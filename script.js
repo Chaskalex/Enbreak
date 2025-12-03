@@ -151,6 +151,15 @@
         const originalCards = Array.from(document.querySelectorAll('.testimonial-card'));
         const totalOriginalCards = originalCards.length;
 
+        // Drag functionality variables
+        let isDragging = false;
+        let startPos = 0;
+        let currentTranslate = 0;
+        let prevTranslate = 0;
+        let animationID = 0;
+        let dragStartIndex = 0;
+        let initialTranslate = 0;
+
         // Clone cards for seamless infinite loop
         function setupInfiniteCarousel() {
             // Clear existing grid
@@ -263,10 +272,142 @@
             startAutoplay();
         }
 
+        // Drag functionality
+        function touchStart(event) {
+            isDragging = true;
+            dragStartIndex = currentIndex;
+            startPos = getPositionX(event);
+
+            const cardWidth = 270;
+            const gap = 30;
+            const moveDistance = cardWidth + gap;
+
+            // Store the initial position when dragging starts
+            initialTranslate = -(currentIndex * moveDistance);
+            currentTranslate = initialTranslate;
+            prevTranslate = initialTranslate;
+
+            animationID = requestAnimationFrame(animation);
+            grid.classList.add('dragging');
+
+            // Pause autoplay while dragging
+            clearInterval(autoplayTimer);
+        }
+
+        function touchMove(event) {
+            if (isDragging) {
+                event.preventDefault();
+                const currentPosition = getPositionX(event);
+                const dragDistance = currentPosition - startPos;
+                currentTranslate = initialTranslate + dragDistance;
+            }
+        }
+
+        function touchEnd() {
+            if (!isDragging) return;
+
+            isDragging = false;
+            cancelAnimationFrame(animationID);
+            grid.classList.remove('dragging');
+
+            const cardWidth = 270;
+            const gap = 30;
+            const moveDistance = cardWidth + gap;
+
+            // Calculate how many cards we've moved based on total drag distance
+            const movedBy = currentTranslate - initialTranslate;
+            const cardsMoved = Math.round(-movedBy / moveDistance);
+
+            // Update current index based on how many cards were dragged
+            currentIndex = dragStartIndex + cardsMoved;
+
+            // Clamp the index to prevent going too far
+            const minIndex = 0;
+            const maxIndex = totalOriginalCards * 3 - 1;
+            currentIndex = Math.max(minIndex, Math.min(maxIndex, currentIndex));
+
+            // Snap to the nearest card
+            updateCarousel(true);
+
+            // Check if we need to reset position for infinite loop
+            setTimeout(() => {
+                if (currentIndex >= totalOriginalCards * 2) {
+                    currentIndex = totalOriginalCards + (currentIndex % totalOriginalCards);
+                    updateCarousel(false);
+                } else if (currentIndex < totalOriginalCards) {
+                    currentIndex = totalOriginalCards + (currentIndex % totalOriginalCards);
+                    updateCarousel(false);
+                }
+            }, 600);
+
+            // Restart autoplay
+            startAutoplay();
+        }
+
+        function getPositionX(event) {
+            return event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
+        }
+
+        function animation() {
+            if (isDragging) {
+                grid.style.transition = 'none';
+                grid.style.transform = `translateX(${currentTranslate}px)`;
+                requestAnimationFrame(animation);
+            }
+        }
+
+        // Add drag event listeners to the grid
+        function setupDragListeners() {
+            grid.style.userSelect = 'none';
+
+            // Mouse events
+            grid.addEventListener('mousedown', (e) => {
+                e.preventDefault();
+                touchStart(e);
+            });
+
+            grid.addEventListener('mousemove', (e) => {
+                touchMove(e);
+            });
+
+            grid.addEventListener('mouseup', (e) => {
+                touchEnd(e);
+            });
+
+            grid.addEventListener('mouseleave', (e) => {
+                if (isDragging) {
+                    touchEnd(e);
+                }
+            });
+
+            // Touch events
+            grid.addEventListener('touchstart', (e) => {
+                touchStart(e);
+            }, { passive: false });
+
+            grid.addEventListener('touchmove', (e) => {
+                if (isDragging) {
+                    touchMove(e);
+                }
+            }, { passive: false });
+
+            grid.addEventListener('touchend', touchEnd);
+
+            // Prevent context menu on long press
+            grid.addEventListener('contextmenu', (e) => e.preventDefault());
+
+            // Prevent default drag behavior on images and links
+            grid.querySelectorAll('img, a').forEach(element => {
+                element.addEventListener('dragstart', (e) => e.preventDefault());
+                element.style.userSelect = 'none';
+            });
+        }
+
         // Initialize carousel
         window.addEventListener('load', () => {
             setupInfiniteCarousel();
             createDots();
+            setupDragListeners();
             startAutoplay();
         });
 
