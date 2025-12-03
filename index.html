@@ -1,0 +1,2895 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enbreak - Clases de Inglés Online</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rubik:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .top-header {
+            background: #0a1e42;
+            color: white;
+            padding: 12px 0;
+            font-size: 14px;
+        }
+
+        .top-header .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .top-left {
+            display: flex;
+            gap: 0;
+            flex-wrap: wrap;
+        }
+
+        .top-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: rgb(216, 222, 234);
+            text-decoration: none;
+            transition: color 0.3s;
+            padding: 0 25px;
+            border-right: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .top-item:last-child {
+            border-right: none;
+        }
+
+        .top-item i {
+            color: white;
+            transition: color 0.3s;
+        }
+
+        .top-item.contact-icon i {
+            color: white !important;
+        }
+
+        .top-item:hover {
+            color: #ff6600;
+        }
+
+        .top-item:hover i {
+            color: #ff6600;
+        }
+
+        .top-item.contact-icon:hover i {
+            color: #ff6600 !important;
+        }
+
+        .top-right {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .language-selector {
+            position: relative;
+        }
+
+        .language-btn {
+            background: none;
+            border: none;
+            color: rgb(216, 222, 234);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            padding: 5px 10px;
+            transition: color 0.3s;
+        }
+
+        .language-btn i {
+            color: rgb(216, 222, 234);
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        .language-btn:hover,
+        .language-btn:hover i {
+            color: #ff6600;
+        }
+
+        .language-dropdown {
+            position: absolute;
+            top: calc(100% + 5px);
+            right: 0;
+            background: white;
+            min-width: 120px;
+            margin-top: 8px;
+            border-radius: 5px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s;
+            z-index: 10000;
+        }
+
+        .language-selector.active .language-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .language-dropdown a {
+            display: block;
+            padding: 10px 15px;
+            color: #0a1e42;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+
+        .language-dropdown a:first-child {
+            border-radius: 5px 5px 0 0;
+        }
+
+        .language-dropdown a:last-child {
+            border-radius: 0 0 5px 5px;
+        }
+
+        .language-dropdown a:hover {
+            background: #f8f9fa;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 12px;
+            padding-left: 20px;
+            border-left: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .social-icons a {
+            color: rgb(216, 222, 234);
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: #ff6600;
+        }
+
+        /* Main Header */
+        .main-header {
+            background: white;
+            padding: 4px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo img {
+            height: 44px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 0;
+            right: 0;
+            height: 12px;
+            background: transparent;
+            z-index: 9999;
+        }
+
+        .nav-link {
+            padding: 12px 16px;
+            color: #0a1e42;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: color 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 16px;
+            right: 16px;
+            height: 4px;
+            background: #ff6600;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-item.active .nav-link::after {
+            transform: scaleX(1);
+        }
+
+        .nav-link:hover,
+        .nav-item.active .nav-link {
+            color: #ff6600;
+        }
+
+        .dropdown {
+            position: absolute;
+            top: calc(100% + 4px);
+            left: 0;
+            background: #0a1e42;
+            min-width: 220px;
+            padding: 0;
+            opacity: 0;
+            visibility: hidden;
+            transform-origin: top center;
+            transform: scaleY(0);
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+            z-index: 10000;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .nav-item:hover .dropdown,
+        .nav-item.active .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: scaleY(1);
+        }
+
+        .dropdown a {
+            display: block;
+            padding: 15px 25px;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 400;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .dropdown a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown a:hover {
+            background: rgba(255,255,255,0.1);
+            border-left-color: #ff6600;
+            padding-left: 30px;
+        }
+
+        .cta-btn {
+            padding: 6px 18px;
+            background: #ff6600;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            border-radius: 5px;
+            margin-left: 10px;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .cta-btn:hover {
+            background: #ff8533;
+            transform: translateY(-2px);
+        }
+
+        .cta-btn:active {
+            background: #ff9955;
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Hero */
+        .hero {
+            position: relative;
+            height: 650px;
+            background: url('/assets/backgrounds/hero1.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-text {
+            max-width: 600px;
+            color: white;
+            animation: heroSlideUp 1.2s ease-out forwards;
+        }
+
+        @keyframes heroSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-text h1 {
+            font-size: 56px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 25px;
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 35px;
+            opacity: 0.95;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            padding: 14px 32px;
+            background: #ff6600;
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: capitalize;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            margin-right: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(255, 102, 0, 0.4);
+        }
+
+        .hero-btn:hover {
+            background: #ff8533;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 102, 0, 0.5);
+        }
+
+        .hero-btn:active {
+            background: #ff9955;
+            box-shadow: 0 2px 10px rgba(255, 102, 0, 0.3);
+        }
+
+        .hero-btn-secondary {
+            display: inline-block;
+            padding: 14px 32px;
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: capitalize;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            border-radius: 8px;
+        }
+
+        .hero-btn-secondary:hover {
+            background: white;
+            color: #0a1e42;
+            transform: translateY(-2px);
+        }
+
+        /* Value Proposition Section */
+        .value-proposition {
+            display: flex;
+            width: 100%;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .value-card {
+            flex: 1;
+            padding: 35px 30px;
+            text-align: center;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 240px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: transform 0.3s ease;
+        }
+
+        .value-card.animate {
+            animation: slideUp 0.4s ease-out forwards;
+        }
+
+        .value-card:nth-child(1).animate {
+            animation-delay: 0.1s;
+        }
+
+        .value-card:nth-child(2).animate {
+            animation-delay: 0.2s;
+        }
+
+        .value-card:nth-child(3).animate {
+            animation-delay: 0.3s;
+        }
+
+        .value-card:nth-child(4).animate {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .value-card:nth-child(odd) {
+            background: linear-gradient(135deg, #060b9a 0%, #020547 100%) !important;
+        }
+
+        .value-card:nth-child(even) {
+            background: linear-gradient(135deg, #05097e 0%, #0071c1 100%) !important;
+        }
+
+        .value-icon {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 20px;
+            filter: brightness(0) invert(1);
+            flex-shrink: 0;
+        }
+
+        .value-card h3 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: white;
+            min-height: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .value-card p {
+            font-size: 15px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 280px;
+        }
+
+        /* Teacher Section */
+        .teacher-section {
+            background: linear-gradient(135deg, #202020 0%, #000000 100%);
+            padding: 60px 0 40px 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .teacher-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('assets/backgrounds/bg1.jpg') center/cover;
+            background-attachment: fixed;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .teacher-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 60px;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .teacher-image-wrapper {
+            flex-shrink: 0;
+            width: 280px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .teacher-image-wrapper.animate {
+            animation: teacherFadeIn 0.8s ease-out forwards;
+        }
+
+        .teacher-image {
+            position: relative;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            transform: translateY(0);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            aspect-ratio: 1/1;
+            width: 100%;
+        }
+
+        .teacher-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            border: 3px solid #ff6600;
+            pointer-events: none;
+        }
+
+        .teacher-image:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .teacher-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            scale: 1.25;
+        }
+
+        .teacher-content {
+            flex: 1;
+            color: white;
+            max-width: 680px;
+            opacity: 0;
+            transform: translateY(30px);
+            min-width: 0;
+            height: 280px;
+        }
+
+        .teacher-content.animate {
+            animation: teacherFadeIn 0.8s ease-out 0.2s forwards;
+        }
+
+        @keyframes teacherFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .teacher-header {
+            margin-bottom: 25px;
+        }
+
+        .teacher-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .teacher-tab {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 25px;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .teacher-tab:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .teacher-tab.active {
+            background: #ff6600;
+            border-color: #ff6600;
+        }
+
+        .teacher-tab-content {
+            display: none;
+        }
+
+        .teacher-tab-content.active {
+            display: block;
+        }
+
+        #enbreak-content.active {
+            display: flex;
+            align-items: center;
+        }
+
+        .teacher-header h2 {
+            font-family: 'Rubik', sans-serif;
+            font-size: 42px;
+            font-weight: 700;
+            color: white;
+            margin: 0;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 12px;
+        }
+
+        .teacher-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 105%;
+            height: 3px;
+            background: #ff6600;
+        }
+
+        .teacher-bio {
+            margin-bottom: 0;
+        }
+
+        .teacher-bio p {
+            font-size: 16px;
+            line-height: 1.9;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 18px;
+        }
+
+        .teacher-bio p:last-child {
+            margin-bottom: 0;
+        }
+
+        .teacher-bio em {
+            color: #ff6600;
+            font-style: italic;
+            font-weight: 600;
+        }
+
+        .teacher-bio .highlight {
+            color: #ff6600;
+            font-weight: 600;
+        }
+
+        .teacher-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            padding: 30px 40px 0 40px;
+            margin-top: 35px;
+            border-top: 2px solid rgba(255, 255, 255, 0.1);
+            width: 100%;
+            max-width: 1040px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .stat-item {
+            text-align: center;
+            position: relative;
+        }
+
+        .stat-number {
+            font-family: 'Rubik', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 15px;
+            line-height: 1;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .stat-number::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: #ff6600;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 500;
+            margin-top: 10px;
+        }
+
+        /* Testimonials Section */
+        .testimonials-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 100px 0;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        .testimonials-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(10,30,66,0.03)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .testimonials-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .testimonials-header {
+            text-align: center;
+            margin-bottom: 60px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeSlideUp 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeSlideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .testimonials-label {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff6600 0%, #ff8533 100%);
+            color: white;
+            padding: 8px 24px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(255, 102, 0, 0.3);
+        }
+
+        .testimonials-header h2 {
+            font-family: 'Rubik', sans-serif;
+            font-size: 46px;
+            font-weight: 700;
+            color: #0a1e42;
+            margin: 0 0 15px 0;
+            line-height: 1.2;
+        }
+
+        .testimonials-header p {
+            font-size: 17px;
+            color: #666;
+            max-width: 850px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .testimonials-wrapper {
+            position: relative;
+            overflow: visible;
+            padding: 0 20px;
+            margin-bottom: 20px;
+        }
+
+        .testimonials-track {
+            overflow: hidden;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonials-grid {
+            display: flex;
+            gap: 30px;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 10px 0;
+        }
+
+        .testimonial-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 270px;
+            flex-shrink: 0;
+            opacity: 0;
+            animation: testimonialFadeIn 0.6s ease-out forwards;
+        }
+
+        .testimonial-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .testimonial-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .testimonial-card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .testimonial-card:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes testimonialFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border: 2px solid #e9ecef;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .carousel-btn:hover {
+            background: linear-gradient(135deg, #ff6600 0%, #ff8533 100%);
+            border-color: #ff6600;
+            transform: translateY(-50%) scale(1.15);
+            box-shadow: 0 6px 25px rgba(255, 102, 0, 0.4);
+        }
+
+        .carousel-btn:active {
+            transform: translateY(-50%) scale(1.05);
+        }
+
+        .carousel-btn i {
+            font-size: 18px;
+            color: #0a1e42;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-btn:hover i {
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .carousel-btn.prev {
+            left: 0;
+        }
+
+        .carousel-btn.next {
+            right: 0;
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 45px;
+            padding: 15px 0;
+        }
+
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #d1d5db;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .carousel-dot:hover {
+            background: #9ca3af;
+            transform: scale(1.2);
+        }
+
+        .carousel-dot.active {
+            background: linear-gradient(135deg, #ff6600 0%, #ff8533 100%);
+            width: 40px;
+            border-radius: 6px;
+            box-shadow: 0 2px 10px rgba(255, 102, 0, 0.4);
+        }
+
+        .testimonial-video {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 9/14;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(10, 30, 66, 0.12), 0 4px 12px rgba(10, 30, 66, 0.08);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 3px solid transparent;
+        }
+
+        .testimonial-video::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 102, 0, 0) 0%, rgba(255, 102, 0, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .testimonial-video:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 16px 40px rgba(10, 30, 66, 0.18), 0 8px 20px rgba(255, 102, 0, 0.15);
+            border-color: rgba(255, 102, 0, 0.3);
+        }
+
+        .testimonial-video:hover::before {
+            opacity: 1;
+        }
+
+        .testimonial-video img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .testimonial-play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 65px;
+            height: 65px;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 2;
+            border: 3px solid rgba(255, 255, 255, 0.9);
+        }
+
+        .testimonial-play-btn::before {
+            content: '';
+            position: absolute;
+            inset: -8px;
+            border-radius: 50%;
+            background: rgba(255, 102, 0, 0.2);
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .testimonial-video:hover .testimonial-play-btn {
+            transform: translate(-50%, -50%) scale(1.15);
+            background: linear-gradient(135deg, #ff6600 0%, #ff8533 100%);
+            box-shadow: 0 12px 32px rgba(255, 102, 0, 0.4);
+        }
+
+        .testimonial-video:hover .testimonial-play-btn::before {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .testimonial-play-btn i {
+            color: #ff6600;
+            font-size: 24px;
+            margin-left: 4px;
+            transition: all 0.4s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-video:hover .testimonial-play-btn i {
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .testimonial-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 24px;
+            text-align: center;
+            padding: 0 10px;
+        }
+
+        .testimonial-stars {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 12px;
+        }
+
+        .testimonial-stars i {
+            color: #fbbf24;
+            font-size: 16px;
+            filter: drop-shadow(0 1px 2px rgba(251, 191, 36, 0.3));
+            transition: transform 0.3s ease;
+        }
+
+        .testimonial-card:hover .testimonial-stars i {
+            transform: scale(1.1);
+        }
+
+        .testimonial-name {
+            font-family: 'Rubik', sans-serif;
+            font-size: 17px;
+            font-weight: 700;
+            color: #0a1e42;
+            margin-bottom: 5px;
+            line-height: 1.3;
+        }
+
+        .testimonial-role {
+            font-size: 14px;
+            color: #6b7280;
+            margin-bottom: 0;
+            font-weight: 500;
+        }
+
+        /* Recursos Recientes Section */
+        .recursos-section {
+            background: #f8f9fa;
+            padding: 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .recursos-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .recursos-header {
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .recursos-header h2 {
+            font-family: 'Rubik', sans-serif;
+            font-size: 42px;
+            font-weight: 700;
+            color: #0a1e42;
+            margin-bottom: 15px;
+        }
+
+        .recursos-header p {
+            font-size: 17px;
+            color: #666;
+            max-width: 600px;
+            line-height: 1.7;
+            margin: 0 auto;
+        }
+
+        .recursos-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .recurso-item {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+            height: 160px;
+        }
+
+        .recurso-item.animate {
+            animation: fadeSlideUp 0.6s ease-out forwards;
+        }
+
+        .recurso-item:nth-child(1).animate,
+        .recurso-item:nth-child(2).animate {
+            animation-delay: 0.1s;
+        }
+
+        .recurso-item:nth-child(3).animate,
+        .recurso-item:nth-child(4).animate {
+            animation-delay: 0.2s;
+        }
+
+        .recurso-item:nth-child(5).animate,
+        .recurso-item:nth-child(6).animate {
+            animation-delay: 0.3s;
+        }
+
+        .recurso-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2), 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .recurso-image {
+            width: 180px;
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .recurso-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .recurso-item:hover .recurso-image img {
+            transform: scale(1.05);
+        }
+
+        .recurso-date {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: #ff6600;
+            color: white;
+            padding: 6px 10px;
+            border-radius: 0 0 6px 0;
+            text-align: center;
+            box-shadow: 0 3px 8px rgba(255, 102, 0, 0.3);
+        }
+
+        .date-day {
+            display: block;
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .date-month {
+            display: block;
+            font-size: 10px;
+            font-weight: 600;
+            margin-top: 2px;
+            text-transform: capitalize;
+        }
+
+        .date-year {
+            display: block;
+            font-size: 9px;
+            margin-top: 1px;
+            opacity: 0.9;
+        }
+
+        .recurso-content {
+            padding: 15px 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .recurso-category {
+            display: inline-block;
+            background: rgba(255, 102, 0, 0.1);
+            color: #ff6600;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+            align-self: flex-start;
+        }
+
+        .recurso-content h3 {
+            font-family: 'Rubik', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            color: #0a1e42;
+            margin-bottom: 6px;
+            line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .recurso-content p {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 10px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .recurso-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #ff6600;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 12px;
+            transition: all 0.3s;
+            align-self: flex-start;
+        }
+
+        .recurso-btn:hover {
+            gap: 10px;
+            color: #0a1e42;
+        }
+
+        .recurso-btn i {
+            font-size: 10px;
+        }
+
+        /* Question Form Section */
+        .question-form {
+            position: relative;
+            background: url('assets/backgrounds/bg2.jpg') center/cover;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+        }
+
+        .question-form::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(10, 30, 66, 0.9) 0%, rgba(26, 68, 141, 0.85) 100%);
+            pointer-events: none;
+        }
+
+        .question-form-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 50px 40px;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .question-form-content {
+            max-width: 550px;
+            width: 100%;
+        }
+
+        .question-form-header {
+            margin-bottom: 25px;
+        }
+
+        .question-form-header h2 {
+            font-family: 'Rubik', sans-serif;
+            font-size: 36px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .question-form-header p {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.6;
+        }
+
+        .question-form form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .form-group {
+            flex: 1;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: none;
+            border-radius: 6px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            background: rgba(255, 255, 255, 0.95);
+            color: #333;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #888;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.3);
+            background: white;
+        }
+
+        .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border: none;
+            border-radius: 6px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: #333;
+            cursor: pointer;
+            appearance: none;
+            background: rgba(255, 255, 255, 0.95) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8L1 3h10z'/%3E%3C/svg%3E") no-repeat right 15px center;
+            background-size: 12px;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .form-group select:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.3);
+            background: white url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8L1 3h10z'/%3E%3C/svg%3E") no-repeat right 15px center;
+            background-size: 12px;
+        }
+
+        .form-group select option {
+            color: #333;
+        }
+
+        .form-group textarea {
+            resize: none;
+            height: 42px;
+            min-height: 42px;
+        }
+
+        .form-row-submit {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .form-group-message {
+            flex: 1;
+        }
+
+        .form-group-submit {
+            flex: 1;
+        }
+
+        .form-submit-btn {
+            width: 100%;
+            padding: 15px 20px;
+            background: #ff6600;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .form-submit-btn:hover {
+            background: #ff8533;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 102, 0, 0.4);
+        }
+
+        .form-submit-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Footer */
+        .main-footer {
+            background: #060e1e;
+            color: white;
+            padding: 50px 40px 0;
+        }
+
+        .footer-content-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 40px;
+            padding-bottom: 40px;
+        }
+
+        .footer-about {
+            grid-column: 1;
+        }
+
+        .footer-logo {
+            height: 50px;
+            width: auto;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .footer-about p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .footer-copyright {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .footer-copyright p {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .footer-column h4 {
+            font-family: 'Rubik', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer-column p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .footer-column p a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column p a:hover {
+            color: #ff6600;
+        }
+
+        .footer-column p i {
+            margin-right: 8px;
+            color: #ff6600;
+            width: 16px;
+        }
+
+        .footer-social-icons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .footer-social-icons a {
+            width: 38px;
+            height: 38px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .footer-social-icons a:hover {
+            background: #ff6600;
+            transform: translateY(-3px);
+        }
+
+        .footer-column p a {
+            text-decoration: none;
+        }
+
+        .whatsapp {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: #00b023;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(0, 176, 35, 0.4);
+            z-index: 999;
+            color: white;
+            font-size: 32px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            flex-shrink: 0;
+        }
+
+        .whatsapp:hover {
+            background: #007d19;
+            transform: scale(1.05);
+        }
+
+        .whatsapp-container {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            display: flex;
+            align-items: center;
+            z-index: 1000;
+            text-decoration: none;
+        }
+
+        .whatsapp-message {
+            background-color: white;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 8px;
+            box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+            margin-right: 15px;
+            font-size: 14px;
+            line-height: 1.2;
+            text-align: right;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(20px);
+            transition: all 0.3s ease-in-out;
+            white-space: nowrap;
+            pointer-events: none;
+        }
+
+        .whatsapp-container:hover .whatsapp-message {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+        }
+
+        .whatsapp-float {
+            width: 60px;
+            height: 60px;
+            background-color: #00b023;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 32px;
+            transition: background-color 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+            box-shadow: 0 4px 20px rgba(0, 176, 35, 0.4);
+        }
+
+        .whatsapp-float:hover {
+            background-color: #007d19;
+        }
+
+        .service-section {
+            position: relative;
+            padding: 0;
+            background: #fefefe;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .service-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 50px 40px 80px 120px;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 60px;
+            min-height: 100%;
+        }
+
+        .service-content {
+            flex: 1;
+            max-width: 55%;
+        }
+
+        .service-panel-image {
+            position: absolute;
+            right: 20px;
+            top: 0;
+            bottom: 0;
+            width: 45%; 
+            max-width: 500px;
+        }
+
+        .service-panel-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            border-radius: 0;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .service-content h2 {
+            font-family: 'Rubik', sans-serif;
+            font-size: 42px;
+            font-weight: 700;
+            color: #0a1e42;
+            margin-bottom: 20px;
+        }
+
+        .service-content > p {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 45px;
+            line-height: 1.6;
+            max-width: 700px;
+        }
+
+        .service-spacer {
+            display: none;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 35px;
+        }
+
+        .service-item {
+            display: flex;
+            gap: 20px;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .service-item.animate {
+            animation: fadeSlideUp 0.6s ease-out forwards;
+        }
+
+        .service-item:nth-child(1).animate,
+        .service-item:nth-child(2).animate {
+            animation-delay: 0.1s;
+        }
+
+        .service-item:nth-child(3).animate,
+        .service-item:nth-child(4).animate {
+            animation-delay: 0.3s;
+        }
+
+        .service-item:nth-child(5).animate,
+        .service-item:nth-child(6).animate {
+            animation-delay: 0.5s;
+        }
+
+        @keyframes fadeSlideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background: #ff6600;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-icon:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 8px 20px rgba(255, 102, 0, 0.4);
+        }
+
+        .service-icon img {
+            width: 35px;
+            height: 35px;
+            filter: brightness(0) invert(1);
+            transition: transform 0.3s ease;
+        }
+
+        .service-icon:hover img {
+            transform: scale(1.1);
+        }
+
+        .service-text h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #0a1e42;
+            margin-bottom: 10px;
+        }
+
+        .service-text p {
+            font-size: 15px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 968px) {
+            .top-header .container {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .top-left {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .top-item {
+                border-right: none;
+                padding: 0;
+            }
+
+            .header-container {
+                flex-wrap: wrap;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 140px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 140px);
+                background: white;
+                flex-direction: column;
+                padding: 30px;
+                transition: left 0.3s;
+                overflow-y: auto;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .mobile-toggle {
+                display: block;
+            }
+
+            .hero-text h1 {
+                font-size: 36px;
+            }
+
+            .value-proposition {
+                flex-direction: column;
+            }
+
+            .value-card {
+                min-height: 220px;
+                padding: 35px 25px;
+            }
+
+            .service-section {
+                padding: 80px 0;
+            }
+
+            /* Hiding the panel image on small screens */
+            .service-panel-image {
+                display: none;
+            }
+
+            .service-container {
+                /* No need for flex on small screens if one item is hidden */
+                display: block;
+                gap: 40px;
+            }
+
+            .service-content {
+                margin-left: 0;
+            }
+
+            .service-content > p {
+                max-width: 100%;
+            }
+
+            .service-spacer {
+                display: none;
+            }
+
+            .service-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .service-content h2 {
+                font-size: 32px;
+            }
+
+            .teacher-container {
+                flex-direction: column;
+                gap: 40px;
+                align-items: center;
+            }
+
+            .teacher-image-wrapper {
+                width: 100%;
+                max-width: 280px;
+                margin-top: 0;
+            }
+
+            .teacher-header h2 {
+                font-size: 38px;
+            }
+
+            .teacher-stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+
+            .testimonials-wrapper {
+                padding: 0 10px;
+            }
+
+            .testimonials-track {
+                max-width: 600px;
+            }
+
+            .testimonial-card {
+                width: 240px;
+            }
+
+            .carousel-btn {
+                width: 40px;
+                height: 40px;
+            }
+
+            .carousel-btn i {
+                font-size: 16px;
+            }
+
+            .testimonials-section {
+                padding: 70px 0;
+            }
+
+            .testimonials-header {
+                margin-bottom: 45px;
+            }
+
+            .testimonials-header h2 {
+                font-size: 32px;
+            }
+
+            .testimonials-header p {
+                font-size: 15px;
+            }
+
+            .testimonial-quote {
+                max-width: 180px;
+                font-size: 12px;
+            }
+
+            .recursos-container {
+                padding: 60px 20px;
+            }
+
+            .recursos-header h2 {
+                font-size: 32px;
+            }
+
+            .recursos-list {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .recurso-item {
+                flex-direction: column;
+                height: auto;
+            }
+
+            .recurso-image {
+                width: 100%;
+                height: 180px;
+            }
+
+            .recurso-content {
+                padding: 20px 25px;
+            }
+
+            .question-form-container {
+                padding: 60px 20px;
+                justify-content: center;
+            }
+
+            .question-form-header h2 {
+                font-size: 32px;
+            }
+
+            .form-row {
+                flex-direction: column;
+            }
+
+            .form-row-submit {
+                flex-direction: column;
+            }
+
+            .form-submit-btn {
+                min-height: auto;
+                padding: 15px 25px;
+            }
+
+            .footer-content-wrapper {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .footer-about {
+                text-align: center;
+            }
+
+            .footer-logo {
+                margin: 0 auto 15px;
+            }
+
+            .footer-column {
+                text-align: center;
+            }
+
+            .footer-social-icons {
+                justify-content: center;
+            }
+
+            .footer-copyright {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-header">
+        <div class="container">
+            <div class="top-left">
+                <a href="#" class="top-item contact-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>100% Online - Chile</span>
+                </a>
+                <a href="mailto:info@enbreak.net" class="top-item contact-icon">
+                    <i class="fas fa-envelope"></i>
+                    <span>info@enbreak.net</span>
+                </a>
+                <a href="tel:+56979924910" class="top-item contact-icon">
+                    <i class="fas fa-phone"></i>
+                    <span>+56 9 79924910</span>
+                </a>
+            </div>
+            <div class="top-right">
+                <div class="language-selector">
+                    <button class="language-btn" onclick="toggleLanguage(event)">
+                        <i class="fas fa-globe"></i>
+                        <span id="currentLanguage">Español</span>
+                        <i class="fas fa-chevron-down" style="font-size: 10px;"></i>
+                    </button>
+                    <div class="language-dropdown">
+                        <a href="#" onclick="changeLanguage('en'); return false;">English</a>
+                    </div>
+                </div>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                    <a href="#"><i class="fab fa-x-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <header class="main-header">
+        <div class="header-container">
+            <a href="#home" class="logo">
+                <img src="assets/logo/logo.png" alt="Enbreak Logo">
+            </a>
+
+            <button class="mobile-toggle" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav class="nav-menu" id="navMenu">
+                <div class="nav-item active">
+                    <a href="#home" class="nav-link">Inicio</a>
+                </div>
+                
+                <div class="nav-item">
+                    <a class="nav-link">Clases <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown">
+                        <a href="#planes">Ver Planes</a>
+                        <a href="#agendar">Agendar Clase</a>
+                        <a href="#inscribir">Inscribir Curso</a>
+                        <a href="#test">Test Gratuito</a>
+                    </div>
+                </div>
+                
+                <div class="nav-item">
+                    <a class="nav-link">Biblioteca <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown">
+                        <a href="#miniclasses">Mini-classes</a>
+                        <a href="#podcast">Podcast</a>
+                        <a href="#actividades">Actividades</a>
+                        <a href="#galeria">Galería</a>
+                    </div>
+                </div>
+                
+                <div class="nav-item">
+                    <a class="nav-link">Soporte <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown">
+                        <a href="#ayuda">Ayuda</a>
+                        <a href="#faq">Preguntas Frecuentes</a>
+                        <a href="#terminos">Términos y Condiciones</a>
+                        <a href="#contacto">Contacto</a>
+                    </div>
+                </div>
+                
+                <a href="#agendar" class="cta-btn">Agendar Ahora</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Clases de Inglés Personalizadas</h1>
+                <p>Logra la fluidez que siempre has deseado. Clases 100% online adaptadas a tu ritmo y necesidades. Comienza a aprender hoy.</p>
+                <a href="#courses" class="hero-btn">Ver Planes</a>
+                <a href="#test" class="hero-btn-secondary">Test Gratuito</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="value-proposition">
+        <div class="value-card">
+            <img src="assets/icons/schedule.svg" alt="Horarios Flexibles" class="value-icon">
+            <h3>Horarios Flexibles</h3>
+            <p>Diseñados para ajustarse a tu rutina y estilo de vida. Clases 100% online.</p>
+        </div>
+        <div class="value-card">
+            <img src="assets/icons/badge.svg" alt="Preparación para Examenes" class="value-icon">
+            <h3>Preparación para Examenes</h3>
+            <p>Entrenamiento específico para certificaciones de Cambridge, TOEFL, IELTS, y más.</p>
+        </div>
+        <div class="value-card">
+            <img src="assets/icons/piggy.svg" alt="Precios Justos" class="value-icon">
+            <h3>Precios Justos</h3>
+            <p>Clases de calidad sin pagar de más. Precios adaptados a tus requerimientos.</p>
+        </div>
+        <div class="value-card">
+            <img src="assets/icons/media.svg" alt="Contenido Gratuito" class="value-icon">
+            <h3>Contenido Gratuito</h3>
+            <p>Accede a la biblioteca de recursos para encontrar videos, podcasts y mini-clases.</p>
+        </div>
+    </section>
+
+    <section class="service-section" id="service">
+        <div class="service-container">
+            <div class="service-content">
+                <h2>Cómo te Ayudamos</h2>
+                <p>Enbreak te brinda la libertad de aprender a tu manera, con apoyo constante y recursos que potencian tu progreso.</p>
+                
+                <div class="service-grid">
+                    <div class="service-item">
+                        <div class="service-icon">
+                            <img src="assets/icons/solo.svg" alt="Clases Particulares">
+                        </div>
+                        <div class="service-text">
+                            <h3>Clases Particulares</h3>
+                            <p>Sesiones adaptadas a tus necesidades y objetivos personales.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="service-item">
+                        <div class="service-icon">
+                            <img src="assets/icons/group.svg" alt="Clases Grupales">
+                        </div>
+                        <div class="service-text">
+                            <h3>Clases Grupales</h3>
+                            <p>Participa y aprende en conjunto con otros estudiantes.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="service-item">
+                        <div class="service-icon">
+                            <img src="assets/icons/notes.svg" alt="Acompañamiento Académico">
+                        </div>
+                        <div class="service-text">
+                            <h3>Acompañamiento Académico</h3>
+                            <p>Asistencia en tareas, informes, proyectos, presentaciones, etc.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="service-item">
+                        <div class="service-icon">
+                            <img src="assets/icons/gear.svg" alt="Retroalimentación Continua">
+                        </div>
+                        <div class="service-text">
+                            <h3>Retroalimentación Continua</h3>
+                            <p>Acompañamiento constante para optimizar tu rendimiento.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="service-item">
+                        <div class="service-icon">
+                            <img src="assets/icons/teacher.svg" alt="Mini-clases">
+                        </div>
+                        <div class="service-text">
+                            <h3>Mini-clases</h3>
+                            <p>Cápsulas para abordar conceptos específicos de forma eficiente.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="service-item">
+                        <div class="service-icon">
+                            <img src="assets/icons/headphones.svg" alt="Podcasts">
+                        </div>
+                        <div class="service-text">
+                            <h3>Podcasts</h3>
+                            <p>Acceso a contenido educativo y relevante para escuchar.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- New Vertical Panel Image is now properly sized to sit next to the content -->
+            <div class="service-panel-image">
+                <img src="assets/panels/panel1.jpg" alt="Panel">
+            </div>
+        </div>
+    </section>
+
+    <section class="teacher-section" id="teacher">
+        <div class="teacher-container">
+            <div class="teacher-image-wrapper">
+                <div class="teacher-image">
+                    <img src="assets/panels/me.jpg" alt="Alexis Inostroza - Tu Profesor">
+                </div>
+            </div>
+            
+            <div class="teacher-content">
+                <div class="teacher-header">
+                    <div class="teacher-tabs">
+                        <button class="teacher-tab active" onclick="switchTab('profesor')">Profesor</button>
+                        <button class="teacher-tab" onclick="switchTab('carrera')">Carrera</button>
+                        <button class="teacher-tab" onclick="switchTab('enbreak')">Enbreak</button>
+                    </div>
+                    <h2 id="teacher-name">Alexis Inostroza Díaz</h2>
+                </div>
+
+                <div class="teacher-tab-content active" id="profesor-content">
+                    <div class="teacher-bio">
+                        <p>¡Hola! Soy Alexis. Profesor de Inglés como Lengua Extranjera (EFL Teacher). Me gradué de la <span class="highlight">Pontificia Universidad Católica de Valparaíso</span>, institución donde también he trabajado como docente durante los últimos cinco años.</p>
+                    </div>
+                </div>
+
+                <div class="teacher-tab-content" id="carrera-content">
+                    <div class="teacher-bio">
+                        <p><span class="highlight">2011:</span> Certificado en Productividad Digital (Universidad de Concepción)</p>
+                        <p><span class="highlight">2018:</span> Acreditación C1 Advanced (Cambridge University)</p>
+                        <p><span class="highlight">2020:</span> Licenciado en Educación (PUCV) - Distinción Cum Laude</p>
+                        <p><span class="highlight">2020:</span> Profesor de Inglés (PUCV) - Proyecto de Título Destacado: Enbreak</p>
+                        <p><span class="highlight">2024:</span> Designado como Invigilator y Speaking Examiner (Cambridge University)</p>
+                    </div>
+                </div>
+
+                <div class="teacher-tab-content" id="enbreak-content">
+                    <div class="teacher-bio">
+                        <p>En 2020 creé la plataforma online <span class="highlight">English Break (Enbreak)</span> como mi proyecto de título. En 2025 decidí llevar a Enbreak al siguiente nivel, transformándolo en un espacio de aprendizaje virtual abierto a todos y todas.</p>
+                        <p>La misión de Enbreak es clara: ayudarte a dominar el inglés de manera práctica y libre de estrés. <span class="highlight">Toma un break con Enbreak</span> y comienza a construir confianza, superar miedos y avanzar paso a paso hacia tus objetivos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="teacher-stats">
+            <div class="stat-item">
+                <div class="stat-number" data-target="6">0</div>
+                <div class="stat-label">Años de Experiencia</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" data-target="1200">0</div>
+                <div class="stat-label">Estudiantes</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" data-target="48">0</div>
+                <div class="stat-label">Cursos</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" data-target="17">0</div>
+                <div class="stat-label">Países</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials-section" id="testimonials">
+        <div class="testimonials-container">
+            <div class="testimonials-header">
+                <h2>Lo Que Dicen Mis Estudiantes</h2>
+                <p>Descubre las experiencias reales de estudiantes que han mejorado su inglés conmigo</p>
+            </div>
+
+            <div class="testimonials-wrapper">
+                <button class="carousel-btn prev" onclick="moveCarousel(-1)">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="testimonials-track">
+                <div class="testimonials-grid" id="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-video">
+                        <img src="assets/testimonials/video1.jpg" alt="Testimonio de María">
+                        <div class="testimonial-play-btn">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="testimonial-info">
+                        <div class="testimonial-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="testimonial-name">María González</div>
+                        <div class="testimonial-role">Ingeniera de Software</div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-video">
+                        <img src="assets/testimonials/video2.jpg" alt="Testimonio de Carlos">
+                        <div class="testimonial-play-btn">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="testimonial-info">
+                        <div class="testimonial-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="testimonial-name">Carlos Mendoza</div>
+                        <div class="testimonial-role">Estudiante Universitario</div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-video">
+                        <img src="assets/testimonials/video3.jpg" alt="Testimonio de Ana">
+                        <div class="testimonial-play-btn">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="testimonial-info">
+                        <div class="testimonial-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="testimonial-name">Ana Rodríguez</div>
+                        <div class="testimonial-role">Ejecutiva de Ventas</div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-video">
+                        <img src="assets/testimonials/video4.jpg" alt="Testimonio de Pedro">
+                        <div class="testimonial-play-btn">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="testimonial-info">
+                        <div class="testimonial-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="testimonial-name">Pedro Silva</div>
+                        <div class="testimonial-role">Emprendedor</div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-video">
+                        <img src="assets/testimonials/video5.jpg" alt="Testimonio de Laura">
+                        <div class="testimonial-play-btn">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="testimonial-info">
+                        <div class="testimonial-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="testimonial-name">Laura Fernández</div>
+                        <div class="testimonial-role">Diseñadora Gráfica</div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-video">
+                        <img src="assets/testimonials/video6.jpg" alt="Testimonio de Diego">
+                        <div class="testimonial-play-btn">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="testimonial-info">
+                        <div class="testimonial-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="testimonial-name">Diego Vargas</div>
+                        <div class="testimonial-role">Gerente de Proyectos</div>
+                    </div>
+                </div>
+                </div>
+                </div>
+                <button class="carousel-btn next" onclick="moveCarousel(1)">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            <div class="carousel-dots" id="carousel-dots"></div>
+        </div>
+    </section>
+
+    <section class="question-form" id="question">
+        <div class="question-form-container">
+            <div class="question-form-content">
+                <div class="question-form-header">
+                    <h2>¿Tienes una Pregunta?</h2>
+                    <p>Envíanos un mensaje y cuéntanos qué necesitas.</p>
+                </div>
+                <form action="#" method="POST">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="text" name="nombre" placeholder="Nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="apellido" placeholder="Apellido" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <select name="servicio" required>
+                                <option value="">Selecciona una opción</option>
+                                <option value="particulares">Clases Particulares</option>
+                                <option value="grupales">Clases Grupales</option>
+                                <option value="academica">Ayuda Académica</option>
+                                <option value="examenes">Exámenes Internacionales</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="correo" placeholder="Correo" required>
+                        </div>
+                    </div>
+                    <div class="form-row-submit">
+                        <div class="form-group form-group-message">
+                            <textarea name="mensaje" placeholder="Mensaje" required></textarea>
+                        </div>
+                        <div class="form-group form-group-submit">
+                            <button type="submit" class="form-submit-btn">Envía tu Consulta</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section class="recursos-section" id="recursos">
+        <div class="recursos-container">
+            <div class="recursos-header">
+                <h2>Recursos Recientes</h2>
+                <p>Explora nuestros últimos recursos educativos: mini-clases, podcasts y contenido diseñado para potenciar tu aprendizaje del inglés.</p>
+            </div>
+
+            <div class="recursos-list">
+                <div class="recurso-item">
+                    <div class="recurso-image">
+                        <img src="assets/resources/miniclass1.jpg" alt="Mini-class: Verb To Be">
+                    </div>
+                    <div class="recurso-content">
+                        <span class="recurso-category">Mini-clase</span>
+                        <h3>Verb To Be</h3>
+                        <p>Domina las bases del inglés con esta mini-clase sobre el verbo "to be". Aprende su conjugación, uso y aplicación práctica en conversaciones cotidianas.</p>
+                        <a href="#" class="recurso-btn">Ver recurso <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="recurso-item">
+                    <div class="recurso-image">
+                        <img src="assets/resources/podcast1.png" alt="Podcast: Episode 1">
+                    </div>
+                    <div class="recurso-content">
+                        <span class="recurso-category">Podcast</span>
+                        <h3>Episode 1: Introduction to English Learning</h3>
+                        <p>En este primer episodio exploramos estrategias efectivas para aprender inglés de manera natural y sin estrés. Tips prácticos para tu día a día.</p>
+                        <a href="#" class="recurso-btn">Escuchar <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="recurso-item">
+                    <div class="recurso-image">
+                        <img src="assets/resources/miniclass2.jpg" alt="Mini-class: Present Simple">
+                    </div>
+                    <div class="recurso-content">
+                        <span class="recurso-category">Mini-clase</span>
+                        <h3>Present Simple</h3>
+                        <p>Aprende a usar el presente simple en inglés para describir rutinas, hábitos y verdades generales. Incluye ejercicios prácticos y ejemplos reales.</p>
+                        <a href="#" class="recurso-btn">Ver recurso <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="recurso-item">
+                    <div class="recurso-image">
+                        <img src="assets/resources/miniclass3.jpg" alt="Mini-class: Past Simple">
+                    </div>
+                    <div class="recurso-content">
+                        <span class="recurso-category">Mini-clase</span>
+                        <h3>Past Simple</h3>
+                        <p>Descubre cómo hablar sobre eventos pasados en inglés. Verbos regulares e irregulares con ejemplos claros.</p>
+                        <a href="#" class="recurso-btn">Ver recurso <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="main-footer" role="contentinfo">
+        <div class="footer-content-wrapper">
+            <div class="footer-column footer-about">
+                <a href="#"><img src="assets/logo/logo2.png" alt="ENBREAK" class="footer-logo"></a>
+                <p>Take a break with Enbreak</p>
+            </div>
+            <div class="footer-column footer-links">
+                <h4>Enlaces Rápidos</h4>
+                <p><a href="#test-gratis">Evaluación Gratuita</a></p>
+                <p><a href="./pages/ayuda.php">Preguntas Frecuentes (FAQ)</a></p>
+                <p><a href="#">Términos y Condiciones</a></p>
+            </div>
+            <div class="footer-column footer-contact">
+                <h4>Contacto</h4>
+                <p><i class="fa-solid fa-envelope"></i> <a href="mailto:info@enbreak.net">info@enbreak.net</a></p>
+                <p><i class="fa-solid fa-phone"></i> +56 9 1234 5678</p>
+                <p><i class="fa-solid fa-location-dot"></i> 100% Online</p>
+            </div>
+            <div class="footer-column footer-social-col">
+                <h4>¡Síguenos!</h4>
+                <div class="footer-social-icons">
+                    <a href="#" aria-label="Instagram" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="YouTube" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+                    <a href="#" aria-label="TikTok" rel="noopener noreferrer"><i class="fab fa-tiktok"></i></a>
+                    <a href="#" aria-label="X / Twitter" rel="noopener noreferrer"><i class="fab fa-x-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <p>&copy; 2025 Enbreak. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/56979924910" class="whatsapp-container" target="_blank">
+        <div class="whatsapp-message">
+            ¿Necesitas Ayuda?<br><strong>Escríbeme</strong>
+        </div>
+        <div class="whatsapp-float">
+            <i class="fab fa-whatsapp"></i>
+        </div>
+    </a>
+
+    <script>
+        let currentLang = 'es';
+
+        function toggleLanguage(event) {
+            event.stopPropagation();
+            const selector = document.querySelector('.language-selector');
+            selector.classList.toggle('active');
+        }
+
+        function changeLanguage(lang) {
+            const btn = document.getElementById('currentLanguage');
+            const dropdown = document.querySelector('.language-dropdown');
+            
+            if (lang === 'es') {
+                btn.textContent = 'Español';
+                dropdown.innerHTML = '<a href="#" onclick="changeLanguage(\'en\'); return false;">English</a>';
+                currentLang = 'es';
+            } else if (lang === 'en') {
+                btn.textContent = 'English';
+                dropdown.innerHTML = '<a href="#" onclick="changeLanguage(\'es\'); return false;">Español</a>';
+                currentLang = 'en';
+            }
+            document.querySelector('.language-selector').classList.remove('active');
+        }
+
+        document.addEventListener('click', function(event) {
+            const selector = document.querySelector('.language-selector');
+            if (!selector.contains(event.target)) {
+                selector.classList.remove('active');
+            }
+        });
+
+        function toggleMenu() {
+            document.getElementById('navMenu').classList.toggle('active');
+        }
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    document.getElementById('navMenu').classList.remove('active');
+                    
+                    // Update active nav item
+                    document.querySelectorAll('.nav-link').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                }
+            });
+        });
+
+        // Scroll animation for value cards
+        const observerOptions = {
+            threshold: 0.01,
+            rootMargin: '0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.value-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Scroll animation for service items
+        const serviceObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.service-item').forEach(item => {
+            serviceObserver.observe(item);
+        });
+
+        // Counter animation for teacher stats
+        function animateCounter(element, target, duration = 3000) {
+            let start = 0;
+            const increment = target / (duration / 16);
+            const timer = setInterval(() => {
+                start += increment;
+                if (start >= target) {
+                    element.textContent = target.toLocaleString();
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(start).toLocaleString();
+                }
+            }, 16);
+        }
+
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statNumbers = entry.target.querySelectorAll('.stat-number');
+                    statNumbers.forEach(stat => {
+                        const target = parseInt(stat.getAttribute('data-target'));
+                        animateCounter(stat, target);
+                    });
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+
+        const teacherStats = document.querySelector('.teacher-stats');
+        if (teacherStats) {
+            statsObserver.observe(teacherStats);
+        }
+
+        // Fade-in animation for teacher section
+        const teacherObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    document.querySelector('.teacher-image-wrapper').classList.add('animate');
+                    document.querySelector('.teacher-content').classList.add('animate');
+                    teacherObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        const teacherSection = document.querySelector('.teacher-section');
+        if (teacherSection) {
+            teacherObserver.observe(teacherSection);
+        }
+
+        // Scroll animation for recursos items
+        const recursosObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.recurso-item').forEach(item => {
+            recursosObserver.observe(item);
+        });
+
+        // Testimonials carousel functionality - Perfect infinite loop
+        let currentIndex = 0;
+        let autoplayTimer = null;
+        const grid = document.getElementById('testimonials-grid');
+        const originalCards = Array.from(document.querySelectorAll('.testimonial-card'));
+        const totalOriginalCards = originalCards.length;
+
+        // Clone cards for seamless infinite loop
+        function setupInfiniteCarousel() {
+            // Clear existing grid
+            grid.innerHTML = '';
+
+            // Add clones before original cards
+            originalCards.forEach(card => {
+                const clone = card.cloneNode(true);
+                grid.appendChild(clone);
+            });
+
+            // Add original cards
+            originalCards.forEach(card => {
+                grid.appendChild(card);
+            });
+
+            // Add clones after original cards
+            originalCards.forEach(card => {
+                const clone = card.cloneNode(true);
+                grid.appendChild(clone);
+            });
+
+            // Start at the first original card (after the first set of clones)
+            currentIndex = totalOriginalCards;
+            updateCarousel(false);
+        }
+
+        function updateCarousel(animated = true) {
+            const allCards = grid.querySelectorAll('.testimonial-card');
+            if (allCards.length === 0) return;
+
+            // Fixed card width of 270px + 30px gap = 300px per card movement
+            const cardWidth = 270;
+            const gap = 30;
+            const moveDistance = cardWidth + gap; // 300px
+
+            // No offset needed - cards start aligned to show 4 full cards
+            const offset = -(currentIndex * moveDistance);
+
+            if (animated) {
+                grid.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+            } else {
+                grid.style.transition = 'none';
+            }
+
+            grid.style.transform = `translateX(${offset}px)`;
+            updateDots();
+        }
+
+        function moveCarousel(direction) {
+            // Reset autoplay timer when user interacts
+            resetAutoplay();
+
+            currentIndex += direction;
+            updateCarousel(true);
+
+            // Check if we need to reset position for infinite loop
+            setTimeout(() => {
+                if (currentIndex >= totalOriginalCards * 2) {
+                    // We're past the original cards, jump back to first original
+                    currentIndex = totalOriginalCards;
+                    updateCarousel(false);
+                } else if (currentIndex < totalOriginalCards) {
+                    // We're before the original cards, jump to last original
+                    currentIndex = totalOriginalCards * 2 - 1;
+                    updateCarousel(false);
+                }
+            }, 600);
+        }
+
+        function createDots() {
+            const dotsContainer = document.getElementById('carousel-dots');
+            dotsContainer.innerHTML = '';
+
+            for (let i = 0; i < totalOriginalCards; i++) {
+                const dot = document.createElement('button');
+                dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+                dot.onclick = () => goToSlide(i);
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        function goToSlide(index) {
+            resetAutoplay();
+            currentIndex = totalOriginalCards + index;
+            updateCarousel(true);
+        }
+
+        function updateDots() {
+            const dots = document.querySelectorAll('.carousel-dot');
+            // Calculate which original card we're showing
+            let actualIndex = currentIndex % totalOriginalCards;
+            if (currentIndex >= totalOriginalCards && currentIndex < totalOriginalCards * 2) {
+                actualIndex = currentIndex - totalOriginalCards;
+            }
+
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === actualIndex);
+            });
+        }
+
+        function startAutoplay() {
+            autoplayTimer = setInterval(() => {
+                moveCarousel(1);
+            }, 5000);
+        }
+
+        function resetAutoplay() {
+            clearInterval(autoplayTimer);
+            startAutoplay();
+        }
+
+        // Initialize carousel
+        window.addEventListener('load', () => {
+            setupInfiniteCarousel();
+            createDots();
+            startAutoplay();
+        });
+
+        window.addEventListener('resize', () => {
+            updateCarousel(false);
+        });
+
+        // Teacher tabs functionality
+        function switchTab(tabName) {
+            // Remove active class from all tabs
+            document.querySelectorAll('.teacher-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Hide all tab contents
+            document.querySelectorAll('.teacher-tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+
+            // Show corresponding content
+            document.getElementById(tabName + '-content').classList.add('active');
+
+            // Show/hide teacher name based on tab
+            const teacherName = document.getElementById('teacher-name');
+            if (tabName === 'profesor') {
+                teacherName.style.display = 'inline-block';
+            } else {
+                teacherName.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

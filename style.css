@@ -1,0 +1,417 @@
+:root {
+            --primary-color: #007bff; /* Deep Blue for Education */
+            --secondary-color: #ffc107; /* Yellow/Gold Accent */
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+            --max-width: 1200px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: #fff;
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: #0056b3;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* --- 2. Buttons --- */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-top: 20px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: #fff;
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            margin-left: 15px;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+        
+        /* --- 3. Top Header (Contact Info) --- */
+        .top-header {
+            background-color: var(--light-bg); /* Light background for contrast */
+            padding: 8px 0;
+            font-size: 14px;
+            color: #666;
+            border-bottom: 1px solid #eee;
+            position: relative; /* Make sure it doesn't overlap sticky header */
+            z-index: 1001;
+        }
+
+        .top-contact {
+            display: flex;
+            justify-content: flex-end; /* Align content to the right */
+            gap: 25px;
+        }
+
+        .top-contact p {
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+
+
+        /* --- 4. Main Header & Navigation --- */
+        .main-header {
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container-wrapper {
+            /* This wrapper allows us to make the whole sticky section one unit */
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: white; /* Ensure content underneath doesn't show through */
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo a {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .main-nav {
+            flex-grow: 1; 
+            display: flex;
+            justify-content: flex-end;
+            margin-right: 20px; /* Space between nav and CTA button */
+        }
+
+        .nav-list {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-list a {
+            font-weight: 600;
+            color: var(--text-color);
+            padding-bottom: 5px;
+        }
+
+        .nav-list a.active, .nav-list a:hover {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+        }
+        
+        /* CTA Button in Header */
+        .btn-header-cta {
+            background-color: var(--secondary-color); /* Use accent color for visibility */
+            color: var(--text-color);
+            border: 2px solid var(--secondary-color);
+            padding: 8px 15px; 
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: capitalize; /* Make it less aggressive than uppercase */
+            margin-top: 0;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-header-cta:hover {
+            background-color: #e0ac00;
+            border-color: #e0ac00;
+            color: #fff;
+        }
+
+        .menu-toggle {
+            display: none; /* Hidden on desktop */
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1001; 
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: var(--text-color);
+            margin: 4px 0;
+            transition: 0.4s;
+        }
+
+        /* --- 5. Hero Section --- */
+        .hero-section {
+            /* Placeholder URL for visual completeness */
+            background: url('https://placehold.co/1920x600/007bff/ffffff?text=University+Campus+Banner') no-repeat center center/cover;
+            color: #fff;
+            padding: 150px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5); /* Overlay for readability */
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero-content h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        /* Highlight bolded words */
+        .hero-content h1 strong {
+            color: var(--secondary-color);
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* --- 6. Courses Section --- */
+        .courses-section {
+            padding: 80px 0;
+            text-align: center;
+            background-color: var(--light-bg);
+        }
+
+        .section-title {
+            font-size: 32px;
+            margin-bottom: 50px;
+            font-weight: 700;
+        }
+
+        .section-title strong {
+            color: var(--primary-color);
+        }
+
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .course-card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            text-align: left;
+            transition: transform 0.3s;
+            overflow: hidden; /* Fixes hover overflow on borders */
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .course-card h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            color: var(--text-color);
+        }
+
+        .course-card p {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .course-card a {
+            font-weight: 600;
+        }
+
+        /* --- 7. Footer --- */
+        .main-footer {
+            background-color: #222;
+            color: #ccc;
+            padding: 60px 0 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            padding-bottom: 30px;
+        }
+
+        .footer-widget h3 {
+            color: #fff;
+            font-size: 18px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 5px;
+            display: inline-block;
+        }
+
+        .footer-widget ul a {
+            color: #ccc;
+            display: block;
+            padding: 5px 0;
+        }
+
+        .footer-widget ul a:hover {
+            color: var(--primary-color);
+        }
+
+        .copyright {
+            background-color: #111;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 14px;
+        }
+
+        /* --- 8. Media Queries (Responsiveness) --- */
+        @media (max-width: 992px) {
+            
+            .top-header {
+                display: none; /* Hide top bar on smaller screens to save space */
+            }
+            
+            .btn-header-cta {
+                display: none; /* Hide CTA button on mobile nav */
+            }
+
+            .main-nav {
+                justify-content: flex-start;
+            }
+            
+            .nav-list {
+                display: none;
+                flex-direction: column;
+                background-color: #fff;
+                position: absolute;
+                top: 80px; /* Adjust if top-header is shown, but currently hidden */
+                left: 0;
+                width: 100%;
+                padding: 20px;
+                box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-list.open {
+                display: flex; /* Show mobile nav when open */
+            }
+
+            .nav-list li {
+                margin: 10px 0;
+                text-align: center;
+            }
+
+            .nav-list a {
+                display: block;
+                padding: 10px 0;
+                border-bottom: none !important;
+            }
+            
+            .nav-list a.active, .nav-list a:hover {
+                 border-bottom: none;
+                 color: #0056b3;
+            }
+
+
+            .menu-toggle {
+                display: block; /* Show menu toggle button */
+            }
+
+            .hero-content h1 {
+                font-size: 36px;
+            }
+        }
+
+        @media (min-width: 993px) {
+            .btn-header-cta {
+                display: inline-block; /* Show CTA button on desktop */
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero-section {
+                padding: 80px 0;
+            }
+
+            .hero-content h1 {
+                font-size: 28px;
+            }
+            
+            .btn-secondary {
+                margin-left: 0;
+                margin-top: 15px; /* Add space below primary button */
+            }
+            
+            .hero-content .btn-primary {
+                display: block;
+            }
+            
+            .hero-content .btn-secondary {
+                display: block;
+            }
+        }
