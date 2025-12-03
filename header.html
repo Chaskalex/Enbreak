@@ -1,0 +1,86 @@
+<div class="top-header">
+    <div class="container">
+        <div class="top-left">
+            <a href="#" class="top-item contact-icon">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>100% Online - Chile</span>
+            </a>
+            <a href="mailto:info@enbreak.net" class="top-item contact-icon">
+                <i class="fas fa-envelope"></i>
+                <span>info@enbreak.net</span>
+            </a>
+            <a href="tel:+56979924910" class="top-item contact-icon">
+                <i class="fas fa-phone"></i>
+                <span>+56 9 79924910</span>
+            </a>
+        </div>
+        <div class="top-right">
+            <div class="language-selector">
+                <button class="language-btn" onclick="toggleLanguage(event)">
+                    <i class="fas fa-globe"></i>
+                    <span id="currentLanguage">Español</span>
+                    <i class="fas fa-chevron-down" style="font-size: 10px;"></i>
+                </button>
+                <div class="language-dropdown">
+                    <a href="#" onclick="changeLanguage('en'); return false;">English</a>
+                </div>
+            </div>
+            <div class="social-icons">
+                <a href="https://www.instagram.com/enbreak.official/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.youtube.com/@enbreak" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+                <a href="https://x.com/enbreakcl" target="_blank" rel="noopener noreferrer"><i class="fab fa-x-twitter"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<header class="main-header">
+    <div class="header-container">
+        <a href="#home" class="logo">
+            <img src="assets/logo/logo.png" alt="Enbreak Logo">
+        </a>
+
+        <button class="mobile-toggle" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <nav class="nav-menu" id="navMenu">
+            <div class="nav-item active">
+                <a href="#home" class="nav-link">Inicio</a>
+            </div>
+
+            <div class="nav-item">
+                <a class="nav-link">Clases <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown">
+                    <a href="#planes">Ver Planes</a>
+                    <a href="#agendar">Agendar Clase</a>
+                    <a href="#inscribir">Inscribir Curso</a>
+                    <a href="#test">Test Gratuito</a>
+                </div>
+            </div>
+
+            <div class="nav-item">
+                <a class="nav-link">Biblioteca <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown">
+                    <a href="#miniclasses">Mini-classes</a>
+                    <a href="#podcast">Podcast</a>
+                    <a href="#actividades">Actividades</a>
+                    <a href="#galeria">Galería</a>
+                </div>
+            </div>
+
+            <div class="nav-item">
+                <a class="nav-link">Soporte <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown">
+                    <a href="#ayuda">Ayuda</a>
+                    <a href="#faq">Preguntas Frecuentes</a>
+                    <a href="#terminos">Términos y Condiciones</a>
+                    <a href="#contacto">Contacto</a>
+                </div>
+            </div>
+
+            <a href="#agendar" class="cta-btn">Agendar Ahora</a>
+        </nav>
+    </div>
+</header>
