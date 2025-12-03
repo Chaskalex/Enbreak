@@ -1,3 +1,22 @@
+        // Sticky Navbar on Scroll
+        window.addEventListener('scroll', function() {
+            const stickyWrapper = document.querySelector('.sticky-wrapper');
+            const topHeader = document.querySelector('.top-header');
+
+            if (stickyWrapper && topHeader) {
+                const topHeaderHeight = topHeader.offsetHeight;
+
+                if (window.pageYOffset > topHeaderHeight) {
+                    stickyWrapper.classList.add('is-stuck');
+                    // Add padding to body to prevent content jump
+                    document.body.style.paddingTop = stickyWrapper.offsetHeight + 'px';
+                } else {
+                    stickyWrapper.classList.remove('is-stuck');
+                    // Remove padding
+                    document.body.style.paddingTop = '0';
+                }
+            }
+        });
 
         let currentLang = 'es';
 
