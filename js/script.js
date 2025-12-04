@@ -9,13 +9,14 @@
                 navItems.forEach(item => item.classList.remove('active'));
 
                 // Check if we're on the home page
-                if (currentPath === '/' || currentPath === '/index.html' || currentPath.endsWith('/index.html') ||
-                    currentPath === '' || currentPath.includes('/enbreak/') && !currentPath.includes('/pages/')) {
+                if (currentPath === '/' || currentPath === '/home' || currentPath === '/index.html' ||
+                    currentPath.endsWith('/index.html') || currentPath === '' ||
+                    currentPath.includes('/enbreak/') && !currentPath.includes('/pages/')) {
                     // Activate "Inicio" nav item
                     navItems.forEach(navItem => {
                         const navLink = navItem.querySelector('.nav-link');
                         const href = navLink?.getAttribute('href');
-                        if (href && (href === 'index.html' || href === '/index.html' || href === '/')) {
+                        if (href && (href === 'index.html' || href === '/index.html' || href === '/' || href === '/home')) {
                             navItem.classList.add('active');
                         }
                     });

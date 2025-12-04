@@ -27,13 +27,14 @@ document.addEventListener('DOMContentLoaded', function() {
         if (depth > 0) {
             document.querySelectorAll('[data-nav-link]').forEach(link => {
                 const href = link.getAttribute('href');
-                link.setAttribute('href', basePath + href);
+                // Don't modify absolute paths (starting with /)
+                if (!href.startsWith('/')) {
+                    link.setAttribute('href', basePath + href);
+                }
             });
 
-            // Fix logo link and image
-            const logoLink = document.getElementById('logo-link');
+            // Fix logo image (logo link already uses absolute path /)
             const logoImg = document.getElementById('logo-img');
-            if (logoLink) logoLink.setAttribute('href', basePath + 'index.html');
             if (logoImg) logoImg.setAttribute('src', basePath + 'assets/logo/logo.png');
         }
 
