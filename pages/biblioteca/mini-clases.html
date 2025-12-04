@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini-clases - Enbreak</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rubik:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <!-- Page Loader -->
+    <div id="page-loader">
+        <div class="loader-content">
+            <img src="/assets/logo/loading.png" alt="Loading" class="loader-logo">
+            <svg class="circular" role="img" aria-label="Cargando">
+                <circle class="path-bg" cx="90" cy="90" r="80" fill="none" stroke-width="6"/>
+                <circle class="path" cx="90" cy="90" r="80" fill="none" stroke-width="6" stroke-miterlimit="10"/>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <!-- Your page content goes here -->
+    <style>
+    /* Banner Section */
+    .mini-banner-section {
+        width: 100%;
+        height: 320px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 60px;
+        overflow: hidden;
+    }
+
+    .mini-banner-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('/enbreak/assets/bgimg/panel4.jpg') center/cover no-repeat;
+        filter: blur(5px);
+        z-index: 0;
+    }
+
+    .mini-banner-section::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(90deg, rgba(13, 27, 62, 0.85) 0%, rgba(13, 27, 62, 0.65) 40%, rgba(13, 27, 62, 0.45) 70%, rgba(13, 27, 62, 0.25) 100%);
+        z-index: 1;
+    }
+
+    .banner-content {
+        text-align: center;
+        z-index: 2;
+        max-width: 1200px;
+        padding: 0 20px;
+    }
+
+    .breadcrumb {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.8);
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .breadcrumb a {
+        color: #fff;
+        text-decoration: none;
+        transition: color 0.2s ease;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .breadcrumb a:hover {
+        color: #ff6600;
+        border-bottom-color: #ff6600;
+    }
+
+    .breadcrumb-separator {
+        margin: 0 10px;
+        color: rgba(255, 255, 255, 0.6);
+        font-weight: 400;
+    }
+
+    .breadcrumb-current {
+        color: #fff;
+    }
+
+    .mini-banner-section h1 {
+        font-size: 50px;
+        color: #fff;
+        font-weight: 600;
+        margin: 0;
+        text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+    }
+
+    @media (max-width: 767.98px) {
+        .mini-banner-section {
+            height: 250px;
+        }
+        
+        .mini-banner-section h1 {
+            font-size: 36px;
+        }
+    }
+
+    /* Content section title */
+    .content-header {
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    .content-header h2 {
+        font-size: 28px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 0;
+    }
+
+    .content-header p {
+        font-size: 18px;
+        color: #666;
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+    /* Page container */
+    .mini-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        text-align: left;
+        display: flex;
+        gap: 40px;
+        align-items: flex-start;
+    }
+
+    .content-wrapper {
+        flex: 1;
+        max-width: 700px;
+    }
+
+    .sidebar-image {
+        width: 380px;
+        flex-shrink: 0;
+        position: relative;
+    }
+
+    .sidebar-image img {
+        width: 100%;
+        height: auto;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    @media (max-width: 992px) {
+        .mini-container {
+            flex-direction: column;
+        }
+
+        .sidebar-image {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            position: static;
+        }
+
+        .content-wrapper {
+            max-width: 100%;
+        }
+    }
+
+    /* Dropdown sections with colors */
+    .level-dropdown {
+        margin-bottom: 12px;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        background: white;
+    }
+
+    .level-header {
+        padding: 14px 22px;
+        font-size: 18px;
+        font-weight: 600;
+        color: white;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+        transition: opacity 0.2s ease;
+    }
+
+    .level-header:hover {
+        opacity: 0.9;
+    }
+
+    .level-badge {
+        background: rgba(255, 255, 255, 0.2);
+        padding: 2px 8px;
+        border-radius: 14px;
+        font-size: 11px;
+        font-weight: 500;
+    }
+
+    .arrow {
+        font-size: 14px;
+        transition: transform 0.3s ease;
+        margin-left: auto;
+    }
+
+    .level-content {
+        display: grid;
+        grid-template-rows: 0fr;
+        padding: 0;
+        background: white;
+        transition: grid-template-rows 0.3s ease, padding 0.3s ease;
+        overflow: hidden;
+    }
+
+    .level-content.show {
+        grid-template-rows: 1fr;
+    }
+
+    .level-content-inner {
+        overflow: hidden;
+    }
+
+    .topics-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .topic-item {
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    .topic-item:last-child {
+        border-bottom: none;
+    }
+
+    .topic-link {
+        display: block;
+        padding: 10px 22px;
+        color: #333;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+    .topic-link:hover {
+        background: #f8f9fa;
+        color: #ff6600;
+        padding-left: 32px;
+    }
+
+    /* Individual level colors - Rainbow progression from purple to red */
+    .level-0 .level-header {
+        background: linear-gradient(135deg, #6A1B9A 0%, #4A148C 100%);
+    }
+
+    .level-a1 .level-header {
+        background: linear-gradient(135deg, #5E35B1 0%, #4527A0 100%);
+    }
+
+    .level-a2 .level-header {
+        background: linear-gradient(135deg, #1976D2 0%, #1565C0 100%);
+    }
+
+    .level-b1 .level-header {
+        background: linear-gradient(135deg, #0288D1 0%, #01579B 100%);
+    }
+
+    .level-b2 .level-header {
+        background: linear-gradient(135deg, #00897B 0%, #00695C 100%);
+    }
+
+    .level-c1 .level-header {
+        background: linear-gradient(135deg, #F57C00 0%, #E65100 100%);
+    }
+
+    .level-c2 .level-header {
+        background: linear-gradient(135deg, #D32F2F 0%, #B71C1C 100%);
+    }
+
+    @media (max-width: 768px) {
+        .topics-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<main style="padding: 0; margin: 0;">
+    <!-- Banner with Breadcrumb -->
+    <section class="mini-banner-section">
+        <div class="banner-content">
+            <nav class="breadcrumb">
+                <a href="/enbreak/index.php">Home</a>
+                <span class="breadcrumb-separator">></span>
+                <span class="breadcrumb-current">Mini-Classes</span>
+            </nav>
+            <h1>Mini-Classes</h1>
+        </div>
+    </section>
+
+    <div class="mini-container" style="padding: 0 40px 80px 40px;">
+        <div class="content-wrapper">
+            <div class="content-header">
+                <h2>Tabla de Contenidos</h2>
+            </div>
+
+            <!-- NIVEL 0 -->
+        <div class="level-dropdown level-0">
+            <div class="level-header">
+                <span>Nivel Cero</span>
+                <span class="level-badge">Pre-A1</span>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="level-content">
+                <div class="level-content-inner">
+                    <ul class="topics-list">
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Alphabet</a>
+                        </li>
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Numbers</a>
+                        </li>
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Colors</a>
+                        </li>
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Days & Months</a>
+                        </li>
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Weather</a>
+                        </li>
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Animals</a>
+                        </li>
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Sports</a>
+                        </li>
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Countries & Nationalities</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- NIVEL A1 -->
+        <div class="level-dropdown level-a1">
+            <div class="level-header">
+                <span>Nivel Principiante</span>
+                <span class="level-badge">A1</span>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="level-content">
+                <div class="level-content-inner">
+                    <ul class="topics-list">
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Present Simple: Verb To Be</a>
+                        </li>
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Present Simple: Other Verbs</a>
+                        </li>
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Adverbs of Frequency</a>
+                        </li>
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Possessives</a>
+                        </li>
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Demonstrative Pronouns</a>
+                        </li>
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">There is / There are</a>
+                        </li>
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Articles: A / An</a>
+                        </li>
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Have got</a>
+                        </li>
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Present Continuous</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- NIVEL A2 -->
+        <div class="level-dropdown level-a2">
+            <div class="level-header">
+                <span>Nivel Pre-Intermedio</span>
+                <span class="level-badge">A2</span>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="level-content">
+                <div class="level-content-inner">
+                    <ul class="topics-list">
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Past Simple: Verb To Be</a>
+                        </li>
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Past Simple: Other Verbs</a>
+                        </li>
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Comparatives and Superlatives</a>
+                        </li>
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Countable & Uncountable Nouns</a>
+                        </li>
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Future: Be Going To</a>
+                        </li>
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Future: Will</a>
+                        </li>
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Future: Present Continuous</a>
+                        </li>
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Modal Verbs: Must / Have to / Can</a>
+                        </li>
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Too / Enough</a>
+                        </li>
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Present Perfect</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- NIVEL B1 -->
+        <div class="level-dropdown level-b1">
+            <div class="level-header">
+                <span>Nivel Intermedio</span>
+                <span class="level-badge">B1</span>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="level-content">
+                <div class="level-content-inner">
+                    <ul class="topics-list">
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Used to</a>
+                        </li>
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Past Continuous</a>
+                        </li>
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Present Perfect: for and since</a>
+                        </li>
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Present Perfect vs Past Simple</a>
+                        </li>
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Passive Voice (Present & Past)</a>
+                        </li>
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Relative Clauses</a>
+                        </li>
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">First Conditional</a>
+                        </li>
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Second Conditional</a>
+                        </li>
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Past Perfect</a>
+                        </li>
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Reported Speech</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- NIVEL B2 -->
+        <div class="level-dropdown level-b2">
+            <div class="level-header">
+                <span>Nivel Intermedio Avanzado</span>
+                <span class="level-badge">B2</span>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="level-content">
+                <div class="level-content-inner">
+                    <ul class="topics-list">
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Future Continuous</a>
+                        </li>
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Future Perfect</a>
+                        </li>
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Causative: Have / Get</a>
+                        </li>
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Third Conditional</a>
+                        </li>
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Mixed Conditional</a>
+                        </li>
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Relative Clauses: Defining and Non-defining</a>
+                        </li>
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Reported Speech (Advanced)</a>
+                        </li>
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Modal Verbs of Deduction</a>
+                        </li>
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Wishes and Regrets</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- NIVEL C1 -->
+        <div class="level-dropdown level-c1">
+            <div class="level-header">
+                <span>Nivel Avanzado</span>
+                <span class="level-badge">C1</span>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="level-content">
+                <div class="level-content-inner">
+                    <ul class="topics-list">
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Advanced modals</a>
+                        </li>
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Third Conditional</a>
+                        </li>
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Relative Clauses</a>
+                        </li>
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Nominalisation</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- NIVEL C2 -->
+        <div class="level-dropdown level-c2">
+            <div class="level-header">
+                <span>Nivel Maestro</span>
+                <span class="level-badge">C2</span>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="level-content">
+                <div class="level-content-inner">
+                    <ul class="topics-list">
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Mixed Conditionals</a>
+                        </li>
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Inversion</a>
+                        </li>
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Emphasis structures</a>
+                        </li>
+                        <li class="topic-item">
+                            <a href="#" class="topic-link">Ellipsis & substitution</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        </div>
+
+        <!-- Sidebar Image -->
+        <div class="sidebar-image">
+            <img src="/enbreak/assets/bgimg/panel5.jpg" alt="English Learning">
+        </div>
+    </div>
+</main>
+
+<script>
+    // Toggle dropdowns - only one open at a time
+    document.querySelectorAll('.level-header').forEach(header => {
+        header.addEventListener('click', () => {
+            const content = header.nextElementSibling;
+            const arrow = header.querySelector('.arrow');
+            const isOpen = content.classList.contains('show');
+
+            // Close all dropdowns
+            document.querySelectorAll('.level-content').forEach(otherContent => {
+                otherContent.classList.remove('show');
+            });
+
+            // Reset all arrows
+            document.querySelectorAll('.arrow').forEach(otherArrow => {
+                otherArrow.style.transform = "rotate(0deg)";
+            });
+
+            // If the clicked dropdown was closed, open it
+            if (!isOpen) {
+                content.classList.add('show');
+                arrow.style.transform = "rotate(180deg)";
+            }
+        });
+    });
+</script>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+<script src="/js/layout.js"></script>
+<script src="/js/script.js" defer></script>
+
+</body>
+</html>

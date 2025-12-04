@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(if not exist js mkdir js)",
-      "Bash(move:*)"
+      "Bash(move:*)",
+      "Bash(python -m http.server:*)",
+      "Bash(node -c:*)"
     ],
     "deny": [],
     "ask": []

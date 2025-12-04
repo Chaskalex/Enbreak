@@ -1,3 +1,36 @@
+        // Set active nav item based on current page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Wait for header to load
+            setTimeout(() => {
+                const currentPath = window.location.pathname;
+                const navItems = document.querySelectorAll('.nav-item');
+
+                // Remove active class from all nav items first
+                navItems.forEach(item => item.classList.remove('active'));
+
+                // Check which nav item should be active
+                navItems.forEach(navItem => {
+                    const navLink = navItem.querySelector('.nav-link');
+                    const dropdownLinks = navItem.querySelectorAll('.dropdown a');
+
+                    // Check if the main nav link matches current page
+                    const mainHref = navLink?.getAttribute('href');
+                    if (mainHref && currentPath === mainHref) {
+                        navItem.classList.add('active');
+                        return;
+                    }
+
+                    // Check if any dropdown link matches current page
+                    dropdownLinks.forEach(link => {
+                        const href = link.getAttribute('href');
+                        if (href && currentPath === href) {
+                            navItem.classList.add('active');
+                        }
+                    });
+                });
+            }, 100);
+        });
+
         // Sticky Navbar on Scroll
         window.addEventListener('scroll', function() {
             const stickyWrapper = document.querySelector('.sticky-wrapper');
