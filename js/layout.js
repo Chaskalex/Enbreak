@@ -23,26 +23,33 @@ document.addEventListener('DOMContentLoaded', function() {
         loadComponent('header-placeholder', basePath + 'header.html'),
         loadComponent('footer-placeholder', basePath + 'footer.html')
     ]).then(() => {
-        // Fix navigation paths based on depth
-        if (depth > 0) {
-            document.querySelectorAll('[data-nav-link]').forEach(link => {
-                const href = link.getAttribute('href');
-                // Don't modify absolute paths (starting with /)
-                if (!href.startsWith('/')) {
-                    link.setAttribute('href', basePath + href);
-                }
-            });
-
-            // Fix logo image (logo link already uses absolute path /)
+        // Wait for DOM to update after components are loaded
+        setTimeout(() => {
+            // Always fix logo images for all pages
             const logoImg = document.getElementById('logo-img');
-            if (logoImg) logoImg.setAttribute('src', basePath + 'assets/logo/logo.png');
-        }
+            const footerLogoImg = document.getElementById('footer-logo-img');
 
-        // Hide loader and show page
-        const loader = document.getElementById('page-loader');
-        if (loader) {
-            loader.classList.add('hidden');
-        }
-        document.body.classList.add('loaded');
+            if (depth > 0) {
+                // Fix navigation paths based on depth
+                document.querySelectorAll('[data-nav-link]').forEach(link => {
+                    const href = link.getAttribute('href');
+                    // Don't modify absolute paths (starting with /)
+                    if (!href.startsWith('/')) {
+                        link.setAttribute('href', basePath + href);
+                    }
+                });
+
+                // Fix logo images for subpages
+                if (logoImg) logoImg.setAttribute('src', basePath + 'assets/logo/logo.png');
+                if (footerLogoImg) footerLogoImg.setAttribute('src', basePath + 'assets/logo/logo2.png');
+            }
+
+            // Hide loader and show page
+            const loader = document.getElementById('page-loader');
+            if (loader) {
+                loader.classList.add('hidden');
+            }
+            document.body.classList.add('loaded');
+        }, 0);
     });
 });
