@@ -4,7 +4,12 @@
       "Bash(if not exist js mkdir js)",
       "Bash(move:*)",
       "Bash(python -m http.server:*)",
-      "Bash(node -c:*)"
+      "Bash(node -c:*)",
+      "Bash(grep:*)",
+      "Bash(for file in actividades.html galeria.html mini-clases.html podcast.html)",
+      "Bash(do sed -i 's/rgba(0, 123, 255, 0\\.6)/rgba(2, 40, 80, 0.6)/g' \"$file\")",
+      "Bash(done)",
+      "Bash(for file in ayuda.html contacto.html faq.html terms.html)"
     ],
     "deny": [],
     "ask": []

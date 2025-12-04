@@ -58,7 +58,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(90deg, rgba(13, 27, 62, 0.85) 0%, rgba(13, 27, 62, 0.65) 40%, rgba(13, 27, 62, 0.45) 70%, rgba(13, 27, 62, 0.25) 100%);
+    background: rgba(2, 40, 80, 0.6);
     z-index: 1;
 }
 
@@ -105,8 +105,10 @@
 .booking-banner-section h1 {
     font-size: 50px;
     color: #fff;
-    font-weight: 600;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 700;
     margin: 0;
+    line-height: 1.2;
     text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
 }
 
@@ -467,9 +469,9 @@ input:-webkit-autofill:focus {
     <section class="booking-banner-section">
         <div class="banner-content">
             <nav class="breadcrumb">
-                <a href="/enbreak/index.php">Home</a>
+                <a href="/">Inicio</a>
                 <span class="breadcrumb-separator">></span>
-                <span class="breadcrumb-current">Agenda tu Clase</span>
+                <span class="breadcrumb-current">Agendar</span>
             </nav>
             <h1>Agenda tu Clase</h1>
         </div>
@@ -1004,7 +1006,7 @@ const renderHeader = () => {
     return `
         <div class="px-6 pb-0" style="background-color: #fff; padding-top: 2rem; border-radius: 1rem 1rem 0 0;">
             ${renderProgressSteps()}
-            <div class="w-full bg-gray-300 mt-6" style="height: 2px;"></div>
+            <div class="w-full mt-6" style="height: 1px; background-color: #e0e0e0;"></div>
         </div>
     `;
 };
@@ -1102,9 +1104,9 @@ const renderStep1 = () => {
                 : 'border-2 border-gray-200 hover:border-blue-300';
 
     return `
-        <div onclick="selectPlan(${plan.id})" 
-            class="relative rounded-2xl p-6 cursor-pointer transition-all duration-300 hover:shadow-2xl hover:scale-102 ${cardClasses}" 
-            style="position: relative; z-index: 1; background-color: #ffffff !important;" 
+        <div onclick="selectPlan(${plan.id})"
+            class="relative rounded-2xl p-8 cursor-pointer transition-all duration-300 hover:shadow-2xl hover:scale-102 ${cardClasses}"
+            style="position: relative; z-index: 1; background-color: #ffffff !important; min-height: 220px; display: flex; flex-direction: column; justify-content: center;"
         >
             ${plan.popular ? `
                 <div class="popular-badge" style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%); color: white; font-size: 11px; font-weight: bold; border-radius: 9999px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); z-index: 10; white-space: nowrap;">
