@@ -1,0 +1,32 @@
+# Netlify configuration for Enbreak
+
+[build]
+  publish = "."
+
+# Enable pretty URLs (automatically removes .html extension)
+[build.processing]
+  skip_processing = false
+
+[build.processing.html]
+  pretty_urls = true
+
+# Rewrite clean URLs to actual file locations
+[[redirects]]
+  from = "/home"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/clases/*"
+  to = "/pages/clases/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/biblioteca/*"
+  to = "/pages/biblioteca/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/soporte/*"
+  to = "/pages/soporte/:splat"
+  status = 200

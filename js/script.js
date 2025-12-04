@@ -2,33 +2,52 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Wait for header to load
             setTimeout(() => {
-                const currentPath = window.location.pathname;
+                const currentPath = window.location.pathname.toLowerCase();
                 const navItems = document.querySelectorAll('.nav-item');
 
                 // Remove active class from all nav items first
                 navItems.forEach(item => item.classList.remove('active'));
 
-                // Check which nav item should be active
-                navItems.forEach(navItem => {
-                    const navLink = navItem.querySelector('.nav-link');
-                    const dropdownLinks = navItem.querySelectorAll('.dropdown a');
+                // Check if we're on the home page
+                if (currentPath === '/' || currentPath === '/index.html' || currentPath.endsWith('/index.html') ||
+                    currentPath === '' || currentPath.includes('/enbreak/') && !currentPath.includes('/pages/')) {
+                    // Activate "Inicio" nav item
+                    navItems.forEach(navItem => {
+                        const navLink = navItem.querySelector('.nav-link');
+                        const href = navLink?.getAttribute('href');
+                        if (href && (href === 'index.html' || href === '/index.html' || href === '/')) {
+                            navItem.classList.add('active');
+                        }
+                    });
+                    return;
+                }
 
-                    // Check if the main nav link matches current page
-                    const mainHref = navLink?.getAttribute('href');
-                    if (mainHref && currentPath === mainHref) {
-                        navItem.classList.add('active');
-                        return;
-                    }
+                // Check which category the current page belongs to
+                navItems.forEach(navItem => {
+                    const dropdownLinks = navItem.querySelectorAll('.dropdown a');
 
                     // Check if any dropdown link matches current page
                     dropdownLinks.forEach(link => {
                         const href = link.getAttribute('href');
-                        if (href && currentPath === href) {
-                            navItem.classList.add('active');
+                        if (href) {
+                            // Extract the filename from the href
+                            const hrefFileName = href.split('/').pop();
+                            const currentFileName = currentPath.split('/').pop();
+
+                            // Check if the current path contains the category (clases, biblioteca, soporte)
+                            if (href.includes('/clases/') && currentPath.includes('/clases/')) {
+                                navItem.classList.add('active');
+                            } else if (href.includes('/biblioteca/') && currentPath.includes('/biblioteca/')) {
+                                navItem.classList.add('active');
+                            } else if (href.includes('/soporte/') && currentPath.includes('/soporte/')) {
+                                navItem.classList.add('active');
+                            } else if (currentFileName === hrefFileName && hrefFileName !== '') {
+                                navItem.classList.add('active');
+                            }
                         }
                     });
                 });
-            }, 100);
+            }, 200);
         });
 
         // Sticky Navbar on Scroll
