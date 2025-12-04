@@ -15,10 +15,28 @@ function loadComponent(elementId, filePath) {
 
 // Load header and footer when DOM is ready
 document.addEventListener('DOMContentLoaded', function() {
+    // Determine the correct path based on current location
+    const depth = (window.location.pathname.match(/\//g) || []).length - 1;
+    const basePath = depth === 0 ? '' : '../'.repeat(depth);
+
     Promise.all([
-        loadComponent('header-placeholder', '/header.html'),
-        loadComponent('footer-placeholder', '/footer.html')
+        loadComponent('header-placeholder', basePath + 'header.html'),
+        loadComponent('footer-placeholder', basePath + 'footer.html')
     ]).then(() => {
+        // Fix navigation paths based on depth
+        if (depth > 0) {
+            document.querySelectorAll('[data-nav-link]').forEach(link => {
+                const href = link.getAttribute('href');
+                link.setAttribute('href', basePath + href);
+            });
+
+            // Fix logo link and image
+            const logoLink = document.getElementById('logo-link');
+            const logoImg = document.getElementById('logo-img');
+            if (logoLink) logoLink.setAttribute('href', basePath + 'index.html');
+            if (logoImg) logoImg.setAttribute('src', basePath + 'assets/logo/logo.png');
+        }
+
         // Hide loader and show page
         const loader = document.getElementById('page-loader');
         if (loader) {
