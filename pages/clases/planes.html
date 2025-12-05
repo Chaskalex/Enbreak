@@ -3,13 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ver Planes - ENBREAK</title>
+    <title>Enbreak | Ver Planes</title>
+    <link rel="icon" type="image/x-icon" href="../../favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../favicon/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../favicon/apple-touch-icon.png">
+    <link rel="manifest" href="../../favicon/site.webmanifest">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rubik:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../css/style.css">
     <style>
+        .page-banner::before {
+            background: url('../../assets/backgrounds/bg3.jpg') center/cover no-repeat;
+        }
         .page-banner {
             width: 100%;
             height: 320px;
@@ -28,7 +36,9 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('../../assets/backgrounds/bg3.jpg') center/cover no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             filter: blur(5px);
             z-index: 0;
         }
@@ -49,39 +59,6 @@
             z-index: 2;
             max-width: 1200px;
             padding: 0 20px;
-        }
-
-        .page-banner .breadcrumb {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .page-banner .breadcrumb a {
-            color: #fff;
-            text-decoration: none;
-            transition: color 0.2s ease;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .page-banner .breadcrumb a:hover {
-            color: #ff6600;
-            border-bottom-color: #ff6600;
-        }
-
-        .page-banner .breadcrumb-separator {
-            margin: 0 10px;
-            color: rgba(255, 255, 255, 0.6);
-            font-weight: 400;
-        }
-
-        .page-banner .breadcrumb-current {
-            color: #fff;
         }
 
         .page-banner h1 {

@@ -101,8 +101,8 @@
         .top-header {
             background: #0a1e42;
             color: white;
-            padding: 12px 0;
-            font-size: 14px;
+            padding: 10px 0;
+            font-size: 13px;
         }
 
         .top-header .container {
@@ -138,12 +138,12 @@
         }
 
         .top-item i {
-            color: white;
+            color: #ff6600;
             transition: color 0.3s;
         }
 
         .top-item.contact-icon i {
-            color: white !important;
+            color: #ff6600 !important;
         }
 
         .top-item:hover {
@@ -177,19 +177,28 @@
             gap: 8px;
             cursor: pointer;
             font-family: 'Inter', sans-serif;
-            font-size: 14px;
+            font-size: 13px;
             padding: 5px 10px;
             transition: color 0.3s;
         }
 
         .language-btn i {
             color: rgb(216, 222, 234);
-            font-size: 16px;
+            font-size: 14px;
             transition: color 0.3s;
+        }
+
+        .language-btn .chevron-icon {
+            color: rgb(216, 222, 234);
+            font-size: 10px;
         }
 
         .language-btn:hover,
         .language-btn:hover i {
+            color: #ff6600;
+        }
+
+        .language-btn:hover .chevron-icon {
             color: #ff6600;
         }
 
@@ -627,7 +636,7 @@
 
         /* Teacher Section */
         .teacher-section {
-            background: linear-gradient(135deg, #202020 0%, #000000 100%);
+            background: linear-gradient(135deg, #000000 0%, #06071e 100%);
             padding: 60px 0 40px 0;
             position: relative;
             overflow: hidden;
@@ -1735,34 +1744,34 @@
             position: fixed;
             bottom: 25px;
             right: 25px;
-            display: flex;
-            align-items: center;
             z-index: 1000;
             text-decoration: none;
         }
 
         .whatsapp-message {
+            position: absolute;
+            right: 75px;
+            top: 50%;
+            transform: translateY(-50%) translateX(20px);
             background-color: white;
             color: #333;
             padding: 10px 15px;
             border-radius: 8px;
             box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
-            margin-right: 15px;
             font-size: 14px;
             line-height: 1.2;
             text-align: right;
             opacity: 0;
             visibility: hidden;
-            transform: translateX(20px);
             transition: all 0.3s ease-in-out;
             white-space: nowrap;
             pointer-events: none;
         }
 
-        .whatsapp-container:hover .whatsapp-message {
+        .whatsapp-float:hover + .whatsapp-message {
             opacity: 1;
             visibility: visible;
-            transform: translateX(0);
+            transform: translateY(-50%) translateX(0);
         }
 
         .whatsapp-float {

@@ -3,23 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enbreak | Agendar Clase</title>
-    <link rel="icon" type="image/x-icon" href="../../favicon/favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../../favicon/favicon-16x16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="../../favicon/apple-touch-icon.png">
-    <link rel="manifest" href="../../favicon/site.webmanifest">
+    <title>Agendar Clase | Enbreak</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rubik:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../css/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/lucide@latest"></script>
-    <style>
-        [data-lucide] {
-            display: inline-block;
-        }
-    </style>
 </head>
 <body>
     <!-- Page Loader -->
@@ -36,21 +25,7 @@
     <!-- Header Placeholder -->
     <div id="header-placeholder"></div>
 
-<main style="padding: 0; margin: 0;">
-    <section class="booking-banner-section">
-        <div class="banner-content">
-            <nav class="breadcrumb">
-                <a href="/">Inicio</a>
-                <span class="breadcrumb-separator">></span>
-                <span class="breadcrumb-current">Agendar</span>
-            </nav>
-            <h1>Agenda tu Clase</h1>
-        </div>
-    </section>
-
-    <div id="booking-system-container"></div>
-</main>
-
+    <!-- Your page content goes here -->
 <style>
 
 .booking-banner-section {
@@ -677,13 +652,13 @@ input:-webkit-autofill:focus {
 
 /* Disclaimer Box */
 .disclaimer-box {
-    border: 1px solid #81C7D4;
+    border: 1px solid #93c5fd;
     padding: 1rem;
     border-radius: 0.75rem;
     margin-top: 1rem;
     margin-left: auto;
     margin-right: auto;
-    background-color: #E0F5F7;
+    background-color: #c8e0ffff;
     max-width: 600px;
 }
 
@@ -694,18 +669,17 @@ input:-webkit-autofill:focus {
 }
 
 .disclaimer-icon {
-    color: #3B8A9D;
+    color: #2563eb;
     flex-shrink: 0;
     width: 20px;
     height: 20px;
     min-width: 20px;
-    margin-top: 2px;
 }
 
 .disclaimer-text {
     font-size: 0.875rem;
     line-height: 1.25rem;
-    color: #3B8A9D;
+    color: #1e40af;
     line-height: 1.6;
 }
 
@@ -738,13 +712,11 @@ input:-webkit-autofill:focus {
     grid-template-columns: repeat(1, minmax(0, 1fr));
     gap: 1.5rem;
     margin-bottom: 2rem;
-    position: relative;
 }
 
 @media (min-width: 768px) {
     .date-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        overflow: visible !important;
     }
 }
 
@@ -812,34 +784,6 @@ input:-webkit-autofill:focus {
 .time-slot-button:not(.selected):hover {
     background-color: #eff6ff;
     border-color: #60a5fa;
-}
-
-/* Calendar Popup */
-.calendar-popup {
-    position: fixed !important;
-    z-index: 99999 !important;
-    background-color: #ffffff !important;
-    border: 1px solid #e5e7eb;
-    border-radius: 1rem;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    padding: 1rem;
-    width: 320px;
-    max-width: 90vw;
-}
-
-.calendar-popup .calendar-nav-btn {
-    background: transparent;
-    border: none;
-    padding: 0.5rem;
-    cursor: pointer;
-    border-radius: 0.5rem;
-    transition: background-color 0.2s;
-    color: #374151;
-    font-size: 18px;
-}
-
-.calendar-popup .calendar-nav-btn:hover {
-    background-color: #f3f4f6;
 }
 
 /* Booking Summary */
@@ -1023,25 +967,24 @@ input:-webkit-autofill:focus {
 
 /* Info Box */
 .info-box {
-    border: 1px solid #81C7D4;
-    padding: 1rem;
+    border: 1px solid #93c5fd;
+    padding: 0.75rem;
     border-radius: 0.75rem;
     margin-bottom: 1.5rem;
     margin-left: auto;
     margin-right: auto;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: center;
     gap: 0.75rem;
-    background-color: #E0F5F7;
-    max-width: 600px;
 }
 
 .info-box-text {
     font-size: 0.875rem;
     line-height: 1.25rem;
-    color: #3B8A9D;
+    color: #1e40af;
     margin: 0;
-    text-align: left;
+    text-align: center;
 }
 
 /* Delete Button */
@@ -1058,7 +1001,7 @@ input:-webkit-autofill:focus {
 /* Checkbox Container */
 .checkbox-container {
     display: flex;
-align-items: center;
+    align-items: center;
     gap: 0.5rem;
 }
 
@@ -1097,6 +1040,22 @@ align-items: center;
     display: none;
 }
 </style>
+
+<main style="padding: 0; margin: 0;">
+    <section class="booking-banner-section">
+        <div class="banner-content">
+            <nav class="breadcrumb">
+                <a href="/">Inicio</a>
+                <span class="breadcrumb-separator">></span>
+                <span class="breadcrumb-current">Agendar</span>
+            </nav>
+            <h1>Agenda tu Clase</h1>
+        </div>
+    </section>
+
+    <div id="booking-system-container"></div>
+</main>
+
 <script>
 // =================================================================
 // 1. STATE & CONSTANTS
@@ -1146,8 +1105,10 @@ const formatCurrency = (amount) => {
 };
 
 const calculateOriginalPrice = (plan) => {
-    const basePrice = 14990;
-    return basePrice * plan.classes;
+    if (plan.savings === 0) {
+        return plan.price;
+    }
+    return Math.round(plan.price / (1 - (plan.savings / 100)));
 };
 const calculateFinalPrice = () => {
     if (!selectedPlan) return 0;
@@ -1338,95 +1299,19 @@ const handleConfirmPayment = () => {
 };
 
 const toggleCalendar = (index) => {
-    // Toggle active calendar index
+    const isOpening = activeCalendar !== index;
+    
     if (activeCalendar === index) {
         activeCalendar = null;
-        removeCalendarPopup();
-        renderStep(2);
     } else {
         activeCalendar = index;
-        renderStep(2);
-        // Wait for DOM to update, then show popup
-        setTimeout(() => showCalendarPopup(index), 50);
+    }
+    renderStep(2); 
+
+    if (isOpening && activeCalendar === index) {
+        scrollToCalendar();
     }
 };
-
-function showCalendarPopup(index) {
-    // Remove any existing popup first
-    removeCalendarPopup();
-
-    // Find the button that was clicked
-    const buttons = document.querySelectorAll('button[onclick*="toggleCalendar"]');
-    let btn = null;
-    for (let b of buttons) {
-        const onclick = b.getAttribute('onclick');
-        if (onclick && onclick.includes(`toggleCalendar(${index})`)) {
-            btn = b;
-            break;
-        }
-    }
-    
-    if (!btn) return;
-
-    // Create popup container
-    const popup = document.createElement('div');
-    popup.className = 'calendar-popup';
-    popup.setAttribute('data-calendar-index', index);
-    popup.style.cssText = `
-        position: fixed;
-        z-index: 99999;
-        background-color: #ffffff;
-        border: 1px solid #e5e7eb;
-        border-radius: 1rem;
-        box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
-        padding: 1rem;
-        width: 320px;
-        max-width: 90vw;
-    `;
-
-    // Insert calendar HTML
-    popup.innerHTML = renderCalendarGrid(index);
-    document.body.appendChild(popup);
-
-    // Position popup near the button
-    const rect = btn.getBoundingClientRect();
-    const scrollTop = window.scrollY || document.documentElement.scrollTop;
-    const scrollLeft = window.scrollX || document.documentElement.scrollLeft;
-    
-    let top = rect.bottom + scrollTop + 8;
-    let left = rect.left + scrollLeft;
-
-    // Adjust horizontal position to stay within viewport
-    const popupWidth = 320;
-    const maxWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-    
-    if (left + popupWidth + 12 > maxWidth) {
-        left = maxWidth - popupWidth - 12;
-    }
-    if (left < 12) {
-        left = 12;
-    }
-
-    popup.style.top = top + 'px';
-    popup.style.left = left + 'px';
-
-    // Store reference for later removal
-    window.currentCalendarPopup = popup;
-    window.currentCalendarIndex = index;
-
-    // Set up click-outside handler
-    setTimeout(() => {
-        document.addEventListener('click', handleCalendarClickOutside);
-    }, 0);
-}
-
-function removeCalendarPopup() {
-    if (window.currentCalendarPopup) {
-        window.currentCalendarPopup.remove();
-        window.currentCalendarPopup = null;
-    }
-    window.currentCalendarIndex = null;
-}
 
 function handleCalendarClickOutside(event) {
     const calendar = document.querySelector('.calendar-popup');
@@ -1435,29 +1320,21 @@ function handleCalendarClickOutside(event) {
         return;
     }
     
-    // Check if click was inside calendar
-    if (calendar.contains(event.target)) {
-        return;
-    }
+    const clickedInsideCalendar = calendar.contains(event.target);
+    const clickedDateButton = event.target.closest('button[onclick*="toggleCalendar"]');
     
-    // Check if click was on the toggle button itself
-    const clickedButton = event.target.closest('button[onclick*="toggleCalendar"]');
-    if (clickedButton) {
-        return;
+    if (!clickedInsideCalendar && !clickedDateButton) {
+        activeCalendar = null;
+        document.removeEventListener('click', handleCalendarClickOutside);
+        renderStep(2); 
     }
-    
-    // Click was outside - close calendar
-    activeCalendar = null;
-    removeCalendarPopup();
-    renderStep(2);
 }
 
 const selectDate = (dateStr, index) => {
-    bookings[index] = { ...bookings[index], date: dateStr, time: null };
+    bookings[index] = { ...bookings[index], date: dateStr, time: null }; 
     activeCalendar = null;
-    removeCalendarPopup();
     document.removeEventListener('click', handleCalendarClickOutside);
-    renderStep(2);
+    renderStep(2); 
 };
 
 const selectTimeSlot = (slot, index) => {
@@ -1671,7 +1548,7 @@ const showNotification = (message, type) => {
         iconName = 'check-circle';
     } else if (type === 'error') {
         bgColor = 'bg-red-500';
-textColor = 'text-white';
+        textColor = 'text-white';
         iconName = 'x-octagon';
     } else { 
         bgColor = 'bg-blue-500';
@@ -1731,7 +1608,7 @@ const renderProgressSteps = () => {
             <div class="rounded-full flex items-center justify-center font-bold text-sm transition-all duration-300 ${stepClass} ${isClickable ? 'cursor-pointer hover:bg-blue-600' : ''}" 
                 style="width: 32px; height: 32px; min-width: 32px; min-height: 32px;"
                 ${isClickable ? `onclick="goToStep(${step})"` : ''}>
-                ${currentStep > step ? '<i class="fas fa-check" style="font-size: 14px;"></i>' : step}
+                ${currentStep > step ? icon('check', 14, '') : step}
             </div>
         `;
         
@@ -1821,7 +1698,7 @@ const renderStep1 = () => {
                 <div style="min-height: 28px; display: flex; justify-content: center; align-items: center; margin-top: 8px;">
                     ${plan.savings > 0 ? `
                         <div class="plan-savings-badge">
-                            Pagas: ${finalPrice}
+                            Ahorras ${plan.savings}%
                         </div>
                     ` : ''}
                 </div>
@@ -1829,7 +1706,7 @@ const renderStep1 = () => {
                 <div style="min-height: 24px; margin-top: 8px;">
                     ${plan.savings > 0 ? `
                         <div class="plan-total-price">
-                            <span style="text-decoration: line-through;">${originalPriceStr}</span>
+                            Total: ${finalPrice}
                         </div>
                     ` : ''}
                 </div>
@@ -1845,11 +1722,11 @@ const renderStep1 = () => {
 
             <div class="disclaimer-box">
                 <div class="disclaimer-content">
-                    <i class="fas fa-info-circle disclaimer-icon"></i>
+                    <i data-lucide="info" class="disclaimer-icon"></i>
                     <div class="disclaimer-text">
                         <strong>Todas las clases:</strong>
                         <ul class="disclaimer-list">
-                            <li>Se realizan mediante la plataforma Zoom. <a href="https://zoom.us/download" target="_blank" rel="noopener noreferrer" style="color: #1d4ed8; text-decoration: underline;">Descargar aquí.</a></li>
+                            <li>Se realizan mediante la plataforma Zoom. <a href="https://zoom.us/download" target="_blank" rel="noopener noreferrer" style="color: #1d4ed8; text-decoration: underline;">Descargar aquí</a></li>
                             <li>Tienen una duración de 60 minutos.</li>
                             <li>Son realizadas por el profesor Alexis Inostroza Díaz.</li>
                             <li>Pueden ser recalendarizadas hasta con 2 horas de anticipación.</li>
@@ -1873,11 +1750,11 @@ const renderStep2 = () => {
         <h2 class="section-header">Selecciona tus Horarios</h2>
 
         <div class="info-box">
-            <i class="fas fa-info-circle disclaimer-icon"></i>
-            <p class="info-box-text" style="line-height: 1.4;">
-                Solo es posible seleccionar horarios con 12 horas de anticipación.
-            </p>
-        </div>
+    ${icon('info', 20, 'disclaimer-icon')}
+    <p class="info-box-text" style="line-height: 1.4;">
+        Solo es posible seleccionar horarios con 12 horas de anticipación. La duración de cada clase es de 60 minutos.
+    </p>
+</div>
 
         <div class="booking-summary-container">
             <div class="booking-summary-list">
@@ -1900,7 +1777,7 @@ const renderStep2 = () => {
                                    <button type="button" onclick="toggleCalendar(${index})" class="date-button ${booking?.date ? 'selected' : ''}" style="transform-origin: center;" onmousedown="this.style.transform='scale(0.98)'" onmouseup="this.style.transform='scale(1)'" onmouseleave="this.style.transform='scale(1)'">
     ${booking?.date ? new Date(booking.date + 'T12:00:00').toLocaleDateString('es-CL', { weekday: 'long', day: 'numeric', month: 'long' }) : 'Selecciona un día'}
 </button>
-                                    <!-- calendar rendered as a body-level popup to avoid clipping -->
+                                    ${activeCalendar === index ? `<div style="position: relative;">${renderCalendarGrid(index)}</div>` : ''}
                                 </div>
 
                                 <div>
@@ -2006,32 +1883,32 @@ if (isSelected) {
     const monthName = calendarMonth.toLocaleDateString('es-CL', { month: 'long' });
     const year = calendarMonth.getFullYear();
 
-    return `
-    <div class="flex items-center justify-between mb-3">
-        <button type="button" onclick="prevMonth(${index}); event.stopPropagation();" class="calendar-nav-btn">
-            <i class="fas fa-chevron-left"></i>
-        </button>
-        <div class="font-bold text-gray-800 capitalize text-sm">
-            ${monthName} ${year}
+       return `
+    <div class="calendar-popup rounded-xl shadow-2xl pt-3 px-4 pb-4 border border-gray-200 w-72 animate-fade-in" style="position: absolute; z-index: 1000; margin-top: 8px; left: 0; top: 100%; background-color: #ffffff !important;">
+            <div class="flex items-center justify-between mb-3">
+                <button type="button" onclick="prevMonth(${index}); event.stopPropagation();" class="p-2 hover:bg-gray-200 rounded-lg transition-colors" style="border: none; background: transparent;">
+    ${icon('chevron-left', 18, '')}
+</button>
+                <div class="font-bold text-gray-800 capitalize text-sm">
+                    ${monthName} ${year}
+                </div>
+                <button type="button" onclick="nextMonth(${index}); event.stopPropagation();" class="p-2 hover:bg-gray-200 rounded-lg transition-colors" style="border: none; background: transparent;">
+    ${icon('chevron-right', 18, '')}
+</button>
+            </div>
+            ${daysHtml}
         </div>
-        <button type="button" onclick="nextMonth(${index}); event.stopPropagation();" class="calendar-nav-btn">
-            <i class="fas fa-chevron-right"></i>
-        </button>
-    </div>
-    ${daysHtml}
     `;
 };
 
 const prevMonth = (index) => {
     calendarMonth = new Date(calendarMonth.getFullYear(), calendarMonth.getMonth() - 1, 1);
     renderStep(2);
-    setTimeout(() => showCalendarPopup(index), 0);
 };
 
 const nextMonth = (index) => {
     calendarMonth = new Date(calendarMonth.getFullYear(), calendarMonth.getMonth() + 1, 1);
     renderStep(2);
-    setTimeout(() => showCalendarPopup(index), 0);
 };
 
 const renderStep3 = () => {
@@ -2110,9 +1987,10 @@ const renderStep3 = () => {
     onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 107 || event.charCode === 75"
     placeholder="12.345.678-9"
     maxlength="12"
-    class="form-input ${getFieldClass('rut')}"
-    style="padding-right: ${studentRut.trim().length > 0 && !fieldErrors.rut ? '2.5rem' : '0.75rem'};"
-    onblur="validateField('rut'); updateFieldError('rut');"
+    class="w-full p-3 rounded-lg ${getFieldClass('rut')}"
+    style="background-color: #ffffff !important; border: 1px solid #6b7280; transition: all 0.2s; padding-right: ${studentRut.trim().length > 0 && !fieldErrors.rut ? '2.5rem' : '0.75rem'};"
+    onfocus="this.style.borderColor='#3b82f6'; this.style.boxShadow='0 0 0 3px rgba(59, 130, 246, 0.1)';"
+    onblur="this.style.borderColor='#6b7280'; this.style.boxShadow=''; validateField('rut'); updateFieldError('rut');"
 />
 
                             ${studentRut.trim().length > 0 && !fieldErrors.rut ? `<div style="position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); pointer-events: none;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" fill="#16a34a"/><path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>` : ''}
@@ -2132,10 +2010,11 @@ const renderStep3 = () => {
                                 type="email" 
                                 value="${studentEmail}" 
                                 oninput="updateStudentInfo('email', this.value)" 
-                                placeholder="juan@ejemplo.com"
-                                class="form-input ${getFieldClass('email')}"
-                                style="padding-right: ${studentEmail.trim().length > 0 && !fieldErrors.email ? '2.5rem' : '0.75rem'};"
-                                onblur="validateField('email'); updateFieldError('email');"
+                                placeholder="juan@ejemplo.com" 
+                                class="w-full p-3 rounded-lg ${getFieldClass('email')}" 
+                                style="background-color: #ffffff !important; border: 1px solid #6b7280; transition: all 0.2s; padding-right: ${studentEmail.trim().length > 0 && !fieldErrors.email ? '2.5rem' : '0.75rem'};"
+                                onfocus="this.style.borderColor='#3b82f6'; this.style.boxShadow='0 0 0 3px rgba(59, 130, 246, 0.1)';"
+                                onblur="this.style.borderColor='#6b7280'; this.style.boxShadow=''; validateField('email'); updateFieldError('email');"
                             />
                             ${studentEmail.trim().length > 0 && !fieldErrors.email ? `<div style="position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); pointer-events: none;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" fill="#16a34a"/><path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>` : ''}
                         </div>
@@ -2154,10 +2033,11 @@ const renderStep3 = () => {
                                 type="email" 
                                 value="${studentEmailConfirm}" 
                                 oninput="updateStudentInfo('emailConfirm', this.value)" 
-                                placeholder="juan@ejemplo.com"
-                                class="form-input ${getFieldClass('emailConfirm')}"
-                                style="padding-right: ${studentEmailConfirm.trim().length > 0 && !fieldErrors.emailConfirm ? '2.5rem' : '0.75rem'};"
-                                onblur="validateField('emailConfirm'); updateFieldError('emailConfirm');"
+                                placeholder="juan@ejemplo.com" 
+                                class="w-full p-3 rounded-lg ${getFieldClass('emailConfirm')}" 
+                                style="background-color: #ffffff !important; border: 1px solid #6b7280; transition: all 0.2s; padding-right: ${studentEmailConfirm.trim().length > 0 && !fieldErrors.emailConfirm ? '2.5rem' : '0.75rem'};"
+                                onfocus="this.style.borderColor='#3b82f6'; this.style.boxShadow='0 0 0 3px rgba(59, 130, 246, 0.1)';"
+                                onblur="this.style.borderColor='#6b7280'; this.style.boxShadow=''; validateField('emailConfirm'); updateFieldError('emailConfirm');"
                             />
                             ${studentEmailConfirm.trim().length > 0 && !fieldErrors.emailConfirm ? `<div style="position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); pointer-events: none;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" fill="#16a34a"/><path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>` : ''}
                         </div>
@@ -2181,10 +2061,14 @@ const renderStep3 = () => {
     oninput="updateStudentInfo('phone', this.value)" 
     onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode === 43"
     maxlength="13"
-    placeholder="+56 9 1234 5678"
-    class="form-input ${getFieldClass('phone')}"
-    style="padding-right: ${studentPhone.trim().length > 0 && !fieldErrors.phone ? '2.5rem' : '0.75rem'};"
-    onblur="validateField('phone'); updateFieldError('phone');"
+    placeholder="+56 9 1234 5678" 
+    class="w-full p-3 rounded-lg ${getFieldClass('phone')}" 
+    style="background-color: #ffffff !important; border: 1px solid #6b7280; 
+           transition: all 0.2s; 
+           padding-right: ${studentPhone.trim().length > 0 && !fieldErrors.phone ? '2.5rem' : '0.75rem'};"
+    onfocus="this.style.borderColor='#3b82f6'; this.style.boxShadow='0 0 0 3px rgba(59, 130, 246, 0.1)';"
+    onblur="this.style.borderColor='#6b7280'; this.style.boxShadow=''; 
+            validateField('phone'); updateFieldError('phone');"
 />
 
         ${studentPhone.trim().length > 0 && !fieldErrors.phone ? `<div style="position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); pointer-events: none;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" fill="#16a34a"/><path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>` : ''}
@@ -2360,6 +2244,21 @@ const renderStep3 = () => {
     `;
 };
 
+function handleCalendarClickOutside(event) {
+    const calendar = document.querySelector('.calendar-popup');
+    if (!calendar) {
+        document.removeEventListener('click', handleCalendarClickOutside);
+        return;
+    }
+    const clickedInsideCalendar = calendar.contains(event.target);
+    const clickedDateButton = event.target.closest('button[onclick*="toggleCalendar"]');
+    
+    if (!clickedInsideCalendar && !clickedDateButton) {
+        activeCalendar = null;
+        document.removeEventListener('click', handleCalendarClickOutside);
+        renderStep(2);
+    }
+}
 const renderStep = (step, shouldAnimate = false) => {
     let content = '';
     document.removeEventListener('click', handleCalendarClickOutside);
@@ -2401,13 +2300,6 @@ const renderStep = (step, shouldAnimate = false) => {
             document.addEventListener('click', handleCalendarClickOutside);
         }, 100);
     }
-    
-    // Ensure icons are rendered even if lucide hasn't fully initialized
-    setTimeout(() => {
-        if (window.lucide) {
-            lucide.createIcons();
-        }
-    }, 100);
 };
 const renderApp = () => {
     const container = document.getElementById('booking-system-container');
@@ -2421,19 +2313,10 @@ const renderApp = () => {
     `;
     renderStep(currentStep);
 };
-document.addEventListener('DOMContentLoaded', () => {
-    // Wait for Lucide to load
-    if (window.lucide) {
-        lucide.createIcons();
-    } else {
-        setTimeout(() => {
-            if (window.lucide) lucide.createIcons();
-        }, 500);
-    }
-    renderApp();
-});
+document.addEventListener('DOMContentLoaded', renderApp);
 
 </script>
+
     <!-- Footer Placeholder -->
     <div id="footer-placeholder"></div>
 
