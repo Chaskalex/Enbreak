@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enbreak | Ver Planes</title>
+    <title>Enbreak | Planes de Clases</title>
     <link rel="icon" type="image/x-icon" href="../../favicon/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="../../favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../../favicon/favicon-16x16.png">
@@ -15,10 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rubik:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../css/style.css">
     <style>
-        .page-banner::before {
-            background: url('../../assets/backgrounds/bg3.jpg') center/cover no-repeat;
-        }
-        .page-banner {
+        .booking-banner-section {
             width: 100%;
             height: 320px;
             position: relative;
@@ -29,21 +26,19 @@
             overflow: hidden;
         }
 
-        .page-banner::before {
+        .booking-banner-section::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
+            background: url('/assets/backgrounds/bg4.jpg') center/cover no-repeat;
             filter: blur(5px);
             z-index: 0;
         }
 
-        .page-banner::after {
+        .booking-banner-section::after {
             content: '';
             position: absolute;
             top: 0;
@@ -54,14 +49,47 @@
             z-index: 1;
         }
 
-        .page-banner .banner-content {
+        .booking-banner-section .banner-content {
             text-align: center;
             z-index: 2;
             max-width: 1200px;
             padding: 0 20px;
         }
 
-        .page-banner h1 {
+        .booking-banner-section .breadcrumb {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .booking-banner-section .breadcrumb a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.2s ease;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .booking-banner-section .breadcrumb a:hover {
+            color: #ff6600;
+            border-bottom-color: #ff6600;
+        }
+
+        .booking-banner-section .breadcrumb-separator {
+            margin: 0 10px;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 400;
+        }
+
+        .booking-banner-section .breadcrumb-current {
+            color: #fff;
+        }
+
+        .booking-banner-section h1 {
             font-size: 50px;
             color: #fff;
             font-family: 'Rubik', sans-serif;
@@ -72,10 +100,10 @@
         }
 
         @media (max-width: 767.98px) {
-            .page-banner {
+            .booking-banner-section {
                 height: 250px;
             }
-            .page-banner h1 {
+            .booking-banner-section h1 {
                 font-size: 36px;
             }
         }
@@ -97,30 +125,28 @@
     <div id="header-placeholder"></div>
 
     <!-- Banner Section -->
-    <main style="padding: 0; margin: 0;">
-        <section class="page-banner">
-            <div class="banner-content">
-                <nav class="breadcrumb">
-                    <a href="/">Inicio</a>
-                    <span class="breadcrumb-separator">></span>
-                    <span class="breadcrumb-current">Planes</span>
-                </nav>
-                <h1>Ver Planes</h1>
-            </div>
-        </section>
+    <section class="booking-banner-section">
+        <div class="banner-content">
+            <nav class="breadcrumb">
+                <a href="/">Inicio</a>
+                <span class="breadcrumb-separator">></span>
+                <span class="breadcrumb-current">Planes</span>
+            </nav>
+            <h1>Nuestros Planes</h1>
+        </div>
+    </section>
 
-        <!-- Your page content goes here -->
-        <section class="your-section">
-            <h1>Your Page Content</h1>
-            <p>Add your content here...</p>
-        </section>
+    <!-- Main Content -->
+    <main style="padding: 0; margin: 0;">
+        <div class="container" style="padding: 3rem 1.5rem;">
+            <!-- Planes content will go here -->
+        </div>
     </main>
 
     <!-- Footer Placeholder -->
     <div id="footer-placeholder"></div>
 
-<script src="../../js/layout.js"></script>
-<script src="../../js/script.js" defer></script>
-
+    <script src="../../js/layout.js"></script>
+    <script src="../../js/script.js" defer></script>
 </body>
 </html>

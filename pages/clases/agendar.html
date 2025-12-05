@@ -36,21 +36,7 @@
     <!-- Header Placeholder -->
     <div id="header-placeholder"></div>
 
-<main style="padding: 0; margin: 0;">
-    <section class="booking-banner-section">
-        <div class="banner-content">
-            <nav class="breadcrumb">
-                <a href="/">Inicio</a>
-                <span class="breadcrumb-separator">></span>
-                <span class="breadcrumb-current">Agendar</span>
-            </nav>
-            <h1>Agenda tu Clase</h1>
-        </div>
-    </section>
-
-    <div id="booking-system-container"></div>
-</main>
-
+    <!-- Your page content goes here -->
 <style>
 
 .booking-banner-section {
@@ -1058,7 +1044,7 @@ input:-webkit-autofill:focus {
 /* Checkbox Container */
 .checkbox-container {
     display: flex;
-align-items: center;
+    align-items: center;
     gap: 0.5rem;
 }
 
@@ -1097,6 +1083,22 @@ align-items: center;
     display: none;
 }
 </style>
+
+<main style="padding: 0; margin: 0;">
+    <section class="booking-banner-section">
+        <div class="banner-content">
+            <nav class="breadcrumb">
+                <a href="/">Inicio</a>
+                <span class="breadcrumb-separator">></span>
+                <span class="breadcrumb-current">Agendar</span>
+            </nav>
+            <h1>Agenda tu Clase</h1>
+        </div>
+    </section>
+
+    <div id="booking-system-container"></div>
+</main>
+
 <script>
 // =================================================================
 // 1. STATE & CONSTANTS
@@ -1671,7 +1673,7 @@ const showNotification = (message, type) => {
         iconName = 'check-circle';
     } else if (type === 'error') {
         bgColor = 'bg-red-500';
-textColor = 'text-white';
+        textColor = 'text-white';
         iconName = 'x-octagon';
     } else { 
         bgColor = 'bg-blue-500';
@@ -1849,7 +1851,7 @@ const renderStep1 = () => {
                     <div class="disclaimer-text">
                         <strong>Todas las clases:</strong>
                         <ul class="disclaimer-list">
-                            <li>Se realizan mediante la plataforma Zoom. <a href="https://zoom.us/download" target="_blank" rel="noopener noreferrer" style="color: #1d4ed8; text-decoration: underline;">Descargar aquí.</a></li>
+                            <li>Se realizan mediante la plataforma Zoom. <a href="https://zoom.us/download" target="_blank" rel="noopener noreferrer" style="color: #1d4ed8; text-decoration: underline;">Descargarla aquí.</a></li>
                             <li>Tienen una duración de 60 minutos.</li>
                             <li>Son realizadas por el profesor Alexis Inostroza Díaz.</li>
                             <li>Pueden ser recalendarizadas hasta con 2 horas de anticipación.</li>
@@ -2434,6 +2436,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 </script>
+
     <!-- Footer Placeholder -->
     <div id="footer-placeholder"></div>
 
