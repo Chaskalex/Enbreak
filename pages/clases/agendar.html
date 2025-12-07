@@ -22,16 +22,6 @@
     </style>
 </head>
 <body>
-    <!-- Page Loader -->
-    <div id="page-loader">
-        <div class="loader-content">
-            <img src="../../assets/logo/loading.png" alt="Loading" class="loader-logo">
-            <svg class="circular" role="img" aria-label="Cargando">
-                <circle class="path-bg" cx="90" cy="90" r="80" fill="none" stroke-width="6"/>
-                <circle class="path" cx="90" cy="90" r="80" fill="none" stroke-width="6" stroke-miterlimit="10"/>
-            </svg>
-        </div>
-    </div>
 
     <!-- Header Placeholder -->
     <div id="header-placeholder"></div>
@@ -1339,120 +1329,57 @@ const handleConfirmPayment = () => {
     }, 1500);
 };
 
+// --- Replace the popup-based toggle with inline toggle behavior ---
 const toggleCalendar = (index) => {
-    // Toggle active calendar index
-    if (activeCalendar === index) {
-        activeCalendar = null;
-        removeCalendarPopup();
-        renderStep(2);
+    // Toggle inline calendar rendering (mirrors the working test.html approach)
+    const isOpening = activeCalendar !== index;
+    activeCalendar = isOpening ? index : null;
+    renderStep(2);
+
+    if (isOpening) {
+        // after DOM is updated, add global click listener to detect outside clicks
+        setTimeout(() => {
+            document.addEventListener('click', handleCalendarClickOutside);
+            scrollToCalendar();
+        }, 50);
     } else {
-        activeCalendar = index;
-        renderStep(2);
-        // Wait for DOM to update, then show popup
-        setTimeout(() => showCalendarPopup(index), 50);
+        document.removeEventListener('click', handleCalendarClickOutside);
     }
 };
 
-function showCalendarPopup(index) {
-    // Remove any existing popup first
-    removeCalendarPopup();
-
-    // Find the button that was clicked
-    const buttons = document.querySelectorAll('button[onclick*="toggleCalendar"]');
-    let btn = null;
-    for (let b of buttons) {
-        const onclick = b.getAttribute('onclick');
-        if (onclick && onclick.includes(`toggleCalendar(${index})`)) {
-            btn = b;
-            break;
-        }
-    }
-    
-    if (!btn) return;
-
-    // Create popup container
-    const popup = document.createElement('div');
-    popup.className = 'calendar-popup';
-    popup.setAttribute('data-calendar-index', index);
-    popup.style.cssText = `
-        position: fixed;
-        z-index: 99999;
-        background-color: #ffffff;
-        border: 1px solid #e5e7eb;
-        border-radius: 1rem;
-        box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
-        padding: 1rem;
-        width: 320px;
-        max-width: 90vw;
-    `;
-
-    // Insert calendar HTML
-    popup.innerHTML = renderCalendarGrid(index);
-    document.body.appendChild(popup);
-
-    // Position popup near the button
-    const rect = btn.getBoundingClientRect();
-    const scrollTop = window.scrollY || document.documentElement.scrollTop;
-    const scrollLeft = window.scrollX || document.documentElement.scrollLeft;
-    
-    let top = rect.bottom + scrollTop + 8;
-    let left = rect.left + scrollLeft;
-
-    // Adjust horizontal position to stay within viewport
-    const popupWidth = 320;
-    const maxWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-    
-    if (left + popupWidth + 12 > maxWidth) {
-        left = maxWidth - popupWidth - 12;
-    }
-    if (left < 12) {
-        left = 12;
-    }
-
-    popup.style.top = top + 'px';
-    popup.style.left = left + 'px';
-
-    // Store reference for later removal
-    window.currentCalendarPopup = popup;
-    window.currentCalendarIndex = index;
-
-    // Set up click-outside handler
-    setTimeout(() => {
-        document.addEventListener('click', handleCalendarClickOutside);
-    }, 0);
-}
-
 function removeCalendarPopup() {
-    if (window.currentCalendarPopup) {
-        window.currentCalendarPopup.remove();
-        window.currentCalendarPopup = null;
-    }
-    window.currentCalendarIndex = null;
+    // kept for backward-compatibility with calls elsewhere; now simply close inline calendar
+    activeCalendar = null;
+    document.removeEventListener('click', handleCalendarClickOutside);
+    renderStep(2);
 }
+
 
 function handleCalendarClickOutside(event) {
-    const calendar = document.querySelector('.calendar-popup');
+    // Support both inline and body-level calendars; close when clicking outside.
+    const calendar = document.querySelector('.calendar-popup') || document.querySelector('[data-inline-calendar]');
     if (!calendar) {
         document.removeEventListener('click', handleCalendarClickOutside);
         return;
     }
-    
-    // Check if click was inside calendar
+
+    // Click inside calendar -> do nothing
     if (calendar.contains(event.target)) {
         return;
     }
-    
-    // Check if click was on the toggle button itself
+
+    // If click was on the toggle button itself, keep it open
     const clickedButton = event.target.closest('button[onclick*="toggleCalendar"]');
     if (clickedButton) {
         return;
     }
-    
-    // Click was outside - close calendar
+
+    // Click outside -> close
     activeCalendar = null;
-    removeCalendarPopup();
+    document.removeEventListener('click', handleCalendarClickOutside);
     renderStep(2);
 }
+
 
 const selectDate = (dateStr, index) => {
     bookings[index] = { ...bookings[index], date: dateStr, time: null };
@@ -1899,7 +1826,7 @@ const renderStep2 = () => {
                                     <label class="form-label">
                                         ${icon('calendar', 16, 'inline mr-1')} Fecha
                                     </label>
-                                   <button type="button" onclick="toggleCalendar(${index})" class="date-button ${booking?.date ? 'selected' : ''}" style="transform-origin: center;" onmousedown="this.style.transform='scale(0.98)'" onmouseup="this.style.transform='scale(1)'" onmouseleave="this.style.transform='scale(1)'">
+                                   <button type="button" onclick="event.stopPropagation(); toggleCalendar(${index})" class="date-button ${booking?.date ? 'selected' : ''}" style="transform-origin: center;" onmousedown="this.style.transform='scale(0.98)'" onmouseup="this.style.transform='scale(1)'" onmouseleave="this.style.transform='scale(1)'">
     ${booking?.date ? new Date(booking.date + 'T12:00:00').toLocaleDateString('es-CL', { weekday: 'long', day: 'numeric', month: 'long' }) : 'Selecciona un día'}
 </button>
                                     <!-- calendar rendered as a body-level popup to avoid clipping -->

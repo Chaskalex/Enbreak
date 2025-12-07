@@ -17,53 +17,132 @@
     <script src="js/layout.js"></script>
 </head>
 <body>
-    <!-- Page Loader -->
-    <div id="page-loader">
-        <div class="loader-content">
-            <img src="assets/logo/loading.png" alt="Loading" class="loader-logo">
-            <svg class="circular" role="img" aria-label="Cargando">
-                <circle class="path-bg" cx="90" cy="90" r="80" fill="none" stroke-width="6"/>
-                <circle class="path" cx="90" cy="90" r="80" fill="none" stroke-width="6" stroke-miterlimit="10"/>
-            </svg>
-        </div>
-    </div>
 
     <!-- Header Placeholder -->
     <div id="header-placeholder"></div>
 
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1>Clases de Inglés Personalizadas</h1>
-                <p>Logra la fluidez que siempre has deseado. Clases 100% online adaptadas a tu ritmo y necesidades. Comienza a aprender hoy.</p>
-                <a href="pages/clases/planes.html" class="hero-btn">Ver Planes</a>
-                <a href="pages/clases/diagnostico.html" class="hero-btn-secondary">Test Gratuito</a>
+<section class="hero">
+    <div class="bg-shapes">
+        <div class="dots-pattern" id="dotsPattern"></div>
+        <div class="geometric-shape shape-1"></div>
+        <div class="geometric-shape shape-2"></div>
+        <div class="geometric-shape shape-3"></div>
+    </div>
+
+    <div class="diagonal-overlay"></div>
+
+    <img src="assets/backgrounds/test1.jpeg" alt="Student learning" class="student-image">
+
+    <div class="hero-content">
+        <div class="hero-text">
+            <h1>
+                <span class="white">Clases de Inglés</span>
+                <span class="white">Personalizadas</span>
+            </h1>
+
+            <p>Logra la fluidez que siempre has deseado. Clases 100% online adaptadas a tu ritmo y necesidades. Comienza a aprender hoy.</p>
+                
+            <div class="button-group">
+                <a href="#" class="hero-btn"><span>Ver Planes</span></a>
+                <a href="#" class="hero-btn-secondary">Test Gratuito</a>
             </div>
         </div>
-    </section>
+    </div>
+
+    <!-- Bottom left dots -->
+    <div class="corner-dots">
+        <div class="corner-dot"></div>
+        <div class="corner-dot"></div>
+        <div class="corner-dot"></div>
+        <div class="corner-dot"></div>
+        <div class="corner-dot"></div>
+        <div class="corner-dot"></div>
+        <div class="corner-dot"></div>
+        <div class="corner-dot"></div>
+        <div class="corner-dot"></div>
+    </div>
+
+    <!-- NEW: Top right dots -->
+    <div class="corner-dots-top">
+        <div class="corner-dot"></div>
+        <div class="corner-dot"></div>
+        <div class="corner-dot"></div>
+        <div class="corner-dot"></div>
+        <div class="corner-dot"></div>
+        <div class="corner-dot"></div>
+        <div class="corner-dot"></div>
+        <div class="corner-dot"></div>
+        <div class="corner-dot"></div>
+    </div>
+</section>
+
+    <script>
+        // Generate scattered dots
+        const dotsPattern = document.getElementById('dotsPattern');
+        const dotCount = 80;
+
+        for (let i = 0; i < dotCount; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'dot';
+            
+            // Random positioning
+            dot.style.left = Math.random() * 60 + '%'; // Keep dots on left side
+            dot.style.top = Math.random() * 100 + '%';
+            
+            // Random animation delay
+            dot.style.animationDelay = Math.random() * 3 + 's';
+            dot.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            
+            dotsPattern.appendChild(dot);
+        }
+    </script>
 
     <section class="value-proposition">
+    <!-- MORE floating dots for star effect -->
+    <div class="value-decoration"></div>
+    <div class="value-decoration"></div>
+    <div class="value-decoration"></div>
+    <div class="value-decoration"></div>
+    <div class="value-decoration"></div>
+    <div class="value-decoration"></div>
+    <div class="value-decoration"></div>
+    <div class="value-decoration"></div>
+    
+    <!-- Floating geometric shapes -->
+    <div class="value-shape value-shape-1"></div>
+    <div class="value-shape value-shape-2"></div>
+    
+    <div class="value-card-wrapper">
         <div class="value-card">
             <img src="assets/icons/schedule.svg" alt="Horarios Flexibles" class="value-icon">
-            <h3>Horarios Flexibles</h3>
-            <p>Diseñados para ajustarse a tu rutina y estilo de vida. Clases 100% online.</p>
+            <div class="value-content">
+                <h3>Horarios Flexibles</h3>
+                <p>Diseñados para ajustarse a tu rutina y estilo de vida. Clases 100% online.</p>
+            </div>
         </div>
         <div class="value-card">
             <img src="assets/icons/badge.svg" alt="Preparación para Examenes" class="value-icon">
-            <h3>Preparación para Examenes</h3>
-            <p>Entrenamiento específico para certificaciones de Cambridge, TOEFL, IELTS, y más.</p>
+            <div class="value-content">
+                <h3>Preparación para Examenes</h3>
+                <p>Entrenamiento específico para certificaciones de Cambridge, TOEFL, IELTS, y más.</p>
+            </div>
         </div>
         <div class="value-card">
             <img src="assets/icons/piggy.svg" alt="Precios Justos" class="value-icon">
-            <h3>Precios Justos</h3>
-            <p>Clases de calidad sin pagar de más. Precios adaptados a tus requerimientos.</p>
+            <div class="value-content">
+                <h3>Precios Justos</h3>
+                <p>Clases de calidad sin pagar de más. Precios adaptados a tus requerimientos.</p>
+            </div>
         </div>
         <div class="value-card">
             <img src="assets/icons/media.svg" alt="Contenido Gratuito" class="value-icon">
-            <h3>Contenido Gratuito</h3>
-            <p>Accede a la biblioteca de recursos para encontrar videos, podcasts y mini-clases.</p>
+            <div class="value-content">
+                <h3>Contenido Gratuito</h3>
+                <p>Accede a la biblioteca de recursos para encontrar videos, podcasts y mini-clases.</p>
+            </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <section class="service-section" id="service">
         <div class="service-container">

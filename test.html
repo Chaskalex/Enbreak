@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Learning Hero Banner</title>
+    <style>
+        /* --- Reset & Base Styles --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --dark-navy: #111827; /* Dark background */
+            --accent-blue: #0ea5e9; /* The bright blue text */
+            --overlay-blue: rgba(14, 165, 233, 0.4); /* The transparent angle */
+            --text-white: #ffffff;
+            --text-gray: #9ca3af;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f3f4f6;
+        }
+
+        /* --- Main Container --- */
+        .hero-section {
+            position: relative;
+            display: flex;
+            min-height: 100vh;
+            width: 100%;
+            overflow: hidden; /* Important so shapes don't spill out */
+            background-color: var(--dark-navy);
+        }
+
+        /* --- Left Side: Content --- */
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            width: 55%; /* Takes up slightly more than half */
+            padding: 4rem 6rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: var(--text-white);
+        }
+
+        /* Background Shape for Dark Navy Area */
+        /* We use a pseudo-element so the text isn't clipped, only the background */
+        .hero-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 130%; /* Extend wider to cover the slant */
+            height: 100%;
+            background-color: var(--dark-navy);
+            z-index: -2;
+            /* The Magic Polygon: Creates the diagonal cut */
+            clip-path: polygon(0 0, 85% 0, 65% 100%, 0% 100%);
+        }
+
+        /* The Lighter Blue Overlay Shape */
+        .hero-content::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 130%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--overlay-blue), transparent);
+            z-index: -3; /* Sit behind the dark navy */
+            /* A slightly different angle to create the layered effect */
+            clip-path: polygon(0 0, 100% 0, 80% 100%, 0% 100%);
+        }
+
+        /* --- Decorative Dot Pattern --- */
+        .dot-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* CSS approach to make the dots */
+            background-image: radial-gradient(var(--text-gray) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* --- Right Side: Image --- */
+        .hero-image {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 60%; /* Occupies the right side */
+            height: 100%;
+            z-index: 0;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Align position so the face is visible */
+            object-position: center top; 
+        }
+
+        /* --- Typography & Elements --- */
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+        
+        .logo i { margin-right: 10px; }
+
+        .social-handle {
+            font-size: 0.9rem;
+            color: var(--accent-blue);
+            margin-bottom: 4rem;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        /* Social Icon circles */
+        .social-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--accent-blue);
+            display: inline-block;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        h1 span {
+            color: var(--accent-blue);
+        }
+
+        p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--text-gray);
+            max-width: 500px;
+            margin-bottom: 4rem;
+        }
+
+        .hashtag {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            font-weight: 500;
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 1024px) {
+            h1 { font-size: 2.5rem; }
+            .hero-content::before { clip-path: polygon(0 0, 90% 0, 75% 100%, 0% 100%); }
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                flex-direction: column;
+            }
+            
+            .hero-content {
+                width: 100%;
+                padding: 3rem 2rem;
+                background-color: var(--dark-navy); /* Fallback */
+            }
+
+            /* Remove the slanted shape on mobile, stack instead */
+            .hero-content::before, .hero-content::after {
+                display: none;
+            }
+
+            .hero-image {
+                position: relative;
+                width: 100%;
+                height: 400px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <section class="hero-section">
+        
+        <div class="hero-content">
+            <div class="dot-pattern"></div>
+
+            <div class="logo">
+                <i class="fa-solid fa-book-open"></i> E-LEARNING
+            </div>
+            
+            <div class="social-handle">
+                <span class="social-dot"></span>
+                <span class="social-dot"></span>
+                <span class="social-dot"></span>
+                <i class="fa-brands fa-twitter"></i> @elearning
+            </div>
+
+            <h1>Knowledge At<br> <span>Your Fingertips</span></h1>
+
+            <p>
+                Aenean vel lectus et purus feugiat maximus sodales sed ex, duis quis faucibus libero. 
+                Aenean mattis purus sed enim sollicitudin laoreet, maecenas ornare velit non fermentum pulvinar.
+            </p>
+
+            <div class="hashtag">#Elearning</div>
+        </div>
+
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2671&auto=format&fit=crop" alt="Student learning online">
+        </div>
+
+    </section>
+
+</body>
+</html>
