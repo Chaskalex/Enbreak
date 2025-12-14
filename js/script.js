@@ -123,35 +123,53 @@
             });
         });
 
-        // Scroll animation for value cards
-        const observerOptions = {
-            threshold: 0.01,
-            rootMargin: '0px'
+        // Premium scroll animation system with better thresholds
+        const premiumObserverOptions = {
+            threshold: 0.15,
+            rootMargin: '-50px 0px -50px 0px'
         };
 
-        const observer = new IntersectionObserver((entries) => {
+        // Value cards observer
+        const valueObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('animate');
+                    valueObserver.unobserve(entry.target);
                 }
             });
-        }, observerOptions);
+        }, premiumObserverOptions);
 
         document.querySelectorAll('.value-card').forEach(card => {
-            observer.observe(card);
+            valueObserver.observe(card);
         });
 
-        // Scroll animation for service items
-        const serviceObserver = new IntersectionObserver((entries) => {
+        // Service header observer
+        const serviceHeaderObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('animate');
+                    serviceHeaderObserver.unobserve(entry.target);
                 }
             });
-        }, observerOptions);
+        }, premiumObserverOptions);
 
-        document.querySelectorAll('.service-item').forEach(item => {
-            serviceObserver.observe(item);
+        const serviceHeader = document.querySelector('.service-header');
+        if (serviceHeader) {
+            serviceHeaderObserver.observe(serviceHeader);
+        }
+
+        // Service cards observer
+        const serviceCardObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                    serviceCardObserver.unobserve(entry.target);
+                }
+            });
+        }, premiumObserverOptions);
+
+        document.querySelectorAll('.service-card').forEach(card => {
+            serviceCardObserver.observe(card);
         });
 
         // Counter animation for teacher stats

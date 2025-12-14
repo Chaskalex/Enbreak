@@ -1,0 +1,18 @@
+# Build & dependencies
+node_modules/
+dist/
+build/
+.cache/
+
+# Version control & IDE
+.git/
+.vscode/
+.claude/
+
+# Images and static assets
+assets/
+favicon/
+
+# Logs & config
+*.log
+netlify.toml
