@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="es">
+<!--
+═══════════════════════════════════════════════════════════════════════════════
+REFERENCE IMPLEMENTATION: New Step 2 Booking Flow
+═══════════════════════════════════════════════════════════════════════════════
+
+PURPOSE:
+Replace the current Step 2 (card-based popup calendar) with a unified single-calendar approach.
+
+KEY CONCEPTS TO PRESERVE WHEN ADAPTING:
+1. Single persistent calendar (no popup, always visible on left side)
+2. Linear flow with dynamic header: "Select Date and Time for Class 1" → 2 → 3 → etc.
+3. Badge system: Dates with locked classes show small numbered badges (1, 2, or "1,2" for multiple)
+4. Same-day booking allowed: User can select same date multiple times with different time slots
+5. Smart time slot filtering: Already-booked time slots for a date are crossed out/disabled
+6. Locked classes sidebar: Shows confirmed classes with Edit/Delete buttons
+7. Progress bar: Visual feedback showing X/4 classes completed
+8. Responsive layout: Stacks vertically on mobile (calendar top, sidebar bottom)
+
+═══════════════════════════════════════════════════════════════════════════════
+INTEGRATION INSTRUCTIONS FOR CLAUDE CODE:
+═══════════════════════════════════════════════════════════════════════════════
+
+TARGET FILE: agendar.html
+
+FUNCTIONS TO REPLACE:
+- renderStep2() - Main step renderer
+- renderCalendarGrid() - Calendar popup logic (no longer needed)
+- toggleCalendar() - Remove (no popup anymore)
+- selectDate() - Simplify (no popup closing)
+- selectTimeSlot() - Adapt to work with new flow
+- updateStep2Content() - Replace with new updateSidebar() logic
+
+STATE VARIABLES TO ADAPT:
+- bookings[] array → Use this instead of lockedClasses[]
+  Current format: [{ date: '2025-12-17', time: '09:00' }, ...]
+  Keep this format, just adapt the UI logic
+
+- selectedPlan.classes → Use this for totalClasses (dynamic, not hardcoded 4)
+  Example: If user selected 8-class plan, render 8 slots
+
+- currentClassIndex → ADD this variable to track which class is being scheduled (0-7)
+  Start at 0, increment when class is locked in
+
+- activeCalendar → REMOVE (no longer needed, calendar always visible)
+
+KEEP UNCHANGED:
+- All utility functions: formatCurrency(), isDateAvailable(), getAvailableSlots()
+- timeSlots object (weekday/saturday arrays)
+- Navigation: goToNextStep(), goToPrevStep()
+- Validation: isBookingComplete()
+- All other steps (Step 1, 3, 4)
+- CSS variables: --color-primary, --shadow-md, etc.
+- Icon system: icon() function with lucide icons
+
+STYLING INTEGRATION:
+1. Extract styles from <style> block below into existing #booking-system-container styles
+2. Reuse existing CSS custom properties where possible
+3. Maintain responsive breakpoints that match current system (@media queries)
+4. Keep existing .booking-item, .nav-button classes for consistency
+
+HTML STRUCTURE TO IMPLEMENT:
+- Replace entire renderStep2() return value with the .main-content structure below
+- Left section: .calendar-section (persistent calendar grid)
+- Right section: .sidebar (locked classes + current selection + continue button)
+
+JAVASCRIPT LOGIC TO ADAPT:
+1. initCalendar() → Call when renderStep2() executes
+2. selectDate(dateStr) → Update selectedDate, re-render sidebar (no popup logic)
+3. selectTime(time) → Lock class into bookings[], increment currentClassIndex, update UI
+4. modifyClass(index) → Set currentClassIndex back, remove from bookings[], re-render
+5. deleteClass(index) → Remove from bookings[], renumber remaining, re-render
+6. updateSidebar() → Render locked classes list + current selection area
+7. updateHeader() → Change title based on currentClassIndex
+8. updateProgress() → Calculate (bookings.length / selectedPlan.classes) * 100
+
+CRITICAL ADAPTATIONS:
+- Change all instances of "lockedClasses" to "bookings"
+- Change "totalClasses" to "selectedPlan.classes"
+- Ensure badge logic groups by date: bookings.filter(b => b.date === dateStr)
+- Time slot filtering: bookedSlotsOnDate = bookings.filter(b => b.date === selectedDate).map(b => b.time)
+- Continue button: Enable only when bookings.length === selectedPlan.classes
+
+TESTING CHECKLIST AFTER INTEGRATION:
+☐ All classes (4 or 8) can be scheduled
+☐ Same date can be selected multiple times with different times
+☐ Badges appear on calendar dates with booked classes
+☐ Time slots gray out correctly for already-booked times on same date
+☐ Edit button re-opens that class for modification
+☐ Delete button removes class and renumbers remaining
+☐ Progress bar updates correctly
+☐ Continue button enables only when all classes scheduled
+☐ goToNextStep() validation still works
+☐ Responsive layout works on mobile
+☐ No console errors
+☐ Lucide icons render correctly
+
+═══════════════════════════════════════════════════════════════════════════════
+REFERENCE CODE BEGINS BELOW
+═══════════════════════════════════════════════════════════════════════════════
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selecciona tus Horarios</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf0 100%);
+            padding: 1rem;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .header h2 {
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        .header p {
+            opacity: 0.95;
+            font-size: 1rem;
+        }
+        
+        .progress {
+            background: rgba(255,255,255,0.2);
+            height: 6px;
+            border-radius: 3px;
+            margin-top: 1rem;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            background: white;
+            height: 100%;
+            transition: width 0.3s ease;
+            border-radius: 3px;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            min-height: 600px;
+        }
+        
+        .calendar-section {
+            padding: 2rem;
+            border-right: 1px solid #e5e7eb;
+        }
+        
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .month-display {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1f2937;
+            text-transform: capitalize;
+        }
+        
+        .month-nav {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .nav-btn {
+            width: 36px;
+            height: 36px;
+            border: 1px solid #d1d5db;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            color: #4b5563;
+            transition: all 0.2s;
+        }
+        
+        .nav-btn:hover {
+            background: #f3f4f6;
+            border-color: #9ca3af;
+        }
+        
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+        }
+        
+        .day-name {
+            text-align: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #6b7280;
+            padding: 0.5rem 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .day-cell {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            border: 2px solid transparent;
+        }
+        
+        .day-cell.empty {
+            cursor: default;
+        }
+        
+        .day-cell.available {
+            background: #eff6ff;
+            color: #1e40af;
+        }
+        
+        .day-cell.available:hover {
+            background: #dbeafe;
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+        }
+        
+        .day-cell.disabled {
+            background: #f9fafb;
+            color: #d1d5db;
+            cursor: not-allowed;
+        }
+        
+        .day-cell.booked {
+            background: #f0fdf4;
+            color: #15803d;
+            border-color: #86efac;
+        }
+        
+        .day-cell.booked:hover {
+            background: #dcfce7;
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.2);
+        }
+        
+        .day-cell.selected {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #764ba2;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+        
+        .badge {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            background: white;
+            color: #667eea;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar {
+            background: #fafafa;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .locked-classes {
+            margin-bottom: 2rem;
+        }
+        
+        .locked-classes h3 {
+            font-size: 0.875rem;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .locked-class {
+            background: white;
+            border: 2px solid #10b981;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .class-number {
+            width: 32px;
+            height: 32px;
+            background: #10b981;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+        
+        .class-info {
+            flex: 1;
+        }
+        
+        .class-date {
+            font-size: 0.875rem;
+            color: #1f2937;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        
+        .class-time {
+            font-size: 0.8rem;
+            color: #6b7280;
+        }
+        
+        .class-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .action-btn {
+            padding: 0.375rem 0.625rem;
+            border-radius: 6px;
+            border: 1px solid #d1d5db;
+            background: white;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+        
+        .action-btn.modify {
+            color: #2563eb;
+            border-color: #bfdbfe;
+        }
+        
+        .action-btn.modify:hover {
+            background: #eff6ff;
+            border-color: #3b82f6;
+        }
+        
+        .action-btn.delete {
+            color: #dc2626;
+            border-color: #fecaca;
+        }
+        
+        .action-btn.delete:hover {
+            background: #fef2f2;
+            border-color: #ef4444;
+        }
+        
+        .current-selection {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            border: 2px solid #667eea;
+        }
+        
+        .selection-header {
+            font-size: 0.875rem;
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .selection-date {
+            font-size: 1rem;
+            color: #1f2937;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: capitalize;
+        }
+        
+        .time-slots {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+        }
+        
+        .time-slot {
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            background: white;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .time-slot:hover:not(.unavailable) {
+            background: #eff6ff;
+            border-color: #3b82f6;
+        }
+        
+        .time-slot.selected {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        
+        .time-slot.unavailable {
+            background: #f9fafb;
+            color: #d1d5db;
+            cursor: not-allowed;
+            text-decoration: line-through;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: #9ca3af;
+        }
+        
+        .empty-state-icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .empty-state-text {
+            font-size: 0.875rem;
+        }
+        
+        .continue-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: auto;
+            transition: all 0.2s;
+        }
+        
+        .continue-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+        }
+        
+        .continue-btn:disabled {
+            background: #d1d5db;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        @media (max-width: 968px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .calendar-section {
+                border-right: none;
+                border-bottom: 1px solid #e5e7eb;
+            }
+            
+            .time-slots {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .header h2 {
+                font-size: 1.25rem;
+            }
+            
+            .header p {
+                font-size: 0.875rem;
+            }
+            
+            .calendar-section, .sidebar {
+                padding: 1.25rem;
+            }
+            
+            .time-slots {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2 id="headerTitle">Selecciona Fecha y Hora para Clase 1</h2>
+            <p>Elige el día en el calendario y luego selecciona un horario</p>
+            <div class="progress">
+                <div class="progress-fill" id="progressBar" style="width: 0%"></div>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <div class="calendar-section">
+                <div class="calendar-header">
+                    <div class="month-display" id="monthDisplay"></div>
+                    <div class="month-nav">
+                        <button class="nav-btn" onclick="prevMonth()">‹</button>
+                        <button class="nav-btn" onclick="nextMonth()">›</button>
+                    </div>
+                </div>
+                
+                <div class="calendar-grid">
+                    <div class="day-name">L</div>
+                    <div class="day-name">M</div>
+                    <div class="day-name">M</div>
+                    <div class="day-name">J</div>
+                    <div class="day-name">V</div>
+                    <div class="day-name">S</div>
+                    <div class="day-name">D</div>
+                </div>
+                
+                <div class="calendar-grid" id="calendarDays"></div>
+            </div>
+            
+            <div class="sidebar">
+                <div class="locked-classes" id="lockedClasses">
+                    <h3>Clases Confirmadas</h3>
+                    <div id="lockedClassesList"></div>
+                </div>
+                
+                <div id="currentSelection"></div>
+                
+                <button class="continue-btn" id="continueBtn" disabled onclick="handleContinue()">
+                    Continuar a Datos del Estudiante →
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let currentMonth = new Date(2025, 11, 1); // December 2025
+        let selectedDate = null;
+        let selectedTime = null;
+        let lockedClasses = [];
+        let currentClassIndex = 0;
+        const totalClasses = 4;
+        
+        const timeSlots = {
+            weekday: ['09:00', '10:30', '12:00', '15:00', '16:30', '18:00', '21:00'],
+            saturday: ['09:00', '10:30', '12:00']
+        };
+        
+        function initCalendar() {
+            renderCalendar();
+            updateSidebar();
+            updateHeader();
+        }
+        
+        function renderCalendar() {
+            const monthDisplay = document.getElementById('monthDisplay');
+            monthDisplay.textContent = currentMonth.toLocaleDateString('es-ES', { 
+                month: 'long', 
+                year: 'numeric' 
+            });
+            
+            const daysGrid = document.getElementById('calendarDays');
+            daysGrid.innerHTML = '';
+            
+            const firstDay = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), 1);
+            const lastDay = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 0);
+            const startPadding = (firstDay.getDay() + 6) % 7;
+            
+            // Empty cells
+            for (let i = 0; i < startPadding; i++) {
+                const emptyCell = document.createElement('div');
+                emptyCell.className = 'day-cell empty';
+                daysGrid.appendChild(emptyCell);
+            }
+            
+            // Days
+            for (let day = 1; day <= lastDay.getDate(); day++) {
+                const date = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day);
+                const dateStr = date.toISOString().split('T')[0];
+                const dayOfWeek = date.getDay();
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+                
+                const cell = document.createElement('div');
+                cell.className = 'day-cell';
+                
+                // Check if past or Sunday
+                if (date < today || dayOfWeek === 0) {
+                    cell.className += ' disabled';
+                } else {
+                    cell.className += ' available';
+                    cell.onclick = () => selectDate(dateStr);
+                }
+                
+                // Check if date has locked classes
+                const classesOnDate = lockedClasses.filter(c => c.date === dateStr);
+                if (classesOnDate.length > 0) {
+                    cell.className = cell.className.replace('available', 'booked');
+                    const badge = document.createElement('div');
+                    badge.className = 'badge';
+                    badge.textContent = classesOnDate.map(c => c.classNumber).join(',');
+                    cell.appendChild(badge);
+                }
+                
+                // Highlight selected date
+                if (selectedDate === dateStr) {
+                    cell.className = cell.className.replace('available', 'selected').replace('booked', 'selected');
+                }
+                
+                const dayNumber = document.createElement('span');
+                dayNumber.textContent = day;
+                cell.appendChild(dayNumber);
+                
+                daysGrid.appendChild(cell);
+            }
+        }
+        
+        function selectDate(dateStr) {
+            selectedDate = dateStr;
+            selectedTime = null;
+            renderCalendar();
+            updateSidebar();
+        }
+        
+        function selectTime(time) {
+            selectedTime = time;
+            
+            // Lock in the class
+            const date = new Date(selectedDate);
+            lockedClasses.push({
+                classNumber: currentClassIndex + 1,
+                date: selectedDate,
+                time: time,
+                dateObj: date
+            });
+            
+            // Move to next class
+            currentClassIndex++;
+            selectedDate = null;
+            selectedTime = null;
+            
+            renderCalendar();
+            updateSidebar();
+            updateHeader();
+            updateProgress();
+        }
+        
+        function modifyClass(index) {
+            const classToModify = lockedClasses[index];
+            
+            // Remove from locked
+            lockedClasses.splice(index, 1);
+            
+            // Set current selection
+            selectedDate = classToModify.date;
+            selectedTime = null;
+            
+            // Move back to that class
+            currentClassIndex = classToModify.classNumber - 1;
+            
+            renderCalendar();
+            updateSidebar();
+            updateHeader();
+            updateProgress();
+        }
+        
+        function deleteClass(index) {
+            lockedClasses.splice(index, 1);
+            
+            // Renumber remaining classes
+            lockedClasses.forEach((c, i) => {
+                c.classNumber = i + 1;
+            });
+            
+            currentClassIndex = lockedClasses.length;
+            selectedDate = null;
+            selectedTime = null;
+            
+            renderCalendar();
+            updateSidebar();
+            updateHeader();
+            updateProgress();
+        }
+        
+        function updateSidebar() {
+            // Update locked classes list
+            const lockedList = document.getElementById('lockedClassesList');
+            if (lockedClasses.length === 0) {
+                lockedList.innerHTML = '<div class="empty-state" style="padding: 1rem;"><div style="font-size: 0.875rem; color: #9ca3af;">Ninguna clase confirmada aún</div></div>';
+            } else {
+                lockedList.innerHTML = lockedClasses
+                    .sort((a, b) => a.classNumber - b.classNumber)
+                    .map((c, index) => {
+                        const date = new Date(c.date);
+                        const dateStr = date.toLocaleDateString('es-ES', { 
+                            weekday: 'short', 
+                            day: 'numeric', 
+                            month: 'short' 
+                        });
+                        
+                        return `
+                            <div class="locked-class">
+                                <div class="class-number">${c.classNumber}</div>
+                                <div class="class-info">
+                                    <div class="class-date">${dateStr}</div>
+                                    <div class="class-time">${c.time}</div>
+                                </div>
+                                <div class="class-actions">
+                                    <button class="action-btn modify" onclick="modifyClass(${index})">Editar</button>
+                                    <button class="action-btn delete" onclick="deleteClass(${index})">×</button>
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+            }
+            
+            // Update current selection area
+            const currentSelection = document.getElementById('currentSelection');
+            
+            if (currentClassIndex >= totalClasses) {
+                currentSelection.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">✓</div>
+                        <div class="empty-state-text">¡Todas las clases programadas!</div>
+                    </div>
+                `;
+                return;
+            }
+            
+            if (!selectedDate) {
+                currentSelection.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📅</div>
+                        <div class="empty-state-text">Selecciona un día en el calendario</div>
+                    </div>
+                `;
+            } else {
+                const date = new Date(selectedDate);
+                const dateStr = date.toLocaleDateString('es-ES', { 
+                    weekday: 'long', 
+                    day: 'numeric', 
+                    month: 'long',
+                    year: 'numeric'
+                });
+                
+                const dayOfWeek = date.getDay();
+                const slots = dayOfWeek === 6 ? timeSlots.saturday : timeSlots.weekday;
+                
+                // Get unavailable slots for this date
+                const bookedSlotsOnDate = lockedClasses
+                    .filter(c => c.date === selectedDate)
+                    .map(c => c.time);
+                
+                currentSelection.innerHTML = `
+                    <div class="current-selection">
+                        <div class="selection-header">
+                            📍 Clase ${currentClassIndex + 1} de ${totalClasses}
+                        </div>
+                        <div class="selection-date">${dateStr}</div>
+                        <div class="time-slots">
+                            ${slots.map(slot => {
+                                const isBooked = bookedSlotsOnDate.includes(slot);
+                                const isSelected = selectedTime === slot;
+                                return `
+                                    <div class="time-slot ${isBooked ? 'unavailable' : ''} ${isSelected ? 'selected' : ''}"
+                                         onclick="${isBooked ? '' : `selectTime('${slot}')`}">
+                                        ${slot}
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+        }
+        
+        function updateHeader() {
+            const header = document.getElementById('headerTitle');
+            if (currentClassIndex >= totalClasses) {
+                header.textContent = '¡Todas las Clases Programadas!';
+            } else {
+                header.textContent = `Selecciona Fecha y Hora para Clase ${currentClassIndex + 1}`;
+            }
+        }
+        
+        function updateProgress() {
+            const progress = (lockedClasses.length / totalClasses) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('continueBtn').disabled = lockedClasses.length !== totalClasses;
+        }
+        
+        function prevMonth() {
+            currentMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, 1);
+            renderCalendar();
+        }
+        
+        function nextMonth() {
+            currentMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1);
+            renderCalendar();
+        }
+        
+        function handleContinue() {
+            alert('Continuando a Datos del Estudiante...\n\n' + 
+                  'Clases programadas:\n' + 
+                  lockedClasses.map(c => {
+                      const date = new Date(c.date);
+                      return `Clase ${c.classNumber}: ${date.toLocaleDateString('es-ES')} a las ${c.time}`;
+                  }).join('\n'));
+        }
+        
+        // Initialize
+        initCalendar();
+    </script>
+</body>
+</html>

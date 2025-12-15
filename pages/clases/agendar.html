@@ -838,6 +838,365 @@ input:-webkit-autofill:focus {
     overflow: visible;
 }
 
+/* Step 2 - New Unified Calendar System */
+.step2-main-content {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    min-height: 600px;
+    gap: 0;
+}
+
+.step2-calendar-section {
+    padding: 1.5rem;
+    border-right: 1px solid #e5e7eb;
+    background: white;
+}
+
+.step2-calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.step2-month-display {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1f2937;
+    text-transform: capitalize;
+}
+
+.step2-month-nav {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.step2-nav-btn {
+    width: 36px;
+    height: 36px;
+    border: 1px solid #d1d5db;
+    background: white;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    color: #4b5563;
+    transition: all 0.2s;
+}
+
+.step2-nav-btn:hover {
+    background: #f3f4f6;
+    border-color: #9ca3af;
+}
+
+.step2-calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+}
+
+.step2-day-name {
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #6b7280;
+    padding: 0.5rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.step2-day-cell {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    border: 2px solid transparent;
+}
+
+.step2-day-cell.empty {
+    cursor: default;
+}
+
+.step2-day-cell.available {
+    background: #dbeafe;
+    color: #1e3a8a;
+}
+
+.step2-day-cell.available:hover {
+    background: #bfdbfe;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+}
+
+.step2-day-cell.disabled {
+    background: #f3f4f6;
+    color: #6b7280;
+    cursor: not-allowed;
+}
+
+.step2-day-cell.holiday {
+    background: #fee2e2;
+    color: #991b1b;
+    cursor: not-allowed;
+}
+
+.step2-day-cell.booked {
+    background: #f0fdf4;
+    color: #15803d;
+    border-color: #86efac;
+}
+
+.step2-day-cell.booked:hover {
+    background: #dcfce7;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.2);
+}
+
+.step2-day-cell.selected {
+    background: #3b82f6;
+    color: white;
+    border-color: #2563eb;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.step2-badge {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    background: white;
+    color: #3b82f6;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.step2-sidebar {
+    background: white;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.step2-locked-classes {
+    margin-bottom: 2rem;
+}
+
+.step2-locked-classes h3 {
+    font-size: 0.875rem;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.step2-locked-class {
+    background: white;
+    border: 2px solid #10b981;
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.step2-class-number {
+    width: 32px;
+    height: 32px;
+    background: #10b981;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+
+.step2-class-info {
+    flex: 1;
+}
+
+.step2-class-date {
+    font-size: 0.875rem;
+    color: #1f2937;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.step2-class-time {
+    font-size: 0.8rem;
+    color: #6b7280;
+}
+
+.step2-class-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.step2-action-btn {
+    padding: 0.375rem 0.625rem;
+    border-radius: 6px;
+    border: 1px solid #d1d5db;
+    background: white;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 500;
+}
+
+.step2-action-btn.modify {
+    color: #2563eb;
+    border-color: #bfdbfe;
+}
+
+.step2-action-btn.modify:hover {
+    background: #eff6ff;
+    border-color: #3b82f6;
+}
+
+.step2-action-btn.delete {
+    color: #dc2626;
+    border-color: #fecaca;
+}
+
+.step2-action-btn.delete:hover {
+    background: #fef2f2;
+    border-color: #ef4444;
+}
+
+.step2-current-selection {
+    background: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    border: 2px solid #3b82f6;
+}
+
+.step2-selection-header {
+    font-size: 0.875rem;
+    color: #3b82f6;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.step2-selection-date {
+    font-size: 1rem;
+    color: #1f2937;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    text-transform: capitalize;
+}
+
+.step2-time-slots {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+}
+
+.step2-time-slot {
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    background: white;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.step2-time-slot:hover:not(.unavailable) {
+    background: #eff6ff;
+    border-color: #3b82f6;
+}
+
+.step2-time-slot.selected {
+    background: #3b82f6;
+    color: white;
+    border-color: #3b82f6;
+}
+
+.step2-time-slot.unavailable {
+    background: #f9fafb;
+    color: #d1d5db;
+    cursor: not-allowed;
+    text-decoration: line-through;
+}
+
+.step2-empty-state {
+    text-align: center;
+    padding: 2rem 1rem;
+    color: #9ca3af;
+}
+
+.step2-empty-state-icon {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+.step2-empty-state-text {
+    font-size: 0.875rem;
+}
+
+.step2-progress {
+    background: #e5e7eb;
+    height: 6px;
+    border-radius: 3px;
+    margin-top: 1rem;
+    overflow: hidden;
+}
+
+.step2-progress-fill {
+    background: #3b82f6;
+    height: 100%;
+    transition: width 0.3s ease;
+    border-radius: 3px;
+}
+
+@media (max-width: 968px) {
+    .step2-main-content {
+        grid-template-columns: 1fr;
+    }
+
+    .step2-calendar-section {
+        border-right: none;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    .step2-time-slots {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .step2-calendar-section, .step2-sidebar {
+        padding: 1.25rem;
+    }
+
+    .step2-time-slots {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 .booking-item {
     padding: 1rem;
     border-radius: 0.75rem;
@@ -1028,7 +1387,6 @@ input:-webkit-autofill:focus {
     align-items: flex-start;
     gap: 0.75rem;
     background-color: #E0F5F7;
-    max-width: 600px;
 }
 
 .info-box-text {
@@ -1091,6 +1449,125 @@ input:-webkit-autofill:focus {
 .hidden {
     display: none;
 }
+
+/* Booking Container Background - Light Theme */
+#booking-system-container-wrapper {
+    position: relative;
+    background: linear-gradient(135deg, #f8f9fa 0%, #f0f2f5 50%, #e8ecf0 100%);
+    overflow: hidden;
+    min-height: 100vh;
+    padding: 60px 0 100px;
+}
+
+.booking-shapes {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.booking-shape {
+    position: absolute;
+    background: rgba(0, 172, 193, 0.15);
+    animation: floatShape 20s infinite ease-in-out;
+}
+
+.booking-shape-1 {
+    width: 500px;
+    height: 500px;
+    top: -150px;
+    right: -100px;
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    animation-delay: 0s;
+}
+
+.booking-shape-2 {
+    width: 600px;
+    height: 600px;
+    bottom: -200px;
+    right: -150px;
+    background: rgba(0, 150, 200, 0.12);
+    clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+    animation-delay: 5s;
+}
+
+.booking-shape-3 {
+    width: 450px;
+    height: 450px;
+    top: 30%;
+    left: -100px;
+    background: rgba(0, 172, 193, 0.18);
+    transform: rotate(45deg);
+    animation-delay: 10s;
+}
+
+@keyframes floatShape {
+    0%, 100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    25% {
+        transform: translate(30px, 40px) rotate(5deg);
+    }
+    50% {
+        transform: translate(-20px, 60px) rotate(-3deg);
+    }
+    75% {
+        transform: translate(40px, 20px) rotate(4deg);
+    }
+}
+
+.booking-corner-dots {
+    position: absolute;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.booking-corner-dots-top {
+    top: 40px;
+    right: 40px;
+}
+
+.booking-corner-dots-bottom {
+    bottom: 40px;
+    left: 40px;
+}
+
+.booking-corner-dot {
+    width: 8px;
+    height: 8px;
+    background: rgba(0, 172, 193, 0.4);
+    border-radius: 50%;
+    animation: pulse 3s infinite ease-in-out;
+}
+
+.booking-corner-dot:nth-child(1) { animation-delay: 0s; }
+.booking-corner-dot:nth-child(2) { animation-delay: 0.1s; }
+.booking-corner-dot:nth-child(3) { animation-delay: 0.2s; }
+.booking-corner-dot:nth-child(4) { animation-delay: 0.3s; }
+.booking-corner-dot:nth-child(5) { animation-delay: 0.4s; }
+.booking-corner-dot:nth-child(6) { animation-delay: 0.5s; }
+.booking-corner-dot:nth-child(7) { animation-delay: 0.6s; }
+.booking-corner-dot:nth-child(8) { animation-delay: 0.7s; }
+.booking-corner-dot:nth-child(9) { animation-delay: 0.8s; }
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(1.15);
+    }
+}
+
+#booking-system-container {
+    position: relative;
+    z-index: 3;
+}
 </style>
 
 <main style="padding: 0; margin: 0;">
@@ -1105,7 +1582,39 @@ input:-webkit-autofill:focus {
         </div>
     </section>
 
-    <div id="booking-system-container"></div>
+    <div id="booking-system-container-wrapper">
+        <div class="booking-shapes">
+            <div class="booking-shape booking-shape-1"></div>
+            <div class="booking-shape booking-shape-2"></div>
+            <div class="booking-shape booking-shape-3"></div>
+        </div>
+
+        <div class="booking-corner-dots booking-corner-dots-top">
+            <div class="booking-corner-dot"></div>
+            <div class="booking-corner-dot"></div>
+            <div class="booking-corner-dot"></div>
+            <div class="booking-corner-dot"></div>
+            <div class="booking-corner-dot"></div>
+            <div class="booking-corner-dot"></div>
+            <div class="booking-corner-dot"></div>
+            <div class="booking-corner-dot"></div>
+            <div class="booking-corner-dot"></div>
+        </div>
+
+        <div class="booking-corner-dots booking-corner-dots-bottom">
+            <div class="booking-corner-dot"></div>
+            <div class="booking-corner-dot"></div>
+            <div class="booking-corner-dot"></div>
+            <div class="booking-corner-dot"></div>
+            <div class="booking-corner-dot"></div>
+            <div class="booking-corner-dot"></div>
+            <div class="booking-corner-dot"></div>
+            <div class="booking-corner-dot"></div>
+            <div class="booking-corner-dot"></div>
+        </div>
+
+        <div id="booking-system-container"></div>
+    </div>
 </main>
 
 <script>
@@ -1115,9 +1624,11 @@ input:-webkit-autofill:focus {
 let currentStep = 1;
 let selectedPlan = null;
 let bookings = [];
+let currentClassIndex = 0;
+let selectedDate = null;
+let selectedTime = null;
 let studentName = '', studentEmail = '', studentEmailConfirm = '', studentRut = '', studentPhone = '', wantsReminder = false;
-let discountCode = '';
-let appliedDiscount = null;
+let paymentMethod = 'webpay';
 let fieldErrors = {};
 let calendarMonth = new Date();
 let activeCalendar = null;
@@ -1138,12 +1649,6 @@ const timeSlots = {
 
 const chileanHolidays = ['01-01', '04-03', '04-04', '05-01', '05-21', '06-20', '08-15', '09-18', '09-19', '10-12', '10-31', '11-01', '12-08', '12-25'];
 
-const discountCodes = {
-    'PROMO10': { percent: 10, description: '10% de descuento' },
-    'PRIMERA20': { percent: 20, description: '20% descuento primera clase' },
-    'VERANO15': { percent: 15, description: '15% descuento de verano' },
-};
-
 // =================================================================
 // 2. UTILITY FUNCTIONS (Currency and Calculations)
 // =================================================================
@@ -1162,11 +1667,7 @@ const calculateOriginalPrice = (plan) => {
 };
 const calculateFinalPrice = () => {
     if (!selectedPlan) return 0;
-    let price = selectedPlan.price;
-    if (appliedDiscount) {
-        price = price * (1 - (appliedDiscount.percent / 100));
-    }
-    return Math.round(price);
+    return selectedPlan.price;
 };
 const formatRUT = (value) => {
     const clean = value.replace(/[^0-9kK]/g, '');
@@ -1191,10 +1692,6 @@ const validateField = (field) => {
             value = studentEmail.trim();
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             isValid = emailRegex.test(value);
-            break;
-        case 'emailConfirm':
-            value = studentEmailConfirm.trim();
-            isValid = value === studentEmail.trim() && studentEmail.trim().length > 0;
             break;
         case 'rut':
             value = studentRut.trim();
@@ -1225,7 +1722,7 @@ const validateField = (field) => {
 };
 
 const validateAllFields = () => {
-    const fields = ['name', 'email', 'emailConfirm', 'rut', 'phone'];
+    const fields = ['name', 'email', 'rut', 'phone'];
     let allValid = true;
     fields.forEach(field => {
         if (!validateField(field)) {
@@ -1282,33 +1779,25 @@ const getAvailableSlots = (dateStr, currentIndex) => {
 };
 
 const isBookingComplete = () => {
-    const isScheduleComplete = bookings.every(b => b?.date && b?.time);
+    const isScheduleComplete = bookings.length === selectedPlan?.classes && bookings.every(b => b.date && b.time);
     return isScheduleComplete && validateAllFields();
 };
 
 const selectPlan = (planId) => {
     selectedPlan = plans.find(p => p.id === planId);
     if (selectedPlan) {
-        bookings = new Array(selectedPlan.classes).fill(null).map(() => ({ date: null, time: null }));
-        goToNextStep(); 
+        bookings = [];
+        currentClassIndex = 0;
+        selectedDate = null;
+        selectedTime = null;
+        goToNextStep();
         showNotification(`Plan de ${selectedPlan.classes} ${selectedPlan.classes === 1 ? 'clase' : 'clases'} seleccionado`, 'success');
     }
 };
 
-const applyDiscount = (code) => {
-    if (!selectedPlan) {
-        showNotification('Debes seleccionar un plan primero.', 'error');
-        return;
-    }
-    const upperCode = code.toUpperCase();
-    if (discountCodes[upperCode]) {
-        appliedDiscount = discountCodes[upperCode];
-        showNotification(`Descuento "${upperCode}" aplicado: ${appliedDiscount.description}`, 'success');
-    } else {
-        appliedDiscount = null;
-        showNotification('Código de descuento inválido o expirado.', 'error');
-    }
-    renderStep(3); 
+const selectPaymentMethod = (method) => {
+    paymentMethod = method;
+    renderStep(currentStep);
 };
 
 const handleConfirmPayment = () => {
@@ -1486,24 +1975,31 @@ const selectTimeSlot = (slot, index) => {
     updateStep2Content();
 };
 const goToNextStep = () => {
-    const prevStep = currentStep; 
+    const prevStep = currentStep;
     if (currentStep === 1 && selectedPlan) {
         currentStep = 2;
     } else if (currentStep === 2) {
 
-        if (bookings.every(b => b?.date && b?.time)) {
+        if (bookings.length === selectedPlan.classes && bookings.every(b => b.date && b.time)) {
             currentStep = 3;
         } else {
             showNotification('Debes completar toda la información antes de continuar.', 'error');
-            renderStep(2); 
+            renderStep(2);
             return;
         }
-    } else if (currentStep === 3 && isBookingComplete()) {
+    } else if (currentStep === 3) {
+        if (isBookingComplete()) {
+            currentStep = 4;
+        } else {
+            showNotification('Completa toda la información del estudiante correctamente.', 'error');
+            return;
+        }
+    } else if (currentStep === 4 && isBookingComplete()) {
 
     } else {
 
-        if (currentStep === 3) {
-            showNotification('Completa toda la información del estudiante correctamente.', 'error');
+        if (currentStep === 4) {
+            showNotification('Completa toda la información antes de continuar.', 'error');
         }
         return;
     }
@@ -1746,8 +2242,8 @@ const renderHeader = () => {
 };
 
 const renderProgressSteps = () => {
-    const steps = [1, 2, 3];
-    const stepLabels = ['Plan', 'Horarios', 'Datos'];
+    const steps = [1, 2, 3, 4];
+    const stepLabels = ['Plan', 'Horarios', 'Datos', 'Pago'];
 
     let circlesHtml = '<div class="flex justify-center items-center mb-2">';
     
@@ -1771,8 +2267,8 @@ const renderProgressSteps = () => {
         `;
         
         circlesHtml += circleContent;
-        
-        if (step < 3) {
+
+        if (step < 4) {
             circlesHtml += `<div class="h-1 rounded transition-all duration-300 ${lineClass}" style="width: 76px; margin: 0 8px;"></div>`;
         }
     });
@@ -1782,7 +2278,7 @@ const renderProgressSteps = () => {
     
     stepLabels.forEach((label, index) => {
         const isActive = currentStep >= index + 1;
-        
+
         if (index === 0) {
             labelsHtml += `
                 <div class="text-xs font-medium ${isActive ? 'text-blue-600 font-bold' : 'text-gray-400'}" style="width: 32px; text-align: center;">
@@ -1796,6 +2292,13 @@ const renderProgressSteps = () => {
                     ${label}
                 </div>
                 <div style="width: 83px;"></div>
+            `;
+        } else if (index === 2) {
+            labelsHtml += `
+                <div class="text-xs font-medium ${isActive ? 'text-blue-600 font-bold' : 'text-gray-400'}" style="width: 32px; text-align: center;">
+                    ${label}
+                </div>
+                <div style="width: 92px;"></div>
             `;
         } else {
             labelsHtml += `
@@ -1903,6 +2406,14 @@ const renderStep2 = () => {
         return renderStep1();
     }
 
+    // Initialize calendar rendering
+    setTimeout(() => {
+        initStep2Calendar();
+        updateStep2Sidebar();
+        updateStep2Header();
+        updateStep2Progress();
+    }, 0);
+
     return `
     <div id="step-2-content" class="step-content">
         <h2 class="section-header">Selecciona tus Horarios</h2>
@@ -1914,69 +2425,53 @@ const renderStep2 = () => {
             </p>
         </div>
 
-        <div class="booking-summary-container">
-            <div class="booking-summary-list">
-            ${bookings.map((booking, index) => {
-                    const availableSlots = getAvailableSlots(booking?.date, index);
-                    const isComplete = booking?.date && booking?.time;
+        <div class="p-6 rounded-xl" style="background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); border: 2px solid #e2e8f0; width: 90%; margin: 0 auto 2rem auto;">
+            <div class="step2-main-content">
+                <div class="step2-calendar-section">
+                <div class="step2-calendar-header">
+                    <div class="step2-month-display" id="step2MonthDisplay"></div>
+                    <div class="step2-month-nav">
+                        <button class="step2-nav-btn" onclick="step2PrevMonth()">‹</button>
+                        <button class="step2-nav-btn" onclick="step2NextMonth()">›</button>
+                    </div>
+                </div>
 
-                    return `
-                        <div class="booking-item" style="background-color: #ffffffff !important; border: 1px solid #9ca3af;">
-                            <div class="booking-item-header">
-    <h3 class="booking-item-title">Clase ${index + 1} de ${selectedPlan.classes}</h3>
-   ${isComplete ? `<span class="booking-savings-badge">${icon('check-circle', 16, '')} Listo</span>` : ''}
-</div>
+                <div class="step2-calendar-grid">
+                    <div class="step2-day-name">L</div>
+                    <div class="step2-day-name">M</div>
+                    <div class="step2-day-name">M</div>
+                    <div class="step2-day-name">J</div>
+                    <div class="step2-day-name">V</div>
+                    <div class="step2-day-name">S</div>
+                    <div class="step2-day-name">D</div>
+                </div>
 
-                            <div class="date-grid">
-                                <div style="position: relative; max-width: 480px;">
-                                    <label class="form-label">
-                                        ${icon('calendar', 16, 'inline mr-1')} Fecha
-                                    </label>
-                                   <button type="button" onclick="event.stopPropagation(); toggleCalendar(${index})" class="date-button ${booking?.date ? 'selected' : ''}" style="transform-origin: center;" onmousedown="this.style.transform='scale(0.98)'" onmouseup="this.style.transform='scale(1)'" onmouseleave="this.style.transform='scale(1)'">
-    ${booking?.date ? new Date(booking.date + 'T12:00:00').toLocaleDateString('es-CL', { weekday: 'long', day: 'numeric', month: 'long' }) : 'Selecciona un día'}
-</button>
-                                    ${activeCalendar === index ? `
-                                        <div class="calendar-popup" style="position: absolute; left: 0; top: 100%; margin-top: 0.5rem; z-index: 1000;">
-                                            ${renderCalendarGrid(index)}
-                                        </div>
-                                    ` : ''}
-                                </div>
-
-                                <div>
-                                    <label class="form-label">
-                                        ${icon('clock', 16, 'inline mr-1')} Horario
-                                    </label>
-                                    <div style="display: grid; grid-template-columns: ${booking?.date ? 'repeat(3, 1fr)' : '1fr'}; gap: 0.5rem;">
-                                        ${booking?.date ? availableSlots.map(slot => `
-                                            <button type="button" onclick="selectTimeSlot('${slot}', ${index})"
-                                                class="time-slot-button ${booking.time === slot ? 'selected' : ''}"
-                                                ${booking.date && availableSlots.length === 0 ? 'disabled' : ''}
-                                            >
-                                                ${slot.split('-')[0]}
-                                            </button>
-                                        `).join('') : `
-                                            <span style="font-size: 0.875rem; color: #6b7280; padding: 0.5rem; text-align: center; grid-column: span 1;">Selecciona una fecha primero</span>
-                                        `}
-                                        ${booking.date && availableSlots.length === 0 ? `
-                                            <span class="error-message" style="padding: 0.5rem; text-align: center; grid-column: span 3; font-weight: 600;">No hay horarios disponibles para esta fecha.</span>
-                                        ` : ''}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                }).join('')}
-            </div>
+                <div class="step2-calendar-grid" id="step2CalendarDays"></div>
             </div>
 
-            <div class="nav-button-container">
-    <button onclick="goToPrevStep()" class="nav-button back" style="border: none; background: none; padding: 0;">
-        <span style="font-size: 20px; line-height: 1;">&lsaquo;</span> <span>Cambiar Plan</span>
-    </button>
-    <button onclick="goToNextStep()" class="nav-button next">
-        <span>Continuar a Datos</span> <span style="font-size: 20px; line-height: 1;">&rsaquo;</span>
-    </button>
-</div>
+            <div class="step2-sidebar">
+                <div class="step2-locked-classes" id="step2LockedClasses">
+                    <h3>Clases Confirmadas</h3>
+                    <div class="step2-progress" style="margin-top: 0.5rem; margin-bottom: 1rem;">
+                        <div class="step2-progress-fill" id="step2ProgressBar" style="width: ${(bookings.length / selectedPlan.classes) * 100}%"></div>
+                    </div>
+                    <div id="step2LockedClassesList"></div>
+                </div>
+
+                <div id="step2CurrentSelection"></div>
+            </div>
+            </div>
+        </div>
+
+        <div class="nav-button-container">
+            <button onclick="goToPrevStep()" class="nav-button back" style="border: none; background: none; padding: 0;">
+                <span style="font-size: 20px; line-height: 1;">&lsaquo;</span> <span>Cambiar Plan</span>
+            </button>
+            <button onclick="goToNextStep()" class="nav-button next" id="step2ContinueBtn">
+                <span>Continuar a Datos</span> <span style="font-size: 20px; line-height: 1;">&rsaquo;</span>
+            </button>
+        </div>
+    </div>
     `;
 };
 
@@ -2071,6 +2566,304 @@ const nextMonth = (index) => {
     updateStep2Content();
 };
 
+// =================================================================
+// NEW STEP 2 CALENDAR SYSTEM
+// =================================================================
+
+const initStep2Calendar = () => {
+    renderStep2Calendar();
+};
+
+const renderStep2Calendar = () => {
+    const monthDisplay = document.getElementById('step2MonthDisplay');
+    if (!monthDisplay) return;
+
+    const monthName = calendarMonth.toLocaleDateString('es-ES', { month: 'long' });
+    const year = calendarMonth.getFullYear();
+    monthDisplay.textContent = `${monthName.charAt(0).toUpperCase() + monthName.slice(1)} ${year}`;
+
+    const daysGrid = document.getElementById('step2CalendarDays');
+    if (!daysGrid) return;
+
+    daysGrid.innerHTML = '';
+
+    const firstDay = new Date(calendarMonth.getFullYear(), calendarMonth.getMonth(), 1);
+    const lastDay = new Date(calendarMonth.getFullYear(), calendarMonth.getMonth() + 1, 0);
+    const startPadding = (firstDay.getDay() + 6) % 7;
+
+    // Empty cells before first day
+    for (let i = 0; i < startPadding; i++) {
+        const emptyCell = document.createElement('div');
+        emptyCell.className = 'step2-day-cell empty';
+        daysGrid.appendChild(emptyCell);
+    }
+
+    // Render each day
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    for (let day = 1; day <= lastDay.getDate(); day++) {
+        const date = new Date(calendarMonth.getFullYear(), calendarMonth.getMonth(), day);
+        const dateStr = date.toISOString().split('T')[0];
+        const dayOfWeek = date.getDay();
+
+        const cell = document.createElement('div');
+        cell.className = 'step2-day-cell';
+
+        // Check availability
+        const { available, reason } = isDateAvailable(dateStr, currentClassIndex);
+        const isSunday = dayOfWeek === 0;
+
+        if (!available || date < today || isSunday) {
+            if (reason === 'holiday' || isSunday) {
+                cell.className += ' holiday';
+            } else {
+                cell.className += ' disabled';
+            }
+        } else {
+            cell.className += ' available';
+            cell.onclick = () => step2SelectDate(dateStr);
+        }
+
+        // Check if date has booked classes
+        const classesOnDate = bookings.filter(b => b.date === dateStr);
+        if (classesOnDate.length > 0) {
+            if (!cell.className.includes('disabled')) {
+                cell.className = cell.className.replace('available', 'booked');
+            }
+            const badge = document.createElement('div');
+            badge.className = 'step2-badge';
+            badge.textContent = classesOnDate.map((b, i) => bookings.indexOf(b) + 1).join(',');
+            cell.appendChild(badge);
+        }
+
+        // Highlight selected date
+        if (selectedDate === dateStr) {
+            cell.className = cell.className.replace('available', 'selected').replace('booked', 'selected');
+        }
+
+        const dayNumber = document.createElement('span');
+        dayNumber.textContent = day;
+        cell.appendChild(dayNumber);
+
+        daysGrid.appendChild(cell);
+    }
+};
+
+const step2SelectDate = (dateStr) => {
+    selectedDate = dateStr;
+    selectedTime = null;
+    renderStep2Calendar();
+    updateStep2Sidebar();
+};
+
+const step2SelectTime = (time) => {
+    if (currentClassIndex >= selectedPlan.classes) return;
+
+    selectedTime = time;
+
+    // Lock in the class
+    bookings.push({
+        date: selectedDate,
+        time: time
+    });
+
+    // Move to next class
+    currentClassIndex++;
+    selectedDate = null;
+    selectedTime = null;
+
+    renderStep2Calendar();
+    updateStep2Sidebar();
+    updateStep2Header();
+    updateStep2Progress();
+};
+
+const step2ModifyClass = (index) => {
+    const classToModify = bookings[index];
+
+    // Remove from bookings
+    bookings.splice(index, 1);
+
+    // Set current selection
+    selectedDate = classToModify.date;
+    selectedTime = null;
+
+    // Move back to that class
+    currentClassIndex = index;
+
+    renderStep2Calendar();
+    updateStep2Sidebar();
+    updateStep2Header();
+    updateStep2Progress();
+};
+
+const step2DeleteClass = (index) => {
+    bookings.splice(index, 1);
+
+    currentClassIndex = bookings.length;
+    selectedDate = null;
+    selectedTime = null;
+
+    renderStep2Calendar();
+    updateStep2Sidebar();
+    updateStep2Header();
+    updateStep2Progress();
+};
+
+const updateStep2Sidebar = () => {
+    const lockedList = document.getElementById('step2LockedClassesList');
+    if (!lockedList) return;
+
+    if (bookings.length === 0) {
+        lockedList.innerHTML = '<div class="step2-empty-state" style="padding: 1rem;"><div style="font-size: 0.875rem; color: #9ca3af;">Ninguna clase confirmada aún</div></div>';
+    } else {
+        lockedList.innerHTML = bookings
+            .map((booking, index) => {
+                const date = new Date(booking.date + 'T12:00:00');
+                const dateStr = date.toLocaleDateString('es-ES', {
+                    weekday: 'short',
+                    day: 'numeric',
+                    month: 'short'
+                });
+
+                return `
+                    <div class="step2-locked-class">
+                        <div class="step2-class-number">${index + 1}</div>
+                        <div class="step2-class-info">
+                            <div class="step2-class-date">${dateStr}</div>
+                            <div class="step2-class-time">${booking.time}</div>
+                        </div>
+                        <div class="step2-class-actions">
+                            <button class="step2-action-btn modify" onclick="step2ModifyClass(${index})">Modificar</button>
+                            <button class="step2-action-btn delete" onclick="step2DeleteClass(${index})">×</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+    }
+
+    // Update current selection area
+    const currentSelection = document.getElementById('step2CurrentSelection');
+    if (!currentSelection) return;
+
+    if (currentClassIndex >= selectedPlan.classes) {
+        currentSelection.innerHTML = `
+            <div class="step2-empty-state">
+                <div class="step2-empty-state-icon">✓</div>
+                <div class="step2-empty-state-text">¡Todas las clases programadas!</div>
+            </div>
+        `;
+        return;
+    }
+
+    if (!selectedDate) {
+        currentSelection.innerHTML = `
+            <div class="step2-empty-state">
+                <div class="step2-empty-state-icon">${icon('calendar', 48, '')}</div>
+                <div class="step2-empty-state-text">Selecciona un día en el calendario</div>
+            </div>
+        `;
+
+        // Re-render lucide icons
+        setTimeout(() => {
+            if (window.lucide) {
+                lucide.createIcons();
+            }
+        }, 0);
+    } else {
+        const date = new Date(selectedDate + 'T12:00:00');
+        const dateStr = date.toLocaleDateString('es-ES', {
+            weekday: 'long',
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+        });
+
+        const dayOfWeek = date.getDay();
+        const slots = dayOfWeek === 6 ? timeSlots.saturday : timeSlots.weekday;
+
+        // Get unavailable slots for this date
+        const bookedSlotsOnDate = bookings
+            .filter(b => b.date === selectedDate)
+            .map(b => b.time);
+
+        currentSelection.innerHTML = `
+            <div class="step2-current-selection">
+                <div class="step2-selection-header">
+                    ${icon('map-pin', 16, '')} Clase ${currentClassIndex + 1} de ${selectedPlan.classes}
+                </div>
+                <div class="step2-selection-date">${dateStr}</div>
+                <div class="step2-time-slots">
+                    ${slots.map(slot => {
+                        const isBooked = bookedSlotsOnDate.includes(slot);
+                        const isSelected = selectedTime === slot;
+                        return `
+                            <div class="step2-time-slot ${isBooked ? 'unavailable' : ''} ${isSelected ? 'selected' : ''}"
+                                 onclick="${isBooked ? '' : `step2SelectTime('${slot}')`}">
+                                ${slot.replace('-', ' - ')}
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            </div>
+        `;
+
+        // Re-render lucide icons
+        setTimeout(() => {
+            if (window.lucide) {
+                lucide.createIcons();
+            }
+        }, 0);
+    }
+};
+
+const updateStep2Header = () => {
+    const header = document.getElementById('step2HeaderTitle');
+    if (!header) return;
+
+    if (currentClassIndex >= selectedPlan.classes) {
+        header.textContent = '¡Todas las Clases Programadas!';
+    } else {
+        header.textContent = `Selecciona Fecha y Hora para Clase ${currentClassIndex + 1}`;
+    }
+};
+
+const updateStep2Progress = () => {
+    const progressBar = document.getElementById('step2ProgressBar');
+    if (progressBar) {
+        const progress = (bookings.length / selectedPlan.classes) * 100;
+        progressBar.style.width = progress + '%';
+    }
+
+    const continueBtn = document.getElementById('step2ContinueBtn');
+    if (continueBtn) {
+        if (bookings.length === selectedPlan.classes) {
+            continueBtn.disabled = false;
+            continueBtn.style.opacity = '1';
+            continueBtn.style.cursor = 'pointer';
+        } else {
+            continueBtn.disabled = true;
+            continueBtn.style.opacity = '0.5';
+            continueBtn.style.cursor = 'not-allowed';
+        }
+    }
+};
+
+const step2PrevMonth = () => {
+    calendarMonth = new Date(calendarMonth.getFullYear(), calendarMonth.getMonth() - 1, 1);
+    renderStep2Calendar();
+};
+
+const step2NextMonth = () => {
+    calendarMonth = new Date(calendarMonth.getFullYear(), calendarMonth.getMonth() + 1, 1);
+    renderStep2Calendar();
+};
+
+// =================================================================
+// END NEW STEP 2 CALENDAR SYSTEM
+// =================================================================
+
 const renderStep3 = () => {
     if (!selectedPlan) {
         currentStep = 1;
@@ -2080,7 +2873,6 @@ const renderStep3 = () => {
     const originalPlanPrice = calculateOriginalPrice(selectedPlan);
     const finalPrice = calculateFinalPrice();
     const discountAmount = originalPlanPrice - selectedPlan.price;
-    const finalDiscountAmount = selectedPlan.price - finalPrice;
     const getFieldClass = (field) => {
     const value = field === 'name' ? studentName : 
                  field === 'email' ? studentEmail :
@@ -2178,28 +2970,6 @@ const renderStep3 = () => {
                             ${fieldErrors.email && studentEmail.trim().length > 0 ? '<p class="text-red-500 text-xs mt-1">Correo inválido</p>' : ''}
                         </div>
                     </div>
-                    
-                    <!-- Confirm Email -->
-                    <div style="position: relative; margin-bottom: 0.5rem;">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">
-                            ${icon('mail-check', 16, 'inline mr-1')} Confirmar Correo <span class="text-red-500">*</span>
-                        </label>
-                        <div style="position: relative;">
-                            <input 
-                                type="email" 
-                                value="${studentEmailConfirm}" 
-                                oninput="updateStudentInfo('emailConfirm', this.value)" 
-                                placeholder="juan@ejemplo.com"
-                                class="form-input ${getFieldClass('emailConfirm')}"
-                                style="padding-right: ${studentEmailConfirm.trim().length > 0 && !fieldErrors.emailConfirm ? '2.5rem' : '0.75rem'};"
-                                onblur="validateField('emailConfirm'); updateFieldError('emailConfirm');"
-                            />
-                            ${studentEmailConfirm.trim().length > 0 && !fieldErrors.emailConfirm ? `<div style="position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); pointer-events: none;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" fill="#16a34a"/><path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>` : ''}
-                        </div>
-                        <div style="position: absolute; height: 20px;">
-                            ${fieldErrors.emailConfirm && studentEmailConfirm.trim().length > 0 ? '<p class="text-red-500 text-xs mt-1">Los correos no coinciden</p>' : ''}
-                        </div>
-                    </div>
 
                     <!-- Phone -->
 <div style="position: relative; margin-bottom: 0.5rem;">
@@ -2250,16 +3020,47 @@ const renderStep3 = () => {
 </div>
             </div>
 
+            <div class="nav-button-container" style="margin-top: 2rem;">
+                <button onclick="goToPrevStep()" class="nav-button back" style="border: none; background: none; padding: 0;">
+                    <span style="font-size: 20px; line-height: 1;">&lsaquo;</span> <span>Modificar Horarios</span>
+                </button>
+                <button onclick="goToNextStep()"
+                    class="nav-button next ${Object.keys(fieldErrors).length === 0 ? '' : 'opacity-50 cursor-not-allowed'}"
+                    ${Object.keys(fieldErrors).length === 0 ? '' : 'disabled'}
+                >
+                    <span>Continuar a Pago</span> <span style="font-size: 20px; line-height: 1;">&rsaquo;</span>
+                </button>
+            </div>
+        </div>
+    `;
+};
+
+const renderStep4 = () => {
+    if (!selectedPlan) {
+        currentStep = 1;
+        return renderStep1();
+    }
+
+    const originalPlanPrice = calculateOriginalPrice(selectedPlan);
+    const finalPrice = calculateFinalPrice();
+    const discountAmount = originalPlanPrice - selectedPlan.price;
+
+    return `
+        <div id="step-4-content" class="step-content" style="background-color: #ffffff;">
+            <h2 class="section-header">Resumen y Pago</h2>
+
             <div class="p-6 rounded-xl" style="background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); border: 2px solid #e2e8f0; width: 90%; margin: 0 auto;">
-                <h3 class="text-lg font-bold text-gray-800 mb-4 pb-3 flex items-center" style="border-bottom: 2px solid #3b82f6;">
-                    ${icon('clipboard-list', 20, 'mr-2 text-blue-600')} Resumen
-                </h3>
-                
-                <div class="mb-4">
-    <div style="overflow-x: auto; border-radius: 0.5rem; border: 1px solid #d1d5db;">
+                <div style="border-radius: 0.5rem; border: 1px solid #d1d5db; overflow: hidden; margin-bottom: 2rem;">
+                    <div style="background: #f3f4f6; padding: 0.75rem 1rem; border-bottom: 2px solid #3b82f6;">
+                        <h4 style="margin: 0; font-size: 0.875rem; font-weight: 600; color: #374151; display: flex; align-items: center; gap: 0.5rem;">
+                            ${icon('clipboard-list', 16, 'text-blue-600')}
+                            <span>Resumen de tu Reserva</span>
+                        </h4>
+                    </div>
+                    <div style="overflow-x: auto; background: white;">
         <table style="width: 100%; border-collapse: collapse; background: white;">
             <thead>
-                <tr style="background: #f3f4f6; border-bottom: 1px solid #d1d5db;">
+                <tr style="background: #f9fafb; border-bottom: 1px solid #e5e7eb;">
                     <th style="padding: 0.625rem 0.75rem; text-align: center; font-weight: 600; font-size: 0.8125rem; color: #374151; width: 10%;">Clase</th>
                     <th style="padding: 0.625rem 0.75rem; text-align: center; font-weight: 600; font-size: 0.8125rem; color: #374151; width: 15%;">Día</th>
                     <th style="padding: 0.625rem 0.75rem; text-align: center; font-weight: 600; font-size: 0.8125rem; color: #374151; width: 30%;">Fecha</th>
@@ -2288,7 +3089,7 @@ const renderStep3 = () => {
         const day = date.getDate();
         const month = date.toLocaleDateString('es-CL', { month: 'long' });
         const year = date.getFullYear();
-        
+
         return `
         <tr style="background: ${sortedIndex % 2 === 0 ? '#ffffff' : '#fafaf9'}; border-bottom: 1px solid #e5e7eb; transition: background-color 0.15s;">
             <td style="padding: 0.625rem 0.75rem; text-align: center; font-weight: 500; color: #374151; font-size: 0.8125rem;">${sortedIndex + 1}</td>
@@ -2312,76 +3113,94 @@ const renderStep3 = () => {
             </tbody>
         </table>
     </div>
-</div>
-                <div class="mb-4">
-                    <label class="block text-sm font-semibold text-gray-700 mb-2">
-                        ${icon('ticket', 16, 'inline mr-1')} ¿Tienes un código de descuento?
-                    </label>
-                    <div class="flex gap-2">
-    <input 
-        type="text" 
-        value="${discountCode}" 
-        oninput="discountCode=this.value.toUpperCase();" 
-        placeholder="PROMO10" 
-        maxlength="10"
-        class="p-3 border border-gray-300 rounded-lg bg-gray-100 text-gray-700" 
-        style="width: 250px;"
-    />
-    <button 
-        onclick="applyDiscount(discountCode)" 
-        class="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all shadow-md whitespace-nowrap text-sm"
-    >
-        Aplicar
-    </button>
-</div>
-                    ${appliedDiscount ? `
-                        <p class="text-xs text-emerald-600 mt-1.5 font-semibold flex items-center gap-1">
-                            ${icon('check-circle', 14, '')} ${appliedDiscount.description} (${appliedDiscount.percent}%)
-                        </p>
-                    ` : ''}
                 </div>
 
-                <div class="space-y-0 text-sm" style="border: 1px solid #e5e7eb; border-radius: 0.5rem; overflow: hidden;">
-                    <div class="flex justify-between py-3 px-4" style="border-bottom: 1px solid #e5e7eb;">
-                        <span class="text-gray-600">Plan seleccionado</span>
-                        <span class="font-medium text-gray-900">${selectedPlan.classes} ${selectedPlan.classes === 1 ? 'clase' : 'clases'}</span>
+                <div style="border-radius: 0.5rem; border: 1px solid #d1d5db; overflow: hidden; margin-bottom: 2rem;">
+                    <div style="background: #f3f4f6; padding: 0.75rem 1rem; border-bottom: 2px solid #3b82f6;">
+                        <h4 style="margin: 0; font-size: 0.875rem; font-weight: 600; color: #374151; display: flex; align-items: center; gap: 0.5rem;">
+                            ${icon('wallet', 16, 'text-blue-600')}
+                            <span>Detalle de Pago</span>
+                        </h4>
                     </div>
 
-                    <div class="flex justify-between py-3 px-4" style="border-bottom: 1px solid #e5e7eb;">
-                        <span class="text-gray-600">Precio base</span>
-                        <span class="font-medium text-gray-900">${formatCurrency(originalPlanPrice)}</span>
-                    </div>
-
-                    ${selectedPlan.savings > 0 ? `
-                        <div class="flex justify-between py-3 px-4" style="border-bottom: 1px solid #e5e7eb;">
-                            <span class="text-gray-600">Ahorro por plan (${selectedPlan.savings}%)</span>
-                            <span class="font-medium text-gray-900">- ${formatCurrency(discountAmount)}</span>
+                    <div style="background: white;">
+                        <div class="flex justify-between" style="padding: 0.625rem 0.75rem; border-bottom: 1px solid #e5e7eb;">
+                            <span style="color: #6b7280; font-size: 0.8125rem; font-weight: 500;">Plan seleccionado</span>
+                            <span style="font-weight: 500; color: #374151; font-size: 0.8125rem;">${selectedPlan.classes} ${selectedPlan.classes === 1 ? 'clase' : 'clases'}</span>
                         </div>
-                    ` : ''}
 
-                    ${appliedDiscount ? `
-                        <div class="flex justify-between py-3 px-4" style="border-bottom: 1px solid #e5e7eb;">
-                            <span class="text-gray-600">Código aplicado (${appliedDiscount.percent}%)</span>
-                            <span class="font-medium text-gray-900">- ${formatCurrency(finalDiscountAmount)}</span>
+                        <div class="flex justify-between" style="padding: 0.625rem 0.75rem; border-bottom: 1px solid #e5e7eb;">
+                            <span style="color: #6b7280; font-size: 0.8125rem; font-weight: 500;">Precio base</span>
+                            <span style="font-weight: 500; color: #374151; font-size: 0.8125rem;">${formatCurrency(originalPlanPrice)}</span>
                         </div>
-                    ` : ''}
 
-                    <div class="flex justify-between items-center py-4 px-4" style="background: #f9fafb;">
-                        <span class="text-base font-semibold text-gray-900">Total a pagar</span>
-                        <span class="text-2xl font-bold text-gray-900">${formatCurrency(finalPrice)}</span>
+                        <div class="flex justify-between" style="padding: 0.625rem 0.75rem; border-bottom: 1px solid #e5e7eb;">
+                            <span style="color: #6b7280; font-size: 0.8125rem; font-weight: 500;">Ahorro por plan</span>
+                            <span style="font-weight: 500; color: ${selectedPlan.savings > 0 ? '#16a34a' : '#6b7280'}; font-size: 0.8125rem;">${selectedPlan.savings > 0 ? `- ${formatCurrency(discountAmount)}` : 'No aplica'}</span>
+                        </div>
+
+                        <div class="flex justify-between items-center" style="padding: 0.875rem 0.75rem; background: #fafaf9;">
+                            <span style="font-size: 0.875rem; font-weight: 700; color: #111827;">Total a pagar</span>
+                            <span style="font-size: 1rem; font-weight: 700; color: #111827;">${formatCurrency(finalPrice)}</span>
+                        </div>
                     </div>
+                </div>
+
+                <div style="margin-bottom: 0;">
+                    <div style="background: #f3f4f6; padding: 0.75rem 1rem; border-radius: 0.5rem 0.5rem 0 0; border: 1px solid #d1d5db; border-bottom: 2px solid #3b82f6;">
+                        <h4 style="margin: 0; font-size: 0.875rem; font-weight: 600; color: #374151; display: flex; align-items: center; gap: 0.5rem;">
+                            ${icon('credit-card', 16, 'text-blue-600')}
+                            <span>Método de Pago</span>
+                        </h4>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; padding: 1.25rem; background: white; border: 1px solid #d1d5db; border-top: none; border-radius: 0 0 0.5rem 0.5rem;">
+                        <button
+                            onclick="selectPaymentMethod('webpay')"
+                            class="payment-method-btn ${paymentMethod === 'webpay' ? 'selected' : ''}"
+                            style="position: relative; padding: 1.5rem 1rem; border: 2px solid ${paymentMethod === 'webpay' ? '#3b82f6' : '#d1d5db'}; border-radius: 0.5rem; background: ${paymentMethod === 'webpay' ? '#eff6ff' : 'white'}; cursor: pointer; transition: all 0.2s ease; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 110px; box-shadow: ${paymentMethod === 'webpay' ? '0 2px 8px rgba(59, 130, 246, 0.2)' : '0 1px 3px rgba(0,0,0,0.05)'};"
+                            onmouseover="if('${paymentMethod}' !== 'webpay') this.style.borderColor='#9ca3af'; if('${paymentMethod}' !== 'webpay') this.style.boxShadow='0 2px 6px rgba(0,0,0,0.1)';"
+                            onmouseout="if('${paymentMethod}' !== 'webpay') this.style.borderColor='#d1d5db'; if('${paymentMethod}' !== 'webpay') this.style.boxShadow='0 1px 3px rgba(0,0,0,0.05)';"
+                        >
+                            ${paymentMethod === 'webpay' ? `<div style="position: absolute; top: 0.5rem; right: 0.5rem; background: #3b82f6; color: white; border-radius: 9999px; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>` : ''}
+                            <img src="/assets/logo/webpay.png" alt="Webpay" style="max-height: 50px; max-width: 100%; object-fit: contain; margin-bottom: 0.625rem;" />
+                            <span style="font-size: 0.8125rem; font-weight: 600; color: ${paymentMethod === 'webpay' ? '#1e40af' : '#6b7280'};">Pago en Línea</span>
+                            <span style="font-size: 0.75rem; color: #9ca3af; margin-top: 0.25rem;">Débito o Crédito</span>
+                        </button>
+                        <button
+                            onclick="selectPaymentMethod('transferencia')"
+                            class="payment-method-btn ${paymentMethod === 'transferencia' ? 'selected' : ''}"
+                            style="position: relative; padding: 1.5rem 1rem; border: 2px solid ${paymentMethod === 'transferencia' ? '#3b82f6' : '#d1d5db'}; border-radius: 0.5rem; background: ${paymentMethod === 'transferencia' ? '#eff6ff' : 'white'}; cursor: pointer; transition: all 0.2s ease; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 110px; box-shadow: ${paymentMethod === 'transferencia' ? '0 2px 8px rgba(59, 130, 246, 0.2)' : '0 1px 3px rgba(0,0,0,0.05)'};"
+                            onmouseover="if('${paymentMethod}' !== 'transferencia') this.style.borderColor='#9ca3af'; if('${paymentMethod}' !== 'transferencia') this.style.boxShadow='0 2px 6px rgba(0,0,0,0.1)';"
+                            onmouseout="if('${paymentMethod}' !== 'transferencia') this.style.borderColor='#d1d5db'; if('${paymentMethod}' !== 'transferencia') this.style.boxShadow='0 1px 3px rgba(0,0,0,0.05)';"
+                        >
+                            ${paymentMethod === 'transferencia' ? `<div style="position: absolute; top: 0.5rem; right: 0.5rem; background: #3b82f6; color: white; border-radius: 9999px; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>` : ''}
+                            <img src="/assets/logo/transferencia.png" alt="Transferencia Bancaria" style="max-height: 50px; max-width: 100%; object-fit: contain; margin-bottom: 0.625rem;" />
+                            <span style="font-size: 0.8125rem; font-weight: 600; color: ${paymentMethod === 'transferencia' ? '#1e40af' : '#6b7280'};">Transferencia</span>
+                            <span style="font-size: 0.75rem; color: #9ca3af; margin-top: 0.25rem;">Bancaria</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%); border: 2px solid #facc15; border-radius: 0.75rem; padding: 1.25rem; margin-top: 2rem; width: 90%; margin-left: auto; margin-right: auto; box-shadow: 0 2px 4px rgba(250, 204, 21, 0.1);">
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <div style="flex-shrink: 0;">
+                        ${icon('shield-check', 20, 'text-yellow-700')}
+                    </div>
+                    <p style="margin: 0; font-size: 0.875rem; line-height: 1.5; color: #713f12;">
+                        Al continuar, aceptas los <a href="/pages/soporte/terms.html" target="_blank" rel="noopener noreferrer" style="text-decoration: underline; font-weight: 700; color: #854d0e;">términos y condiciones</a> sobre políticas de cancelación y reagendamiento.
+                    </p>
                 </div>
             </div>
 
             <div class="nav-button-container" style="margin-top: 1.5rem;">
                 <button onclick="goToPrevStep()" class="nav-button back" style="border: none; background: none; padding: 0;">
-                    <span style="font-size: 20px; line-height: 1;">&lsaquo;</span> <span>Modificar Horarios</span>
+                    <span style="font-size: 20px; line-height: 1;">&lsaquo;</span> <span>Modificar Datos</span>
                 </button>
                 <button onclick="handleConfirmPayment()"
-                    class="nav-button next ${Object.keys(fieldErrors).length === 0 ? '' : 'opacity-50 cursor-not-allowed'}"
-                    ${Object.keys(fieldErrors).length === 0 ? '' : 'disabled'}
+                    class="nav-button next"
                 >
-                    <span>Continuar a Pagar</span> <span style="font-size: 20px; line-height: 1;">&rsaquo;</span>
+                    <span>Pagar ${formatCurrency(finalPrice)}</span> <span style="font-size: 20px; line-height: 1;">&rsaquo;</span>
                 </button>
             </div>
         </div>
@@ -2397,6 +3216,8 @@ const renderStep = (step, shouldAnimate = false) => {
         content = renderStep2();
     } else if (step === 3) {
         content = renderStep3();
+    } else if (step === 4) {
+        content = renderStep4();
     }
     const container = document.querySelector('#booking-system-container .max-w-6xl');
     if (container) {
