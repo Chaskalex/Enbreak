@@ -853,10 +853,11 @@ input:-webkit-autofill:focus {
 }
 
 .step2-calendar-header {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 36px 1fr 36px;
     align-items: center;
     margin-bottom: 1.5rem;
+    gap: 1.5rem;
 }
 
 .step2-month-display {
@@ -864,6 +865,7 @@ input:-webkit-autofill:focus {
     font-weight: 700;
     color: #1f2937;
     text-transform: capitalize;
+    text-align: center;
 }
 
 .step2-month-nav {
@@ -872,29 +874,34 @@ input:-webkit-autofill:focus {
 }
 
 .step2-nav-btn {
-    width: 36px;
-    height: 36px;
-    border: 1px solid #d1d5db;
+    width: 40px;
+    height: 40px;
+    border: 2px solid #e2e8f0;
     background: white;
-    border-radius: 8px;
+    border-radius: 10px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.25rem;
-    color: #4b5563;
-    transition: all 0.2s;
+    color: #64748b;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
 }
 
 .step2-nav-btn:hover {
-    background: #f3f4f6;
-    border-color: #9ca3af;
+    background: #3b82f6;
+    border-color: #3b82f6;
+    color: white;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
 }
 
 .step2-calendar-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 8px;
+    gap: 6px;
+    padding: 0.5rem;
 }
 
 .step2-day-name {
@@ -912,13 +919,13 @@ input:-webkit-autofill:focus {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 10px;
+    border-radius: 8px;
     font-size: 0.9rem;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.2s ease;
     position: relative;
-    border: 2px solid transparent;
+    border: 1.5px solid transparent;
 }
 
 .step2-day-cell.empty {
@@ -927,44 +934,49 @@ input:-webkit-autofill:focus {
 
 .step2-day-cell.available {
     background: #dbeafe;
-    color: #1e3a8a;
+    color: #2563eb;
+    border-color: #3b82f6;
 }
 
 .step2-day-cell.available:hover {
     background: #bfdbfe;
-    transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+    color: #1e40af;
+    border-color: #2563eb;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.15);
 }
 
 .step2-day-cell.disabled {
-    background: #f3f4f6;
-    color: #6b7280;
+    background: #f9fafb;
+    color: #d1d5db;
     cursor: not-allowed;
+    border-color: #e5e7eb;
 }
 
 .step2-day-cell.holiday {
-    background: #fee2e2;
-    color: #991b1b;
+    background: #fef2f2;
+    color: #ef4444;
     cursor: not-allowed;
+    border-color: #fecaca;
 }
 
 .step2-day-cell.booked {
-    background: #f0fdf4;
-    color: #15803d;
-    border-color: #86efac;
+    background: #3b82f6;
+    color: white;
+    border-color: #3b82f6;
 }
 
 .step2-day-cell.booked:hover {
-    background: #dcfce7;
-    transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.2);
+    background: #2563eb;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
 }
 
 .step2-day-cell.selected {
     background: #3b82f6;
     color: white;
-    border-color: #2563eb;
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    border-color: #3b82f6;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
 }
 
 .step2-badge {
@@ -992,11 +1004,11 @@ input:-webkit-autofill:focus {
 }
 
 .step2-locked-classes {
-    margin-bottom: 2rem;
+    margin-bottom: 0.75rem;
 }
 
 .step2-locked-classes h3 {
-    font-size: 0.875rem;
+    font-size: 0.75rem;
     color: #6b7280;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -1004,11 +1016,37 @@ input:-webkit-autofill:focus {
     font-weight: 600;
 }
 
+#step2LockedClassesList {
+    height: calc((4 * (3.25rem + 0.75rem)) - 0.75rem);
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding-right: 0.5rem;
+    margin-top: 1rem;
+}
+
+#step2LockedClassesList::-webkit-scrollbar {
+    width: 6px;
+}
+
+#step2LockedClassesList::-webkit-scrollbar-track {
+    background: #f3f4f6;
+    border-radius: 3px;
+}
+
+#step2LockedClassesList::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 3px;
+}
+
+#step2LockedClassesList::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
+}
+
 .step2-locked-class {
     background: white;
-    border: 2px solid #10b981;
+    border: 1px solid #3b82f6;
     border-radius: 10px;
-    padding: 1rem;
+    padding: 0.75rem;
     margin-bottom: 0.75rem;
     display: flex;
     align-items: center;
@@ -1016,28 +1054,29 @@ input:-webkit-autofill:focus {
 }
 
 .step2-class-number {
-    width: 32px;
-    height: 32px;
-    background: #10b981;
+    width: 24px;
+    height: 24px;
+    background: #3b82f6;
     color: white;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 700;
-    font-size: 0.9rem;
+    font-size: 0.6875rem;
     flex-shrink: 0;
 }
 
 .step2-class-info {
     flex: 1;
+    display: flex;
+    align-items: center;
 }
 
 .step2-class-date {
     font-size: 0.875rem;
     color: #1f2937;
     font-weight: 600;
-    margin-bottom: 0.25rem;
 }
 
 .step2-class-time {
@@ -1062,23 +1101,23 @@ input:-webkit-autofill:focus {
 }
 
 .step2-action-btn.modify {
-    color: #2563eb;
+    color: #3b82f6;
     border-color: #bfdbfe;
 }
 
 .step2-action-btn.modify:hover {
     background: #eff6ff;
-    border-color: #3b82f6;
+    border-color: #bfdbfe;
 }
 
 .step2-action-btn.delete {
-    color: #dc2626;
+    color: #ef4444;
     border-color: #fecaca;
 }
 
 .step2-action-btn.delete:hover {
     background: #fef2f2;
-    border-color: #ef4444;
+    border-color: #fecaca;
 }
 
 .step2-current-selection {
@@ -1086,6 +1125,7 @@ input:-webkit-autofill:focus {
     border-radius: 10px;
     padding: 1.5rem;
     border: 2px solid #3b82f6;
+    margin-top: 0.5rem;
 }
 
 .step2-selection-header {
@@ -1099,28 +1139,27 @@ input:-webkit-autofill:focus {
 }
 
 .step2-selection-date {
-    font-size: 1rem;
+    font-size: 0.875rem;
     color: #1f2937;
     font-weight: 600;
     margin-bottom: 1rem;
-    text-transform: capitalize;
 }
 
 .step2-time-slots {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 0.5rem;
 }
 
 .step2-time-slot {
-    padding: 0.75rem;
+    padding: 0.5rem;
     border: 1px solid #d1d5db;
     background: white;
     border-radius: 8px;
     text-align: center;
     cursor: pointer;
     transition: all 0.2s;
-    font-size: 0.875rem;
+    font-size: 0.75rem;
     font-weight: 500;
 }
 
@@ -1135,11 +1174,15 @@ input:-webkit-autofill:focus {
     border-color: #3b82f6;
 }
 
+.step2-time-slot.selected:hover {
+    background: #2563eb;
+    color: white;
+}
+
 .step2-time-slot.unavailable {
     background: #f9fafb;
     color: #d1d5db;
     cursor: not-allowed;
-    text-decoration: line-through;
 }
 
 .step2-empty-state {
@@ -1149,7 +1192,7 @@ input:-webkit-autofill:focus {
 }
 
 .step2-empty-state-icon {
-    font-size: 3rem;
+    font-size: 2rem;
     margin-bottom: 0.5rem;
 }
 
@@ -1305,16 +1348,18 @@ input:-webkit-autofill:focus {
 }
 
 .nav-button {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 0.5rem;
     font-weight: 600;
     transition: all 0.2s;
     cursor: pointer;
+    line-height: 1.2;
 }
 
 .nav-button.back {
     color: #4b5563;
+    line-height: 1;
 }
 
 .nav-button.back:hover {
@@ -1322,7 +1367,7 @@ input:-webkit-autofill:focus {
 }
 
 .nav-button.next {
-    padding: 0.875rem 2rem;
+    padding: 0.875rem 1.25rem;
     background: #3b82f6;
     color: white;
     font-weight: 600;
@@ -1627,7 +1672,8 @@ let bookings = [];
 let currentClassIndex = 0;
 let selectedDate = null;
 let selectedTime = null;
-let studentName = '', studentEmail = '', studentEmailConfirm = '', studentRut = '', studentPhone = '', wantsReminder = false;
+let modifyingIndex = null;
+let studentName = '', studentEmail = '', studentRut = '', studentPhone = '+56 ', wantsReminder = false;
 let paymentMethod = 'webpay';
 let fieldErrors = {};
 let calendarMonth = new Date();
@@ -1700,16 +1746,12 @@ const validateField = (field) => {
             break;
         case 'phone':
     value = studentPhone.trim();
-    const cleanPhone = value.replace(/\s/g, '');
-    const phoneRegex = /^\+?\d+$/;
-    const hasValidCharacters = phoneRegex.test(cleanPhone);
-    
-    if (!hasValidCharacters) {
-        isValid = false;
-    } else {
-        const digitCount = cleanPhone.replace(/\+/g, '').length;
-        isValid = digitCount >= 8 && digitCount <= 12;
+    const cleanPhone = value.replace(/\+56\s?/g, '').replace(/\s/g, '');
+    if (cleanPhone.length === 0) {
+        delete fieldErrors[field];
+        return false;
     }
+    isValid = /^9\d{8}$/.test(cleanPhone);
     break;
     }
 
@@ -1791,7 +1833,6 @@ const selectPlan = (planId) => {
         selectedDate = null;
         selectedTime = null;
         goToNextStep();
-        showNotification(`Plan de ${selectedPlan.classes} ${selectedPlan.classes === 1 ? 'clase' : 'clases'} seleccionado`, 'success');
     }
 };
 
@@ -1802,8 +1843,7 @@ const selectPaymentMethod = (method) => {
 
 const handleConfirmPayment = () => {
     if (!validateAllFields()) {
-        showNotification('Completa todos los campos requeridos antes de continuar', 'error');
-        renderStep(3); // Re-render to show errors without animation
+        renderStep(3);
         return;
     }
 
@@ -1828,9 +1868,8 @@ const handleConfirmPayment = () => {
         discount: appliedDiscount,
         timestamp: new Date().toISOString()
     };
-    
+
     console.log('Booking Data:', bookingData);
-    showNotification('¡Reserva confirmada exitosamente!', 'success');
 
     setTimeout(() => {
         alert('Demo: Redirigiendo a Pasarela de Pago con un total de ' + formatCurrency(finalPrice) + '...');
@@ -1969,7 +2008,6 @@ const selectTimeSlot = (slot, index) => {
             month: 'long'
         });
         const formattedTime = slot.split('-')[0];
-        showNotification(`Clase ${index + 1}: ${formattedDate}, ${formattedTime}`, 'success');
     }
 
     updateStep2Content();
@@ -1983,7 +2021,6 @@ const goToNextStep = () => {
         if (bookings.length === selectedPlan.classes && bookings.every(b => b.date && b.time)) {
             currentStep = 3;
         } else {
-            showNotification('Debes completar toda la información antes de continuar.', 'error');
             renderStep(2);
             return;
         }
@@ -1991,15 +2028,12 @@ const goToNextStep = () => {
         if (isBookingComplete()) {
             currentStep = 4;
         } else {
-            showNotification('Completa toda la información del estudiante correctamente.', 'error');
             return;
         }
     } else if (currentStep === 4 && isBookingComplete()) {
 
     } else {
-
         if (currentStep === 4) {
-            showNotification('Completa toda la información antes de continuar.', 'error');
         }
         return;
     }
@@ -2009,47 +2043,149 @@ const goToNextStep = () => {
 const goToPrevStep = () => {
     const prevStep = currentStep; 
     currentStep = Math.max(1, currentStep - 1);
-    const shouldAnimate = currentStep !== prevStep; 
+    const shouldAnimate = currentStep !== prevStep;
     renderStep(currentStep, shouldAnimate);
 };
+
+const handlePhoneKeydown = (event, input) => {
+    const selectionStart = input.selectionStart;
+    const selectionEnd = input.selectionEnd;
+
+    if ((event.key === 'Backspace' || event.key === 'Delete') && selectionStart < 4 && selectionEnd <= 4) {
+        event.preventDefault();
+        return;
+    }
+
+    if (event.key === 'Backspace' && selectionStart === selectionEnd && selectionStart === 4) {
+        event.preventDefault();
+        return;
+    }
+};
+
+const handlePhoneSelect = (event, input) => {
+    const start = input.selectionStart;
+    const end = input.selectionEnd;
+    const length = input.value.length;
+
+    if (end === length && start === 4) {
+        return;
+    }
+
+    if (start < 4 || end < 4) {
+        if (start < 4 && end > 4) {
+            setTimeout(() => input.setSelectionRange(4, end), 0);
+        } else if (start < 4 && end === 4) {
+            setTimeout(() => input.setSelectionRange(4, 4), 0);
+        }
+    }
+};
+
+const handlePhoneClick = (event, input) => {
+    if (input.selectionStart < 4) {
+        setTimeout(() => input.setSelectionRange(4, 4), 0);
+    }
+};
+
 const updateStudentInfo = (field, value) => {
     switch (field) {
         case 'name': 
             studentName = value; 
             break;
-        case 'email': 
-            studentEmail = value; 
+        case 'email':
+            studentEmail = value;
             break;
-        case 'emailConfirm': 
-            studentEmailConfirm = value; 
-            break;
-        case 'rut': 
+        case 'rut':
             const input = event.target;
             const cursorPosition = input.selectionStart;
             const oldValue = studentRut;
             const newValue = formatRUT(value);
-            
+
             if (newValue !== oldValue || newValue.length <= oldValue.length) {
-                studentRut = newValue; 
+                studentRut = newValue;
                 setTimeout(() => {
                     input.value = studentRut;
                     const lengthDiff = studentRut.length - value.length;
                     const newCursorPos = cursorPosition + lengthDiff;
                     input.setSelectionRange(newCursorPos, newCursorPos);
+                    validateField('rut');
+                    updateStep3Button();
+                }, 0);
+            } else {
+                validateField('rut');
+                updateStep3Button();
+            }
+            return;
+        case 'phone':
+            const phoneInput = document.querySelector('input[name="phone"]');
+
+            let rawValue = value;
+            if (rawValue.length < 4) {
+                rawValue = '+56 ';
+            }
+
+            let digits = rawValue.replace(/\D/g, '');
+            if (digits.startsWith('56')) {
+                digits = digits.slice(2);
+            }
+            digits = digits.slice(0, 9);
+
+            const oldPhoneValue = studentPhone;
+            const oldCursorPos = phoneInput ? phoneInput.selectionStart : 0;
+
+            if (digits.length === 0) {
+                studentPhone = '+56 ';
+            } else if (digits.length === 1) {
+                studentPhone = '+56 ' + digits;
+            } else if (digits.length <= 5) {
+                studentPhone = '+56 ' + digits[0] + ' ' + digits.slice(1);
+            } else {
+                studentPhone = '+56 ' + digits[0] + ' ' + digits.slice(1, 5) + ' ' + digits.slice(5);
+            }
+
+            validateField('phone');
+            updateStep3Button();
+
+            if (phoneInput) {
+                setTimeout(() => {
+                    phoneInput.value = studentPhone;
+                    let newCursorPos = oldCursorPos;
+                    if (studentPhone.length < oldPhoneValue.length) {
+                        newCursorPos = Math.max(4, oldCursorPos);
+                    } else {
+                        newCursorPos = oldCursorPos + (studentPhone.length - oldPhoneValue.length);
+                    }
+                    phoneInput.setSelectionRange(newCursorPos, newCursorPos);
                 }, 0);
             }
             return;
-        case 'phone': 
-            studentPhone = value; 
-            break;
-        case 'reminder': 
-    wantsReminder = value; 
-
-    return;
+        case 'reminder':
+            wantsReminder = value;
+            return;
     }
 
-    if (fieldErrors[field]) {
-        validateField(field);
+    validateField(field);
+    updateStep3Button();
+};
+
+const updateStep3Button = () => {
+    const continueBtn = document.getElementById('step3ContinueBtn');
+    if (continueBtn) {
+        const phoneDigits = studentPhone.replace(/\+56\s?/g, '').replace(/\s/g, '');
+        const allFieldsFilled = studentName.trim() &&
+                                studentEmail.trim() &&
+                                studentRut.trim() &&
+                                phoneDigits.length === 9;
+        const noErrors = Object.keys(fieldErrors).length === 0;
+
+        if (allFieldsFilled && noErrors) {
+            continueBtn.disabled = false;
+            continueBtn.style.opacity = '1';
+            continueBtn.style.cursor = 'pointer';
+        } else {
+            continueBtn.disabled = true;
+            continueBtn.style.opacity = '0.5';
+            continueBtn.style.cursor = 'not-allowed';
+        }
     }
 };
 
@@ -2058,8 +2194,7 @@ function updateFieldError(field) {
     name: 'Debes ingresar nombre y apellido',
     rut: 'RUT debe tener entre 8 y 9 dígitos',
     email: 'Correo inválido',
-    emailConfirm: 'Los correos no coinciden',
-    phone: 'Debes ingresar entre 8 y 12 dígitos'
+    phone: 'Debes ingresar un número de 9 dígitos'
 };
     
     const inputs = document.querySelectorAll('input');
@@ -2073,15 +2208,27 @@ function updateFieldError(field) {
     }
     if (!targetInput) return;
 
-    const value = field === 'name' ? studentName : 
+    const value = field === 'name' ? studentName :
                  field === 'email' ? studentEmail :
-                 field === 'emailConfirm' ? studentEmailConfirm :
                  field === 'rut' ? studentRut :
                  field === 'phone' ? studentPhone : '';
-    
-    const isFilled = value.trim().length > 0;
+
+    let isFilled;
+    if (field === 'phone') {
+        isFilled = value.length > 4;
+    } else {
+        isFilled = value.trim().length > 0;
+    }
+
     const hasError = fieldErrors[field] && isFilled;
-    const isValid = isFilled && !fieldErrors[field];
+
+    let isValid;
+    if (field === 'phone') {
+        const cleanPhone = value.replace(/\+56\s?/g, '').replace(/\s/g, '');
+        isValid = /^9\d{8}$/.test(cleanPhone) && !fieldErrors[field];
+    } else {
+        isValid = isFilled && !fieldErrors[field];
+    }
     
     if (hasError) {
         targetInput.style.borderColor = '#ef4444';
@@ -2116,16 +2263,16 @@ function updateFieldError(field) {
     if (isValid) {
         if (!icon) {
             icon = document.createElement('div');
-            icon.style.cssText = 'position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); pointer-events: none;';
             inputWrapper.appendChild(icon);
         }
+        icon.style.cssText = 'position: absolute; right: 0.75rem; top: 0; bottom: 0; display: flex; align-items: center; pointer-events: none;';
         icon.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" fill="#16a34a"/><path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
     } else if (hasError) {
         if (!icon) {
             icon = document.createElement('div');
-            icon.style.cssText = 'position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); pointer-events: none;';
             inputWrapper.appendChild(icon);
         }
+        icon.style.cssText = 'position: absolute; right: 0.75rem; top: 0; bottom: 0; display: flex; align-items: center; pointer-events: none;';
         icon.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" fill="#ef4444"/><path d="M12 8v4m0 4h.01" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
     } else {
         if (icon) {
@@ -2367,7 +2514,7 @@ const renderStep1 = () => {
                 <div style="min-height: 24px; margin-top: 8px;">
                     ${plan.savings > 0 ? `
                         <div class="plan-total-price">
-                            <span style="text-decoration: line-through;">${originalPriceStr}</span>
+                            Antes: <span style="text-decoration: line-through;">${originalPriceStr}</span>
                         </div>
                     ` : ''}
                 </div>
@@ -2418,22 +2565,20 @@ const renderStep2 = () => {
     <div id="step-2-content" class="step-content">
         <h2 class="section-header">Selecciona tus Horarios</h2>
 
-        <div class="info-box">
+        <div class="info-box" style="width: 90%; max-width: none;">
             ${icon('info', 20, 'disclaimer-icon')}
             <p class="info-box-text" style="line-height: 1.4;">
                 Solo es posible seleccionar horarios con 12 horas de anticipación.
             </p>
         </div>
 
-        <div class="p-6 rounded-xl" style="background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); border: 2px solid #e2e8f0; width: 90%; margin: 0 auto 2rem auto;">
+        <div class="p-6 rounded-xl" style="background: #ffffff; border: 2px solid #e2e8f0; width: 90%; margin: 0 auto 2rem auto;">
             <div class="step2-main-content">
                 <div class="step2-calendar-section">
                 <div class="step2-calendar-header">
+                    <button class="step2-nav-btn" onclick="step2PrevMonth()">‹</button>
                     <div class="step2-month-display" id="step2MonthDisplay"></div>
-                    <div class="step2-month-nav">
-                        <button class="step2-nav-btn" onclick="step2PrevMonth()">‹</button>
-                        <button class="step2-nav-btn" onclick="step2NextMonth()">›</button>
-                    </div>
+                    <button class="step2-nav-btn" onclick="step2NextMonth()">›</button>
                 </div>
 
                 <div class="step2-calendar-grid">
@@ -2447,12 +2592,27 @@ const renderStep2 = () => {
                 </div>
 
                 <div class="step2-calendar-grid" id="step2CalendarDays"></div>
+
+                <div style="display: flex; gap: 1.5rem; justify-content: center; margin-top: 2.5rem; font-size: 0.75rem; color: #6b7280;">
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <div style="width: 18px; height: 18px; background: #dbeafe; border: 1.5px solid #3b82f6; border-radius: 4px;"></div>
+                        <span>Disponible</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <div style="width: 18px; height: 18px; background: #e5e7eb; border: 1.5px solid #9ca3af; border-radius: 4px;"></div>
+                        <span>No disponible</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <div style="width: 18px; height: 18px; background: #fecaca; border: 1.5px solid #f87171; border-radius: 4px;"></div>
+                        <span>Domingos y festivos</span>
+                    </div>
+                </div>
             </div>
 
             <div class="step2-sidebar">
                 <div class="step2-locked-classes" id="step2LockedClasses">
-                    <h3>Clases Confirmadas</h3>
-                    <div class="step2-progress" style="margin-top: 0.5rem; margin-bottom: 1rem;">
+                    <h3><span id="step2ProgressCount">${bookings.length}/${selectedPlan.classes}</span> Clases Confirmadas</h3>
+                    <div class="step2-progress" style="margin-top: 0.5rem; margin-bottom: 2.5rem;">
                         <div class="step2-progress-fill" id="step2ProgressBar" style="width: ${(bookings.length / selectedPlan.classes) * 100}%"></div>
                     </div>
                     <div id="step2LockedClassesList"></div>
@@ -2465,10 +2625,10 @@ const renderStep2 = () => {
 
         <div class="nav-button-container">
             <button onclick="goToPrevStep()" class="nav-button back" style="border: none; background: none; padding: 0;">
-                <span style="font-size: 20px; line-height: 1;">&lsaquo;</span> <span>Cambiar Plan</span>
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" style="margin-bottom: 1px;"><path d="M10 2L4 8l6 6V2z"/></svg> <span>Cambiar Plan</span>
             </button>
             <button onclick="goToNextStep()" class="nav-button next" id="step2ContinueBtn">
-                <span>Continuar a Datos</span> <span style="font-size: 20px; line-height: 1;">&rsaquo;</span>
+                <span>Continuar a Datos</span> <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" style="margin-bottom: 1px;"><path d="M6 2l6 6-6 6V2z"/></svg>
             </button>
         </div>
     </div>
@@ -2610,11 +2770,15 @@ const renderStep2Calendar = () => {
         const cell = document.createElement('div');
         cell.className = 'step2-day-cell';
 
+        // Check if date has booked classes (exclude the class being modified)
+        const classesOnDate = bookings.filter((b, idx) => b.date === dateStr && idx !== modifyingIndex);
+        const hasMaxClasses = classesOnDate.length >= 2;
+
         // Check availability
         const { available, reason } = isDateAvailable(dateStr, currentClassIndex);
         const isSunday = dayOfWeek === 0;
 
-        if (!available || date < today || isSunday) {
+        if (!available || date < today || isSunday || hasMaxClasses) {
             if (reason === 'holiday' || isSunday) {
                 cell.className += ' holiday';
             } else {
@@ -2625,8 +2789,6 @@ const renderStep2Calendar = () => {
             cell.onclick = () => step2SelectDate(dateStr);
         }
 
-        // Check if date has booked classes
-        const classesOnDate = bookings.filter(b => b.date === dateStr);
         if (classesOnDate.length > 0) {
             if (!cell.className.includes('disabled')) {
                 cell.className = cell.className.replace('available', 'booked');
@@ -2640,6 +2802,17 @@ const renderStep2Calendar = () => {
         // Highlight selected date
         if (selectedDate === dateStr) {
             cell.className = cell.className.replace('available', 'selected').replace('booked', 'selected');
+
+            // If modifying a class, show badge on the newly selected date
+            if (modifyingIndex !== null) {
+                if (!cell.querySelector('.step2-badge')) {
+                    const badge = document.createElement('div');
+                    badge.className = 'step2-badge';
+                    // Show the current index + 1 (will be updated after time selection and sort)
+                    badge.textContent = modifyingIndex + 1;
+                    cell.appendChild(badge);
+                }
+            }
         }
 
         const dayNumber = document.createElement('span');
@@ -2651,6 +2824,8 @@ const renderStep2Calendar = () => {
 };
 
 const step2SelectDate = (dateStr) => {
+    if (currentClassIndex >= selectedPlan.classes && modifyingIndex === null) return;
+
     selectedDate = dateStr;
     selectedTime = null;
     renderStep2Calendar();
@@ -2658,18 +2833,33 @@ const step2SelectDate = (dateStr) => {
 };
 
 const step2SelectTime = (time) => {
-    if (currentClassIndex >= selectedPlan.classes) return;
+    if (currentClassIndex >= selectedPlan.classes && modifyingIndex === null) return;
 
     selectedTime = time;
 
-    // Lock in the class
-    bookings.push({
-        date: selectedDate,
-        time: time
+    // Check if we're modifying an existing class
+    if (modifyingIndex !== null) {
+        // Update the existing booking
+        bookings[modifyingIndex].date = selectedDate;
+        bookings[modifyingIndex].time = time;
+        modifyingIndex = null;
+    } else {
+        // Lock in a new class
+        bookings.push({
+            date: selectedDate,
+            time: time
+        });
+        currentClassIndex++;
+    }
+
+    // Sort bookings chronologically
+    bookings.sort((a, b) => {
+        const dateCompare = a.date.localeCompare(b.date);
+        if (dateCompare !== 0) return dateCompare;
+        return a.time.localeCompare(b.time);
     });
 
-    // Move to next class
-    currentClassIndex++;
+    // Reset selection
     selectedDate = null;
     selectedTime = null;
 
@@ -2680,17 +2870,29 @@ const step2SelectTime = (time) => {
 };
 
 const step2ModifyClass = (index) => {
+    // If clicking the same class being modified, toggle it closed
+    if (modifyingIndex === index) {
+        selectedDate = null;
+        selectedTime = null;
+        modifyingIndex = null;
+
+        renderStep2Calendar();
+        updateStep2Sidebar();
+        updateStep2Header();
+        updateStep2Progress();
+        return;
+    }
+
+    // If user is currently modifying another class, the previous modification is automatically saved
+    // because the booking data is still in the bookings array with its original values
+    // No need to save anything - just switch to the new one
+
     const classToModify = bookings[index];
 
-    // Remove from bookings
-    bookings.splice(index, 1);
-
-    // Set current selection
+    // Set current selection with previous time displayed
     selectedDate = classToModify.date;
-    selectedTime = null;
-
-    // Move back to that class
-    currentClassIndex = index;
+    selectedTime = classToModify.time;
+    modifyingIndex = index;
 
     renderStep2Calendar();
     updateStep2Sidebar();
@@ -2704,6 +2906,7 @@ const step2DeleteClass = (index) => {
     currentClassIndex = bookings.length;
     selectedDate = null;
     selectedTime = null;
+    modifyingIndex = null;
 
     renderStep2Calendar();
     updateStep2Sidebar();
@@ -2721,18 +2924,20 @@ const updateStep2Sidebar = () => {
         lockedList.innerHTML = bookings
             .map((booking, index) => {
                 const date = new Date(booking.date + 'T12:00:00');
-                const dateStr = date.toLocaleDateString('es-ES', {
-                    weekday: 'short',
-                    day: 'numeric',
-                    month: 'short'
-                });
+                const dayNames = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
+                const monthNames = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+                const dayName = dayNames[date.getDay()].toLowerCase();
+                const day = date.getDate();
+                const month = monthNames[date.getMonth()];
+                const timeFormatted = booking.time.replace('-', ' - ');
+                const isModifying = modifyingIndex === index;
+                const cardStyle = isModifying ? 'background: #eff6ff; border-color: #2563eb; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);' : '';
 
                 return `
-                    <div class="step2-locked-class">
+                    <div class="step2-locked-class" style="${cardStyle}">
                         <div class="step2-class-number">${index + 1}</div>
                         <div class="step2-class-info">
-                            <div class="step2-class-date">${dateStr}</div>
-                            <div class="step2-class-time">${booking.time}</div>
+                            <div class="step2-class-date">${dayName} ${day} ${month}, ${timeFormatted}</div>
                         </div>
                         <div class="step2-class-actions">
                             <button class="step2-action-btn modify" onclick="step2ModifyClass(${index})">Modificar</button>
@@ -2741,13 +2946,20 @@ const updateStep2Sidebar = () => {
                     </div>
                 `;
             }).join('');
+
+        // Scroll to the last item to keep it visible
+        setTimeout(() => {
+            if (lockedList.scrollHeight > lockedList.clientHeight) {
+                lockedList.scrollTop = lockedList.scrollHeight;
+            }
+        }, 0);
     }
 
     // Update current selection area
     const currentSelection = document.getElementById('step2CurrentSelection');
     if (!currentSelection) return;
 
-    if (currentClassIndex >= selectedPlan.classes) {
+    if (currentClassIndex >= selectedPlan.classes && modifyingIndex === null) {
         currentSelection.innerHTML = `
             <div class="step2-empty-state">
                 <div class="step2-empty-state-icon">✓</div>
@@ -2773,26 +2985,25 @@ const updateStep2Sidebar = () => {
         }, 0);
     } else {
         const date = new Date(selectedDate + 'T12:00:00');
-        const dateStr = date.toLocaleDateString('es-ES', {
-            weekday: 'long',
-            day: 'numeric',
-            month: 'long',
-            year: 'numeric'
-        });
+        const dayNames = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+        const monthNames = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+        const dayName = dayNames[date.getDay()];
+        const day = date.getDate();
+        const month = monthNames[date.getMonth()];
+        const year = date.getFullYear();
+        const monthLower = month.toLowerCase();
+        const dateStr = `${dayName} ${day} de ${monthLower}, ${year}`;
 
         const dayOfWeek = date.getDay();
         const slots = dayOfWeek === 6 ? timeSlots.saturday : timeSlots.weekday;
 
-        // Get unavailable slots for this date
+        // Get unavailable slots for this date (excluding the one being modified)
         const bookedSlotsOnDate = bookings
-            .filter(b => b.date === selectedDate)
+            .filter((b, idx) => b.date === selectedDate && idx !== modifyingIndex)
             .map(b => b.time);
 
         currentSelection.innerHTML = `
             <div class="step2-current-selection">
-                <div class="step2-selection-header">
-                    ${icon('map-pin', 16, '')} Clase ${currentClassIndex + 1} de ${selectedPlan.classes}
-                </div>
                 <div class="step2-selection-date">${dateStr}</div>
                 <div class="step2-time-slots">
                     ${slots.map(slot => {
@@ -2836,9 +3047,16 @@ const updateStep2Progress = () => {
         progressBar.style.width = progress + '%';
     }
 
+    const progressCount = document.getElementById('step2ProgressCount');
+    if (progressCount) {
+        progressCount.textContent = `${bookings.length}/${selectedPlan.classes}`;
+    }
+
     const continueBtn = document.getElementById('step2ContinueBtn');
     if (continueBtn) {
-        if (bookings.length === selectedPlan.classes) {
+        const allBookingsComplete = bookings.length === selectedPlan.classes &&
+                                    bookings.every(b => b.date && b.time);
+        if (allBookingsComplete) {
             continueBtn.disabled = false;
             continueBtn.style.opacity = '1';
             continueBtn.style.cursor = 'pointer';
@@ -2874,18 +3092,23 @@ const renderStep3 = () => {
     const finalPrice = calculateFinalPrice();
     const discountAmount = originalPlanPrice - selectedPlan.price;
     const getFieldClass = (field) => {
-    const value = field === 'name' ? studentName : 
+    const value = field === 'name' ? studentName :
                  field === 'email' ? studentEmail :
-                 field === 'emailConfirm' ? studentEmailConfirm :
                  field === 'rut' ? studentRut :
                  field === 'phone' ? studentPhone : '';
-    
-    const isFilled = value.trim().length > 0;
+
+    let isFilled;
+    if (field === 'phone') {
+        isFilled = value.length > 4;
+    } else {
+        isFilled = value.trim().length > 0;
+    }
+
     const hasError = fieldErrors[field] && isFilled;
-    
+
     if (hasError) {
         return 'border-2 border-red-500 bg-white text-gray-800';
-    } 
+    }
     else {
         return 'border-2 border-gray-300 bg-white text-gray-800';
     }
@@ -2902,20 +3125,19 @@ const renderStep3 = () => {
                         <label class="form-label">
                             ${icon('user', 16, 'inline mr-1')} Nombre Completo <span class="text-red-500">*</span>
                         </label>
-                        <div style="position: relative;">
-                            <input 
+                        <div style="position: relative; max-width: 450px;">
+                            <input
     type="text"
     name="name"
     autocomplete="name"
-    value="${studentName}" 
-    oninput="updateStudentInfo('name', this.value)" 
+    value="${studentName}"
+    oninput="updateStudentInfo('name', this.value)"
     placeholder="Juan Pérez González"
     class="form-input ${getFieldClass('name')}"
-    style="padding-right: ${studentName.trim().length > 0 && !fieldErrors.name ? '2.5rem' : '0.75rem'};"
+    style="padding-right: ${studentName.trim().length > 0 && !fieldErrors.name ? '2.5rem' : '0.75rem'}; max-width: 100%;"
     onblur="validateField('name'); updateFieldError('name');"
 />
-
-                            ${studentName.trim().length > 0 && !fieldErrors.name ? `<div style="position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); pointer-events: none;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" fill="#16a34a"/><path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>` : ''}
+                            ${studentName.trim().length > 0 && !fieldErrors.name ? `<div style="position: absolute; right: 0.75rem; top: 0; bottom: 0; display: flex; align-items: center; pointer-events: none;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" fill="#16a34a"/><path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>` : ''}
                         </div>
                         <div style="position: absolute; height: 20px;">
                             ${fieldErrors.name && studentName.trim().length > 0 ? '<p class="text-red-500 text-xs mt-1">Debes ingresar nombre y apellido</p>' : ''}
@@ -2927,22 +3149,21 @@ const renderStep3 = () => {
                         <label class="block text-sm font-medium text-gray-700 mb-2">
                             ${icon('credit-card', 16, 'inline mr-1')} RUT <span class="text-red-500">*</span>
                         </label>
-                        <div style="position: relative;">
-                            <input 
+                        <div style="position: relative; max-width: 450px;">
+                            <input
     type="text"
     name="rut"
     autocomplete="id-number"
-    value="${studentRut}" 
-    oninput="updateStudentInfo('rut', this.value)" 
+    value="${studentRut}"
+    oninput="updateStudentInfo('rut', this.value)"
     onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 107 || event.charCode === 75"
     placeholder="12.345.678-9"
     maxlength="12"
     class="form-input ${getFieldClass('rut')}"
-    style="padding-right: ${studentRut.trim().length > 0 && !fieldErrors.rut ? '2.5rem' : '0.75rem'};"
+    style="padding-right: ${studentRut.trim().length > 0 && !fieldErrors.rut ? '2.5rem' : '0.75rem'}; max-width: 100%;"
     onblur="validateField('rut'); updateFieldError('rut');"
 />
-
-                            ${studentRut.trim().length > 0 && !fieldErrors.rut ? `<div style="position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); pointer-events: none;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" fill="#16a34a"/><path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>` : ''}
+                            ${studentRut.trim().length > 0 && !fieldErrors.rut ? `<div style="position: absolute; right: 0.75rem; top: 0; bottom: 0; display: flex; align-items: center; pointer-events: none;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" fill="#16a34a"/><path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>` : ''}
                         </div>
                         <div style="position: absolute; height: 20px;">
                             ${fieldErrors.rut && studentRut.trim().length > 0 ? '<p class="text-red-500 text-xs mt-1">RUT debe tener entre 8 y 9 dígitos</p>' : ''}
@@ -2954,17 +3175,17 @@ const renderStep3 = () => {
                         <label class="block text-sm font-medium text-gray-700 mb-2">
                             ${icon('mail', 16, 'inline mr-1')} Correo Electrónico <span class="text-red-500">*</span>
                         </label>
-                        <div style="position: relative;">
-                            <input 
-                                type="email" 
-                                value="${studentEmail}" 
-                                oninput="updateStudentInfo('email', this.value)" 
+                        <div style="position: relative; max-width: 450px;">
+                            <input
+                                type="email"
+                                value="${studentEmail}"
+                                oninput="updateStudentInfo('email', this.value)"
                                 placeholder="juan@ejemplo.com"
                                 class="form-input ${getFieldClass('email')}"
-                                style="padding-right: ${studentEmail.trim().length > 0 && !fieldErrors.email ? '2.5rem' : '0.75rem'};"
+                                style="padding-right: ${studentEmail.trim().length > 0 && !fieldErrors.email ? '2.5rem' : '0.75rem'}; max-width: 100%;"
                                 onblur="validateField('email'); updateFieldError('email');"
                             />
-                            ${studentEmail.trim().length > 0 && !fieldErrors.email ? `<div style="position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); pointer-events: none;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" fill="#16a34a"/><path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>` : ''}
+                            ${studentEmail.trim().length > 0 && !fieldErrors.email ? `<div style="position: absolute; right: 0.75rem; top: 0; bottom: 0; display: flex; align-items: center; pointer-events: none;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" fill="#16a34a"/><path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>` : ''}
                         </div>
                         <div style="position: absolute; height: 20px;">
                             ${fieldErrors.email && studentEmail.trim().length > 0 ? '<p class="text-red-500 text-xs mt-1">Correo inválido</p>' : ''}
@@ -2976,26 +3197,25 @@ const renderStep3 = () => {
     <label class="block text-sm font-medium text-gray-700 mb-2">
         ${icon('phone', 16, 'inline mr-1')} Teléfono <span class="text-red-500">*</span>
     </label>
-    <div style="position: relative;">
-        <input 
-    <input 
+    <div style="position: relative; max-width: 450px;">
+        <input
     type="tel"
     name="phone"
     autocomplete="tel"
-    value="${studentPhone}" 
-    oninput="updateStudentInfo('phone', this.value)" 
-    onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode === 43"
-    maxlength="13"
+    value="${studentPhone}"
+    oninput="updateStudentInfo('phone', this.value)"
+    onkeydown="handlePhoneKeydown(event, this)"
+    onselect="handlePhoneSelect(event, this)"
+    onclick="handlePhoneClick(event, this)"
+    maxlength="15"
     placeholder="+56 9 1234 5678"
     class="form-input ${getFieldClass('phone')}"
-    style="padding-right: ${studentPhone.trim().length > 0 && !fieldErrors.phone ? '2.5rem' : '0.75rem'};"
+    style="padding-right: 0.75rem; max-width: 100%;"
     onblur="validateField('phone'); updateFieldError('phone');"
 />
-
-        ${studentPhone.trim().length > 0 && !fieldErrors.phone ? `<div style="position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); pointer-events: none;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" fill="#16a34a"/><path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>` : ''}
     </div>
     <div style="position: absolute; height: 20px;">
-        ${fieldErrors.phone && studentPhone.trim().length > 0 ? '<p class="text-red-500 text-xs mt-1">Entre 8 y 12 dígitos</p>' : ''}
+        ${fieldErrors.phone && studentPhone.length > 4 ? '<p class="text-red-500 text-xs mt-1">Debe tener exactamente 9 dígitos</p>' : ''}
     </div>
 </div>
                     
@@ -3004,7 +3224,7 @@ const renderStep3 = () => {
     <label class="block text-sm font-medium text-gray-700 mb-2">
         ${icon('bell', 16, 'inline mr-1')} Recordatorio
     </label>
-    <div class="w-full p-3 border border-gray-300 rounded-lg flex items-center gap-3 bg-gray-100" style="min-height: 52px;">
+    <div class="w-full p-3 rounded-lg flex items-center gap-3 bg-gray-100" style="min-height: 52px; border: 2px solid #d1d5db;">
         <input
             type="checkbox"
             id="reminder-checkbox"
@@ -3022,13 +3242,10 @@ const renderStep3 = () => {
 
             <div class="nav-button-container" style="margin-top: 2rem;">
                 <button onclick="goToPrevStep()" class="nav-button back" style="border: none; background: none; padding: 0;">
-                    <span style="font-size: 20px; line-height: 1;">&lsaquo;</span> <span>Modificar Horarios</span>
+                    <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" style="margin-bottom: 1px;"><path d="M10 2L4 8l6 6V2z"/></svg> <span>Modificar Horarios</span>
                 </button>
-                <button onclick="goToNextStep()"
-                    class="nav-button next ${Object.keys(fieldErrors).length === 0 ? '' : 'opacity-50 cursor-not-allowed'}"
-                    ${Object.keys(fieldErrors).length === 0 ? '' : 'disabled'}
-                >
-                    <span>Continuar a Pago</span> <span style="font-size: 20px; line-height: 1;">&rsaquo;</span>
+                <button onclick="goToNextStep()" class="nav-button next" id="step3ContinueBtn">
+                    <span>Continuar a Pago</span> <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" style="margin-bottom: 1px;"><path d="M6 2l6 6-6 6V2z"/></svg>
                 </button>
             </div>
         </div>
@@ -3091,7 +3308,7 @@ const renderStep4 = () => {
         const year = date.getFullYear();
 
         return `
-        <tr style="background: ${sortedIndex % 2 === 0 ? '#ffffff' : '#fafaf9'}; border-bottom: 1px solid #e5e7eb; transition: background-color 0.15s;">
+        <tr style="background: #ffffff; border-bottom: 1px solid #e5e7eb; transition: background-color 0.15s;">
             <td style="padding: 0.625rem 0.75rem; text-align: center; font-weight: 500; color: #374151; font-size: 0.8125rem;">${sortedIndex + 1}</td>
                         <td style="padding: 0.625rem 0.75rem; text-align: center; font-weight: 500; color: #374151; font-size: 0.8125rem; text-transform: capitalize;">${dayName}</td>
                         <td style="padding: 0.625rem 0.75rem; text-align: center; font-weight: 500; color: #374151; font-size: 0.8125rem;">${day} de ${month} de ${year}</td>
@@ -3195,12 +3412,12 @@ const renderStep4 = () => {
 
             <div class="nav-button-container" style="margin-top: 1.5rem;">
                 <button onclick="goToPrevStep()" class="nav-button back" style="border: none; background: none; padding: 0;">
-                    <span style="font-size: 20px; line-height: 1;">&lsaquo;</span> <span>Modificar Datos</span>
+                    <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" style="margin-bottom: 1px;"><path d="M10 2L4 8l6 6V2z"/></svg> <span>Modificar Datos</span>
                 </button>
                 <button onclick="handleConfirmPayment()"
                     class="nav-button next"
                 >
-                    <span>Pagar ${formatCurrency(finalPrice)}</span> <span style="font-size: 20px; line-height: 1;">&rsaquo;</span>
+                    <span>Pagar ${formatCurrency(finalPrice)}</span> <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" style="margin-bottom: 1px;"><path d="M6 2l6 6-6 6V2z"/></svg>
                 </button>
             </div>
         </div>
@@ -3250,7 +3467,13 @@ const renderStep = (step, shouldAnimate = false) => {
             document.addEventListener('click', handleCalendarClickOutside);
         }, 100);
     }
-    
+
+    if (step === 3) {
+        setTimeout(() => {
+            updateStep3Button();
+        }, 0);
+    }
+
     // Ensure icons are rendered even if lucide hasn't fully initialized
     setTimeout(() => {
         if (window.lucide) {
