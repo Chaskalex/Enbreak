@@ -35,6 +35,8 @@ body.loaded {
     padding: 0 40px;
     height: 40px;
     line-height: normal;
+    position: relative;
+    z-index: 100;
 }
 
 .top-header .container {
@@ -67,6 +69,7 @@ body.loaded {
     border-right: 1px solid rgba(255, 255, 255, 0.5);
     height: 20px;
     font-size: 14px;
+    cursor: pointer;
 }
 
 .top-item:last-child {
@@ -78,19 +81,33 @@ body.loaded {
     transition: color 0.3s;
 }
 
+.top-item span {
+    transition: color 0.3s;
+}
+
 .top-item.contact-icon i {
     color: rgb(216, 222, 234) !important;
+    transition: color 0.3s;
 }
 
 .top-item:hover {
     color: #ff6600;
+    cursor: pointer;
 }
 
 .top-item:hover i {
     color: #ff6600;
 }
 
+.top-item:hover span {
+    color: #ff6600;
+}
+
 .top-item.contact-icon:hover i {
+    color: #ff6600 !important;
+}
+
+.top-item.contact-icon:hover span {
     color: #ff6600 !important;
 }
 
@@ -120,6 +137,13 @@ body.loaded {
     transition: color 0.3s;
 }
 
+.language-flag {
+    width: 20px;
+    height: 15px;
+    border-radius: 2px;
+    display: inline-block;
+}
+
 .language-btn i {
     color: rgb(216, 222, 234);
     font-size: 14px;
@@ -142,18 +166,15 @@ body.loaded {
 
 .language-dropdown {
     position: absolute;
-    top: calc(100% + 5px);
-    right: 0;
     background: white;
     min-width: 120px;
-    margin-top: 8px;
     border-radius: 5px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     opacity: 0;
     visibility: hidden;
     transform: translateY(-10px);
     transition: all 0.3s;
-    z-index: 10000;
+    z-index: 10200;
 }
 
 .language-selector.active .language-dropdown {
@@ -163,7 +184,9 @@ body.loaded {
 }
 
 .language-dropdown a {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 8px;
     padding: 10px 15px;
     color: #0a1e42;
     text-decoration: none;
@@ -216,6 +239,9 @@ body.loaded {
 .sticky-wrapper {
     background: white;
     transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    position: relative;
+    z-index: 100;
 }
 
 .sticky-wrapper.is-stuck {
@@ -224,13 +250,11 @@ body.loaded {
     left: 0;
     right: 0;
     z-index: 9999;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
 .main-header {
     background: white;
     padding: 8px 0;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     width: 100%;
 }
 
@@ -414,25 +438,6 @@ body.loaded {
     overflow: hidden;
 }
 
-.dots-pattern {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-}
-
-.dot {
-    position: absolute;
-    width: 3px;
-    height: 3px;
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    animation: twinkle 3s infinite ease-in-out;
-}
-
-@keyframes twinkle {
-    0%, 100% { opacity: 0.3; }
-    50% { opacity: 0.8; }
-}
 
 .geometric-shape {
     position: absolute;
@@ -841,76 +846,6 @@ body.loaded {
     pointer-events: none;
 }
 
-/* Decorative floating dots in background - MORE DOTS */
-.value-decoration {
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    background: rgba(0, 172, 193, 0.3);
-    border-radius: 50%;
-    animation: floatDot 8s infinite ease-in-out;
-    z-index: 1;
-    pointer-events: none;
-}
-
-.value-decoration:nth-child(1) {
-    top: 15%;
-    left: 8%;
-    animation-delay: 0s;
-}
-
-.value-decoration:nth-child(2) {
-    top: 65%;
-    left: 15%;
-    animation-delay: 1.5s;
-}
-
-.value-decoration:nth-child(3) {
-    top: 35%;
-    left: 30%;
-    animation-delay: 3s;
-}
-
-.value-decoration:nth-child(4) {
-    top: 80%;
-    left: 45%;
-    animation-delay: 4.5s;
-}
-
-.value-decoration:nth-child(5) {
-    top: 20%;
-    right: 40%;
-    animation-delay: 0.5s;
-}
-
-.value-decoration:nth-child(6) {
-    top: 70%;
-    right: 25%;
-    animation-delay: 2s;
-}
-
-.value-decoration:nth-child(7) {
-    top: 45%;
-    right: 12%;
-    animation-delay: 3.5s;
-}
-
-.value-decoration:nth-child(8) {
-    top: 25%;
-    right: 5%;
-    animation-delay: 5s;
-}
-
-@keyframes floatDot {
-    0%, 100% { 
-        transform: translateY(0) scale(1);
-        opacity: 0.2;
-    }
-    50% { 
-        transform: translateY(-20px) scale(1.3);
-        opacity: 0.5;
-    }
-}
 
 /* Floating geometric shapes - SUBTLE */
 .value-shape {
@@ -2392,7 +2327,7 @@ body.loaded {
 }
 
 .main-footer {
-    background: #060e1e;
+    background: #0a1e42;
     color: white;
     padding: 50px 40px 0;
 }
@@ -2450,6 +2385,12 @@ body.loaded {
     font-size: 14px;
     line-height: 1.6;
     margin-bottom: 10px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.footer-column p.footer-slogan {
+    cursor: default;
 }
 
 .footer-column p a {
@@ -2458,14 +2399,31 @@ body.loaded {
     transition: color 0.3s;
 }
 
+.footer-column p:hover {
+    color: #ff6600;
+}
+
+.footer-column p.footer-slogan:hover {
+    color: rgba(255, 255, 255, 0.7);
+}
+
 .footer-column p a:hover {
     color: #ff6600;
 }
 
 .footer-column p i {
     margin-right: 8px;
-    color: #ff6600;
+    color: rgba(255, 255, 255, 0.7);
     width: 16px;
+    transition: color 0.3s;
+}
+
+.footer-column p:hover i {
+    color: #ff6600;
+}
+
+.footer-column p:hover a {
+    color: #ff6600;
 }
 
 .footer-social-icons {
@@ -2710,7 +2668,7 @@ body.loaded {
         transform: translateY(0);
     }
 
-    .value-decoration, .value-shape {
+    .value-shape {
         display: none;
     }
 

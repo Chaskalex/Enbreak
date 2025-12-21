@@ -10,6 +10,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="../../favicon/apple-touch-icon.png">
     <link rel="manifest" href="../../favicon/site.webmanifest">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rubik:wght@600;700&display=swap" rel="stylesheet">
@@ -35,96 +36,165 @@
     <!-- Your page content goes here -->
 <style>
 
-.booking-banner-section {
-    width: 100%;
-    height: 320px;
+.page-header {
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 0px;
-    overflow: hidden;
+    width: 100%;
+    background: #ffffff;
+    border-bottom: 1px solid #d2d2d2;
 }
 
-.booking-banner-section::before {
+.page-header::after {
     content: '';
     position: absolute;
     top: 0;
-    left: 0;
     right: 0;
-    bottom: 0;
-    background: url('/assets/backgrounds/bg4.jpg') center/cover no-repeat;
-    filter: blur(5px);
-    z-index: 0;
+    width: 55%;
+    height: 100%;
+    background: url('../../assets/banners/banner2.jpg') left 50% / cover no-repeat;
+    filter: contrast(1.05) brightness(1.15);
+    opacity: 0.45;
+    pointer-events: none;
+    mask-image: linear-gradient(to left,
+        rgba(0,0,0,1) 0%,
+        rgba(0,0,0,0.9) 70%,
+        rgba(0,0,0,0) 100%);
+    -webkit-mask-image: linear-gradient(to left,
+        rgba(0,0,0,1) 0%,
+        rgba(0,0,0,0.9) 70%,
+        rgba(0,0,0,0) 100%);
+    animation: bannerImageSlideIn 1s ease-out;
 }
 
-.booking-banner-section::after {
+.page-header::before {
     content: '';
     position: absolute;
     top: 0;
-    left: 0;
     right: 0;
-    bottom: 0;
-    background: rgba(2, 40, 80, 0.6);
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(to left,
+        transparent 0%,
+        rgba(255, 255, 255, 0.05) 50%,
+        rgba(255, 255, 255, 0.2) 100%);
+    pointer-events: none;
     z-index: 1;
 }
 
-.booking-banner-section .banner-content {
-    text-align: center;
-    z-index: 2;
+.page-header-wrapper {
     max-width: 1200px;
-    padding: 0 20px;
-}
-
-.booking-banner-section .breadcrumb {
+    margin: 0 auto;
+    min-height: 140px;
+    position: relative;
     display: flex;
     align-items: center;
-    justify-content: center;
-    font-size: 13px;
-    color: rgba(255, 255, 255, 0.8);
-    margin-bottom: 20px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
 }
 
-.booking-banner-section .breadcrumb a {
-    color: #fff;
+.page-header-content {
+    padding: 30px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+    position: relative;
+    z-index: 1;
+    max-width: 520px;
+    animation: bannerTextSlideIn 1s ease-out;
+}
+
+.page-header-image {
+    display: none;
+}
+
+.page-header-accent {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 60px;
+    background: #ff6600;
+    z-index: 2;
+}
+
+.page-header .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+}
+
+.page-header .breadcrumb a {
+    color: #6b7280;
     text-decoration: none;
     transition: color 0.2s ease;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
 }
 
-.booking-banner-section .breadcrumb a:hover {
+.page-header .breadcrumb a:hover {
     color: #ff6600;
-    border-bottom-color: #ff6600;
 }
 
-.booking-banner-section .breadcrumb-separator {
-    margin: 0 10px;
-    color: rgba(255, 255, 255, 0.6);
-    font-weight: 400;
+.page-header .breadcrumb-separator {
+    color: #d1d5db;
+    font-size: 9px;
 }
 
-.booking-banner-section .breadcrumb-current {
-    color: #fff;
+.page-header .breadcrumb-current {
+    color: #374151;
+    font-weight: 500;
 }
 
-.booking-banner-section h1 {
-    font-size: 50px;
-    color: #fff;
+.page-header h1 {
     font-family: 'Rubik', sans-serif;
+    font-size: 32px;
     font-weight: 700;
+    color: #0a1e42;
     margin: 0;
     line-height: 1.2;
-    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
 }
 
-@media (max-width: 767.98px) {
-    .booking-banner-section {
-        height: 250px;
+/* Responsive */
+@media (max-width: 768px) {
+    .page-header {
+        background: #ffffff;
     }
-    .booking-banner-section h1 {
-        font-size: 36px;
+
+    .page-header::after {
+        display: none;
+    }
+
+    .page-header-wrapper {
+        min-height: auto;
+    }
+
+    .page-header-content {
+        padding: 24px 20px;
+    }
+
+    .page-header h1 {
+        font-size: 24px;
+    }
+}
+
+/* Banner animations */
+@keyframes bannerTextSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-60px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes bannerImageSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+    to {
+        opacity: 0.45;
+        transform: translateX(0);
     }
 }
 
@@ -337,7 +407,7 @@
 #booking-system-container .py-1 { padding-top: 0.25rem; padding-bottom: 0.25rem; }
 #booking-system-container .py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
 #booking-system-container .py-4 { padding-top: 1rem; padding-bottom: 1rem; }
-#booking-system-container .py-12 { padding-top: 3rem; padding-bottom: 3rem; }
+#booking-system-container .py-12 { padding-top: 0.75rem; padding-bottom: 3rem; }
 #booking-system-container .pt-3 { padding-top: 0.75rem; }
 #booking-system-container .pb-2 { padding-bottom: 0.5rem; }
 #booking-system-container .pb-4 { padding-bottom: 1rem; }
@@ -543,6 +613,48 @@ input:-webkit-autofill:focus {
     background-color: #2563eb;
 }
 
+.step-tooltip {
+    position: relative;
+}
+
+.step-tooltip::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%) scale(0);
+    background: #1f2937;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.2s ease;
+    z-index: 1000;
+}
+
+.step-tooltip::before {
+    content: '';
+    position: absolute;
+    bottom: calc(100% + 2px);
+    left: 50%;
+    transform: translateX(-50%) scale(0);
+    border: 6px solid transparent;
+    border-top-color: #1f2937;
+    opacity: 0;
+    transition: all 0.2s ease;
+    z-index: 1000;
+}
+
+.step-tooltip:hover::after,
+.step-tooltip:hover::before {
+    transform: translateX(-50%) scale(1);
+    opacity: 1;
+}
+
 .step-line {
     height: 0.25rem;
     border-radius: 0.25rem;
@@ -706,6 +818,8 @@ input:-webkit-autofill:focus {
     color: #1f2937;
     margin-bottom: 2.5rem;
     text-align: center;
+    animation: none !important;
+    transition: none !important;
 }
 
 /* Step Content Container */
@@ -713,6 +827,8 @@ input:-webkit-autofill:focus {
     padding: 1.5rem;
     border-radius: 0 0 1rem 1rem;
     overflow: visible;
+    animation: none !important;
+    transition: none !important;
 }
 
 /* Date Grid */
@@ -853,11 +969,11 @@ input:-webkit-autofill:focus {
 }
 
 .step2-calendar-header {
-    display: grid;
-    grid-template-columns: 36px 1fr 36px;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
     margin-bottom: 1.5rem;
-    gap: 1.5rem;
+    padding: 0 0.5rem;
 }
 
 .step2-month-display {
@@ -874,8 +990,8 @@ input:-webkit-autofill:focus {
 }
 
 .step2-nav-btn {
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     border: 2px solid #e2e8f0;
     background: white;
     border-radius: 10px;
@@ -887,6 +1003,7 @@ input:-webkit-autofill:focus {
     color: #64748b;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    flex-shrink: 0;
 }
 
 .step2-nav-btn:hover {
@@ -1063,7 +1180,7 @@ input:-webkit-autofill:focus {
     align-items: center;
     justify-content: center;
     font-weight: 700;
-    font-size: 0.6875rem;
+    font-size: 0.70rem;
     flex-shrink: 0;
 }
 
@@ -1074,7 +1191,7 @@ input:-webkit-autofill:focus {
 }
 
 .step2-class-date {
-    font-size: 0.875rem;
+    font-size: 0.78rem;
     color: #1f2937;
     font-weight: 600;
 }
@@ -1616,16 +1733,20 @@ input:-webkit-autofill:focus {
 </style>
 
 <main style="padding: 0; margin: 0;">
-    <section class="booking-banner-section">
-        <div class="banner-content">
-            <nav class="breadcrumb">
-                <a href="/">Inicio</a>
-                <span class="breadcrumb-separator">></span>
-                <span class="breadcrumb-current">Agendar</span>
-            </nav>
-            <h1>Agenda tu Clase</h1>
+    <header class="page-header">
+        <div class="page-header-wrapper">
+            <div class="page-header-content">
+                <div class="page-header-accent"></div>
+                <nav class="breadcrumb">
+                    <a href="/">Inicio</a>
+                    <span class="breadcrumb-separator"><i class="fas fa-chevron-right"></i></span>
+                    <span class="breadcrumb-current">Agendar Clase</span>
+                </nav>
+                <h1>Agenda tu Clase</h1>
+            </div>
+            <div class="page-header-image"></div>
         </div>
-    </section>
+    </header>
 
     <div id="booking-system-container-wrapper">
         <div class="booking-shapes">
@@ -1689,8 +1810,9 @@ const plans = [
 ];
 
 const timeSlots = {
-    weekday: ['09:00-10:00', '10:30-11:30', '12:00-13:00', '15:00-16:00', '16:30-17:30', '18:00-19:00', '21:00-22:00'],
+    weekday: ['09:00-10:00', '10:30-11:30', '12:00-13:00', '16:30-17:30', '18:00-19:00', '21:00-22:00'],
     saturday: ['09:00-10:00', '10:30-11:30', '12:00-13:00'],
+    saturdayUnavailable: ['16:30-17:30', '18:00-19:00', '21:00-22:00'],
 };
 
 const chileanHolidays = ['01-01', '04-03', '04-04', '05-01', '05-21', '06-20', '08-15', '09-18', '09-19', '10-12', '10-31', '11-01', '12-08', '12-25'];
@@ -2291,11 +2413,11 @@ const handleBlur = (field) => {
 };
 
 const scrollToTop = () => {
-    const banner = document.querySelector('.booking-banner-section');
-    if (banner) {
-        const bannerTop = banner.getBoundingClientRect().top + window.scrollY;
+    const pageHeader = document.querySelector('.page-header');
+    if (pageHeader) {
+        const headerBottom = pageHeader.getBoundingClientRect().bottom + window.scrollY;
         window.scrollTo({
-            top: bannerTop +245,
+            top: headerBottom - 70,
             behavior: 'smooth'
         });
     } else {
@@ -2391,32 +2513,33 @@ const renderHeader = () => {
 const renderProgressSteps = () => {
     const steps = [1, 2, 3, 4];
     const stepLabels = ['Plan', 'Horarios', 'Datos', 'Pago'];
+    const tooltipLabels = ['Volver a Plan', 'Volver a Horarios', 'Volver a Datos'];
 
     let circlesHtml = '<div class="flex justify-center items-center mb-2">';
-    
+
     steps.forEach((step, index) => {
         const isCurrentOrPast = currentStep >= step;
         const isCurrent = currentStep === step;
-        const isClickable = step < currentStep; 
-        
-        const stepClass = isCurrentOrPast 
-            ? `bg-blue-500 text-white shadow-lg ${isCurrent ? 'ring-2 ring-blue-300' : ''}` 
+        const isClickable = step < currentStep;
+
+        const stepClass = isCurrentOrPast
+            ? `bg-blue-500 text-white shadow-lg ${isCurrent ? 'ring-2 ring-blue-300' : ''}`
             : 'bg-gray-200 text-gray-700';
-            
+
         const lineClass = currentStep > step ? 'bg-blue-500' : 'bg-gray-200';
 
         const circleContent = `
-            <div class="rounded-full flex items-center justify-center font-bold text-sm transition-all duration-300 ${stepClass} ${isClickable ? 'cursor-pointer hover:bg-blue-600' : ''}" 
+            <div class="rounded-full flex items-center justify-center font-bold text-sm ${stepClass} ${isClickable ? 'cursor-pointer hover:bg-blue-600 step-tooltip' : ''}"
                 style="width: 32px; height: 32px; min-width: 32px; min-height: 32px;"
-                ${isClickable ? `onclick="goToStep(${step})"` : ''}>
+                ${isClickable ? `onclick="goToStep(${step})" data-tooltip="${tooltipLabels[index]}"` : ''}>
                 ${currentStep > step ? '<i class="fas fa-check" style="font-size: 14px;"></i>' : step}
             </div>
         `;
-        
+
         circlesHtml += circleContent;
 
         if (step < 4) {
-            circlesHtml += `<div class="h-1 rounded transition-all duration-300 ${lineClass}" style="width: 76px; margin: 0 8px;"></div>`;
+            circlesHtml += `<div class="h-1 rounded ${lineClass}" style="width: 76px; margin: 0 8px;"></div>`;
         }
     });
     circlesHtml += '</div>';
@@ -2563,7 +2686,7 @@ const renderStep2 = () => {
 
     return `
     <div id="step-2-content" class="step-content">
-        <h2 class="section-header">Selecciona tus Horarios</h2>
+        <h2 class="section-header" style="margin-bottom: 1rem;">Selecciona tus Horarios</h2>
 
         <div class="info-box" style="width: 90%; max-width: none;">
             ${icon('info', 20, 'disclaimer-icon')}
@@ -2778,20 +2901,24 @@ const renderStep2Calendar = () => {
         const { available, reason } = isDateAvailable(dateStr, currentClassIndex);
         const isSunday = dayOfWeek === 0;
 
-        if (!available || date < today || isSunday || hasMaxClasses) {
+        if (!available || date < today || isSunday) {
             if (reason === 'holiday' || isSunday) {
                 cell.className += ' holiday';
             } else {
                 cell.className += ' disabled';
             }
+        } else if (hasMaxClasses) {
+            // Date has 2 classes - keep blue/booked style but make unclickable
+            cell.className += ' booked';
         } else {
             cell.className += ' available';
             cell.onclick = () => step2SelectDate(dateStr);
         }
 
         if (classesOnDate.length > 0) {
-            if (!cell.className.includes('disabled')) {
+            if (!cell.className.includes('disabled') && !hasMaxClasses) {
                 cell.className = cell.className.replace('available', 'booked');
+                cell.onclick = () => step2SelectDate(dateStr);
             }
             const badge = document.createElement('div');
             badge.className = 'step2-badge';
@@ -2996,6 +3123,7 @@ const updateStep2Sidebar = () => {
 
         const dayOfWeek = date.getDay();
         const slots = dayOfWeek === 6 ? timeSlots.saturday : timeSlots.weekday;
+        const isSaturday = dayOfWeek === 6;
 
         // Get unavailable slots for this date (excluding the one being modified)
         const bookedSlotsOnDate = bookings
@@ -3016,6 +3144,11 @@ const updateStep2Sidebar = () => {
                             </div>
                         `;
                     }).join('')}
+                    ${isSaturday ? timeSlots.saturdayUnavailable.map(slot => `
+                        <div class="step2-time-slot unavailable" style="opacity: 0.5;">
+                            ${slot.replace('-', ' - ')}
+                        </div>
+                    `).join('') : ''}
                 </div>
             </div>
         `;
@@ -3210,9 +3343,10 @@ const renderStep3 = () => {
     maxlength="15"
     placeholder="+56 9 1234 5678"
     class="form-input ${getFieldClass('phone')}"
-    style="padding-right: 0.75rem; max-width: 100%;"
+    style="padding-right: ${(() => { const cp = studentPhone.replace(/\+56\s?/g, '').replace(/\s/g, ''); return /^9\d{8}$/.test(cp) && !fieldErrors.phone ? '2.5rem' : '0.75rem'; })()}; max-width: 100%;"
     onblur="validateField('phone'); updateFieldError('phone');"
 />
+        ${(() => { const cp = studentPhone.replace(/\+56\s?/g, '').replace(/\s/g, ''); return /^9\d{8}$/.test(cp) && !fieldErrors.phone ? `<div style="position: absolute; right: 0.75rem; top: 0; bottom: 0; display: flex; align-items: center; pointer-events: none;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" fill="#16a34a"/><path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>` : ''; })()}
     </div>
     <div style="position: absolute; height: 20px;">
         ${fieldErrors.phone && studentPhone.length > 4 ? '<p class="text-red-500 text-xs mt-1">Debe tener exactamente 9 dígitos</p>' : ''}
@@ -3405,7 +3539,7 @@ const renderStep4 = () => {
                         ${icon('shield-check', 20, 'text-yellow-700')}
                     </div>
                     <p style="margin: 0; font-size: 0.875rem; line-height: 1.5; color: #713f12;">
-                        Al continuar, aceptas los <a href="/pages/soporte/terms.html" target="_blank" rel="noopener noreferrer" style="text-decoration: underline; font-weight: 700; color: #854d0e;">términos y condiciones</a> sobre políticas de cancelación y reagendamiento.
+                        Antes de continuar, asegúrate de conocer las políticas de cancelación y reagendamiento en los <a href="/pages/soporte/terms.html" target="_blank" rel="noopener noreferrer" style="text-decoration: underline; font-weight: 700; color: #854d0e;">términos y condiciones</a>.
                     </p>
                 </div>
             </div>
@@ -3452,14 +3586,6 @@ const renderStep = (step, shouldAnimate = false) => {
 }
     if (shouldAnimate) {
         scrollToTop();
-    }
-    if (shouldAnimate) {
-        const stepContentDiv = document.getElementById(`step-${step}-content`);
-        if (stepContentDiv) {
-            stepContentDiv.classList.remove('animate-fade-in'); 
-            void stepContentDiv.offsetWidth; 
-            stepContentDiv.classList.add('animate-fade-in'); 
-        }
     }
     lucide.createIcons();
     if (step === 2 && activeCalendar !== null) {

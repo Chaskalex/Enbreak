@@ -10,6 +10,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
     <link rel="manifest" href="/favicon/site.webmanifest">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rubik:wght@600;700&display=swap" rel="stylesheet">
@@ -23,7 +24,6 @@
 
 <section class="hero">
     <div class="bg-shapes">
-        <div class="dots-pattern" id="dotsPattern"></div>
         <div class="geometric-shape shape-1"></div>
         <div class="geometric-shape shape-2"></div>
         <div class="geometric-shape shape-3"></div>
@@ -41,7 +41,7 @@
             </h1>
 
             <p>Logra la fluidez que siempre has deseado. Clases 100% online adaptadas a tu ritmo y necesidades. Comienza a aprender hoy.</p>
-                
+
             <div class="button-group">
                 <a href="pages/clases/planes.html" class="hero-btn"><span>Ver Planes</span></a>
                 <a href="pages/clases/diagnostico.html" class="hero-btn-secondary">Test Gratuito</a>
@@ -49,7 +49,6 @@
         </div>
     </div>
 
-    <!-- Bottom left dots -->
     <div class="corner-dots">
         <div class="corner-dot"></div>
         <div class="corner-dot"></div>
@@ -62,7 +61,6 @@
         <div class="corner-dot"></div>
     </div>
 
-    <!-- NEW: Top right dots -->
     <div class="corner-dots-top">
         <div class="corner-dot"></div>
         <div class="corner-dot"></div>
@@ -76,42 +74,11 @@
     </div>
 </section>
 
-    <script>
-        // Generate scattered dots
-        const dotsPattern = document.getElementById('dotsPattern');
-        const dotCount = 80;
-
-        for (let i = 0; i < dotCount; i++) {
-            const dot = document.createElement('div');
-            dot.className = 'dot';
-            
-            // Random positioning
-            dot.style.left = Math.random() * 60 + '%'; // Keep dots on left side
-            dot.style.top = Math.random() * 100 + '%';
-            
-            // Random animation delay
-            dot.style.animationDelay = Math.random() * 3 + 's';
-            dot.style.animationDuration = (Math.random() * 2 + 2) + 's';
-            
-            dotsPattern.appendChild(dot);
-        }
-    </script>
-
     <section class="value-proposition">
-    <!-- MORE floating dots for star effect -->
-    <div class="value-decoration"></div>
-    <div class="value-decoration"></div>
-    <div class="value-decoration"></div>
-    <div class="value-decoration"></div>
-    <div class="value-decoration"></div>
-    <div class="value-decoration"></div>
-    <div class="value-decoration"></div>
-    <div class="value-decoration"></div>
-    
     <!-- Floating geometric shapes -->
     <div class="value-shape value-shape-1"></div>
     <div class="value-shape value-shape-2"></div>
-    
+
     <div class="value-card-wrapper">
         <div class="value-card">
             <img src="assets/icons/schedule.svg" alt="Horarios Flexibles" class="value-icon">

@@ -10,103 +10,688 @@
     <link rel="apple-touch-icon" sizes="180x180" href="../../favicon/apple-touch-icon.png">
     <link rel="manifest" href="../../favicon/site.webmanifest">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rubik:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../css/style.css">
     <style>
-        .page-banner {
-            width: 100%;
-            height: 320px;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 0px;
-            overflow: hidden;
-        }
+        .page-header {
+    position: relative;
+    width: 100%;
+    background: #ffffff;
+    border-bottom: 1px solid #d2d2d2;
+}
 
-        .page-banner::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('../../assets/backgrounds/bg6.jpg') center/cover no-repeat;
-            filter: blur(5px);
-            z-index: 0;
-        }
+.page-header::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 55%;
+    height: 100%;
+    background: url('../../assets/banners/banner4.jpeg') left 40% / cover no-repeat;
+    filter: contrast(1.05) brightness(1.15);
+    opacity: 0.45;
+    pointer-events: none;
+    mask-image: linear-gradient(to left,
+        rgba(0,0,0,1) 0%,
+        rgba(0,0,0,0.9) 70%,
+        rgba(0,0,0,0) 100%);
+    -webkit-mask-image: linear-gradient(to left,
+        rgba(0,0,0,1) 0%,
+        rgba(0,0,0,0.9) 70%,
+        rgba(0,0,0,0) 100%);
+    animation: bannerImageSlideIn 1s ease-out;
+}
 
-        .page-banner::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(2, 40, 80, 0.6);
-            z-index: 1;
-        }
+.page-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(to left,
+        transparent 0%,
+        rgba(255, 255, 255, 0.05) 50%,
+        rgba(255, 255, 255, 0.2) 100%);
+    pointer-events: none;
+    z-index: 1;
+}
 
-        .page-banner .banner-content {
-            text-align: center;
-            z-index: 2;
-            max-width: 1200px;
-            padding: 0 20px;
-        }
+.page-header-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    min-height: 140px;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
 
-        .page-banner .breadcrumb {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+.page-header-content {
+    padding: 30px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+    position: relative;
+    z-index: 1;
+    max-width: 520px;
+    animation: bannerTextSlideIn 1s ease-out;
+}
 
-        .page-banner .breadcrumb a {
-            color: #fff;
-            text-decoration: none;
-            transition: color 0.2s ease;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-        }
+.page-header-image {
+    display: none;
+}
 
-        .page-banner .breadcrumb a:hover {
-            color: #ff6600;
-            border-bottom-color: #ff6600;
-        }
+.page-header-accent {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 60px;
+    background: #ff6600;
+    z-index: 2;
+}
 
-        .page-banner .breadcrumb-separator {
-            margin: 0 10px;
-            color: rgba(255, 255, 255, 0.6);
-            font-weight: 400;
-        }
+.page-header .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+}
 
-        .page-banner .breadcrumb-current {
-            color: #fff;
-        }
+.page-header .breadcrumb a {
+    color: #6b7280;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
 
-        .page-banner h1 {
-            font-size: 50px;
-            color: #fff;
-            font-family: 'Rubik', sans-serif;
-            font-weight: 700;
-            margin: 0;
-            line-height: 1.2;
-            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
-        }
+.page-header .breadcrumb a:hover {
+    color: #ff6600;
+}
 
-        @media (max-width: 767.98px) {
-            .page-banner {
-                height: 250px;
-            }
-            .page-banner h1 {
-                font-size: 36px;
-            }
-        }
+.page-header .breadcrumb-separator {
+    color: #d1d5db;
+    font-size: 9px;
+}
+
+.page-header .breadcrumb-current {
+    color: #374151;
+    font-weight: 500;
+}
+
+.page-header h1 {
+    font-family: 'Rubik', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: #0a1e42;
+    margin: 0;
+    line-height: 1.2;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .page-header {
+        background: #ffffff;
+    }
+
+    .page-header::after {
+        display: none;
+    }
+
+    .page-header-wrapper {
+        min-height: auto;
+    }
+
+    .page-header-content {
+        padding: 24px 20px;
+    }
+
+    .page-header h1 {
+        font-size: 24px;
+    }
+}
+
+/* Banner animations */
+@keyframes bannerTextSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-60px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes bannerImageSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+    to {
+        opacity: 0.45;
+        transform: translateX(0);
+    }
+}
+
+.test-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.test-screen {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.test-screen.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.intro-content {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.intro-illustration {
+    width: 300px;
+    margin: 0 auto 30px;
+}
+
+.intro-content h2 {
+    font-family: 'Rubik', sans-serif;
+    font-size: 36px;
+    color: #0a1e42;
+    margin-bottom: 16px;
+}
+
+.intro-description {
+    font-size: 18px;
+    color: #4b5563;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.intro-section {
+    text-align: left;
+    background: #f9fafb;
+    padding: 24px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.intro-section h3 {
+    font-family: 'Rubik', sans-serif;
+    font-size: 18px;
+    color: #0a1e42;
+    margin-bottom: 12px;
+}
+
+.intro-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.intro-section li {
+    padding: 8px 0 8px 28px;
+    position: relative;
+    color: #4b5563;
+    line-height: 1.6;
+}
+
+.intro-section li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #10b981;
+    font-weight: 700;
+}
+
+.intro-footer {
+    font-size: 16px;
+    color: #6b7280;
+    font-style: italic;
+    margin: 30px 0;
+}
+
+.btn-start {
+    background: #ff6600;
+    color: white;
+    border: none;
+    padding: 16px 48px;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-start:hover {
+    background: #e55b00;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 102, 0, 0.3);
+}
+
+.test-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #e5e7eb;
+}
+
+.level-badge {
+    background: #ff6600;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.progress-bar {
+    flex: 1;
+    height: 8px;
+    background: #e5e7eb;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #10b981, #059669);
+    transition: width 0.3s ease;
+    width: 0%;
+}
+
+.question-counter {
+    font-weight: 600;
+    color: #6b7280;
+}
+
+.question-content {
+    margin-bottom: 30px;
+}
+
+.question-text {
+    font-family: 'Rubik', sans-serif;
+    font-size: 24px;
+    color: #0a1e42;
+    margin-bottom: 24px;
+    line-height: 1.4;
+}
+
+.options-container {
+    display: grid;
+    gap: 12px;
+}
+
+.option-btn {
+    background: white;
+    border: 2px solid #e5e7eb;
+    padding: 16px 20px;
+    text-align: left;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 16px;
+    color: #374151;
+}
+
+.option-btn:hover {
+    border-color: #ff6600;
+    background: #fff7ed;
+}
+
+.option-btn.selected {
+    border-color: #ff6600;
+    background: #fff7ed;
+    font-weight: 600;
+}
+
+.option-btn.correct {
+    border-color: #10b981;
+    background: #ecfdf5;
+}
+
+.option-btn.incorrect {
+    border-color: #ef4444;
+    background: #fef2f2;
+}
+
+.test-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-next {
+    background: #ff6600;
+    color: white;
+    border: none;
+    padding: 12px 32px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-next:hover:not(:disabled) {
+    background: #e55b00;
+}
+
+.btn-next:disabled {
+    background: #d1d5db;
+    cursor: not-allowed;
+}
+
+.result-content {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.result-icon {
+    font-size: 80px;
+    margin-bottom: 20px;
+}
+
+.result-content h2 {
+    font-family: 'Rubik', sans-serif;
+    font-size: 32px;
+    color: #0a1e42;
+    margin-bottom: 30px;
+}
+
+.score-display {
+    margin: 40px 0;
+}
+
+.score-circle {
+    width: 180px;
+    height: 180px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.score-circle svg {
+    width: 100%;
+    height: 100%;
+}
+
+.score-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 48px;
+    font-weight: 700;
+    color: #0a1e42;
+}
+
+.result-message {
+    font-size: 18px;
+    color: #4b5563;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.result-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-continue {
+    background: #10b981;
+    color: white;
+    border: none;
+    padding: 14px 32px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-continue:hover {
+    background: #059669;
+}
+
+.btn-primary {
+    background: #ff6600;
+    color: white;
+    border: none;
+    padding: 14px 32px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+    background: #e55b00;
+}
+
+.btn-secondary {
+    background: white;
+    color: #374151;
+    border: 2px solid #e5e7eb;
+    padding: 14px 32px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+    border-color: #9ca3af;
+}
+
+.final-content {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.final-content h2 {
+    font-family: 'Rubik', sans-serif;
+    font-size: 32px;
+    color: #0a1e42;
+    margin-bottom: 30px;
+}
+
+.final-level {
+    margin-bottom: 40px;
+}
+
+.level-badge-large {
+    display: inline-block;
+    background: linear-gradient(135deg, #ff6600, #ff8c00);
+    color: white;
+    padding: 20px 40px;
+    border-radius: 16px;
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+#final-level-description {
+    font-size: 18px;
+    color: #4b5563;
+    line-height: 1.6;
+}
+
+.scores-summary {
+    background: #f9fafb;
+    padding: 30px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+}
+
+.scores-summary h3 {
+    font-family: 'Rubik', sans-serif;
+    font-size: 20px;
+    color: #0a1e42;
+    margin-bottom: 20px;
+}
+
+#scores-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.score-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: white;
+    border-radius: 8px;
+}
+
+.score-item-level {
+    font-weight: 600;
+    color: #0a1e42;
+}
+
+.score-item-score {
+    font-weight: 700;
+    color: #10b981;
+}
+
+.final-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.review-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.review-content h2 {
+    font-family: 'Rubik', sans-serif;
+    font-size: 32px;
+    color: #0a1e42;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+#review-container {
+    margin-bottom: 30px;
+}
+
+.review-question {
+    background: #f9fafb;
+    padding: 24px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.review-question-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.review-level-badge {
+    background: #ff6600;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.review-question-number {
+    font-weight: 600;
+    color: #6b7280;
+}
+
+.review-question-text {
+    font-size: 18px;
+    color: #0a1e42;
+    margin-bottom: 16px;
+    font-weight: 600;
+}
+
+.review-option {
+    padding: 12px 16px;
+    margin: 8px 0;
+    border-radius: 8px;
+    background: white;
+    border: 2px solid #e5e7eb;
+}
+
+.review-option.user-answer {
+    border-color: #ff6600;
+    background: #fff7ed;
+}
+
+.review-option.correct-answer {
+    border-color: #10b981;
+    background: #ecfdf5;
+}
+
+.review-option.wrong {
+    border-color: #ef4444;
+    background: #fef2f2;
+}
+
+@media (max-width: 768px) {
+    .intro-content h2 {
+        font-size: 28px;
+    }
+
+    .intro-illustration {
+        width: 250px;
+    }
+
+    .question-text {
+        font-size: 20px;
+    }
+
+    .test-header {
+        flex-wrap: wrap;
+    }
+
+    .level-badge-large {
+        font-size: 36px;
+        padding: 16px 32px;
+    }
+
+    .result-actions,
+    .final-actions {
+        flex-direction: column;
+    }
+
+    .btn-continue,
+    .btn-primary,
+    .btn-secondary {
+        width: 100%;
+    }
+}
     </style>
 </head>
 <body>
@@ -116,21 +701,138 @@
 
     <!-- Banner Section -->
     <main style="padding: 0; margin: 0;">
-        <section class="page-banner">
-            <div class="banner-content">
-                <nav class="breadcrumb">
-                    <a href="/">Inicio</a>
-                    <span class="breadcrumb-separator">></span>
-                    <span class="breadcrumb-current">Diagnóstico</span>
-                </nav>
-                <h1>Test Gratuito</h1>
+        <section class="page-header">
+            <div class="page-header-wrapper">
+                <div class="page-header-content">
+                    <div class="page-header-accent"></div>
+                    <nav class="breadcrumb">
+                        <a href="/">Inicio</a>
+                        <span class="breadcrumb-separator">›</span>
+                        <span class="breadcrumb-current">Diagnóstico</span>
+                    </nav>
+                    <h1>Test Gratuito</h1>
+                </div>
             </div>
         </section>
 
-        <!-- Your page content goes here -->
-        <section class="your-section">
-            <h1>Your Page Content</h1>
-            <p>Add your content here...</p>
+        <section class="test-container">
+            <div id="intro-screen" class="test-screen active">
+                <div class="intro-content">
+                    <div class="intro-illustration">
+                        <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="50" y="80" width="200" height="150" rx="8" fill="#f3f4f6"/>
+                            <rect x="70" y="100" width="160" height="20" rx="4" fill="#e5e7eb"/>
+                            <rect x="70" y="130" width="120" height="20" rx="4" fill="#e5e7eb"/>
+                            <rect x="70" y="160" width="140" height="20" rx="4" fill="#e5e7eb"/>
+                            <circle cx="320" cy="150" r="60" fill="#fef3c7"/>
+                            <circle cx="320" cy="140" r="25" fill="#f59e0b"/>
+                            <circle cx="310" cy="135" r="4" fill="#1f2937"/>
+                            <circle cx="330" cy="135" r="4" fill="#1f2937"/>
+                            <path d="M 310 150 Q 320 160 330 150" stroke="#1f2937" stroke-width="2" fill="none"/>
+                        </svg>
+                    </div>
+                    <h2>Evalúa tu nivel de inglés</h2>
+                    <p class="intro-description">¿Listo para descubrir tu nivel de inglés? Este test es tu boleto para descubrir dónde te encuentras, desde A1 hasta C1. Está dividido en cinco niveles, cada uno con su propio conjunto de preguntas.</p>
+
+                    <div class="intro-section">
+                        <h3>Esto es lo que va a pasar:</h3>
+                        <ul>
+                            <li>Comenzaremos fácil con A1. ¡Piénsalo como el calentamiento!</li>
+                            <li>Después de cada nivel, te mostraremos tu resultado, o te animaremos a seguir si vas bien.</li>
+                            <li>¡Encontrarás tu nivel en el camino o completarás los cinco bloques con gran éxito!</li>
+                        </ul>
+                    </div>
+
+                    <div class="intro-section">
+                        <h3>Y después de que termines:</h3>
+                        <ul>
+                            <li>Podrás revisar todas tus respuestas.</li>
+                            <li>Además, tendrás la opción de descargar un PDF o tomar una captura de tus resultados. ¡Muéstraselo a tus amigos o a tu gato, el que se impresione más!</li>
+                        </ul>
+                    </div>
+
+                    <p class="intro-footer">Así que respira profundo, relájate y veamos a dónde te lleva tu viaje con el inglés. Buena suerte, que la gramática esté siempre de tu lado.</p>
+
+                    <button class="btn-start" onclick="startTest()">Comenzar</button>
+                </div>
+            </div>
+
+            <div id="question-screen" class="test-screen">
+                <div class="test-header">
+                    <div class="level-badge">
+                        <span id="current-level-badge">A1</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div id="progress-fill" class="progress-fill"></div>
+                    </div>
+                    <div class="question-counter">
+                        <span id="question-number">1</span>/<span id="total-questions">10</span>
+                    </div>
+                </div>
+
+                <div class="question-content">
+                    <h3 id="question-text" class="question-text"></h3>
+                    <div id="options-container" class="options-container"></div>
+                </div>
+
+                <div class="test-actions">
+                    <button id="next-btn" class="btn-next" onclick="nextQuestion()" disabled>Siguiente</button>
+                </div>
+            </div>
+
+            <div id="level-result-screen" class="test-screen">
+                <div class="result-content">
+                    <div id="result-icon" class="result-icon"></div>
+                    <h2 id="result-title"></h2>
+                    <div class="score-display">
+                        <div class="score-circle">
+                            <svg viewBox="0 0 120 120">
+                                <circle cx="60" cy="60" r="54" fill="none" stroke="#e5e7eb" stroke-width="8"/>
+                                <circle id="score-progress" cx="60" cy="60" r="54" fill="none" stroke="#10b981" stroke-width="8" stroke-dasharray="339.292" stroke-dashoffset="339.292" transform="rotate(-90 60 60)"/>
+                            </svg>
+                            <div class="score-text">
+                                <span id="score-percentage">0</span>%
+                            </div>
+                        </div>
+                    </div>
+                    <p id="result-message" class="result-message"></p>
+                    <div class="result-actions">
+                        <button id="continue-btn" class="btn-continue" onclick="continueToNextLevel()"></button>
+                        <button class="btn-secondary" onclick="showFinalResults()">Ver Resultados</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="final-result-screen" class="test-screen">
+                <div class="final-content">
+                    <h2>Evaluación de tu Nivel de Inglés</h2>
+                    <div class="final-level">
+                        <div class="level-badge-large">
+                            <span id="final-level-text">A1</span>
+                        </div>
+                        <p id="final-level-description"></p>
+                    </div>
+
+                    <div class="scores-summary">
+                        <h3>Desglose de Puntuaciones</h3>
+                        <div id="scores-list"></div>
+                    </div>
+
+                    <div class="final-actions">
+                        <button class="btn-primary" onclick="showReview()">Revisar Respuestas</button>
+                        <button class="btn-secondary" onclick="downloadResults()">Descargar PDF</button>
+                        <button class="btn-secondary" onclick="restartTest()">Repetir Test</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="review-screen" class="test-screen">
+                <div class="review-content">
+                    <h2>Revisión de Respuestas</h2>
+                    <div id="review-container"></div>
+                    <button class="btn-secondary" onclick="showFinalResults()">Volver a Resultados</button>
+                </div>
+            </div>
         </section>
     </main>
 
@@ -139,6 +841,296 @@
 
 <script src="../../js/layout.js"></script>
 <script src="../../js/script.js" defer></script>
+<script>
+const LEVELS = ['A1', 'A2', 'B1', 'B2', 'C1'];
+const PASS_THRESHOLD = 70;
+
+const questionBank = {
+  A1: [
+    { q: "Hello! ___ are you?", options: ["What", "How", "Where", "Who"], correct: 1 },
+    { q: "I ___ a student.", options: ["am", "is", "are", "be"], correct: 0 },
+    { q: "This is ___ book.", options: ["I", "my", "me", "mine"], correct: 1 },
+    { q: "She ___ from Spain.", options: ["am", "is", "are", "be"], correct: 1 },
+    { q: "We ___ coffee every morning.", options: ["drinks", "drink", "drinking", "drank"], correct: 1 },
+    { q: "___ do you live?", options: ["What", "Who", "Where", "When"], correct: 2 },
+    { q: "I have ___ apple.", options: ["a", "an", "the", "some"], correct: 1 },
+    { q: "They ___ to school by bus.", options: ["go", "goes", "going", "went"], correct: 0 },
+    { q: "My birthday is ___ May.", options: ["at", "on", "in", "by"], correct: 2 },
+    { q: "There ___ three cats in the garden.", options: ["is", "are", "am", "be"], correct: 1 }
+  ],
+  A2: [
+    { q: "I ___ to London last year.", options: ["go", "goes", "went", "going"], correct: 2 },
+    { q: "She is ___ than her sister.", options: ["tall", "taller", "tallest", "more tall"], correct: 1 },
+    { q: "We ___ study for the exam tomorrow.", options: ["must", "can", "may", "could"], correct: 0 },
+    { q: "I ___ been to Paris twice.", options: ["has", "have", "am", "was"], correct: 1 },
+    { q: "If it rains, we ___ stay home.", options: ["will", "would", "can", "must"], correct: 0 },
+    { q: "He enjoys ___ football.", options: ["play", "plays", "playing", "to play"], correct: 2 },
+    { q: "This is the ___ book I've ever read.", options: ["good", "better", "best", "well"], correct: 2 },
+    { q: "I don't have ___ money.", options: ["some", "any", "many", "few"], correct: 1 },
+    { q: "She ___ cooking when I arrived.", options: ["is", "was", "has been", "will be"], correct: 1 },
+    { q: "How long ___ you lived here?", options: ["do", "did", "have", "are"], correct: 2 }
+  ],
+  B1: [
+    { q: "By this time next year, I ___ my degree.", options: ["will finish", "will have finished", "finish", "am finishing"], correct: 1 },
+    { q: "I wish I ___ speak French fluently.", options: ["can", "could", "will", "would"], correct: 1 },
+    { q: "The report ___ by Friday.", options: ["must finish", "must be finished", "must finishing", "must finished"], correct: 1 },
+    { q: "She's not used ___ up early.", options: ["to wake", "to waking", "wake", "waking"], correct: 1 },
+    { q: "I'd rather you ___ come tomorrow.", options: ["don't", "didn't", "won't", "wouldn't"], correct: 1 },
+    { q: "___ the weather, we decided to go hiking.", options: ["Although", "Despite", "However", "Because"], correct: 1 },
+    { q: "He suggested ___ a break.", options: ["take", "to take", "taking", "took"], correct: 2 },
+    { q: "I've been working here ___ 2020.", options: ["since", "for", "from", "during"], correct: 0 },
+    { q: "The house ___ when we arrived.", options: ["cleaned", "was cleaning", "had been cleaned", "has cleaned"], correct: 2 },
+    { q: "She's the woman ___ won the competition.", options: ["which", "who", "whose", "whom"], correct: 1 }
+  ],
+  B2: [
+    { q: "Had I known about the traffic, I ___ earlier.", options: ["would leave", "would have left", "will leave", "left"], correct: 1 },
+    { q: "The manager insisted ___ the meeting immediately.", options: ["on holding", "to hold", "holding", "hold"], correct: 0 },
+    { q: "___ circumstances should you reveal this information.", options: ["Under no", "In no", "At no", "On no"], correct: 0 },
+    { q: "She's perfectly capable ___ the project herself.", options: ["to manage", "of managing", "managing", "in managing"], correct: 1 },
+    { q: "Not only ___ the exam, but he also got the highest score.", options: ["he passed", "did he pass", "he did pass", "passed he"], correct: 1 },
+    { q: "I object ___ treated like a child.", options: ["to be", "to being", "being", "be"], correct: 1 },
+    { q: "The proposal merits serious ___.", options: ["consideration", "considerate", "considering", "considered"], correct: 0 },
+    { q: "___ harder, you would have succeeded.", options: ["Had you worked", "If you worked", "Should you work", "Were you to work"], correct: 0 },
+    { q: "She's ___ to be the best candidate.", options: ["bound", "likely", "prone", "apt"], correct: 1 },
+    { q: "The evidence ___ that he was innocent.", options: ["pointed", "indicated", "suggested", "proved"], correct: 2 }
+  ],
+  C1: [
+    { q: "The politician's speech was ___ with references to classical literature.", options: ["littered", "peppered", "scattered", "dotted"], correct: 1 },
+    { q: "___ to the terms, the contract was signed immediately.", options: ["Having agreed", "Being agreed", "Agreed", "To agree"], correct: 0 },
+    { q: "The findings are ___ with previous research on the topic.", options: ["compatible", "consistent", "coherent", "congruent"], correct: 1 },
+    { q: "She ___ the temptation to criticize her colleague publicly.", options: ["resisted", "withstood", "opposed", "countered"], correct: 0 },
+    { q: "The company's profits have been ___ declining over the past year.", options: ["steadily", "constantly", "continuously", "persistently"], correct: 0 },
+    { q: "His argument was so ___ that nobody could find fault with it.", options: ["compelling", "convincing", "cogent", "forceful"], correct: 2 },
+    { q: "The committee decided to ___ the proposal pending further review.", options: ["suspend", "defer", "postpone", "shelve"], correct: 3 },
+    { q: "___ the circumstances, I think we handled the situation well.", options: ["Given", "Granted", "Considering", "Regarding"], correct: 0 },
+    { q: "The theory remains largely ___ despite extensive testing.", options: ["unverified", "unproven", "uncorroborated", "unsubstantiated"], correct: 2 },
+    { q: "Her contribution to the field cannot be ___.", options: ["overestimated", "underestimated", "overstated", "understated"], correct: 2 }
+  ]
+};
+
+let state = {
+  currentLevel: 0,
+  currentQuestion: 0,
+  answers: [],
+  scores: {},
+  finalLevel: null
+};
+
+function showScreen(screenId) {
+  document.querySelectorAll('.test-screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(screenId).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function startTest() {
+  state = {
+    currentLevel: 0,
+    currentQuestion: 0,
+    answers: [],
+    scores: {},
+    finalLevel: null
+  };
+  loadQuestion();
+  showScreen('question-screen');
+}
+
+function loadQuestion() {
+  const level = LEVELS[state.currentLevel];
+  const questions = questionBank[level];
+  const question = questions[state.currentQuestion];
+
+  document.getElementById('current-level-badge').textContent = level;
+  document.getElementById('question-number').textContent = state.currentQuestion + 1;
+  document.getElementById('total-questions').textContent = questions.length;
+  document.getElementById('question-text').textContent = question.q;
+
+  const progress = ((state.currentQuestion + 1) / questions.length) * 100;
+  document.getElementById('progress-fill').style.width = progress + '%';
+
+  const container = document.getElementById('options-container');
+  container.innerHTML = '';
+
+  question.options.forEach((opt, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'option-btn';
+    btn.textContent = opt;
+    btn.onclick = () => selectOption(idx);
+    container.appendChild(btn);
+  });
+
+  document.getElementById('next-btn').disabled = true;
+}
+
+function selectOption(idx) {
+  document.querySelectorAll('.option-btn').forEach((btn, i) => {
+    btn.classList.toggle('selected', i === idx);
+  });
+
+  state.answers[state.currentQuestion] = idx;
+  document.getElementById('next-btn').disabled = false;
+}
+
+function nextQuestion() {
+  const level = LEVELS[state.currentLevel];
+  const questions = questionBank[level];
+
+  state.currentQuestion++;
+
+  if (state.currentQuestion >= questions.length) {
+    showLevelResult();
+  } else {
+    loadQuestion();
+  }
+}
+
+function showLevelResult() {
+  const level = LEVELS[state.currentLevel];
+  const questions = questionBank[level];
+  const correct = state.answers.filter((ans, idx) => ans === questions[idx].correct).length;
+  const percentage = Math.round((correct / questions.length) * 100);
+
+  state.scores[level] = percentage;
+
+  const passed = percentage >= PASS_THRESHOLD;
+  const isLastLevel = state.currentLevel === LEVELS.length - 1;
+
+  document.getElementById('result-icon').textContent = passed ? '🎉' : '📚';
+  document.getElementById('result-title').textContent = passed ?
+    `¡Excelente trabajo en ${level}!` : `Has encontrado tu nivel: ${level}`;
+
+  document.getElementById('score-percentage').textContent = percentage;
+
+  const circumference = 2 * Math.PI * 54;
+  const offset = circumference - (percentage / 100) * circumference;
+  const circle = document.getElementById('score-progress');
+  circle.style.strokeDashoffset = offset;
+  circle.style.stroke = passed ? '#10b981' : '#f59e0b';
+
+  document.getElementById('result-message').textContent = passed ?
+    `¡Obtuviste ${percentage}%! ${isLastLevel ? '¡Increíble trabajo completando todos los niveles!' : '¿Listo para el siguiente desafío?'}` :
+    `Obtuviste ${percentage}%. Esto indica que tu nivel actual es ${level}. ¡Sigue practicando y mejorarás!`;
+
+  const continueBtn = document.getElementById('continue-btn');
+  if (passed && !isLastLevel) {
+    continueBtn.textContent = `Continuar a ${LEVELS[state.currentLevel + 1]}`;
+    continueBtn.style.display = 'inline-block';
+  } else {
+    continueBtn.style.display = 'none';
+  }
+
+  if (!passed || isLastLevel) {
+    determineFinalLevel();
+  }
+
+  showScreen('level-result-screen');
+}
+
+function continueToNextLevel() {
+  state.currentLevel++;
+  state.currentQuestion = 0;
+  state.answers = [];
+  loadQuestion();
+  showScreen('question-screen');
+}
+
+function determineFinalLevel() {
+  const completedLevels = Object.keys(state.scores);
+
+  for (let i = completedLevels.length - 1; i >= 0; i--) {
+    const level = LEVELS[i];
+    if (state.scores[level] >= PASS_THRESHOLD) {
+      state.finalLevel = i < LEVELS.length - 1 ? LEVELS[i + 1] : LEVELS[i];
+      return;
+    }
+  }
+
+  state.finalLevel = LEVELS[0];
+}
+
+function showFinalResults() {
+  if (!state.finalLevel) {
+    determineFinalLevel();
+  }
+
+  document.getElementById('final-level-text').textContent = state.finalLevel;
+
+  const descriptions = {
+    A1: "Estás en la etapa principiante. Puedes entender y usar expresiones cotidianas familiares y frases básicas.",
+    A2: "Estás en el nivel elemental. Puedes comunicarte en tareas simples y entender expresiones de uso frecuente.",
+    B1: "Estás en el nivel intermedio. Puedes lidiar con la mayoría de situaciones y describir experiencias y eventos.",
+    B2: "Estás en el nivel intermedio-alto. Puedes interactuar con fluidez y entender textos complejos.",
+    C1: "Estás en el nivel avanzado. Puedes expresarte con fluidez y entender textos largos y exigentes."
+  };
+
+  document.getElementById('final-level-description').textContent = descriptions[state.finalLevel];
+
+  const scoresList = document.getElementById('scores-list');
+  scoresList.innerHTML = '';
+
+  Object.entries(state.scores).forEach(([level, score]) => {
+    const item = document.createElement('div');
+    item.className = 'score-item';
+    item.innerHTML = `
+      <span class="score-item-level">Nivel ${level}</span>
+      <span class="score-item-score">${score}%</span>
+    `;
+    scoresList.appendChild(item);
+  });
+
+  showScreen('final-result-screen');
+}
+
+function showReview() {
+  const container = document.getElementById('review-container');
+  container.innerHTML = '';
+
+  let questionNum = 1;
+  Object.entries(state.scores).forEach(([level, score]) => {
+    const levelIdx = LEVELS.indexOf(level);
+    const questions = questionBank[level];
+    const levelAnswers = state.answers;
+
+    questions.forEach((q, idx) => {
+      const userAnswer = levelAnswers[idx];
+      const isCorrect = userAnswer === q.correct;
+
+      const div = document.createElement('div');
+      div.className = 'review-question';
+      div.innerHTML = `
+        <div class="review-question-header">
+          <span class="review-level-badge">${level}</span>
+          <span class="review-question-number">Pregunta ${idx + 1}</span>
+        </div>
+        <div class="review-question-text">${q.q}</div>
+        ${q.options.map((opt, i) => {
+          let classes = 'review-option';
+          if (i === q.correct) classes += ' correct-answer';
+          if (i === userAnswer && !isCorrect) classes += ' wrong';
+          if (i === userAnswer) classes += ' user-answer';
+
+          let label = opt;
+          if (i === q.correct) label += ' ✓';
+          if (i === userAnswer && !isCorrect) label += ' ✗';
+
+          return `<div class="${classes}">${label}</div>`;
+        }).join('')}
+      `;
+      container.appendChild(div);
+      questionNum++;
+    });
+  });
+
+  showScreen('review-screen');
+}
+
+function downloadResults() {
+  window.print();
+}
+
+function restartTest() {
+  showScreen('intro-screen');
+}
+</script>
 
 </body>
 </html>

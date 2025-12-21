@@ -1,28 +1,31 @@
 <div class="top-header">
     <div class="container">
         <div class="top-left">
-            <a href="#" class="top-item contact-icon">
+            <span class="top-item contact-icon">
                 <i class="fas fa-map-marker-alt"></i>
                 <span>100% Online - Chile</span>
-            </a>
+            </span>
             <a href="mailto:info@enbreak.net" class="top-item contact-icon">
                 <i class="fas fa-envelope"></i>
                 <span>info@enbreak.net</span>
             </a>
             <a href="tel:+56979924910" class="top-item contact-icon">
                 <i class="fas fa-phone"></i>
-                <span>+56 9 79924910</span>
+                <span>+56 9 7992 4910</span>
             </a>
         </div>
         <div class="top-right">
             <div class="language-selector">
                 <button class="language-btn" onclick="toggleLanguage(event)">
-                    <i class="fas fa-globe"></i>
+                    <span class="fi fi-es language-flag" id="currentFlag"></span>
                     <span id="currentLanguage">Español</span>
                     <i class="fas fa-chevron-down chevron-icon"></i>
                 </button>
                 <div class="language-dropdown">
-                    <a href="#" onclick="changeLanguage('en'); return false;">English</a>
+                    <a href="#" onclick="changeLanguage('en'); return false;">
+                        <span class="fi fi-gb"></span>
+                        English
+                    </a>
                 </div>
             </div>
             <div class="top-social-icons">

@@ -10,135 +10,778 @@
     <link rel="apple-touch-icon" sizes="180x180" href="../../favicon/apple-touch-icon.png">
     <link rel="manifest" href="../../favicon/site.webmanifest">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rubik:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../css/style.css">
     <style>
-        .page-banner {
-            width: 100%;
-            height: 320px;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 0px;
-            overflow: hidden;
+        .page-header {
+    position: relative;
+    width: 100%;
+    background: #ffffff;
+    border-bottom: 1px solid #d2d2d2;
+}
+
+.page-header::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 55%;
+    height: 100%;
+    background: url('../../assets/banners/banner10.png') left 40% / cover no-repeat;
+    filter: contrast(1.05) brightness(1.15);
+    opacity: 0.45;
+    pointer-events: none;
+    mask-image: linear-gradient(to left,
+        rgba(0,0,0,1) 0%,
+        rgba(0,0,0,0.9) 70%,
+        rgba(0,0,0,0) 100%);
+    -webkit-mask-image: linear-gradient(to left,
+        rgba(0,0,0,1) 0%,
+        rgba(0,0,0,0.9) 70%,
+        rgba(0,0,0,0) 100%);
+    animation: bannerImageSlideIn 1s ease-out;
+}
+
+.page-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(to left,
+        transparent 0%,
+        rgba(255, 255, 255, 0.05) 50%,
+        rgba(255, 255, 255, 0.2) 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.page-header-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    min-height: 140px;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.page-header-content {
+    padding: 30px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+    position: relative;
+    z-index: 1;
+    max-width: 520px;
+    animation: bannerTextSlideIn 1s ease-out;
+}
+
+.page-header-image {
+    display: none;
+}
+
+.page-header-accent {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 60px;
+    background: #ff6600;
+    z-index: 2;
+}
+
+.page-header .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+}
+
+.page-header .breadcrumb a {
+    color: #6b7280;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.page-header .breadcrumb a:hover {
+    color: #ff6600;
+}
+
+.page-header .breadcrumb-separator {
+    color: #d1d5db;
+    font-size: 9px;
+}
+
+.page-header .breadcrumb-current {
+    color: #374151;
+    font-weight: 500;
+}
+
+.page-header h1 {
+    font-family: 'Rubik', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: #0a1e42;
+    margin: 0;
+    line-height: 1.2;
+}
+
+@media (max-width: 768px) {
+    .page-header {
+        background: #ffffff;
+    }
+
+    .page-header::after {
+        display: none;
+    }
+
+    .page-header-wrapper {
+        min-height: auto;
+    }
+
+    .page-header-content {
+        padding: 24px 20px;
+    }
+
+    .page-header h1 {
+        font-size: 24px;
+    }
+}
+
+@keyframes bannerTextSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-60px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes bannerImageSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+    to {
+        opacity: 0.45;
+        transform: translateX(0);
+    }
+}
+
+        .faq-section {
+            background: #f8f9fa;
+            padding: 80px 0;
         }
 
-        .page-banner::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('../../assets/backgrounds/bg12.jpg') center/cover no-repeat;
-            filter: blur(5px);
-            z-index: 0;
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 40px;
         }
 
-        .page-banner::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(2, 40, 80, 0.6);
-            z-index: 1;
-        }
-
-        .page-banner .banner-content {
+        .faq-intro {
             text-align: center;
-            z-index: 2;
-            max-width: 1200px;
-            padding: 0 20px;
+            margin-bottom: 50px;
         }
 
-        .page-banner .breadcrumb {
+        .faq-intro p {
+            font-size: 17px;
+            color: #5a6c7d;
+            line-height: 1.7;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .faq-categories {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .faq-category-btn {
+            padding: 10px 24px;
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #5a6c7d;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .faq-category-btn:hover {
+            border-color: #00acc1;
+            color: #00acc1;
+        }
+
+        .faq-category-btn.active {
+            background: #ff6600;
+            border-color: #ff6600;
+            color: white;
+        }
+
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(10, 29, 59, 0.08);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            box-shadow: 0 8px 24px rgba(10, 29, 59, 0.12);
+        }
+
+        .faq-question {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 24px 28px;
+            cursor: pointer;
+            gap: 20px;
+        }
+
+        .faq-question-content {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex: 1;
+        }
+
+        .faq-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, rgba(0, 172, 193, 0.1) 0%, rgba(0, 172, 193, 0.05) 100%);
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
         }
 
-        .page-banner .breadcrumb a {
-            color: #fff;
-            text-decoration: none;
-            transition: color 0.2s ease;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        .faq-icon i {
+            font-size: 18px;
+            color: #00acc1;
+            transition: all 0.3s ease;
         }
 
-        .page-banner .breadcrumb a:hover {
-            color: #ff6600;
-            border-bottom-color: #ff6600;
+        .faq-item.active .faq-icon {
+            background: linear-gradient(135deg, #ff6600 0%, #ff8533 100%);
         }
 
-        .page-banner .breadcrumb-separator {
-            margin: 0 10px;
-            color: rgba(255, 255, 255, 0.6);
-            font-weight: 400;
+        .faq-item.active .faq-icon i {
+            color: white;
         }
 
-        .page-banner .breadcrumb-current {
-            color: #fff;
-        }
-
-        .page-banner h1 {
-            font-size: 50px;
-            color: #fff;
+        .faq-question h3 {
             font-family: 'Rubik', sans-serif;
-            font-weight: 700;
+            font-size: 17px;
+            font-weight: 600;
+            color: #0a1e42;
             margin: 0;
-            line-height: 1.2;
-            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+            line-height: 1.4;
+            transition: color 0.3s ease;
+        }
+
+        .faq-item.active .faq-question h3 {
+            color: #ff6600;
+        }
+
+        .faq-toggle {
+            width: 32px;
+            height: 32px;
+            background: #f8f9fa;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .faq-toggle i {
+            font-size: 14px;
+            color: #5a6c7d;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item.active .faq-toggle {
+            background: #ff6600;
+            transform: rotate(180deg);
+        }
+
+        .faq-item.active .faq-toggle i {
+            color: white;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+
+        .faq-answer-content {
+            padding: 0 28px 28px 88px;
+        }
+
+        .faq-answer-content p {
+            font-size: 15px;
+            color: #5a6c7d;
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        .faq-cta {
+            background: linear-gradient(135deg, #0a1e42 0%, #0d2550 100%);
+            padding: 60px 40px;
+            text-align: center;
+            margin-top: 60px;
+            border-radius: 16px;
+        }
+
+        .faq-cta h3 {
+            font-family: 'Rubik', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 12px;
+        }
+
+        .faq-cta p {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 24px;
+        }
+
+        .faq-cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 32px;
+            background: #ff6600;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .faq-cta-btn:hover {
+            background: #ff8533;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 102, 0, 0.4);
         }
 
         @media (max-width: 767.98px) {
             .page-banner {
                 height: 250px;
             }
+
             .page-banner h1 {
                 font-size: 36px;
+            }
+
+            .faq-section {
+                padding: 60px 0;
+            }
+
+            .faq-container {
+                padding: 0 20px;
+            }
+
+            .faq-question {
+                padding: 20px;
+            }
+
+            .faq-answer-content {
+                padding: 0 20px 20px 20px;
+            }
+
+            .faq-question-content {
+                gap: 12px;
+            }
+
+            .faq-icon {
+                width: 38px;
+                height: 38px;
+            }
+
+            .faq-icon i {
+                font-size: 16px;
+            }
+
+            .faq-question h3 {
+                font-size: 15px;
+            }
+
+            .faq-category-btn {
+                padding: 8px 18px;
+                font-size: 13px;
+            }
+
+            .faq-cta {
+                padding: 40px 24px;
+            }
+
+            .faq-cta h3 {
+                font-size: 22px;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- Header Placeholder -->
     <div id="header-placeholder"></div>
 
-    <!-- Banner Section -->
     <main style="padding: 0; margin: 0;">
-        <section class="page-banner">
-            <div class="banner-content">
-                <nav class="breadcrumb">
-                    <a href="/">Inicio</a>
-                    <span class="breadcrumb-separator">></span>
-                    <span class="breadcrumb-current">Preguntas Frecuentes</span>
-                </nav>
-                <h1>Preguntas Frecuentes</h1>
+        <section class="page-header">
+            <div class="page-header-wrapper">
+                <div class="page-header-content">
+                    <div class="page-header-accent"></div>
+                    <nav class="breadcrumb">
+                        <a href="/">Inicio</a>
+                        <span class="breadcrumb-separator">›</span>
+                        <span class="breadcrumb-current">Preguntas Frecuentes</span>
+                    </nav>
+                    <h1>Preguntas Frecuentes</h1>
+                </div>
             </div>
         </section>
 
-        <!-- Your page content goes here -->
-        <section class="your-section">
-            <h1>Your Page Content</h1>
-            <p>Add your content here...</p>
+        <section class="faq-section">
+            <div class="faq-container">
+                <div class="faq-intro">
+                    <p>Encuentra respuestas a las preguntas que nuestros estudiantes hacen con mayor frecuencia. Si no encuentras lo que buscas, no dudes en contactarnos.</p>
+                </div>
+
+                <div class="faq-categories">
+                    <button class="faq-category-btn active" data-category="all">Todas</button>
+                    <button class="faq-category-btn" data-category="clases">Clases</button>
+                    <button class="faq-category-btn" data-category="pagos">Pagos</button>
+                    <button class="faq-category-btn" data-category="metodologia">Metodología</button>
+                </div>
+
+                <div class="faq-list">
+                    <div class="faq-item" data-category="clases">
+                        <div class="faq-question">
+                            <div class="faq-question-content">
+                                <div class="faq-icon">
+                                    <i class="fas fa-calendar-alt"></i>
+                                </div>
+                                <h3>¿Cómo puedo agendar mi primera clase?</h3>
+                            </div>
+                            <div class="faq-toggle">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>Para agendar tu primera clase, ve a la sección "Agendar Clase" en nuestro menú. Primero selecciona el paquete de clases que prefieras (1, 2, 4, 6 u 8 clases), luego elige las fechas y horarios disponibles que se adapten a tu agenda, completa tus datos personales y procede al pago. Recibirás la confirmación y los detalles de conexión a Zoom por correo electrónico.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-category="clases">
+                        <div class="faq-question">
+                            <div class="faq-question-content">
+                                <div class="faq-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <h3>¿Cuánto dura cada sesión de clase?</h3>
+                            </div>
+                            <div class="faq-toggle">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>Cada sesión de clase privada tiene una duración de 60 minutos. Este tiempo está diseñado para mantener la concentración óptima y cubrir suficiente contenido sin agotarte. Todas las clases se realizan a través de la plataforma Zoom.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-category="clases">
+                        <div class="faq-question">
+                            <div class="faq-question-content">
+                                <div class="faq-icon">
+                                    <i class="fas fa-calendar-times"></i>
+                                </div>
+                                <h3>¿Qué pasa si necesito cancelar o reprogramar una clase?</h3>
+                            </div>
+                            <div class="faq-toggle">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>Entendemos que pueden surgir imprevistos. Puedes reprogramar tu clase sin ningún cargo siempre que nos avises con al menos 2 horas de anticipación. Para reprogramar, simplemente envíanos un mensaje por WhatsApp o correo electrónico y coordinaremos un nuevo horario que se ajuste a tu disponibilidad.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-category="metodologia">
+                        <div class="faq-question">
+                            <div class="faq-question-content">
+                                <div class="faq-icon">
+                                    <i class="fas fa-graduation-cap"></i>
+                                </div>
+                                <h3>¿Necesito tener algún nivel previo de inglés?</h3>
+                            </div>
+                            <div class="faq-toggle">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>¡Para nada! Aceptamos estudiantes de todos los niveles, desde principiantes absolutos hasta avanzados que buscan perfeccionar su inglés. En tu primera sesión evaluamos tu nivel actual y diseñamos un plan de estudio personalizado según tus objetivos y necesidades específicas.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-category="metodologia">
+                        <div class="faq-question">
+                            <div class="faq-question-content">
+                                <div class="faq-icon">
+                                    <i class="fas fa-laptop"></i>
+                                </div>
+                                <h3>¿Las clases son presenciales u online?</h3>
+                            </div>
+                            <div class="faq-toggle">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>Actualmente todas nuestras clases son 100% online a través de Zoom. Esto te permite estudiar desde la comodidad de tu hogar, oficina o cualquier lugar con conexión a internet. Puedes descargar Zoom gratuitamente desde su página oficial. Durante la clase compartimos materiales en tiempo real para una experiencia de aprendizaje interactiva.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-category="metodologia">
+                        <div class="faq-question">
+                            <div class="faq-question-content">
+                                <div class="faq-icon">
+                                    <i class="fas fa-book-open"></i>
+                                </div>
+                                <h3>¿Qué metodología de enseñanza utilizan?</h3>
+                            </div>
+                            <div class="faq-toggle">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>Utilizamos un enfoque comunicativo centrado en la conversación real. Nuestras clases combinan gramática práctica, vocabulario contextualizado, ejercicios de listening y mucha práctica oral. Nos enfocamos en situaciones de la vida real para que puedas aplicar lo aprendido inmediatamente en tu trabajo, viajes o vida cotidiana.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-category="pagos">
+                        <div class="faq-question">
+                            <div class="faq-question-content">
+                                <div class="faq-icon">
+                                    <i class="fas fa-credit-card"></i>
+                                </div>
+                                <h3>¿Cuáles son los métodos de pago disponibles?</h3>
+                            </div>
+                            <div class="faq-toggle">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>El pago se realiza de forma segura a través de nuestra pasarela de pagos al momento de completar tu reserva. Puedes pagar con tarjetas de crédito, débito o transferencia bancaria. El pago se realiza por adelantado según el paquete de clases que elijas, y obtienes mejores precios mientras más clases reserves.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-category="pagos">
+                        <div class="faq-question">
+                            <div class="faq-question-content">
+                                <div class="faq-icon">
+                                    <i class="fas fa-tags"></i>
+                                </div>
+                                <h3>¿Ofrecen descuentos por paquetes de clases?</h3>
+                            </div>
+                            <div class="faq-toggle">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>¡Sí! Ofrecemos descuentos atractivos cuando adquieres paquetes de clases. Tenemos paquetes de 1, 2, 4, 6 y 8 clases con descuentos progresivos de hasta un 27% de ahorro. Mientras más clases reserves, menor será el precio por clase. Visita nuestra página de "Agendar Clase" para ver los precios actualizados de cada paquete.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-category="pagos">
+                        <div class="faq-question">
+                            <div class="faq-question-content">
+                                <div class="faq-icon">
+                                    <i class="fas fa-undo"></i>
+                                </div>
+                                <h3>¿Tienen política de reembolso?</h3>
+                            </div>
+                            <div class="faq-toggle">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>Si por alguna razón no estás satisfecho después de tu primera clase pagada, te ofrecemos un reembolso completo sin hacer preguntas. Para paquetes de clases, puedes solicitar un reembolso proporcional por las clases no utilizadas dentro de los primeros 30 días de tu compra.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-category="clases">
+                        <div class="faq-question">
+                            <div class="faq-question-content">
+                                <div class="faq-icon">
+                                    <i class="fas fa-bullseye"></i>
+                                </div>
+                                <h3>¿Pueden ayudarme a prepararme para exámenes oficiales?</h3>
+                            </div>
+                            <div class="faq-toggle">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>¡Por supuesto! Ofrecemos preparación especializada para exámenes internacionales como TOEFL, IELTS, Cambridge (FCE, CAE, CPE) y otros. Nuestras clases de preparación incluyen estrategias específicas para cada sección del examen, práctica con ejercicios reales y simulacros de examen para que llegues preparado y confiado.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-category="metodologia">
+                        <div class="faq-question">
+                            <div class="faq-question-content">
+                                <div class="faq-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <h3>¿Cuánto tiempo toma ver resultados?</h3>
+                            </div>
+                            <div class="faq-toggle">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>Los resultados varían según tu dedicación y frecuencia de estudio. Sin embargo, la mayoría de nuestros estudiantes notan mejoras significativas en su confianza y fluidez después de solo 4-6 semanas de clases regulares (2-3 veces por semana). Te recomendamos complementar las clases con práctica diaria usando nuestros recursos gratuitos.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-category="clases">
+                        <div class="faq-question">
+                            <div class="faq-question-content">
+                                <div class="faq-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <h3>¿Ofrecen clases grupales además de las privadas?</h3>
+                            </div>
+                            <div class="faq-toggle">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>Actualmente nos especializamos en clases privadas uno a uno para garantizar atención personalizada y máximo progreso. Sin embargo, si tienes un amigo o familiar que quiera estudiar contigo, ofrecemos la opción de clases para 2 personas con una tarifa especial. Contáctanos para más detalles.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-category="metodologia">
+                        <div class="faq-question">
+                            <div class="faq-question-content">
+                                <div class="faq-icon">
+                                    <i class="fas fa-file-alt"></i>
+                                </div>
+                                <h3>¿Recibo material de estudio adicional?</h3>
+                            </div>
+                            <div class="faq-toggle">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>Sí, todos nuestros estudiantes reciben acceso a nuestra biblioteca de recursos que incluye ejercicios de práctica, hojas de trabajo, listas de vocabulario, audios para practicar listening y material de lectura. Además, después de cada clase recibirás un resumen con los puntos clave y tareas opcionales para reforzar lo aprendido.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-cta">
+                    <h3>¿No encontraste tu respuesta?</h3>
+                    <p>Estamos aquí para ayudarte. Contáctanos y resolveremos todas tus dudas.</p>
+                    <a href="/pages/soporte/contacto.html" class="faq-cta-btn">
+                        <i class="fas fa-envelope"></i>
+                        <span>Contáctanos</span>
+                    </a>
+                </div>
+            </div>
         </section>
     </main>
 
-    <!-- Footer Placeholder -->
     <div id="footer-placeholder"></div>
 
 <script src="../../js/layout.js"></script>
 <script src="../../js/script.js" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const faqItems = document.querySelectorAll('.faq-item');
+    const categoryBtns = document.querySelectorAll('.faq-category-btn');
+
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        question.addEventListener('click', () => {
+            const isActive = item.classList.contains('active');
+            faqItems.forEach(i => i.classList.remove('active'));
+            if (!isActive) {
+                item.classList.add('active');
+            }
+        });
+    });
+
+    categoryBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            categoryBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const category = btn.dataset.category;
+            faqItems.forEach(item => {
+                if (category === 'all' || item.dataset.category === category) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+            faqItems.forEach(i => i.classList.remove('active'));
+        });
+    });
+});
+</script>
 
 </body>
 </html>
