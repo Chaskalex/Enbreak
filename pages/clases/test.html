@@ -15,6 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rubik:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
         .page-header {
     position: relative;
@@ -561,6 +562,142 @@
     border-color: #9ca3af;
 }
 
+.btn-certificate {
+    background: linear-gradient(135deg, #0a1e42, #1a3a6e);
+    color: white;
+    border: none;
+    padding: 14px 28px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-certificate:hover {
+    background: linear-gradient(135deg, #1a3a6e, #0a1e42);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(10, 30, 66, 0.3);
+}
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal-content {
+    background: white;
+    padding: 40px;
+    border-radius: 16px;
+    max-width: 450px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-content h3 {
+    font-family: 'Rubik', sans-serif;
+    font-size: 24px;
+    color: #0a1e42;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.modal-content p {
+    font-size: 14px;
+    color: #6b7280;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.modal-content input {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 16px;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    margin-bottom: 24px;
+    font-family: 'Inter', sans-serif;
+    transition: border-color 0.2s ease;
+}
+
+.modal-content input:focus {
+    outline: none;
+    border-color: #ff6600;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.modal-actions button {
+    flex: 1;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-modal-confirm {
+    background: #ff6600;
+    color: white;
+    border: none;
+}
+
+.btn-modal-confirm:hover {
+    background: #e55b00;
+}
+
+.btn-modal-cancel {
+    background: white;
+    color: #374151;
+    border: 2px solid #e5e7eb;
+}
+
+.btn-modal-cancel:hover {
+    border-color: #9ca3af;
+}
+
+
+.no-certificate-message {
+    color: #6b7280;
+    font-style: italic;
+    font-size: 14px;
+    margin: 0;
+    padding: 12px 20px;
+    background: #f3f4f6;
+    border-radius: 8px;
+}
+
 .btn-abandon {
     background: #ef4444;
     color: white;
@@ -869,12 +1006,12 @@
                                 <li>Busca un lugar tranquilo y sin distracciones</li>
                                 <li>Responde con honestidad, sin buscar ayuda externa</li>
                                 <li>Si no sabes una respuesta, ve con tu instinto</li>
-                                <li>El test toma aproximadamente 4 minutos por nivel</li>
+                                <li>El test toma aproximadamente 5 minutos por nivel</li>
                             </ul>
                         </div>
                     </div>
 
-                    <p class="intro-footer">¿Listo para conocer tu nivel? ¡Comencemos!</p>
+                    <p class="intro-footer">¿Listo para conocer tu nivel?</p>
 
                     <button class="btn-start" onclick="startTest()">Comenzar Test</button>
                 </div>
@@ -948,7 +1085,9 @@
                     </div>
 
                     <div class="final-actions">
-                        <button class="btn-primary" onclick="showReview()">Revisar Respuestas</button>
+                        <button id="certificate-btn" class="btn-certificate" onclick="showNameModal()"><i class="fas fa-download"></i> Descargar Certificado</button>
+                        <p id="no-certificate-msg" class="no-certificate-message" style="display: none;">El certificado está disponible a partir del nivel A1. ¡Sigue practicando!</p>
+                        <button class="btn-secondary" onclick="showReview()">Revisar Respuestas</button>
                     </div>
                 </div>
                 </div>
@@ -973,6 +1112,20 @@
     <!-- Footer Placeholder -->
     <div id="footer-placeholder"></div>
 
+    <!-- Name Modal -->
+    <div id="name-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h3>Descargar Certificado</h3>
+            <p>Por favor, ingresa tu nombre completo tal como deseas que aparezca en el certificado.</p>
+            <input type="text" id="student-name-input" placeholder="Ej: María García López" maxlength="50">
+            <div class="modal-actions">
+                <button class="btn-modal-cancel" onclick="closeNameModal()">Cancelar</button>
+                <button class="btn-modal-confirm" onclick="confirmDownload()">Descargar</button>
+            </div>
+        </div>
+    </div>
+
+
 <script src="../../js/layout.js"></script>
 <script src="../../js/script.js" defer></script>
 <script>
@@ -982,74 +1135,74 @@ const LEVEL_ZERO = 'A0';
 
 const questionBank = {
   A1: [
-    { q: "How do you go to work?", options: ["By bus", "A doctor", "Five days a week"], correct: 0 },
-    { q: "What time does the class start?", options: ["For two hours", "At nine o'clock", "On Monday"], correct: 1 },
-    { q: "Can I borrow your pen?", options: ["Yes, I have", "Yes, I can", "Yes, here you are"], correct: 2 },
-    { q: "How often do you visit your family?", options: ["In my hometown", "Last weekend", "Every month"], correct: 2 },
-    { q: "How much is this shirt?", options: ["It's fifteen dollars", "It's medium", "It's very nice"], correct: 0 },
-    { q: "When do you study?", options: ["In my room", "Half an hour", "At noon"], correct: 2 },
-    { q: "Choose the correct sentence:", options: ["She goes to school every day", "She go to school every day", "She going to school every day"], correct: 0 },
-    { q: "Choose the correct sentence:", options: ["There is three cats in the garden", "There are three cats in the garden", "There have three cats in the garden"], correct: 1 },
-    { q: "Choose the correct sentence:", options: ["I can to swim very well", "I can swimming very well", "I can swim very well"], correct: 2 },
+    { q: "How do you go to work?", options: ["By bus.", "In a train station.", "Five days a week."], correct: 0 },
+    { q: "What time does the class start?", options: ["For two hours.", "At nine o'clock.", "On Monday."], correct: 1 },
+    { q: "Can I borrow your pen?", options: ["Yes, I have.", "Yes, I can.", "Yes, here you are."], correct: 2 },
+    { q: "How often do you visit your family?", options: ["Every month.", "In my hometown.", "Last weekend."], correct: 0 },
+    { q: "How much is this shirt?", options: ["It's very nice.", "It's fifteen dollars.", "It's medium size."], correct: 1 },
+    { q: "When do you study?", options: ["In my room.", "Half an hour.", "At noon."], correct: 2 },
+    { q: "Choose the correct sentence:", options: ["She goes to school every day.", "She go to school every day.", "She going to school every day."], correct: 0 },
+    { q: "Choose the correct sentence:", options: ["There is three cats in the garden.", "There are three cats in the garden.", "There have three cats in the garden."], correct: 1 },
+    { q: "Choose the correct sentence:", options: ["I can to swim very well.", "I can swimming very well.", "I can swim very well."], correct: 2 },
     { q: "My sister <blank></blank> a doctor.", options: ["am", "is", "are"], correct: 1 },
-    { q: "I <blank></blank> like coffee.", options: ["does not", "am not", "do not"], correct: 2 },
+    { q: "I <blank></blank> like coffee.", options: ["do not", "does not", "am not"], correct: 0 },
     { q: "<blank></blank> do you live?", options: ["What", "Who", "Where"], correct: 2 }
   ],
   A2: [
-    { q: "What did you do last weekend?", options: ["I went to the museum", "I go to the mountain", "I've been to the beach"], correct: 0 },
-    { q: "How was your vacation?", options: ["I traveled to Brazil", "It was amazing", "I stayed for three weeks"], correct: 1 },
-    { q: "Can you come to my party on Saturday?", options: ["Sorry, I can work", "Sorry, I may work", "Sorry, I have to work"], correct: 2 },
-    { q: "Have you ever been to Italy?", options: ["Yes, twice", "Yes, I went", "Yes, I will"], correct: 0 },
-    { q: "What are your plans for the summer?", options: ["I went to London", "I don't have any", "I've visited my friends"], correct: 1 },
-    { q: "How long have you lived in this city?", options: ["By 2020", "In 2020", "Since 2020"], correct: 2 },
-    { q: "Choose the correct sentence:", options: ["She is taller than her sister", "She is more tall than her sister", "She is more taller than her sister"], correct: 0 },
-    { q: "Choose the correct sentence:", options: ["Employees must washing their hands", "Employees must wash their hands", "Employees must to wash their hands"], correct: 1 },
-    { q: "Choose the correct sentence:", options: ["We going to travel next month", "We go to travel next month", "We are going to travel next month"], correct: 2 },
+    { q: "What did you do last weekend?", options: ["I went to the museum.", "I go to the mountain.", "I've been to the beach."], correct: 0 },
+    { q: "How was your vacation?", options: ["I traveled to Brazil.", "It was amazing.", "I stayed for three weeks."], correct: 1 },
+    { q: "Can you come to my party on Saturday?", options: ["Sorry, I can work.", "Sorry, I may work.", "Sorry, I have to work."], correct: 2 },
+    { q: "Have you ever been to Italy?", options: ["Yes, twice.", "Yes, I went.", "Yes, I will."], correct: 0 },
+    { q: "What are your plans for the summer?", options: ["I went to London.", "I don't have any.", "I've visited my friends."], correct: 1 },
+    { q: "How long have you lived in this city?", options: ["By 2020.", "In 2020.", "Since 2020."], correct: 2 },
+    { q: "Choose the correct sentence:", options: ["She is taller than her sister.", "She is more tall than her sister.", "She is more taller than her sister."], correct: 0 },
+    { q: "Choose the correct sentence:", options: ["Employees must washing their hands.", "Employees must wash their hands.", "Employees must to wash their hands."], correct: 1 },
+    { q: "Choose the correct sentence:", options: ["We going to travel next month.", "We go to travel next month.", "We are going to travel next month."], correct: 2 },
     { q: "I <blank></blank> this course twice this year.", options: ["have taken", "took", "have take"], correct: 0 },
     { q: "There isn't <blank></blank> milk in the fridge.", options: ["some", "any", "many"], correct: 1 },
     { q: "She is the <blank></blank> person I know.", options: ["fast", "faster", "fastest"], correct: 2 }
   ],
   B1: [
-    { q: "What did the doctor tell you?", options: ["She said I shall rest for a few days", "She said I have to resting for a few days", "She said I should rest for a few days"], correct: 2 },
-    { q: "What would you do if you found a wallet on the street?", options: ["I will take it to the police", "I would take it to the police", "I took it to the police"], correct: 1 },
-    { q: "Why didn't you answer my call last night?", options: ["Sorry, I already went to bed", "Sorry, I have already gone to bed", "Sorry, I had already gone to bed"], correct: 2 },
-    { q: "How was the exam?", options: ["Difficult. I didn't have enough time to finish", "Difficult. I didn't have time enough to finish", "Difficult. I didn't have too time to finish"], correct: 0 },
-    { q: "Do you know what happened to the old factory?", options: ["It demolished last year", "It was demolished last year", "It has been demolished last year"], correct: 1 },
-    { q: "Will you come to the party on Saturday?", options: ["Yes, if I won't have to work", "Yes, if I didn't have to work", "Yes, if I don't have to work"], correct: 2 },
-    { q: "Choose the correct sentence:", options: ["He drives more carefully than his brother", "He drives more careful than his brother", "He drives carefuller than his brother"], correct: 0 },
-    { q: "Choose the correct sentence:", options: ["By the time we arrived, the concert already finished", "By the time we arrived, the concert had already finished", "By the time we arrived, the concert has already finished"], correct: 1 },
-    { q: "Choose the correct sentence:", options: ["If I would know the answer, I would tell you", "If I know the answer, I would tell you", "If I knew the answer, I would tell you"], correct: 2 },
-    { q: "The documents <blank></blank> to all employees yesterday.", options: ["were sent", "sent", "have sent"], correct: 0 },
-    { q: "We had to <blank></blank> the meeting until next week.", options: ["turn down", "put off", "carry out"], correct: 1 },
-    { q: "I couldn't concentrate. There was <blank></blank> noise.", options: ["too many", "enough", "too much"], correct: 2 }
+    { q: "What did the doctor tell you?", options: ["She said I should rest for a few days.", "She said I shall rest for a few days.", "She said I have to resting for a few days."], correct: 0 },
+    { q: "What would you do if you found a wallet on the street?", options: ["I will take it to the police.", "I would take it to the police.", "I took it to the police."], correct: 1 },
+    { q: "Why didn't you answer my call last night?", options: ["Sorry, I already went to bed.", "Sorry, I have already gone to bed.", "Sorry, I had already gone to bed."], correct: 2 },
+    { q: "How was the exam?", options: ["Difficult. I didn't have enough time to finish.", "Difficult. I didn't have time enough to finish.", "Difficult. I didn't have too time to finish."], correct: 0 },
+    { q: "Do you know what happened to the old factory?", options: ["It demolished last year.", "It was demolished last year.", "It has been demolished last year."], correct: 1 },
+    { q: "Will you come to the party on Saturday?", options: ["Yes, if I won't have to work.", "Yes, if I didn't have to work.", "Yes, if I don't have to work."], correct: 2 },
+    { q: "Choose the correct sentence:", options: ["He drives more carefully than his brother.", "He drives more careful than his brother.", "He drives carefuller than his brother."], correct: 0 },
+    { q: "Choose the correct sentence:", options: ["By the time we arrived, the concert already finished.", "By the time we arrived, the concert had already finished.", "By the time we arrived, the concert has already finished."], correct: 1 },
+    { q: "Choose the correct sentence:", options: ["If I would know the answer, I would tell you.", "If I know the answer, I would tell you.", "If I knew the answer, I would tell you."], correct: 2 },
+    { q: "The documents <blank></blank> to all employees yesterday.", options: ["were sent", "are sent", "have been sent"], correct: 0 },
+    { q: "We had to <blank></blank> the meeting until next week.", options: ["put off", "turn down", "carry out"], correct: 0 },
+    { q: "I couldn't concentrate. There was <blank></blank> noise.", options: ["too many", "too much", "enough"], correct: 1 }
   ],
   B2: [
-    { q: "Had I known about the traffic, I <blank></blank> earlier.", options: ["would leave", "would have left", "will leave"], correct: 1 },
-    { q: "The manager insisted <blank></blank> the meeting immediately.", options: ["on holding", "to hold", "holding"], correct: 0 },
-    { q: "<blank></blank> circumstances should you reveal this information.", options: ["Under no", "In no", "At no"], correct: 0 },
-    { q: "She's perfectly capable <blank></blank> the project herself.", options: ["to manage", "of managing", "managing"], correct: 1 },
-    { q: "Not only <blank></blank> the exam, but he also got the highest score.", options: ["he passed", "did he pass", "he did pass"], correct: 1 },
-    { q: "I object <blank></blank> treated like a child.", options: ["to be", "to being", "being"], correct: 1 },
-    { q: "The proposal merits serious <blank></blank>.", options: ["consideration", "considerate", "considering"], correct: 0 },
-    { q: "<blank></blank> harder, you would have succeeded.", options: ["Had you worked", "If you worked", "Should you work"], correct: 0 },
-    { q: "She's <blank></blank> to be the best candidate.", options: ["bound", "likely", "prone"], correct: 1 },
-    { q: "The evidence <blank></blank> that he was innocent.", options: ["indicated", "suggested", "proved"], correct: 1 },
-    { q: "The project was completed <blank></blank> schedule.", options: ["ahead of", "in front of", "before"], correct: 0 },
-    { q: "<blank></blank> you need any help, feel free to call.", options: ["Should", "Would", "Could"], correct: 0 }
+    { q: "What would you have done if you'd missed your flight?", options: ["I would have taken the next available one.", "I will take the next available one.", "I would take the next available one."], correct: 0 },
+    { q: "Why do you think James didn't reply to your email?", options: ["He should have been too busy.", "He must have been too busy.", "He would have been too busy."], correct: 1 },
+    { q: "What did the lawyer advise you to do?", options: ["He recommended that I will contest the decision.", "He recommended me to contest the decision.", "He recommended that I contest the decision."], correct: 2 },
+    { q: "How did you manage to finish the report so quickly?", options: ["Having worked on similar projects before, I knew exactly what to do.", "To work on similar projects before, I knew exactly what to do.", "Working on similar projects before, I know exactly what to do."], correct: 0 },
+    { q: "Your computer is working perfectly now. What happened?", options: ["I repaired it at the shop.", "I had it repaired at the shop.", "I have repaired it at the shop."], correct: 1 },
+    { q: "Tell me about the conference you attended last week.", options: ["It was an event which I learned a great deal from it.", "It was an event what I learned a great deal from.", "It was an event from which I learned a great deal."], correct: 2 },
+    { q: "She looks so exhausted. She <blank></blank> slept well.", options: ["can't have", "must have", "might not have"], correct: 0 },
+    { q: "I'm so sorry I missed your call. I <blank></blank> my phone on silent.", options: ["would have left", "must have left", "should have left"], correct: 1 },
+    { q: "I wish I <blank></blank> to her advice. Now I regret it.", options: ["would have listened", "could have listened", "had listened"], correct: 2 },
+    { q: "Choose the correct sentence:", options: ["The manuscript is believed to have been written in the 15th century.", "The manuscript is believed to be written in the 15th century.", "The manuscript is believed to been written in the 15th century."], correct: 0 },
+    { q: "Choose the correct sentence:", options: ["Seldom I have encountered such rudeness.", "Seldom have I encountered such rudeness.", "Seldom have encountered I such rudeness."], correct: 1 },
+    { q: "Choose the correct sentence:", options: ["If I would have studied harder, I would have passed the exam.", "If I had studied harder, I will have passed the exam.", "If I had studied harder, I would have passed the exam."], correct: 2 }
   ],
   C1: [
-    { q: "The politician's speech was <blank></blank> with references to classical literature.", options: ["littered", "peppered", "scattered"], correct: 1 },
-    { q: "<blank></blank> to the terms, the contract was signed immediately.", options: ["Having agreed", "Being agreed", "Agreed"], correct: 0 },
-    { q: "The findings are <blank></blank> with previous research on the topic.", options: ["compatible", "consistent", "coherent"], correct: 1 },
-    { q: "She <blank></blank> the temptation to criticize her colleague publicly.", options: ["resisted", "withstood", "opposed"], correct: 0 },
-    { q: "The company's profits have been <blank></blank> declining over the past year.", options: ["steadily", "constantly", "continuously"], correct: 0 },
-    { q: "His argument was so <blank></blank> that nobody could find fault with it.", options: ["compelling", "convincing", "cogent"], correct: 2 },
-    { q: "The committee decided to <blank></blank> the proposal pending further review.", options: ["suspend", "defer", "shelve"], correct: 2 },
-    { q: "<blank></blank> the circumstances, I think we handled the situation well.", options: ["Given", "Granted", "Considering"], correct: 0 },
-    { q: "The theory remains largely <blank></blank> despite extensive testing.", options: ["unverified", "unproven", "uncorroborated"], correct: 2 },
-    { q: "Her contribution to the field cannot be <blank></blank>.", options: ["underestimated", "overstated", "understated"], correct: 1 },
-    { q: "The results were <blank></blank> different from what we expected.", options: ["markedly", "remarkably", "notably"], correct: 0 },
-    { q: "His behavior was <blank></blank> unacceptable.", options: ["utterly", "totally", "completely"], correct: 0 }
+    { q: "I can't believe you managed to finish the entire project in just two days!", options: ["Had I known how demanding it would be, I wouldn't have accepted it.", "The deadline has been extended until next Friday.", "I haven't actually begun the research phase yet."], correct: 0 },
+    { q: "The merger talks have collapsed. What went wrong?", options: ["The stock price has recovered surprisingly quickly.", "What caused the breakdown was disagreement over management control.", "We should schedule a meeting with the legal team."], correct: 1 },
+    { q: "Sarah hasn't been herself lately. Have you noticed anything?", options: ["She's scheduled to lead the next quarterly review.", "Her presentation at the conference was excellent.", "She may well be dealing with some family issues."], correct: 2 },
+    { q: "Why did the committee reject your proposal outright?", options: ["Not having consulted them earlier, I misjudged their priorities.", "I'll be submitting a revised version next month.", "The budget allocation was approved unanimously."], correct: 0 },
+    { q: "What's your assessment of the political pressure facing the minister?", options: ["The opposition has tabled a motion of no confidence.", "Rarely have I seen a politician under such intense scrutiny.", "The prime minister has publicly reaffirmed her support."], correct: 1 },
+    { q: "What's your view on the government's climate strategy?", options: ["The legislation was passed with cross-party support.", "Renewable energy investment has doubled this year.", "The measures would appear to be rather insufficient."], correct: 2 },
+    { q: "The contract will be renewed next year, <blank></blank> any unforeseen circumstances.", options: ["notwithstanding", "regarding", "concerning"], correct: 0 },
+    { q: "Given his experience in the field, he <blank></blank> be the best candidate for the position.", options: ["may good", "may well", "may much"], correct: 1 },
+    { q: "It is imperative that every employee <blank></blank> the new safety protocols.", options: ["follows", "will follow", "follow"], correct: 2 },
+    { q: "Choose the correct sentence:", options: ["It was the lack of preparation that caused the project to fail.", "It was the lack of preparation what caused the project to fail.", "It was the lack of preparation which it caused the project to fail."], correct: 0 },
+    { q: "Choose the correct sentence:", options: ["Should you will need assistance, please contact our support team.", "Should you need assistance, please contact our support team.", "Should you to need assistance, please contact our support team."], correct: 1 },
+    { q: "Choose the correct sentence:", options: ["The theory is considering to be one of the most influential.", "The theory is considered being one of the most influential.", "The theory is considered to be one of the most influential."], correct: 2 }
   ]
 };
 
@@ -1271,12 +1424,12 @@ function showFinalResults() {
   document.getElementById('final-level-text').textContent = state.finalLevel;
 
   const descriptions = {
-    A0: "Eres un principiante absoluto. Necesitas comenzar desde lo más básico del idioma para construir una base sólida.",
-    A1: "Estás en la etapa principiante. Puedes entender y usar expresiones cotidianas familiares y frases básicas.",
-    A2: "Estás en el nivel elemental. Puedes comunicarte en tareas simples y entender expresiones de uso frecuente.",
-    B1: "Estás en el nivel intermedio. Puedes lidiar con la mayoría de situaciones y describir experiencias y eventos.",
-    B2: "Estás en el nivel intermedio-alto. Puedes interactuar con fluidez y entender textos complejos.",
-    C1: "Estás en el nivel avanzado. Puedes expresarte con fluidez y entender textos largos y exigentes."
+    A0: "Estás dando tus primeros pasos. Con práctica constante, pronto podrás comunicarte en situaciones básicas.",
+    A1: "Puedes comunicarte en situaciones cotidianas muy básicas usando frases simples. Puedes presentarte, pedir información elemental y hablar sobre tu rutina diaria.",
+    A2: "Puedes mantener conversaciones sobre temas familiares y personales. Puedes describir experiencias pasadas y hacer planes para el futuro.",
+    B1: "Puedes desenvolverte con independencia. Puedes expresar opiniones, narrar experiencias y entender las ideas principales de textos y discursos.",
+    B2: "Puedes interactuar con fluidez y naturalidad con hablantes nativos. Puedes leer textos complejos, dar argumentos detallados y captar significados implícitos.",
+    C1: "Puedes usar el idioma con precisión y sofisticación. Puedes expresarte espontáneamente, captar sutilezas y comunicarte efectivamente en entornos académicos y profesionales."
   };
 
   document.getElementById('final-level-description').textContent = descriptions[state.finalLevel];
@@ -1293,6 +1446,17 @@ function showFinalResults() {
     `;
     scoresList.appendChild(item);
   });
+
+  // Show/hide certificate button based on level
+  const certificateBtn = document.getElementById('certificate-btn');
+  const noCertificateMsg = document.getElementById('no-certificate-msg');
+  if (state.finalLevel === 'A0') {
+    certificateBtn.style.display = 'none';
+    noCertificateMsg.style.display = 'block';
+  } else {
+    certificateBtn.style.display = 'inline-flex';
+    noCertificateMsg.style.display = 'none';
+  }
 
   showScreen('final-result-screen');
 }
@@ -1393,6 +1557,281 @@ function restartTest() {
     returnScreen: null
   };
   showScreen('intro-screen');
+}
+
+function showNameModal() {
+  document.getElementById('name-modal').classList.add('active');
+  const input = document.getElementById('student-name-input');
+  input.focus();
+  input.addEventListener('keypress', handleNameInputKeypress);
+}
+
+function handleNameInputKeypress(e) {
+  if (e.key === 'Enter') {
+    confirmDownload();
+  }
+}
+
+function closeNameModal() {
+  document.getElementById('name-modal').classList.remove('active');
+  const input = document.getElementById('student-name-input');
+  input.value = '';
+  input.removeEventListener('keypress', handleNameInputKeypress);
+}
+
+function confirmDownload() {
+  const studentName = document.getElementById('student-name-input').value.trim();
+  if (!studentName) {
+    alert('Por favor, ingresa tu nombre completo.');
+    return;
+  }
+  closeNameModal();
+  downloadCertificate(studentName);
+}
+
+function loadImageAsDataURL(src) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = img.naturalWidth;
+      canvas.height = img.naturalHeight;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0);
+      resolve({
+        dataURL: canvas.toDataURL('image/png'),
+        width: img.naturalWidth,
+        height: img.naturalHeight
+      });
+    };
+    img.onerror = () => reject(new Error(`Failed to load image: ${src}`));
+    img.src = src;
+  });
+}
+
+async function downloadCertificate(studentName) {
+  const { jsPDF } = window.jspdf;
+  const level = state.finalLevel;
+
+  // Create PDF - A4 Landscape
+  const doc = new jsPDF({
+    orientation: 'landscape',
+    unit: 'mm',
+    format: 'a4'
+  });
+
+  const pageWidth = 297;
+  const pageHeight = 210;
+  const centerX = pageWidth / 2;
+
+  try {
+    // Load background image first
+    const bgImage = await loadImageAsDataURL('../../assets/backgrounds/certificate.png');
+    doc.addImage(bgImage.dataURL, 'PNG', 0, 0, pageWidth, pageHeight);
+
+    // Load logos
+    let logoLoaded = false;
+    let cefrLoaded = false;
+
+    try {
+      const logoImage = await loadImageAsDataURL('../../assets/logo/logo.png');
+      const logoHeight = 12;
+      const logoWidth = (logoImage.width / logoImage.height) * logoHeight;
+      doc.addImage(logoImage.dataURL, 'PNG', 34, 21, logoWidth, logoHeight);
+      logoLoaded = true;
+    } catch (e) {
+      console.warn('Logo not loaded:', e);
+    }
+
+    try {
+      const cefrImage = await loadImageAsDataURL('../../assets/logo/cefr.png');
+      const cefrHeight = 22;
+      const cefrWidth = (cefrImage.width / cefrImage.height) * cefrHeight;
+      doc.addImage(cefrImage.dataURL, 'PNG', pageWidth - cefrWidth - 38, 20, cefrWidth, cefrHeight);
+      cefrLoaded = true;
+    } catch (e) {
+      console.warn('CEFR logo not loaded:', e);
+    }
+
+    // Fallback text for logos if not loaded
+    if (!logoLoaded) {
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(14);
+      doc.setTextColor(10, 30, 66);
+      doc.text('ENBREAK', 22, 20);
+    }
+
+    if (!cefrLoaded) {
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(10);
+      doc.setTextColor(10, 30, 66);
+      doc.text('CEFR', pageWidth - 35, 20);
+    }
+
+    // "Se certifica que"
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(12);
+    doc.setTextColor(80, 80, 80);
+    doc.text('Por medio del presente se certifica que', centerX, 34, { align: 'center' });
+
+    // Student name
+    doc.setFont('times', 'bold');
+    doc.setFontSize(28);
+    doc.setTextColor(10, 30, 66);
+    doc.text(studentName, centerX, 47, { align: 'center' });
+
+    // "ha alcanzado el nivel"
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(12);
+    doc.setTextColor(80, 80, 80);
+    doc.text('ha alcanzado el nivel', centerX, 61, { align: 'center' });
+
+    // Level (only A1, A2, etc - without "Nivel")
+    doc.setFont('times', 'bold');
+    doc.setFontSize(34);
+    doc.setTextColor(10, 30, 66);
+    doc.text(level, centerX, 78, { align: 'center' });
+
+    // "en el Test de Nivel Enbreak"
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(12);
+    doc.setTextColor(80, 80, 80);
+    doc.text('en el Test de Nivel de Enbreak conforme al Marco Común Europeo de Referencia', centerX, 90, { align: 'center' });
+
+    // Competencies data
+    const competencies = {
+      A1: [
+        'Comprende y utiliza expresiones cotidianas y frases básicas',
+        'Puede presentarse y proporcionar información personal básica',
+        'Interactúa de forma sencilla con interlocutores pacientes'
+      ],
+      A2: [
+        'Comunica tareas simples sobre temas familiares y cotidianos',
+        'Describe aspectos de su entorno y necesidades inmediatas',
+        'Comprende frases y vocabulario de uso frecuente'
+      ],
+      B1: [
+        'Se desenvuelve en situaciones cotidianas con independencia',
+        'Produce textos coherentes sobre temas conocidos o de interés',
+        'Describe experiencias, eventos, deseos y aspiraciones'
+      ],
+      B2: [
+        'Interactúa con fluidez y espontaneidad con hablantes nativos',
+        'Produce textos claros y detallados sobre diversos temas',
+        'Comprende ideas principales de textos complejos'
+      ],
+      C1: [
+        'Se expresa con fluidez y precisión en cualquier contexto',
+        'Comprende textos extensos con significados implícitos',
+        'Usa el idioma de manera flexible y efectiva'
+      ]
+    };
+
+    // Competencias section
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(11);
+    doc.setTextColor(10, 30, 66);
+    doc.text('Competencias:', 70, 108);
+
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+    doc.setTextColor(60, 60, 60);
+    const levelCompetencies = competencies[level] || competencies['A1'];
+    let yPos = 120;
+    levelCompetencies.forEach(comp => {
+      doc.text('• ' + comp, 38, yPos);
+      yPos += 8;
+    });
+
+    // Resultados section - 2x3 Grid
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(11);
+    doc.setTextColor(10, 30, 66);
+    const resultsHeaderX = 210;
+    doc.text('Resultados Obtenidos:', resultsHeaderX, 108, { align: 'center' });
+
+    doc.setTextColor(60, 60, 60);
+
+    const gridStartX = 158;
+    const gridStartY = 120;
+    const colWidth = 30;
+    const rowHeight = 10;
+
+    const allLevels = ['A1', 'A2', 'B1', 'B2', 'C1'];
+    const row1 = ['A1', 'B1', 'C1'];
+    const row2 = ['A2', 'B2'];
+
+    row1.forEach((lvl, idx) => {
+      const score = state.scores[lvl];
+      const xPos = gridStartX + (idx * colWidth);
+
+      // Level name in bold
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(10);
+      doc.text(`${lvl}:`, xPos, gridStartY);
+
+      // Score in normal
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(10);
+      const scoreText = score !== undefined ? `${score}%` : '-';
+      doc.text(scoreText, xPos + 8, gridStartY);
+    });
+
+    row2.forEach((lvl, idx) => {
+      const score = state.scores[lvl];
+      const xPos = gridStartX + (idx * colWidth);
+
+      // Level name in bold
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(10);
+      doc.text(`${lvl}:`, xPos, gridStartY + rowHeight);
+
+      // Score in normal
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(10);
+      const scoreText = score !== undefined ? `${score}%` : '-';
+      doc.text(scoreText, xPos + 8, gridStartY + rowHeight);
+    });
+
+    // Date
+    const today = new Date();
+    const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+    const formattedDate = today.toLocaleDateString('es-ES', dateOptions);
+
+    const dateX = 70;
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9);
+    doc.setTextColor(100, 100, 100);
+    doc.text('Fecha de emisión:', dateX, 165, { align: 'center' });
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(10, 30, 66);
+    doc.text(formattedDate, dateX, 171, { align: 'center' });
+
+    // Website
+    const websiteX = pageWidth - 70;
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9);
+    doc.setTextColor(100, 100, 100);
+    doc.text('Sitio web:', websiteX, 165, { align: 'center' });
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(10, 30, 66);
+    doc.text('www.enbreak.net', websiteX, 171, { align: 'center' });
+
+    // Disclaimer
+    doc.setFont('helvetica', 'italic');
+    doc.setFontSize(7);
+    doc.setTextColor(120, 120, 120);
+    doc.text('Este es un resultado orientativo del test diagnóstico de Enbreak y no constituye una certificación oficial.', centerX, 190, { align: 'center' });
+
+    // Save
+    const sanitizedName = studentName.replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '-');
+    doc.save(`Certificado-Enbreak-${level}-${sanitizedName}.pdf`);
+
+  } catch (error) {
+    console.error('Error generating certificate:', error);
+    alert('Hubo un error al generar el certificado. Por favor, intenta de nuevo.');
+  }
 }
 </script>
 

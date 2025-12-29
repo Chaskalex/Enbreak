@@ -16,7 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rubik:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../css/style.css">
     <style>
-        .page-header {
+.page-header {
     position: relative;
     width: 100%;
     background: #ffffff;
@@ -81,10 +81,6 @@
     animation: bannerTextSlideIn 1s ease-out;
 }
 
-.page-header-image {
-    display: none;
-}
-
 .page-header-accent {
     position: absolute;
     left: 20px;
@@ -132,28 +128,6 @@
     line-height: 1.2;
 }
 
-@media (max-width: 768px) {
-    .page-header {
-        background: #ffffff;
-    }
-
-    .page-header::after {
-        display: none;
-    }
-
-    .page-header-wrapper {
-        min-height: auto;
-    }
-
-    .page-header-content {
-        padding: 24px 20px;
-    }
-
-    .page-header h1 {
-        font-size: 24px;
-    }
-}
-
 @keyframes bannerTextSlideIn {
     from {
         opacity: 0;
@@ -175,14 +149,197 @@
         transform: translateX(0);
     }
 }
+
+.terms-section {
+    padding: 80px 20px;
+    background: #f8f9fa;
+}
+
+.terms-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 50px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.terms-intro {
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 2px solid #f1f3f5;
+}
+
+.terms-intro p {
+    font-size: 15px;
+    color: #6b7280;
+    line-height: 1.7;
+    margin: 0;
+}
+
+.terms-intro .update-date {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 8px 16px;
+    background: #f1f3f5;
+    border-radius: 6px;
+    font-size: 13px;
+    color: #374151;
+    font-weight: 500;
+}
+
+.terms-content {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+}
+
+.terms-section-block h2 {
+    font-family: 'Rubik', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #0a1e42;
+    margin: 0 0 15px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.terms-section-block h2 i {
+    color: #ff6600;
+    font-size: 20px;
+}
+
+.terms-section-block h3 {
+    font-family: 'Rubik', sans-serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: #374151;
+    margin: 20px 0 10px 0;
+}
+
+.terms-section-block p {
+    font-size: 15px;
+    color: #5a6c7d;
+    line-height: 1.8;
+    margin: 0 0 12px 0;
+}
+
+.terms-section-block ul {
+    margin: 12px 0;
+    padding-left: 24px;
+}
+
+.terms-section-block li {
+    font-size: 15px;
+    color: #5a6c7d;
+    line-height: 1.8;
+    margin-bottom: 8px;
+}
+
+.terms-highlight {
+    background: #fff7ed;
+    border-left: 3px solid #ff6600;
+    padding: 16px 20px;
+    margin: 20px 0;
+    border-radius: 6px;
+}
+
+.terms-highlight p {
+    margin: 0;
+    color: #374151;
+    font-weight: 500;
+}
+
+.terms-contact {
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 2px solid #f1f3f5;
+    text-align: center;
+}
+
+.terms-contact h3 {
+    font-family: 'Rubik', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #0a1e42;
+    margin-bottom: 12px;
+}
+
+.terms-contact p {
+    font-size: 15px;
+    color: #6b7280;
+    margin-bottom: 20px;
+}
+
+.terms-contact-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 28px;
+    background: #ff6600;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+.terms-contact-btn:hover {
+    background: #e55a00;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 102, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+    .page-header {
+        background: #ffffff;
+    }
+
+    .page-header::after {
+        display: none;
+    }
+
+    .page-header-wrapper {
+        min-height: auto;
+    }
+
+    .page-header-content {
+        padding: 24px 20px;
+    }
+
+    .page-header h1 {
+        font-size: 24px;
+    }
+
+    .terms-section {
+        padding: 60px 20px;
+    }
+
+    .terms-container {
+        padding: 30px 24px;
+    }
+
+    .terms-section-block h2 {
+        font-size: 19px;
+    }
+
+    .terms-section-block h3 {
+        font-size: 16px;
+    }
+
+    .terms-section-block p,
+    .terms-section-block li {
+        font-size: 14px;
+    }
+}
     </style>
 </head>
 <body>
 
-    <!-- Header Placeholder -->
     <div id="header-placeholder"></div>
 
-    <!-- Banner Section -->
     <main style="padding: 0; margin: 0;">
         <section class="page-header">
             <div class="page-header-wrapper">
@@ -198,14 +355,133 @@
             </div>
         </section>
 
-        <!-- Your page content goes here -->
-        <section class="your-section">
-            <h1>Your Page Content</h1>
-            <p>Add your content here...</p>
+        <section class="terms-section">
+            <div class="terms-container">
+                <div class="terms-intro">
+                    <p>Al utilizar los servicios de Enbreak, aceptas cumplir con los siguientes términos y condiciones. Lee atentamente este documento antes de registrarte o realizar cualquier compra.</p>
+                    <span class="update-date"><i class="fas fa-calendar"></i> Última actualización: Diciembre 2024</span>
+                </div>
+
+                <div class="terms-content">
+                    <div class="terms-section-block">
+                        <h2><i class="fas fa-file-contract"></i> 1. Aceptación de los Términos</h2>
+                        <p>Al acceder y utilizar los servicios de Enbreak, incluidas las clases privadas, grupales, recursos educativos y cualquier otro contenido disponible en nuestra plataforma, aceptas estar legalmente vinculado por estos términos y condiciones.</p>
+                        <p>Si no estás de acuerdo con alguna parte de estos términos, no debes utilizar nuestros servicios.</p>
+                    </div>
+
+                    <div class="terms-section-block">
+                        <h2><i class="fas fa-user-graduate"></i> 2. Servicios Ofrecidos</h2>
+                        <p>Enbreak ofrece los siguientes servicios educativos:</p>
+                        <ul>
+                            <li>Clases particulares de inglés personalizadas</li>
+                            <li>Clases grupales con estudiantes de nivel similar</li>
+                            <li>Recursos educativos gratuitos (mini-clases, podcasts, materiales descargables)</li>
+                            <li>Preparación para exámenes internacionales (Cambridge, TOEFL, IELTS)</li>
+                            <li>Planes y paquetes de clases con descuentos especiales</li>
+                        </ul>
+                        <p>Nos reservamos el derecho de modificar, suspender o descontinuar cualquier servicio en cualquier momento sin previo aviso.</p>
+                    </div>
+
+                    <div class="terms-section-block">
+                        <h2><i class="fas fa-credit-card"></i> 3. Pagos y Facturación</h2>
+
+                        <h3>3.1 Métodos de Pago</h3>
+                        <p>Aceptamos transferencias bancarias, PayPal y tarjetas de crédito/débito. Todos los pagos deben realizarse antes de la clase programada.</p>
+
+                        <h3>3.2 Precios</h3>
+                        <p>Los precios están expresados en la moneda local y pueden variar según el tipo de clase, duración y paquete seleccionado. Los precios están sujetos a cambios sin previo aviso, pero no afectarán las compras ya realizadas.</p>
+
+                        <h3>3.3 Política de Reembolso</h3>
+                        <p>Ofrecemos reembolso completo si cancelas dentro de las primeras 48 horas después de tu compra y antes de haber tomado cualquier clase. Una vez iniciadas las clases, no se realizarán reembolsos, pero podrás reprogramar o transferir tus créditos según nuestra política de cancelación.</p>
+                    </div>
+
+                    <div class="terms-section-block">
+                        <h2><i class="fas fa-calendar-times"></i> 4. Cancelaciones y Reprogramación</h2>
+
+                        <div class="terms-highlight">
+                            <p><i class="fas fa-exclamation-circle"></i> Importante: Debes cancelar o reprogramar con al menos 24 horas de anticipación.</p>
+                        </div>
+
+                        <h3>4.1 Cancelación por Parte del Estudiante</h3>
+                        <p>Puedes cancelar o reprogramar una clase con al menos 24 horas de anticipación sin costo adicional. Las cancelaciones realizadas con menos de 24 horas de anticipación resultarán en la pérdida de esa clase.</p>
+
+                        <h3>4.2 Cancelación por Parte de Enbreak</h3>
+                        <p>En caso de que debamos cancelar una clase por causas de fuerza mayor, problemas técnicos u otra razón justificada, te notificaremos lo antes posible y reprogramaremos tu clase sin costo adicional o te ofreceremos un crédito completo.</p>
+                    </div>
+
+                    <div class="terms-section-block">
+                        <h2><i class="fas fa-laptop"></i> 5. Requisitos Técnicos</h2>
+                        <p>Para participar en las clases online, necesitas:</p>
+                        <ul>
+                            <li>Conexión a internet estable (mínimo 3 Mbps)</li>
+                            <li>Computadora, tablet o smartphone con cámara y micrófono</li>
+                            <li>Aplicación Zoom instalada (descarga gratuita)</li>
+                            <li>Auriculares (recomendado para mejor calidad de audio)</li>
+                        </ul>
+                        <p>No nos hacemos responsables por problemas técnicos derivados de tu equipo o conexión a internet. En caso de problemas persistentes, ofreceremos reprogramar la clase.</p>
+                    </div>
+
+                    <div class="terms-section-block">
+                        <h2><i class="fas fa-user-shield"></i> 6. Conducta del Usuario</h2>
+                        <p>Al usar nuestros servicios, te comprometes a:</p>
+                        <ul>
+                            <li>Asistir puntualmente a las clases programadas</li>
+                            <li>Mantener un comportamiento respetuoso hacia profesores y otros estudiantes</li>
+                            <li>No grabar, distribuir o compartir contenido de las clases sin autorización</li>
+                            <li>No utilizar el servicio para fines ilegales o no autorizados</li>
+                            <li>Proporcionar información veraz durante el registro</li>
+                        </ul>
+                        <p>Nos reservamos el derecho de suspender o terminar tu acceso a los servicios si violas estos términos.</p>
+                    </div>
+
+                    <div class="terms-section-block">
+                        <h2><i class="fas fa-lock"></i> 7. Propiedad Intelectual</h2>
+                        <p>Todo el contenido disponible en Enbreak, incluyendo pero no limitado a textos, imágenes, videos, materiales educativos, logotipos y diseños, está protegido por derechos de autor y es propiedad exclusiva de Enbreak.</p>
+                        <p>Queda prohibida la reproducción, distribución, modificación o uso comercial de cualquier contenido sin autorización escrita.</p>
+                    </div>
+
+                    <div class="terms-section-block">
+                        <h2><i class="fas fa-shield-alt"></i> 8. Privacidad y Protección de Datos</h2>
+                        <p>La recopilación y uso de tus datos personales se rige por nuestra Política de Privacidad. Al usar nuestros servicios, aceptas el tratamiento de tus datos según lo descrito en dicha política.</p>
+                        <p>Nos comprometemos a proteger tu información personal y no compartirla con terceros sin tu consentimiento, excepto cuando sea requerido por ley.</p>
+                    </div>
+
+                    <div class="terms-section-block">
+                        <h2><i class="fas fa-exclamation-triangle"></i> 9. Limitación de Responsabilidad</h2>
+                        <p>Enbreak no será responsable por:</p>
+                        <ul>
+                            <li>Pérdida de datos o información</li>
+                            <li>Interrupciones del servicio por causas técnicas o de fuerza mayor</li>
+                            <li>Daños indirectos, incidentales o consecuentes derivados del uso de nuestros servicios</li>
+                            <li>Problemas técnicos en el equipo del usuario</li>
+                        </ul>
+                        <p>Nuestra responsabilidad máxima se limita al monto pagado por el servicio en cuestión.</p>
+                    </div>
+
+                    <div class="terms-section-block">
+                        <h2><i class="fas fa-sync-alt"></i> 10. Modificaciones de los Términos</h2>
+                        <p>Nos reservamos el derecho de modificar estos términos y condiciones en cualquier momento. Los cambios entrarán en vigor inmediatamente después de su publicación en esta página.</p>
+                        <p>Es tu responsabilidad revisar periódicamente estos términos. El uso continuado de nuestros servicios después de cualquier modificación constituye tu aceptación de los nuevos términos.</p>
+                    </div>
+
+                    <div class="terms-section-block">
+                        <h2><i class="fas fa-gavel"></i> 11. Ley Aplicable</h2>
+                        <p>Estos términos y condiciones se rigen por las leyes aplicables en la jurisdicción donde opera Enbreak. Cualquier disputa será resuelta en los tribunales competentes de dicha jurisdicción.</p>
+                    </div>
+                </div>
+
+                <div class="terms-contact">
+                    <h3>¿Tienes preguntas sobre estos términos?</h3>
+                    <p>Si necesitas aclaraciones o tienes dudas sobre estos términos y condiciones, no dudes en contactarnos.</p>
+                    <a href="contacto.html" class="terms-contact-btn">
+                        <i class="fas fa-envelope"></i>
+                        <span>Contáctanos</span>
+                    </a>
+                </div>
+            </div>
         </section>
     </main>
 
-    <!-- Footer Placeholder -->
     <div id="footer-placeholder"></div>
 
 <script src="../../js/layout.js"></script>

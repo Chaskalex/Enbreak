@@ -209,26 +209,29 @@
         }
 
         .faq-category-btn {
-            padding: 10px 24px;
-            background: white;
-            border: 2px solid #e9ecef;
-            border-radius: 25px;
-            font-size: 14px;
-            font-weight: 600;
-            color: #5a6c7d;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: #ffffff;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
             cursor: pointer;
             transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 500;
+            color: #6b7280;
         }
 
         .faq-category-btn:hover {
-            border-color: #00acc1;
-            color: #00acc1;
+            border-color: #ff6600;
+            color: #ff6600;
         }
 
         .faq-category-btn.active {
             background: #ff6600;
             border-color: #ff6600;
-            color: white;
+            color: #ffffff;
         }
 
         .faq-list {
@@ -478,10 +481,12 @@
                 </div>
 
                 <div class="faq-categories">
-                    <button class="faq-category-btn active" data-category="all">Todas</button>
-                    <button class="faq-category-btn" data-category="clases">Clases</button>
-                    <button class="faq-category-btn" data-category="pagos">Pagos</button>
-                    <button class="faq-category-btn" data-category="metodologia">Metodología</button>
+                    <button class="faq-category-btn active" data-category="all"><i class="fas fa-grip"></i> Todas</button>
+                    <button class="faq-category-btn" data-category="clases"><i class="fas fa-chalkboard-teacher"></i> Clases</button>
+                    <button class="faq-category-btn" data-category="pagos"><i class="fas fa-credit-card"></i> Pagos</button>
+                    <button class="faq-category-btn" data-category="metodologia"><i class="fas fa-lightbulb"></i> Metodología</button>
+                    <button class="faq-category-btn" data-category="recursos"><i class="fas fa-book"></i> Recursos</button>
+                    <button class="faq-category-btn" data-category="tecnico"><i class="fas fa-laptop"></i> Técnico</button>
                 </div>
 
                 <div class="faq-list">
@@ -728,6 +733,139 @@
                         <div class="faq-answer">
                             <div class="faq-answer-content">
                                 <p>Sí, todos nuestros estudiantes reciben acceso a nuestra biblioteca de recursos que incluye ejercicios de práctica, hojas de trabajo, listas de vocabulario, audios para practicar listening y material de lectura. Además, después de cada clase recibirás un resumen con los puntos clave y tareas opcionales para reforzar lo aprendido.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-category="recursos">
+                        <div class="faq-question">
+                            <div class="faq-question-content">
+                                <div class="faq-icon">
+                                    <i class="fas fa-gift"></i>
+                                </div>
+                                <h3>¿Los recursos de la biblioteca son gratuitos?</h3>
+                            </div>
+                            <div class="faq-toggle">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>Sí, todos los recursos de nuestra biblioteca son completamente gratuitos y están disponibles para cualquier persona. Incluyen mini-clases, podcasts, videos educativos y materiales descargables que puedes usar para complementar tu aprendizaje del inglés.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-category="recursos">
+                        <div class="faq-question">
+                            <div class="faq-question-content">
+                                <div class="faq-icon">
+                                    <i class="fas fa-calendar-week"></i>
+                                </div>
+                                <h3>¿Con qué frecuencia publican nuevos recursos?</h3>
+                            </div>
+                            <div class="faq-toggle">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>Publicamos nuevos recursos semanalmente, incluyendo mini-clases, episodios de podcast y contenido educativo. Te recomendamos visitar regularmente nuestra biblioteca o suscribirte a nuestro newsletter para recibir notificaciones cuando publiquemos nuevo material.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-category="recursos">
+                        <div class="faq-question">
+                            <div class="faq-question-content">
+                                <div class="faq-icon">
+                                    <i class="fas fa-video"></i>
+                                </div>
+                                <h3>¿Qué son las mini-clases?</h3>
+                            </div>
+                            <div class="faq-toggle">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>Las mini-clases son cápsulas educativas breves (5-15 minutos) que cubren temas específicos de gramática, vocabulario o pronunciación. Son perfectas para aprender conceptos puntuales de manera rápida y eficiente, ideales para quienes tienen poco tiempo pero quieren seguir progresando.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-category="recursos">
+                        <div class="faq-question">
+                            <div class="faq-question-content">
+                                <div class="faq-icon">
+                                    <i class="fas fa-download"></i>
+                                </div>
+                                <h3>¿Puedo descargar los materiales?</h3>
+                            </div>
+                            <div class="faq-toggle">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>Algunos materiales están disponibles para descarga directa, como PDFs, guías de estudio y hojas de trabajo. Los videos y podcasts se pueden ver o escuchar en línea desde nuestra plataforma, y están optimizados para funcionar en cualquier dispositivo.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-category="tecnico">
+                        <div class="faq-question">
+                            <div class="faq-question-content">
+                                <div class="faq-icon">
+                                    <i class="fas fa-desktop"></i>
+                                </div>
+                                <h3>¿Qué plataforma usan para las clases online?</h3>
+                            </div>
+                            <div class="faq-toggle">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>Utilizamos Zoom como plataforma principal para las clases en vivo. Es fácil de usar, estable y ofrece buena calidad de video y audio. Te enviaremos el enlace de acceso antes de cada clase junto con instrucciones simples para conectarte.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-category="tecnico">
+                        <div class="faq-question">
+                            <div class="faq-question-content">
+                                <div class="faq-icon">
+                                    <i class="fas fa-tools"></i>
+                                </div>
+                                <h3>¿Qué requisitos técnicos necesito?</h3>
+                            </div>
+                            <div class="faq-toggle">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>Necesitas una conexión a internet estable (mínimo 3 Mbps), una computadora, tablet o smartphone con cámara y micrófono, y la aplicación Zoom instalada (descarga gratuita). Recomendamos usar auriculares para mejor calidad de audio y evitar ecos.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-category="tecnico">
+                        <div class="faq-question">
+                            <div class="faq-question-content">
+                                <div class="faq-icon">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                                <h3>¿Qué hago si tengo problemas técnicos durante la clase?</h3>
+                            </div>
+                            <div class="faq-toggle">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>Si experimentas problemas técnicos durante la clase, primero intenta reconectarte cerrando y abriendo Zoom nuevamente. Si el problema persiste, contáctanos inmediatamente por WhatsApp o correo y reprogramaremos tu sesión sin costo adicional. Tu tiempo es valioso para nosotros.</p>
                             </div>
                         </div>
                     </div>
