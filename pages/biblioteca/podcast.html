@@ -177,6 +177,110 @@
         transform: translateX(0);
     }
 }
+
+.podcast-card {
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+    border: 1.5px solid #e1e4e8;
+    display: flex;
+    flex-direction: column;
+}
+
+.podcast-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12), 0 6px 16px rgba(0, 0, 0, 0.08);
+    border-color: #d1d5db;
+}
+
+.podcast-card-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    background: #f3f4f6;
+    position: relative;
+}
+
+.podcast-card-image iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.podcast-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.podcast-card-content {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.podcast-card-content h3 {
+    font-family: 'Rubik', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #0a1e42;
+    margin-bottom: 12px;
+}
+
+.podcast-card-content p {
+    font-size: 14px;
+    color: #6b7280;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    flex: 1;
+}
+
+.podcast-card-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 16px;
+    border-top: 1px solid #e1e4e8;
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.podcast-card-date {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.podcast-card-date i {
+    color: #ff6600;
+}
+
+.podcast-card-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.podcast-card-actions button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    transition: all 0.2s ease;
+    color: #6b7280;
+    font-size: 16px;
+}
+
+.podcast-card-actions button:hover {
+    color: #ff6600;
+    transform: scale(1.1);
+}
+
+.podcast-card-actions button:active {
+    transform: scale(0.95);
+}
     </style>
 </head>
 <body>
@@ -200,10 +304,163 @@
             </div>
         </section>
 
-        <!-- Your page content goes here -->
-        <section class="your-section">
-            <h1>Your Page Content</h1>
-            <p>Add your content here...</p>
+        <!-- Podcast Section -->
+        <section style="padding: 80px 0; background: #f8f9fa;">
+            <div style="max-width: 1200px; margin: 0 auto; padding: 0 40px;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;">
+
+                    <!-- Podcast Card 6 -->
+                    <div class="podcast-card">
+                        <div class="podcast-card-image">
+                            <iframe src="https://www.youtube.com/embed/J_QBFyGKZNY" title="Enbreak Podcast #6" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <div class="podcast-card-content">
+                            <h3>Enbreak Podcast #6</h3>
+                            <p>Here the description will be displayed</p>
+                            <div class="podcast-card-meta">
+                                <div class="podcast-card-date">
+                                    <i class="fa-solid fa-calendar"></i>
+                                    <span>10 Ene 2025</span>
+                                </div>
+                                <div class="podcast-card-actions">
+                                    <button type="button" title="Me gusta">
+                                        <i class="fa-solid fa-thumbs-up"></i>
+                                    </button>
+                                    <button type="button" title="No me gusta">
+                                        <i class="fa-solid fa-thumbs-down"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Podcast Card 5 -->
+                    <div class="podcast-card">
+                        <div class="podcast-card-image">
+                            <iframe src="https://www.youtube.com/embed/5oE6Hsr4gh0" title="Enbreak Podcast #5" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <div class="podcast-card-content">
+                            <h3>Enbreak Podcast #5</h3>
+                            <p>Here the description will be displayed</p>
+                            <div class="podcast-card-meta">
+                                <div class="podcast-card-date">
+                                    <i class="fa-solid fa-calendar"></i>
+                                    <span>5 Ene 2025</span>
+                                </div>
+                                <div class="podcast-card-actions">
+                                    <button type="button" title="Me gusta">
+                                        <i class="fa-solid fa-thumbs-up"></i>
+                                    </button>
+                                    <button type="button" title="No me gusta">
+                                        <i class="fa-solid fa-thumbs-down"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Podcast Card 4 -->
+                    <div class="podcast-card">
+                        <div class="podcast-card-image">
+                            <iframe src="https://www.youtube.com/embed/WCXqszvlc_4" title="Enbreak Podcast #4" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <div class="podcast-card-content">
+                            <h3>Enbreak Podcast #4</h3>
+                            <p>Here the description will be displayed</p>
+                            <div class="podcast-card-meta">
+                                <div class="podcast-card-date">
+                                    <i class="fa-solid fa-calendar"></i>
+                                    <span>30 Dic 2024</span>
+                                </div>
+                                <div class="podcast-card-actions">
+                                    <button type="button" title="Me gusta">
+                                        <i class="fa-solid fa-thumbs-up"></i>
+                                    </button>
+                                    <button type="button" title="No me gusta">
+                                        <i class="fa-solid fa-thumbs-down"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Podcast Card 3 -->
+                    <div class="podcast-card">
+                        <div class="podcast-card-image">
+                            <iframe src="https://www.youtube.com/embed/YWUSBH_r4Xw" title="Enbreak Podcast #3" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <div class="podcast-card-content">
+                            <h3>Enbreak Podcast #3</h3>
+                            <p>Here the description will be displayed</p>
+                            <div class="podcast-card-meta">
+                                <div class="podcast-card-date">
+                                    <i class="fa-solid fa-calendar"></i>
+                                    <span>25 Dic 2024</span>
+                                </div>
+                                <div class="podcast-card-actions">
+                                    <button type="button" title="Me gusta">
+                                        <i class="fa-solid fa-thumbs-up"></i>
+                                    </button>
+                                    <button type="button" title="No me gusta">
+                                        <i class="fa-solid fa-thumbs-down"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Podcast Card 2 -->
+                    <div class="podcast-card">
+                        <div class="podcast-card-image">
+                            <iframe src="https://www.youtube.com/embed/A3KJny9c1bE" title="Enbreak Podcast #2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <div class="podcast-card-content">
+                            <h3>Enbreak Podcast #2</h3>
+                            <p>Here the description will be displayed</p>
+                            <div class="podcast-card-meta">
+                                <div class="podcast-card-date">
+                                    <i class="fa-solid fa-calendar"></i>
+                                    <span>20 Dic 2024</span>
+                                </div>
+                                <div class="podcast-card-actions">
+                                    <button type="button" title="Me gusta">
+                                        <i class="fa-solid fa-thumbs-up"></i>
+                                    </button>
+                                    <button type="button" title="No me gusta">
+                                        <i class="fa-solid fa-thumbs-down"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Podcast Card 1 -->
+                    <div class="podcast-card">
+                        <div class="podcast-card-image">
+                            <iframe src="https://www.youtube.com/embed/guCMkv0aQ00" title="Enbreak Podcast #1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <div class="podcast-card-content">
+                            <h3>Enbreak Podcast #1</h3>
+                            <p>Here the description will be displayed</p>
+                            <div class="podcast-card-meta">
+                                <div class="podcast-card-date">
+                                    <i class="fa-solid fa-calendar"></i>
+                                    <span>15 Dic 2024</span>
+                                </div>
+                                <div class="podcast-card-actions">
+                                    <button type="button" title="Me gusta">
+                                        <i class="fa-solid fa-thumbs-up"></i>
+                                    </button>
+                                    <button type="button" title="No me gusta">
+                                        <i class="fa-solid fa-thumbs-down"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </section>
     </main>
 

@@ -11,6 +11,7 @@
     <link rel="manifest" href="../../favicon/site.webmanifest">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css"/>
+    <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rubik:wght@600;700&display=swap" rel="stylesheet">
@@ -463,24 +464,31 @@
 }
 
 .result-icon {
-    font-size: 64px;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: center;
+}
+
+.result-icon svg {
+    width: 48px;
+    height: 48px;
+    stroke-width: 2;
 }
 
 .result-content h2 {
     font-family: 'Rubik', sans-serif;
-    font-size: 26px;
+    font-size: 22px;
     color: #0a1e42;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
 }
 
 .score-display {
-    margin: 32px 0;
+    margin: 24px 0;
 }
 
 .score-circle {
-    width: 140px;
-    height: 140px;
+    width: 120px;
+    height: 120px;
     margin: 0 auto;
     position: relative;
 }
@@ -495,15 +503,15 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 36px;
+    font-size: 32px;
     font-weight: 700;
     color: #0a1e42;
 }
 
 .result-message {
-    font-size: 18px;
+    font-size: 15px;
     color: #4b5563;
-    margin-bottom: 30px;
+    margin-bottom: 24px;
     line-height: 1.6;
 }
 
@@ -562,7 +570,7 @@
     border-color: #9ca3af;
 }
 
-.btn-certificate {
+.btn-report {
     background: linear-gradient(135deg, #0a1e42, #1a3a6e);
     color: white;
     border: none;
@@ -577,7 +585,7 @@
     gap: 10px;
 }
 
-.btn-certificate:hover {
+.btn-report:hover {
     background: linear-gradient(135deg, #1a3a6e, #0a1e42);
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(10, 30, 66, 0.3);
@@ -698,21 +706,6 @@
     border-radius: 8px;
 }
 
-.btn-abandon {
-    background: #ef4444;
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    font-size: 15px;
-    font-weight: 600;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.btn-abandon:hover {
-    background: #dc2626;
-}
 
 .final-content {
     max-width: 700px;
@@ -722,45 +715,45 @@
 
 .final-content h2 {
     font-family: 'Rubik', sans-serif;
-    font-size: 32px;
+    font-size: 24px;
     color: #0a1e42;
-    margin-bottom: 30px;
+    margin-bottom: 24px;
 }
 
 .final-level {
-    margin-bottom: 40px;
+    margin-bottom: 32px;
 }
 
 .level-badge-large {
     display: inline-block;
     background: linear-gradient(135deg, #ff6600, #ff8c00);
     color: white;
-    padding: 20px 40px;
-    border-radius: 16px;
-    font-size: 48px;
+    padding: 12px 28px;
+    border-radius: 12px;
+    font-size: 32px;
     font-weight: 700;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
 }
 
 #final-level-description {
-    font-size: 18px;
+    font-size: 15px;
     color: #4b5563;
     line-height: 1.6;
 }
 
 .scores-summary {
     background: #f8f9fa;
-    padding: 30px;
+    padding: 24px;
     border-radius: 12px;
-    margin-bottom: 30px;
+    margin-bottom: 24px;
     border: 1px solid #e5e7eb;
 }
 
 .scores-summary h3 {
     font-family: 'Rubik', sans-serif;
-    font-size: 20px;
+    font-size: 16px;
     color: #0a1e42;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 }
 
 #scores-list {
@@ -925,8 +918,12 @@
     }
 
     .level-badge-large {
-        font-size: 36px;
-        padding: 16px 32px;
+        font-size: 28px;
+        padding: 10px 24px;
+    }
+
+    .final-content h2 {
+        font-size: 20px;
     }
 
     .result-actions,
@@ -969,7 +966,7 @@
                         <span class="breadcrumb-separator">›</span>
                         <span class="breadcrumb-current">Test</span>
                     </nav>
-                    <h1>Test Diágnostico</h1>
+                    <h1>Test de Nivel</h1>
                 </div>
             </div>
         </section>
@@ -1062,7 +1059,6 @@
                     <div class="result-actions">
                         <button class="btn-secondary" onclick="showLevelReview()">Revisar Respuestas</button>
                         <button id="continue-btn" class="btn-continue" onclick="continueToNextLevel()"></button>
-                        <button id="abandon-btn" class="btn-abandon" onclick="abandonTest()" style="display: none;">Abandonar Test</button>
                     </div>
                     </div>
                 </div>
@@ -1080,13 +1076,13 @@
                     </div>
 
                     <div class="scores-summary">
-                        <h3>Desglose de Puntuaciones</h3>
+                        <h3>Resumen de Puntuaciones</h3>
                         <div id="scores-list"></div>
                     </div>
 
                     <div class="final-actions">
-                        <button id="certificate-btn" class="btn-certificate" onclick="showNameModal()"><i class="fas fa-download"></i> Descargar Certificado</button>
-                        <p id="no-certificate-msg" class="no-certificate-message" style="display: none;">El certificado está disponible a partir del nivel A1. ¡Sigue practicando!</p>
+                        <button id="report-btn" class="btn-report" onclick="showNameModal()"><i data-lucide="file-text"></i> Descargar Informe</button>
+                        <p id="no-report-msg" class="no-certificate-message" style="display: none;">El informe está disponible a partir del nivel A1. ¡Sigue practicando!</p>
                         <button class="btn-secondary" onclick="showReview()">Revisar Respuestas</button>
                     </div>
                 </div>
@@ -1115,8 +1111,8 @@
     <!-- Name Modal -->
     <div id="name-modal" class="modal-overlay">
         <div class="modal-content">
-            <h3>Descargar Certificado</h3>
-            <p>Por favor, ingresa tu nombre completo tal como deseas que aparezca en el certificado.</p>
+            <h3>Descargar Informe</h3>
+            <p>Por favor, ingresa tu nombre completo tal como deseas que aparezca en el informe.</p>
             <input type="text" id="student-name-input" placeholder="Ej: María García López" maxlength="50">
             <div class="modal-actions">
                 <button class="btn-modal-cancel" onclick="closeNameModal()">Cancelar</button>
@@ -1131,7 +1127,7 @@
 <script>
 const LEVELS = ['A1', 'A2', 'B1', 'B2', 'C1'];
 const PASS_THRESHOLD = 75;
-const LEVEL_ZERO = 'A0';
+const LEVEL_ZERO = 'Pre-A1';
 
 const questionBank = {
   A1: [
@@ -1326,7 +1322,12 @@ function showLevelResult() {
   const passed = percentage >= PASS_THRESHOLD;
   const isLastLevel = state.currentLevel === LEVELS.length - 1;
 
-  document.getElementById('result-icon').textContent = passed ? '🎉' : '📚';
+  const resultIcon = document.getElementById('result-icon');
+  resultIcon.innerHTML = passed ?
+    '<i data-lucide="party-popper" style="color: #10b981;"></i>' :
+    '<i data-lucide="book-open" style="color: #f59e0b;"></i>';
+  lucide.createIcons();
+
   document.getElementById('result-title').textContent = passed ?
     `¡Aprobaste el nivel ${level}!` : `Has encontrado tu nivel: ${level}`;
 
@@ -1358,16 +1359,12 @@ function showLevelResult() {
     `Obtuviste ${percentage}%. Esto indica que tu nivel actual es ${level}. ¡Sigue practicando y mejorarás!`;
 
   const continueBtn = document.getElementById('continue-btn');
-  const abandonBtn = document.getElementById('abandon-btn');
 
   if (passed && !isLastLevel) {
     continueBtn.textContent = `Continuar a ${LEVELS[state.currentLevel + 1]}`;
     continueBtn.style.display = 'inline-block';
-    abandonBtn.style.display = 'inline-block';
-    abandonBtn.textContent = 'Abandonar';
   } else {
     continueBtn.style.display = 'none';
-    abandonBtn.style.display = 'none';
   }
 
   if (!passed || isLastLevel) {
@@ -1409,11 +1406,6 @@ function determineFinalLevel() {
   }
 }
 
-function abandonTest() {
-  determineFinalLevel();
-  state.testCompleted = true;
-  showFinalResults();
-}
 
 function showFinalResults() {
   if (!state.finalLevel) {
@@ -1424,7 +1416,7 @@ function showFinalResults() {
   document.getElementById('final-level-text').textContent = state.finalLevel;
 
   const descriptions = {
-    A0: "Estás dando tus primeros pasos. Con práctica constante, pronto podrás comunicarte en situaciones básicas.",
+    'Pre-A1': "Estás dando tus primeros pasos. Con práctica constante, pronto podrás comunicarte en situaciones básicas.",
     A1: "Puedes comunicarte en situaciones cotidianas muy básicas usando frases simples. Puedes presentarte, pedir información elemental y hablar sobre tu rutina diaria.",
     A2: "Puedes mantener conversaciones sobre temas familiares y personales. Puedes describir experiencias pasadas y hacer planes para el futuro.",
     B1: "Puedes desenvolverte con independencia. Puedes expresar opiniones, narrar experiencias y entender las ideas principales de textos y discursos.",
@@ -1447,18 +1439,14 @@ function showFinalResults() {
     scoresList.appendChild(item);
   });
 
-  // Show/hide certificate button based on level
-  const certificateBtn = document.getElementById('certificate-btn');
-  const noCertificateMsg = document.getElementById('no-certificate-msg');
-  if (state.finalLevel === 'A0') {
-    certificateBtn.style.display = 'none';
-    noCertificateMsg.style.display = 'block';
-  } else {
-    certificateBtn.style.display = 'inline-flex';
-    noCertificateMsg.style.display = 'none';
-  }
+  // Show report button for all levels
+  const reportBtn = document.getElementById('report-btn');
+  const noReportMsg = document.getElementById('no-report-msg');
+  reportBtn.style.display = 'inline-flex';
+  noReportMsg.style.display = 'none';
 
   showScreen('final-result-screen');
+  lucide.createIcons();
 }
 
 function showLevelReview() {
@@ -1525,19 +1513,27 @@ function displayReviewLevel(level) {
       <div class="review-question-text">${questionHTML}</div>
       ${q.options.map((opt, i) => {
         let classes = 'review-option';
-        if (i === q.correct) classes += ' correct-answer';
-        if (i === userAnswer && !isCorrect) classes += ' wrong';
-        if (i === userAnswer) classes += ' user-answer';
+        let icon = '';
 
-        let label = opt;
-        if (i === q.correct) label += ' ✓';
-        if (i === userAnswer && !isCorrect) label += ' ✗';
+        if (i === q.correct) {
+          classes += ' correct-answer';
+          // Only show check mark if the user got it right
+          if (isCorrect) {
+            icon = '<i data-lucide="check" style="color: #10b981; width: 18px; height: 18px; display: inline-block; vertical-align: middle; margin-left: 8px;"></i>';
+          }
+        }
+        if (i === userAnswer && !isCorrect) {
+          classes += ' wrong user-answer';
+          icon = '<i data-lucide="x" style="color: #ef4444; width: 18px; height: 18px; display: inline-block; vertical-align: middle; margin-left: 8px;"></i>';
+        }
 
-        return `<div class="${classes}">${label}</div>`;
+        return `<div class="${classes}">${opt}${icon}</div>`;
       }).join('')}
     `;
     container.appendChild(div);
   });
+
+  lucide.createIcons();
 }
 
 function backFromReview() {
@@ -1557,6 +1553,19 @@ function restartTest() {
     returnScreen: null
   };
   showScreen('intro-screen');
+}
+
+function debugReport() {
+  // Simulate test completion with sample scores
+  state.scores = {
+    'A1': 92,
+    'A2': 83,
+    'B1': 75,
+    'B2': 58
+  };
+  state.finalLevel = 'B1';
+  state.testCompleted = true;
+  showFinalResults();
 }
 
 function showNameModal() {
@@ -1586,7 +1595,7 @@ function confirmDownload() {
     return;
   }
   closeNameModal();
-  downloadCertificate(studentName);
+  downloadReport(studentName);
 }
 
 function loadImageAsDataURL(src) {
@@ -1610,227 +1619,319 @@ function loadImageAsDataURL(src) {
   });
 }
 
-async function downloadCertificate(studentName) {
+async function downloadReport(studentName) {
   const { jsPDF } = window.jspdf;
   const level = state.finalLevel;
 
-  // Create PDF - A4 Landscape
+  // Auto-capitalize first letter of each word
+  studentName = studentName.toLowerCase().replace(/\b\w/g, char => char.toUpperCase());
+
+  // Create PDF - A4 Portrait for report style
   const doc = new jsPDF({
-    orientation: 'landscape',
+    orientation: 'portrait',
     unit: 'mm',
     format: 'a4'
   });
 
-  const pageWidth = 297;
-  const pageHeight = 210;
+  const pageWidth = 210;
+  const pageHeight = 297;
+  const margin = 25;
+  const contentWidth = pageWidth - (margin * 2);
   const centerX = pageWidth / 2;
 
   try {
-    // Load background image first
-    const bgImage = await loadImageAsDataURL('../../assets/backgrounds/certificate.png');
-    doc.addImage(bgImage.dataURL, 'PNG', 0, 0, pageWidth, pageHeight);
+    // Header bar (shorter height for more breathing room)
+    const headerHeight = 32;
+    doc.setFillColor(10, 30, 66);
+    doc.rect(0, 0, pageWidth, headerHeight, 'F');
 
-    // Load logos
+    // Load logos (centered vertically in shorter header)
     let logoLoaded = false;
     let cefrLoaded = false;
 
     try {
-      const logoImage = await loadImageAsDataURL('../../assets/logo/logo.png');
+      const logoImage = await loadImageAsDataURL('../../assets/logo/logo2.png');
       const logoHeight = 12;
       const logoWidth = (logoImage.width / logoImage.height) * logoHeight;
-      doc.addImage(logoImage.dataURL, 'PNG', 34, 21, logoWidth, logoHeight);
+      doc.addImage(logoImage.dataURL, 'PNG', margin, (headerHeight - logoHeight) / 2, logoWidth, logoHeight);
       logoLoaded = true;
     } catch (e) {
       console.warn('Logo not loaded:', e);
     }
 
     try {
-      const cefrImage = await loadImageAsDataURL('../../assets/logo/cefr.png');
-      const cefrHeight = 22;
+      const cefrImage = await loadImageAsDataURL('../../assets/logo/cefr2.png');
+      const cefrHeight = 16;
       const cefrWidth = (cefrImage.width / cefrImage.height) * cefrHeight;
-      doc.addImage(cefrImage.dataURL, 'PNG', pageWidth - cefrWidth - 38, 20, cefrWidth, cefrHeight);
+      doc.addImage(cefrImage.dataURL, 'PNG', pageWidth - margin - cefrWidth, (headerHeight - cefrHeight) / 2, cefrWidth, cefrHeight);
       cefrLoaded = true;
     } catch (e) {
       console.warn('CEFR logo not loaded:', e);
     }
 
-    // Fallback text for logos if not loaded
+    // Fallback text for logos
     if (!logoLoaded) {
       doc.setFont('helvetica', 'bold');
       doc.setFontSize(14);
-      doc.setTextColor(10, 30, 66);
-      doc.text('ENBREAK', 22, 20);
+      doc.setTextColor(255, 255, 255);
+      doc.text('ENBREAK', margin, headerHeight / 2 + 2);
     }
 
     if (!cefrLoaded) {
       doc.setFont('helvetica', 'bold');
-      doc.setFontSize(10);
-      doc.setTextColor(10, 30, 66);
-      doc.text('CEFR', pageWidth - 35, 20);
+      doc.setFontSize(9);
+      doc.setTextColor(255, 255, 255);
+      doc.text('CEFR', pageWidth - margin - 12, headerHeight / 2 + 2);
     }
 
-    // "Se certifica que"
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(12);
-    doc.setTextColor(80, 80, 80);
-    doc.text('Por medio del presente se certifica que', centerX, 34, { align: 'center' });
+    let yPos = 55;
 
-    // Student name
-    doc.setFont('times', 'bold');
-    doc.setFontSize(28);
-    doc.setTextColor(10, 30, 66);
-    doc.text(studentName, centerX, 47, { align: 'center' });
-
-    // "ha alcanzado el nivel"
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(12);
-    doc.setTextColor(80, 80, 80);
-    doc.text('ha alcanzado el nivel', centerX, 61, { align: 'center' });
-
-    // Level (only A1, A2, etc - without "Nivel")
-    doc.setFont('times', 'bold');
-    doc.setFontSize(34);
-    doc.setTextColor(10, 30, 66);
-    doc.text(level, centerX, 78, { align: 'center' });
-
-    // "en el Test de Nivel Enbreak"
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(12);
-    doc.setTextColor(80, 80, 80);
-    doc.text('en el Test de Nivel de Enbreak conforme al Marco Común Europeo de Referencia', centerX, 90, { align: 'center' });
-
-    // Competencies data
-    const competencies = {
-      A1: [
-        'Comprende y utiliza expresiones cotidianas y frases básicas',
-        'Puede presentarse y proporcionar información personal básica',
-        'Interactúa de forma sencilla con interlocutores pacientes'
-      ],
-      A2: [
-        'Comunica tareas simples sobre temas familiares y cotidianos',
-        'Describe aspectos de su entorno y necesidades inmediatas',
-        'Comprende frases y vocabulario de uso frecuente'
-      ],
-      B1: [
-        'Se desenvuelve en situaciones cotidianas con independencia',
-        'Produce textos coherentes sobre temas conocidos o de interés',
-        'Describe experiencias, eventos, deseos y aspiraciones'
-      ],
-      B2: [
-        'Interactúa con fluidez y espontaneidad con hablantes nativos',
-        'Produce textos claros y detallados sobre diversos temas',
-        'Comprende ideas principales de textos complejos'
-      ],
-      C1: [
-        'Se expresa con fluidez y precisión en cualquier contexto',
-        'Comprende textos extensos con significados implícitos',
-        'Usa el idioma de manera flexible y efectiva'
-      ]
-    };
-
-    // Competencias section
+    // Document title
     doc.setFont('helvetica', 'bold');
-    doc.setFontSize(11);
+    doc.setFontSize(20);
     doc.setTextColor(10, 30, 66);
-    doc.text('Competencias:', 70, 108);
+    doc.text('Informe de Evaluación', centerX, yPos, { align: 'center' });
+    yPos += 8;
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(11);
+    doc.setTextColor(100, 100, 100);
+    doc.text('Test Diagnóstico de Nivel de Inglés', centerX, yPos, { align: 'center' });
+
+    yPos += 20;
+
+    // Student info box
+    doc.setFillColor(248, 249, 250);
+    doc.setDrawColor(229, 231, 235);
+    doc.roundedRect(margin, yPos, contentWidth, 28, 3, 3, 'FD');
 
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(10);
-    doc.setTextColor(60, 60, 60);
-    const levelCompetencies = competencies[level] || competencies['A1'];
-    let yPos = 120;
-    levelCompetencies.forEach(comp => {
-      doc.text('• ' + comp, 38, yPos);
-      yPos += 8;
-    });
-
-    // Resultados section - 2x3 Grid
+    doc.setTextColor(100, 100, 100);
+    doc.text('Estudiante:', margin + 8, yPos + 12);
     doc.setFont('helvetica', 'bold');
-    doc.setFontSize(11);
+    doc.setFontSize(14);
     doc.setTextColor(10, 30, 66);
-    const resultsHeaderX = 210;
-    doc.text('Resultados Obtenidos:', resultsHeaderX, 108, { align: 'center' });
+    doc.text(studentName, margin + 8, yPos + 21);
 
-    doc.setTextColor(60, 60, 60);
-
-    const gridStartX = 158;
-    const gridStartY = 120;
-    const colWidth = 30;
-    const rowHeight = 10;
-
-    const allLevels = ['A1', 'A2', 'B1', 'B2', 'C1'];
-    const row1 = ['A1', 'B1', 'C1'];
-    const row2 = ['A2', 'B2'];
-
-    row1.forEach((lvl, idx) => {
-      const score = state.scores[lvl];
-      const xPos = gridStartX + (idx * colWidth);
-
-      // Level name in bold
-      doc.setFont('helvetica', 'bold');
-      doc.setFontSize(10);
-      doc.text(`${lvl}:`, xPos, gridStartY);
-
-      // Score in normal
-      doc.setFont('helvetica', 'normal');
-      doc.setFontSize(10);
-      const scoreText = score !== undefined ? `${score}%` : '-';
-      doc.text(scoreText, xPos + 8, gridStartY);
-    });
-
-    row2.forEach((lvl, idx) => {
-      const score = state.scores[lvl];
-      const xPos = gridStartX + (idx * colWidth);
-
-      // Level name in bold
-      doc.setFont('helvetica', 'bold');
-      doc.setFontSize(10);
-      doc.text(`${lvl}:`, xPos, gridStartY + rowHeight);
-
-      // Score in normal
-      doc.setFont('helvetica', 'normal');
-      doc.setFontSize(10);
-      const scoreText = score !== undefined ? `${score}%` : '-';
-      doc.text(scoreText, xPos + 8, gridStartY + rowHeight);
-    });
-
-    // Date
+    // Date on the right
     const today = new Date();
     const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
     const formattedDate = today.toLocaleDateString('es-ES', dateOptions);
-
-    const dateX = 70;
     doc.setFont('helvetica', 'normal');
-    doc.setFontSize(9);
+    doc.setFontSize(10);
     doc.setTextColor(100, 100, 100);
-    doc.text('Fecha de emisión:', dateX, 165, { align: 'center' });
+    doc.text('Fecha:', pageWidth - margin - 55, yPos + 12);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(10);
+    doc.setTextColor(10, 30, 66);
+    doc.text(formattedDate, pageWidth - margin - 55, yPos + 21);
+
+    yPos += 40;
+
+    // Level result section
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(12);
+    doc.setTextColor(10, 30, 66);
+    doc.text('Nivel Alcanzado', margin, yPos);
+
+    yPos += 8;
+
+    // Level badge - centered text (narrower)
+    const badgeWidth = 28;
+    const badgeHeight = 18;
+    doc.setFillColor(255, 102, 0);
+    doc.roundedRect(margin, yPos, badgeWidth, badgeHeight, 3, 3, 'F');
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(16);
+    doc.setTextColor(255, 255, 255);
+    doc.text(level, margin + (badgeWidth / 2), yPos + (badgeHeight / 2) + 2, { align: 'center' });
+
+    // Level description - bilingual level names only
+    const descriptions = {
+      'Pre-A1': 'Pre-Beginner / Pre-Principiante',
+      A1: 'Beginner / Principiante',
+      A2: 'Elementary / Elemental',
+      B1: 'Intermediate / Intermedio',
+      B2: 'Upper Intermediate / Intermedio Alto',
+      C1: 'Advanced / Avanzado'
+    };
+
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+    doc.setTextColor(75, 85, 99);
+    doc.text(descriptions[level] || '', margin + 35, yPos + 11);
+
+    yPos += 35;
+
+    // Scores section
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(12);
+    doc.setTextColor(10, 30, 66);
+    doc.text('Resultados por Nivel', margin, yPos);
+
+    yPos += 8;
+
+    // Score table
+    const allLevels = ['A1', 'A2', 'B1', 'B2', 'C1'];
+    const tableWidth = contentWidth;
+    const colWidth = tableWidth / 5;
+
+    // Table header
+    doc.setFillColor(10, 30, 66);
+    doc.rect(margin, yPos, tableWidth, 10, 'F');
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(9);
+    doc.setTextColor(255, 255, 255);
+    allLevels.forEach((lvl, idx) => {
+      doc.text(lvl, margin + (idx * colWidth) + (colWidth / 2), yPos + 7, { align: 'center' });
+    });
+
+    yPos += 10;
+
+    // Table body
+    doc.setFillColor(248, 249, 250);
+    doc.rect(margin, yPos, tableWidth, 12, 'F');
+    doc.setDrawColor(229, 231, 235);
+    doc.rect(margin, yPos, tableWidth, 12, 'S');
+
+    allLevels.forEach((lvl, idx) => {
+      const score = state.scores[lvl];
+      const scoreText = score !== undefined ? `${score}%` : '-';
+      const passed = score !== undefined && score >= 75;
+
+      if (passed) {
+        doc.setTextColor(16, 185, 129);
+      } else if (score !== undefined) {
+        doc.setTextColor(245, 158, 11);
+      } else {
+        doc.setTextColor(156, 163, 175);
+      }
+
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(11);
+      doc.text(scoreText, margin + (idx * colWidth) + (colWidth / 2), yPos + 8, { align: 'center' });
+
+      // Vertical dividers
+      if (idx < 4) {
+        doc.setDrawColor(229, 231, 235);
+        doc.line(margin + ((idx + 1) * colWidth), yPos, margin + ((idx + 1) * colWidth), yPos + 12);
+      }
+    });
+
+    yPos += 25;
+
+    // Competencies/Recommendations section
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(12);
+    doc.setTextColor(10, 30, 66);
+
+    // A0 gets recommendations, other levels get competencies
+    if (level === 'A0') {
+      doc.text('Recomendaciones', margin, yPos);
+    } else {
+      doc.text('Competencias del Nivel ' + level, margin, yPos);
+    }
+
+    yPos += 8;
+
+    if (level === 'Pre-A1') {
+      const recommendations = [
+        'Comienza con lo básico: aprende el alfabeto, números y saludos comunes.',
+        'Practica todos los días con vocabulario simple y frases cortas.',
+        'Escucha contenido en inglés lento y repite en voz alta para mejorar tu pronunciación.'
+      ];
+
+      doc.setFillColor(248, 249, 250);
+      doc.setDrawColor(229, 231, 235);
+      const recBoxHeight = 35;
+      doc.roundedRect(margin, yPos, contentWidth, recBoxHeight, 3, 3, 'FD');
+
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(9);
+      doc.setTextColor(75, 85, 99);
+
+      let recY = yPos + 10;
+      recommendations.forEach(rec => {
+        doc.setFillColor(16, 185, 129);
+        doc.circle(margin + 7, recY - 1, 1, 'F');
+        doc.setTextColor(75, 85, 99);
+        const recLines = doc.splitTextToSize(rec, contentWidth - 18);
+        doc.text(recLines, margin + 12, recY);
+        recY += 10;
+      });
+
+      yPos += recBoxHeight + 15;
+    } else {
+      const competencies = {
+        A1: [
+          'Comprende y utiliza expresiones cotidianas y frases básicas destinadas a satisfacer necesidades inmediatas.',
+          'Puede presentarse a sí mismo y a otros, y puede proporcionar información personal básica.',
+          'Puede interactuar de forma sencilla siempre que el interlocutor hable despacio y con claridad.'
+        ],
+        A2: [
+          'Comprende frases y expresiones de uso frecuente relacionadas con áreas de experiencia relevantes.',
+          'Puede comunicarse en tareas simples y cotidianas que requieren intercambios sencillos de información.',
+          'Puede describir en términos simples aspectos de su pasado y entorno, así como cuestiones inmediatas.'
+        ],
+        B1: [
+          'Comprende los puntos principales de textos claros sobre asuntos cotidianos.',
+          'Puede desenvolverse en la mayoría de situaciones que pueden surgir durante un viaje.',
+          'Puede producir textos sencillos sobre temas conocidos y describir experiencias y acontecimientos.'
+        ],
+        B2: [
+          'Comprende las ideas principales de textos complejos sobre temas concretos y abstractos.',
+          'Puede relacionarse con hablantes nativos con un grado suficiente de fluidez y naturalidad.',
+          'Puede producir textos claros y detallados sobre temas diversos y defender un punto de vista.'
+        ],
+        C1: [
+          'Comprende textos largos y exigentes, reconociendo significados implícitos.',
+          'Se expresa con fluidez y espontaneidad sin muestras evidentes de esfuerzo para encontrar expresiones.',
+          'Usa el lenguaje con flexibilidad y eficacia para fines sociales, académicos y profesionales.'
+        ]
+      };
+
+      doc.setFillColor(248, 249, 250);
+      doc.setDrawColor(229, 231, 235);
+      const compBoxHeight = 40;
+      doc.roundedRect(margin, yPos, contentWidth, compBoxHeight, 3, 3, 'FD');
+
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(9);
+      doc.setTextColor(75, 85, 99);
+
+      const levelCompetencies = competencies[level] || competencies['A1'];
+      let compY = yPos + 10;
+      levelCompetencies.forEach(comp => {
+        doc.setFillColor(16, 185, 129);
+        doc.circle(margin + 7, compY - 1, 1, 'F');
+        doc.setTextColor(75, 85, 99);
+        const compLines = doc.splitTextToSize(comp, contentWidth - 18);
+        doc.text(compLines, margin + 12, compY);
+        compY += 10;
+      });
+
+      yPos += compBoxHeight + 15;
+    }
+
+    // Footer
+    doc.setDrawColor(229, 231, 235);
+    doc.line(margin, pageHeight - 28, pageWidth - margin, pageHeight - 28);
+
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(8);
+    doc.setTextColor(156, 163, 175);
+    doc.text('Este informe es el resultado del test diagnóstico de Enbreak y tiene carácter orientativo.', centerX, pageHeight - 20, { align: 'center' });
     doc.setFont('helvetica', 'bold');
     doc.setTextColor(10, 30, 66);
-    doc.text(formattedDate, dateX, 171, { align: 'center' });
-
-    // Website
-    const websiteX = pageWidth - 70;
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(9);
-    doc.setTextColor(100, 100, 100);
-    doc.text('Sitio web:', websiteX, 165, { align: 'center' });
-    doc.setFont('helvetica', 'bold');
-    doc.setTextColor(10, 30, 66);
-    doc.text('www.enbreak.net', websiteX, 171, { align: 'center' });
-
-    // Disclaimer
-    doc.setFont('helvetica', 'italic');
-    doc.setFontSize(7);
-    doc.setTextColor(120, 120, 120);
-    doc.text('Este es un resultado orientativo del test diagnóstico de Enbreak y no constituye una certificación oficial.', centerX, 190, { align: 'center' });
+    doc.text('www.enbreak.net', centerX, pageHeight - 13, { align: 'center' });
 
     // Save
     const sanitizedName = studentName.replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '-');
-    doc.save(`Certificado-Enbreak-${level}-${sanitizedName}.pdf`);
+    doc.save(`Informe-Enbreak-${level}-${sanitizedName}.pdf`);
 
   } catch (error) {
-    console.error('Error generating certificate:', error);
-    alert('Hubo un error al generar el certificado. Por favor, intenta de nuevo.');
+    console.error('Error generating report:', error);
+    alert('Hubo un error al generar el informe. Por favor, intenta de nuevo.');
   }
 }
 </script>

@@ -13,10 +13,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rubik:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Space+Grotesk:wght@700&family=Sora:wght@700;800&family=Bricolage+Grotesque:wght@700;800&family=Manrope:wght@700;800&family=Outfit:wght@700;800&family=Inter:wght@400;500;600;700&family=Rubik:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../css/style.css">
     <style>
-        .page-header {
+/* Page Header */
+.page-header {
     position: relative;
     width: 100%;
     background: #ffffff;
@@ -34,14 +35,8 @@
     filter: contrast(1.05) brightness(1.15);
     opacity: 0.45;
     pointer-events: none;
-    mask-image: linear-gradient(to left,
-        rgba(0,0,0,1) 0%,
-        rgba(0,0,0,0.9) 70%,
-        rgba(0,0,0,0) 100%);
-    -webkit-mask-image: linear-gradient(to left,
-        rgba(0,0,0,1) 0%,
-        rgba(0,0,0,0.9) 70%,
-        rgba(0,0,0,0) 100%);
+    mask-image: linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.9) 70%, rgba(0,0,0,0) 100%);
+    -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.9) 70%, rgba(0,0,0,0) 100%);
     animation: bannerImageSlideIn 1s ease-out;
 }
 
@@ -52,10 +47,7 @@
     right: 0;
     width: 60%;
     height: 100%;
-    background: linear-gradient(to left,
-        transparent 0%,
-        rgba(255, 255, 255, 0.05) 50%,
-        rgba(255, 255, 255, 0.2) 100%);
+    background: linear-gradient(to left, transparent 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.2) 100%);
     pointer-events: none;
     z-index: 1;
 }
@@ -79,10 +71,6 @@
     z-index: 1;
     max-width: 520px;
     animation: bannerTextSlideIn 1s ease-out;
-}
-
-.page-header-image {
-    display: none;
 }
 
 .page-header-accent {
@@ -132,64 +120,331 @@
     line-height: 1.2;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .page-header {
-        background: #ffffff;
-    }
-
-    .page-header::after {
-        display: none;
-    }
-
-    .page-header-wrapper {
-        min-height: auto;
-    }
-
-    .page-header-content {
-        padding: 24px 20px;
-    }
-
-    .page-header h1 {
-        font-size: 24px;
-    }
-}
-
-/* Banner animations */
 @keyframes bannerTextSlideIn {
-    from {
-        opacity: 0;
-        transform: translateX(-60px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
+    from { opacity: 0; transform: translateX(-60px); }
+    to { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes bannerImageSlideIn {
-    from {
-        opacity: 0;
-        transform: translateX(40px);
+    from { opacity: 0; transform: translateX(40px); }
+    to { opacity: 0.45; transform: translateX(0); }
+}
+
+/* Landing Page */
+.activities-landing {
+    background: #fafbfc;
+    padding: 100px 60px 120px;
+}
+
+.activities-landing-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.landing-intro {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.landing-intro h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 20px;
+    line-height: 1.25;
+    letter-spacing: -0.5px;
+}
+
+.landing-intro p {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #4b5563;
+    max-width: 1000px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+.level-help {
+    margin-top: 48px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #6b7280;
+}
+
+.level-help a {
+    color: #ff6600;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.level-help a:hover {
+    color: #e55a00;
+    text-decoration: underline;
+}
+
+/* Level Cards Grid */
+.level-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Quote Strip */
+.quote-strip {
+    background: linear-gradient(135deg, #0a1e42 0%, #1a3a6e 100%);
+    padding: 40px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    margin-top: 80px;
+    border-radius: 16px;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.quote-strip::before {
+    content: '"';
+    position: absolute;
+    left: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Georgia', serif;
+    font-size: 120px;
+    color: rgba(255, 255, 255, 0.08);
+    line-height: 1;
+}
+
+.quote-strip::after {
+    content: '"';
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Georgia', serif;
+    font-size: 120px;
+    color: rgba(255, 255, 255, 0.08);
+    line-height: 1;
+}
+
+.quote-strip p {
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: #ffffff;
+    font-style: italic;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+}
+
+.quote-strip span {
+    display: block;
+    margin-top: 12px;
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.7);
+    font-style: normal;
+}
+
+/* Level Card */
+.level-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 40px 32px;
+    text-align: center;
+    text-decoration: none;
+    border: 2px solid #e5e7eb;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.level-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    transition: height 0.3s ease;
+}
+
+.level-card.beginner::before { background: linear-gradient(90deg, #22c55e, #4ade80); }
+.level-card.intermediate::before { background: linear-gradient(90deg, #eab308, #facc15); }
+.level-card.advanced::before { background: linear-gradient(90deg, #ef4444, #f87171); }
+
+.level-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+    border-color: transparent;
+}
+
+.level-card:hover::before {
+    height: 6px;
+}
+
+.level-card-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    margin-bottom: 24px;
+}
+
+.level-card.beginner .level-card-icon { background: #dcfce7; color: #16a34a; }
+.level-card.intermediate .level-card-icon { background: #fef9c3; color: #ca8a04; }
+.level-card.advanced .level-card-icon { background: #fee2e2; color: #dc2626; }
+
+.level-card-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.level-card.beginner .level-card-badge { background: #dcfce7; color: #166534; }
+.level-card.intermediate .level-card-badge { background: #fef9c3; color: #854d0e; }
+.level-card.advanced .level-card-badge { background: #fee2e2; color: #991b1b; }
+
+.level-card h3 {
+    font-family: 'Rubik', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 12px;
+}
+
+.level-card p {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #6b7280;
+    line-height: 1.6;
+    margin-bottom: 24px;
+}
+
+.level-card-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #ff6600;
+    margin-top: auto;
+}
+
+.level-card-cta i {
+    transition: transform 0.2s ease;
+}
+
+.level-card:hover .level-card-cta i {
+    transform: translateX(4px);
+}
+
+/* Skills Preview */
+.skills-preview {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.skill-icon-mini {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+
+.skill-icon-mini.listening { background: #ede9fe; color: #7c3aed; }
+.skill-icon-mini.reading { background: #dbeafe; color: #2563eb; }
+.skill-icon-mini.writing { background: #d1fae5; color: #059669; }
+.skill-icon-mini.speaking { background: #fef3c7; color: #d97706; }
+
+/* Responsive */
+@media (max-width: 900px) {
+    .level-cards {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+        margin: 0 auto;
     }
-    to {
-        opacity: 0.45;
-        transform: translateX(0);
+
+    .quote-strip::before,
+    .quote-strip::after {
+        font-size: 80px;
+    }
+}
+
+@media (max-width: 768px) {
+    .page-header::after { display: none; }
+    .page-header-wrapper { min-height: auto; }
+    .page-header-content { padding: 24px 20px; }
+    .page-header h1 { font-size: 24px; }
+
+    .activities-landing {
+        padding: 60px 20px 80px;
+    }
+
+    .landing-intro h2 {
+        font-size: 36px;
+    }
+
+    .level-card {
+        padding: 32px 24px;
+    }
+
+    .level-card-icon {
+        width: 64px;
+        height: 64px;
+        font-size: 26px;
+    }
+
+    .level-card h3 {
+        font-size: 22px;
+    }
+
+    .quote-strip {
+        padding: 30px 20px;
+    }
+
+    .quote-strip::before,
+    .quote-strip::after {
+        display: none;
+    }
+
+    .quote-strip p {
+        font-size: 18px;
     }
 }
     </style>
 </head>
 <body>
 
-    <!-- Header Placeholder -->
     <div id="header-placeholder"></div>
 
-    <!-- Banner Section -->
     <main style="padding: 0; margin: 0;">
         <section class="page-header">
             <div class="page-header-wrapper">
                 <div class="page-header-content">
-                     <div class="page-header-accent"></div>
+                    <div class="page-header-accent"></div>
                     <nav class="breadcrumb">
                         <a href="/">Inicio</a>
                         <span class="breadcrumb-separator">›</span>
@@ -200,18 +455,86 @@
             </div>
         </section>
 
-        <!-- Your page content goes here -->
-        <section class="your-section">
-            <h1>Your Page Content</h1>
-            <p>Add your content here...</p>
+        <section class="activities-landing">
+            <div class="activities-landing-inner">
+                <div class="landing-intro">
+                    <h2>Elige tu nivel</h2>
+                    <p>Selecciona tu nivel de inglés para acceder a actividades diseñadas específicamente para ti. Practica las 4 habilidades: Listening, Reading, Writing y Speaking.</p>
+                    <p class="level-help">¿No sabes tu nivel? <a href="../clases/test.html">Haz el test de nivel aquí</a></p>
+                </div>
+
+                <div class="level-cards">
+                    <!-- Beginner Card -->
+                    <a href="actividades-principiante.html" class="level-card beginner">
+                        <div class="level-card-icon">
+                            <i class="fa-solid fa-seedling"></i>
+                        </div>
+                        <span class="level-card-badge">A1 - A2</span>
+                        <h3>Principiante</h3>
+                        <p>Ideal si estás comenzando. Vocabulario básico, frases simples y comprensión elemental.</p>
+                        <div class="skills-preview">
+                            <div class="skill-icon-mini listening"><i class="fa-solid fa-headphones"></i></div>
+                            <div class="skill-icon-mini reading"><i class="fa-solid fa-book-open"></i></div>
+                            <div class="skill-icon-mini writing"><i class="fa-solid fa-pen"></i></div>
+                            <div class="skill-icon-mini speaking"><i class="fa-solid fa-comments"></i></div>
+                        </div>
+                        <span class="level-card-cta">
+                            Ver actividades
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </span>
+                    </a>
+
+                    <!-- Intermediate Card -->
+                    <a href="actividades-intermedio.html" class="level-card intermediate">
+                        <div class="level-card-icon">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+                        <span class="level-card-badge">B1 - B2</span>
+                        <h3>Intermedio</h3>
+                        <p>Para quienes pueden mantener conversaciones y comprender textos más complejos.</p>
+                        <div class="skills-preview">
+                            <div class="skill-icon-mini listening"><i class="fa-solid fa-headphones"></i></div>
+                            <div class="skill-icon-mini reading"><i class="fa-solid fa-book-open"></i></div>
+                            <div class="skill-icon-mini writing"><i class="fa-solid fa-pen"></i></div>
+                            <div class="skill-icon-mini speaking"><i class="fa-solid fa-comments"></i></div>
+                        </div>
+                        <span class="level-card-cta">
+                            Ver actividades
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </span>
+                    </a>
+
+                    <!-- Advanced Card -->
+                    <a href="actividades-avanzado.html" class="level-card advanced">
+                        <div class="level-card-icon">
+                            <i class="fa-solid fa-trophy"></i>
+                        </div>
+                        <span class="level-card-badge">C1 - C2</span>
+                        <h3>Avanzado</h3>
+                        <p>Dominio del idioma. Textos complejos, expresión fluida y uso sofisticado del lenguaje.</p>
+                        <div class="skills-preview">
+                            <div class="skill-icon-mini listening"><i class="fa-solid fa-headphones"></i></div>
+                            <div class="skill-icon-mini reading"><i class="fa-solid fa-book-open"></i></div>
+                            <div class="skill-icon-mini writing"><i class="fa-solid fa-pen"></i></div>
+                            <div class="skill-icon-mini speaking"><i class="fa-solid fa-comments"></i></div>
+                        </div>
+                        <span class="level-card-cta">
+                            Ver actividades
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </span>
+                    </a>
+                </div>
+
+                <div class="quote-strip">
+                    <p>"The beautiful thing about learning is that no one can take it away from you."<span>— B.B. King</span></p>
+                </div>
+            </div>
         </section>
     </main>
 
-    <!-- Footer Placeholder -->
     <div id="footer-placeholder"></div>
 
-<script src="../../js/layout.js"></script>
-<script src="../../js/script.js" defer></script>
-
+    <script src="../../js/layout.js"></script>
+    <script src="../../js/script.js" defer></script>
 </body>
 </html>

@@ -16,6 +16,83 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rubik:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../css/style.css">
     <style>
+        /* Course Card Styles */
+        .course-card {
+            background: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+            border: 1.5px solid #e1e4e8;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .course-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12), 0 6px 16px rgba(0, 0, 0, 0.08);
+            border-color: #d1d5db;
+        }
+
+        .course-card-image {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            background: #f3f4f6;
+        }
+
+        .course-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .course-card:hover .course-card-image img {
+            transform: scale(1.05);
+        }
+
+        .course-card a {
+            display: inline-block;
+            background: #ff6600;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-card a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .course-card a:hover {
+            background: #ff7a1a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 102, 0, 0.3);
+        }
+
+        .course-card a:hover::before {
+            left: 100%;
+        }
+
+        .course-card a:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 6px rgba(255, 102, 0, 0.2);
+        }
+
        .page-header {
     position: relative;
     width: 100%;
@@ -205,8 +282,9 @@
             <div style="max-width: 1200px; margin: 0 auto; padding: 0 40px;">
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;">
                     <!-- Course Card 1: A1 -->
-                    <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08); transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 8px 24px rgba(0,0,0,0.12)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.08)';">
-                        <div style="height: 200px; background-image: url('../../assets/courses/A1.jpg'); background-size: cover; background-position: center; position: relative;">
+                    <div class="course-card">
+                        <div class="course-card-image" style="position: relative;">
+                            <img src="../../assets/courses/A1.jpg" alt="Curso A1">
                             <div style="position: absolute; top: 12px; right: 12px; background: linear-gradient(135deg, #e91e63, #c2185b); color: white; padding: 6px 12px; border-radius: 6px; font-size: 13px; font-weight: 600; box-shadow: 0 2px 8px rgba(233,30,99,0.3);">
                                 A1
                             </div>
@@ -229,15 +307,16 @@
                             <p style="color: #6b7280; font-size: 14px; line-height: 1.6; margin-bottom: 20px;">
                                 Desarrolla tus habilidades básicas de comunicación. Aprende vocabulario esencial y estructuras gramaticales para manejar situaciones cotidianas simples.
                             </p>
-                            <a href="#" style="display: inline-block; background: #ff6600; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; transition: background 0.3s ease;" onmouseover="this.style.background='#e55b00';" onmouseout="this.style.background='#ff6600';">
+                            <a href="#">
                                 Ver más
                             </a>
                         </div>
                     </div>
 
                     <!-- Course Card 2: A2 -->
-                    <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08); transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 8px 24px rgba(0,0,0,0.12)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.08)';">
-                        <div style="height: 200px; background-image: url('../../assets/courses/A2.jpg'); background-size: cover; background-position: center; position: relative;">
+                    <div class="course-card">
+                        <div class="course-card-image" style="position: relative;">
+                            <img src="../../assets/courses/A2.jpg" alt="Curso A2">
                             <div style="position: absolute; top: 12px; right: 12px; background: linear-gradient(135deg, #29b6f6, #0288d1); color: white; padding: 6px 12px; border-radius: 6px; font-size: 13px; font-weight: 600; box-shadow: 0 2px 8px rgba(41,182,246,0.3);">
                                 A2
                             </div>
@@ -260,15 +339,16 @@
                             <p style="color: #6b7280; font-size: 14px; line-height: 1.6; margin-bottom: 20px;">
                                 Adquiere independencia comunicacional. Podrás describir tu entorno, expresar ideas sencillas y participar en conversaciones sobre temas comunes.
                             </p>
-                            <a href="#" style="display: inline-block; background: #ff6600; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; transition: background 0.3s ease;" onmouseover="this.style.background='#e55b00';" onmouseout="this.style.background='#ff6600';">
+                            <a href="#">
                                 Ver más
                             </a>
                         </div>
                     </div>
 
                     <!-- Course Card 3: B1 -->
-                    <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08); transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 8px 24px rgba(0,0,0,0.12)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.08)';">
-                        <div style="height: 200px; background-image: url('../../assets/courses/B1.jpg'); background-size: cover; background-position: center; position: relative;">
+                    <div class="course-card">
+                        <div class="course-card-image" style="position: relative;">
+                            <img src="../../assets/courses/B1.jpg" alt="Curso B1">
                             <div style="position: absolute; top: 12px; right: 12px; background: linear-gradient(135deg, #66bb6a, #43a047); color: white; padding: 6px 12px; border-radius: 6px; font-size: 13px; font-weight: 600; box-shadow: 0 2px 8px rgba(102,187,106,0.3);">
                                 B1
                             </div>
@@ -291,15 +371,16 @@
                             <p style="color: #6b7280; font-size: 14px; line-height: 1.6; margin-bottom: 20px;">
                                 Maneja conversaciones más complejas, comprende textos especializados y exprésate con confianza en la mayoría de las situaciones cotidianas.
                             </p>
-                            <a href="#" style="display: inline-block; background: #ff6600; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; transition: background 0.3s ease;" onmouseover="this.style.background='#e55b00';" onmouseout="this.style.background='#ff6600';">
+                            <a href="#">
                                 Ver más
                             </a>
                         </div>
                     </div>
 
                     <!-- Course Card 4: Conversational B1 -->
-                    <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08); transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 8px 24px rgba(0,0,0,0.12)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.08)';">
-                        <div style="height: 200px; background-image: url('../../assets/courses/B1C.jpg'); background-size: cover; background-position: center; position: relative;">
+                    <div class="course-card">
+                        <div class="course-card-image" style="position: relative;">
+                            <img src="../../assets/courses/B1C.jpg" alt="Conversational B1">
                             <div style="position: absolute; top: 12px; right: 12px; background: linear-gradient(135deg, #66bb6a, #43a047); color: white; padding: 6px 12px; border-radius: 6px; font-size: 13px; font-weight: 600; box-shadow: 0 2px 8px rgba(102,187,106,0.3);">
                                 B1
                             </div>
@@ -322,15 +403,16 @@
                             <p style="color: #6b7280; font-size: 14px; line-height: 1.6; margin-bottom: 20px;">
                                 Desarrolla fluidez conversacional intermedia. Participa en discusiones sobre temas cotidianos y exprésate con seguridad en situaciones sociales comunes.
                             </p>
-                            <a href="#" style="display: inline-block; background: #ff6600; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; transition: background 0.3s ease;" onmouseover="this.style.background='#e55b00';" onmouseout="this.style.background='#ff6600';">
+                            <a href="#">
                                 Ver más
                             </a>
                         </div>
                     </div>
 
                     <!-- Course Card 5: Conversational C1 -->
-                    <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08); transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 8px 24px rgba(0,0,0,0.12)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.08)';">
-                        <div style="height: 200px; background-image: url('../../assets/courses/C1C.jpg'); background-size: cover; background-position: center; position: relative;">
+                    <div class="course-card">
+                        <div class="course-card-image" style="position: relative;">
+                            <img src="../../assets/courses/C1C.jpg" alt="Conversational C1">
                             <div style="position: absolute; top: 12px; right: 12px; background: linear-gradient(135deg, #ffd700, #ffb300); color: white; padding: 6px 12px; border-radius: 6px; font-size: 13px; font-weight: 600; box-shadow: 0 2px 8px rgba(255,215,0,0.3);">
                                 C1
                             </div>
@@ -353,15 +435,16 @@
                             <p style="color: #6b7280; font-size: 14px; line-height: 1.6; margin-bottom: 20px;">
                                 Alcanza maestría conversacional. Comunícate con precisión y naturalidad en contextos académicos y profesionales complejos, dominando matices culturales y expresiones idiomáticas.
                             </p>
-                            <a href="#" style="display: inline-block; background: #ff6600; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; transition: background 0.3s ease;" onmouseover="this.style.background='#e55b00';" onmouseout="this.style.background='#ff6600';">
+                            <a href="#">
                                 Ver más
                             </a>
                         </div>
                     </div>
 
                     <!-- Corporate/Business Card -->
-                    <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08); transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 8px 24px rgba(0,0,0,0.12)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.08)';">
-                        <div style="height: 200px; background-image: url('../../assets/courses/CO.jpg'); background-size: cover; background-position: center; position: relative;">
+                    <div class="course-card">
+                        <div class="course-card-image" style="position: relative;">
+                            <img src="../../assets/courses/CO.jpg" alt="Cursos para Empresas">
                             <div style="position: absolute; top: 12px; right: 12px; background: rgba(30,30,30,0.9); color: white; padding: 6px 12px; border-radius: 6px; font-size: 13px; font-weight: 600; box-shadow: 0 2px 8px rgba(0,0,0,0.3);">
                             BUSINESS
                             </div>
@@ -381,7 +464,7 @@
                             <p style="color: #6b7280; font-size: 14px; line-height: 1.6; margin-bottom: 20px;">
                                 Ofrecemos cursos de inglés corporativos personalizados para tu equipo. Diseñamos programas adaptados a las necesidades específicas de tu empresa.
                             </p>
-                            <a href="../soporte/contacto.html" style="display: inline-block; background: #ff6600; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; transition: background 0.3s ease;" onmouseover="this.style.background='#e55b00';" onmouseout="this.style.background='#ff6600';">
+                            <a href="../soporte/contacto.html">
                                 Contáctanos
                             </a>
                         </div>
