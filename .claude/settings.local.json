@@ -11,7 +11,8 @@
       "Bash(done)",
       "Bash(for file in ayuda.html contacto.html faq.html terms.html)",
       "Bash(start msedge agendar.html)",
-      "Bash(start msedge:*)"
+      "Bash(start msedge:*)",
+      "Bash(powershell -Command \"\\(Get-Content ''pages/biblioteca/actividades.html''\\) -replace '' data-date=\"\"[0-9]*\"\"'', '''' | Set-Content ''pages/biblioteca/actividades.html''\")"
     ],
     "deny": [],
     "ask": []

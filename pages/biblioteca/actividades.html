@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Space+Grotesk:wght@700&family=Sora:wght@700;800&family=Bricolage+Grotesque:wght@700;800&family=Manrope:wght@700;800&family=Outfit:wght@700;800&family=Inter:wght@400;500;600;700&family=Rubik:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rubik:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../css/style.css">
     <style>
 /* Page Header */
@@ -37,7 +37,6 @@
     pointer-events: none;
     mask-image: linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.9) 70%, rgba(0,0,0,0) 100%);
     -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.9) 70%, rgba(0,0,0,0) 100%);
-    animation: bannerImageSlideIn 1s ease-out;
 }
 
 .page-header::before {
@@ -70,7 +69,6 @@
     position: relative;
     z-index: 1;
     max-width: 520px;
-    animation: bannerTextSlideIn 1s ease-out;
 }
 
 .page-header-accent {
@@ -120,276 +118,566 @@
     line-height: 1.2;
 }
 
-@keyframes bannerTextSlideIn {
-    from { opacity: 0; transform: translateX(-60px); }
-    to { opacity: 1; transform: translateX(0); }
+/* Activities Container */
+.activities-container {
+    background: #f8f9fa;
+    padding: 50px 40px 100px;
 }
 
-@keyframes bannerImageSlideIn {
-    from { opacity: 0; transform: translateX(40px); }
-    to { opacity: 0.45; transform: translateX(0); }
-}
-
-/* Landing Page */
-.activities-landing {
-    background: #fafbfc;
-    padding: 100px 60px 120px;
-}
-
-.activities-landing-inner {
-    max-width: 1400px;
+.activities-inner {
+    max-width: 1200px;
     margin: 0 auto;
 }
 
-.landing-intro {
-    text-align: center;
-    margin-bottom: 60px;
+/* Filters and Sort Row */
+.filters-sort-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 48px;
+    gap: 24px;
 }
 
-.landing-intro h2 {
+.filters-left {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+/* Level Filter Dropdown */
+.level-filter-dropdown {
+    position: relative;
+}
+
+.level-filter-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: #ffffff;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 8px;
     font-family: 'Inter', sans-serif;
-    font-size: 48px;
-    font-weight: 700;
-    color: #1f2937;
-    margin-bottom: 20px;
-    line-height: 1.25;
-    letter-spacing: -0.5px;
-}
-
-.landing-intro p {
-    font-family: 'Inter', sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    color: #4b5563;
-    max-width: 1000px;
-    margin: 0 auto;
-    line-height: 1.7;
-}
-
-.level-help {
-    margin-top: 48px;
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    color: #6b7280;
-}
-
-.level-help a {
-    color: #ff6600;
-    text-decoration: none;
+    font-size: 13px;
     font-weight: 500;
-    transition: color 0.2s ease;
+    color: #4b5563;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
 }
 
-.level-help a:hover {
-    color: #e55a00;
-    text-decoration: underline;
+.level-filter-btn:hover {
+    border-color: #d1d5db;
+    background: #f9fafb;
 }
 
-/* Level Cards Grid */
-.level-cards {
+.level-filter-btn i {
+    font-size: 12px;
+    color: #9ca3af;
+}
+
+.level-filter-menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    background: #ffffff;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    min-width: 140px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: all 0.2s ease;
+    z-index: 100;
+}
+
+.level-filter-dropdown.active .level-filter-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.level-option {
+    display: block;
+    width: 100%;
+    padding: 12px 16px;
+    background: none;
+    border: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: #4b5563;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.level-option:first-child {
+    border-radius: 8px 8px 0 0;
+}
+
+.level-option:last-child {
+    border-radius: 0 0 8px 8px;
+}
+
+.level-option:hover {
+    background: #f3f4f6;
+}
+
+.level-option.active {
+    color: #ff6600;
+    background: #fff7ed;
+}
+
+/* Skill Filter Dropdown */
+.skill-filter-dropdown {
+    position: relative;
+}
+
+.skill-filter-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: #ffffff;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: #4b5563;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.skill-filter-btn:hover {
+    border-color: #d1d5db;
+    background: #f9fafb;
+}
+
+.skill-filter-btn i {
+    font-size: 12px;
+    color: #9ca3af;
+}
+
+.skill-filter-menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    background: #ffffff;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    min-width: 180px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: all 0.2s ease;
+    z-index: 100;
+}
+
+.skill-filter-dropdown.active .skill-filter-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.skill-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 12px 16px;
+    background: none;
+    border: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: #4b5563;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.skill-option i {
+    font-size: 14px;
+}
+
+.skill-option[data-skill="listening"] i { color: #2563eb; }
+.skill-option[data-skill="reading"] i { color: #dc2626; }
+.skill-option[data-skill="writing"] i { color: #16a34a; }
+.skill-option[data-skill="speaking"] i { color: #ca8a04; }
+.skill-option[data-skill="vocabulary"] i { color: #9333ea; }
+.skill-option[data-skill="all"] i { color: #6b7280; }
+
+.skill-option:first-child {
+    border-radius: 8px 8px 0 0;
+}
+
+.skill-option:last-child {
+    border-radius: 0 0 8px 8px;
+}
+
+.skill-option:hover {
+    background: #f3f4f6;
+}
+
+.skill-option.active {
+    color: #ff6600;
+    background: #fff7ed;
+}
+
+.filters-sort-row .results-count {
+    white-space: nowrap;
+    margin-left: auto;
+}
+
+/* Results Count */
+.results-count {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: #4b5563;
+}
+
+.results-count strong {
+    color: #1f2937;
+}
+
+/* Sort Dropdown */
+.sort-dropdown {
+    position: relative;
+}
+
+.sort-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: #ffffff;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: #4b5563;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.sort-btn:hover {
+    border-color: #d1d5db;
+    background: #f9fafb;
+}
+
+.sort-btn i {
+    font-size: 12px;
+    color: #9ca3af;
+}
+
+.sort-menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    background: #ffffff;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    min-width: 180px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: all 0.2s ease;
+    z-index: 100;
+}
+
+.sort-dropdown.active .sort-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.sort-option {
+    display: block;
+    width: 100%;
+    padding: 12px 16px;
+    background: none;
+    border: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: #4b5563;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.sort-option:first-child {
+    border-radius: 8px 8px 0 0;
+}
+
+.sort-option:last-child {
+    border-radius: 0 0 8px 8px;
+}
+
+.sort-option:hover {
+    background: #f3f4f6;
+}
+
+.sort-option.active {
+    color: #ff6600;
+    background: #fff7ed;
+}
+
+/* Activities Grid */
+.activities-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    max-width: 1000px;
-    margin: 0 auto;
+    gap: 24px;
 }
 
-/* Quote Strip */
-.quote-strip {
-    background: linear-gradient(135deg, #0a1e42 0%, #1a3a6e 100%);
-    padding: 40px 60px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    margin-top: 80px;
-    border-radius: 16px;
-    max-width: 1000px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.quote-strip::before {
-    content: '"';
-    position: absolute;
-    left: 40px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-family: 'Georgia', serif;
-    font-size: 120px;
-    color: rgba(255, 255, 255, 0.08);
-    line-height: 1;
-}
-
-.quote-strip::after {
-    content: '"';
-    position: absolute;
-    right: 40px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-family: 'Georgia', serif;
-    font-size: 120px;
-    color: rgba(255, 255, 255, 0.08);
-    line-height: 1;
-}
-
-.quote-strip p {
-    font-family: 'Inter', sans-serif;
-    font-size: 20px;
-    font-weight: 500;
-    color: #ffffff;
-    font-style: italic;
-    margin: 0;
-    position: relative;
-    z-index: 1;
-}
-
-.quote-strip span {
-    display: block;
-    margin-top: 12px;
-    font-size: 14px;
-    font-weight: 400;
-    color: rgba(255, 255, 255, 0.7);
-    font-style: normal;
-}
-
-/* Level Card */
-.level-card {
+/* Activity Card */
+.activity-card {
     background: #ffffff;
-    border-radius: 20px;
-    padding: 40px 32px;
-    text-align: center;
-    text-decoration: none;
-    border: 2px solid #e5e7eb;
+    border-radius: 16px;
+    border: 1.5px solid #e5e7eb;
+    overflow: hidden;
     transition: all 0.3s ease;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
 }
 
-.level-card::before {
+.activity-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.12);
+    border-color: #d1d5db;
+}
+
+.activity-card-link {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    height: 100%;
+}
+
+/* Card Background Image Section */
+.activity-card-image {
+    position: relative;
+    height: 140px;
+    background-size: cover;
+    background-position: center;
+    background-color: #e5e7eb;
+}
+
+.activity-card-image::after {
     content: '';
     position: absolute;
-    top: 0;
+    bottom: 0;
     left: 0;
     right: 0;
-    height: 4px;
-    transition: height 0.3s ease;
+    height: 70%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 0%, transparent 100%);
+    pointer-events: none;
 }
 
-.level-card.beginner::before { background: linear-gradient(90deg, #22c55e, #4ade80); }
-.level-card.intermediate::before { background: linear-gradient(90deg, #eab308, #facc15); }
-.level-card.advanced::before { background: linear-gradient(90deg, #ef4444, #f87171); }
-
-.level-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
-    border-color: transparent;
-}
-
-.level-card:hover::before {
-    height: 6px;
-}
-
-.level-card-icon {
-    width: 80px;
-    height: 80px;
-    border-radius: 20px;
+/* Floating Icon */
+.activity-card-icon {
+    position: absolute;
+    bottom: -28px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 32px;
-    margin-bottom: 24px;
+    font-size: 22px;
+    background: #ffffff;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    z-index: 10;
+    transition: transform 0.3s ease;
 }
 
-.level-card.beginner .level-card-icon { background: #dcfce7; color: #16a34a; }
-.level-card.intermediate .level-card-icon { background: #fef9c3; color: #ca8a04; }
-.level-card.advanced .level-card-icon { background: #fee2e2; color: #dc2626; }
+.activity-card:hover .activity-card-icon {
+    transform: translateX(-50%) scale(1.08);
+}
 
-.level-card-badge {
-    display: inline-block;
-    padding: 6px 14px;
-    border-radius: 20px;
+.activity-card-icon.listening { color: #2563eb; }
+.activity-card-icon.reading { color: #dc2626; }
+.activity-card-icon.writing { color: #16a34a; }
+.activity-card-icon.speaking { color: #ca8a04; }
+.activity-card-icon.vocabulary { color: #9333ea; }
+
+/* Card Info Section */
+.activity-card-info {
+    padding: 40px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex: 1;
+}
+
+.activity-card-title {
+    font-family: 'Rubik', sans-serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+/* NEW Badge */
+.new-badge {
+    padding: 3px 7px;
+    border-radius: 4px;
+    background: linear-gradient(135deg, #ff6600 0%, #ef4444 100%);
+    color: #ffffff;
     font-family: 'Inter', sans-serif;
-    font-size: 12px;
+    font-size: 9px;
     font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Badges Row */
+.activity-card-badges {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.skill-badge {
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.skill-badge.listening { background: #dbeafe; color: #2563eb; }
+.skill-badge.reading { background: #fee2e2; color: #dc2626; }
+.skill-badge.writing { background: #dcfce7; color: #16a34a; }
+.skill-badge.speaking { background: #fef9c3; color: #ca8a04; }
+.skill-badge.vocabulary { background: #f3e8ff; color: #9333ea; }
+
+.level-badge {
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    background: #ffedd5;
+    color: #ea580c;
+}
+
+/* Duration */
+.activity-card-duration {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: #6b7280;
+    padding: 5px 10px;
+    background: #f3f4f6;
+    border-radius: 6px;
+}
+
+.activity-card-duration i {
+    font-size: 11px;
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 48px;
+}
+
+.pagination-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 10px;
+    background: #ffffff;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #4b5563;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.pagination-btn:hover:not(:disabled) {
+    border-color: #d1d5db;
+    background: #f9fafb;
+}
+
+.pagination-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.pagination-btn.active {
+    background: #0a1e42;
+    border-color: #0a1e42;
+    color: #ffffff;
+}
+
+.pagination-btn.arrow {
+    font-size: 12px;
+}
+
+.pagination-btn.arrow i {
+    color: inherit;
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 80px 40px;
+    grid-column: 1 / -1;
+}
+
+.empty-state i {
+    font-size: 48px;
+    color: #d1d5db;
     margin-bottom: 16px;
 }
 
-.level-card.beginner .level-card-badge { background: #dcfce7; color: #166534; }
-.level-card.intermediate .level-card-badge { background: #fef9c3; color: #854d0e; }
-.level-card.advanced .level-card-badge { background: #fee2e2; color: #991b1b; }
-
-.level-card h3 {
+.empty-state h3 {
     font-family: 'Rubik', sans-serif;
-    font-size: 24px;
-    font-weight: 700;
-    color: #1f2937;
-    margin-bottom: 12px;
+    font-size: 20px;
+    color: #4b5563;
+    margin-bottom: 8px;
 }
 
-.level-card p {
+.empty-state p {
     font-family: 'Inter', sans-serif;
     font-size: 14px;
-    color: #6b7280;
-    line-height: 1.6;
-    margin-bottom: 24px;
+    color: #9ca3af;
 }
-
-.level-card-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    color: #ff6600;
-    margin-top: auto;
-}
-
-.level-card-cta i {
-    transition: transform 0.2s ease;
-}
-
-.level-card:hover .level-card-cta i {
-    transform: translateX(4px);
-}
-
-/* Skills Preview */
-.skills-preview {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    margin-bottom: 24px;
-}
-
-.skill-icon-mini {
-    width: 36px;
-    height: 36px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-}
-
-.skill-icon-mini.listening { background: #ede9fe; color: #7c3aed; }
-.skill-icon-mini.reading { background: #dbeafe; color: #2563eb; }
-.skill-icon-mini.writing { background: #d1fae5; color: #059669; }
-.skill-icon-mini.speaking { background: #fef3c7; color: #d97706; }
 
 /* Responsive */
-@media (max-width: 900px) {
-    .level-cards {
-        grid-template-columns: 1fr;
-        max-width: 400px;
-        margin: 0 auto;
-    }
-
-    .quote-strip::before,
-    .quote-strip::after {
-        font-size: 80px;
+@media (max-width: 1024px) {
+    .activities-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
@@ -399,39 +687,46 @@
     .page-header-content { padding: 24px 20px; }
     .page-header h1 { font-size: 24px; }
 
-    .activities-landing {
-        padding: 60px 20px 80px;
+    .activities-container { padding: 40px 20px 80px; }
+
+    .filters-sort-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        margin-bottom: 20px;
     }
 
-    .landing-intro h2 {
-        font-size: 36px;
+    .filters-left {
+        flex-direction: column;
+        width: 100%;
+        gap: 12px;
     }
 
-    .level-card {
-        padding: 32px 24px;
+    .level-filter-dropdown,
+    .skill-filter-dropdown,
+    .sort-dropdown {
+        width: 100%;
     }
 
-    .level-card-icon {
-        width: 64px;
-        height: 64px;
-        font-size: 26px;
+    .level-filter-btn,
+    .skill-filter-btn,
+    .sort-btn {
+        width: 100%;
+        justify-content: space-between;
     }
 
-    .level-card h3 {
-        font-size: 22px;
+    .filters-sort-row .results-count {
+        margin-left: 0;
+        width: 100%;
+        font-size: 12px;
     }
 
-    .quote-strip {
-        padding: 30px 20px;
+    .activities-grid {
+        grid-template-columns: 1fr;
     }
 
-    .quote-strip::before,
-    .quote-strip::after {
-        display: none;
-    }
-
-    .quote-strip p {
-        font-size: 18px;
+    .pagination {
+        flex-wrap: wrap;
     }
 }
     </style>
@@ -455,78 +750,637 @@
             </div>
         </section>
 
-        <section class="activities-landing">
-            <div class="activities-landing-inner">
-                <div class="landing-intro">
-                    <h2>Elige tu nivel</h2>
-                    <p>Selecciona tu nivel de inglés para acceder a actividades diseñadas específicamente para ti. Practica las 4 habilidades: Listening, Reading, Writing y Speaking.</p>
-                    <p class="level-help">¿No sabes tu nivel? <a href="../clases/test.html">Haz el test de nivel aquí</a></p>
+        <section class="activities-container">
+            <div class="activities-inner">
+                <!-- Filters and Sort Row -->
+                <div class="filters-sort-row">
+                    <div class="filters-left">
+                        <div class="level-filter-dropdown">
+                            <button class="level-filter-btn">
+                                <span>Nivel:</span>
+                                <span id="level-label">Todos</span>
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </button>
+                            <div class="level-filter-menu">
+                                <button class="level-option active" data-level="all">Todos</button>
+                                <button class="level-option" data-level="A1">A1</button>
+                                <button class="level-option" data-level="A2">A2</button>
+                                <button class="level-option" data-level="B1">B1</button>
+                                <button class="level-option" data-level="B2">B2</button>
+                                <button class="level-option" data-level="C1">C1</button>
+                            </div>
+                        </div>
+
+                        <div class="skill-filter-dropdown">
+                            <button class="skill-filter-btn">
+                                <span>Habilidad:</span>
+                                <span id="skill-label">Todas</span>
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </button>
+                            <div class="skill-filter-menu">
+                                <button class="skill-option active" data-skill="all">
+                                    <i class="fa-solid fa-border-all"></i>
+                                    <span>Todas</span>
+                                </button>
+                                <button class="skill-option" data-skill="listening">
+                                    <i class="fa-solid fa-headphones"></i>
+                                    <span>Listening</span>
+                                </button>
+                                <button class="skill-option" data-skill="reading">
+                                    <i class="fa-solid fa-book-open"></i>
+                                    <span>Reading</span>
+                                </button>
+                                <button class="skill-option" data-skill="writing">
+                                    <i class="fa-solid fa-pen"></i>
+                                    <span>Writing</span>
+                                </button>
+                                <button class="skill-option" data-skill="speaking">
+                                    <i class="fa-solid fa-comments"></i>
+                                    <span>Speaking</span>
+                                </button>
+                                <button class="skill-option" data-skill="vocabulary">
+                                    <i class="fa-solid fa-spell-check"></i>
+                                    <span>Vocabulary</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="sort-dropdown">
+                            <button class="sort-btn">
+                                <span>Ordenar:</span>
+                                <span id="sort-label">Más recientes</span>
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </button>
+                            <div class="sort-menu">
+                                <button class="sort-option active" data-sort="newest">Más recientes</button>
+                                <button class="sort-option" data-sort="oldest">Más antiguos</button>
+                                <button class="sort-option" data-sort="popular">Populares</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="results-count">
+                        <span>Mostrando <strong id="activity-count">9</strong> de <strong id="total-activities">20</strong> actividades</span>
+                    </div>
                 </div>
 
-                <div class="level-cards">
-                    <!-- Beginner Card -->
-                    <a href="actividades-principiante.html" class="level-card beginner">
-                        <div class="level-card-icon">
-                            <i class="fa-solid fa-seedling"></i>
-                        </div>
-                        <span class="level-card-badge">A1 - A2</span>
-                        <h3>Principiante</h3>
-                        <p>Ideal si estás comenzando. Vocabulario básico, frases simples y comprensión elemental.</p>
-                        <div class="skills-preview">
-                            <div class="skill-icon-mini listening"><i class="fa-solid fa-headphones"></i></div>
-                            <div class="skill-icon-mini reading"><i class="fa-solid fa-book-open"></i></div>
-                            <div class="skill-icon-mini writing"><i class="fa-solid fa-pen"></i></div>
-                            <div class="skill-icon-mini speaking"><i class="fa-solid fa-comments"></i></div>
-                        </div>
-                        <span class="level-card-cta">
-                            Ver actividades
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </span>
-                    </a>
+                <!-- Activities Grid -->
+                <div class="activities-grid" id="activities-grid">
 
-                    <!-- Intermediate Card -->
-                    <a href="actividades-intermedio.html" class="level-card intermediate">
-                        <div class="level-card-icon">
-                            <i class="fa-solid fa-chart-line"></i>
-                        </div>
-                        <span class="level-card-badge">B1 - B2</span>
-                        <h3>Intermedio</h3>
-                        <p>Para quienes pueden mantener conversaciones y comprender textos más complejos.</p>
-                        <div class="skills-preview">
-                            <div class="skill-icon-mini listening"><i class="fa-solid fa-headphones"></i></div>
-                            <div class="skill-icon-mini reading"><i class="fa-solid fa-book-open"></i></div>
-                            <div class="skill-icon-mini writing"><i class="fa-solid fa-pen"></i></div>
-                            <div class="skill-icon-mini speaking"><i class="fa-solid fa-comments"></i></div>
-                        </div>
-                        <span class="level-card-cta">
-                            Ver actividades
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </span>
-                    </a>
+                    <!-- Vocabulary A1 - Number Dictation -->
+                    <div class="activity-card" data-skill="vocabulary" data-level="A1" data-title="Number Dictation">
+                        <a href="actividades/spelling-numbers.html" class="activity-card-link">
+                            <div class="activity-card-image" style="background-image: url('../../assets/activities/spelling.png'); background-color: #0a1e42;">
+                                <div class="activity-card-icon vocabulary">
+                                    <i class="fa-solid fa-spell-check"></i>
+                                </div>
+                            </div>
+                            <div class="activity-card-info">
+                                <h3 class="activity-card-title">Number Dictation</h3>
+                                <div class="activity-card-badges">
+                                    <span class="skill-badge vocabulary">Vocabulary</span>
+                                    <span class="level-badge beginner">Level A1</span>
+                                    <span class="activity-card-duration"><i class="fa-regular fa-clock"></i> 20 min</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
 
-                    <!-- Advanced Card -->
-                    <a href="actividades-avanzado.html" class="level-card advanced">
-                        <div class="level-card-icon">
-                            <i class="fa-solid fa-trophy"></i>
-                        </div>
-                        <span class="level-card-badge">C1 - C2</span>
-                        <h3>Avanzado</h3>
-                        <p>Dominio del idioma. Textos complejos, expresión fluida y uso sofisticado del lenguaje.</p>
-                        <div class="skills-preview">
-                            <div class="skill-icon-mini listening"><i class="fa-solid fa-headphones"></i></div>
-                            <div class="skill-icon-mini reading"><i class="fa-solid fa-book-open"></i></div>
-                            <div class="skill-icon-mini writing"><i class="fa-solid fa-pen"></i></div>
-                            <div class="skill-icon-mini speaking"><i class="fa-solid fa-comments"></i></div>
-                        </div>
-                        <span class="level-card-cta">
-                            Ver actividades
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </span>
-                    </a>
+                    <!-- Vocabulary A1 - Spelling Names -->
+                    <div class="activity-card" data-skill="vocabulary" data-level="A1" data-title="Spelling Names">
+                        <a href="actividades/spelling-names.html" class="activity-card-link">
+                            <div class="activity-card-image" style="background-image: url('../../assets/activities/spelling.png'); background-color: #0a1e42;">
+                                <div class="activity-card-icon vocabulary">
+                                    <i class="fa-solid fa-spell-check"></i>
+                                </div>
+                            </div>
+                            <div class="activity-card-info">
+                                <h3 class="activity-card-title">Spelling Names</h3>
+                                <div class="activity-card-badges">
+                                    <span class="skill-badge vocabulary">Vocabulary</span>
+                                    <span class="level-badge beginner">Level A1</span>
+                                    <span class="activity-card-duration"><i class="fa-regular fa-clock"></i> 15 min</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Get Off the Phone - Listening B1 -->
+                    <div class="activity-card" data-skill="listening" data-level="B1" data-title="Get Off the Phone">
+                        <a href="actividades/get-off-the-phone.html" class="activity-card-link">
+                            <div class="activity-card-image" style="background-image: url('../../assets/activities/getoff.jpg');">
+                                <div class="activity-card-icon listening">
+                                    <i class="fa-solid fa-headphones"></i>
+                                </div>
+                            </div>
+                            <div class="activity-card-info">
+                                <h3 class="activity-card-title">Get Off the Phone</h3>
+                                <div class="activity-card-badges">
+                                    <span class="skill-badge listening">Listening</span>
+                                    <span class="level-badge intermediate">Level B1</span>
+                                    <span class="activity-card-duration"><i class="fa-regular fa-clock"></i> 30 min</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- ==================== A1 ACTIVITIES ==================== -->
+
+                    <!-- Listening A1 -->
+                    <div class="activity-card" data-skill="listening" data-level="A1" data-title="Sunday Morning Routine">
+                        <a href="#" class="activity-card-link">
+                            <div class="activity-card-image" style="background-image: url('../../assets/activities/morning.jpg');">
+                                <div class="activity-card-icon listening">
+                                    <i class="fa-solid fa-headphones"></i>
+                                </div>
+                            </div>
+                            <div class="activity-card-info">
+                                <h3 class="activity-card-title">Sunday Morning Routine</h3>
+                                <div class="activity-card-badges">
+                                    <span class="skill-badge listening">Listening</span>
+                                    <span class="level-badge beginner">Level A1</span>
+                                    <span class="activity-card-duration"><i class="fa-regular fa-clock"></i> 15 min</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Reading A1 -->
+                    <div class="activity-card" data-skill="reading" data-level="A1" data-title="At the Supermarket">
+                        <a href="#" class="activity-card-link">
+                            <div class="activity-card-image" style="background-image: url('../../assets/activities/supermarket.jpg');">
+                                <div class="activity-card-icon reading">
+                                    <i class="fa-solid fa-book-open"></i>
+                                </div>
+                            </div>
+                            <div class="activity-card-info">
+                                <h3 class="activity-card-title">At the Supermarket</h3>
+                                <div class="activity-card-badges">
+                                    <span class="skill-badge reading">Reading</span>
+                                    <span class="level-badge beginner">Level A1</span>
+                                    <span class="activity-card-duration"><i class="fa-regular fa-clock"></i> 10 min</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Writing A1 -->
+                    <div class="activity-card" data-skill="writing" data-level="A1" data-title="All About Me">
+                        <a href="#" class="activity-card-link">
+                            <div class="activity-card-image" style="background-image: url('../../assets/activities/aboutme.jpg');">
+                                <div class="activity-card-icon writing">
+                                    <i class="fa-solid fa-pen"></i>
+                                </div>
+                            </div>
+                            <div class="activity-card-info">
+                                <h3 class="activity-card-title">All About Me</h3>
+                                <div class="activity-card-badges">
+                                    <span class="skill-badge writing">Writing</span>
+                                    <span class="level-badge beginner">Level A1</span>
+                                    <span class="activity-card-duration"><i class="fa-regular fa-clock"></i> 15 min</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Speaking A1 -->
+                    <div class="activity-card" data-skill="speaking" data-level="A1" data-title="Nice to Meet You!">
+                        <a href="#" class="activity-card-link">
+                            <div class="activity-card-image" style="background-image: url('../../assets/activities/nice.jpg');">
+                                <div class="activity-card-icon speaking">
+                                    <i class="fa-solid fa-comments"></i>
+                                </div>
+                            </div>
+                            <div class="activity-card-info">
+                                <h3 class="activity-card-title">Nice to Meet You!</h3>
+                                <div class="activity-card-badges">
+                                    <span class="skill-badge speaking">Speaking</span>
+                                    <span class="level-badge beginner">Level A1</span>
+                                    <span class="activity-card-duration"><i class="fa-regular fa-clock"></i> 15 min</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- ==================== A2 ACTIVITIES ==================== -->
+
+                    <!-- Listening A2 -->
+                    <div class="activity-card" data-skill="listening" data-level="A2" data-title="At the Coffee Shop">
+                        <a href="#" class="activity-card-link">
+                            <div class="activity-card-image" style="background-image: url('../../assets/activities/coffee.jpg');">
+                                <div class="activity-card-icon listening">
+                                    <i class="fa-solid fa-headphones"></i>
+                                </div>
+                            </div>
+                            <div class="activity-card-info">
+                                <h3 class="activity-card-title">At the Coffee Shop</h3>
+                                <div class="activity-card-badges">
+                                    <span class="skill-badge listening">Listening</span>
+                                    <span class="level-badge beginner">Level A2</span>
+                                    <span class="activity-card-duration"><i class="fa-regular fa-clock"></i> 20 min</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Reading A2 -->
+                    <div class="activity-card" data-skill="reading" data-level="A2" data-title="Holiday with My Family">
+                        <a href="#" class="activity-card-link">
+                            <div class="activity-card-image" style="background-image: url('../../assets/activities/family.jpg');">
+                                <div class="activity-card-icon reading">
+                                    <i class="fa-solid fa-book-open"></i>
+                                </div>
+                            </div>
+                            <div class="activity-card-info">
+                                <h3 class="activity-card-title">Holiday with My Family</h3>
+                                <div class="activity-card-badges">
+                                    <span class="skill-badge reading">Reading</span>
+                                    <span class="level-badge beginner">Level A2</span>
+                                    <span class="activity-card-duration"><i class="fa-regular fa-clock"></i> 20 min</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Writing A2 -->
+                    <div class="activity-card" data-skill="writing" data-level="A2" data-title="Vacation Time">
+                        <a href="#" class="activity-card-link">
+                            <div class="activity-card-image" style="background-image: url('../../assets/activities/vacation.jpg');">
+                                <div class="activity-card-icon writing">
+                                    <i class="fa-solid fa-pen"></i>
+                                </div>
+                            </div>
+                            <div class="activity-card-info">
+                                <h3 class="activity-card-title">Vacation Time</h3>
+                                <div class="activity-card-badges">
+                                    <span class="skill-badge writing">Writing</span>
+                                    <span class="level-badge beginner">Level A2</span>
+                                    <span class="activity-card-duration"><i class="fa-regular fa-clock"></i> 20 min</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Speaking A2 -->
+                    <div class="activity-card" data-skill="speaking" data-level="A2" data-title="What's Your Favorite Sport?">
+                        <a href="#" class="activity-card-link">
+                            <div class="activity-card-image" style="background-image: url('../../assets/activities/sport.jpg');">
+                                <div class="activity-card-icon speaking">
+                                    <i class="fa-solid fa-comments"></i>
+                                </div>
+                            </div>
+                            <div class="activity-card-info">
+                                <h3 class="activity-card-title">What's Your Favorite Sport?</h3>
+                                <div class="activity-card-badges">
+                                    <span class="skill-badge speaking">Speaking</span>
+                                    <span class="level-badge beginner">Level A2</span>
+                                    <span class="activity-card-duration"><i class="fa-regular fa-clock"></i> 20 min</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- ==================== B1 ACTIVITIES ==================== -->
+
+                    <!-- Listening B1 -->
+                    <div class="activity-card" data-skill="listening" data-level="B1" data-title="The Job Interview">
+                        <a href="#" class="activity-card-link">
+                            <div class="activity-card-image" style="background-image: url('../../assets/activities/interview.jpg');">
+                                <div class="activity-card-icon listening">
+                                    <i class="fa-solid fa-headphones"></i>
+                                </div>
+                            </div>
+                            <div class="activity-card-info">
+                                <h3 class="activity-card-title">The Job Interview</h3>
+                                <div class="activity-card-badges">
+                                    <span class="skill-badge listening">Listening</span>
+                                    <span class="level-badge intermediate">Level B1</span>
+                                    <span class="activity-card-duration"><i class="fa-regular fa-clock"></i> 25 min</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Reading B1 -->
+                    <div class="activity-card" data-skill="reading" data-level="B1" data-title="A Day in London">
+                        <a href="#" class="activity-card-link">
+                            <div class="activity-card-image" style="background-image: url('../../assets/activities/london.jpg');">
+                                <div class="activity-card-icon reading">
+                                    <i class="fa-solid fa-book-open"></i>
+                                </div>
+                            </div>
+                            <div class="activity-card-info">
+                                <h3 class="activity-card-title">A Day in London</h3>
+                                <div class="activity-card-badges">
+                                    <span class="skill-badge reading">Reading</span>
+                                    <span class="level-badge intermediate">Level B1</span>
+                                    <span class="activity-card-duration"><i class="fa-regular fa-clock"></i> 20 min</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Writing B1 -->
+                    <div class="activity-card" data-skill="writing" data-level="B1" data-title="Writing a Formal Email">
+                        <a href="#" class="activity-card-link">
+                            <div class="activity-card-image" style="background-image: url('../../assets/activities/email.jpg');">
+                                <div class="activity-card-icon writing">
+                                    <i class="fa-solid fa-pen"></i>
+                                </div>
+                            </div>
+                            <div class="activity-card-info">
+                                <h3 class="activity-card-title">Writing a Formal Email</h3>
+                                <div class="activity-card-badges">
+                                    <span class="skill-badge writing">Writing</span>
+                                    <span class="level-badge intermediate">Level B1</span>
+                                    <span class="activity-card-duration"><i class="fa-regular fa-clock"></i> 25 min</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Speaking B1 -->
+                    <div class="activity-card" data-skill="speaking" data-level="B1" data-title="Giving Opinions">
+                        <a href="#" class="activity-card-link">
+                            <div class="activity-card-image" style="background-image: url('../../assets/activities/opinions.jpg');">
+                                <div class="activity-card-icon speaking">
+                                    <i class="fa-solid fa-comments"></i>
+                                </div>
+                            </div>
+                            <div class="activity-card-info">
+                                <h3 class="activity-card-title">Giving Opinions</h3>
+                                <div class="activity-card-badges">
+                                    <span class="skill-badge speaking">Speaking</span>
+                                    <span class="level-badge intermediate">Level B1</span>
+                                    <span class="activity-card-duration"><i class="fa-regular fa-clock"></i> 20 min</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- ==================== B2 ACTIVITIES ==================== -->
+
+                    <!-- Listening B2 -->
+                    <div class="activity-card" data-skill="listening" data-level="B2" data-title="TED Talk: Climate Change">
+                        <a href="#" class="activity-card-link">
+                            <div class="activity-card-image" style="background-image: url('../../assets/activities/ted.jpg');">
+                                <div class="activity-card-icon listening">
+                                    <i class="fa-solid fa-headphones"></i>
+                                </div>
+                            </div>
+                            <div class="activity-card-info">
+                                <h3 class="activity-card-title">TED Talk: Climate Change</h3>
+                                <div class="activity-card-badges">
+                                    <span class="skill-badge listening">Listening</span>
+                                    <span class="level-badge intermediate">Level B2</span>
+                                    <span class="activity-card-duration"><i class="fa-regular fa-clock"></i> 30 min</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Reading B2 -->
+                    <div class="activity-card" data-skill="reading" data-level="B2" data-title="The Future of AI">
+                        <a href="#" class="activity-card-link">
+                            <div class="activity-card-image" style="background-image: url('../../assets/activities/ai.jpg');">
+                                <div class="activity-card-icon reading">
+                                    <i class="fa-solid fa-book-open"></i>
+                                </div>
+                            </div>
+                            <div class="activity-card-info">
+                                <h3 class="activity-card-title">The Future of AI</h3>
+                                <div class="activity-card-badges">
+                                    <span class="skill-badge reading">Reading</span>
+                                    <span class="level-badge intermediate">Level B2</span>
+                                    <span class="activity-card-duration"><i class="fa-regular fa-clock"></i> 25 min</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Writing B2 -->
+                    <div class="activity-card" data-skill="writing" data-level="B2" data-title="Opinion Essay: Social Media">
+                        <a href="#" class="activity-card-link">
+                            <div class="activity-card-image" style="background-image: url('../../assets/activities/socialmedia.jpg');">
+                                <div class="activity-card-icon writing">
+                                    <i class="fa-solid fa-pen"></i>
+                                </div>
+                            </div>
+                            <div class="activity-card-info">
+                                <h3 class="activity-card-title">Opinion Essay: Social Media</h3>
+                                <div class="activity-card-badges">
+                                    <span class="skill-badge writing">Writing</span>
+                                    <span class="level-badge intermediate">Level B2</span>
+                                    <span class="activity-card-duration"><i class="fa-regular fa-clock"></i> 30 min</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Speaking B2 -->
+                    <div class="activity-card" data-skill="speaking" data-level="B2" data-title="Debate: Remote Work">
+                        <a href="#" class="activity-card-link">
+                            <div class="activity-card-image" style="background-image: url('../../assets/activities/remotework.jpg');">
+                                <div class="activity-card-icon speaking">
+                                    <i class="fa-solid fa-comments"></i>
+                                </div>
+                            </div>
+                            <div class="activity-card-info">
+                                <h3 class="activity-card-title">Debate: Remote Work</h3>
+                                <div class="activity-card-badges">
+                                    <span class="skill-badge speaking">Speaking</span>
+                                    <span class="level-badge intermediate">Level B2</span>
+                                    <span class="activity-card-duration"><i class="fa-regular fa-clock"></i> 25 min</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- ==================== C1 ACTIVITIES ==================== -->
+
+                    <!-- Listening C1 -->
+                    <div class="activity-card" data-skill="listening" data-level="C1" data-title="BBC Documentary: Ocean Life">
+                        <a href="#" class="activity-card-link">
+                            <div class="activity-card-image" style="background-image: url('../../assets/activities/ocean.jpg');">
+                                <div class="activity-card-icon listening">
+                                    <i class="fa-solid fa-headphones"></i>
+                                </div>
+                            </div>
+                            <div class="activity-card-info">
+                                <h3 class="activity-card-title">BBC Documentary: Ocean Life</h3>
+                                <div class="activity-card-badges">
+                                    <span class="skill-badge listening">Listening</span>
+                                    <span class="level-badge advanced">Level C1</span>
+                                    <span class="activity-card-duration"><i class="fa-regular fa-clock"></i> 35 min</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Reading C1 -->
+                    <div class="activity-card" data-skill="reading" data-level="C1" data-title="The Economist: Global Markets">
+                        <a href="#" class="activity-card-link">
+                            <div class="activity-card-image" style="background-image: url('../../assets/activities/markets.jpg');">
+                                <div class="activity-card-icon reading">
+                                    <i class="fa-solid fa-book-open"></i>
+                                </div>
+                            </div>
+                            <div class="activity-card-info">
+                                <h3 class="activity-card-title">The Economist: Global Markets</h3>
+                                <div class="activity-card-badges">
+                                    <span class="skill-badge reading">Reading</span>
+                                    <span class="level-badge advanced">Level C1</span>
+                                    <span class="activity-card-duration"><i class="fa-regular fa-clock"></i> 30 min</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Writing C1 -->
+                    <div class="activity-card" data-skill="writing" data-level="C1" data-title="Academic Report Writing">
+                        <a href="#" class="activity-card-link">
+                            <div class="activity-card-image" style="background-image: url('../../assets/activities/academic.jpg');">
+                                <div class="activity-card-icon writing">
+                                    <i class="fa-solid fa-pen"></i>
+                                </div>
+                            </div>
+                            <div class="activity-card-info">
+                                <h3 class="activity-card-title">Academic Report Writing</h3>
+                                <div class="activity-card-badges">
+                                    <span class="skill-badge writing">Writing</span>
+                                    <span class="level-badge advanced">Level C1</span>
+                                    <span class="activity-card-duration"><i class="fa-regular fa-clock"></i> 40 min</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Speaking C1 -->
+                    <div class="activity-card" data-skill="speaking" data-level="C1" data-title="Presentation: Business Pitch">
+                        <a href="#" class="activity-card-link">
+                            <div class="activity-card-image" style="background-image: url('../../assets/activities/pitch.jpg');">
+                                <div class="activity-card-icon speaking">
+                                    <i class="fa-solid fa-comments"></i>
+                                </div>
+                            </div>
+                            <div class="activity-card-info">
+                                <h3 class="activity-card-title">Presentation: Business Pitch</h3>
+                                <div class="activity-card-badges">
+                                    <span class="skill-badge speaking">Speaking</span>
+                                    <span class="level-badge advanced">Level C1</span>
+                                    <span class="activity-card-duration"><i class="fa-regular fa-clock"></i> 30 min</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- ==================== VOCABULARY ACTIVITIES ==================== -->
+
+                    <!-- Vocabulary A1 -->
+                    <div class="activity-card" data-skill="vocabulary" data-level="A1" data-title="Food & Drinks">
+                        <a href="#" class="activity-card-link">
+                            <div class="activity-card-image" style="background-image: url('../../assets/activities/food.jpg');">
+                                <div class="activity-card-icon vocabulary">
+                                    <i class="fa-solid fa-spell-check"></i>
+                                </div>
+                            </div>
+                            <div class="activity-card-info">
+                                <h3 class="activity-card-title">Food & Drinks</h3>
+                                <div class="activity-card-badges">
+                                    <span class="skill-badge vocabulary">Vocabulary</span>
+                                    <span class="level-badge beginner">Level A1</span>
+                                    <span class="activity-card-duration"><i class="fa-regular fa-clock"></i> 10 min</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Vocabulary A2 -->
+                    <div class="activity-card" data-skill="vocabulary" data-level="A2" data-title="Planning a Weekend Trip">
+                        <a href="#" class="activity-card-link">
+                            <div class="activity-card-image" style="background-image: url('../../assets/activities/trip.jpg');">
+                                <div class="activity-card-icon vocabulary">
+                                    <i class="fa-solid fa-spell-check"></i>
+                                </div>
+                            </div>
+                            <div class="activity-card-info">
+                                <h3 class="activity-card-title">Planning a Weekend Trip</h3>
+                                <div class="activity-card-badges">
+                                    <span class="skill-badge vocabulary">Vocabulary</span>
+                                    <span class="level-badge beginner">Level A2</span>
+                                    <span class="activity-card-duration"><i class="fa-regular fa-clock"></i> 15 min</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Vocabulary B1 -->
+                    <div class="activity-card" data-skill="vocabulary" data-level="B1" data-title="Work & Career">
+                        <a href="#" class="activity-card-link">
+                            <div class="activity-card-image" style="background-image: url('../../assets/activities/career.jpg');">
+                                <div class="activity-card-icon vocabulary">
+                                    <i class="fa-solid fa-spell-check"></i>
+                                </div>
+                            </div>
+                            <div class="activity-card-info">
+                                <h3 class="activity-card-title">Work & Career</h3>
+                                <div class="activity-card-badges">
+                                    <span class="skill-badge vocabulary">Vocabulary</span>
+                                    <span class="level-badge intermediate">Level B1</span>
+                                    <span class="activity-card-duration"><i class="fa-regular fa-clock"></i> 15 min</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Vocabulary B2 -->
+                    <div class="activity-card" data-skill="vocabulary" data-level="B2" data-title="Idioms & Expressions">
+                        <a href="#" class="activity-card-link">
+                            <div class="activity-card-image" style="background-image: url('../../assets/activities/idioms.jpg');">
+                                <div class="activity-card-icon vocabulary">
+                                    <i class="fa-solid fa-spell-check"></i>
+                                </div>
+                            </div>
+                            <div class="activity-card-info">
+                                <h3 class="activity-card-title">Idioms & Expressions</h3>
+                                <div class="activity-card-badges">
+                                    <span class="skill-badge vocabulary">Vocabulary</span>
+                                    <span class="level-badge intermediate">Level B2</span>
+                                    <span class="activity-card-duration"><i class="fa-regular fa-clock"></i> 20 min</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Vocabulary C1 -->
+                    <div class="activity-card" data-skill="vocabulary" data-level="C1" data-title="Academic Vocabulary">
+                        <a href="#" class="activity-card-link">
+                            <div class="activity-card-image" style="background-image: url('../../assets/activities/academicvocab.jpg');">
+                                <div class="activity-card-icon vocabulary">
+                                    <i class="fa-solid fa-spell-check"></i>
+                                </div>
+                            </div>
+                            <div class="activity-card-info">
+                                <h3 class="activity-card-title">Academic Vocabulary</h3>
+                                <div class="activity-card-badges">
+                                    <span class="skill-badge vocabulary">Vocabulary</span>
+                                    <span class="level-badge advanced">Level C1</span>
+                                    <span class="activity-card-duration"><i class="fa-regular fa-clock"></i> 25 min</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
                 </div>
 
-                <div class="quote-strip">
-                    <p>"The beautiful thing about learning is that no one can take it away from you."<span>— B.B. King</span></p>
+                <!-- Pagination -->
+                <div class="pagination" id="pagination">
+                    <button class="pagination-btn arrow" id="prev-btn" disabled>
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <button class="pagination-btn arrow" id="next-btn">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
                 </div>
             </div>
         </section>
@@ -536,5 +1390,211 @@
 
     <script src="../../js/layout.js"></script>
     <script src="../../js/script.js" defer></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const skillFilterBtn = document.querySelector('.skill-filter-btn');
+        const skillFilterDropdown = document.querySelector('.skill-filter-dropdown');
+        const skillOptions = document.querySelectorAll('.skill-option');
+        const skillLabel = document.getElementById('skill-label');
+        const levelFilterBtn = document.querySelector('.level-filter-btn');
+        const levelFilterDropdown = document.querySelector('.level-filter-dropdown');
+        const levelOptions = document.querySelectorAll('.level-option');
+        const levelLabel = document.getElementById('level-label');
+        const cards = document.querySelectorAll('.activity-card');
+        const countEl = document.getElementById('activity-count');
+        const totalActivitiesEl = document.getElementById('total-activities');
+        const sortDropdown = document.querySelector('.sort-dropdown');
+        const sortBtn = document.querySelector('.sort-btn');
+        const sortOptions = document.querySelectorAll('.sort-option');
+        const sortLabel = document.getElementById('sort-label');
+        const grid = document.getElementById('activities-grid');
+        const paginationContainer = document.getElementById('pagination');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+
+        const ITEMS_PER_PAGE = 9;
+        const NEW_BADGE_COUNT = 3;
+        let currentPage = 1;
+        let currentFilter = 'all';
+        let currentLevel = 'all';
+
+        function addNewBadges() {
+            cards.forEach((card, index) => {
+                const title = card.querySelector('.activity-card-title');
+                const existingBadge = title.querySelector('.new-badge');
+                if (existingBadge) existingBadge.remove();
+
+                if (index < NEW_BADGE_COUNT) {
+                    const badge = document.createElement('span');
+                    badge.className = 'new-badge';
+                    badge.textContent = 'New';
+                    title.appendChild(badge);
+                }
+            });
+        }
+
+        function getFilteredCards() {
+            return Array.from(cards).filter(card => {
+                const skillMatch = currentFilter === 'all' || card.dataset.skill === currentFilter;
+                const levelMatch = currentLevel === 'all' || card.dataset.level === currentLevel;
+                return skillMatch && levelMatch;
+            });
+        }
+
+        function renderPagination(filteredCards) {
+            const totalPages = Math.ceil(filteredCards.length / ITEMS_PER_PAGE);
+
+            const existingPageBtns = paginationContainer.querySelectorAll('.pagination-btn[data-page]');
+            existingPageBtns.forEach(btn => btn.remove());
+
+            for (let i = 1; i <= totalPages; i++) {
+                const btn = document.createElement('button');
+                btn.className = 'pagination-btn' + (i === currentPage ? ' active' : '');
+                btn.dataset.page = i;
+                btn.textContent = i;
+                btn.addEventListener('click', () => goToPage(i));
+                nextBtn.insertAdjacentElement('beforebegin', btn);
+            }
+
+            prevBtn.disabled = currentPage === 1;
+            nextBtn.disabled = currentPage >= totalPages || totalPages === 0;
+
+            paginationContainer.style.display = totalPages <= 1 ? 'none' : 'flex';
+        }
+
+        function displayCards() {
+            const filteredCards = getFilteredCards();
+            const totalPages = Math.ceil(filteredCards.length / ITEMS_PER_PAGE);
+
+            if (currentPage > totalPages && totalPages > 0) {
+                currentPage = 1;
+            }
+
+            const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+            const endIndex = startIndex + ITEMS_PER_PAGE;
+
+            cards.forEach(card => card.style.display = 'none');
+
+            let visibleCount = 0;
+            filteredCards.forEach((card, index) => {
+                if (index >= startIndex && index < endIndex) {
+                    card.style.display = 'flex';
+                    visibleCount++;
+                }
+            });
+
+            countEl.textContent = visibleCount;
+            totalActivitiesEl.textContent = filteredCards.length;
+
+            renderPagination(filteredCards);
+        }
+
+        function goToPage(page) {
+            currentPage = page;
+            displayCards();
+        }
+
+        levelFilterBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            levelFilterDropdown.classList.toggle('active');
+            skillFilterDropdown.classList.remove('active');
+            sortDropdown.classList.remove('active');
+        });
+
+        levelOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                levelOptions.forEach(o => o.classList.remove('active'));
+                this.classList.add('active');
+                levelLabel.textContent = this.textContent;
+                levelFilterDropdown.classList.remove('active');
+
+                currentLevel = this.dataset.level;
+                currentPage = 1;
+                displayCards();
+            });
+        });
+
+        skillFilterBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            skillFilterDropdown.classList.toggle('active');
+            levelFilterDropdown.classList.remove('active');
+            sortDropdown.classList.remove('active');
+        });
+
+        skillOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                skillOptions.forEach(o => o.classList.remove('active'));
+                this.classList.add('active');
+                const skillText = this.querySelector('span').textContent;
+                skillLabel.textContent = skillText;
+                skillFilterDropdown.classList.remove('active');
+
+                currentFilter = this.dataset.skill;
+                currentPage = 1;
+                displayCards();
+            });
+        });
+
+        sortBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            sortDropdown.classList.toggle('active');
+            levelFilterDropdown.classList.remove('active');
+            skillFilterDropdown.classList.remove('active');
+        });
+
+        document.addEventListener('click', function() {
+            sortDropdown.classList.remove('active');
+            levelFilterDropdown.classList.remove('active');
+            skillFilterDropdown.classList.remove('active');
+        });
+
+        const originalOrder = Array.from(cards);
+
+        sortOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                sortOptions.forEach(o => o.classList.remove('active'));
+                this.classList.add('active');
+                sortLabel.textContent = this.textContent;
+                sortDropdown.classList.remove('active');
+
+                const sortType = this.dataset.sort;
+                let cardsArray;
+
+                if (sortType === 'newest') {
+                    cardsArray = [...originalOrder];
+                } else if (sortType === 'oldest') {
+                    cardsArray = [...originalOrder].reverse();
+                } else if (sortType === 'popular') {
+                    cardsArray = [...originalOrder].sort((a, b) => {
+                        const aPopular = a.dataset.popular === 'true' ? 1 : 0;
+                        const bPopular = b.dataset.popular === 'true' ? 1 : 0;
+                        return bPopular - aPopular;
+                    });
+                }
+
+                cardsArray.forEach(card => grid.appendChild(card));
+                currentPage = 1;
+                displayCards();
+            });
+        });
+
+        prevBtn.addEventListener('click', function() {
+            if (currentPage > 1) {
+                goToPage(currentPage - 1);
+            }
+        });
+
+        nextBtn.addEventListener('click', function() {
+            const filteredCards = getFilteredCards();
+            const totalPages = Math.ceil(filteredCards.length / ITEMS_PER_PAGE);
+            if (currentPage < totalPages) {
+                goToPage(currentPage + 1);
+            }
+        });
+
+        addNewBadges();
+        displayCards();
+    });
+    </script>
 </body>
 </html>

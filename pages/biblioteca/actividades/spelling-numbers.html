@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enbreak | Number Dictation</title>
+    <link rel="icon" type="image/x-icon" href="../../../favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../favicon/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../favicon/apple-touch-icon.png">
+    <link rel="manifest" href="../../../favicon/site.webmanifest">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rubik:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/style.css">
+    <style>
+/* Reusing Activity Page Layout */
+.activity-page { background: #f8f9fa; min-height: 100vh; }
+.activity-hero { position: relative; height: 280px; background: url('../../../assets/activities/spelling.png') center center/cover no-repeat; background-color: #0a1e42; }
+.activity-hero { position: relative; height: 280px; background: url('../../../assets/activities/numbers.jpg') center center/cover no-repeat; background-color: #0a1e42; }
+.activity-hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(10, 30, 66, 0.4) 0%, rgba(10, 30, 66, 0.85) 100%); }
+.activity-hero-content { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 40px; padding-bottom: 60px; height: 100%; display: flex; flex-direction: column; justify-content: center; }
+.activity-hero .breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 13px; margin-bottom: 12px; }
+.activity-hero .breadcrumb a { color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.2s; }
+.activity-hero .breadcrumb a:hover { color: #ffffff; }
+.activity-hero .breadcrumb-separator { color: rgba(255, 255, 255, 0.4); }
+.activity-hero .breadcrumb-current { color: #ffffff; }
+.activity-hero h1 { font-family: 'Rubik', sans-serif; font-size: 36px; font-weight: 700; color: #ffffff; margin: 0 0 16px 0; }
+.activity-hero-badges { display: flex; gap: 10px; flex-wrap: wrap; }
+.hero-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 20px; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; background: rgba(255, 255, 255, 0.15); color: #ffffff; backdrop-filter: blur(8px); }
+
+/* Tabs */
+.activity-container { max-width: 1200px; margin: 0 auto; padding: 0 40px 80px; }
+.tabs-wrapper { background: #ffffff; border-radius: 0 0 16px 16px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); margin-top: 0; position: relative; z-index: 10; overflow: hidden; }
+.tab-nav { display: flex; align-items: center; border-bottom: 1px solid #e5e7eb; background: #fafafa; overflow-x: auto; }
+.tab-nav-main { display: flex; flex: 1; }
+.tab-btn { display: flex; align-items: center; gap: 8px; padding: 18px 24px; background: none; border: none; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500; color: #6b7280; cursor: pointer; white-space: nowrap; transition: all 0.2s; position: relative; }
+.tab-btn:hover { color: #374151; background: #f3f4f6; }
+.tab-btn.active { color: #ea580c; background: #ffffff; }
+.tab-btn.active::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: #ea580c; }
+.tab-content { display: none; padding: 40px 60px; }
+.tab-content.active { display: block; }
+
+/* Intro Styles */
+.intro-grid { display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: start; }
+.intro-main { display: flex; flex-direction: column; gap: 24px; }
+.intro-text { font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.8; color: #4b5563; }
+.intro-sidebar { display: flex; flex-direction: column; gap: 16px; max-width: 380px; }
+.info-card { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 12px; padding: 12px; display: flex; gap: 10px; }
+.info-card-icon { width: 36px; height: 36px; border-radius: 8px; background: #ffedd5; color: #ea580c; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+.info-card-content h4 { font-family: 'Rubik', sans-serif; font-size: 14px; font-weight: 600; color: #374151; margin: 0 0 4px 0; }
+.info-card-content p { font-family: 'Inter', sans-serif; font-size: 14px; color: #6b7280; margin: 0; }
+
+/* Number Grid Styles */
+.number-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 16px;
+    margin-top: 20px;
+}
+
+.number-card {
+    background: white;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+    padding: 16px;
+    min-height: 100px;
+}
+
+.number-card:hover {
+    border-color: #ea580c;
+    background: #fff7ed;
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(234, 88, 12, 0.1);
+}
+
+.number-card.playing {
+    border-color: #ea580c;
+    background: #ffedd5;
+    box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.2);
+}
+
+.number-char {
+    font-family: 'Rubik', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+.number-word {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: #6b7280;
+    margin-top: 4px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.number-icon {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-size: 12px;
+    color: #ea580c;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.number-card:hover .number-icon {
+    opacity: 1;
+}
+
+/* Tip Box */
+.tip-box {
+    background-color: #
+}
+
+.tip-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    color:
+}
+tf5rem;
+    color: #3B8A9D;
+    line-height: 1.6;
+}
+
+.tip-content ul {
+    margin: 8px 0;
+    padding-left: 20px;
+.tip-content li {
+    margin-bottom: 4px;
+}
+
+[data-lucide] {
+    display: inline-block;
+    vertical-align: middle;
+}
+[data-lucide] svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* Practice Exercises */
+.exercise-section { margin-bottom: 40px; }
+.exercise-header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+.exercise-number { width: 36px; height: 36px; border-radius: 50%; background: #ea580c; color: #ffffff; font-family: 'Rubik', sans-serif; font-size: 16px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.exercise-header h3 { font-family: 'Rubik', sans-serif; font-size: 20px; font-weight: 600; color: #1f2937; margin: 0; }
+.exercise-instructions { font-family: 'Inter', sans-serif; font-size: 15px; color: #6b7280; margin-bottom: 20px; line-height: 1.6; }
+
+.spelling-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.spelling-item {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: fit-content;
+}
+
+.spelling-audio-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 2px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ea580c;
+    cursor: pointer;
+    transition: all 0.2s;
+    flex-shrink: 0;
+}
+
+.spelling-audio-btn:hover {
+    border-color: #ea580c;
+    background: #fff7ed;
+    transform: scale(1.05);
+}
+
+.spelling-audio-btn.playing {
+    background: #ea580c;
+    color: white;
+    border-color: #ea580c;
+}
+
+.audio-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.speed-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: white;
+    border: 2px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 11px;
+    font-weight: 600;
+    color: #6b7280;
+    padding: 0;
+    line-height: 1;
+}
+
+.speed-btn:hover {
+    background: #f9fafb;
+    border-color: #ea580c;
+    background: #fff7ed;
+    transform: scale(1.1);
+}
+
+.spelling-input-wrapper {
+    flex: 1;
+    position: relative;
+}
+
+.spelling-input {
+    width: 250px;
+    padding: 12px 16px;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: #374151;
+    transition: all 0.2s;
+    text-transform: uppercase;
+}
+
+.spelling-input::placeholder {
+    text-transform: none;
+}
+
+.spelling-input:focus {
+    outline: none;
+    border-color: #ea580c;
+    box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.1);
+}
+
+.spelling-input.correct {
+    border-color: #16a34a;
+    background: #dcfce7;
+    color: #166534;
+}
+
+.spelling-input.incorrect {
+    border-color: #dc2626;
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* Navigation Buttons */
+.activity-nav { display: flex; justify-content: space-between; align-items: center; padding: 24px 40px; border-top: 1px solid #e5e7eb; background: #fafafa; }
+.nav-btn { display: flex; align-items: center; gap: 8px; padding: 12px 24px; border-radius: 10px; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.nav-btn-back { background: #ffffff; border: 2px solid #e5e7eb; color: #6b7280; }
+.nav-btn-back:hover:not(:disabled) { border-color: #d1d5db; color: #374151; }
+.nav-btn-next { background: #ea580c; border: 2px solid #ea580c; color: #ffffff; }
+.nav-btn-next:hover:not(:disabled) { background: #dc2626; border-color: #dc2626; }
+.nav-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.nav-btn-back.hidden { visibility: hidden; }
+
+/* Check Answers Button */
+.check-answers-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px; background: #0a1e42; border: none; border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; color: #ffffff; cursor: pointer; transition: all 0.2s; margin-top: 20px; }
+.check-answers-btn:hover { background: #1e3a5f; }
+.check-answers-btn.retry-btn { background: #ea580c; }
+.check-answers-btn.retry-btn:hover { background: #c2410c; }
+.check-answers-btn:disabled { opacity: 0.5; cursor: not-allowed; background: #9ca3af; }
+
+/* Feedback Popup */
+.feedback-popup-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); display: flex; align-items: center; justify-content: center; z-index: 10000; opacity: 0; visibility: hidden; transition: all 0.3s ease; }
+.feedback-popup-overlay.show { opacity: 1; visibility: visible; }
+.feedback-popup { background: #ffffff; border-radius: 16px; padding: 32px; max-width: 400px; width: 90%; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); text-align: center; transform: scale(0.9); transition: transform 0.3s ease; }
+.feedback-popup-overlay.show .feedback-popup { transform: scale(1); }
+.feedback-popup-icon { font-size: 40px; margin-bottom: 16px; }
+.feedback-popup-icon.success { color: #16a34a; }
+.feedback-popup-icon.partial { color: #ea580c; }
+.feedback-popup h3 { font-family: 'Rubik', sans-serif; font-size: 18px; font-weight: 700; color: #1f2937; margin: 0 0 12px 0; }
+.feedback-popup p { font-family: 'Inter', sans-serif; font-size: 15px; color: #6b7280; margin: 0 0 24px 0; }
+.feedback-popup-close { display: inline-flex; align-items: center; gap: 8px; padding: 12px 32px; background: #0a1e42; border: none; border-radius: 10px; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600; color: #ffffff; cursor: pointer; transition: all 0.2s; }
+.feedback-popup-close:hover { background: #1e3a5f; }
+
+@media (max-width: 768px) {
+    .activity-hero { height: 220px; }
+    .activity-hero-content { padding: 24px; }
+    .activity-hero h1 { font-size: 28px; }
+    .activity-container { padding: 0 16px 60px; }
+    .tab-content { padding: 24px; }
+    .spelling-item { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .spelling-input-wrapper { width: 100%; }
+}
+    </style>
+</head>
+<body>
+
+    <div id="header-placeholder"></div>
+
+    <main class="activity-page">
+        <!-- Hero Section -->
+        <section class="activity-hero">
+            <div class="activity-hero-content">
+                <nav class="breadcrumb">
+                    <a href="/">Inicio</a>
+                    <span class="breadcrumb-separator">›</span>
+                    <a href="../actividades.html">Actividades</a>
+                    <span class="breadcrumb-separator">›</span>
+                    <span class="breadcrumb-current">Number Dictation</span>
+                </nav>
+                <h1>Number Dictation</h1>
+                <div class="activity-hero-badges">
+                    <span class="hero-badge"><i class="fa-solid fa-spell-check"></i> Vocabulary</span>
+                    <span class="hero-badge"><i class="fa-solid fa-layer-group"></i> Level A1</span>
+                    <span class="hero-badge"><i class="fa-regular fa-clock"></i> 20 min</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Activity Content -->
+        <section class="activity-container">
+            <div class="tabs-wrapper">
+                <!-- Tab Navigation -->
+                <nav class="tab-nav">
+                    <div class="tab-nav-main">
+                        <button class="tab-btn active" data-tab="introduction">Introduction</button>
+                        <button class="tab-btn" data-tab="preparation">Preparation</button>
+                        <button class="tab-btn" data-tab="practice">Practice</button>
+                    </div>
+                </nav>
+
+                <!-- Introduction Tab -->
+                <div class="tab-content active" id="introduction">
+                    <div class="intro-grid">
+                        <div class="intro-main">
+                            <p class="intro-text">
+                                Numbers are everywhere in our daily lives. From <strong>phone numbers</strong> and <strong>prices</strong> to <strong>dates</strong> and <strong>addresses</strong>, being able to understand and say numbers correctly is essential for effective communication.
+                            </p>
+                            <p class="intro-text">
+                                In English, there are specific rules for pronouncing large numbers, money, and decimals. Mastering these will help you sound more natural and avoid misunderstandings.
+                            </p>
+                            <p class="intro-text">
+                                In this activity, we will review numbers from zero to millions, learn about money symbols, and practice with real-world examples.
+                            </p>
+                        </div>
+                        <div class="intro-sidebar">
+                            <div class="info-card">
+                                <div class="info-card-icon">
+                                    <i class="fa-solid fa-bullseye"></i>
+                                </div>
+                                <div class="info-card-content">
+                                    <h4>Learning Objective</h4>
+                                    <p>You will be able to recognize, pronounce, and write numbers, prices, and amounts correctly.</p>
+                                </div>
+                            </div>
+                            <div class="info-card">
+                                <div class="info-card-icon">
+                                    <i class="fa-solid fa-spell-check"></i>
+                                </div>
+                                <div class="info-card-content">
+                                    <h4>Skill Focus</h4>
+                                    <p>Vocabulary & Listening (A1 Level)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Preparation Tab -->
+                <div class="tab-content" id="preparation">
+                    <!-- Section 1: 0-10 -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">1</span>
+                            <h3>Numbers 0 - 10</h3>
+                        </div>
+                        <p class="exercise-instructions">Click on each number to hear its pronunciation.</p>
+                        
+                        <div class="number-grid" id="grid-0-10">
+                            <!-- Generated by JS -->
+                        </div>
+
+                        <div class="tip-box">
+                            <div class="tip-header">
+                                <i 
+                            <div class="tip-content">
+                                <p>The number <strong>0</strong> is usually pronounced as "zero". However, when saying phone numbers, room numbers, or years, it is often pronounced like the letter <strong>"oh"</strong>.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section 2: 11-19 -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">2</span>
+                            <h3>Numbers 11 - 19</h3>
+                        </div>
+                        <p class="exercise-instructions">Pay attention to the "-teen" ending.</p>
+                        
+                        <div class="number-grid" id="grid-11-19">
+                            <!-- Generated by JS -->
+                        </div>
+
+                        <div class="tip-box">
+                            <div class="tip-header">
+                                <i data-lucide="info" style="width: 20px; height: 20px;"></i> Tip
+                            </div>s="tip-content">
+                                <p>Numbers like 13, 14, 15 end in <strong>-teen</strong> (stressed). Numbers like 30, 40, 50 end in <strong>-ty</strong> (unstressed). Be careful not to confuse <strong>15 (fifteen)</strong> with <strong>50 (fifty)</strong>!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section 3: 20-90 -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">3</span>
+                            <h3>Numbers 20 - 90</h3>
+                        </div>
+                        <p class="exercise-instructions">Counting by tens.</p>
+                        
+                        <div class="number-grid" id="grid-20-90">
+                            <!-- Generated by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Section 4: Large Numbers -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">4</span>
+                            <h3>Large Numbers</h3>
+                        </div>
+                        <p class="exercise-instructions">Hundreds, thousands, and millions.</p>
+                        
+                        <div class="number-grid" id="grid-large">
+                            <!-- Generated by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Section 5: Money & Symbols -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">5</span>
+                            <h3>Money & Symbols</h3>
+                        </div>
+                        <p class="exercise-instructions">Common currency symbols and how to read prices.</p>
+                        
+                        <div class="number-grid" id="grid-money">
+                            <!-- Generated by JS -->
+                        </div>
+
+                        <div class="tip-box">
+                            <div class="tip-header">
+                                <i data-lucide="info" style="width: 20px; height: 20px;"></i> Tip
+                            </div>
+                                <p>For prices with decimals, we usually say the currency first, then the main number, and then the cents. <br>Example: <strong>$10.50</strong> is read as "ten dollars fifty".</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Practice Tab -->
+                <div class="tab-content" id="practice">
+                    <!-- Exercise 1: Phone Numbers -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">1</span>
+                            <h3>Phone Numbers</h3>
+                        </div>
+                        <p class="exercise-instructions">Listen and write the phone numbers.</p>
+                        
+                        <div class="spelling-list" id="list-phones">
+                            <div class="spelling-item" data-answer="07700 900461">
+                                <div class="audio-controls">
+                                    <button class="spelling-audio-btn" onclick="playAudio('phone1')">
+                                        <i class="fa-solid fa-play"></i>
+                                    </button>
+                                    <button class="speed-btn" onclick="toggleSpeed(this)" data-speed="1">1x</button>
+                                </div>
+                                <div class="spelling-input-wrapper">
+                                    <input type="text" class="spelling-input" placeholder="Type the number..." autocomplete="new-password">
+                                </div>
+                            </div>
+
+                            <div class="spelling-item" data-answer="+44 20 7946 0123">
+                                <div class="audio-controls">
+                                    <button class="spelling-audio-btn" onclick="playAudio('phone2')">
+                                        <i class="fa-solid fa-play"></i>
+                                    </button>
+                                    <button class="speed-btn" onclick="toggleSpeed(this)" data-speed="1">1x</button>
+                                </div>
+                                <div class="spelling-input-wrapper">
+                                    <input type="text" class="spelling-input" placeholder="Type the number..." autocomplete="new-password">
+                                </div>
+                            </div>
+
+                            <div class="spelling-item" data-answer="555-0199">
+                                <div class="audio-controls">
+                                    <button class="spelling-audio-btn" onclick="playAudio('phone3')">
+                                        <i class="fa-solid fa-play"></i>
+                                    </button>
+                                    <button class="speed-btn" onclick="toggleSpeed(this)" data-speed="1">1x</button>
+                                </div>
+                                <div class="spelling-input-wrapper">
+                                    <input type="text" class="spelling-input" placeholder="Type the number..." autocomplete="new-password">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 12px; align-items: center; margin-top: 20px;">
+                            <button class="check-answers-btn" id="check-phones">
+                                <i class="fa-solid fa-check"></i> Check answers
+                            </button>
+                            <button class="check-answers-btn retry-btn" id="retry-phones" disabled>
+                                <i class="fa-solid fa-rotate-right"></i> Try again
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Exercise 2: Prices -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">2</span>
+                            <h3>Prices</h3>
+                        </div>
+                        <p class="exercise-instructions">Listen and write the prices (include currency symbols like $ or £).</p>
+                        
+                        <div class="spelling-list" id="list-prices">
+                            <div class="spelling-item" data-answer="$19.99">
+                                <div class="audio-controls">
+                                    <button class="spelling-audio-btn" onclick="playAudio('price1')">
+                                        <i class="fa-solid fa-play"></i>
+                                    </button>
+                                    <button class="speed-btn" onclick="toggleSpeed(this)" data-speed="1">1x</button>
+                                </div>
+                                <div class="spelling-input-wrapper">
+                                    <input type="text" class="spelling-input" placeholder="Type the price..." autocomplete="new-password">
+                                </div>
+                            </div>
+
+                            <div class="spelling-item" data-answer="£5.50">
+                                <div class="audio-controls">
+                                    <button class="spelling-audio-btn" onclick="playAudio('price2')">
+                                        <i class="fa-solid fa-play"></i>
+                                    </button>
+                                    <button class="speed-btn" onclick="toggleSpeed(this)" data-speed="1">1x</button>
+                                </div>
+                                <div class="spelling-input-wrapper">
+                                    <input type="text" class="spelling-input" placeholder="Type the price..." autocomplete="new-password">
+                                </div>
+                            </div>
+
+                            <div class="spelling-item" data-answer="€120">
+                                <div class="audio-controls">
+                                    <button class="spelling-audio-btn" onclick="playAudio('price3')">
+                                        <i class="fa-solid fa-play"></i>
+                                    </button>
+                                    <button class="speed-btn" onclick="toggleSpeed(this)" data-speed="1">1x</button>
+                                </div>
+                                <div class="spelling-input-wrapper">
+                                    <input type="text" class="spelling-input" placeholder="Type the price..." autocomplete="new-password">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 12px; align-items: center; margin-top: 20px;">
+                            <button class="check-answers-btn" id="check-prices">
+                                <i class="fa-solid fa-check"></i> Check answers
+                            </button>
+                            <button class="check-answers-btn retry-btn" id="retry-prices" disabled>
+                                <i class="fa-solid fa-rotate-right"></i> Try again
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Exercise 3: Amounts -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">3</span>
+                            <h3>Amounts & Quantities</h3>
+                        </div>
+                        <p class="exercise-instructions">Listen and write the numbers you hear.</p>
+                        
+                        <div class="spelling-list" id="list-amounts">
+                            <div class="spelling-item" data-answer="350">
+                                <div class="audio-controls">
+                                    <button class="spelling-audio-btn" onclick="playAudio('amount1')">
+                                        <i class="fa-solid fa-play"></i>
+                                    </button>
+                                    <button class="speed-btn" onclick="toggleSpeed(this)" data-speed="1">1x</button>
+                                </div>
+                                <div class="spelling-input-wrapper">
+                                    <input type="text" class="spelling-input" placeholder="Type the number..." autocomplete="new-password">
+                                </div>
+                            </div>
+
+                            <div class="spelling-item" data-answer="1,200">
+                                <div class="audio-controls">
+                                    <button class="spelling-audio-btn" onclick="playAudio('amount2')">
+                                        <i class="fa-solid fa-play"></i>
+                                    </button>
+                                    <button class="speed-btn" onclick="toggleSpeed(this)" data-speed="1">1x</button>
+                                </div>
+                                <div class="spelling-input-wrapper">
+                                    <input type="text" class="spelling-input" placeholder="Type the number..." autocomplete="new-password">
+                                </div>
+                            </div>
+
+                            <div class="spelling-item" data-answer="15,000">
+                                <div class="audio-controls">
+                                    <button class="spelling-audio-btn" onclick="playAudio('amount3')">
+                                        <i class="fa-solid fa-play"></i>
+                                    </button>
+                                    <button class="speed-btn" onclick="toggleSpeed(this)" data-speed="1">1x</button>
+                                </div>
+                                <div class="spelling-input-wrapper">
+                                    <input type="text" class="spelling-input" placeholder="Type the number..." autocomplete="new-password">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 12px; align-items: center; margin-top: 20px;">
+                            <button class="check-answers-btn" id="check-amounts">
+                                <i class="fa-solid fa-check"></i> Check answers
+                            </button>
+                            <button class="check-answers-btn retry-btn" id="retry-amounts" disabled>
+                                <i class="fa-solid fa-rotate-right"></i> Try again
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Exercise 4: Identification Numbers -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">4</span>
+                            <h3>Identification Numbers</h3>
+                        </div>
+                        <p class="exercise-instructions">Listen and write the room, bus, or flight numbers.</p>
+                        
+                        <div class="spelling-list" id="list-ids">
+                            <div class="spelling-item" data-answer="ROOM 204">
+                                <div class="audio-controls">
+                                    <button class="spelling-audio-btn" onclick="playAudio('id1')">
+                                        <i class="fa-solid fa-play"></i>
+                                    </button>
+                                    <button class="speed-btn" onclick="toggleSpeed(this)" data-speed="1">1x</button>
+                                </div>
+                                <div class="spelling-input-wrapper">
+                                    <input type="text" class="spelling-input" placeholder="Type the room number..." autocomplete="new-password">
+                                </div>
+                            </div>
+
+                            <div class="spelling-item" data-answer="BUS 55">
+                                <div class="audio-controls">
+                                    <button class="spelling-audio-btn" onclick="playAudio('id2')">
+                                        <i class="fa-solid fa-play"></i>
+                                    </button>
+                                    <button class="speed-btn" onclick="toggleSpeed(this)" data-speed="1">1x</button>
+                                </div>
+                                <div class="spelling-input-wrapper">
+                                    <input type="text" class="spelling-input" placeholder="Type the bus number..." autocomplete="new-password">
+                                </div>
+                            </div>
+
+                            <div class="spelling-item" data-answer="FLIGHT BA249">
+                                <div class="audio-controls">
+                                    <button class="spelling-audio-btn" onclick="playAudio('id3')">
+                                        <i class="fa-solid fa-play"></i>
+                                    </button>
+                                    <button class="speed-btn" onclick="toggleSpeed(this)" data-speed="1">1x</button>
+                                </div>
+                                <div class="spelling-input-wrapper">
+                                    <input type="text" class="spelling-input" placeholder="Type the flight number..." autocomplete="new-password">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 12px; align-items: center; margin-top: 20px;">
+                            <button class="check-answers-btn" id="check-ids">
+                                <i class="fa-solid fa-check"></i> Check answers
+                            </button>
+                            <button class="check-answers-btn retry-btn" id="retry-ids" disabled>
+                                <i class="fa-solid fa-rotate-right"></i> Try again
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="activity-nav">
+                    <button class="nav-btn nav-btn-back" id="btn-back" disabled>
+                        <i class="fa-solid fa-arrow-left"></i> Back
+                    </button>
+                    <button class="nav-btn nav-btn-next" id="btn-next">
+                        Next <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="../../../js/layout.js"></script>
+    <script src="../../../js/script.js" defer></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        lucide.createIcons();
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        const btnBack = document.getElementById('btn-back');
+        const btnNext = document.getElementById('btn-next');
+        const tabs = ['introduction', 'preparation', 'practice'];
+        let currentTabIndex = 0;
+
+        // Data for Preparation Tab
+        const numbers0to10 = [
+            { char: '0', word: 'Zero / Oh' }, { char: '1', word: 'One' }, { char: '2', word: 'Two' },
+            { char: '3', word: 'Three' }, { char: '4', word: 'Four' }, { char: '5', word: 'Five' },
+            { char: '6', word: 'Six' }, { char: '7', word: 'Seven' }, { char: '8', word: 'Eight' },
+            { char: '9', word: 'Nine' }, { char: '10', word: 'Ten' }
+        ];
+
+        const numbers11to19 = [
+            { char: '11', word: 'Eleven' }, { char: '12', word: 'Twelve' }, { char: '13', word: 'Thirteen' },
+            { char: '14', word: 'Fourteen' }, { char: '15', word: 'Fifteen' }, { char: '16', word: 'Sixteen' },
+            { char: '17', word: 'Seventeen' }, { char: '18', word: 'Eighteen' }, { char: '19', word: 'Nineteen' }
+        ];
+
+        const numbers20to90 = [
+            { char: '20', word: 'Twenty' }, { char: '30', word: 'Thirty' }, { char: '40', word: 'Forty' },
+            { char: '50', word: 'Fifty' }, { char: '60', word: 'Sixty' }, { char: '70', word: 'Seventy' },
+            { char: '80', word: 'Eighty' }, { char: '90', word: 'Ninety' }
+        ];
+
+        const largeNumbers = [
+            { char: '100', word: 'One Hundred' }, { char: '1,000', word: 'One Thousand' },
+            { char: '10,000', word: 'Ten Thousand' }, { char: '1,000,000', word: 'One Million' }
+        ];
+
+        const moneySymbols = [
+            { char: '$', word: 'Dollar' }, { char: '£', word: 'Pound' }, { char: '€', word: 'Euro' },
+            { char: '¢', word: 'Cent' }, { char: 'p', word: 'Pence' }
+        ];
+
+        function renderGrid(gridId, data) {
+            const grid = document.getElementById(gridId);
+            if (!grid) return;
+            
+            grid.innerHTML = '';
+            data.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'number-card';
+                card.innerHTML = `
+                    <span class="number-char">${item.char}</span>
+                    <span class="number-word">${item.word}</span>
+                    <i class="fa-solid fa-volume-high number-icon"></i>
+                `;
+                card.onclick = () => playNumberSound(item.char, card);
+                grid.appendChild(card);
+            });
+        }
+
+        renderGrid('grid-0-10', numbers0to10);
+        renderGrid('grid-11-19', numbers11to19);
+        renderGrid('grid-20-90', numbers20to90);
+        renderGrid('grid-large', largeNumbers);
+        renderGrid('grid-money', moneySymbols);
+
+        // Tab Switching Logic
+        function switchTab(tabId, scrollToTop = false) {
+            tabBtns.forEach(btn => btn.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+
+            const activeBtn = document.querySelector(`[data-tab="${tabId}"]`);
+            const activeContent = document.getElementById(tabId);
+
+            if (activeBtn) activeBtn.classList.add('active');
+            if (activeContent) activeContent.classList.add('active');
+
+            currentTabIndex = tabs.indexOf(tabId);
+            updateNavButtons();
+
+            if (scrollToTop) {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function updateNavButtons() {
+            btnBack.disabled = currentTabIndex === 0;
+            if (currentTabIndex === 0) {
+                btnBack.classList.add('hidden');
+            } else {
+                btnBack.classList.remove('hidden');
+            }
+
+            if (currentTabIndex === tabs.length - 1) {
+                btnNext.innerHTML = 'Back to Activities <i class="fa-solid fa-check"></i>';
+            } else {
+                btnNext.innerHTML = 'Next <i class="fa-solid fa-arrow-right"></i>';
+            }
+        }
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const tabId = this.dataset.tab;
+                switchTab(tabId, false);
+            });
+        });
+
+        btnBack.addEventListener('click', function() {
+            if (currentTabIndex > 0) {
+                switchTab(tabs[currentTabIndex - 1], true);
+            }
+        });
+
+        btnNext.addEventListener('click', function() {
+            if (currentTabIndex === tabs.length - 1) {
+                window.location.href = '../actividades.html';
+                return;
+            }
+            if (currentTabIndex < tabs.length - 1) {
+                switchTab(tabs[currentTabIndex + 1], true);
+            }
+        });
+
+        // Spelling Check Logic
+        function setupSpellingExercise(checkBtnId, retryBtnId, listId) {
+            const checkBtn = document.getElementById(checkBtnId);
+            const retryBtn = document.getElementById(retryBtnId);
+            const list = document.getElementById(listId);
+            
+            if (checkBtn && retryBtn && list) {
+                checkBtn.addEventListener('click', function() {
+                    const items = list.querySelectorAll('.spelling-item');
+                    let correctCount = 0;
+                    let total = items.length;
+
+                    items.forEach(item => {
+                        const input = item.querySelector('.spelling-input');
+                        const correctAnswer = item.dataset.answer;
+                        const userAnswer = input.value.trim().toUpperCase();
+
+                        // Reset classes
+                        input.classList.remove('correct', 'incorrect');
+
+                        if (userAnswer === correctAnswer) {
+                            input.classList.add('correct');
+                            correctCount++;
+                        } else {
+                            input.classList.add('incorrect');
+                        }
+                    });
+
+                    showFeedbackPopup(correctCount, total);
+                    retryBtn.disabled = false;
+                });
+
+                retryBtn.addEventListener('click', function() {
+                    const items = list.querySelectorAll('.spelling-item');
+                    items.forEach(item => {
+                        const input = item.querySelector('.spelling-input');
+                        input.value = '';
+                        input.classList.remove('correct', 'incorrect');
+                    });
+                    retryBtn.disabled = true;
+                });
+            }
+        }
+
+        setupSpellingExercise('check-phones', 'retry-phones', 'list-phones');
+        setupSpellingExercise('check-prices', 'retry-prices', 'list-prices');
+        setupSpellingExercise('check-amounts', 'retry-amounts', 'list-amounts');
+        setupSpellingExercise('check-ids', 'retry-ids', 'list-ids');
+
+        updateNavButtons();
+    });
+
+    function playNumberSound(number, cardElement) {
+        // Visual feedback
+        document.querySelectorAll('.number-card').forEach(c => c.classList.remove('playing'));
+        cardElement.classList.add('playing');
+        
+        // Placeholder for audio logic
+        console.log(`Playing sound for number: ${number}`);
+        
+        // Simulate audio duration
+        setTimeout(() => {
+            cardElement.classList.remove('playing');
+        }, 1000);
+    }
+
+    let currentAudio = null;
+    let currentBtn = null;
+
+    function playAudio(filename) {
+        // Visual feedback
+        const btn = event.currentTarget;
+        const icon = btn.querySelector('i');
+        
+        if (currentBtn === btn && currentAudio) {
+            if (currentAudio.paused) {
+                currentAudio.play();
+                btn.classList.add('playing');
+                icon.className = 'fa-solid fa-pause';
+            } else {
+                currentAudio.pause();
+                btn.classList.remove('playing');
+                icon.className = 'fa-solid fa-play';
+            }
+            return;
+        }
+
+        if (currentAudio) {
+            currentAudio.pause();
+            if (currentBtn) {
+                currentBtn.classList.remove('playing');
+                currentBtn.querySelector('i').className = 'fa-solid fa-play';
+            }
+        }
+        
+        btn.classList.add('playing');
+        icon.className = 'fa-solid fa-pause';
+        
+        // Note: Audio files need to be added to assets/activities/spelling-numbers/
+        currentAudio = new Audio(`../../../assets/activities/spelling-numbers/${filename}.mp3`);
+        currentBtn = btn;
+
+        // Apply speed if set
+        const speedBtn = btn.parentElement.querySelector('.speed-btn');
+        if (speedBtn) {
+            currentAudio.playbackRate = parseFloat(speedBtn.dataset.speed || 1);
+        }
+        
+        currentAudio.play().catch(e => {
+            console.log('Audio not found or error playing:', e);
+            btn.classList.remove('playing');
+            icon.className = 'fa-solid fa-play';
+            currentAudio = null;
+            currentBtn = null;
+        });
+        
+        currentAudio.onended = () => {
+            btn.classList.remove('playing');
+            icon.className = 'fa-solid fa-play';
+            currentAudio = null;
+            currentBtn = null;
+        };
+    }
+
+    function toggleSpeed(btn) {
+        const speeds = [1, 0.75, 0.5];
+        const labels = ['1x', '0.75x', '0.5x'];
+        
+        let currentSpeed = parseFloat(btn.dataset.speed || 1);
+        let currentIndex = speeds.indexOf(currentSpeed);
+        let nextIndex = (currentIndex + 1) % speeds.length;
+        
+        let nextSpeed = speeds[nextIndex];
+        btn.dataset.speed = nextSpeed;
+        btn.textContent = labels[nextIndex];
+        
+        const playBtn = btn.parentElement.querySelector('.spelling-audio-btn');
+        if (playBtn === currentBtn && currentAudio) {
+            currentAudio.playbackRate = nextSpeed;
+        }
+    }
+
+    // Feedback Popup Logic
+    const feedbackPopupOverlay = document.createElement('div');
+    feedbackPopupOverlay.className = 'feedback-popup-overlay';
+    feedbackPopupOverlay.innerHTML = `
+        <div class="feedback-popup">
+            <div class="feedback-popup-icon"></div>
+            <h3></h3>
+            <p></p>
+            <button class="feedback-popup-close">Close</button>
+        </div>
+    `;
+    document.body.appendChild(feedbackPopupOverlay);
+
+    function showFeedbackPopup(correct, total) {
+        const icon = feedbackPopupOverlay.querySelector('.feedback-popup-icon');
+        const title = feedbackPopupOverlay.querySelector('h3');
+        const message = feedbackPopupOverlay.querySelector('p');
+        const percentage = (correct / total) * 100;
+
+        if (correct === total) {
+            icon.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+            icon.className = 'feedback-popup-icon success';
+            title.textContent = 'Perfect!';
+        } else if (percentage >= 70) {
+            icon.innerHTML = '<i class="fa-solid fa-thumbs-up"></i>';
+            icon.className = 'feedback-popup-icon good';
+            title.textContent = 'Good Job!';
+        } else {
+            icon.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i>';
+            icon.className = 'feedback-popup-icon partial';
+            title.textContent = 'Keep Practicing!';
+        }
+
+        message.textContent = `${correct} out of ${total} correct`;
+        feedbackPopupOverlay.classList.add('show');
+    }
+
+    feedbackPopupOverlay.querySelector('.feedback-popup-close').addEventListener('click', () => {
+        feedbackPopupOverlay.classList.remove('show');
+    });
+
+    feedbackPopupOverlay.addEventListener('click', (e) => {
+        if (e.target === feedbackPopupOverlay) {
+            feedbackPopupOverlay.classList.remove('show');
+        }
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,3866 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enbreak | Get Off the Phone</title>
+    <link rel="icon" type="image/x-icon" href="../../../favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../favicon/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../favicon/apple-touch-icon.png">
+    <link rel="manifest" href="../../../favicon/site.webmanifest">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rubik:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/style.css">
+    <style>
+/* Activity Page Layout */
+.activity-page {
+    background: #f8f9fa;
+    min-height: 100vh;
+}
+
+/* Hero Section */
+.activity-hero {
+    position: relative;
+    height: 280px;
+    background: url('../../../assets/activities/getoff.jpg') center 30%/cover no-repeat;
+}
+
+.activity-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(10, 30, 66, 0.4) 0%, rgba(10, 30, 66, 0.85) 100%);
+}
+
+.activity-hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px;
+    padding-bottom: 60px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.activity-hero .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    margin-bottom: 12px;
+}
+
+.activity-hero .breadcrumb a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.activity-hero .breadcrumb a:hover {
+    color: #ffffff;
+}
+
+.activity-hero .breadcrumb-separator {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.activity-hero .breadcrumb-current {
+    color: #ffffff;
+}
+
+.activity-hero h1 {
+    font-family: 'Rubik', sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 16px 0;
+}
+
+.activity-hero-badges {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    backdrop-filter: blur(8px);
+}
+
+.hero-badge i {
+    font-size: 11px;
+}
+
+/* Tabs Container */
+.activity-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px 80px;
+}
+
+.tabs-wrapper {
+    background: #ffffff;
+    border-radius: 0 0 16px 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    margin-top: 0;
+    position: relative;
+    z-index: 10;
+    overflow: hidden;
+}
+
+/* Tab Navigation */
+.tab-nav {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #e5e7eb;
+    background: #fafafa;
+    overflow-x: auto;
+}
+
+.tab-nav-main {
+    display: flex;
+    flex: 1;
+}
+
+.tab-nav-divider {
+    display: none;
+}
+
+.tab-nav-secondary {
+    display: flex;
+    margin-left: auto;
+    padding-right: 0;
+}
+
+.tab-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 18px 24px;
+    background: none;
+    border: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #6b7280;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+    position: relative;
+}
+
+.tab-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    color: #9ca3af;
+}
+
+.tab-btn:hover {
+    color: #374151;
+    background: #f3f4f6;
+}
+
+.tab-btn.active {
+    color: #ea580c;
+    background: #ffffff;
+}
+
+.tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: #ea580c;
+}
+
+.tab-btn i {
+    font-size: 14px;
+}
+
+/* Tab Content */
+.tab-content {
+    display: none;
+    padding: 40px 60px;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Introduction Tab */
+.intro-grid {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 32px;
+    align-items: start;
+}
+
+.intro-main {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.intro-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 1.8;
+    color: #4b5563;
+}
+
+.intro-text strong {
+    color: #ea580c;
+}
+
+/* Audio Player Button */
+.audio-player-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    background: #f3f4f6;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #374151;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 8px;
+    width: fit-content;
+}
+
+.audio-player-btn:hover {
+    background: #e5e7eb;
+}
+
+.audio-player-btn.playing {
+    background: #ffedd5;
+    border-color: #fed7aa;
+    color: #ea580c;
+}
+
+.audio-player-btn i {
+    font-size: 16px;
+}
+
+.intro-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 380px;
+}
+
+.info-card {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 12px;
+    display: flex;
+    gap: 10px;
+}
+
+.info-card-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: #ffedd5;
+    color: #ea580c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+.info-card-content h4 {
+    font-family: 'Rubik', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+    margin: 0 0 4px 0;
+}
+
+.info-card-content p {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #6b7280;
+    margin: 0;
+}
+
+.video-embed {
+    margin: 0 auto 32px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #000;
+    aspect-ratio: 16/9;
+    max-width: 720px;
+}
+
+.video-embed iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Exercise Sections */
+.exercise-section {
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.exercise-section .decorative-img {
+    position: absolute;
+    right: 0;
+    top: 24px;
+    width: 380px;
+    height: auto;
+    border-radius: 12px;
+}
+
+.exercise-section:last-child {
+    margin-bottom: 0;
+}
+
+.exercise-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.exercise-number {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #ea580c;
+    color: #ffffff;
+    font-family: 'Rubik', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.exercise-step {
+    padding: 6px 14px;
+    border-radius: 8px;
+    background: #ffedd5;
+    border: 1px solid #fed7aa;
+    color: #ea580c;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.exercise-header h3 {
+    font-family: 'Rubik', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #1f2937;
+    margin: 0;
+}
+
+.exercise-instructions {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: #6b7280;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+/* Reflection Questions */
+.reflection-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.reflection-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #374151;
+    width: 100%;
+    max-width: 500px;
+}
+
+.reflection-list li::before {
+    content: '•';
+    color: #ea580c;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 1;
+    margin-right: 8px;
+    flex-shrink: 0;
+}
+
+/* Matching Exercise */
+.matching-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.matching-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    background: #f9fafb;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+}
+
+.matching-image-placeholder {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    background: #ffedd5;
+    color: #ea580c;
+    font-family: 'Rubik', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.matching-text {
+    flex: 1;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: #374151;
+}
+
+.matching-input {
+    width: 50px;
+    height: 44px;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: all 0.2s;
+}
+
+.matching-input:focus {
+    outline: none;
+    border-color: #ea580c;
+    box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.1);
+}
+
+.vocab-pool {
+    background: #f9fafb;
+    border: 2px dashed #e5e7eb;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 30px;
+    transition: all 0.2s;
+}
+
+.vocab-pool.drag-over {
+    border-color: #ea580c;
+    background: #ffedd5;
+    box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.1);
+}
+
+.vocab-pool-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+    margin: 0 0 16px 0;
+}
+
+.vocab-words-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-content: flex-start;
+}
+
+.vocab-word {
+    padding: 12px 16px;
+    background: #ffffff;
+    border: 2px solid #fed7aa;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #374151;
+    cursor: grab;
+    transition: all 0.2s;
+    user-select: none;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+.vocab-word:hover {
+    background: #ffedd5;
+    border-color: #ea580c;
+    box-shadow: 0 2px 8px rgba(234, 88, 12, 0.15);
+}
+
+.vocab-word.dragging {
+    opacity: 0.5;
+    cursor: grabbing;
+}
+
+.vocab-word strong {
+    color: #ea580c;
+    font-weight: 700;
+}
+
+.vocab-images-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.vocab-image-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.vocab-image-placeholder {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 10px;
+    background: #ffedd5;
+    color: #ea580c;
+    font-family: 'Rubik', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #fed7aa;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.vocab-image-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.vocab-drop-zone {
+    min-height: 100px;
+    border: 2px dashed #e5e7eb;
+    border-radius: 8px;
+    background: #fafafa;
+    padding: 12px;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.vocab-drop-zone.drag-over {
+    border-color: #ea580c;
+    background: #ffedd5;
+    box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.1);
+}
+
+.vocab-drop-zone .dropped-word {
+    padding: 10px 14px;
+    background: #ffffff;
+    border: 2px solid #fed7aa;
+    border-radius: 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: #374151;
+    text-align: center;
+    max-width: 100%;
+    cursor: grab;
+    transition: all 0.2s;
+}
+
+.vocab-drop-zone .dropped-word:active {
+    cursor: grabbing;
+}
+
+.vocab-drop-zone .dropped-word.dragging {
+    opacity: 0.5;
+}
+
+.vocab-drop-zone .dropped-word strong {
+    color: #ea580c;
+    font-weight: 700;
+}
+
+.vocab-drop-zone.correct-match {
+    border-color: #16a34a;
+    background: #dcfce7;
+}
+
+.vocab-drop-zone.incorrect-match {
+    border-color: #dc2626;
+    background: #fee2e2;
+}
+
+/* Prediction Textareas */
+.prediction-group {
+    margin-bottom: 20px;
+}
+
+.prediction-group:last-child {
+    margin-bottom: 0;
+}
+
+.prediction-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.prediction-textarea {
+    width: 100%;
+    min-height: 80px;
+    padding: 14px;
+    border: 2px solid #e5e7eb;
+    border-radius: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: #374151;
+    resize: vertical;
+    transition: all 0.2s;
+}
+
+.prediction-textarea:focus {
+    outline: none;
+    border-color: #ea580c;
+    box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.1);
+}
+
+.prediction-textarea::placeholder {
+    color: #9ca3af;
+}
+
+/* Prediction Checklist */
+.prediction-checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: fit-content;
+}
+
+.prediction-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.prediction-item:hover {
+    background: #f3f4f6;
+    border-color: #d1d5db;
+}
+
+.prediction-item.selected {
+    background: #ffedd5;
+    border-color: #fed7aa;
+}
+
+.prediction-item.correct {
+    background: #dcfce7;
+    border-color: #16a34a;
+}
+
+.prediction-item.incorrect {
+    background: #fee2e2;
+    border-color: #dc2626;
+}
+
+.prediction-checkbox {
+    width: 22px;
+    height: 22px;
+    border: 2px solid #d1d5db;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.2s;
+    margin-top: 1px;
+}
+
+.prediction-item.selected .prediction-checkbox {
+    background: #ea580c;
+    border-color: #ea580c;
+    color: #ffffff;
+}
+
+.prediction-item.correct .prediction-checkbox {
+    background: #16a34a;
+    border-color: #16a34a;
+    color: #ffffff;
+}
+
+.prediction-item.incorrect .prediction-checkbox {
+    background: #dc2626;
+    border-color: #dc2626;
+    color: #ffffff;
+}
+
+.prediction-checkbox i {
+    font-size: 12px;
+    opacity: 0;
+}
+
+.prediction-item.selected .prediction-checkbox i,
+.prediction-item.correct .prediction-checkbox i,
+.prediction-item.incorrect .prediction-checkbox i {
+    opacity: 1;
+}
+
+.prediction-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #374151;
+    line-height: 1.5;
+}
+
+.prediction-sentence {
+    padding: 14px 16px;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    margin-bottom: 12px;
+}
+
+.prediction-sentence:last-child {
+    margin-bottom: 0;
+}
+
+.prediction-gap {
+    min-width: 80px;
+    display: inline-block;
+}
+
+/* True/False Exercise */
+.tf-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.tf-item {
+    padding: 14px 20px;
+    background: #f9fafb;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.tf-statement {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #374151;
+    margin-bottom: 0;
+    flex: 1;
+    line-height: 1.5;
+}
+
+.tf-buttons {
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.tf-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    background: #ffffff;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #6b7280;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.tf-btn:hover {
+    border-color: #d1d5db;
+}
+
+.tf-btn.selected {
+    background: #ffedd5;
+    border-color: #fed7aa;
+    color: #ea580c;
+}
+
+.tf-btn.correct {
+    background: #dcfce7;
+    border-color: #16a34a;
+    color: #16a34a;
+}
+
+.tf-btn.incorrect {
+    background: #fee2e2;
+    border-color: #dc2626;
+    color: #dc2626;
+}
+
+/* Sentence Completion Exercise */
+.sentence-completion-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.sentence-item {
+    padding: 14px 20px;
+    background: #f9fafb;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+}
+
+.sentence-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #374151;
+    margin: 0;
+    line-height: 1.5;
+    display: inline;
+}
+
+.sentence-dropdown {
+    display: inline;
+    width: auto;
+    min-width: 150px;
+    padding: 4px 8px;
+    margin: 0 4px;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    background: #ffffff;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #374151;
+    cursor: pointer;
+    transition: all 0.2s;
+    vertical-align: baseline;
+}
+
+.sentence-dropdown:hover {
+    border-color: #d1d5db;
+}
+
+.sentence-dropdown:focus {
+    outline: none;
+    border-color: #ea580c;
+}
+
+.sentence-dropdown.correct {
+    border-color: #16a34a;
+    background: #f0fdf4;
+    color: #16a34a;
+    font-weight: 600;
+}
+
+.sentence-dropdown.incorrect {
+    border-color: #dc2626;
+    background: #fef2f2;
+    color: #dc2626;
+    font-weight: 600;
+}
+
+/* Description Exercise */
+.description-group {
+    margin-bottom: 20px;
+}
+
+.description-group:last-child {
+    margin-bottom: 0;
+}
+
+/* Matching Exercise */
+.matching-container {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+#matching-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.matching-exercise {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    z-index: 1;
+}
+
+.matching-column {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.column-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #1f2937;
+    margin: 0 0 8px 0;
+}
+
+.matching-problems,
+.matching-advice {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.matching-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    background: #f9fafb;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+}
+
+.matching-item:hover {
+    background: #f3f4f6;
+    border-color: #d1d5db;
+}
+
+.matching-item.selected {
+    background: #ffedd5;
+    border-color: #fed7aa;
+}
+
+.matching-item.matched {
+    background: #e0f2fe;
+    border-color: #0ea5e9;
+    cursor: pointer;
+}
+
+.matching-item.matched:hover {
+    background: #bae6fd;
+    border-color: #0284c7;
+}
+
+.matching-item.correct {
+    background: #dcfce7;
+    border-color: #16a34a;
+}
+
+.matching-item.incorrect {
+    background: #fee2e2;
+    border-color: #dc2626;
+}
+
+.matching-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #d1d5db;
+    border: 2px solid #ffffff;
+    flex-shrink: 0;
+    transition: all 0.2s;
+}
+
+.problem-item .matching-dot {
+    order: 2;
+}
+
+.advice-item .matching-dot {
+    order: -1;
+}
+
+.matching-item.selected .matching-dot {
+    background: #ea580c;
+    border-color: #ea580c;
+}
+
+.matching-item.matched .matching-dot {
+    background: #0ea5e9;
+    border-color: #0ea5e9;
+}
+
+.matching-item.correct .matching-dot {
+    background: #16a34a;
+    border-color: #16a34a;
+}
+
+.matching-item.incorrect .matching-dot {
+    background: #dc2626;
+    border-color: #dc2626;
+}
+
+.matching-item-content {
+    flex: 1;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+}
+
+.matching-number {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #6b7280;
+    flex-shrink: 0;
+}
+
+.matching-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #374151;
+    margin: 0;
+    line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+    .matching-exercise {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Completion Box */
+.completion-box {
+    background: linear-gradient(135deg, #dcfce7 0%, #d1fae5 100%);
+    border: 1px solid #86efac;
+    border-radius: 12px;
+    padding: 24px;
+    margin-top: 32px;
+}
+
+.completion-box h4 {
+    font-family: 'Rubik', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #166534;
+    margin: 0 0 12px 0;
+}
+
+.completion-box p {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #166534;
+    margin: 0 0 16px 0;
+}
+
+.completion-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.completion-list li {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #166534;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.completion-list li i {
+    color: #16a34a;
+}
+
+/* Lyrics Tab */
+.lyrics-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.lyrics-header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.lyrics-header h3 {
+    font-family: 'Rubik', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: #1f2937;
+    margin: 0 0 8px 0;
+}
+
+.lyrics-header p {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #6b7280;
+}
+
+.lyrics-box {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 32px;
+}
+
+.lyrics-section {
+    margin-bottom: 24px;
+}
+
+.lyrics-section:last-child {
+    margin-bottom: 0;
+}
+
+.lyrics-section-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #ea580c;
+    margin-bottom: 12px;
+}
+
+.lyrics-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 1.8;
+    color: #374151;
+    white-space: pre-line;
+}
+
+/* Navigation Buttons */
+.activity-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 40px;
+    border-top: 1px solid #e5e7eb;
+    background: #fafafa;
+}
+
+.nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.nav-btn-back {
+    background: #ffffff;
+    border: 2px solid #e5e7eb;
+    color: #6b7280;
+}
+
+.nav-btn-back:hover:not(:disabled) {
+    border-color: #d1d5db;
+    color: #374151;
+}
+
+.nav-btn-next {
+    background: #ea580c;
+    border: 2px solid #ea580c;
+    color: #ffffff;
+}
+
+.nav-btn-next:hover:not(:disabled) {
+    background: #dc2626;
+    border-color: #dc2626;
+}
+
+.nav-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.nav-btn-back.hidden {
+    visibility: hidden;
+}
+
+/* Conversation Exercise - Two Column Layout */
+.conversation-layout {
+    display: grid;
+    grid-template-columns: 1fr 180px;
+    gap: 32px;
+    margin: 30px 0 20px 0;
+}
+
+/* Left Column: Conversation Dialog */
+.conversation-dialog-column {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.dialog-line {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.dialog-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #e5e7eb;
+    flex-shrink: 0;
+}
+
+.dialog-bubble {
+    flex: 1;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 14px 16px;
+    position: relative;
+}
+
+.dialog-avatar-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.name-label {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 3px 7px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.name-label-rhett {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.name-label-link {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.dialog-avatars-both {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+}
+
+.dialog-avatar-small {
+    width: 44px;
+    height: 44px;
+}
+
+.both-label {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    color: #ea580c;
+    background: #ffedd5;
+    padding: 3px 7px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Audio Player */
+.conversation-audio-player {
+    width: 100%;
+    max-width: 380px;
+    margin: 20px auto 20px auto;
+    display: block;
+    outline: none;
+}
+
+.dialog-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #374151;
+    margin: 0;
+}
+
+.conversation-gap {
+    display: inline-flex;
+    min-width: 100px;
+    min-height: 30px;
+    padding: 4px 8px;
+    border: 2px dashed #e5e7eb;
+    border-radius: 6px;
+    background: #ffffff;
+    vertical-align: middle;
+    transition: all 0.2s;
+    align-items: center;
+    justify-content: center;
+}
+
+.conversation-gap.drag-over {
+    border-color: #ea580c;
+    background: #ffedd5;
+    box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.1);
+}
+
+.conversation-gap .dropped-conversation-word {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #ea580c;
+    cursor: grab;
+}
+
+.conversation-gap.correct-gap {
+    border-color: #16a34a;
+    background: #dcfce7;
+}
+
+.conversation-gap.incorrect-gap {
+    border-color: #dc2626;
+    background: #fee2e2;
+}
+
+/* Right Column: Vocabulary Word Bank */
+.conversation-vocab-column {
+    position: relative;
+}
+
+.vocab-pool-sticky {
+    position: sticky;
+    top: 20px;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.vocab-pool-sticky.drag-over {
+    border-color: #ea580c;
+    background: #ffedd5;
+    box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.1);
+}
+
+.vocab-pool-sticky .vocab-words-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.conversation-word {
+    width: 100%;
+    padding: 12px 16px;
+    background: #ffffff;
+    border: 2px solid #fed7aa;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #ea580c;
+    cursor: grab;
+    transition: all 0.2s;
+    user-select: none;
+    text-align: center;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+.conversation-word:last-child {
+    margin-bottom: 0;
+}
+
+.conversation-word:hover {
+    background: #ffedd5;
+    border-color: #ea580c;
+    box-shadow: 0 2px 8px rgba(234, 88, 12, 0.15);
+    transform: translateY(-2px);
+}
+
+.conversation-word.dragging {
+    opacity: 0.5;
+    cursor: grabbing;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+    .conversation-layout {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .vocab-pool-sticky {
+        position: static;
+    }
+
+    .tf-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    
+    .tf-buttons {
+        width: 100%;
+        justify-content: flex-end;
+    }
+}
+
+/* Tip Box */
+.tip-box {
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 10px;
+    padding: 16px;
+    margin-top: 16px;
+    display: flex;
+    gap: 12px;
+}
+
+.tip-box i {
+    color: #2563eb;
+    font-size: 16px;
+    margin-top: 2px;
+}
+
+.tip-box p {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #1e40af;
+    margin: 0;
+}
+
+.lyrics-tip-box {
+    margin-top: 24px;
+}
+
+/* Warning Box */
+.warning-box {
+    background: #fef9c3;
+    border: 1px solid #fde047;
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.warning-box i {
+    color: #ca8a04;
+    font-size: 16px;
+}
+
+.warning-box-content h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #854d0e;
+    margin: 0;
+    display: inline;
+}
+
+.warning-box-content p {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #a16207;
+    margin: 0;
+    display: inline;
+}
+
+/* Check Answers Button */
+.check-answers-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 18px;
+    background: #0a1e42;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 20px;
+}
+
+.check-answers-btn:hover {
+    background: #1e3a5f;
+}
+
+.check-answers-btn i {
+    font-size: 13px;
+}
+
+.check-answers-btn.retry-btn {
+    background: #ea580c;
+}
+
+.check-answers-btn.retry-btn:hover {
+    background: #c2410c;
+}
+
+.check-answers-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: #9ca3af;
+}
+
+.check-answers-btn:disabled:hover {
+    background: #9ca3af;
+}
+
+/* Feedback Popup */
+.feedback-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.feedback-popup-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.feedback-popup {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 32px;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.feedback-popup-overlay.show .feedback-popup {
+    transform: scale(1);
+}
+
+.feedback-popup-icon {
+    font-size: 40px;
+    margin-bottom: 16px;
+}
+
+.feedback-popup-icon.success {
+    color: #16a34a;
+}
+
+.feedback-popup-icon.partial {
+    color: #ea580c;
+}
+
+.feedback-popup-icon.good {
+    color: #2563eb;
+}
+
+.feedback-popup h3 {
+    font-family: 'Rubik', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #1f2937;
+    margin: 0 0 12px 0;
+}
+
+.feedback-popup p {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: #6b7280;
+    margin: 0 0 24px 0;
+}
+
+.feedback-popup-close {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 32px;
+    background: #0a1e42;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.feedback-popup-close:hover {
+    background: #1e3a5f;
+}
+
+/* Answer Feedback */
+.matching-input.correct {
+    border-color: #16a34a;
+    background: #dcfce7;
+    color: #166534;
+}
+
+.matching-input.incorrect {
+    border-color: #dc2626;
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.answer-feedback {
+    margin-top: 16px;
+    padding: 16px;
+    border-radius: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    display: none;
+}
+
+.answer-feedback.show {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.answer-feedback.success {
+    background: #dcfce7;
+    border: 1px solid #86efac;
+    color: #166534;
+}
+
+.answer-feedback.partial {
+    background: #fef9c3;
+    border: 1px solid #fde047;
+    color: #854d0e;
+}
+
+.answer-feedback.error {
+    background: #fee2e2;
+    border: 1px solid #fca5a5;
+    color: #991b1b;
+}
+
+/* Results Tab */
+.results-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.results-header h3 {
+    font-family: 'Rubik', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #1f2937;
+    margin: 0 0 8px 0;
+}
+
+.results-header p {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: #6b7280;
+}
+
+.results-score-card {
+    background: linear-gradient(135deg, #0a1e42 0%, #1e3a5f 100%);
+    border-radius: 16px;
+    padding: 32px;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.results-score-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 4px solid #ea580c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+}
+
+.results-score-number {
+    font-family: 'Rubik', sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.results-score-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.results-section {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+.results-section:last-child {
+    margin-bottom: 0;
+}
+
+.results-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.results-section-title {
+    font-family: 'Rubik', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #1f2937;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.results-section-score {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 20px;
+}
+
+.results-section-score.good {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.results-section-score.medium {
+    background: #fef9c3;
+    color: #854d0e;
+}
+
+.results-section-score.poor {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.results-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px;
+    background: #ffffff;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #e5e7eb;
+}
+
+.results-item:last-child {
+    margin-bottom: 0;
+}
+
+.results-item-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    flex-shrink: 0;
+}
+
+.results-item-icon.correct {
+    background: #dcfce7;
+    color: #16a34a;
+}
+
+.results-item-icon.incorrect {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.results-item-content {
+    flex: 1;
+}
+
+.results-item-question {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #374151;
+    margin-bottom: 4px;
+}
+
+.results-item-answer {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+}
+
+.results-item-answer.user-answer {
+    color: #6b7280;
+}
+
+.results-item-answer.correct-answer {
+    color: #16a34a;
+    font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .intro-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .activity-hero {
+        height: 220px;
+    }
+
+    .activity-hero-content {
+        padding: 24px;
+    }
+
+    .activity-hero h1 {
+        font-size: 28px;
+    }
+
+    .activity-container {
+        padding: 0 16px 60px;
+    }
+
+    .tab-nav {
+        gap: 0;
+        flex-wrap: wrap;
+    }
+
+    .tab-nav-main {
+        width: 100%;
+    }
+
+    .tab-nav-divider {
+        display: none;
+    }
+
+    .tab-nav-secondary {
+        width: 100%;
+        padding: 8px;
+        border-top: 1px solid #e5e7eb;
+        background: #f3f4f6;
+    }
+
+    .tab-btn {
+        padding: 14px 16px;
+        font-size: 13px;
+    }
+
+    .tab-btn span {
+        display: none;
+    }
+
+    .tab-content {
+        padding: 24px;
+    }
+
+    .activity-nav {
+        padding: 16px 24px;
+    }
+
+    .nav-btn {
+        padding: 10px 18px;
+        font-size: 13px;
+    }
+}
+    </style>
+</head>
+<body>
+
+    <div id="header-placeholder"></div>
+
+    <main class="activity-page">
+        <!-- Hero Section -->
+        <section class="activity-hero">
+            <div class="activity-hero-content">
+                <nav class="breadcrumb">
+                    <a href="/">Inicio</a>
+                    <span class="breadcrumb-separator">›</span>
+                    <a href="../actividades.html">Actividades</a>
+                    <span class="breadcrumb-separator">›</span>
+                    <span class="breadcrumb-current">Get Off the Phone</span>
+                </nav>
+                <h1>Get Off the Phone</h1>
+                <div class="activity-hero-badges">
+                    <span class="hero-badge"><i class="fa-solid fa-headphones"></i> Listening</span>
+                    <span class="hero-badge"><i class="fa-solid fa-layer-group"></i> Level B1</span>
+                    <span class="hero-badge"><i class="fa-regular fa-clock"></i> 30 min</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Activity Content -->
+        <section class="activity-container">
+            <div class="tabs-wrapper">
+                <!-- Tab Navigation -->
+                <nav class="tab-nav">
+                    <div class="tab-nav-main">
+                        <button class="tab-btn active" data-tab="introduction">Introduction</button>
+                        <button class="tab-btn" data-tab="pre-listening">Pre-Listening</button>
+                        <button class="tab-btn" data-tab="listening">Listening</button>
+                        <button class="tab-btn" data-tab="post-listening">Post-Listening</button>
+                        <button class="tab-btn" data-tab="lyrics">View Lyrics</button>
+                    </div>
+                </nav>
+
+                <!-- Introduction Tab -->
+                <div class="tab-content active" id="introduction">
+                    <div class="intro-grid">
+                        <div class="intro-main">
+                            <p class="intro-text">
+                                Did you know that the average person spends <strong>over 4 hours a day</strong> on their phone? That's nearly 60 days per year! Studies show we check our phones <strong>over 140 times a day</strong> on average, and most people check their notifications within minutes of receiving them.
+                            </p>
+                            <p class="intro-text">
+                                Are you guilty of this too? When was the last time you went an entire day without your phone?
+                            </p>
+                            <p class="intro-text">
+                                In this activity, we'll explore our relationship with technology through a catchy song by Rhett & Link.
+                            </p>
+                            <button class="audio-player-btn" id="intro-audio-btn">
+                                <i class="fa-solid fa-volume-high"></i>
+                                <span>Listen to Introduction</span>
+                            </button>
+                            <audio id="intro-audio" src="../../../assets/activities/get-off-the-phone/intro.mp3" preload="auto"></audio>
+                        </div>
+                        <div class="intro-sidebar">
+                            <div class="info-card">
+                                <div class="info-card-icon">
+                                    <i class="fa-solid fa-bullseye"></i>
+                                </div>
+                                <div class="info-card-content">
+                                    <h4>Learning Objective</h4>
+                                    <p>You will be able to provide advice on difficult situations related to technology.</p>
+                                </div>
+                            </div>
+                            <div class="info-card">
+                                <div class="info-card-icon">
+                                    <i class="fa-solid fa-headphones"></i>
+                                </div>
+                                <div class="info-card-content">
+                                    <h4>Skill Focus</h4>
+                                    <p>Listening Comprehension (B1 Level)</p>
+                                </div>
+                            </div>
+                            <div class="info-card">
+                                <div class="info-card-icon">
+                                    <i class="fa-brands fa-youtube"></i>
+                                </div>
+                                <div class="info-card-content">
+                                    <h4>Source</h4>
+                                    <p>Get Off The Phone by Rhett & Link</p>
+                                    <a href="https://youtu.be/nfUD0WhE264" target="_blank" rel="noopener noreferrer" style="color: #2563eb; font-size: 13px; text-decoration: none;">Watch on YouTube <i class="fa-solid fa-external-link" style="font-size: 11px;"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pre-Listening Tab -->
+                <div class="tab-content" id="pre-listening">
+                    <!-- Step 1: Reflection -->
+                    <div class="exercise-section">
+                        <img src="../../../assets/activities/get-off-the-phone/phone-habits.jpg" alt="Person using phone" class="decorative-img">
+                        <div class="exercise-header">
+                            <span class="exercise-number">1</span>
+                            <h3>Your phone habits</h3>
+                        </div>
+                        <p class="exercise-instructions">Before we start, think about how you use your phone. Reflect on these questions:</p>
+                        <ul class="reflection-list">
+                            <li>Do you usually take pictures of your food before eating?</li>
+                            <li>Do you record videos at concerts, parties, or special events?</li>
+                            <li>Do you check your phone while eating with friends or family?</li>
+                        </ul>
+                    </div>
+
+                    <!-- Step 2: Complete the Conversation -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">2</span>
+                            <h3>Phone use conversation</h3>
+                        </div>
+                        <p class="exercise-instructions">Rhett and Link are having a conversation about phones. Listen and complete the missing gaps with the words from the box.</p>
+
+                        <audio id="conversation-audio" controls preload="auto" class="conversation-audio-player">
+                            <source src="../../../assets/activities/get-off-the-phone/pre-listening.mp3" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+
+                        <!-- Two Column Layout -->
+                        <div class="conversation-layout">
+                            <!-- Left Column: Conversation Dialog -->
+                            <div class="conversation-dialog-column">
+                                <div class="dialog-line">
+                                    <div class="dialog-avatar-wrapper">
+                                        <img src="../../../assets/activities/get-off-the-phone/rhett.jpg" alt="Rhett" class="dialog-avatar">
+                                        <span class="name-label name-label-rhett">Rhett</span>
+                                    </div>
+                                    <div class="dialog-bubble">
+                                        <p class="dialog-text">"Hey man, I've recently been doing some <span class="conversation-gap" data-word-id="contemplation"></span> about people's <span class="conversation-gap" data-word-id="dependency"></span> upon cellular telephones"</p>
+                                    </div>
+                                </div>
+                                <div class="dialog-line">
+                                    <div class="dialog-avatar-wrapper">
+                                        <img src="../../../assets/activities/get-off-the-phone/link.jpg" alt="Link" class="dialog-avatar">
+                                        <span class="name-label name-label-link">Link</span>
+                                    </div>
+                                    <div class="dialog-bubble">
+                                        <p class="dialog-text">"Yeah man, me too. I've really <span class="conversation-gap" data-word-id="noticed"></span> that everyone always seems to be on their mobile device <span class="conversation-gap" data-word-id="instead"></span> of really being in the moment."</p>
+                                    </div>
+                                </div>
+                                <div class="dialog-line">
+                                    <div class="dialog-avatar-wrapper">
+                                        <img src="../../../assets/activities/get-off-the-phone/rhett.jpg" alt="Rhett" class="dialog-avatar">
+                                        <span class="name-label name-label-rhett">Rhett</span>
+                                    </div>
+                                    <div class="dialog-bubble">
+                                        <p class="dialog-text">"Exactly, and I feel like this is a very significant <span class="conversation-gap" data-word-id="issue"></span> that needs to be <span class="conversation-gap" data-word-id="addressed"></span> immediately."</p>
+                                    </div>
+                                </div>
+                                <div class="dialog-line">
+                                    <div class="dialog-avatar-wrapper">
+                                        <img src="../../../assets/activities/get-off-the-phone/link.jpg" alt="Link" class="dialog-avatar">
+                                        <span class="name-label name-label-link">Link</span>
+                                    </div>
+                                    <div class="dialog-bubble">
+                                        <p class="dialog-text">"Yes, immediately."</p>
+                                    </div>
+                                </div>
+                                <div class="dialog-line">
+                                    <div class="dialog-avatars-both">
+                                        <img src="../../../assets/activities/get-off-the-phone/rhett.jpg" alt="Rhett" class="dialog-avatar dialog-avatar-small">
+                                        <img src="../../../assets/activities/get-off-the-phone/link.jpg" alt="Link" class="dialog-avatar dialog-avatar-small">
+                                        <span class="both-label">BOTH</span>
+                                    </div>
+                                    <div class="dialog-bubble">
+                                        <p class="dialog-text">"We really <span class="conversation-gap" data-word-id="should"></span> do something about this."</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right Column: Vocabulary Word Bank -->
+                            <div class="conversation-vocab-column">
+                                <div class="vocab-pool-sticky" id="conversation-vocab-pool">
+                                    <div class="vocab-words-container" id="conversation-words-container">
+                                        <div class="conversation-word" draggable="true" data-word-id="noticed">noticed</div>
+                                        <div class="conversation-word" draggable="true" data-word-id="should">should</div>
+                                        <div class="conversation-word" draggable="true" data-word-id="dependency">dependency</div>
+                                        <div class="conversation-word" draggable="true" data-word-id="addressed">addressed</div>
+                                        <div class="conversation-word" draggable="true" data-word-id="contemplation">contemplation</div>
+                                        <div class="conversation-word" draggable="true" data-word-id="instead">instead</div>
+                                        <div class="conversation-word" draggable="true" data-word-id="issue">issue</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 12px; align-items: center;">
+                            <button class="check-answers-btn" id="check-conversation">
+                                <i class="fa-solid fa-check"></i> Check answers
+                            </button>
+                            <button class="check-answers-btn retry-btn" id="retry-conversation" disabled>
+                                <i class="fa-solid fa-rotate-right"></i> Try again
+                            </button>
+                        </div>
+                        <div class="answer-feedback" id="conversation-feedback"></div>
+                    </div>
+
+                    <!-- Step 3: Make Predictions -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">3</span>
+                            <h3>Making Predictions</h3>
+                        </div>
+                        <p class="exercise-instructions">Based on the conversation you just heard, which of the following predictions seem accurate for the song?</p>
+                        
+                        <div class="prediction-checklist" id="prediction-checklist">
+                            <div class="prediction-item" data-correct="true">
+                                <div class="prediction-checkbox"><i class="fa-solid fa-check"></i></div>
+                                <span class="prediction-text">The song will criticize people for using phones during meals.</span>
+                            </div>
+                            <div class="prediction-item" data-correct="false">
+                                <div class="prediction-checkbox"><i class="fa-solid fa-check"></i></div>
+                                <span class="prediction-text">They will drive off to another city where phones are prohibited.</span>
+                            </div>
+                            <div class="prediction-item" data-correct="true">
+                                <div class="prediction-checkbox"><i class="fa-solid fa-check"></i></div>
+                                <span class="prediction-text">They will persuade people to stop using their phones.</span>
+                            </div>
+                            <div class="prediction-item" data-correct="false">
+                                <div class="prediction-checkbox"><i class="fa-solid fa-check"></i></div>
+                                <span class="prediction-text">The song will be about the benefits of social media.</span>
+                            </div>
+                            <div class="prediction-item" data-correct="true">
+                                <div class="prediction-checkbox"><i class="fa-solid fa-check"></i></div>
+                                <span class="prediction-text">They will show people glued to their phones instead of connecting with each other.</span>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 12px; align-items: center; margin-top: 20px;">
+                            <button class="check-answers-btn" id="check-predictions">
+                                <i class="fa-solid fa-check"></i> Check answers
+                            </button>
+                            <button class="check-answers-btn retry-btn" id="retry-predictions" disabled>
+                                <i class="fa-solid fa-rotate-right"></i> Try again
+                            </button>
+                        </div>
+                        <div class="answer-feedback" id="prediction-feedback"></div>
+                    </div>
+
+                    <!-- Step 4: Vocabulary Matching -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">4</span>
+                            <h3>Vocabulary Matching</h3>
+                        </div>
+                        <p class="exercise-instructions">Match the lyrics to the correct images. Drag and drop each phrase from the song under the picture that best describes it.</p>
+                        
+                        <!-- Vocabulary Words Pool -->
+                        <div class="vocab-pool" id="vocab-pool">
+                            <div class="vocab-words-container" id="vocab-words-container">
+                                <div class="vocab-word" draggable="true" data-image-id="image-2">
+                                    "His apple pie <strong>à la mode</strong>"
+                                </div>
+                                <div class="vocab-word" draggable="true" data-image-id="image-3">
+                                    "The <strong>street performer</strong>"
+                                </div>
+                                <div class="vocab-word" draggable="true" data-image-id="image-4">
+                                    "A <strong>crowd</strong> to watch him do his thing"
+                                </div>
+                                <div class="vocab-word" draggable="true" data-image-id="image-5">
+                                    "This unreasonably attractive <strong>couple</strong>"
+                                </div>
+                                <div class="vocab-word" draggable="true" data-image-id="image-6">
+                                    "As he fumbles through the <strong>filters</strong>"
+                                </div>
+                                <div class="vocab-word" draggable="true" data-image-id="image-8">
+                                    "More worried about <strong>facebooking</strong> it"
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Images Grid with Drop Zones (shuffled) -->
+                        <div class="vocab-images-grid">
+                            <div class="vocab-image-container">
+                                <div class="vocab-image-placeholder">
+                                    <img src="../../../assets/activities/get-off-the-phone/crowd.jpg" alt="Crowd">
+                                </div>
+                                <div class="vocab-drop-zone" data-image-id="image-4"></div>
+                            </div>
+                            <div class="vocab-image-container">
+                                <div class="vocab-image-placeholder">
+                                    <img src="../../../assets/activities/get-off-the-phone/apple-pie.jpg" alt="Apple pie à la mode">
+                                </div>
+                                <div class="vocab-drop-zone" data-image-id="image-2"></div>
+                            </div>
+                            <div class="vocab-image-container">
+                                <div class="vocab-image-placeholder">
+                                    <img src="../../../assets/activities/get-off-the-phone/facebooking-it.jpg" alt="Facebooking it">
+                                </div>
+                                <div class="vocab-drop-zone" data-image-id="image-8"></div>
+                            </div>
+                            <div class="vocab-image-container">
+                                <div class="vocab-image-placeholder">
+                                    <img src="../../../assets/activities/get-off-the-phone/street-performer.jpg" alt="Street performer">
+                                </div>
+                                <div class="vocab-drop-zone" data-image-id="image-3"></div>
+                            </div>
+                            <div class="vocab-image-container">
+                                <div class="vocab-image-placeholder">
+                                    <img src="../../../assets/activities/get-off-the-phone/attractive-couple.jpg" alt="Attractive couple">
+                                </div>
+                                <div class="vocab-drop-zone" data-image-id="image-5"></div>
+                            </div>
+                            <div class="vocab-image-container">
+                                <div class="vocab-image-placeholder">
+                                    <img src="../../../assets/activities/get-off-the-phone/phone.jpg" alt="Get off the phone">
+                                </div>
+                                <div class="vocab-drop-zone" data-image-id="image-6"></div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 12px; align-items: center;">
+                            <button class="check-answers-btn" id="check-vocab-matching">
+                                <i class="fa-solid fa-check"></i> Check answers
+                            </button>
+                            <button class="check-answers-btn retry-btn" id="retry-vocab-matching" disabled>
+                                <i class="fa-solid fa-rotate-right"></i> Try again
+                            </button>
+                        </div>
+                        <div class="answer-feedback" id="vocab-matching-feedback"></div>
+                    </div>
+                </div>
+
+                <!-- Listening Tab -->
+                <div class="tab-content" id="listening">
+                    <!-- Video -->
+                    <div class="video-embed">
+                        <iframe
+                            src="https://www.youtube.com/embed/nfUD0WhE264"
+                            title="Get Off the Phone - Rhett & Link"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+
+                    <!-- Exercise 1: Listening Only - Main Idea -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">1</span>
+                            <h3>Getting the Main Idea</h3>
+                        </div>
+                        <p class="exercise-instructions">Listen to the song once without interruptions. Pay attention to the main message and choose the alternative that best describes it.</p>
+                        
+                        <div class="prediction-checklist" id="main-idea-checklist">
+                            <div class="prediction-item" data-correct="false">
+                                <div class="prediction-checkbox"><i class="fa-solid fa-check"></i></div>
+                                <span class="prediction-text">The song is about the benefits of using technology to share moments with friends and family.</span>
+                            </div>
+                            <div class="prediction-item" data-correct="true">
+                                <div class="prediction-checkbox"><i class="fa-solid fa-check"></i></div>
+                                <span class="prediction-text">The song criticizes people's obsession with their phones, which causes them to miss real-life experiences.</span>
+                            </div>
+                            <div class="prediction-item" data-correct="false">
+                                <div class="prediction-checkbox"><i class="fa-solid fa-check"></i></div>
+                                <span class="prediction-text">The song explains how the government uses phones to spy on people.</span>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 12px; align-items: center; margin-top: 20px;">
+                            <button class="check-answers-btn" id="check-main-idea">
+                                <i class="fa-solid fa-check"></i> Check answer
+                            </button>
+                            <button class="check-answers-btn retry-btn" id="retry-main-idea" disabled>
+                                <i class="fa-solid fa-rotate-right"></i> Try again
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Exercise 2: True or False -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">2</span>
+                            <h3>True or False</h3>
+                        </div>
+                        <p class="exercise-instructions">Listen again and decide if the following statements are True or False.</p>
+                        <div class="tf-list" id="tf-list">
+                            <div class="tf-item" data-correct="true">
+                                <p class="tf-statement">1. The man's dessert was ruined because he spent too much time choosing filters for his photo.</p>
+                                <div class="tf-buttons">
+                                    <button class="tf-btn" data-value="true">True</button>
+                                    <button class="tf-btn" data-value="false">False</button>
+                                </div>
+                            </div>
+                            <div class="tf-item" data-correct="false">
+                                <p class="tf-statement">2. The crowd watching the street performer decided to put their phones away and enjoy the show.</p>
+                                <div class="tf-buttons">
+                                    <button class="tf-btn" data-value="true">True</button>
+                                    <button class="tf-btn" data-value="false">False</button>
+                                </div>
+                            </div>
+                            <div class="tf-item" data-correct="true">
+                                <p class="tf-statement">3. The unreasonably attractive couple at the restaurant turned out to be siblings.</p>
+                                <div class="tf-buttons">
+                                    <button class="tf-btn" data-value="true">True</button>
+                                    <button class="tf-btn" data-value="false">False</button>
+                                </div>
+                            </div>
+                            <div class="tf-item" data-correct="false">
+                                <p class="tf-statement">4. The stereotypical teen is eager to be part of family game night.</p>
+                                <div class="tf-buttons">
+                                    <button class="tf-btn" data-value="true">True</button>
+                                    <button class="tf-btn" data-value="false">False</button>
+                                </div>
+                            </div>
+                            <div class="tf-item" data-correct="false">
+                                <p class="tf-statement">5. The baby's father prefers spending time with his son rather than posting him on social media.</p>
+                                <div class="tf-buttons">
+                                    <button class="tf-btn" data-value="true">True</button>
+                                    <button class="tf-btn" data-value="false">False</button>
+                                </div>
+                            </div>
+                            <div class="tf-item" data-correct="true">
+                                <p class="tf-statement">6. The man eating a hotdog actually needed to use his phone to call for emergency assistance.</p>
+                                <div class="tf-buttons">
+                                    <button class="tf-btn" data-value="true">True</button>
+                                    <button class="tf-btn" data-value="false">False</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 12px; align-items: center; margin-top: 20px;">
+                            <button class="check-answers-btn" id="check-tf">
+                                <i class="fa-solid fa-check"></i> Check answers
+                            </button>
+                            <button class="check-answers-btn retry-btn" id="retry-tf" disabled>
+                                <i class="fa-solid fa-rotate-right"></i> Try again
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Exercise 3: Complete the Sentences -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">3</span>
+                            <h3>Complete the Sentences</h3>
+                        </div>
+                        <p class="exercise-instructions">Watch the video carefully and complete the sentences. Choose between Past Simple, Past Continuous, and their negative forms. The video context will help you decide!</p>
+                        <div class="sentence-completion-list" id="sentence-completion-list">
+                            <div class="sentence-item" data-correct="b,a">
+                                <p class="sentence-text">1. The man
+                                    <select class="sentence-dropdown">
+                                        <option value=""></option>
+                                        <option value="a">ate</option>
+                                        <option value="b">didn't eat</option>
+                                        <option value="c">was eating</option>
+                                    </select>
+                                    his dessert because he
+                                    <select class="sentence-dropdown">
+                                        <option value=""></option>
+                                        <option value="a">fumbled</option>
+                                        <option value="b">was fumbling</option>
+                                        <option value="c">didn't fumble</option>
+                                    </select>
+                                    through Instagram filters first.
+                                </p>
+                            </div>
+                            <div class="sentence-item" data-correct="a,b">
+                                <p class="sentence-text">2. Everyone
+                                    <select class="sentence-dropdown">
+                                        <option value=""></option>
+                                        <option value="a">decided</option>
+                                        <option value="b">were deciding</option>
+                                        <option value="c">didn't decide</option>
+                                    </select>
+                                    to make a documentary of the street performer, so they
+                                    <select class="sentence-dropdown">
+                                        <option value=""></option>
+                                        <option value="a">filmed</option>
+                                        <option value="b">were filming</option>
+                                        <option value="c">didn't film</option>
+                                    </select>
+                                    instead of enjoying the show directly.
+                                </p>
+                            </div>
+                            <div class="sentence-item" data-correct="a,b">
+                                <p class="sentence-text">3. The couple
+                                    <select class="sentence-dropdown">
+                                        <option value=""></option>
+                                        <option value="a">were</option>
+                                        <option value="b">weren't</option>
+                                        <option value="c">was</option>
+                                    </select>
+                                    at an Italian restaurant together, but they
+                                    <select class="sentence-dropdown">
+                                        <option value=""></option>
+                                        <option value="a">touched</option>
+                                        <option value="b">didn't touch</option>
+                                        <option value="c">were touching</option>
+                                    </select>
+                                    each other—they only touched their phones.
+                                </p>
+                            </div>
+                            <div class="sentence-item" data-correct="a,b">
+                                <p class="sentence-text">4. The mother
+                                    <select class="sentence-dropdown">
+                                        <option value=""></option>
+                                        <option value="a">demonstrated</option>
+                                        <option value="b">was demonstrating</option>
+                                        <option value="c">didn't demonstrate</option>
+                                    </select>
+                                    a carousel ride, but her son
+                                    <select class="sentence-dropdown">
+                                        <option value=""></option>
+                                        <option value="a">paid</option>
+                                        <option value="b">didn't pay</option>
+                                        <option value="c">was paying</option>
+                                    </select>
+                                    attention because he was texting.
+                                </p>
+                            </div>
+                            <div class="sentence-item" data-correct="b,a">
+                                <p class="sentence-text">5. The dad
+                                    <select class="sentence-dropdown">
+                                        <option value=""></option>
+                                        <option value="a">played</option>
+                                        <option value="b">didn't play</option>
+                                        <option value="c">was playing</option>
+                                    </select>
+                                    with baby Ethan because he
+                                    <select class="sentence-dropdown">
+                                        <option value=""></option>
+                                        <option value="a">posted</option>
+                                        <option value="b">was posting</option>
+                                        <option value="c">didn't post</option>
+                                    </select>
+                                    pictures to Facebook instead.
+                                </p>
+                            </div>
+                            <div class="sentence-item" data-correct="a,a">
+                                <p class="sentence-text">6. When the hotdog man
+                                    <select class="sentence-dropdown">
+                                        <option value=""></option>
+                                        <option value="a">made</option>
+                                        <option value="b">was making</option>
+                                        <option value="c">didn't make</option>
+                                    </select>
+                                    an emergency call, the singers
+                                    <select class="sentence-dropdown">
+                                        <option value=""></option>
+                                        <option value="a">thought</option>
+                                        <option value="b">were thinking</option>
+                                        <option value="c">didn't think</option>
+                                    </select>
+                                    he was being disrespectful.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 12px; align-items: center;">
+                            <button class="check-answers-btn" id="check-sentences">
+                                <i class="fa-solid fa-circle-check"></i> Check answers
+                            </button>
+                            <button class="check-answers-btn retry-btn" id="retry-sentences" disabled>
+                                <i class="fa-solid fa-rotate-right"></i> Try again
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Post-Listening Tab -->
+                <div class="tab-content" id="post-listening">
+                    <!-- Exercise 4: Giving Advice -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">4</span>
+                            <h3>Giving Advice</h3>
+                        </div>
+                        <p class="exercise-instructions">Read each problem and match it with the most appropriate advice.</p>
+
+                        <div class="matching-container">
+                            <canvas id="matching-canvas"></canvas>
+                            <div class="matching-exercise">
+                                <div class="matching-column">
+                                    <h4 class="column-title">Problems</h4>
+                                    <div class="matching-problems" id="matching-problems">
+                                        <div class="matching-item problem-item" data-id="1" data-correct="3">
+                                            <div class="matching-dot"></div>
+                                            <div class="matching-item-content">
+                                                <span class="matching-number">1.</span>
+                                                <p class="matching-text">My phone always dies before noon because I can't stop scrolling through apps.</p>
+                                            </div>
+                                        </div>
+                                        <div class="matching-item problem-item" data-id="2" data-correct="1">
+                                            <div class="matching-dot"></div>
+                                            <div class="matching-item-content">
+                                                <span class="matching-number">2.</span>
+                                                <p class="matching-text">I record every concert I attend but never actually enjoy the live performance.</p>
+                                            </div>
+                                        </div>
+                                        <div class="matching-item problem-item" data-id="3" data-correct="5">
+                                            <div class="matching-dot"></div>
+                                            <div class="matching-item-content">
+                                                <span class="matching-number">3.</span>
+                                                <p class="matching-text">I feel like I ignore my partner during dates because I'm always on my phone.</p>
+                                            </div>
+                                        </div>
+                                        <div class="matching-item problem-item" data-id="4" data-correct="2">
+                                            <div class="matching-dot"></div>
+                                            <div class="matching-item-content">
+                                                <span class="matching-number">4.</span>
+                                                <p class="matching-text">I suffer from constant neck pain after spending hours hunched over my phone.</p>
+                                            </div>
+                                        </div>
+                                        <div class="matching-item problem-item" data-id="5" data-correct="4">
+                                            <div class="matching-dot"></div>
+                                            <div class="matching-item-content">
+                                                <span class="matching-number">5.</span>
+                                                <p class="matching-text">I'm always running late because I lose track of time on social media before leaving.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="matching-column">
+                                    <h4 class="column-title">Advice</h4>
+                                    <div class="matching-advice">
+                                        <div class="matching-item advice-item" data-id="1">
+                                            <div class="matching-item-content">
+                                                <p class="matching-text">You should put your phone away at concerts and enjoy the live experience instead of filming.</p>
+                                            </div>
+                                            <div class="matching-dot"></div>
+                                        </div>
+                                        <div class="matching-item advice-item" data-id="2">
+                                            <div class="matching-item-content">
+                                                <p class="matching-text">You should hold your phone at eye level to prevent neck strain.</p>
+                                            </div>
+                                            <div class="matching-dot"></div>
+                                        </div>
+                                        <div class="matching-item advice-item" data-id="3">
+                                            <div class="matching-item-content">
+                                                <p class="matching-text">You should carry a portable charger or limit your daily screen time.</p>
+                                            </div>
+                                            <div class="matching-dot"></div>
+                                        </div>
+                                        <div class="matching-item advice-item" data-id="4">
+                                            <div class="matching-item-content">
+                                                <p class="matching-text">You should set reminders 15 minutes before leaving to stay on schedule.</p>
+                                            </div>
+                                            <div class="matching-dot"></div>
+                                        </div>
+                                        <div class="matching-item advice-item" data-id="5">
+                                            <div class="matching-item-content">
+                                                <p class="matching-text">You should keep your phone away during meals and focus on your partner.</p>
+                                            </div>
+                                            <div class="matching-dot"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 12px; align-items: center;">
+                            <button class="check-answers-btn" id="check-matching">
+                                <i class="fa-solid fa-circle-check"></i> Check answers
+                            </button>
+                            <button class="check-answers-btn retry-btn" id="retry-matching" disabled>
+                                <i class="fa-solid fa-rotate-right"></i> Try again
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="completion-box">
+                        <h4><i class="fa-solid fa-party-horn"></i> Great Job!</h4>
+                        <p>You've completed the "Get Off the Phone" listening activity. You've practiced:</p>
+                        <ul class="completion-list">
+                            <li><i class="fa-solid fa-check"></i> Listening comprehension with fast-paced audio</li>
+                            <li><i class="fa-solid fa-check"></i> Making predictions based on limited information</li>
+                            <li><i class="fa-solid fa-check"></i> Describing past events and situations</li>
+                            <li><i class="fa-solid fa-check"></i> Giving advice on technology-related problems</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Lyrics Tab -->
+                <div class="tab-content" id="lyrics">
+                    <div class="warning-box">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                        <div class="warning-box-content">
+                            <h4>Before You Continue:</h4> <p>Try to complete the listening exercises first. Only use the lyrics if you really need extra help.</p>
+                        </div>
+                    </div>
+                    <div class="lyrics-container">
+                        <div class="lyrics-header">
+                            <h3>Get Off the Phone</h3>
+                            <p>Rhett & Link</p>
+                        </div>
+                        <div class="lyrics-box">
+                            <div class="lyrics-section">
+                                <p class="lyrics-section-title">Intro</p>
+                                <p class="lyrics-text">"Hey man, I've recently been doing some contemplation about people's dependency upon cellular telephones"
+"Yeah man, me too. I've really noticed that everyone always seems to be on their mobile device instead of really being in the moment."
+"Exactly, and I feel like this is a very significant issue that needs to be addressed immediately."
+"Yes, immediately."
+"We really should do something about this."</p>
+                            </div>
+                            <div class="lyrics-section">
+                                <p class="lyrics-section-title">Verse 1</p>
+                                <p class="lyrics-text">Here we have a man
+Who's chosen to Instagram
+His apple pie, a la mode.
+While he fumbles through the filters
+His ice cream has gotten "a la hot"
+And the pie "a la cold."
+
+As you can see
+This street performer's drawn a crowd
+To watch him do his thing.
+But instead of just enjoying the show
+it seems everyone's decided
+To make a documentary.
+
+Notice this unreasonably attractive couple
+Enjoying a reasonably priced Italian dinner together.
+Social networking instead of working
+On getting to know each other better</p>
+                            </div>
+                            <div class="lyrics-section">
+                                <p class="lyrics-section-title">Bridge 1</p>
+                                <p class="lyrics-text">How does that filtered picture taste
+Since your dessert has gone to waste?
+
+When do you think you ever will
+Wanna watch this portrait juggling film?
+
+You know you want to touch each other
+Doesn't that feel good?
+"He's my brother."</p>
+                            </div>
+                            <div class="lyrics-section">
+                                <p class="lyrics-section-title">Chorus</p>
+                                <p class="lyrics-text">Get off the phone now!
+It's gonna be okay
+There's no need to be afraid.
+(Get off the phone now!) It doesn't love you
+It's gonna die one day.
+The government is probably
+Spying on you with it anyway.</p>
+                            </div>
+                            <div class="lyrics-section">
+                                <p class="lyrics-section-title">Verse 2</p>
+                                <p class="lyrics-text">Here we have a stereotypical teen
+Forced to endure "Family Game Night."
+He's stereotypically texting
+And missing his mom
+Demonstrate a carousel ride.
+
+Little Ethan here
+Is celebrating being the center of the universe
+For one year.
+But "The World's Greatest Dad"
+Is more worried about 'Facebooking' it
+Than actually being here.</p>
+                            </div>
+                            <div class="lyrics-section">
+                                <p class="lyrics-section-title">Bridge 2</p>
+                                <p class="lyrics-text">Let's listen in and see if we can get some context.
+"Please hurry! We're at 382 Pine."
+He has the nerve to make a phone call
+At such a pivotal moment in his friend's life.
+
+How could you be so disengaged?
+While precious memories are being made?
+
+Do you really think your friends need
+Another baby picture in their feed?
+
+Don't be such a self-centered guy.
+Now isn't that better?
+"I think he just died."</p>
+                            </div>
+                            <div class="lyrics-section">
+                                <p class="lyrics-section-title">Chorus</p>
+                                <p class="lyrics-text">Get off the phone now!
+It's gonna be okay.
+There's no need to be afraid.
+(Get off the phone now!) It doesn't love you
+It's gonna die one day.
+It's crawling with e-coli bacteria anyway.
+(Get off the phone now!) It's gonna be okay.</p>
+                            </div>
+                            <div class="lyrics-section">
+                                <p class="lyrics-section-title">Outro</p>
+                                <p class="lyrics-text">Hey guys, I'm on the set of a music video, uh, there's Rhett.
+"Seriously?"
+"What?"</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="activity-nav">
+                    <button class="nav-btn nav-btn-back" id="btn-back" disabled>
+                        <i class="fa-solid fa-arrow-left"></i> Back
+                    </button>
+                    <button class="nav-btn nav-btn-next" id="btn-next">
+                        Next <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="../../../js/layout.js"></script>
+    <script src="../../../js/script.js" defer></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        const btnBack = document.getElementById('btn-back');
+        const btnNext = document.getElementById('btn-next');
+        const tabs = ['introduction', 'pre-listening', 'listening', 'post-listening', 'lyrics'];
+        let currentTabIndex = 0;
+
+        // Audio Player - Introduction
+        const introAudioBtn = document.getElementById('intro-audio-btn');
+        const introAudio = document.getElementById('intro-audio');
+
+        if (introAudioBtn && introAudio) {
+            introAudioBtn.addEventListener('click', function() {
+                if (introAudio.paused) {
+                    introAudio.play();
+                    introAudioBtn.classList.add('playing');
+                    introAudioBtn.querySelector('i').className = 'fa-solid fa-pause';
+                    introAudioBtn.querySelector('span').textContent = 'Pause';
+                } else {
+                    introAudio.pause();
+                    introAudioBtn.classList.remove('playing');
+                    introAudioBtn.querySelector('i').className = 'fa-solid fa-volume-high';
+                    introAudioBtn.querySelector('span').textContent = 'Listen to Introduction';
+                }
+            });
+
+            introAudio.addEventListener('ended', function() {
+                introAudioBtn.classList.remove('playing');
+                introAudioBtn.querySelector('i').className = 'fa-solid fa-volume-high';
+                introAudioBtn.querySelector('span').textContent = 'Listen to Introduction';
+            });
+        }
+
+        // Conversation audio now uses native HTML5 controls, no custom JS needed
+
+        function switchTab(tabId, scrollToTop = false) {
+            tabBtns.forEach(btn => btn.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+
+            const activeBtn = document.querySelector(`[data-tab="${tabId}"]`);
+            const activeContent = document.getElementById(tabId);
+
+            if (activeBtn) activeBtn.classList.add('active');
+            if (activeContent) activeContent.classList.add('active');
+
+            currentTabIndex = tabs.indexOf(tabId);
+            updateNavButtons();
+
+            if (tabId === 'post-listening') {
+                setTimeout(() => {
+                    if (typeof resizeCanvas === 'function') resizeCanvas();
+                }, 50);
+            }
+
+            if (scrollToTop) {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function updateNavButtons() {
+            const navContainer = document.querySelector('.activity-nav');
+            
+            // Hide nav container completely on Lyrics tab (index 4)
+            if (currentTabIndex === 4) {
+                navContainer.style.display = 'none';
+                return;
+            }
+            
+            navContainer.style.display = 'flex';
+
+            btnBack.disabled = currentTabIndex === 0;
+            
+            // Hide Back button on first tab
+            if (currentTabIndex === 0) {
+                btnBack.classList.add('hidden');
+            } else {
+                btnBack.classList.remove('hidden');
+            }
+
+            // Change button text based on current tab
+            if (currentTabIndex === 3) { // Post-listening tab
+                btnNext.innerHTML = 'Back to Activities <i class="fa-solid fa-check"></i>';
+            } else {
+                btnNext.innerHTML = 'Next <i class="fa-solid fa-arrow-right"></i>';
+            }
+            
+            btnNext.disabled = false;
+            btnNext.style.display = 'flex';
+        }
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const tabId = this.dataset.tab;
+                switchTab(tabId, false);
+            });
+        });
+
+        btnBack.addEventListener('click', function() {
+            if (currentTabIndex > 0) {
+                switchTab(tabs[currentTabIndex - 1], true);
+            }
+        });
+
+        btnNext.addEventListener('click', function() {
+            if (currentTabIndex === 3) { // Post-listening
+                window.location.href = '../actividades.html';
+                return;
+            }
+            
+            if (currentTabIndex < tabs.length - 1) {
+                switchTab(tabs[currentTabIndex + 1], true);
+            }
+        });
+
+        // True/False button functionality
+        const tfBtns = document.querySelectorAll('.tf-btn');
+        tfBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const parent = this.closest('.tf-item');
+                const buttons = parent.querySelectorAll('.tf-btn');
+
+                if (this.classList.contains('selected')) {
+                    this.classList.remove('selected');
+                } else {
+                    buttons.forEach(b => {
+                        b.classList.remove('selected');
+                    });
+                    this.classList.add('selected');
+                }
+            });
+        });
+
+        // Check True/False Answers
+        const checkTfBtn = document.getElementById('check-tf');
+        const retryTfBtn = document.getElementById('retry-tf');
+        const tfList = document.getElementById('tf-list');
+
+        if (checkTfBtn) {
+            checkTfBtn.addEventListener('click', function() {
+                const items = tfList.querySelectorAll('.tf-item');
+                let correctCount = 0;
+                let total = items.length;
+                let allAnswered = true;
+
+                items.forEach(item => {
+                    const selectedBtn = item.querySelector('.tf-btn.selected');
+                    if (!selectedBtn) {
+                        allAnswered = false;
+                        return;
+                    }
+
+                    const userValue = selectedBtn.dataset.value;
+                    const correctValue = item.dataset.correct;
+                    const correctBtn = item.querySelector(`.tf-btn[data-value="${correctValue}"]`);
+
+                    if (userValue === correctValue) {
+                        selectedBtn.classList.add('correct');
+                        correctCount++;
+                    } else {
+                        selectedBtn.classList.add('incorrect');
+                        correctBtn.classList.add('correct');
+                    }
+                });
+
+                if (!allAnswered) {
+                    showFeedbackPopup(-1, 1);
+                    return;
+                }
+
+                showFeedbackPopup(correctCount, total);
+                retryTfBtn.disabled = false;
+            });
+        }
+
+        if (retryTfBtn) {
+            retryTfBtn.addEventListener('click', function() {
+                const items = tfList.querySelectorAll('.tf-item');
+                items.forEach(item => {
+                    const buttons = item.querySelectorAll('.tf-btn');
+                    buttons.forEach(btn => btn.classList.remove('selected', 'correct', 'incorrect'));
+                });
+                retryTfBtn.disabled = true;
+            });
+        }
+
+        // Sentence Completion Exercise
+        const checkSentencesBtn = document.getElementById('check-sentences');
+        const retrySentencesBtn = document.getElementById('retry-sentences');
+        const sentenceList = document.getElementById('sentence-completion-list');
+
+        if (checkSentencesBtn) {
+            checkSentencesBtn.addEventListener('click', function() {
+                const items = sentenceList.querySelectorAll('.sentence-item');
+                let correctCount = 0;
+                let total = 0;
+
+                items.forEach(item => {
+                    const dropdowns = item.querySelectorAll('.sentence-dropdown');
+                    const correctValues = item.dataset.correct.split(',');
+
+                    // Clear previous classes
+                    dropdowns.forEach(dropdown => {
+                        dropdown.classList.remove('correct', 'incorrect');
+                    });
+
+                    dropdowns.forEach((dropdown, index) => {
+                        total++;
+
+                        if (dropdown.value === correctValues[index]) {
+                            dropdown.classList.add('correct');
+                            correctCount++;
+                        } else {
+                            dropdown.classList.add('incorrect');
+                        }
+                    });
+                });
+
+                showFeedbackPopup(correctCount, total);
+                retrySentencesBtn.disabled = false;
+            });
+        }
+
+        if (retrySentencesBtn) {
+            retrySentencesBtn.addEventListener('click', function() {
+                const items = sentenceList.querySelectorAll('.sentence-item');
+                items.forEach(item => {
+                    const dropdowns = item.querySelectorAll('.sentence-dropdown');
+                    dropdowns.forEach(dropdown => {
+                        dropdown.classList.remove('correct', 'incorrect');
+                        dropdown.value = '';
+                    });
+                });
+                retrySentencesBtn.disabled = true;
+            });
+        }
+
+        // Matching Exercise (Post-Listening) - Line Connecting
+        const canvas = document.getElementById('matching-canvas');
+        const ctx = canvas ? canvas.getContext('2d') : null;
+        const checkMatchingBtn = document.getElementById('check-matching');
+        const retryMatchingBtn = document.getElementById('retry-matching');
+        const problemItems = document.querySelectorAll('.problem-item');
+        const adviceItems = document.querySelectorAll('.advice-item');
+
+        let selectedProblem = null;
+        let connections = [];
+
+        function resizeCanvas() {
+            if (!canvas) return;
+            const container = canvas.parentElement;
+            canvas.width = container.offsetWidth;
+            canvas.height = container.offsetHeight;
+            drawLines();
+        }
+
+        function getDotPosition(item) {
+            const dot = item.querySelector('.matching-dot');
+            const rect = dot.getBoundingClientRect();
+            const containerRect = canvas.getBoundingClientRect();
+            return {
+                x: rect.left + rect.width / 2 - containerRect.left,
+                y: rect.top + rect.height / 2 - containerRect.top
+            };
+        }
+
+        function drawLines() {
+            if (!ctx) return;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            connections.forEach(conn => {
+                const problemEl = document.querySelector(`.problem-item[data-id="${conn.problem}"]`);
+                const adviceEl = document.querySelector(`.advice-item[data-id="${conn.advice}"]`);
+
+                if (problemEl && adviceEl) {
+                    const start = getDotPosition(problemEl);
+                    const end = getDotPosition(adviceEl);
+
+                    ctx.beginPath();
+                    ctx.moveTo(start.x, start.y);
+                    ctx.lineTo(end.x, end.y);
+                    ctx.strokeStyle = conn.correct !== undefined ?
+                        (conn.correct ? '#16a34a' : '#dc2626') : '#0ea5e9';
+                    ctx.lineWidth = 2.5;
+                    ctx.lineCap = 'round';
+                    ctx.stroke();
+                }
+            });
+        }
+
+        function removeConnection(problemId) {
+            const connIndex = connections.findIndex(c => c.problem === problemId);
+            if (connIndex !== -1) {
+                const conn = connections[connIndex];
+                const problemEl = document.querySelector(`.problem-item[data-id="${conn.problem}"]`);
+                const adviceEl = document.querySelector(`.advice-item[data-id="${conn.advice}"]`);
+
+                problemEl.classList.remove('matched');
+                const adviceStillUsed = connections.some((c, i) => i !== connIndex && c.advice === conn.advice);
+                if (!adviceStillUsed) {
+                    adviceEl.classList.remove('matched');
+                }
+
+                connections.splice(connIndex, 1);
+                drawLines();
+            }
+        }
+
+        function updateMatchedStates() {
+            adviceItems.forEach(advice => {
+                const isUsed = connections.some(c => c.advice === advice.dataset.id);
+                if (isUsed) {
+                    advice.classList.add('matched');
+                } else {
+                    advice.classList.remove('matched');
+                }
+            });
+        }
+
+        problemItems.forEach(item => {
+            item.addEventListener('click', function() {
+                if (checkMatchingBtn.disabled) return;
+
+                const problemId = this.dataset.id;
+                const isMatched = this.classList.contains('matched');
+                const isSelected = this.classList.contains('selected');
+
+                if (isMatched) {
+                    removeConnection(problemId);
+                    return;
+                }
+
+                if (isSelected) {
+                    this.classList.remove('selected');
+                    selectedProblem = null;
+                    return;
+                }
+
+                problemItems.forEach(p => p.classList.remove('selected'));
+                this.classList.add('selected');
+                selectedProblem = problemId;
+            });
+        });
+
+        adviceItems.forEach(item => {
+            item.addEventListener('click', function() {
+                if (checkMatchingBtn.disabled) return;
+
+                const adviceId = this.dataset.id;
+                const isMatched = this.classList.contains('matched');
+
+                if (isMatched && !selectedProblem) {
+                    const connToRemove = connections.find(c => c.advice === adviceId);
+                    if (connToRemove) {
+                        removeConnection(connToRemove.problem);
+                    }
+                    return;
+                }
+
+                if (!selectedProblem) return;
+
+                const existingProblemConn = connections.findIndex(c => c.problem === selectedProblem);
+                if (existingProblemConn !== -1) {
+                    connections.splice(existingProblemConn, 1);
+                }
+
+                connections.push({
+                    problem: selectedProblem,
+                    advice: adviceId
+                });
+
+                const problemEl = document.querySelector(`.problem-item[data-id="${selectedProblem}"]`);
+                problemEl.classList.remove('selected');
+                problemEl.classList.add('matched');
+
+                updateMatchedStates();
+                selectedProblem = null;
+                drawLines();
+            });
+        });
+
+        if (checkMatchingBtn) {
+            checkMatchingBtn.addEventListener('click', function() {
+                let correctCount = 0;
+
+                problemItems.forEach(item => {
+                    const problemId = item.dataset.id;
+                    const correctAdviceId = item.dataset.correct;
+                    const connection = connections.find(c => c.problem === problemId);
+
+                    if (connection && connection.advice === correctAdviceId) {
+                        connection.correct = true;
+                        item.classList.add('correct');
+                        const adviceEl = document.querySelector(`.advice-item[data-id="${connection.advice}"]`);
+                        adviceEl.classList.add('correct');
+                        correctCount++;
+                    } else {
+                        if (connection) {
+                            connection.correct = false;
+                            item.classList.add('incorrect');
+                            const adviceEl = document.querySelector(`.advice-item[data-id="${connection.advice}"]`);
+                            adviceEl.classList.add('incorrect');
+                        } else {
+                            item.classList.add('incorrect');
+                        }
+                    }
+                });
+
+                drawLines();
+                showFeedbackPopup(correctCount, problemItems.length);
+                retryMatchingBtn.disabled = false;
+                checkMatchingBtn.disabled = true;
+            });
+        }
+
+        if (retryMatchingBtn) {
+            retryMatchingBtn.addEventListener('click', function() {
+                connections = [];
+                problemItems.forEach(item => {
+                    item.classList.remove('selected', 'matched', 'correct', 'incorrect');
+                });
+                adviceItems.forEach(item => {
+                    item.classList.remove('matched', 'correct', 'incorrect');
+                });
+                drawLines();
+                retryMatchingBtn.disabled = true;
+                checkMatchingBtn.disabled = false;
+            });
+        }
+
+        if (canvas) {
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+        }
+
+        // Vocabulary Matching - Drag and Drop
+        const vocabWordsContainer = document.getElementById('vocab-words-container');
+        const vocabPool = document.getElementById('vocab-pool');
+        const dropZones = document.querySelectorAll('.vocab-drop-zone');
+        let draggedElement = null;
+
+        // Initial vocabulary data (shuffled)
+        const vocabData = [
+            { id: 'image-8', text: '"More worried about <strong>Facebooking</strong> it"' },
+            { id: 'image-5', text: '"This unreasonably <strong>attractive couple</strong>"' },
+            { id: 'image-3', text: '"The <strong>street performer</strong>"' },
+            { id: 'image-4', text: '"A <strong>crowd</strong> to watch him do his thing"' },
+            { id: 'image-2', text: '"His apple pie <strong>à la mode</strong>"' },
+            { id: 'image-6', text: '"As he fumbles through the <strong>filters</strong>"' }
+        ];
+
+        // Function to create and render vocab words
+        function renderVocabWords() {
+            vocabWordsContainer.innerHTML = '';
+            vocabData.forEach(vocab => {
+                const word = document.createElement('div');
+                word.className = 'vocab-word';
+                word.draggable = true;
+                word.dataset.imageId = vocab.id;
+                word.innerHTML = vocab.text;
+                vocabWordsContainer.appendChild(word);
+            });
+        }
+
+        // Initial render
+        renderVocabWords();
+
+        // Function to add drag listeners to vocab words
+        function addDragListeners() {
+            const vocabWords = document.querySelectorAll('.vocab-word');
+            vocabWords.forEach(word => {
+                word.addEventListener('dragstart', function(e) {
+                    draggedElement = this;
+                    this.classList.add('dragging');
+                    e.dataTransfer.effectAllowed = 'move';
+                });
+
+                word.addEventListener('dragend', function(e) {
+                    this.classList.remove('dragging');
+                    draggedElement = null;
+                });
+            });
+
+            // Add listeners to dropped words
+            const droppedWords = document.querySelectorAll('.dropped-word');
+            droppedWords.forEach(word => {
+                word.draggable = true;
+                word.addEventListener('dragstart', function(e) {
+                    draggedElement = this;
+                    this.classList.add('dragging');
+                    e.dataTransfer.effectAllowed = 'move';
+                });
+
+                word.addEventListener('dragend', function(e) {
+                    this.classList.remove('dragging');
+                    draggedElement = null;
+                });
+            });
+        }
+
+        // Initial drag listeners
+        addDragListeners();
+
+        // Vocab pool drop zone
+        vocabPool.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+            this.classList.add('drag-over');
+        });
+
+        vocabPool.addEventListener('dragleave', function(e) {
+            this.classList.remove('drag-over');
+        });
+
+        vocabPool.addEventListener('drop', function(e) {
+            e.preventDefault();
+            this.classList.remove('drag-over');
+
+            if (draggedElement && draggedElement.classList.contains('dropped-word')) {
+                // Moving a word back to the pool
+                const imageId = draggedElement.dataset.imageId;
+                const parentZone = draggedElement.parentElement;
+                
+                // Add word back to pool
+                const newWord = document.createElement('div');
+                newWord.className = 'vocab-word';
+                newWord.draggable = true;
+                newWord.dataset.imageId = imageId;
+                newWord.innerHTML = draggedElement.innerHTML;
+                vocabWordsContainer.appendChild(newWord);
+
+                // Clear the drop zone
+                if (parentZone) {
+                    parentZone.innerHTML = '';
+                }
+
+                addDragListeners();
+            }
+        });
+
+        // Image drop zones
+        dropZones.forEach(zone => {
+            zone.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                e.dataTransfer.dropEffect = 'move';
+                this.classList.add('drag-over');
+            });
+
+            zone.addEventListener('dragleave', function(e) {
+                this.classList.remove('drag-over');
+            });
+
+            zone.addEventListener('drop', function(e) {
+                e.preventDefault();
+                this.classList.remove('drag-over');
+
+                if (draggedElement) {
+                    const correctImageId = draggedElement.dataset.imageId;
+                    const targetImageId = this.dataset.imageId;
+
+                    // Check if there's already a word in this zone
+                    const existingWord = this.querySelector('.dropped-word');
+                    
+                    if (draggedElement.classList.contains('vocab-word')) {
+                        // Dragging from pool to zone
+                        if (existingWord) {
+                            // Swap: move existing word back to pool
+                            const existingImageId = existingWord.dataset.imageId;
+                            const newWord = document.createElement('div');
+                            newWord.className = 'vocab-word';
+                            newWord.draggable = true;
+                            newWord.dataset.imageId = existingImageId;
+                            newWord.innerHTML = existingWord.innerHTML;
+                            vocabWordsContainer.appendChild(newWord);
+                        }
+
+                        // Remove from pool and add to zone
+                        draggedElement.remove();
+                        this.innerHTML = '';
+
+                        const droppedWord = document.createElement('div');
+                        droppedWord.className = 'dropped-word';
+                        droppedWord.innerHTML = draggedElement.innerHTML;
+                        droppedWord.dataset.imageId = correctImageId;
+                        this.appendChild(droppedWord);
+
+                        addDragListeners();
+                    } else if (draggedElement.classList.contains('dropped-word')) {
+                        // Dragging from zone to zone (swap)
+                        const draggedFromZone = draggedElement.parentElement;
+                        const draggedImageId = draggedElement.dataset.imageId;
+                        
+                        if (existingWord) {
+                            // Both zones have words - swap them
+                            draggedFromZone.innerHTML = '';
+                            draggedFromZone.appendChild(existingWord);
+                        } else {
+                            // Target zone is empty - just move
+                            draggedFromZone.innerHTML = '';
+                        }
+
+                        this.innerHTML = '';
+                        this.appendChild(draggedElement);
+                        addDragListeners();
+                    }
+                }
+            });
+        });
+
+        // Right-click context menu for dropped words (using event delegation)
+        document.addEventListener('contextmenu', function(e) {
+            let droppedWord = e.target.closest('.dropped-word');
+            if (droppedWord) {
+                e.preventDefault();
+                const imageId = droppedWord.dataset.imageId;
+                const parentZone = droppedWord.parentElement;
+                
+                // Add word back to pool
+                const newWord = document.createElement('div');
+                newWord.className = 'vocab-word';
+                newWord.draggable = true;
+                newWord.dataset.imageId = imageId;
+                newWord.innerHTML = droppedWord.innerHTML;
+                vocabWordsContainer.appendChild(newWord);
+
+                // Clear the drop zone
+                if (parentZone) {
+                    parentZone.innerHTML = '';
+                }
+
+                addDragListeners();
+            }
+        });
+
+        // Check Vocabulary Matching Answers
+        const checkVocabMatchingBtn = document.getElementById('check-vocab-matching');
+        const retryVocabMatchingBtn = document.getElementById('retry-vocab-matching');
+        const vocabMatchingFeedback = document.getElementById('vocab-matching-feedback');
+
+        if (checkVocabMatchingBtn) {
+            checkVocabMatchingBtn.addEventListener('click', function() {
+                let correct = 0;
+                let total = 6;
+
+                dropZones.forEach(zone => {
+                    const droppedWord = zone.querySelector('.dropped-word');
+                    if (droppedWord) {
+                        const correctImageId = droppedWord.dataset.imageId;
+                        const zoneImageId = zone.dataset.imageId;
+
+                        if (correctImageId === zoneImageId) {
+                            correct++;
+                            zone.classList.remove('incorrect-match');
+                            zone.classList.add('correct-match');
+                        } else {
+                            zone.classList.remove('correct-match');
+                            zone.classList.add('incorrect-match');
+                        }
+                    } else {
+                        zone.classList.remove('correct-match', 'incorrect-match');
+                    }
+                });
+
+                showFeedbackPopup(correct, total);
+                retryVocabMatchingBtn.disabled = false;
+            });
+        }
+
+        if (retryVocabMatchingBtn) {
+            retryVocabMatchingBtn.addEventListener('click', function() {
+                // Clear all words from drop zones and return to pool
+                dropZones.forEach(zone => {
+                    const droppedWord = zone.querySelector('.dropped-word');
+                    if (droppedWord) {
+                        droppedWord.remove();
+                    }
+                    zone.classList.remove('correct-match', 'incorrect-match');
+                });
+
+                // Reset the word pool with all words
+                vocabWordsContainer.innerHTML = '';
+                const vocabWords = [
+                    { id: 'image-2', text: '"His apple pie <strong>à la mode</strong>"' },
+                    { id: 'image-4', text: '"The <strong>crowd</strong> just held their phones up"' },
+                    { id: 'image-3', text: '"The <strong>street performer</strong> is there"' },
+                    { id: 'image-1', text: '"Their <strong>lunch</strong> out on the deck"' },
+                    { id: 'image-5', text: '"<strong>Attractive couple</strong> on the subway"' },
+                    { id: 'image-6', text: '"<strong>Get off</strong> the phone"' }
+                ];
+
+                vocabWords.forEach(word => {
+                    const wordDiv = document.createElement('div');
+                    wordDiv.className = 'vocab-word';
+                    wordDiv.draggable = true;
+                    wordDiv.dataset.imageId = word.id;
+                    wordDiv.innerHTML = word.text;
+                    vocabWordsContainer.appendChild(wordDiv);
+                });
+
+                addDragListeners();
+                retryVocabMatchingBtn.disabled = true;
+            });
+        }
+
+        // Prediction Exercise - Checkboxes
+        const predictionChecklist = document.getElementById('prediction-checklist');
+        const checkPredictionsBtn = document.getElementById('check-predictions');
+        const retryPredictionsBtn = document.getElementById('retry-predictions');
+        const predictionFeedback = document.getElementById('prediction-feedback');
+
+        if (predictionChecklist) {
+            const predictionItems = predictionChecklist.querySelectorAll('.prediction-item');
+            predictionItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    this.classList.toggle('selected');
+                    this.classList.remove('correct', 'incorrect');
+                });
+            });
+        }
+
+        if (checkPredictionsBtn) {
+            checkPredictionsBtn.addEventListener('click', function() {
+                const predictionItems = predictionChecklist.querySelectorAll('.prediction-item');
+                let incorrectSelections = 0;
+                let totalCorrectAnswers = 3;
+                let userCorrectCount = 0;
+
+                predictionItems.forEach(item => {
+                    const isSelected = item.classList.contains('selected');
+                    const isCorrectAnswer = item.dataset.correct === 'true';
+
+                    if (isSelected) {
+                        if (isCorrectAnswer) {
+                            item.classList.add('correct');
+                            userCorrectCount++;
+                        } else {
+                            item.classList.add('incorrect');
+                            incorrectSelections++;
+                        }
+                    } else {
+                        item.classList.remove('correct', 'incorrect');
+                    }
+                });
+
+                // Disable further selections
+                retryPredictionsBtn.disabled = false;
+
+                // Show feedback
+                const score = userCorrectCount - incorrectSelections;
+                const finalScore = Math.max(0, score);
+
+                showFeedbackPopup(finalScore, totalCorrectAnswers);
+            });
+        }
+
+        if (retryPredictionsBtn) {
+            retryPredictionsBtn.addEventListener('click', function() {
+                const predictionItems = predictionChecklist.querySelectorAll('.prediction-item');
+                predictionItems.forEach(item => {
+                    item.classList.remove('selected', 'correct', 'incorrect');
+                });
+                checkPredictionsBtn.disabled = false;
+                retryPredictionsBtn.disabled = true;
+            });
+        }
+
+        // Conversation Exercise - Drag and Drop
+        const conversationWordsContainer = document.getElementById('conversation-words-container');
+        const conversationVocabPool = document.getElementById('conversation-vocab-pool');
+        const conversationGaps = document.querySelectorAll('.conversation-gap');
+        let draggedConversationElement = null;
+
+        function addConversationDragListeners() {
+            const conversationWords = document.querySelectorAll('.conversation-word');
+            conversationWords.forEach(word => {
+                word.addEventListener('dragstart', function(e) {
+                    draggedConversationElement = this;
+                    this.classList.add('dragging');
+                    e.dataTransfer.effectAllowed = 'move';
+                });
+
+                word.addEventListener('dragend', function(e) {
+                    this.classList.remove('dragging');
+                    draggedConversationElement = null;
+                });
+            });
+
+            // Add listeners to dropped conversation words
+            const droppedWords = document.querySelectorAll('.dropped-conversation-word');
+            droppedWords.forEach(word => {
+                word.draggable = true;
+                word.addEventListener('dragstart', function(e) {
+                    draggedConversationElement = this;
+                    this.classList.add('dragging');
+                    e.dataTransfer.effectAllowed = 'move';
+                });
+
+                word.addEventListener('dragend', function(e) {
+                    this.classList.remove('dragging');
+                    draggedConversationElement = null;
+                });
+            });
+        }
+
+        // Initial conversation drag listeners
+        addConversationDragListeners();
+
+        // Conversation vocab pool drop zone
+        conversationVocabPool.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+            this.classList.add('drag-over');
+        });
+
+        conversationVocabPool.addEventListener('dragleave', function(e) {
+            this.classList.remove('drag-over');
+        });
+
+        conversationVocabPool.addEventListener('drop', function(e) {
+            e.preventDefault();
+            this.classList.remove('drag-over');
+
+            if (draggedConversationElement && draggedConversationElement.classList.contains('dropped-conversation-word')) {
+                // Moving a word back to the pool
+                const wordId = draggedConversationElement.dataset.wordId;
+                const parentGap = draggedConversationElement.parentElement;
+
+                // Add word back to pool
+                const newWord = document.createElement('div');
+                newWord.className = 'conversation-word';
+                newWord.draggable = true;
+                newWord.dataset.wordId = wordId;
+                newWord.textContent = draggedConversationElement.textContent;
+                conversationWordsContainer.appendChild(newWord);
+
+                // Clear the gap
+                if (parentGap) {
+                    parentGap.innerHTML = '';
+                }
+
+                addConversationDragListeners();
+            }
+        });
+
+        // Conversation gaps
+        conversationGaps.forEach(gap => {
+            gap.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                e.dataTransfer.dropEffect = 'move';
+                this.classList.add('drag-over');
+            });
+
+            gap.addEventListener('dragleave', function(e) {
+                this.classList.remove('drag-over');
+            });
+
+            gap.addEventListener('drop', function(e) {
+                e.preventDefault();
+                this.classList.remove('drag-over');
+
+                if (draggedConversationElement) {
+                    const wordId = draggedConversationElement.dataset.wordId;
+
+                    // Check if there's already a word in this gap
+                    const existingWord = this.querySelector('.dropped-conversation-word');
+
+                    if (draggedConversationElement.classList.contains('conversation-word')) {
+                        // Dragging from pool to gap
+                        if (existingWord) {
+                            // Swap: move existing word back to pool
+                            const existingWordId = existingWord.dataset.wordId;
+                            const newWord = document.createElement('div');
+                            newWord.className = 'conversation-word';
+                            newWord.draggable = true;
+                            newWord.dataset.wordId = existingWordId;
+                            newWord.textContent = existingWord.textContent;
+                            conversationWordsContainer.appendChild(newWord);
+                        }
+
+                        // Remove from pool and add to gap
+                        draggedConversationElement.remove();
+                        this.innerHTML = '';
+
+                        const droppedWord = document.createElement('span');
+                        droppedWord.className = 'dropped-conversation-word';
+                        droppedWord.textContent = draggedConversationElement.textContent;
+                        droppedWord.dataset.wordId = wordId;
+                        this.appendChild(droppedWord);
+
+                        addConversationDragListeners();
+                    } else if (draggedConversationElement.classList.contains('dropped-conversation-word')) {
+                        // Dragging from gap to gap (swap)
+                        const draggedFromGap = draggedConversationElement.parentElement;
+
+                        if (existingWord) {
+                            // Both gaps have words - swap them
+                            draggedFromGap.innerHTML = '';
+                            draggedFromGap.appendChild(existingWord);
+                        } else {
+                            // Target gap is empty - just move
+                            draggedFromGap.innerHTML = '';
+                        }
+
+                        this.innerHTML = '';
+                        this.appendChild(draggedConversationElement);
+                        addConversationDragListeners();
+                    }
+                }
+            });
+        });
+
+        // Right-click to return conversation word to pool
+        document.addEventListener('contextmenu', function(e) {
+            let droppedWord = e.target.closest('.dropped-conversation-word');
+            if (droppedWord) {
+                e.preventDefault();
+                const wordId = droppedWord.dataset.wordId;
+                const parentGap = droppedWord.parentElement;
+
+                // Add word back to pool
+                const newWord = document.createElement('div');
+                newWord.className = 'conversation-word';
+                newWord.draggable = true;
+                newWord.dataset.wordId = wordId;
+                newWord.textContent = droppedWord.textContent;
+                conversationWordsContainer.appendChild(newWord);
+
+                // Clear the gap
+                if (parentGap) {
+                    parentGap.innerHTML = '';
+                }
+
+                addConversationDragListeners();
+            }
+        });
+
+        // Check Conversation Answers
+        const checkConversationBtn = document.getElementById('check-conversation');
+        const retryConversationBtn = document.getElementById('retry-conversation');
+        const conversationFeedback = document.getElementById('conversation-feedback');
+
+        if (checkConversationBtn) {
+            checkConversationBtn.addEventListener('click', function() {
+                let correct = 0;
+                let total = 7;
+
+                conversationGaps.forEach(gap => {
+                    const droppedWord = gap.querySelector('.dropped-conversation-word');
+                    if (droppedWord) {
+                        const correctWordId = gap.dataset.wordId;
+                        const placedWordId = droppedWord.dataset.wordId;
+
+                        if (correctWordId === placedWordId) {
+                            correct++;
+                            gap.classList.remove('incorrect-gap');
+                            gap.classList.add('correct-gap');
+                        } else {
+                            gap.classList.remove('correct-gap');
+                            gap.classList.add('incorrect-gap');
+                        }
+                    } else {
+                        gap.classList.remove('correct-gap', 'incorrect-gap');
+                    }
+                });
+
+                showFeedbackPopup(correct, total);
+                retryConversationBtn.disabled = false;
+            });
+        }
+
+        if (retryConversationBtn) {
+            retryConversationBtn.addEventListener('click', function() {
+                // Clear all words from gaps and return to pool
+                conversationGaps.forEach(gap => {
+                    const droppedWord = gap.querySelector('.dropped-conversation-word');
+                    if (droppedWord) {
+                        droppedWord.remove();
+                    }
+                    gap.classList.remove('correct-gap', 'incorrect-gap');
+                });
+
+                // Reset the word pool with all words in original order
+                conversationWordsContainer.innerHTML = '';
+                const words = ['noticed', 'should', 'dependency', 'addressed', 'contemplation', 'instead', 'issue'];
+                words.forEach(wordId => {
+                    const wordDiv = document.createElement('div');
+                    wordDiv.className = 'conversation-word';
+                    wordDiv.draggable = true;
+                    wordDiv.dataset.wordId = wordId;
+                    wordDiv.textContent = wordId;
+                    conversationWordsContainer.appendChild(wordDiv);
+                });
+
+                addConversationDragListeners();
+                retryConversationBtn.disabled = true;
+            });
+        }
+
+        // Main Idea Exercise - Listening Tab
+        const mainIdeaChecklist = document.getElementById('main-idea-checklist');
+        const checkMainIdeaBtn = document.getElementById('check-main-idea');
+        const retryMainIdeaBtn = document.getElementById('retry-main-idea');
+
+        if (mainIdeaChecklist) {
+            const mainIdeaItems = mainIdeaChecklist.querySelectorAll('.prediction-item');
+            mainIdeaItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const wasSelected = this.classList.contains('selected');
+                    // Allow only one selection
+                    mainIdeaItems.forEach(i => i.classList.remove('selected', 'correct', 'incorrect'));
+                    if (!wasSelected) {
+                        this.classList.add('selected');
+                    }
+                });
+            });
+        }
+
+        if (checkMainIdeaBtn) {
+            checkMainIdeaBtn.addEventListener('click', function() {
+                const selectedItem = mainIdeaChecklist.querySelector('.prediction-item.selected');
+                if (!selectedItem) {
+                    showFeedbackPopup(-1, 1); // Special case for no answer
+                    return;
+                }
+
+                const isCorrect = selectedItem.dataset.correct === 'true';
+                
+                if (isCorrect) {
+                    selectedItem.classList.add('correct');
+                    showFeedbackPopup(1, 1);
+                } else {
+                    selectedItem.classList.add('incorrect');
+                    showFeedbackPopup(0, 1);
+                }
+
+                retryMainIdeaBtn.disabled = false;
+            });
+        }
+
+        if (retryMainIdeaBtn) {
+            retryMainIdeaBtn.addEventListener('click', function() {
+                const mainIdeaItems = mainIdeaChecklist.querySelectorAll('.prediction-item');
+                mainIdeaItems.forEach(item => {
+                    item.classList.remove('selected', 'correct', 'incorrect');
+                });
+                retryMainIdeaBtn.disabled = true;
+            });
+        }
+
+        updateNavButtons();
+    });
+
+    // Feedback Popup
+    const feedbackPopupOverlay = document.createElement('div');
+    feedbackPopupOverlay.className = 'feedback-popup-overlay';
+    feedbackPopupOverlay.innerHTML = `
+        <div class="feedback-popup">
+            <div class="feedback-popup-icon"></div>
+            <h3></h3>
+            <p></p>
+            <button class="feedback-popup-close">Close</button>
+        </div>
+    `;
+    document.body.appendChild(feedbackPopupOverlay);
+
+    function showFeedbackPopup(correct, total) {
+        const icon = feedbackPopupOverlay.querySelector('.feedback-popup-icon');
+        const title = feedbackPopupOverlay.querySelector('h3');
+        const message = feedbackPopupOverlay.querySelector('p');
+
+        if (correct === -1) correct = 0;
+
+        const percentage = (correct / total) * 100;
+
+        if (correct === total) {
+            icon.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+            icon.className = 'feedback-popup-icon success';
+            title.textContent = 'Perfect!';
+        } else if (percentage >= 70) {
+            icon.innerHTML = '<i class="fa-solid fa-thumbs-up"></i>';
+            icon.className = 'feedback-popup-icon good';
+            title.textContent = 'Good!';
+        } else {
+            icon.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i>';
+            icon.className = 'feedback-popup-icon partial';
+            title.textContent = 'Keep trying!';
+        }
+
+        message.textContent = `${correct} out of ${total} answers correct`;
+
+        feedbackPopupOverlay.classList.add('show');
+    }
+
+    feedbackPopupOverlay.querySelector('.feedback-popup-close').addEventListener('click', () => {
+        feedbackPopupOverlay.classList.remove('show');
+    });
+
+    feedbackPopupOverlay.addEventListener('click', (e) => {
+        if (e.target === feedbackPopupOverlay) {
+            feedbackPopupOverlay.classList.remove('show');
+        }
+    });
+    </script>
+</body>
+</html>

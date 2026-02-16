@@ -392,6 +392,7 @@ body.loaded {
 }
 
 .cta-btn {
+    position: relative;
     padding: 10px 20px;
     background: #ff6600;
     color: white;
@@ -400,17 +401,35 @@ body.loaded {
     font-size: 14px;
     border-radius: 5px;
     margin-left: 10px;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
     white-space: nowrap;
+    overflow: hidden;
+}
+
+.cta-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
 }
 
 .cta-btn:hover {
-    background: #ff8533;
+    background: #ff7a1a;
     transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 102, 0, 0.3);
+}
+
+.cta-btn:hover::before {
+    left: 100%;
 }
 
 .cta-btn:active {
-    background: #ff9955;
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(255, 102, 0, 0.2);
 }
 
 .mobile-toggle {
@@ -567,17 +586,19 @@ body.loaded {
     font-size: 16px;
     border-radius: 12px;
     box-shadow: 0 2px 8px rgba(255, 102, 0, 0.15);
-    transition: all 0.3s;
+    transition: all 0.3s ease;
     overflow: hidden;
 }
 
 .hero-btn::before {
     content: '';
     position: absolute;
-    inset: 0;
-    background: #ff8533;
-    opacity: 0;
-    transition: opacity 0.3s;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
 }
 
 .hero-btn span {
@@ -586,13 +607,18 @@ body.loaded {
 }
 
 .hero-btn:hover {
-    background: #ff8533;
+    background: #ff7a1a;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(255, 102, 0, 0.25);
+    box-shadow: 0 4px 12px rgba(255, 102, 0, 0.3);
 }
 
 .hero-btn:hover::before {
-    opacity: 1;
+    left: 100%;
+}
+
+.hero-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(255, 102, 0, 0.2);
 }
 
 .hero-btn-secondary {
@@ -607,15 +633,41 @@ body.loaded {
     font-size: 16px;
     border-radius: 12px;
     box-shadow: 0 2px 8px rgba(255, 255, 255, 0.08);
-    transition: all 0.4s;
+    transition: all 0.3s ease;
     backdrop-filter: blur(10px);
+    overflow: hidden;
+}
+
+.hero-btn-secondary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+    transition: left 0.5s ease;
+}
+
+.hero-btn-secondary span {
+    position: relative;
+    z-index: 1;
 }
 
 .hero-btn-secondary:hover {
     border-color: white;
-    background: rgba(255, 255, 255, 0.1);
-    transform: translateY(-3px);
-    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+}
+
+.hero-btn-secondary:hover::before {
+    left: 100%;
+}
+
+.hero-btn-secondary:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(255, 255, 255, 0.1);
 }
 
 .student-image {
