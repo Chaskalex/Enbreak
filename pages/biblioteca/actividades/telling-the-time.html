@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -19,7 +19,7 @@
     <style>
 /* Base Activity Styles */
 .activity-page { background: #f8f9fa; min-height: 100vh; }
-.activity-hero { position: relative; height: 280px; background: url('../../../assets/activities/telling-time.jpg') center center/cover no-repeat; background-color: #0a1e42; }
+.activity-hero { position: relative; height: 280px; background: url('../../../assets/activities/telling-the-time.jpg') center center/cover no-repeat; background-color: #0a1e42; }
 .activity-hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(10, 30, 66, 0.4) 0%, rgba(10, 30, 66, 0.85) 100%); }
 .activity-hero-content { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 40px; padding-bottom: 60px; height: 100%; display: flex; flex-direction: column; justify-content: center; }
 .activity-hero .breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 13px; margin-bottom: 12px; }
@@ -172,6 +172,64 @@ canvas {
 }
 canvas:active { cursor: grabbing; }
 
+.current-time-btn {
+    padding: 8px 16px;
+    background: #ea580c;
+    border: 1px solid #ea580c;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.current-time-btn:hover {
+    background: #c2410c;
+    border-color: #c2410c;
+}
+
+.time-preset-btn {
+    padding: 8px 16px;
+    background: #f3f4f6;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151;
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+.time-preset-btn:hover {
+    border-color: #ea580c;
+}
+
+.num-input {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    font-size: 2.2rem;
+    color: #111;
+    line-height: 1;
+    width: 28px;
+    text-align: center;
+    border: none;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+}
+.num-input:focus {
+    outline: none;
+    background-color: #f0f9ff;
+    border-radius: 4px;
+}
+.digital-ampm-badge {
+    cursor: pointer;
+}
+.digital-ampm-badge:hover {
+    background-color: #f3f4f6;
+}
+
 .exercise-instructions { font-family: 'Inter', sans-serif; font-size: 15px; color: #6b7280; margin-bottom: 20px; line-height: 1.6; }
 
 /* Interactive Clock Layout */
@@ -241,7 +299,7 @@ canvas:active { cursor: grabbing; }
     display: flex;
     flex-direction: column;
     gap: 6px;
-    background: #f7f9fc;
+    background: #ffffff;
 }
 
 .bubble {
@@ -411,8 +469,76 @@ canvas:active { cursor: grabbing; }
 .nav-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 .nav-btn-back.hidden { visibility: hidden; }
 
+/* Past & To Section */
+.clock-examples-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-top: 32px;
+}
+
+.clock-example-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.clock-example-header {
+    font-family: 'Rubik', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #1f2937;
+    text-align: center;
+}
+
+.static-clock-wrapper {
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.static-clock-wrapper canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    cursor: default;
+}
+
+.clock-digital {
+    font-family: 'Arial', monospace;
+    font-size: 24px;
+    font-weight: bold;
+    color: #111;
+    text-align: center;
+    margin-top: 8px;
+}
+
+.clock-conversational {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: #374151;
+    text-align: center;
+    line-height: 1.6;
+}
+
+.clock-explanation {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: #6b7280;
+    text-align: center;
+    line-height: 1.6;
+    padding-top: 8px;
+    border-top: 1px solid #e5e7eb;
+}
+
 @media (max-width: 900px) {
     .intro-grid { grid-template-columns: 1fr; }
+    .clock-examples-grid {
+        grid-template-columns: 1fr;
+    }
     .preparation-grid { grid-template-columns: 1fr; }
     .exercise-header { flex-wrap: wrap; }
 }
@@ -423,6 +549,498 @@ canvas:active { cursor: grabbing; }
     .activity-hero h1 { font-size: 28px; }
     .activity-container { padding: 0 16px 60px; }
     .tab-content { padding: 24px; }
+}
+
+/* Practice Activity Styles */
+.practice-layout {
+    display: grid;
+    grid-template-columns: 1fr 180px;
+    gap: 32px;
+    margin-top: 24px;
+    align-items: start;
+}
+
+.times-column {
+    position: sticky;
+    top: 20px;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-height: 480px;
+}
+
+.draggable-time {
+    padding: 12px 16px;
+    background: #ffffff;
+    border: 2px solid #fed7aa;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #ea580c;
+    cursor: grab;
+    text-align: center;
+    transition: all 0.2s;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.draggable-time:hover {
+    background: #ffedd5;
+    border-color: #ea580c;
+    color: #ea580c;
+    box-shadow: 0 2px 8px rgba(234, 88, 12, 0.15);
+}
+
+.draggable-time.dragging {
+    opacity: 0.5;
+    cursor: grabbing;
+}
+
+.sentences-column {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+
+.sentence-item {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: #374151;
+    line-height: 1.7;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    position: relative;
+}
+
+.time-gap {
+    display: inline-flex;
+    min-width: 100px;
+    min-height: 30px;
+    padding: 4px 8px;
+    border: 2px dashed #e5e7eb;
+    border-radius: 6px;
+    background: #ffffff;
+    vertical-align: middle;
+    align-items: center;
+    justify-content: center;
+    margin: 0 4px;
+    transition: all 0.2s;
+}
+
+.time-gap.drag-over {
+    border-color: #ea580c;
+    background: #ffedd5;
+}
+
+.time-gap.correct {
+    border-color: #16a34a;
+    background: #dcfce7;
+}
+
+.time-gap.incorrect {
+    border-color: #dc2626;
+    background: #fee2e2;
+}
+
+.dropped-time {
+    font-weight: 700;
+    color: #ea580c;
+    cursor: grab;
+}
+
+.dropped-time.correct-text { color: #166534; }
+.dropped-time.incorrect-text { color: #991b1b; }
+
+.check-answers-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 18px;
+    background: #0a1e42;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 20px;
+}
+
+.check-answers-btn:hover {
+    background: #1e3a5f;
+}
+
+.check-answers-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: #9ca3af;
+}
+
+.check-answers-btn.retry-btn {
+    background: #ea580c;
+}
+
+.check-answers-btn.retry-btn:hover {
+    background: #c2410c;
+}
+
+@media (max-width: 768px) {
+    .practice-layout {
+        grid-template-columns: 1fr;
+    }
+    .times-column {
+        position: static;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .draggable-time {
+        width: auto;
+        min-width: 80px;
+    }
+}
+
+/* Feedback Popup */
+.feedback-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.feedback-popup-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.feedback-popup {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 32px;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.feedback-popup-overlay.show .feedback-popup {
+    transform: scale(1);
+}
+
+.feedback-popup-icon {
+    font-size: 40px;
+    margin-bottom: 16px;
+}
+
+.feedback-popup-icon.success { color: #16a34a; }
+.feedback-popup-icon.partial { color: #ea580c; }
+.feedback-popup-icon.good { color: #2563eb; }
+
+.feedback-popup h3 {
+    font-family: 'Rubik', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #1f2937;
+    margin: 0 0 12px 0;
+}
+
+.feedback-popup p {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: #6b7280;
+    margin: 0 0 24px 0;
+}
+
+.feedback-popup-close {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 32px;
+    background: #0a1e42;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.feedback-popup-close:hover {
+    background: #1e3a5f;
+}
+
+/* Listening Practice Styles */
+.listening-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 24px;
+}
+
+@media (min-width: 768px) {
+    .listening-list {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.listening-item {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.listening-audio-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    color: #4b5563;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    flex-shrink: 0;
+}
+
+.listening-audio-btn:hover {
+    background: #ea580c;
+    color: white;
+    border-color: #ea580c;
+}
+
+.listening-audio-btn.playing {
+    background: #ea580c;
+    color: white;
+    border-color: #ea580c;
+}
+
+.listening-input-wrapper {
+    flex: 1;
+}
+
+.listening-input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: #374151;
+    transition: all 0.2s;
+}
+
+.listening-input:focus {
+    outline: none;
+    border-color: #ea580c;
+    box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.1);
+}
+
+.listening-input.correct {
+    border-color: #16a34a;
+    background: #dcfce7;
+    color: #166534;
+}
+
+.listening-input.incorrect {
+    border-color: #dc2626;
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* Transcript Styles */
+.warning-box {
+    background: #fef9c3;
+    border: 1px solid #fde047;
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.warning-box i {
+    color: #ca8a04;
+    font-size: 16px;
+}
+
+.warning-box-content h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #854d0e;
+    margin: 0;
+    display: inline;
+}
+
+.warning-box-content p {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #a16207;
+    margin: 0;
+    display: inline;
+}
+
+.transcript-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.transcript-header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.transcript-header h3 {
+    font-family: 'Rubik', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: #1f2937;
+    margin: 0 0 8px 0;
+}
+
+.transcript-header p {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #6b7280;
+}
+
+/* Sentence Completion (Post-Listening) */
+.sentence-completion-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.sentence-dropdown {
+    display: inline-block;
+    width: auto;
+    min-width: 180px;
+    padding: 6px 12px;
+    margin: 0 8px;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    background: #ffffff;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #374151;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.sentence-dropdown:focus {
+    outline: none;
+    border-color: #ea580c;
+}
+
+.sentence-dropdown.correct {
+    border-color: #16a34a;
+    background: #f0fdf4;
+    color: #16a34a;
+    font-weight: 600;
+}
+
+.sentence-dropdown.incorrect {
+    border-color: #dc2626;
+    background: #fef2f2;
+    color: #dc2626;
+    font-weight: 600;
+}
+
+/* Completion Box */
+.completion-box {
+    background: linear-gradient(135deg, #dcfce7 0%, #d1fae5 100%);
+    border: 1px solid #86efac;
+    border-radius: 12px;
+    padding: 24px;
+    margin-top: 32px;
+}
+
+.completion-box h4 {
+    font-family: 'Rubik', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #166534;
+    margin: 0 0 12px 0;
+}
+
+.completion-box p {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #166534;
+    margin: 0 0 16px 0;
+}
+
+.completion-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.completion-list li {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #166534;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.completion-list li i {
+    color: #16a34a;
+}
+
+.transcript-box {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 32px;
+}
+
+.transcript-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 1.8;
+    color: #374151;
+    white-space: pre-line;
 }
     </style>
 </head>
@@ -443,7 +1061,7 @@ canvas:active { cursor: grabbing; }
                 </nav>
                 <h1>Telling the Time</h1>
                 <div class="activity-hero-badges">
-                    <span class="hero-badge"><i class="fa-solid fa-clock"></i> Vocabulary</span>
+                    <span class="hero-badge"><i class="fa-solid fa-headphones"></i> Listening</span>
                     <span class="hero-badge"><i class="fa-solid fa-layer-group"></i> Level A2</span>
                     <span class="hero-badge"><i class="fa-regular fa-clock"></i> 15 min</span>
                 </div>
@@ -457,8 +1075,10 @@ canvas:active { cursor: grabbing; }
                 <nav class="tab-nav">
                     <div class="tab-nav-main">
                         <button class="tab-btn active" data-tab="introduction">Introduction</button>
-                        <button class="tab-btn" data-tab="preparation">Preparation</button>
-                        <button class="tab-btn" data-tab="practice">Practice</button>
+                        <button class="tab-btn" data-tab="pre-listening">Pre-Listening</button>
+                        <button class="tab-btn" data-tab="listening">Listening</button>
+                        <button class="tab-btn" data-tab="post-listening">Post-Listening</button>
+                        <button class="tab-btn" data-tab="transcript">View Transcript</button>
                     </div>
                 </nav>
 
@@ -467,13 +1087,13 @@ canvas:active { cursor: grabbing; }
                     <div class="intro-grid">
                         <div class="intro-main">
                             <p class="intro-text">
-                                Knowing how to tell the time is a basic but essential skill for everyday conversations. Whether you're scheduling a meeting, catching a train, or just asking someone for the time, you'll need to understand and use time expressions correctly.
+                                Telling the time is a <strong>fundamental skill</strong> for navigating daily life in an English-speaking environment. From catching a train to meeting a friend, understanding <strong>time expressions</strong> ensures you are always in the right place at the right moment.
                             </p>
                             <p class="intro-text">
-                                In English, there are two common ways to tell the time: the <strong>formal (digital) way</strong> and the more common <strong>conversational (analog) way</strong>. For example, 2:30 can be "two thirty" or "half past two."
+                                In this lesson, you will learn to distinguish between the two main ways of expressing time: the <strong>digital format</strong> often used in schedules, and the <strong>conversational style</strong> used in everyday speech. Mastering both will help you communicate more naturally and avoid confusion.
                             </p>
                             <p class="intro-text">
-                                This activity will help you master both methods. You'll start with an interactive clock to learn the phrases, and then move on to practice exercises to test your knowledge.
+                                Through <strong>listening practice</strong> and <strong>interactive examples</strong>, you will build the confidence to recognize time expressions quickly and accurately in real-world situations.
                             </p>
                         </div>
                         <div class="intro-sidebar">
@@ -483,30 +1103,39 @@ canvas:active { cursor: grabbing; }
                                 </div>
                                 <div class="info-card-content">
                                     <h4>Learning Objective</h4>
-                                    <p>You will be able to ask for and tell the time using both formal and conversational English.</p>
+                                    <p>You will be able to recognize and understand time expressions in both formal and conversational English contexts.</p>
                                 </div>
                             </div>
                             <div class="info-card">
                                 <div class="info-card-icon">
-                                    <i class="fa-solid fa-comments"></i>
+                                    <i class="fa-solid fa-headphones"></i>
                                 </div>
                                 <div class="info-card-content">
                                     <h4>Skill Focus</h4>
-                                    <p>Vocabulary & Speaking (A2 Level)</p>
+                                    <p>Listening Comprehension (A2 Level)</p>
+                                </div>
+                            </div>
+                            <div class="info-card">
+                                <div class="info-card-icon">
+                                    <i class="fa-solid fa-bolt"></i>
+                                </div>
+                                <div class="info-card-content">
+                                    <h4>Source</h4>
+                                    <p>Enbreak Original Content</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Preparation Tab -->
-                <div class="tab-content" id="preparation">
+                <!-- Pre-Listening Tab -->
+                <div class="tab-content" id="pre-listening">
                     <div class="exercise-section">
                         <div class="exercise-header">
                             <span class="exercise-number">1</span>
                             <h3>Interactive Clock</h3>
                         </div>
-                        <p class="exercise-instructions">Drag the hour or minute hand to set the time. Double click the clock for current time.</p>
+                        <p class="exercise-instructions">Drag the hour or minute hand to set the time. See below the different ways to tell the time in English.</p>
 
                         <div class="preparation-grid" id="clockContainer">
                             <!-- Left: Analog Clock -->
@@ -516,6 +1145,15 @@ canvas:active { cursor: grabbing; }
                                         <canvas id="clockCanvas" width="480" height="480"></canvas>
                                     </div>
                                 </div>
+                                <div style="display: flex; gap: 10px; margin-top: 16px;">
+                                    <button id="btn-noon" class="time-preset-btn">
+                                        <i class="fa-solid fa-sun"></i> Noon
+                                    </button>
+                                    <button id="btn-midnight" class="time-preset-btn">
+                                        <i class="fa-solid fa-moon"></i> Midnight
+                                    </button>
+                                    <button id="btn-current-time" class="current-time-btn">Current Time</button>
+                                </div>
                             </div>
 
                             <!-- Right: Digital + Chat -->
@@ -523,18 +1161,18 @@ canvas:active { cursor: grabbing; }
                                 <!-- Digital Clock -->
                                 <div class="digital-display" id="digitalDisplay">
                                     <div class="digital-fused-block">
-                                        <span class="num" id="h1">1</span>
+                                        <input type="text" class="num-input" id="h1" maxlength="1" value="1" autocomplete="off">
                                         <div class="digital-inner-separator"></div>
-                                        <span class="num" id="h2">2</span>
+                                        <input type="text" class="num-input" id="h2" maxlength="1" value="2" autocomplete="off">
                                     </div>
                                     <div class="digital-divider">
                                         <div class="digital-divider-dot"></div>
                                         <div class="digital-divider-dot"></div>
                                     </div>
                                     <div class="digital-fused-block">
-                                        <span class="num" id="m1">0</span>
+                                        <input type="text" class="num-input" id="m1" maxlength="1" value="0" autocomplete="off">
                                         <div class="digital-inner-separator"></div>
-                                        <span class="num" id="m2">0</span>
+                                        <input type="text" class="num-input" id="m2" maxlength="1" value="0" autocomplete="off">
                                     </div>
                                     <div class="digital-ampm-col">
                                         <span class="digital-ampm-badge" id="badge-ampm">AM</span>
@@ -587,24 +1225,289 @@ canvas:active { cursor: grabbing; }
                                 <i data-lucide="info" style="width: 20px; height: 20px;"></i> Tip
                             </div>
                             <div class="tip-content">
-                                <p>Parts of the day:</p>
                                 <ul>
-                                    <li><strong>Morning:</strong> From sunrise to 12:00 PM (noon).</li>
-                                    <li><strong>Afternoon:</strong> From 12:00 PM to about 5:00 PM.</li>
-                                    <li><strong>Evening:</strong> From 5:00 PM to about 9:00 PM.</li>
-                                    <li><strong>Night:</strong> From 9:00 PM until sunrise.</li>
+                                    <li>Use <strong>"It's"</strong> to say what time it is. Example: <strong>"It's eight o'clock"</strong>.</li>
+                                    <li>Use <strong>"at"</strong> for plans or scheduled events. Example: <strong>"My class starts at 2:30"</strong>.</li>
                                 </ul> 
                             </div>
                         </div>
                     </div>
+                
+                <!-- Section 2: Past & To -->
+                <div class="exercise-section">
+                    <div class="exercise-header">
+                        <span class="exercise-number">2</span>
+                        <h3>Using 'Past' and 'To'</h3>
+                    </div>
+                    <p class="exercise-instructions">Learn the difference between "past" and "to" when telling time.</p>
+                    
+                    <div class="clock-examples-grid">
+                        <!-- PAST -->
+                        <div class="clock-example-card">
+                            <div class="clock-example-header">PAST</div>
+                            <div class="static-clock-wrapper">
+                                <canvas id="clockPast" width="240" height="240"></canvas>
+                            </div>
+                            <div class="clock-digital">6:25</div>
+                            <div class="clock-conversational">"It's twenty-five <strong>past</strong> six"</div>
+                            <div class="clock-explanation">Use 'past' before the 30-minute mark</div>
+                        </div>
+
+                        <!-- HALF PAST -->
+                        <div class="clock-example-card">
+                            <div class="clock-example-header">HALF PAST</div>
+                            <div class="static-clock-wrapper">
+                                <canvas id="clockHalfPast" width="240" height="240"></canvas>
+                            </div>
+                            <div class="clock-digital">6:30</div>
+                            <div class="clock-conversational">"It's <strong>half past</strong> six"</div>
+                            <div class="clock-explanation">Use 'half past' at exactly 30 minutes</div>
+                        </div>
+                        <!-- TO -->
+                        <div class="clock-example-card">
+                            <div class="clock-example-header">TO</div>
+                            <div class="static-clock-wrapper">
+                                <canvas id="clockTo" width="240" height="240"></canvas>
+                            </div>
+                            <div class="clock-digital">6:35</div>
+                            <div class="clock-conversational">"It's twenty-five <strong>to</strong> seven"</div>
+                            <div class="clock-explanation">Use 'to' after the 30-minute mark</div>
+                        </div>
+                    </div>
+
+                    <div class="tip-box">
+                        <div class="tip-header">
+                            <i data-lucide="info" style="width: 20px; height: 20px;"></i> Tip
+                        </div>
+                        <div class="tip-content">
+                            <p>
+                                The word <strong>'quarter'</strong> indicates 15 minutes. Say <strong>'a quarter past'</strong> for times like 3:15 and <strong>'a quarter to'</strong> for times like 3:45.
+                            </p>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Practice Tab -->
-                <div class="tab-content" id="practice">
-                    <div class="empty-state" style="padding: 60px 0; text-align: center;">
-                        <i class="fa-solid fa-person-digging" style="font-size: 48px; color: #d1d5db; margin-bottom: 16px;"></i>
-                        <h3 style="font-family: 'Rubik', sans-serif; font-size: 20px; color: #4b5563; margin-bottom: 8px;">Coming Soon</h3>
-                        <p style="font-family: 'Inter', sans-serif; font-size: 14px; color: #9ca3af;">We are working on practice exercises for this activity.</p>
+                <div class="exercise-section">
+                        <div class="exercise-header">
+                        <span class="exercise-number">3</span>
+                            <h3>Recognizing Time</h3>
+                        </div>
+                        <p class="exercise-instructions">Listen carefully and write the time that you hear. Use numbers only</p>
+
+                        <div class="listening-list" id="listening-practice-list">
+                            <div class="listening-item" data-answer="02:30">
+                                <button class="listening-audio-btn" onclick="playPracticeAudio('2.30')">
+                                    <i class="fa-solid fa-play"></i>
+                                </button>
+                                <div class="listening-input-wrapper">
+                                    <input type="text" class="listening-input" placeholder="00:00" autocomplete="off" inputmode="numeric">
+                                </div>
+                            </div>
+                            <div class="listening-item" data-answer="11:00">
+                                <button class="listening-audio-btn" onclick="playPracticeAudio('11.00')">
+                                    <i class="fa-solid fa-play"></i>
+                                </button>
+                                <div class="listening-input-wrapper">
+                                    <input type="text" class="listening-input" placeholder="00:00" autocomplete="off" inputmode="numeric">
+                                </div>
+                            </div>
+                            <div class="listening-item" data-answer="06:02">
+                                <button class="listening-audio-btn" onclick="playPracticeAudio('6.02')">
+                                    <i class="fa-solid fa-play"></i>
+                                </button>
+                                <div class="listening-input-wrapper">
+                                    <input type="text" class="listening-input" placeholder="00:00" autocomplete="off" inputmode="numeric">
+                                </div>
+                            </div>
+                            <div class="listening-item" data-answer="07:20">
+                                <button class="listening-audio-btn" onclick="playPracticeAudio('7.20')">
+                                    <i class="fa-solid fa-play"></i>
+                                </button>
+                                <div class="listening-input-wrapper">
+                                    <input type="text" class="listening-input" placeholder="00:00" autocomplete="off" inputmode="numeric">
+                                </div>
+                            </div>
+                            <div class="listening-item" data-answer="08:45">
+                                <button class="listening-audio-btn" onclick="playPracticeAudio('8.45')">
+                                    <i class="fa-solid fa-play"></i>
+                                </button>
+                                <div class="listening-input-wrapper">
+                                    <input type="text" class="listening-input" placeholder="00:00" autocomplete="off" inputmode="numeric">
+                                </div>
+                            </div>
+                            <div class="listening-item" data-answer="04:38">
+                                <button class="listening-audio-btn" onclick="playPracticeAudio('4.38')">
+                                    <i class="fa-solid fa-play"></i>
+                                </button>
+                                <div class="listening-input-wrapper">
+                                    <input type="text" class="listening-input" placeholder="00:00" autocomplete="off" inputmode="numeric">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 12px; margin-top: 24px;">
+                            <button class="check-answers-btn" id="checkListeningBtn"><i class="fa-solid fa-check"></i> Check answers</button>
+                            <button class="check-answers-btn retry-btn" id="retryListeningBtn" disabled><i class="fa-solid fa-rotate-right"></i> Try again</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Listening Tab -->
+                <div class="tab-content" id="listening">
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">1</span>
+                            <h3>A Typical Day</h3>
+                        </div>
+                        <p class="exercise-instructions">Listen to the audio and drag the correct times into the sentences.</p>
+                        
+                        <div style="margin-bottom: 24px; display: flex; justify-content: center;">
+                            <audio controls style="width: 100%; max-width: 400px;">
+                                <source src="../../../assets/activities/telling-the-time/CLARA.mp3" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+
+                        <div class="practice-layout">
+                            <!-- Sentences (Left) -->
+                            <div class="sentences-column">
+                                <div class="sentence-item"><strong>1.</strong> Clara usually wakes up at <div class="time-gap" data-correct="7:15"></div> in the morning.</div>
+                                <div class="sentence-item"><strong>2.</strong> She leaves her house for work at <div class="time-gap" data-correct="8:00"></div>.</div>
+                                <div class="sentence-item"><strong>3.</strong> Clara has lunch at <div class="time-gap" data-correct="12:45"></div>.</div>
+                                <div class="sentence-item"><strong>4.</strong> She finishes her workday at <div class="time-gap" data-correct="5:00"></div>.</div>
+                                <div class="sentence-item"><strong>5.</strong> Clara starts cooking dinner at <div class="time-gap" data-correct="6:15"></div>.</div>
+                                <div class="sentence-item"><strong>6.</strong> She goes to bed at <div class="time-gap" data-correct="10:00"></div>.</div>
+                            </div>
+
+                            <!-- Draggable Times (Right) -->
+                            <div class="times-column" id="timesContainer">
+                                <div class="draggable-time" draggable="true" data-time="9:30">9:30</div>
+                                <div class="draggable-time" draggable="true" data-time="7:15">7:15</div>
+                                <div class="draggable-time" draggable="true" data-time="5:00">5:00</div>
+                                <div class="draggable-time" draggable="true" data-time="12:45">12:45</div>
+                                <div class="draggable-time" draggable="true" data-time="6:45">6:45</div>
+                                <div class="draggable-time" draggable="true" data-time="8:00">8:00</div>
+                                <div class="draggable-time" draggable="true" data-time="10:00">10:00</div>
+                                <div class="draggable-time" draggable="true" data-time="6:15">6:15</div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 12px;">
+                            <button class="check-answers-btn" id="checkPracticeBtn"><i class="fa-solid fa-check"></i> Check answers</button>
+                            <button class="check-answers-btn retry-btn" id="retryPracticeBtn" disabled><i class="fa-solid fa-rotate-right"></i> Try again</button>
+                        </div>
+                        <div id="practiceFeedback" style="margin-top: 16px; font-family: 'Inter', sans-serif; font-size: 14px;"></div>
+                    </div>
+                </div>
+
+                <!-- Post-Listening Tab -->
+                <div class="tab-content" id="post-listening">
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">1</span>
+                            <h3>Time Conversion Challenge</h3>
+                        </div>
+                        <p class="exercise-instructions">Select the correct conversational expression for each digital time.</p>
+                        
+                        <div class="sentence-completion-list" id="post-listening-list">
+                            <div class="sentence-item" data-correct="b">
+                                <p class="sentence-text"><strong>1. 04:15</strong> is
+                                    <select class="sentence-dropdown">
+                                        <option value="">Select...</option>
+                                        <option value="a">fifteen to four</option>
+                                        <option value="b">a quarter past four</option>
+                                        <option value="c">four fifteen o'clock</option>
+                                    </select>
+                                </p>
+                            </div>
+                            <div class="sentence-item" data-correct="a">
+                                <p class="sentence-text"><strong>2. 09:30</strong> is
+                                    <select class="sentence-dropdown">
+                                        <option value="">Select...</option>
+                                        <option value="a">half past nine</option>
+                                        <option value="b">nine thirty past</option>
+                                        <option value="c">half to ten</option>
+                                    </select>
+                                </p>
+                            </div>
+                            <div class="sentence-item" data-correct="b">
+                                <p class="sentence-text"><strong>3. 02:45</strong> is
+                                    <select class="sentence-dropdown">
+                                        <option value="">Select...</option>
+                                        <option value="a">a quarter past two</option>
+                                        <option value="b">a quarter to three</option>
+                                        <option value="c">two forty-five past</option>
+                                    </select>
+                                </p>
+                            </div>
+                            <div class="sentence-item" data-correct="b">
+                                <p class="sentence-text"><strong>4. 11:55</strong> is
+                                    <select class="sentence-dropdown">
+                                        <option value="">Select...</option>
+                                        <option value="a">fifty-five past eleven</option>
+                                        <option value="b">five to twelve</option>
+                                        <option value="c">five past twelve</option>
+                                    </select>
+                                </p>
+                            </div>
+                            <div class="sentence-item" data-correct="a">
+                                <p class="sentence-text"><strong>5. 06:00</strong> is
+                                    <select class="sentence-dropdown">
+                                        <option value="">Select...</option>
+                                        <option value="a">six o'clock</option>
+                                        <option value="b">six zero zero</option>
+                                        <option value="c">six past</option>
+                                    </select>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 12px; align-items: center; margin-top: 24px;">
+                            <button class="check-answers-btn" id="checkPostListeningBtn">
+                                <i class="fa-solid fa-circle-check"></i> Check answers
+                            </button>
+                            <button class="check-answers-btn retry-btn" id="retryPostListeningBtn" disabled>
+                                <i class="fa-solid fa-rotate-right"></i> Try again
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="completion-box">
+                        <h4><i class="fa-solid fa-party-horn"></i> Great Job!</h4>
+                        <p>You've completed the "Telling the Time" activity. You've practiced:</p>
+                        <ul class="completion-list">
+                            <li><i class="fa-solid fa-check"></i> Recognizing digital and analog time formats</li>
+                            <li><i class="fa-solid fa-check"></i> Using "past" and "to" correctly</li>
+                            <li><i class="fa-solid fa-check"></i> Listening to daily routines and schedules</li>
+                            <li><i class="fa-solid fa-check"></i> Converting between digital and conversational time</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Transcript Tab -->
+                <div class="tab-content" id="transcript">
+                    <div class="warning-box">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                        <div class="warning-box-content">
+                            <h4>Before you continue:</h4> <p>Try to complete the listening exercises first. Only use the transcript if you really need extra help.</p>
+                        </div>
+                    </div>
+                    <div class="transcript-container">
+                        <div class="transcript-header">
+                            <h3>A Typical Day</h3>
+                            <p>Clara</p>
+                        </div>
+                        <div class="transcript-box">
+                            <p class="transcript-text">Hi there! My name is Clara, and I'd like to tell you about my typical day.
+
+I usually wake up at seven fifteen in the morning and start with a cup of coffee. Then, at eight o'clock, I leave my house to go to work. My first meeting begins at half past nine, and I usually stay at the office until noon.
+
+I have lunch at twelve forty-five, and after that, I sometimes go for a short walk. In the afternoon, I work on my projects until half past three, then I like to take a quick coffee break. My workday ends at five o'clock, and I usually get home around half past five.
+
+In the evening, I like to relax. I usually start cooking dinner at quarter past six, and I eat around quarter to seven. After dinner, I sometimes watch a TV show, and I try to go to bed at ten o'clock at night to get a good night's sleep.
+
+That's a typical day for me, what about you?</p>
+                        </div>
                     </div>
                 </div>
 
@@ -629,50 +1532,69 @@ canvas:active { cursor: grabbing; }
     document.addEventListener('DOMContentLoaded', function() {
         lucide.createIcons();
 
-        // ── Tab logic ──
+        // â”€â”€ Tab logic â”€â”€
         const tabBtns     = document.querySelectorAll('.tab-btn');
         const tabContents = document.querySelectorAll('.tab-content');
         const btnBack     = document.getElementById('btn-back');
         const btnNext     = document.getElementById('btn-next');
-        const tabs        = ['introduction', 'preparation', 'practice'];
+        const tabs        = ['introduction', 'pre-listening', 'listening', 'post-listening', 'transcript'];
         let currentTabIndex = 0;
 
         function switchTab(tabId, scrollToTop = false) {
             tabBtns.forEach(btn => btn.classList.remove('active'));
             tabContents.forEach(content => content.classList.remove('active'));
-            const activeBtn     = document.querySelector(`[data-tab="${tabId}"]`);
+
+            const activeBtn = document.querySelector(`[data-tab="${tabId}"]`);
             const activeContent = document.getElementById(tabId);
-            if (activeBtn)     activeBtn.classList.add('active');
+
+            if (activeBtn) activeBtn.classList.add('active');
             if (activeContent) activeContent.classList.add('active');
+
             currentTabIndex = tabs.indexOf(tabId);
             updateNavButtons();
-            if (scrollToTop) window.scrollTo({ top: 0, behavior: 'smooth' });
+            if (scrollToTop) {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
         }
 
         function updateNavButtons() {
             btnBack.disabled = currentTabIndex === 0;
-            btnBack.classList.toggle('hidden', currentTabIndex === 0);
-            btnNext.innerHTML = currentTabIndex === tabs.length - 1
-                ? 'Back to Activities'
-                : 'Next <i class="fa-solid fa-arrow-right"></i>';
+            if (currentTabIndex === 0) {
+                btnBack.classList.add('hidden');
+            } else {
+                btnBack.classList.remove('hidden');
+            }
+
+            if (currentTabIndex === tabs.length - 1) {
+                btnNext.innerHTML = 'Back to Activities';
+            } else {
+                btnNext.innerHTML = 'Next <i class="fa-solid fa-arrow-right"></i>';
+            }
         }
 
         tabBtns.forEach(btn => {
-            btn.addEventListener('click', function() { switchTab(this.dataset.tab, false); });
+            btn.addEventListener('click', function() {
+                const tabId = this.dataset.tab;
+                switchTab(tabId, false);
+            });
         });
         btnBack.addEventListener('click', function() {
-            if (currentTabIndex > 0) switchTab(tabs[currentTabIndex - 1], true);
+            if (currentTabIndex > 0) {
+                switchTab(tabs[currentTabIndex - 1], true);
+            }
         });
         btnNext.addEventListener('click', function() {
             if (currentTabIndex === tabs.length - 1) {
                 window.location.href = '../actividades.html';
-            } else {
+                return;
+            }
+            if (currentTabIndex < tabs.length - 1) {
                 switchTab(tabs[currentTabIndex + 1], true);
             }
         });
         updateNavButtons();
 
-        // ── Clock logic ──
+        // â”€â”€ Clock logic â”€â”€
         const canvas = document.getElementById('clockCanvas');
         if (!canvas) return;
 
@@ -810,15 +1732,15 @@ canvas:active { cursor: grabbing; }
         function updateDigital() {
             const h  = hours % 12 || 12;
             const m  = Math.floor(minutes);
-            document.getElementById('h1').textContent = Math.floor(h / 10);
-            document.getElementById('h2').textContent = h % 10;
-            document.getElementById('m1').textContent = Math.floor(m / 10);
-            document.getElementById('m2').textContent = m % 10;
+            document.getElementById('h1').value = Math.floor(h / 10);
+            document.getElementById('h2').value = h % 10;
+            document.getElementById('m1').value = Math.floor(m / 10);
+            document.getElementById('m2').value = m % 10;
             document.getElementById('badge-ampm').textContent = hours >= 12 ? 'PM' : 'AM';
             updateChat(hours, m);
         }
 
-        // ── Spoken time (chat bubbles) ──
+        // â”€â”€ Spoken time (chat bubbles) â”€â”€
         const oneWords = ['','one','two','three','four','five','six','seven','eight','nine',
                           'ten','eleven','twelve','thirteen','fourteen','fifteen',
                           'sixteen','seventeen','eighteen','nineteen'];
@@ -881,7 +1803,7 @@ canvas:active { cursor: grabbing; }
             el2.innerHTML = line2;
         }
 
-        // ── Drag events ──
+        // â”€â”€ Drag events â”€â”€
         canvas.addEventListener('mousedown', startDrag);
         canvas.addEventListener('touchstart', startDrag, { passive: false });
         window.addEventListener('mousemove', onDrag);
@@ -924,15 +1846,6 @@ canvas:active { cursor: grabbing; }
             canvas.style.cursor = 'grab';
         }
 
-        canvas.addEventListener('dblclick', () => {
-            const now = new Date();
-            hours   = now.getHours();
-            minutes = now.getMinutes();
-            liveMode = true;
-            draw();
-            updateDigital();
-        });
-
         function tick() {
             if (liveMode) {
                 const now = new Date();
@@ -947,6 +1860,114 @@ canvas:active { cursor: grabbing; }
         draw();
         updateDigital();
         tick();
+
+        // Current Time Button
+        document.getElementById('btn-current-time').addEventListener('click', () => {
+            liveMode = false;
+            const now = new Date();
+            hours = now.getHours();
+            minutes = now.getMinutes();
+            draw();
+            updateDigital();
+        });
+
+        // Noon Button
+        document.getElementById('btn-noon').addEventListener('click', () => {
+            liveMode = false;
+            hours = 12;
+            minutes = 0;
+            draw();
+            updateDigital();
+        });
+
+        // Midnight Button
+        document.getElementById('btn-midnight').addEventListener('click', () => {
+            liveMode = false;
+            hours = 0;
+            minutes = 0;
+            draw();
+            updateDigital();
+        });
+
+        // Digital Clock Inputs
+        let previousValue = '';
+        const inputs = ['h1', 'h2', 'm1', 'm2'];
+        inputs.forEach(id => {
+            const el = document.getElementById(id);
+            el.addEventListener('focus', () => {
+                liveMode = false;
+                previousValue = el.value;
+                el.value = '';
+            });
+            el.addEventListener('blur', () => {
+                if (el.value === '') {
+                    el.value = previousValue;
+                }
+            });
+            el.addEventListener('input', (e) => handleInput(e, id));
+        });
+
+        document.getElementById('badge-ampm').addEventListener('click', () => {
+            hours = (hours + 12) % 24;
+            draw();
+            updateDigital();
+        });
+
+        function handleInput(e, type) {
+            const val = e.target.value;
+            if (!/^\d*$/.test(val)) {
+                e.target.value = '';
+                return;
+            }
+            if (val === '') return;
+
+            const digit = parseInt(val);
+            
+            // Validation
+            if (type === 'h1') {
+                if (digit > 1) { e.target.value = ''; return; }
+            } else if (type === 'h2') {
+                const h1 = parseInt(document.getElementById('h1').value) || 0;
+                if (h1 === 1 && digit > 2) { e.target.value = ''; return; }
+            } else if (type === 'm1') {
+                if (digit > 5) { e.target.value = ''; return; }
+            }
+            
+            updateTimeFromInputs();
+
+            // Move focus
+            if (type === 'h1') document.getElementById('h2').focus();
+            if (type === 'h2') document.getElementById('m1').focus();
+            if (type === 'm1') document.getElementById('m2').focus();
+            if (type === 'm2') document.getElementById('m2').blur();
+        }
+
+        function updateTimeFromInputs() {
+            const h1 = parseInt(document.getElementById('h1').value) || 0;
+            const h2 = parseInt(document.getElementById('h2').value) || 0;
+            const m1 = parseInt(document.getElementById('m1').value) || 0;
+            const m2 = parseInt(document.getElementById('m2').value) || 0;
+            
+            let h = h1 * 10 + h2;
+            const m = m1 * 10 + m2;
+            
+            if (h > 12) h = 12;
+            if (h === 0) h = 12;
+            
+            const isPM = document.getElementById('badge-ampm').textContent === 'PM';
+            
+            if (h === 12) {
+                hours = isPM ? 12 : 0;
+            } else {
+                hours = isPM ? h + 12 : h;
+            }
+            
+            minutes = m;
+            liveMode = false;
+            draw();
+            updateChat(hours, minutes);
+            updateDigital();
+        }
 
         // Example Audio Player
         let currentExampleAudio = null;
@@ -984,6 +2005,441 @@ canvas:active { cursor: grabbing; }
                 btn.style.color = '';
             };
         };
+
+        // Preparation Listening Practice
+        let currentPracticeAudio = null;
+
+        window.playPracticeAudio = function(filename) {
+            const btn = event.currentTarget;
+            const icon = btn.querySelector('i');
+
+            // Reset all buttons
+            document.querySelectorAll('.listening-audio-btn').forEach(b => {
+                b.classList.remove('playing');
+                b.querySelector('i').className = 'fa-solid fa-play';
+            });
+
+            if (currentPracticeAudio) {
+                currentPracticeAudio.pause();
+                currentPracticeAudio = null;
+            }
+
+            btn.classList.add('playing');
+            icon.className = 'fa-solid fa-pause';
+
+            const audioPath = `../../../assets/activities/telling-the-time/${filename}.mp3`;
+            currentPracticeAudio = new Audio(audioPath);
+
+            currentPracticeAudio.play().catch(e => {
+                console.log('Audio not found:', audioPath);
+                btn.classList.remove('playing');
+                icon.className = 'fa-solid fa-play';
+            });
+
+            currentPracticeAudio.onended = () => {
+                btn.classList.remove('playing');
+                icon.className = 'fa-solid fa-play';
+            };
+        };
+
+        const checkListeningBtn = document.getElementById('checkListeningBtn');
+        const retryListeningBtn = document.getElementById('retryListeningBtn');
+
+        document.querySelectorAll('.listening-input').forEach(input => {
+            input.addEventListener('input', function() {
+                this.value = this.value.replace(/[^0-9:]/g, '');
+            });
+        });
+
+        checkListeningBtn.addEventListener('click', () => {
+            const items = document.querySelectorAll('.listening-item');
+            let correctCount = 0;
+            let total = items.length;
+
+            items.forEach(item => {
+                const input = item.querySelector('.listening-input');
+                const correctAnswer = item.dataset.answer;
+                let userAnswer = input.value.trim();
+
+                // Normalize input (e.g., "8:00" -> "08:00")
+                if (/^\d:\d{2}$/.test(userAnswer)) {
+                    userAnswer = '0' + userAnswer;
+                }
+
+                input.classList.remove('correct', 'incorrect');
+
+                if (userAnswer === correctAnswer) {
+                    input.classList.add('correct');
+                    correctCount++;
+                } else {
+                    input.classList.add('incorrect');
+                }
+            });
+
+            showFeedbackPopup(correctCount, total);
+            retryListeningBtn.disabled = false;
+        });
+
+        retryListeningBtn.addEventListener('click', () => {
+            document.querySelectorAll('.listening-item').forEach(item => {
+                const input = item.querySelector('.listening-input');
+                input.value = '';
+                input.classList.remove('correct', 'incorrect');
+            });
+            retryListeningBtn.disabled = true;
+        });
+
+        // â”€â”€ Post-Listening Logic â”€â”€
+        const checkPostListeningBtn = document.getElementById('checkPostListeningBtn');
+        const retryPostListeningBtn = document.getElementById('retryPostListeningBtn');
+        const postListeningList = document.getElementById('post-listening-list');
+
+        if (checkPostListeningBtn) {
+            checkPostListeningBtn.addEventListener('click', () => {
+                const items = postListeningList.querySelectorAll('.sentence-item');
+                let correctCount = 0;
+                let total = items.length;
+
+                items.forEach(item => {
+                    const select = item.querySelector('.sentence-dropdown');
+                    const correctAnswer = item.dataset.correct;
+                    
+                    select.classList.remove('correct', 'incorrect');
+                    
+                    if (select.value === correctAnswer) {
+                        select.classList.add('correct');
+                        correctCount++;
+                    } else {
+                        select.classList.add('incorrect');
+                    }
+                });
+
+                showFeedbackPopup(correctCount, total);
+                retryPostListeningBtn.disabled = false;
+            });
+
+            retryPostListeningBtn.addEventListener('click', () => {
+                postListeningList.querySelectorAll('.sentence-dropdown').forEach(select => {
+                    select.value = "";
+                    select.classList.remove('correct', 'incorrect');
+                });
+                retryPostListeningBtn.disabled = true;
+            });
+        }
+
+        // â”€â”€ Practice Drag & Drop Logic â”€â”€
+        const timesContainer = document.getElementById('timesContainer');
+        const timeGaps = document.querySelectorAll('.time-gap');
+        let draggedTime = null;
+
+        // Add listeners to initial draggable items
+        document.querySelectorAll('.draggable-time').forEach(item => {
+            item.addEventListener('dragstart', handleDragStart);
+            item.addEventListener('dragend', handleDragEnd);
+        });
+
+        function handleDragStart(e) {
+            draggedTime = this;
+            this.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+        }
+
+        function handleDragEnd(e) {
+            this.classList.remove('dragging');
+            draggedTime = null;
+        }
+
+        // Drop zones (gaps)
+        timeGaps.forEach(gap => {
+            gap.addEventListener('dragover', e => {
+                e.preventDefault();
+                gap.classList.add('drag-over');
+            });
+            gap.addEventListener('dragleave', () => gap.classList.remove('drag-over'));
+            gap.addEventListener('drop', handleDrop);
+        });
+
+        // Times container (to return items)
+        timesContainer.addEventListener('dragover', e => {
+            e.preventDefault();
+            timesContainer.classList.add('drag-over'); // Optional visual cue
+        });
+        timesContainer.addEventListener('drop', e => {
+            e.preventDefault();
+            timesContainer.classList.remove('drag-over');
+            if (draggedTime && draggedTime.classList.contains('dropped-time')) {
+                // Convert back to draggable-time
+                const timeVal = draggedTime.textContent;
+                draggedTime.remove();
+                createDraggableTime(timeVal);
+            }
+        });
+
+        function handleDrop(e) {
+            e.preventDefault();
+            this.classList.remove('drag-over');
+            
+            if (!draggedTime) return;
+
+            // If gap already has a time, move it back to container
+            if (this.children.length > 0) {
+                const existing = this.children[0];
+                createDraggableTime(existing.textContent);
+                existing.remove();
+            }
+
+            // Create dropped element
+            const droppedEl = document.createElement('span');
+            droppedEl.className = 'dropped-time';
+            droppedEl.textContent = draggedTime.textContent;
+            droppedEl.draggable = true;
+            droppedEl.addEventListener('dragstart', handleDragStart);
+            droppedEl.addEventListener('dragend', handleDragEnd);
+            
+            this.appendChild(droppedEl);
+
+            // Remove original if it came from container
+            if (draggedTime.parentElement === timesContainer) {
+                draggedTime.remove();
+            } else {
+                // If moved from another gap, original is already removed by appendChild logic or we remove it here
+                draggedTime.remove();
+            }
+        }
+
+        function createDraggableTime(text) {
+            const el = document.createElement('div');
+            el.className = 'draggable-time';
+            el.draggable = true;
+            el.dataset.time = text;
+            el.textContent = text;
+            el.addEventListener('dragstart', handleDragStart);
+            el.addEventListener('dragend', handleDragEnd);
+            timesContainer.appendChild(el);
+        }
+
+        // Check Answers
+        const checkBtn = document.getElementById('checkPracticeBtn');
+        const retryBtn = document.getElementById('retryPracticeBtn');
+        const feedback = document.getElementById('practiceFeedback');
+
+        checkBtn.addEventListener('click', () => {
+            let correctCount = 0;
+            let answeredCount = 0;
+            timeGaps.forEach(gap => {
+                const dropped = gap.querySelector('.dropped-time');
+                if (dropped) {
+                    answeredCount++;
+                    if (dropped.textContent === gap.dataset.correct) {
+                        gap.classList.add('correct');
+                        dropped.classList.add('correct-text');
+                        correctCount++;
+                    } else {
+                        gap.classList.add('incorrect');
+                        dropped.classList.add('incorrect-text');
+                    }
+                }
+            });
+
+            if (answeredCount < timeGaps.length) {
+                showFeedbackPopup(-1, timeGaps.length);
+                return;
+            }
+            
+            feedback.textContent = `You got ${correctCount} out of ${timeGaps.length} correct.`;
+            feedback.style.color = correctCount === timeGaps.length ? '#16a34a' : '#ea580c';
+            
+            showFeedbackPopup(correctCount, timeGaps.length);
+            checkBtn.disabled = true;
+            retryBtn.disabled = false;
+        });
+
+        retryBtn.addEventListener('click', () => {
+            // Reset everything
+            timeGaps.forEach(gap => {
+                gap.classList.remove('correct', 'incorrect');
+                const dropped = gap.querySelector('.dropped-time');
+                if (dropped) {
+                    createDraggableTime(dropped.textContent);
+                    dropped.remove();
+                }
+            });
+            feedback.textContent = '';
+            checkBtn.disabled = false;
+            retryBtn.disabled = true;
+        });
+
+        // Feedback Popup
+        const feedbackPopupOverlay = document.createElement('div');
+        feedbackPopupOverlay.className = 'feedback-popup-overlay';
+        feedbackPopupOverlay.innerHTML = `
+            <div class="feedback-popup">
+                <div class="feedback-popup-icon"></div>
+                <h3></h3>
+                <p></p>
+                <button class="feedback-popup-close">Close</button>
+            </div>
+        `;
+        document.body.appendChild(feedbackPopupOverlay);
+
+        function showFeedbackPopup(correct, total) {
+            const icon = feedbackPopupOverlay.querySelector('.feedback-popup-icon');
+            const title = feedbackPopupOverlay.querySelector('h3');
+            const message = feedbackPopupOverlay.querySelector('p');
+
+            if (correct === -1) { // Special case for not all answered
+                icon.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i>';
+                icon.className = 'feedback-popup-icon partial';
+                title.textContent = 'Incomplete';
+                message.textContent = 'Please fill in all the gaps before checking.';
+                feedbackPopupOverlay.classList.add('show');
+                return;
+            }
+
+            const percentage = total > 0 ? (correct / total) * 100 : 0;
+
+            if (correct === total) {
+                icon.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+                icon.className = 'feedback-popup-icon success';
+                title.textContent = 'Perfect!';
+            } else if (percentage >= 70) {
+                icon.innerHTML = '<i class="fa-solid fa-thumbs-up"></i>';
+                icon.className = 'feedback-popup-icon good';
+                title.textContent = 'Good Job!';
+            } else {
+                icon.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i>';
+                icon.className = 'feedback-popup-icon partial';
+                title.textContent = 'Keep Practicing!';
+            }
+
+            message.textContent = `${correct} out of ${total} answers correct.`;
+            feedbackPopupOverlay.classList.add('show');
+        }
+
+        feedbackPopupOverlay.querySelector('.feedback-popup-close').addEventListener('click', () => {
+            feedbackPopupOverlay.classList.remove('show');
+        });
+
+        feedbackPopupOverlay.addEventListener('click', (e) => {
+            if (e.target === feedbackPopupOverlay) {
+                feedbackPopupOverlay.classList.remove('show');
+            }
+        });
+
+        // Draw static clocks for section 2
+        function drawStaticClock(canvasId, hours, minutes, highlightColor) {
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const radius = canvas.width / 2;
+
+            // Clear canvas
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Draw highlighted minute area
+if (highlightColor === 'red') {
+    const startAngle = (1 * 6 - 90) * Math.PI / 180;
+    const endAngle = (29 * 6 - 90) * Math.PI / 180;
+    ctx.fillStyle = 'rgba(239, 68, 68, 0.15)';
+    ctx.beginPath();
+    ctx.moveTo(centerX, centerY);
+    ctx.arc(centerX, centerY, radius - 12, startAngle, endAngle);
+    ctx.closePath();
+    ctx.fill();
+} else if (highlightColor === 'blue') {
+    const startAngle = (31 * 6 - 90) * Math.PI / 180;
+    const endAngle = (59 * 6 - 90) * Math.PI / 180;
+    ctx.fillStyle = 'rgba(22, 163, 74, 0.1)';
+    ctx.beginPath();
+    ctx.moveTo(centerX, centerY);
+    ctx.arc(centerX, centerY, radius - 12, startAngle, endAngle);
+    ctx.closePath();
+    ctx.fill();
+}
+
+            // Draw clock circle
+            const borderThickness = 12;
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+            ctx.arc(centerX, centerY, radius - borderThickness, 0, 2 * Math.PI, true);
+            ctx.fillStyle = '#111';
+            ctx.fill('evenodd');
+
+            // Draw numbers
+            ctx.fillStyle = '#111';
+            ctx.font = 'bold 18px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            for (let i = 1; i <= 12; i++) {
+                const angle = (i * 30 - 90) * Math.PI / 180;
+                const x = centerX + Math.cos(angle) * (radius - 35);
+                const y = centerY + Math.sin(angle) * (radius - 35);
+                ctx.fillText(i, x, y);
+            }
+
+            // Draw minute markers
+            for (let i = 0; i < 60; i++) {
+                const angle = (i * 6 - 90) * Math.PI / 180;
+                const isHour = i % 5 === 0;
+                const outer = radius - borderThickness;
+                const inner = isHour ? outer - 10 : outer - 5;
+                
+                // Highlight the 30-minute tick in red for half-past illustration
+                if (highlightColor === 'none' && i === 30) {
+                    ctx.strokeStyle = '#EF4444';
+                    ctx.lineWidth = 2.5;
+                } else {
+                    ctx.strokeStyle = '#111';
+                    ctx.lineWidth = isHour ? 2 : 1;
+                }
+                
+                ctx.beginPath();
+                ctx.moveTo(centerX + Math.cos(angle) * outer, centerY + Math.sin(angle) * outer);
+                ctx.lineTo(centerX + Math.cos(angle) * inner, centerY + Math.sin(angle) * inner);
+                ctx.stroke();
+            }
+
+            // Draw center dot
+            ctx.fillStyle = '#111';
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, 5, 0, 2 * Math.PI);
+            ctx.fill();
+
+            // Draw hour hand
+            const hourAngle = ((hours % 12) * 30 + minutes * 0.5 - 90) * Math.PI / 180;
+            ctx.strokeStyle = '#111';
+            ctx.lineWidth = 7;
+            ctx.lineCap = 'round';
+            ctx.beginPath();
+            ctx.moveTo(centerX, centerY);
+            ctx.lineTo(
+                centerX + Math.cos(hourAngle) * (radius * 0.5),
+                centerY + Math.sin(hourAngle) * (radius * 0.5)
+            );
+            ctx.stroke();
+
+            // Draw minute hand
+            const minuteAngle = (minutes * 6 - 90) * Math.PI / 180;
+            ctx.strokeStyle = '#111';
+            ctx.lineWidth = 4;
+            ctx.lineCap = 'round';
+            ctx.beginPath();
+            ctx.moveTo(centerX, centerY);
+            ctx.lineTo(
+                centerX + Math.cos(minuteAngle) * (radius * 0.7),
+                centerY + Math.sin(minuteAngle) * (radius * 0.7)
+            );
+            ctx.stroke();
+        }
+
+        // Draw the three static clocks when page loads
+        drawStaticClock('clockPast', 6, 25, 'red');
+        drawStaticClock('clockHalfPast', 6, 30, 'none');
+        drawStaticClock('clockTo', 6, 35, 'blue');
     });
     </script>
 </body>
