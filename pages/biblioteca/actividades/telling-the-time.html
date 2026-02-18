@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enbreak | Telling the Time</title>
+    <link rel="icon" type="image/x-icon" href="../../../favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../favicon/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../favicon/apple-touch-icon.png">
+    <link rel="manifest" href="../../../favicon/site.webmanifest">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rubik:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/style.css">
+    <style>
+/* Base Activity Styles */
+.activity-page { background: #f8f9fa; min-height: 100vh; }
+.activity-hero { position: relative; height: 280px; background: url('../../../assets/activities/telling-time.jpg') center center/cover no-repeat; background-color: #0a1e42; }
+.activity-hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(10, 30, 66, 0.4) 0%, rgba(10, 30, 66, 0.85) 100%); }
+.activity-hero-content { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 40px; padding-bottom: 60px; height: 100%; display: flex; flex-direction: column; justify-content: center; }
+.activity-hero .breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 13px; margin-bottom: 12px; }
+.activity-hero .breadcrumb a { color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.2s; }
+.activity-hero .breadcrumb a:hover { color: #ffffff; }
+.activity-hero .breadcrumb-separator { color: rgba(255, 255, 255, 0.4); }
+.activity-hero .breadcrumb-current { color: #ffffff; }
+.activity-hero h1 { font-family: 'Rubik', sans-serif; font-size: 36px; font-weight: 700; color: #ffffff; margin: 0 0 16px 0; }
+.activity-hero-badges { display: flex; gap: 10px; flex-wrap: wrap; }
+.hero-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 20px; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; background: rgba(255, 255, 255, 0.15); color: #ffffff; backdrop-filter: blur(8px); }
+
+/* Tabs */
+.activity-container { max-width: 1200px; margin: 0 auto; padding: 0 40px 80px; }
+.tabs-wrapper { background: #ffffff; border-radius: 0 0 16px 16px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); margin-top: 0; position: relative; z-index: 10; overflow: hidden; }
+.tab-nav { display: flex; align-items: center; border-bottom: 1px solid #e5e7eb; background: #fafafa; overflow-x: auto; }
+.tab-nav-main { display: flex; flex: 1; }
+.tab-btn { display: flex; align-items: center; gap: 8px; padding: 18px 24px; background: none; border: none; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500; color: #6b7280; cursor: pointer; white-space: nowrap; transition: all 0.2s; position: relative; }
+.tab-btn:hover { color: #374151; background: #f3f4f6; }
+.tab-btn.active { color: #ea580c; background: #ffffff; }
+.tab-btn.active::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: #ea580c; }
+.tab-content { display: none; padding: 40px 60px; }
+.tab-content.active { display: block; }
+
+/* Intro Styles */
+.intro-grid { display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: start; }
+.intro-main { display: flex; flex-direction: column; gap: 24px; }
+.intro-text { font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.8; color: #4b5563; }
+.intro-text strong { color: #ea580c; }
+.intro-sidebar { display: flex; flex-direction: column; gap: 16px; max-width: 380px; }
+.info-card { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 12px; padding: 12px; display: flex; gap: 10px; }
+.info-card-icon { width: 36px; height: 36px; border-radius: 8px; background: #ffedd5; color: #ea580c; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+.info-card-content h4 { font-family: 'Rubik', sans-serif; font-size: 14px; font-weight: 600; color: #374151; margin: 0 0 4px 0; }
+.info-card-content p { font-family: 'Inter', sans-serif; font-size: 14px; color: #6b7280; margin: 0; }
+
+/* Exercise Section */
+.exercise-section { margin-bottom: 40px; }
+.exercise-header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+.exercise-number { width: 36px; height: 36px; border-radius: 50%; background: #ea580c; color: #ffffff; font-family: 'Rubik', sans-serif; font-size: 16px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.exercise-header h3 { font-family: 'Rubik', sans-serif; font-size: 20px; font-weight: 600; color: #1f2937; margin: 0; }
+
+.clock-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+.digital-display {
+    background: #111;
+    border-radius: 12px;
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.digital-fused-block {
+    background: #fff;
+    border-radius: 7px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+    gap: 2px;
+}
+
+.digital-fused-block .num {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    font-size: 2.2rem;
+    color: #111;
+    line-height: 1;
+    width: 28px;
+    text-align: center;
+}
+
+.digital-inner-separator {
+    width: 1.5px;
+    height: 32px;
+    background: #ddd;
+    border-radius: 99px;
+    flex-shrink: 0;
+}
+
+.digital-divider {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 12px;
+    height: 56px;
+}
+
+.digital-divider-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #fff;
+    flex-shrink: 0;
+}
+
+.digital-ampm-col {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 56px;
+    margin-left: 5px;
+}
+
+.digital-ampm-badge {
+    font-family: Arial, sans-serif;
+    font-size: 0.75rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-align: center;
+    padding: 4px 9px;
+    border-radius: 6px;
+    cursor: default;
+    background: #fff;
+    color: #111;
+    white-space: nowrap;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.clock-border {
+    padding: 0;
+    border-radius: 50%;
+    width: fit-content;
+}
+
+.clock-face-wrapper {
+    position: relative;
+    width: 380px;
+    height: 380px;
+}
+
+canvas {
+    display: block;
+    cursor: grab;
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+}
+canvas:active { cursor: grabbing; }
+
+.exercise-instructions { font-family: 'Inter', sans-serif; font-size: 15px; color: #6b7280; margin-bottom: 20px; line-height: 1.6; }
+
+/* Interactive Clock Layout */
+.preparation-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+    margin-top: 24px;
+}
+
+.chat-panel {
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #e0e4ed;
+    box-shadow: 0 2px 8px rgba(13,31,60,0.06);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    width: 100%;
+}
+
+.right-column {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    align-items: center;
+}
+
+.time-display-wrapper {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+}
+
+.chat-header {
+    background: #0d1f3c;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.chat-header-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #00d084;
+    box-shadow: 0 0 0 2px rgba(0,208,132,0.3);
+}
+
+.chat-header-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.85);
+    letter-spacing: 0.5px;
+}
+
+.chat-body {
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    background: #f7f9fc;
+}
+
+.bubble {
+    max-width: 82%;
+    padding: 10px 14px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    line-height: 1.45;
+    word-break: break-word;
+}
+
+.bubble.outgoing {
+    align-self: flex-end;
+    background: #0d1f3c;
+    color: #ffffff;
+    border-radius: 18px 18px 4px 18px;
+}
+
+.bubble.incoming {
+    align-self: flex-start;
+    background: #e8ecf3;
+    color: #2c3e5a;
+    border-radius: 18px 18px 18px 4px;
+}
+
+.bubble.incoming strong {
+    color: #e8571a;
+    font-weight: 700;
+}
+
+.or-divider {
+    align-self: flex-start;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #8a9bbf;
+    padding-left: 4px;
+    margin: 1px 0;
+}
+
+.timestamp {
+    align-self: flex-end;
+    font-size: 0.65rem;
+    color: #8a9bbf;
+    margin-top: -2px;
+    padding-right: 2px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate {
+    animation: fadeIn 0.25s ease forwards;
+}
+
+/* Examples Section */
+.examples-container {
+    margin-top: 24px;
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid #e2e8f0;
+}
+
+.examples-title {
+    font-family: 'Rubik', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #475569;
+    margin: 0 0 12px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.examples-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.example-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.example-play-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #f1f5f9;
+    border: none;
+    color: #64748b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.example-play-btn:hover {
+    background: #ea580c;
+    color: white;
+}
+
+.example-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #334155;
+    letter-spacing: 1px;
+}
+
+/* Tip Box */
+.tip-box {
+    background-color: #E0F5F7;
+    border: 1px solid #81C7D4;
+    border-radius: 0.75rem;
+    padding: 1rem;
+    margin-top: 24px;
+}
+
+.tip-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    color: #3B8A9D;
+    font-size: 15px;
+}
+
+.tip-content {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    color: #3B8A9D;
+    line-height: 1.6;
+}
+
+.tip-content ul {
+    margin: 8px 0;
+    padding-left: 20px;
+    list-style-type: disc;
+}
+
+.tip-content li {
+    margin-bottom: 4px;
+}
+
+/* Navigation Buttons */
+.activity-nav { display: flex; justify-content: space-between; align-items: center; padding: 24px 40px; border-top: 1px solid #e5e7eb; background: #fafafa; }
+.nav-btn { display: flex; align-items: center; gap: 8px; padding: 12px 24px; border-radius: 10px; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.nav-btn-back { background: #ffffff; border: 2px solid #e5e7eb; color: #6b7280; }
+.nav-btn-back:hover:not(:disabled) { border-color: #d1d5db; color: #374151; }
+.nav-btn-next { background: #ea580c; border: 2px solid #ea580c; color: #ffffff; }
+.nav-btn-next:hover:not(:disabled) { background: #dc2626; border-color: #dc2626; }
+.nav-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.nav-btn-back.hidden { visibility: hidden; }
+
+@media (max-width: 900px) {
+    .intro-grid { grid-template-columns: 1fr; }
+    .preparation-grid { grid-template-columns: 1fr; }
+    .exercise-header { flex-wrap: wrap; }
+}
+
+@media (max-width: 768px) {
+    .activity-hero { height: 220px; }
+    .activity-hero-content { padding: 24px; }
+    .activity-hero h1 { font-size: 28px; }
+    .activity-container { padding: 0 16px 60px; }
+    .tab-content { padding: 24px; }
+}
+    </style>
+</head>
+<body>
+
+    <div id="header-placeholder"></div>
+
+    <main class="activity-page">
+        <!-- Hero Section -->
+        <section class="activity-hero">
+            <div class="activity-hero-content">
+                <nav class="breadcrumb">
+                    <a href="/">Inicio</a>
+                    <span class="breadcrumb-separator">›</span>
+                    <a href="../actividades.html">Actividades</a>
+                    <span class="breadcrumb-separator">›</span>
+                    <span class="breadcrumb-current">Telling the Time</span>
+                </nav>
+                <h1>Telling the Time</h1>
+                <div class="activity-hero-badges">
+                    <span class="hero-badge"><i class="fa-solid fa-clock"></i> Vocabulary</span>
+                    <span class="hero-badge"><i class="fa-solid fa-layer-group"></i> Level A2</span>
+                    <span class="hero-badge"><i class="fa-regular fa-clock"></i> 15 min</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Activity Content -->
+        <section class="activity-container">
+            <div class="tabs-wrapper">
+                <!-- Tab Navigation -->
+                <nav class="tab-nav">
+                    <div class="tab-nav-main">
+                        <button class="tab-btn active" data-tab="introduction">Introduction</button>
+                        <button class="tab-btn" data-tab="preparation">Preparation</button>
+                        <button class="tab-btn" data-tab="practice">Practice</button>
+                    </div>
+                </nav>
+
+                <!-- Introduction Tab -->
+                <div class="tab-content active" id="introduction">
+                    <div class="intro-grid">
+                        <div class="intro-main">
+                            <p class="intro-text">
+                                Knowing how to tell the time is a basic but essential skill for everyday conversations. Whether you're scheduling a meeting, catching a train, or just asking someone for the time, you'll need to understand and use time expressions correctly.
+                            </p>
+                            <p class="intro-text">
+                                In English, there are two common ways to tell the time: the <strong>formal (digital) way</strong> and the more common <strong>conversational (analog) way</strong>. For example, 2:30 can be "two thirty" or "half past two."
+                            </p>
+                            <p class="intro-text">
+                                This activity will help you master both methods. You'll start with an interactive clock to learn the phrases, and then move on to practice exercises to test your knowledge.
+                            </p>
+                        </div>
+                        <div class="intro-sidebar">
+                            <div class="info-card">
+                                <div class="info-card-icon">
+                                    <i class="fa-solid fa-bullseye"></i>
+                                </div>
+                                <div class="info-card-content">
+                                    <h4>Learning Objective</h4>
+                                    <p>You will be able to ask for and tell the time using both formal and conversational English.</p>
+                                </div>
+                            </div>
+                            <div class="info-card">
+                                <div class="info-card-icon">
+                                    <i class="fa-solid fa-comments"></i>
+                                </div>
+                                <div class="info-card-content">
+                                    <h4>Skill Focus</h4>
+                                    <p>Vocabulary & Speaking (A2 Level)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Preparation Tab -->
+                <div class="tab-content" id="preparation">
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">1</span>
+                            <h3>Interactive Clock</h3>
+                        </div>
+                        <p class="exercise-instructions">Drag the hour or minute hand to set the time. Double click the clock for current time.</p>
+
+                        <div class="preparation-grid" id="clockContainer">
+                            <!-- Left: Analog Clock -->
+                            <div class="clock-container">
+                                <div class="clock-border">
+                                    <div class="clock-face-wrapper">
+                                        <canvas id="clockCanvas" width="480" height="480"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right: Digital + Chat -->
+                            <div class="time-display-wrapper">
+                                <!-- Digital Clock -->
+                                <div class="digital-display" id="digitalDisplay">
+                                    <div class="digital-fused-block">
+                                        <span class="num" id="h1">1</span>
+                                        <div class="digital-inner-separator"></div>
+                                        <span class="num" id="h2">2</span>
+                                    </div>
+                                    <div class="digital-divider">
+                                        <div class="digital-divider-dot"></div>
+                                        <div class="digital-divider-dot"></div>
+                                    </div>
+                                    <div class="digital-fused-block">
+                                        <span class="num" id="m1">0</span>
+                                        <div class="digital-inner-separator"></div>
+                                        <span class="num" id="m2">0</span>
+                                    </div>
+                                    <div class="digital-ampm-col">
+                                        <span class="digital-ampm-badge" id="badge-ampm">AM</span>
+                                    </div>
+                                </div>
+
+                                <!-- Chat Panel -->
+                                <div class="chat-panel">
+                                    <div class="chat-header">
+                                        <div class="chat-header-dot"></div>
+                                        <span class="chat-header-title">English Break</span>
+                                    </div>
+                                    <div class="chat-body">
+                                        <div class="bubble outgoing">What time is it?</div>
+                                        <div class="timestamp">You</div>
+                                        <div class="bubble incoming animate" id="line1">It's <strong>noon</strong>.</div>
+                                        <div class="or-divider">or</div>
+                                        <div class="bubble incoming animate" id="line2">It's <strong>twelve o'clock</strong>.</div>
+                                        <div class="bubble outgoing">Thank you!</div>
+                                        <div class="timestamp">You</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="examples-container">
+                            <h4 class="examples-title">Examples</h4>
+                            <div class="examples-list">
+                                <div class="example-item">
+                                    <button class="example-play-btn" onclick="playExample('10.45')"><i class="fa-solid fa-play"></i></button>
+                                    <span class="example-text">It's 10:45</span>
+                                </div>
+                                <div class="example-item">
+                                    <button class="example-play-btn" onclick="playExample('12.20')"><i class="fa-solid fa-play"></i></button>
+                                    <span class="example-text">It's 12:20</span>
+                                </div>
+                                <div class="example-item">
+                                    <button class="example-play-btn" onclick="playExample('07.05')"><i class="fa-solid fa-play"></i></button>
+                                    <span class="example-text">It's 7:05</span>
+                                </div>
+                                <div class="example-item">
+                                    <button class="example-play-btn" onclick="playExample('03.30')"><i class="fa-solid fa-play"></i></button>
+                                    <span class="example-text">It's 3:30</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tip-box">
+                            <div class="tip-header">
+                                <i data-lucide="info" style="width: 20px; height: 20px;"></i> Tip
+                            </div>
+                            <div class="tip-content">
+                                <p>Parts of the day:</p>
+                                <ul>
+                                    <li><strong>Morning:</strong> From sunrise to 12:00 PM (noon).</li>
+                                    <li><strong>Afternoon:</strong> From 12:00 PM to about 5:00 PM.</li>
+                                    <li><strong>Evening:</strong> From 5:00 PM to about 9:00 PM.</li>
+                                    <li><strong>Night:</strong> From 9:00 PM until sunrise.</li>
+                                </ul> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Practice Tab -->
+                <div class="tab-content" id="practice">
+                    <div class="empty-state" style="padding: 60px 0; text-align: center;">
+                        <i class="fa-solid fa-person-digging" style="font-size: 48px; color: #d1d5db; margin-bottom: 16px;"></i>
+                        <h3 style="font-family: 'Rubik', sans-serif; font-size: 20px; color: #4b5563; margin-bottom: 8px;">Coming Soon</h3>
+                        <p style="font-family: 'Inter', sans-serif; font-size: 14px; color: #9ca3af;">We are working on practice exercises for this activity.</p>
+                    </div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="activity-nav">
+                    <button class="nav-btn nav-btn-back" id="btn-back" disabled>
+                        <i class="fa-solid fa-arrow-left"></i> Back
+                    </button>
+                    <button class="nav-btn nav-btn-next" id="btn-next">
+                        Next <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="../../../js/layout.js"></script>
+    <script src="../../../js/script.js" defer></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        lucide.createIcons();
+
+        // ── Tab logic ──
+        const tabBtns     = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        const btnBack     = document.getElementById('btn-back');
+        const btnNext     = document.getElementById('btn-next');
+        const tabs        = ['introduction', 'preparation', 'practice'];
+        let currentTabIndex = 0;
+
+        function switchTab(tabId, scrollToTop = false) {
+            tabBtns.forEach(btn => btn.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+            const activeBtn     = document.querySelector(`[data-tab="${tabId}"]`);
+            const activeContent = document.getElementById(tabId);
+            if (activeBtn)     activeBtn.classList.add('active');
+            if (activeContent) activeContent.classList.add('active');
+            currentTabIndex = tabs.indexOf(tabId);
+            updateNavButtons();
+            if (scrollToTop) window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function updateNavButtons() {
+            btnBack.disabled = currentTabIndex === 0;
+            btnBack.classList.toggle('hidden', currentTabIndex === 0);
+            btnNext.innerHTML = currentTabIndex === tabs.length - 1
+                ? 'Back to Activities'
+                : 'Next <i class="fa-solid fa-arrow-right"></i>';
+        }
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', function() { switchTab(this.dataset.tab, false); });
+        });
+        btnBack.addEventListener('click', function() {
+            if (currentTabIndex > 0) switchTab(tabs[currentTabIndex - 1], true);
+        });
+        btnNext.addEventListener('click', function() {
+            if (currentTabIndex === tabs.length - 1) {
+                window.location.href = '../actividades.html';
+            } else {
+                switchTab(tabs[currentTabIndex + 1], true);
+            }
+        });
+        updateNavButtons();
+
+        // ── Clock logic ──
+        const canvas = document.getElementById('clockCanvas');
+        if (!canvas) return;
+
+        const ctx = canvas.getContext('2d');
+        const W = canvas.width, H = canvas.height;
+        const cx = W / 2, cy = H / 2;
+        const R = W / 2 - 1;
+
+        let hours = 12, minutes = 0;
+        let dragging = null;
+        let liveMode  = false;
+
+        function toRad(deg) { return deg * Math.PI / 180; }
+
+        function getPointerAngle(e) {
+            const rect = canvas.getBoundingClientRect();
+            const sx = W / rect.width, sy = H / rect.height;
+            let px, py;
+            if (e.touches) {
+                px = (e.touches[0].clientX - rect.left) * sx;
+                py = (e.touches[0].clientY - rect.top)  * sy;
+            } else {
+                px = (e.clientX - rect.left) * sx;
+                py = (e.clientY - rect.top)  * sy;
+            }
+            return Math.atan2(px - cx, cy - py);
+        }
+
+        function normalizeAngle(a) {
+            return ((a % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
+        }
+
+        function getHourAngle()   { return toRad((hours % 12) * 30 + minutes * 0.5); }
+        function getMinuteAngle() { return toRad(minutes * 6); }
+
+        function whichHand(e) {
+            const rect = canvas.getBoundingClientRect();
+            const sx = W / rect.width, sy = H / rect.height;
+            let px, py;
+            if (e.touches) {
+                px = (e.touches[0].clientX - rect.left) * sx - cx;
+                py = (e.touches[0].clientY - rect.top)  * sy - cy;
+            } else {
+                px = (e.clientX - rect.left) * sx - cx;
+                py = (e.clientY - rect.top)  * sy - cy;
+            }
+            const dist    = Math.hypot(px, py);
+            const hourLen = R * 0.52;
+
+            function distToHand(angle, len) {
+                const hx = Math.sin(angle) * len;
+                const hy = -Math.cos(angle) * len;
+                const t  = Math.max(0, Math.min(1, (px * hx + py * hy) / (len * len)));
+                return Math.hypot(px - hx * t, py - hy * t);
+            }
+
+            const dH = distToHand(getHourAngle(),   R * 0.52);
+            const dM = distToHand(getMinuteAngle(), R * 0.72);
+            if (Math.abs(dH - dM) < 8) return dist > hourLen * 0.8 ? 'minute' : 'hour';
+            return dH < dM ? 'hour' : 'minute';
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, W, H);
+
+            // White face
+            ctx.beginPath();
+            ctx.arc(cx, cy, R, 0, 2 * Math.PI);
+            ctx.fillStyle = '#ffffff';
+            ctx.fill();
+
+            // Black border ring
+            const borderThickness = 16;
+            ctx.beginPath();
+            ctx.arc(cx, cy, R, 0, 2 * Math.PI);
+            ctx.arc(cx, cy, R - borderThickness, 0, 2 * Math.PI, true);
+            ctx.fillStyle = '#111';
+            ctx.fill('evenodd');
+
+            // Tick marks
+            for (let i = 0; i < 60; i++) {
+                const angle  = toRad(i * 6);
+                const isHour = i % 5 === 0;
+                const outer  = R - borderThickness - 2;
+                const inner  = isHour ? R - borderThickness - 18 : R - borderThickness - 10;
+                ctx.beginPath();
+                ctx.moveTo(cx + Math.sin(angle) * outer, cy - Math.cos(angle) * outer);
+                ctx.lineTo(cx + Math.sin(angle) * inner, cy - Math.cos(angle) * inner);
+                ctx.strokeStyle = '#111';
+                ctx.lineWidth   = isHour ? 3 : 1.5;
+                ctx.stroke();
+            }
+
+            // Hour numbers
+            ctx.font         = 'bold 34px Arial';
+            ctx.fillStyle    = '#111';
+            ctx.textAlign    = 'center';
+            ctx.textBaseline = 'middle';
+            const hourR = R * 0.78;
+            for (let i = 1; i <= 12; i++) {
+                const angle = toRad(i * 30);
+                ctx.fillText(String(i), cx + Math.sin(angle) * hourR, cy - Math.cos(angle) * hourR);
+            }
+
+            // Minute hand
+            drawHand(getMinuteAngle(), R * 0.72, 7,  '#111', R * 0.12);
+            // Hour hand
+            drawHand(getHourAngle(),   R * 0.52, 11, '#111', R * 0.10);
+
+            // Center cap
+            ctx.beginPath();
+            ctx.arc(cx, cy, 11, 0, 2 * Math.PI);
+            ctx.fillStyle = '#111';
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(cx, cy, 5, 0, 2 * Math.PI);
+            ctx.fillStyle = '#ea580c';
+            ctx.fill();
+        }
+
+        function drawHand(angle, length, width, color, tail) {
+            ctx.save();
+            ctx.translate(cx, cy);
+            ctx.rotate(angle);
+            ctx.lineCap     = 'round';
+            ctx.strokeStyle = color;
+            ctx.lineWidth   = width;
+            ctx.beginPath();
+            ctx.moveTo(0,  tail);
+            ctx.lineTo(0, -length);
+            ctx.stroke();
+            ctx.restore();
+        }
+
+        function updateDigital() {
+            const h  = hours % 12 || 12;
+            const m  = Math.floor(minutes);
+            document.getElementById('h1').textContent = Math.floor(h / 10);
+            document.getElementById('h2').textContent = h % 10;
+            document.getElementById('m1').textContent = Math.floor(m / 10);
+            document.getElementById('m2').textContent = m % 10;
+            document.getElementById('badge-ampm').textContent = hours >= 12 ? 'PM' : 'AM';
+            updateChat(hours, m);
+        }
+
+        // ── Spoken time (chat bubbles) ──
+        const oneWords = ['','one','two','three','four','five','six','seven','eight','nine',
+                          'ten','eleven','twelve','thirteen','fourteen','fifteen',
+                          'sixteen','seventeen','eighteen','nineteen'];
+        const tensWords = ['','','twenty','thirty','forty','fifty'];
+
+        function numWord(n) {
+            if (n === 0) return 'zero';
+            if (n < 20)  return oneWords[n];
+            if (n % 10 === 0) return tensWords[Math.floor(n / 10)];
+            return tensWords[Math.floor(n / 10)] + '-' + oneWords[n % 10];
+        }
+
+        function updateChat(fullHour, m) {
+            const h12   = fullHour % 12 || 12;
+            const hWord = numWord(h12);
+            const mWord = numWord(m);
+            let line1, line2;
+
+            if (m === 0) {
+                if (fullHour === 0) { // 12:00 AM
+                    line1 = `It's <strong>twelve o'clock</strong>.`;
+                    line2 = `It's <strong>midnight</strong>.`;
+                } else if (fullHour === 12) { // 12:00 PM
+                    line1 = `It's <strong>twelve o'clock</strong>.`;
+                    line2 = `It's <strong>noon</strong>.`;
+                } else {
+                    line1 = `It's <strong>${hWord} ${fullHour < 12 ? 'a.m' : 'p.m'}</strong>.`;
+                    line2 = `It's <strong>${hWord} o'clock</strong>.`;
+                }
+            } else if (m === 15) {
+                line1 = `It's <strong>${hWord} ${mWord}</strong>.`;
+                line2 = `It's <strong>a quarter past ${hWord}</strong>.`;
+            } else if (m === 30) {
+                line1 = `It's <strong>${hWord} ${mWord}</strong>.`;
+                line2 = `It's <strong>half past ${hWord}</strong>.`;
+            } else if (m === 45) {
+                const nW = numWord((h12 % 12) + 1 > 12 ? 1 : (h12 % 12) + 1);
+                line1 = `It's <strong>${hWord} ${mWord}</strong>.`;
+                line2 = `It's <strong>a quarter to ${nW}</strong>.`;
+            } else if (m < 30) {
+                const ohWord = m < 10 ? `oh ${mWord}` : mWord;
+                line1 = `It's <strong>${hWord} ${ohWord}</strong>.`;
+                line2  = `It's <strong>${mWord} past ${hWord}</strong>.`;
+            } else {
+                const rem = 60 - m;
+                const nW  = numWord((h12 % 12) + 1 > 12 ? 1 : (h12 % 12) + 1);
+                line1 = `It's <strong>${hWord} ${mWord}</strong>.`;
+                line2  = `It's <strong>${numWord(rem)} to ${nW}</strong>.`;
+            }
+
+            const el1 = document.getElementById('line1');
+            const el2 = document.getElementById('line2');
+            if (!el1 || !el2) return;
+            [el1, el2].forEach(el => {
+                el.classList.remove('animate');
+                void el.offsetWidth;
+                el.classList.add('animate');
+            });
+            el1.innerHTML = line1;
+            el2.innerHTML = line2;
+        }
+
+        // ── Drag events ──
+        canvas.addEventListener('mousedown', startDrag);
+        canvas.addEventListener('touchstart', startDrag, { passive: false });
+        window.addEventListener('mousemove', onDrag);
+        window.addEventListener('touchmove', onDrag, { passive: false });
+        window.addEventListener('mouseup',   stopDrag);
+        window.addEventListener('touchend',  stopDrag);
+
+        function startDrag(e) {
+            e.preventDefault();
+            liveMode = false;
+            dragging = whichHand(e);
+            canvas.style.cursor = 'grabbing';
+        }
+
+        function onDrag(e) {
+            if (!dragging) return;
+            e.preventDefault();
+            const norm = normalizeAngle(getPointerAngle(e));
+
+            if (dragging === 'minute') {
+                const prev = minutes;
+                minutes = norm / (2 * Math.PI) * 60;
+                if (prev > 50 && minutes < 10) hours = (hours + 1) % 24;
+                if (prev < 10 && minutes > 50) hours = (hours - 1 + 24) % 24;
+            } else {
+                const prev   = (hours % 12) + minutes / 60;
+                const newH12 = norm / (2 * Math.PI) * 12;
+                const offset = hours >= 12 ? 12 : 0;
+                if      (prev > 11 && newH12 < 1)  hours = (Math.floor(newH12) + offset + 12) % 24;
+                else if (prev < 1  && newH12 > 11) hours = (Math.floor(newH12) + offset - 12 + 24) % 24;
+                else                               hours  = Math.floor(newH12) + offset;
+                minutes = (newH12 % 1) * 60;
+            }
+            draw();
+            updateDigital();
+        }
+
+        function stopDrag() {
+            dragging = null;
+            canvas.style.cursor = 'grab';
+        }
+
+        canvas.addEventListener('dblclick', () => {
+            const now = new Date();
+            hours   = now.getHours();
+            minutes = now.getMinutes();
+            liveMode = true;
+            draw();
+            updateDigital();
+        });
+
+        function tick() {
+            if (liveMode) {
+                const now = new Date();
+                hours   = now.getHours();
+                minutes = now.getMinutes();
+                draw();
+                updateDigital();
+            }
+            requestAnimationFrame(tick);
+        }
+
+        draw();
+        updateDigital();
+        tick();
+
+        // Example Audio Player
+        let currentExampleAudio = null;
+
+        window.playExample = function(id) {
+            // Visual feedback
+            const btn = event.target.closest('.example-play-btn');
+            
+            // Reset previous styles if any
+            document.querySelectorAll('.example-play-btn').forEach(b => {
+                b.style.background = '';
+                b.style.color = '';
+            });
+
+            btn.style.background = '#ea580c';
+            btn.style.color = 'white';
+            
+            if (currentExampleAudio) {
+                currentExampleAudio.pause();
+                currentExampleAudio = null;
+            }
+            
+            const filename = id.includes('.') ? id : id.slice(0, 2) + '.' + id.slice(2);
+            const audioPath = `../../../assets/activities/telling-the-time/${filename}.mp3`;
+            currentExampleAudio = new Audio(audioPath);
+            
+            currentExampleAudio.play().catch(e => {
+                console.log('Audio not found:', audioPath);
+                btn.style.background = '';
+                btn.style.color = '';
+            });
+            
+            currentExampleAudio.onended = () => {
+                btn.style.background = '';
+                btn.style.color = '';
+            };
+        };
+    });
+    </script>
+</body>
+</html>

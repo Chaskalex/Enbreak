@@ -37,6 +37,7 @@
     pointer-events: none;
     mask-image: linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.9) 70%, rgba(0,0,0,0) 100%);
     -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.9) 70%, rgba(0,0,0,0) 100%);
+    animation: bannerImageSlideIn 1s ease-out;
 }
 
 .page-header::before {
@@ -69,6 +70,7 @@
     position: relative;
     z-index: 1;
     max-width: 520px;
+    animation: bannerTextSlideIn 1s ease-out;
 }
 
 .page-header-accent {
@@ -116,6 +118,29 @@
     color: #0a1e42;
     margin: 0;
     line-height: 1.2;
+}
+
+/* Banner animations */
+@keyframes bannerTextSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-60px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes bannerImageSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+    to {
+        opacity: 0.45;
+        transform: translateX(0);
+    }
 }
 
 /* Activities Container */
@@ -826,6 +851,25 @@
 
                 <!-- Activities Grid -->
                 <div class="activities-grid" id="activities-grid">
+
+                    <!-- Vocabulary A2 - Telling the Time -->
+                    <div class="activity-card" data-skill="vocabulary" data-level="A2" data-title="Telling the Time">
+                        <a href="actividades/telling-the-time.html" class="activity-card-link">
+                            <div class="activity-card-image" style="background-image: url('../../assets/activities/telling-time.jpg'); background-color: #0a1e42;">
+                                <div class="activity-card-icon vocabulary">
+                                    <i class="fa-solid fa-clock"></i>
+                                </div>
+                            </div>
+                            <div class="activity-card-info">
+                                <h3 class="activity-card-title">Telling the Time</h3>
+                                <div class="activity-card-badges">
+                                    <span class="skill-badge vocabulary">Vocabulary</span>
+                                    <span class="level-badge beginner">Level A2</span>
+                                    <span class="activity-card-duration"><i class="fa-regular fa-clock"></i> 15 min</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
 
                     <!-- Vocabulary A1 - Numbers -->
                     <div class="activity-card" data-skill="vocabulary" data-level="A1" data-title="Numbers">
