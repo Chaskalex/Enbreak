@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="../../../css/buttons.css">
+    <script src="../../../js/audioplayer.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rubik:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../../css/style.css">
     <style>
@@ -228,39 +230,6 @@
 
 .intro-text strong {
     color: #ea580c;
-}
-
-/* Audio Player Button */
-.audio-player-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 12px 20px;
-    background: #f3f4f6;
-    border: 1px solid #e5e7eb;
-    border-radius: 10px;
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    color: #374151;
-    cursor: pointer;
-    transition: all 0.2s;
-    margin-top: 8px;
-    width: fit-content;
-}
-
-.audio-player-btn:hover {
-    background: #e5e7eb;
-}
-
-.audio-player-btn.playing {
-    background: #ffedd5;
-    border-color: #fed7aa;
-    color: #ea580c;
-}
-
-.audio-player-btn i {
-    font-size: 16px;
 }
 
 .intro-sidebar {
@@ -628,13 +597,17 @@
 }
 
 .vocab-drop-zone.correct-match {
-    border-color: #16a34a;
-    background: #dcfce7;
+    border-color: #86EFAC;
+    background: #F0FDF4;
+    color: #166534;
+    box-shadow: 0 0 0 4px rgba(34,197,94,.08);
 }
 
 .vocab-drop-zone.incorrect-match {
-    border-color: #dc2626;
-    background: #fee2e2;
+    border-color: #FCA5A5;
+    background: #FFF1F2;
+    color: #9F1239;
+    box-shadow: 0 0 0 4px rgba(239,68,68,.08);
 }
 
 /* Prediction Textareas */
@@ -709,13 +682,17 @@
 }
 
 .prediction-item.correct {
-    background: #dcfce7;
-    border-color: #16a34a;
+    background: #F0FDF4;
+    border-color: #86EFAC;
+    color: #166534;
+    box-shadow: 0 0 0 4px rgba(34,197,94,.08);
 }
 
 .prediction-item.incorrect {
-    background: #fee2e2;
-    border-color: #dc2626;
+    background: #FFF1F2;
+    border-color: #FCA5A5;
+    color: #9F1239;
+    box-shadow: 0 0 0 4px rgba(239,68,68,.08);
 }
 
 .prediction-checkbox {
@@ -738,14 +715,14 @@
 }
 
 .prediction-item.correct .prediction-checkbox {
-    background: #16a34a;
-    border-color: #16a34a;
+    background: #166534;
+    border-color: #166534;
     color: #ffffff;
 }
 
 .prediction-item.incorrect .prediction-checkbox {
-    background: #dc2626;
-    border-color: #dc2626;
+    background: #9F1239;
+    border-color: #9F1239;
     color: #ffffff;
 }
 
@@ -840,19 +817,21 @@
 .tf-btn.selected {
     background: #ffedd5;
     border-color: #fed7aa;
-    color: #ea580c;
+    color: #6b7280;
 }
 
 .tf-btn.correct {
-    background: #dcfce7;
-    border-color: #16a34a;
-    color: #16a34a;
+    background: #F0FDF4;
+    border-color: #86EFAC;
+    color: #166534;
+    box-shadow: 0 0 0 4px rgba(34,197,94,.08);
 }
 
 .tf-btn.incorrect {
-    background: #fee2e2;
-    border-color: #dc2626;
-    color: #dc2626;
+    background: #FFF1F2;
+    border-color: #FCA5A5;
+    color: #9F1239;
+    box-shadow: 0 0 0 4px rgba(239,68,68,.08);
 }
 
 /* Sentence Completion Exercise */
@@ -905,17 +884,74 @@
 }
 
 .sentence-dropdown.correct {
-    border-color: #16a34a;
-    background: #f0fdf4;
-    color: #16a34a;
+    border-color: #86EFAC;
+    background: #F0FDF4;
+    color: #166534;
+    box-shadow: 0 0 0 4px rgba(34,197,94,.08);
     font-weight: 600;
 }
 
 .sentence-dropdown.incorrect {
-    border-color: #dc2626;
-    background: #fef2f2;
-    color: #dc2626;
+    border-color: #FCA5A5;
+    background: #FFF1F2;
+    color: #9F1239;
+    box-shadow: 0 0 0 4px rgba(239,68,68,.08);
     font-weight: 600;
+}
+
+/* Inline Choice Exercise */
+.choice-group {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0 6px;
+    vertical-align: middle;
+    background: #f3f4f6;
+    padding: 4px;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+}
+
+.choice-option {
+    cursor: pointer;
+    padding: 6px 12px;
+    border-radius: 6px;
+    color: #4b5563;
+    font-weight: 600;
+    font-size: 13px;
+    border: 1px solid transparent;
+    transition: all 0.2s;
+    background: #ffffff;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    line-height: 1;
+}
+
+.choice-option:hover {
+    border-color: #d1d5db;
+    color: #1f2937;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.choice-option.selected {
+    background: #ffedd5;
+    color: #6b7280;
+    border-color: #fed7aa;
+    box-shadow: none;
+}
+
+.choice-option.correct {
+    background: #16a34a;
+    color: #ffffff;
+    border-color: #16a34a;
+    box-shadow: 0 2px 4px rgba(22, 163, 74, 0.25);
+}
+
+.choice-option.incorrect {
+    background: #dc2626;
+    color: #ffffff;
+    border-color: #dc2626;
+    box-shadow: 0 2px 4px rgba(220, 38, 38, 0.25);
 }
 
 /* Description Exercise */
@@ -1007,13 +1043,17 @@
 }
 
 .matching-item.correct {
-    background: #dcfce7;
-    border-color: #16a34a;
+    background: #F0FDF4;
+    border-color: #86EFAC;
+    color: #166534;
+    box-shadow: 0 0 0 4px rgba(34,197,94,.08);
 }
 
 .matching-item.incorrect {
-    background: #fee2e2;
-    border-color: #dc2626;
+    background: #FFF1F2;
+    border-color: #FCA5A5;
+    color: #9F1239;
+    box-shadow: 0 0 0 4px rgba(239,68,68,.08);
 }
 
 .matching-dot {
@@ -1045,13 +1085,13 @@
 }
 
 .matching-item.correct .matching-dot {
-    background: #16a34a;
-    border-color: #16a34a;
+    background: #166534;
+    border-color: #166534;
 }
 
 .matching-item.incorrect .matching-dot {
-    background: #dc2626;
-    border-color: #dc2626;
+    background: #9F1239;
+    border-color: #9F1239;
 }
 
 .matching-item-content {
@@ -1381,13 +1421,17 @@
 }
 
 .conversation-gap.correct-gap {
-    border-color: #16a34a;
-    background: #dcfce7;
+    border-color: #86EFAC;
+    background: #F0FDF4;
+    color: #166534;
+    box-shadow: 0 0 0 4px rgba(34,197,94,.08);
 }
 
 .conversation-gap.incorrect-gap {
-    border-color: #dc2626;
-    background: #fee2e2;
+    border-color: #FCA5A5;
+    background: #FFF1F2;
+    color: #9F1239;
+    box-shadow: 0 0 0 4px rgba(239,68,68,.08);
 }
 
 /* Right Column: Vocabulary Word Bank */
@@ -1535,151 +1579,19 @@
     display: inline;
 }
 
-/* Check Answers Button */
-.check-answers-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 8px 18px;
-    background: #0a1e42;
-    border: none;
-    border-radius: 8px;
-    font-family: 'Inter', sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    color: #ffffff;
-    cursor: pointer;
-    transition: all 0.2s;
-    margin-top: 20px;
-}
-
-.check-answers-btn:hover {
-    background: #1e3a5f;
-}
-
-.check-answers-btn i {
-    font-size: 13px;
-}
-
-.check-answers-btn.retry-btn {
-    background: #ea580c;
-}
-
-.check-answers-btn.retry-btn:hover {
-    background: #c2410c;
-}
-
-.check-answers-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    background: #9ca3af;
-}
-
-.check-answers-btn:disabled:hover {
-    background: #9ca3af;
-}
-
-/* Feedback Popup */
-.feedback-popup-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10000;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-}
-
-.feedback-popup-overlay.show {
-    opacity: 1;
-    visibility: visible;
-}
-
-.feedback-popup {
-    background: #ffffff;
-    border-radius: 16px;
-    padding: 32px;
-    max-width: 400px;
-    width: 90%;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    text-align: center;
-    transform: scale(0.9);
-    transition: transform 0.3s ease;
-}
-
-.feedback-popup-overlay.show .feedback-popup {
-    transform: scale(1);
-}
-
-.feedback-popup-icon {
-    font-size: 40px;
-    margin-bottom: 16px;
-}
-
-.feedback-popup-icon.success {
-    color: #16a34a;
-}
-
-.feedback-popup-icon.partial {
-    color: #ea580c;
-}
-
-.feedback-popup-icon.good {
-    color: #2563eb;
-}
-
-.feedback-popup h3 {
-    font-family: 'Rubik', sans-serif;
-    font-size: 18px;
-    font-weight: 700;
-    color: #1f2937;
-    margin: 0 0 12px 0;
-}
-
-.feedback-popup p {
-    font-family: 'Inter', sans-serif;
-    font-size: 15px;
-    color: #6b7280;
-    margin: 0 0 24px 0;
-}
-
-.feedback-popup-close {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 32px;
-    background: #0a1e42;
-    border: none;
-    border-radius: 10px;
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    color: #ffffff;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-
-.feedback-popup-close:hover {
-    background: #1e3a5f;
-}
-
 /* Answer Feedback */
 .matching-input.correct {
-    border-color: #16a34a;
-    background: #dcfce7;
+    border-color: #86EFAC;
+    background: #F0FDF4;
     color: #166534;
+    box-shadow: 0 0 0 4px rgba(34,197,94,.08);
 }
 
 .matching-input.incorrect {
-    border-color: #dc2626;
-    background: #fee2e2;
-    color: #991b1b;
+    border-color: #FCA5A5;
+    background: #FFF1F2;
+    color: #9F1239;
+    box-shadow: 0 0 0 4px rgba(239,68,68,.08);
 }
 
 .answer-feedback {
@@ -1698,9 +1610,10 @@
 }
 
 .answer-feedback.success {
-    background: #dcfce7;
-    border: 1px solid #86efac;
+    background: #F0FDF4;
+    border: 1px solid #86EFAC;
     color: #166534;
+    box-shadow: 0 0 0 4px rgba(34,197,94,.08);
 }
 
 .answer-feedback.partial {
@@ -1710,9 +1623,10 @@
 }
 
 .answer-feedback.error {
-    background: #fee2e2;
-    border: 1px solid #fca5a5;
-    color: #991b1b;
+    background: #FFF1F2;
+    border: 1px solid #FCA5A5;
+    color: #9F1239;
+    box-shadow: 0 0 0 4px rgba(239,68,68,.08);
 }
 
 /* Results Tab */
@@ -1847,13 +1761,15 @@
 }
 
 .results-item-icon.correct {
-    background: #dcfce7;
+    background: #F0FDF4;
     color: #16a34a;
+    border: 1px solid #86EFAC;
 }
 
 .results-item-icon.incorrect {
-    background: #fee2e2;
-    color: #dc2626;
+    background: #FFF1F2;
+    color: #9F1239;
+    border: 1px solid #FCA5A5;
 }
 
 .results-item-content {
@@ -1877,7 +1793,7 @@
 }
 
 .results-item-answer.correct-answer {
-    color: #16a34a;
+    color: #166534;
     font-weight: 500;
 }
 
@@ -2000,11 +1916,6 @@
                             <p class="intro-text">
                                 In this activity, we'll explore our relationship with technology through a catchy song by Rhett & Link.
                             </p>
-                            <button class="audio-player-btn" id="intro-audio-btn">
-                                <i class="fa-solid fa-volume-high"></i>
-                                <span>Listen to Introduction</span>
-                            </button>
-                            <audio id="intro-audio" src="../../../assets/activities/get-off-the-phone/intro.mp3" preload="auto"></audio>
                         </div>
                         <div class="intro-sidebar">
                             <div class="info-card">
@@ -2064,10 +1975,7 @@
                         </div>
                         <p class="exercise-instructions">Rhett and Link are having a conversation about phones. Listen and complete the missing gaps with the words from the box.</p>
 
-                        <audio id="conversation-audio" controls preload="auto" class="conversation-audio-player">
-                            <source src="../../../assets/activities/get-off-the-phone/pre-listening.mp3" type="audio/mpeg">
-                            Your browser does not support the audio element.
-                        </audio>
+                        <div id="conversation-player-container" style="width: 100%; max-width: 520px; margin: 0 auto 24px auto;"></div>
 
                         <!-- Two Column Layout -->
                         <div class="conversation-layout">
@@ -2152,9 +2060,9 @@
                     <div class="exercise-section">
                         <div class="exercise-header">
                             <span class="exercise-number">3</span>
-                            <h3>Making Predictions</h3>
+                            <h3>Making predictions</h3>
                         </div>
-                        <p class="exercise-instructions">Based on the conversation you just heard, which of the following predictions seem accurate for the song?</p>
+                        <p class="exercise-instructions">Based on the conversation, which of the following predictions seem accurate? More than one answer may be correct.</p>
                         
                         <div class="prediction-checklist" id="prediction-checklist">
                             <div class="prediction-item" data-correct="true">
@@ -2194,9 +2102,9 @@
                     <div class="exercise-section">
                         <div class="exercise-header">
                             <span class="exercise-number">4</span>
-                            <h3>Vocabulary Matching</h3>
+                            <h3>Matching vocabulary</h3>
                         </div>
-                        <p class="exercise-instructions">Match the lyrics to the correct images. Drag and drop each phrase from the song under the picture that best describes it.</p>
+                        <p class="exercise-instructions">Match the phrases to the images. Drag and drop each phrase under the picture that best describes it.</p>
                         
                         <!-- Vocabulary Words Pool -->
                         <div class="vocab-pool" id="vocab-pool">
@@ -2276,28 +2184,28 @@
 
                 <!-- Listening Tab -->
                 <div class="tab-content" id="listening">
-                    <!-- Video -->
-                    <div class="video-embed">
-                        <iframe
-                            src="https://www.youtube.com/embed/nfUD0WhE264"
-                            title="Get Off the Phone - Rhett & Link"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen>
-                        </iframe>
-                    </div>
 
                     <!-- Exercise 1: Listening Only - Main Idea -->
                     <div class="exercise-section">
                         <div class="exercise-header">
-                            <span class="exercise-number">1</span>
+                            <span class="exercise-number">5</span>
                             <h3>Getting the Main Idea</h3>
                         </div>
-                        <p class="exercise-instructions">Listen to the song once without interruptions. Pay attention to the main message and choose the alternative that best describes it.</p>
+                        <p class="exercise-instructions">Listen to the song for the first time. Choose the alternative that best describes the main idea of the song.</p>
+                        
+                        <div class="video-embed">
+                            <iframe
+                                src="https://www.youtube.com/embed/nfUD0WhE264"
+                                title="Get Off the Phone - Rhett & Link"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                            </iframe>
+                        </div>
                         
                         <div class="prediction-checklist" id="main-idea-checklist">
                             <div class="prediction-item" data-correct="false">
                                 <div class="prediction-checkbox"><i class="fa-solid fa-check"></i></div>
-                                <span class="prediction-text">The song is about the benefits of using technology to share moments with friends and family.</span>
+                                <span class="prediction-text">The song warns that spending too much time on phones is making people forget important skills and knowledge.</span>
                             </div>
                             <div class="prediction-item" data-correct="true">
                                 <div class="prediction-checkbox"><i class="fa-solid fa-check"></i></div>
@@ -2305,7 +2213,7 @@
                             </div>
                             <div class="prediction-item" data-correct="false">
                                 <div class="prediction-checkbox"><i class="fa-solid fa-check"></i></div>
-                                <span class="prediction-text">The song explains how the government uses phones to spy on people.</span>
+                                <span class="prediction-text">The song argues that phones are dangerous because the government uses them to spy on and control people.</span>
                             </div>
                         </div>
 
@@ -2322,7 +2230,7 @@
                     <!-- Exercise 2: True or False -->
                     <div class="exercise-section">
                         <div class="exercise-header">
-                            <span class="exercise-number">2</span>
+                            <span class="exercise-number">6</span>
                             <h3>True or False</h3>
                         </div>
                         <p class="exercise-instructions">Listen again and decide if the following statements are True or False.</p>
@@ -2349,7 +2257,7 @@
                                 </div>
                             </div>
                             <div class="tf-item" data-correct="false">
-                                <p class="tf-statement">4. The stereotypical teen is eager to be part of family game night.</p>
+                                <p class="tf-statement">4. The stereotypical teen is excited to be part of family game night.</p>
                                 <div class="tf-buttons">
                                     <button class="tf-btn" data-value="true">True</button>
                                     <button class="tf-btn" data-value="false">False</button>
@@ -2384,116 +2292,80 @@
                     <!-- Exercise 3: Complete the Sentences -->
                     <div class="exercise-section">
                         <div class="exercise-header">
-                            <span class="exercise-number">3</span>
+                            <span class="exercise-number">7</span>
                             <h3>Complete the Sentences</h3>
                         </div>
                         <p class="exercise-instructions">Watch the video carefully and complete the sentences. Choose between Past Simple, Past Continuous, and their negative forms. The video context will help you decide!</p>
                         <div class="sentence-completion-list" id="sentence-completion-list">
-                            <div class="sentence-item" data-correct="b,a">
+                            <div class="sentence-item">
                                 <p class="sentence-text">1. The man
-                                    <select class="sentence-dropdown">
-                                        <option value=""></option>
-                                        <option value="a">ate</option>
-                                        <option value="b">didn't eat</option>
-                                        <option value="c">was eating</option>
-                                    </select>
+                                    <span class="choice-group" data-correct="didn't eat">
+                                        <span class="choice-option">didn't eat</span> <span class="choice-option">was eating</span>
+                                    </span>
                                     his dessert because he
-                                    <select class="sentence-dropdown">
-                                        <option value=""></option>
-                                        <option value="a">fumbled</option>
-                                        <option value="b">was fumbling</option>
-                                        <option value="c">didn't fumble</option>
-                                    </select>
+                                    <span class="choice-group" data-correct="fumbled">
+                                        <span class="choice-option">was fumbling</span> <span class="choice-option">fumbled</span>
+                                    </span>
                                     through Instagram filters first.
                                 </p>
                             </div>
-                            <div class="sentence-item" data-correct="a,b">
+                            <div class="sentence-item">
                                 <p class="sentence-text">2. Everyone
-                                    <select class="sentence-dropdown">
-                                        <option value=""></option>
-                                        <option value="a">decided</option>
-                                        <option value="b">were deciding</option>
-                                        <option value="c">didn't decide</option>
-                                    </select>
+                                    <span class="choice-group" data-correct="decided">
+                                        <span class="choice-option">decided</span> <span class="choice-option">were deciding</span>
+                                    </span>
                                     to make a documentary of the street performer, so they
-                                    <select class="sentence-dropdown">
-                                        <option value=""></option>
-                                        <option value="a">filmed</option>
-                                        <option value="b">were filming</option>
-                                        <option value="c">didn't film</option>
-                                    </select>
+                                    <span class="choice-group" data-correct="were filming">
+                                        <span class="choice-option">filmed</span> <span class="choice-option">were filming</span>
+                                    </span>
                                     instead of enjoying the show directly.
                                 </p>
                             </div>
-                            <div class="sentence-item" data-correct="a,b">
+                            <div class="sentence-item">
                                 <p class="sentence-text">3. The couple
-                                    <select class="sentence-dropdown">
-                                        <option value=""></option>
-                                        <option value="a">were</option>
-                                        <option value="b">weren't</option>
-                                        <option value="c">was</option>
-                                    </select>
+                                    <span class="choice-group" data-correct="were">
+                                        <span class="choice-option">were</span> <span class="choice-option">weren't</span>
+                                    </span>
                                     at an Italian restaurant together, but they
-                                    <select class="sentence-dropdown">
-                                        <option value=""></option>
-                                        <option value="a">touched</option>
-                                        <option value="b">didn't touch</option>
-                                        <option value="c">were touching</option>
-                                    </select>
+                                    <span class="choice-group" data-correct="didn't touch">
+                                        <span class="choice-option">touched</span> <span class="choice-option">didn't touch</span>
+                                    </span>
                                     each other—they only touched their phones.
                                 </p>
                             </div>
-                            <div class="sentence-item" data-correct="a,b">
+                            <div class="sentence-item">
                                 <p class="sentence-text">4. The mother
-                                    <select class="sentence-dropdown">
-                                        <option value=""></option>
-                                        <option value="a">demonstrated</option>
-                                        <option value="b">was demonstrating</option>
-                                        <option value="c">didn't demonstrate</option>
-                                    </select>
+                                    <span class="choice-group" data-correct="demonstrated">
+                                        <span class="choice-option">demonstrated</span> <span class="choice-option">was demonstrating</span>
+                                    </span>
                                     a carousel ride, but her son
-                                    <select class="sentence-dropdown">
-                                        <option value=""></option>
-                                        <option value="a">paid</option>
-                                        <option value="b">didn't pay</option>
-                                        <option value="c">was paying</option>
-                                    </select>
+                                    <span class="choice-group" data-correct="didn't pay">
+                                        <span class="choice-option">paid</span> <span class="choice-option">didn't pay</span>
+                                    </span>
                                     attention because he was texting.
                                 </p>
                             </div>
-                            <div class="sentence-item" data-correct="b,a">
+                            <div class="sentence-item">
                                 <p class="sentence-text">5. The dad
-                                    <select class="sentence-dropdown">
-                                        <option value=""></option>
-                                        <option value="a">played</option>
-                                        <option value="b">didn't play</option>
-                                        <option value="c">was playing</option>
-                                    </select>
+                                    <span class="choice-group" data-correct="didn't play">
+                                        <span class="choice-option">played</span> <span class="choice-option">didn't play</span>
+                                    </span>
                                     with baby Ethan because he
-                                    <select class="sentence-dropdown">
-                                        <option value=""></option>
-                                        <option value="a">posted</option>
-                                        <option value="b">was posting</option>
-                                        <option value="c">didn't post</option>
-                                    </select>
+                                    <span class="choice-group" data-correct="posted">
+                                        <span class="choice-option">posted</span> <span class="choice-option">was posting</span>
+                                    </span>
                                     pictures to Facebook instead.
                                 </p>
                             </div>
-                            <div class="sentence-item" data-correct="a,a">
+                            <div class="sentence-item">
                                 <p class="sentence-text">6. When the hotdog man
-                                    <select class="sentence-dropdown">
-                                        <option value=""></option>
-                                        <option value="a">made</option>
-                                        <option value="b">was making</option>
-                                        <option value="c">didn't make</option>
-                                    </select>
+                                    <span class="choice-group" data-correct="made">
+                                        <span class="choice-option">made</span> <span class="choice-option">was making</span>
+                                    </span>
                                     an emergency call, the singers
-                                    <select class="sentence-dropdown">
-                                        <option value=""></option>
-                                        <option value="a">thought</option>
-                                        <option value="b">were thinking</option>
-                                        <option value="c">didn't think</option>
-                                    </select>
+                                    <span class="choice-group" data-correct="thought">
+                                        <span class="choice-option">thought</span> <span class="choice-option">were thinking</span>
+                                    </span>
                                     he was being disrespectful.
                                 </p>
                             </div>
@@ -2501,7 +2373,7 @@
 
                         <div style="display: flex; gap: 12px; align-items: center;">
                             <button class="check-answers-btn" id="check-sentences">
-                                <i class="fa-solid fa-circle-check"></i> Check answers
+                                <i class="fa-solid fa-check"></i> Check answers
                             </button>
                             <button class="check-answers-btn retry-btn" id="retry-sentences" disabled>
                                 <i class="fa-solid fa-rotate-right"></i> Try again
@@ -2515,7 +2387,7 @@
                     <!-- Exercise 4: Giving Advice -->
                     <div class="exercise-section">
                         <div class="exercise-header">
-                            <span class="exercise-number">4</span>
+                            <span class="exercise-number">8</span>
                             <h3>Giving Advice</h3>
                         </div>
                         <p class="exercise-instructions">Read each problem and match it with the most appropriate advice.</p>
@@ -2758,6 +2630,7 @@ It's crawling with e-coli bacteria anyway.
 
     <script src="../../../js/layout.js"></script>
     <script src="../../../js/script.js" defer></script>
+    <script src="../../../js/checkanswers.js"></script>
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         const tabBtns = document.querySelectorAll('.tab-btn');
@@ -2767,33 +2640,8 @@ It's crawling with e-coli bacteria anyway.
         const tabs = ['introduction', 'pre-listening', 'listening', 'post-listening', 'lyrics'];
         let currentTabIndex = 0;
 
-        // Audio Player - Introduction
-        const introAudioBtn = document.getElementById('intro-audio-btn');
-        const introAudio = document.getElementById('intro-audio');
-
-        if (introAudioBtn && introAudio) {
-            introAudioBtn.addEventListener('click', function() {
-                if (introAudio.paused) {
-                    introAudio.play();
-                    introAudioBtn.classList.add('playing');
-                    introAudioBtn.querySelector('i').className = 'fa-solid fa-pause';
-                    introAudioBtn.querySelector('span').textContent = 'Pause';
-                } else {
-                    introAudio.pause();
-                    introAudioBtn.classList.remove('playing');
-                    introAudioBtn.querySelector('i').className = 'fa-solid fa-volume-high';
-                    introAudioBtn.querySelector('span').textContent = 'Listen to Introduction';
-                }
-            });
-
-            introAudio.addEventListener('ended', function() {
-                introAudioBtn.classList.remove('playing');
-                introAudioBtn.querySelector('i').className = 'fa-solid fa-volume-high';
-                introAudioBtn.querySelector('span').textContent = 'Listen to Introduction';
-            });
-        }
-
-        // Conversation audio now uses native HTML5 controls, no custom JS needed
+        // Initialize Custom Audio Player for Conversation
+        new EnbreakAudioPlayer('conversation-player-container', '../../../assets/activities/get-off-the-phone/pre-listening.mp3');
 
         function switchTab(tabId, scrollToTop = false) {
             tabBtns.forEach(btn => btn.classList.remove('active'));
@@ -2905,32 +2753,31 @@ It's crawling with e-coli bacteria anyway.
                 let allAnswered = true;
 
                 items.forEach(item => {
+                    const buttons = item.querySelectorAll('.tf-btn');
+                    buttons.forEach(btn => btn.disabled = true);
+
                     const selectedBtn = item.querySelector('.tf-btn.selected');
+                    const correctValue = item.dataset.correct;
+                    const correctBtn = item.querySelector(`.tf-btn[data-value="${correctValue}"]`);
+
                     if (!selectedBtn) {
-                        allAnswered = false;
+                        // No selection: mark correct answer to show what it was
                         return;
                     }
 
                     const userValue = selectedBtn.dataset.value;
-                    const correctValue = item.dataset.correct;
-                    const correctBtn = item.querySelector(`.tf-btn[data-value="${correctValue}"]`);
 
                     if (userValue === correctValue) {
                         selectedBtn.classList.add('correct');
                         correctCount++;
                     } else {
                         selectedBtn.classList.add('incorrect');
-                        correctBtn.classList.add('correct');
                     }
                 });
 
-                if (!allAnswered) {
-                    showFeedbackPopup(-1, 1);
-                    return;
-                }
-
                 showFeedbackPopup(correctCount, total);
                 retryTfBtn.disabled = false;
+                checkTfBtn.disabled = true;
             });
         }
 
@@ -2939,9 +2786,13 @@ It's crawling with e-coli bacteria anyway.
                 const items = tfList.querySelectorAll('.tf-item');
                 items.forEach(item => {
                     const buttons = item.querySelectorAll('.tf-btn');
-                    buttons.forEach(btn => btn.classList.remove('selected', 'correct', 'incorrect'));
+                    buttons.forEach(btn => {
+                        btn.classList.remove('selected', 'correct', 'incorrect');
+                        btn.disabled = false;
+                    });
                 });
                 retryTfBtn.disabled = true;
+                checkTfBtn.disabled = false;
             });
         }
 
@@ -2950,31 +2801,40 @@ It's crawling with e-coli bacteria anyway.
         const retrySentencesBtn = document.getElementById('retry-sentences');
         const sentenceList = document.getElementById('sentence-completion-list');
 
+        // Setup click handlers for choice options
+        if (sentenceList) {
+            sentenceList.addEventListener('click', function(e) {
+                if (e.target.classList.contains('choice-option')) {
+                    // Find parent group
+                    const group = e.target.closest('.choice-group');
+                    // Deselect siblings
+                    group.querySelectorAll('.choice-option').forEach(opt => {
+                        opt.classList.remove('selected', 'correct', 'incorrect');
+                    });
+                    // Select this
+                    e.target.classList.add('selected');
+                }
+            });
+        }
+
         if (checkSentencesBtn) {
             checkSentencesBtn.addEventListener('click', function() {
-                const items = sentenceList.querySelectorAll('.sentence-item');
+                const groups = sentenceList.querySelectorAll('.choice-group');
                 let correctCount = 0;
-                let total = 0;
+                let total = groups.length;
 
-                items.forEach(item => {
-                    const dropdowns = item.querySelectorAll('.sentence-dropdown');
-                    const correctValues = item.dataset.correct.split(',');
-
-                    // Clear previous classes
-                    dropdowns.forEach(dropdown => {
-                        dropdown.classList.remove('correct', 'incorrect');
-                    });
-
-                    dropdowns.forEach((dropdown, index) => {
-                        total++;
-
-                        if (dropdown.value === correctValues[index]) {
-                            dropdown.classList.add('correct');
+                groups.forEach(group => {
+                    const selected = group.querySelector('.choice-option.selected');
+                    const correctAnswer = group.dataset.correct;
+                    
+                    if (selected) {
+                        if (selected.textContent.trim() === correctAnswer) {
+                            selected.classList.add('correct');
                             correctCount++;
                         } else {
-                            dropdown.classList.add('incorrect');
+                            selected.classList.add('incorrect');
                         }
-                    });
+                    }
                 });
 
                 showFeedbackPopup(correctCount, total);
@@ -2984,13 +2844,9 @@ It's crawling with e-coli bacteria anyway.
 
         if (retrySentencesBtn) {
             retrySentencesBtn.addEventListener('click', function() {
-                const items = sentenceList.querySelectorAll('.sentence-item');
-                items.forEach(item => {
-                    const dropdowns = item.querySelectorAll('.sentence-dropdown');
-                    dropdowns.forEach(dropdown => {
-                        dropdown.classList.remove('correct', 'incorrect');
-                        dropdown.value = '';
-                    });
+                const options = sentenceList.querySelectorAll('.choice-option');
+                options.forEach(opt => {
+                    opt.classList.remove('selected', 'correct', 'incorrect');
                 });
                 retrySentencesBtn.disabled = true;
             });
@@ -3161,8 +3017,6 @@ It's crawling with e-coli bacteria anyway.
                             item.classList.add('incorrect');
                             const adviceEl = document.querySelector(`.advice-item[data-id="${connection.advice}"]`);
                             adviceEl.classList.add('incorrect');
-                        } else {
-                            item.classList.add('incorrect');
                         }
                     }
                 });
@@ -3779,18 +3633,17 @@ It's crawling with e-coli bacteria anyway.
         if (checkMainIdeaBtn) {
             checkMainIdeaBtn.addEventListener('click', function() {
                 const selectedItem = mainIdeaChecklist.querySelector('.prediction-item.selected');
-                if (!selectedItem) {
-                    showFeedbackPopup(-1, 1); // Special case for no answer
-                    return;
-                }
-
-                const isCorrect = selectedItem.dataset.correct === 'true';
                 
-                if (isCorrect) {
-                    selectedItem.classList.add('correct');
-                    showFeedbackPopup(1, 1);
+                if (selectedItem) {
+                    const isCorrect = selectedItem.dataset.correct === 'true';
+                    if (isCorrect) {
+                        selectedItem.classList.add('correct');
+                        showFeedbackPopup(1, 1);
+                    } else {
+                        selectedItem.classList.add('incorrect');
+                        showFeedbackPopup(0, 1);
+                    }
                 } else {
-                    selectedItem.classList.add('incorrect');
                     showFeedbackPopup(0, 1);
                 }
 
@@ -3811,56 +3664,7 @@ It's crawling with e-coli bacteria anyway.
         updateNavButtons();
     });
 
-    // Feedback Popup
-    const feedbackPopupOverlay = document.createElement('div');
-    feedbackPopupOverlay.className = 'feedback-popup-overlay';
-    feedbackPopupOverlay.innerHTML = `
-        <div class="feedback-popup">
-            <div class="feedback-popup-icon"></div>
-            <h3></h3>
-            <p></p>
-            <button class="feedback-popup-close">Close</button>
-        </div>
-    `;
-    document.body.appendChild(feedbackPopupOverlay);
 
-    function showFeedbackPopup(correct, total) {
-        const icon = feedbackPopupOverlay.querySelector('.feedback-popup-icon');
-        const title = feedbackPopupOverlay.querySelector('h3');
-        const message = feedbackPopupOverlay.querySelector('p');
-
-        if (correct === -1) correct = 0;
-
-        const percentage = (correct / total) * 100;
-
-        if (correct === total) {
-            icon.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
-            icon.className = 'feedback-popup-icon success';
-            title.textContent = 'Perfect!';
-        } else if (percentage >= 70) {
-            icon.innerHTML = '<i class="fa-solid fa-thumbs-up"></i>';
-            icon.className = 'feedback-popup-icon good';
-            title.textContent = 'Good!';
-        } else {
-            icon.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i>';
-            icon.className = 'feedback-popup-icon partial';
-            title.textContent = 'Keep trying!';
-        }
-
-        message.textContent = `${correct} out of ${total} answers correct`;
-
-        feedbackPopupOverlay.classList.add('show');
-    }
-
-    feedbackPopupOverlay.querySelector('.feedback-popup-close').addEventListener('click', () => {
-        feedbackPopupOverlay.classList.remove('show');
-    });
-
-    feedbackPopupOverlay.addEventListener('click', (e) => {
-        if (e.target === feedbackPopupOverlay) {
-            feedbackPopupOverlay.classList.remove('show');
-        }
-    });
     </script>
 </body>
 </html>
