@@ -17,127 +17,12 @@
     <script src="../../../js/audioplayer.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rubik:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../../../css/activities.css">
+    <link rel="stylesheet" href="../../../css/tipbox.css">
     <style>
-/* Activity Page Layout */
-.activity-page {
-    background: #f8f9fa;
-    min-height: 100vh;
-}
-
 /* Hero Section */
 .activity-hero {
-    position: relative;
-    height: 280px;
     background: url('../../../assets/activities/getoff.jpg') center 30%/cover no-repeat;
-}
-
-.activity-hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, rgba(10, 30, 66, 0.4) 0%, rgba(10, 30, 66, 0.85) 100%);
-}
-
-.activity-hero-content {
-    position: relative;
-    z-index: 1;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 40px;
-    padding-bottom: 60px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.activity-hero .breadcrumb {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 13px;
-    margin-bottom: 12px;
-}
-
-.activity-hero .breadcrumb a {
-    color: rgba(255, 255, 255, 0.7);
-    text-decoration: none;
-    transition: color 0.2s;
-}
-
-.activity-hero .breadcrumb a:hover {
-    color: #ffffff;
-}
-
-.activity-hero .breadcrumb-separator {
-    color: rgba(255, 255, 255, 0.4);
-}
-
-.activity-hero .breadcrumb-current {
-    color: #ffffff;
-}
-
-.activity-hero h1 {
-    font-family: 'Rubik', sans-serif;
-    font-size: 36px;
-    font-weight: 700;
-    color: #ffffff;
-    margin: 0 0 16px 0;
-}
-
-.activity-hero-badges {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-
-.hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-family: 'Inter', sans-serif;
-    font-size: 12px;
-    font-weight: 600;
-    background: rgba(255, 255, 255, 0.15);
-    color: #ffffff;
-    backdrop-filter: blur(8px);
-}
-
-.hero-badge i {
-    font-size: 11px;
-}
-
-/* Tabs Container */
-.activity-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 40px 80px;
-}
-
-.tabs-wrapper {
-    background: #ffffff;
-    border-radius: 0 0 16px 16px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    margin-top: 0;
-    position: relative;
-    z-index: 10;
-    overflow: hidden;
-}
-
-/* Tab Navigation */
-.tab-nav {
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid #e5e7eb;
-    background: #fafafa;
-    overflow-x: auto;
-}
-
-.tab-nav-main {
-    display: flex;
-    flex: 1;
 }
 
 .tab-nav-divider {
@@ -148,63 +33,6 @@
     display: flex;
     margin-left: auto;
     padding-right: 0;
-}
-
-.tab-btn {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 18px 24px;
-    background: none;
-    border: none;
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    color: #6b7280;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: all 0.2s;
-    position: relative;
-}
-
-.tab-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    color: #9ca3af;
-}
-
-.tab-btn:hover {
-    color: #374151;
-    background: #f3f4f6;
-}
-
-.tab-btn.active {
-    color: #ea580c;
-    background: #ffffff;
-}
-
-.tab-btn.active::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: #ea580c;
-}
-
-.tab-btn i {
-    font-size: 14px;
-}
-
-/* Tab Content */
-.tab-content {
-    display: none;
-    padding: 40px 60px;
-}
-
-.tab-content.active {
-    display: block;
 }
 
 /* Introduction Tab */
@@ -1227,60 +1055,6 @@
     white-space: pre-line;
 }
 
-/* Navigation Buttons */
-.activity-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 24px 40px;
-    border-top: 1px solid #e5e7eb;
-    background: #fafafa;
-}
-
-.nav-btn {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 24px;
-    border-radius: 10px;
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-
-.nav-btn-back {
-    background: #ffffff;
-    border: 2px solid #e5e7eb;
-    color: #6b7280;
-}
-
-.nav-btn-back:hover:not(:disabled) {
-    border-color: #d1d5db;
-    color: #374151;
-}
-
-.nav-btn-next {
-    background: #ea580c;
-    border: 2px solid #ea580c;
-    color: #ffffff;
-}
-
-.nav-btn-next:hover:not(:disabled) {
-    background: #dc2626;
-    border-color: #dc2626;
-}
-
-.nav-btn:disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
-}
-
-.nav-btn-back.hidden {
-    visibility: hidden;
-}
-
 /* Conversation Exercise - Two Column Layout */
 .conversation-layout {
     display: grid;
@@ -1515,30 +1289,6 @@
         width: 100%;
         justify-content: flex-end;
     }
-}
-
-/* Tip Box */
-.tip-box {
-    background: #eff6ff;
-    border: 1px solid #bfdbfe;
-    border-radius: 10px;
-    padding: 16px;
-    margin-top: 16px;
-    display: flex;
-    gap: 12px;
-}
-
-.tip-box i {
-    color: #2563eb;
-    font-size: 16px;
-    margin-top: 2px;
-}
-
-.tip-box p {
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    color: #1e40af;
-    margin: 0;
 }
 
 .lyrics-tip-box {
@@ -1805,31 +1555,6 @@
 }
 
 @media (max-width: 768px) {
-    .activity-hero {
-        height: 220px;
-    }
-
-    .activity-hero-content {
-        padding: 24px;
-    }
-
-    .activity-hero h1 {
-        font-size: 28px;
-    }
-
-    .activity-container {
-        padding: 0 16px 60px;
-    }
-
-    .tab-nav {
-        gap: 0;
-        flex-wrap: wrap;
-    }
-
-    .tab-nav-main {
-        width: 100%;
-    }
-
     .tab-nav-divider {
         display: none;
     }
@@ -1840,30 +1565,16 @@
         border-top: 1px solid #e5e7eb;
         background: #f3f4f6;
     }
-
-    .tab-btn {
-        padding: 14px 16px;
-        font-size: 13px;
-    }
-
-    .tab-btn span {
-        display: none;
-    }
-
-    .tab-content {
-        padding: 24px;
-    }
-
-    .activity-nav {
-        padding: 16px 24px;
-    }
-
-    .nav-btn {
-        padding: 10px 18px;
-        font-size: 13px;
-    }
 }
     </style>
+    <script>
+        const activityConfig = {
+            type: 'listening',
+            tabs: ['introduction', 'pre-listening', 'listening', 'post-listening', 'lyrics'],
+            hiddenTab: 'lyrics'
+        };
+    </script>
+    <script src="../../../js/tabs.js"></script>
 </head>
 <body>
 
@@ -2637,90 +2348,9 @@ It's crawling with e-coli bacteria anyway.
         const tabContents = document.querySelectorAll('.tab-content');
         const btnBack = document.getElementById('btn-back');
         const btnNext = document.getElementById('btn-next');
-        const tabs = ['introduction', 'pre-listening', 'listening', 'post-listening', 'lyrics'];
-        let currentTabIndex = 0;
 
         // Initialize Custom Audio Player for Conversation
         new EnbreakAudioPlayer('conversation-player-container', '../../../assets/activities/get-off-the-phone/pre-listening.mp3');
-
-        function switchTab(tabId, scrollToTop = false) {
-            tabBtns.forEach(btn => btn.classList.remove('active'));
-            tabContents.forEach(content => content.classList.remove('active'));
-
-            const activeBtn = document.querySelector(`[data-tab="${tabId}"]`);
-            const activeContent = document.getElementById(tabId);
-
-            if (activeBtn) activeBtn.classList.add('active');
-            if (activeContent) activeContent.classList.add('active');
-
-            currentTabIndex = tabs.indexOf(tabId);
-            updateNavButtons();
-
-            if (tabId === 'post-listening') {
-                setTimeout(() => {
-                    if (typeof resizeCanvas === 'function') resizeCanvas();
-                }, 50);
-            }
-
-            if (scrollToTop) {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-        }
-
-        function updateNavButtons() {
-            const navContainer = document.querySelector('.activity-nav');
-            
-            // Hide nav container completely on Lyrics tab (index 4)
-            if (currentTabIndex === 4) {
-                navContainer.style.display = 'none';
-                return;
-            }
-            
-            navContainer.style.display = 'flex';
-
-            btnBack.disabled = currentTabIndex === 0;
-            
-            // Hide Back button on first tab
-            if (currentTabIndex === 0) {
-                btnBack.classList.add('hidden');
-            } else {
-                btnBack.classList.remove('hidden');
-            }
-
-            // Change button text based on current tab
-            if (currentTabIndex === 3) { // Post-listening tab
-                btnNext.innerHTML = 'Back to Activities';
-            } else {
-                btnNext.innerHTML = 'Next <i class="fa-solid fa-arrow-right"></i>';
-            }
-            
-            btnNext.disabled = false;
-            btnNext.style.display = 'flex';
-        }
-
-        tabBtns.forEach(btn => {
-            btn.addEventListener('click', function() {
-                const tabId = this.dataset.tab;
-                switchTab(tabId, false);
-            });
-        });
-
-        btnBack.addEventListener('click', function() {
-            if (currentTabIndex > 0) {
-                switchTab(tabs[currentTabIndex - 1], true);
-            }
-        });
-
-        btnNext.addEventListener('click', function() {
-            if (currentTabIndex === 3) { // Post-listening
-                window.location.href = '../actividades.html';
-                return;
-            }
-            
-            if (currentTabIndex < tabs.length - 1) {
-                switchTab(tabs[currentTabIndex + 1], true);
-            }
-        });
 
         // True/False button functionality
         const tfBtns = document.querySelectorAll('.tf-btn');

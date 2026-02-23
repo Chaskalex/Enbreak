@@ -1,0 +1,1812 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enbreak | Family Relationships</title>
+    <link rel="icon" type="image/x-icon" href="../../../favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../favicon/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../favicon/apple-touch-icon.png">
+    <link rel="manifest" href="../../../favicon/site.webmanifest">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rubik:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/buttons.css">
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../../../css/activities.css">
+    <link rel="stylesheet" href="../../../css/tipbox.css">
+    <style>
+/* Hero Section */
+.activity-hero {
+    background: url('../../../assets/activities/family.jpg') center center/cover no-repeat;
+}
+
+/* Intro Styles */
+.intro-grid {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 32px;
+    align-items: start;
+}
+
+.intro-main {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.intro-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 1.8;
+    color: #4b5563;
+}
+
+.intro-text strong {
+    color: #ea580c;
+}
+
+.intro-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 380px;
+}
+
+.info-card {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 12px;
+    display: flex;
+    gap: 10px;
+}
+
+.info-card-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: #ffedd5;
+    color: #ea580c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+.info-card-content h4 {
+    font-family: 'Rubik', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+    margin: 0 0 4px 0;
+}
+
+.info-card-content p {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #6b7280;
+    margin: 0;
+}
+
+/* General Exercise Section Styles */
+.exercise-section {
+    margin-bottom: 40px;
+}
+
+.exercise-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.exercise-number {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #ea580c;
+    color: #ffffff;
+    font-family: 'Rubik', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.exercise-header h3 {
+    font-family: 'Rubik', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #1f2937;
+    margin: 0;
+}
+
+.exercise-instructions {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: #6b7280;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+/* Completion Box */
+.completion-box {
+    background: linear-gradient(135deg, #dcfce7 0%, #d1fae5 100%);
+    border: 1px solid #86efac;
+    border-radius: 12px;
+    padding: 24px;
+    margin-top: 32px;
+}
+
+.completion-box h4 {
+    font-family: 'Rubik', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #166534;
+    margin: 0 0 12px 0;
+}
+
+.completion-box p {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #166534;
+    margin: 0 0 16px 0;
+}
+
+.completion-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.completion-list li {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #166534;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.completion-list li i {
+    color: #16a34a;
+}
+
+/* Family Photo Banner */
+.family-photo-container {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 32px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
+
+.family-photo {
+    width: 100%;
+    height: 360px;
+    object-fit: cover;
+    object-position: center 5%;
+    display: block;
+}
+
+.family-photo-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 32px 20px 16px;
+    background: linear-gradient(to top, rgba(0,0,0,0.55), transparent);
+    font-family: 'Rubik', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    letter-spacing: 0.3px;
+}
+
+/* Combo faces for result cards */
+.combo-faces {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0;
+}
+
+.combo-faces .face-img-wrapper {
+    width: 75px;
+    height: 75px;
+}
+
+.result-card .combo-faces .face-img-wrapper {
+    border-color: #e5e7eb;
+}
+
+/* Family sentence cards */
+.family-sentences {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.family-sentence-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    background: #fff7ed;
+    border: 1px solid #fed7aa;
+    border-radius: 14px;
+    padding: 16px 20px;
+}
+
+.family-sentence-faces {
+    display: flex;
+    gap: 12px;
+    flex-shrink: 0;
+    justify-content: center;
+    width: 100%;
+}
+
+.face-sentence-person {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.face-sentence-name {
+    font-family: 'Rubik', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: #92400e;
+}
+
+.family-sentence-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    color: #374151;
+    line-height: 1.7;
+    text-align: center;
+    width: 100%;
+}
+
+.family-sentence-text p {
+    margin: 0;
+}
+
+.family-sentence-text p + p {
+    margin-top: 4px;
+}
+
+.family-sentence-text strong {
+    color: #ea580c;
+}
+
+@media (max-width: 600px) {
+    .family-sentence-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .family-sentences {
+        grid-template-columns: 1fr;
+    }
+}
+
+.family-sentence-card.full-width {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+}
+.family-sentence-card.full-width .family-sentence-faces {
+    width: auto;
+}
+.family-sentence-card.full-width .family-sentence-text {
+    width: auto;
+    text-align: left;
+}
+@media (max-width: 768px) {
+    .family-sentence-card.full-width {
+        flex-direction: column;
+        text-align: center;
+    }
+    .family-sentence-card.full-width .family-sentence-text {
+        text-align: center;
+    }
+}
+
+/* Face Cards */
+.face-cards-group {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.face-cards-row {
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 0;
+}
+
+.face-symbol {
+    font-family: 'Rubik', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #ea580c;
+    user-select: none;
+    flex-shrink: 0;
+    align-self: center;
+}
+
+.face-card {
+    width: 130px;
+    height: 185px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 12px !important;
+}
+
+.face-card.result-card {
+    width: 195px;
+}
+
+.face-card.adult {
+    background-color: #f9fafb !important;
+    border-color: #e5e7eb !important;
+}
+.face-card.adult:hover {
+    border-color: #ea580c !important;
+}
+
+.face-card.child {
+    background-color: #f9fafb !important;
+    border-color: #e5e7eb !important;
+}
+.face-card.child:hover {
+    border-color: #ea580c !important;
+}
+
+/* Family Tree Styles */
+.family-tree-container { overflow-x: auto; padding: 32px 16px; }
+.tree-generation { display: flex; justify-content: center; align-items: flex-start; gap: 40px; flex-wrap: wrap; }
+.tree-branch { display: flex; align-items: center; gap: 0; }
+.tree-member { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.tree-photo { width: 62px; height: 62px; border-radius: 50%; overflow: hidden; border: 3px solid #e5e7eb; }
+.tree-photo img { width: 100%; height: 100%; object-fit: cover; }
+.tree-photo.grandparent-photo { width: 68px; height: 68px; border-color: #a855f7; }
+.tree-photo.parent-photo { border-color: #3b82f6; }
+.tree-photo.me-photo { border-color: #ea580c; border-width: 4px; }
+.tree-photo.sibling-photo { border-color: #10b981; }
+.tree-photo.cousin-photo { border-color: #f59e0b; }
+.tree-name { font-family: 'Rubik', sans-serif; font-size: 13px; font-weight: 600; color: #1f2937; }
+.tree-relation { font-family: 'Inter', sans-serif; font-size: 11px; color: #6b7280; }
+.tree-couple-line { width: 28px; height: 2px; background: #d1d5db; flex-shrink: 0; margin-top: -40px; }
+.tree-vertical-line { width: 2px; height: 36px; background: #d1d5db; margin: 6px auto; }
+.tree-horizontal-bar { display: flex; justify-content: center; align-items: flex-start; position: relative; gap: 40px; }
+.tree-horizontal-bar::before { content: ''; position: absolute; top: 0; left: 25%; right: 25%; height: 2px; background: #d1d5db; }
+.tree-branch-down { display: flex; flex-direction: column; align-items: center; }
+.tree-branch-down .tree-vertical-line { margin: 0; }
+.me-badge { background: #ea580c; color: #fff; font-family: 'Rubik', sans-serif; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 20px; margin-top: -4px; }
+
+.audio-word {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 0 4px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+.audio-word:hover, .audio-word.playing {
+    background-color: #ffedd5;
+    color: #c2410c;
+}
+.audio-word i {
+    font-size: 0.85em;
+}
+
+.face-img-container {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+.face-name-tag {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%) translateZ(0);
+    background: #1f2937;
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 20px;
+    white-space: nowrap;
+    letter-spacing: 0.3px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+    pointer-events: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.face-img-wrapper {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #e5e7eb;
+    transition: border-color 0.2s;
+    flex-shrink: 0;
+}
+
+.face-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.face-card:hover .face-img-wrapper {
+    border-color: #ea580c;
+}
+
+.result-card {
+    background: #f9fafb;
+    border-color: #e5e7eb;
+}
+
+.result-card:hover {
+    border-color: #ea580c;
+    background: #ffedd5;
+}
+
+@media (max-width: 768px) {
+    .face-cards-row {
+        flex-direction: column;
+        gap: 8px;
+    }
+    .face-symbol {
+        transform: rotate(90deg);
+    }
+    .family-photo {
+        height: 200px;
+    }
+}
+
+/* Vocab Cards */
+.vocab-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.vocab-card {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+    transition: box-shadow 0.2s, border-color 0.2s;
+    cursor: pointer;
+    position: relative;
+}
+
+.vocab-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border-color: #ea580c;
+}
+
+.vocab-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: #ffedd5;
+    color: #ea580c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
+.vocab-word {
+    font-family: 'Rubik', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.vocab-desc {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: #6b7280;
+    line-height: 1.4;
+}
+
+.vocab-audio-icon {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-size: 14px;
+    color: #ea580c;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.vocab-card:hover .vocab-audio-icon {
+    opacity: 1;
+}
+
+.vocab-card.playing {
+    border-color: #ea580c;
+    background: #ffedd5;
+    box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.2);
+}
+
+.vocab-equation-container {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    margin-bottom: 32px;
+}
+
+.vocab-equation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.vocab-symbol {
+    font-family: 'Rubik', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #ea580c;
+    user-select: none;
+}
+
+@media (max-width: 768px) {
+    .vocab-equation {
+        flex-direction: column;
+        gap: 12px;
+    }
+    .vocab-symbol {
+        display: none;
+    }
+}
+
+/* Family Tree */
+.family-tree-container {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 32px 24px;
+    overflow-x: auto;
+}
+
+.tree-generation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.gen2 { gap: 40px; }
+.gen3 { gap: 20px; }
+
+.tree-branch {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.tree-vertical-line {
+    width: 2px;
+    height: 32px;
+    background: #d1d5db;
+    margin: 8px auto;
+}
+
+.tree-couple-line {
+    width: 24px;
+    height: 2px;
+    background: #d1d5db;
+}
+
+.tree-member {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.tree-avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    border: 2px solid #e5e7eb;
+}
+
+.tree-avatar.male { background: #dbeafe; color: #1d4ed8; border-color: #93c5fd; }
+.tree-avatar.female { background: #fce7f3; color: #be185d; border-color: #f9a8d4; }
+.tree-avatar.neutral { background: #ffedd5; color: #ea580c; border-color: #fed7aa; }
+
+.tree-name {
+    font-family: 'Rubik', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.tree-relation {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: #6b7280;
+}
+
+.tree-member.star .tree-avatar { border-color: #ea580c; border-width: 3px; }
+.tree-member.grandparent .tree-avatar { width: 56px; height: 56px; }
+
+/* Word Bank */
+.word-bank {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 20px;
+}
+
+.bank-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #6b7280;
+    margin-right: 4px;
+}
+
+.bank-word {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #1f2937;
+    background: #ffffff;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    padding: 4px 10px;
+}
+
+/* Gap Fill */
+.gap-fill-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.gap-fill-item {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 16px;
+}
+
+.gap-number {
+    font-family: 'Rubik', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #ea580c;
+    flex-shrink: 0;
+}
+
+.gap-sentence {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: #374151;
+    margin: 0;
+    line-height: 1.8;
+}
+
+.gap-input {
+    border: none;
+    border-bottom: 2px solid #d1d5db;
+    background: transparent;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: #1f2937;
+    padding: 2px 6px;
+    width: 130px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.gap-input:focus { border-color: #ea580c; }
+.gap-input.correct { border-color: #16a34a; color: #166534; background: #dcfce7; border-radius: 4px; }
+.gap-input.incorrect { border-color: #dc2626; color: #991b1b; background: #fee2e2; border-radius: 4px; }
+
+/* Multiple Choice */
+.mc-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.mc-item {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.mc-question {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: #1f2937;
+    margin: 0 0 14px 0;
+    line-height: 1.6;
+}
+
+.mc-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.mc-btn {
+    padding: 8px 20px;
+    border-radius: 8px;
+    border: 2px solid #e5e7eb;
+    background: #ffffff;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #374151;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.mc-btn:hover { border-color: #ea580c; color: #ea580c; }
+.mc-btn.selected { border-color: #ea580c; background: #fff7ed; color: #ea580c; }
+.mc-btn.correct { border-color: #16a34a; background: #dcfce7; color: #166534; }
+.mc-btn.incorrect { border-color: #dc2626; background: #fee2e2; color: #991b1b; }
+
+/* True or False */
+.tf-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.tf-item {
+    padding: 14px 20px;
+    background: #f9fafb;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.tf-sentence {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #374151;
+    margin-bottom: 0;
+    flex: 1;
+    line-height: 1.5;
+}
+
+.tf-options {
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.tf-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    background: #ffffff;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #6b7280;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.tf-btn:hover {
+    border-color: #d1d5db;
+}
+
+.tf-btn.selected {
+    background: #ffedd5;
+    border-color: #fed7aa;
+    color: #6b7280;
+}
+
+.tf-btn.correct {
+    background: #F0FDF4;
+    border-color: #86EFAC;
+    color: #166534;
+    box-shadow: 0 0 0 4px rgba(34,197,94,.08);
+}
+
+.tf-btn.incorrect {
+    background: #FFF1F2;
+    border-color: #FCA5A5;
+    color: #9F1239;
+    box-shadow: 0 0 0 4px rgba(239,68,68,.08);
+}
+
+.relationship-arrows {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+    color: #ea580c;
+    font-size: 12px;
+    margin: 0 4px;
+}
+
+[data-lucide] { display: inline-block; vertical-align: middle; }
+[data-lucide] svg { display: block; width: 100%; height: 100%; }
+
+@media (max-width: 768px) {
+    .intro-grid { grid-template-columns: 1fr; }
+    .intro-sidebar { max-width: 100%; }
+    .vocab-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+    .tf-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    .tf-options {
+        width: 100%;
+        justify-content: flex-end;
+    }
+    .tf-list { grid-template-columns: 1fr; }
+    .gap-input { width: 100px; }
+}
+    </style>
+    <script>
+        const activityConfig = {
+            type: 'vocabulary',
+            tabs: ['introduction', 'preparation', 'practice'],
+            hiddenTab: null
+        };
+    </script>
+    <script src="../../../js/tabs.js"></script>
+</head>
+<body>
+
+    <div id="header-placeholder"></div>
+
+    <main class="activity-page">
+        <!-- Hero Section -->
+        <section class="activity-hero">
+            <div class="activity-hero-content">
+                <nav class="breadcrumb">
+                    <a href="/">Inicio</a>
+                    <span class="breadcrumb-separator">›</span>
+                    <a href="../actividades.html">Actividades</a>
+                    <span class="breadcrumb-separator">›</span>
+                    <span class="breadcrumb-current">Family Relationships</span>
+                </nav>
+                <h1>Family Relationships</h1>
+                <div class="activity-hero-badges">
+                    <span class="hero-badge"><i class="fa-solid fa-spell-check"></i> Vocabulary</span>
+                    <span class="hero-badge"><i class="fa-solid fa-layer-group"></i> Level A2</span>
+                    <span class="hero-badge"><i class="fa-regular fa-clock"></i> 15 min</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Activity Content -->
+        <section class="activity-container">
+            <div class="tabs-wrapper">
+                <!-- Tab Navigation -->
+                <nav class="tab-nav">
+                    <div class="tab-nav-main">
+                        <button class="tab-btn active" data-tab="introduction">Introduction</button>
+                        <button class="tab-btn" data-tab="preparation">Preparation</button>
+                        <button class="tab-btn" data-tab="practice">Practice</button>
+                    </div>
+                </nav>
+
+                <!-- Introduction Tab -->
+                <div class="tab-content active" id="introduction">
+                    <div class="intro-grid">
+                        <div class="intro-main">
+                            <p class="intro-text">
+                                Family is often the first topic we talk about when meeting new people. Knowing how to describe your <strong>family members</strong> and relationships is essential for basic conversation in English.
+                            </p>
+                            <p class="intro-text">
+                                In this activity, you will learn the vocabulary for immediate family (parents, siblings) and extended family (grandparents, cousins, aunts, and uncles). You will also practise how to describe relationships using a family tree.
+                            </p>
+                            <p class="intro-text">
+                                Mastering these words will help you share your personal story and understand others when they talk about their lives.
+                            </p>
+                        </div>
+                        <div class="intro-sidebar">
+                            <div class="info-card">
+                                <div class="info-card-icon">
+                                    <i class="fa-solid fa-bullseye"></i>
+                                </div>
+                                <div class="info-card-content">
+                                    <h4>Learning Objective</h4>
+                                    <p>You will be able to identify and name family members and describe relationships.</p>
+                                </div>
+                            </div>
+                            <div class="info-card">
+                                <div class="info-card-icon">
+                                    <i class="fa-solid fa-spell-check"></i>
+                                </div>
+                                <div class="info-card-content">
+                                    <h4>Skill Focus</h4>
+                                    <p>Vocabulary (A2 Level)</p>
+                                </div>
+                            </div>
+                            <div class="info-card">
+                                <div class="info-card-icon">
+                                    <i class="fa-solid fa-book"></i>
+                                </div>
+                                <div class="info-card-content">
+                                    <h4>Source</h4>
+                                    <p>Enbreak Original Content</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Preparation Tab -->
+                <div class="tab-content" id="preparation">
+
+                    <!-- Section 1: Immediate Family -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">1</span>
+                            <h3>Immediate Family</h3>
+                        </div>
+                        <p class="exercise-instructions">This is an ordinary family. Check below the names of each family member.</p>
+
+                        <!-- Big family photo -->
+                        <div class="family-photo-container">
+                            <img src="../../../assets/activities/family-relationships/family-1.png" alt="A family together" class="family-photo">
+                            <div class="family-photo-label">Meet the family</div>
+                        </div>
+
+                        <!-- Family member cards -->
+                        <div class="face-cards-group">
+                            <div class="face-cards-row" style="justify-content: center;">
+                                <div class="vocab-card face-card adult" onclick="playAudio('father', this)">
+                                    <div class="face-img-container">
+                                        <div class="face-img-wrapper">
+                                            <img src="../../../assets/activities/family-relationships/father.png" alt="Edgard">
+                                        </div>
+                                    </div>
+                                    <div class="vocab-word">Father</div>
+                                    <div class="vocab-desc">Dad</div>
+                                    <i class="fa-solid fa-volume-high vocab-audio-icon"></i>
+                                </div>
+                                <div class="vocab-card face-card adult" onclick="playAudio('mother', this)">
+                                    <div class="face-img-container">
+                                        <div class="face-img-wrapper">
+                                            <img src="../../../assets/activities/family-relationships/mother.png" alt="Alice">
+                                        </div>
+                                    </div>
+                                    <div class="vocab-word">Mother</div>
+                                    <div class="vocab-desc">Mum / Mom</div>
+                                    <i class="fa-solid fa-volume-high vocab-audio-icon"></i>
+                                </div>
+                                <div class="vocab-card face-card result-card adult" onclick="playAudio('parents', this)">
+                                    <div class="combo-faces">
+                                        <div class="face-img-container">
+                                            <div class="face-img-wrapper"><img src="../../../assets/activities/family-relationships/father.png" alt="Edgard"></div>
+                                        </div>
+                                        <div class="face-img-container">
+                                            <div class="face-img-wrapper"><img src="../../../assets/activities/family-relationships/mother.png" alt="Alice"></div>
+                                        </div>
+                                    </div>
+                                    <div class="vocab-word">Parents</div>
+                                    <div class="vocab-desc">Father and Mother</div>
+                                    <i class="fa-solid fa-volume-high vocab-audio-icon"></i>
+                                </div>
+                                <div class="vocab-card face-card child" onclick="playAudio('son', this)">
+                                    <div class="face-img-container">
+                                        <div class="face-img-wrapper">
+                                            <img src="../../../assets/activities/family-relationships/son.png" alt="Max">
+                                        </div>
+                                    </div>
+                                    <div class="vocab-word">Son</div>
+                                    <div class="vocab-desc">Male child</div>
+                                    <i class="fa-solid fa-volume-high vocab-audio-icon"></i>
+                                </div>
+                                <div class="vocab-card face-card child" onclick="playAudio('daughter', this)">
+                                    <div class="face-img-container">
+                                        <div class="face-img-wrapper">
+                                            <img src="../../../assets/activities/family-relationships/daughter.png" alt="Lily">
+                                        </div>
+                                    </div>
+                                    <div class="vocab-word">Daughter</div>
+                                    <div class="vocab-desc">Female child</div>
+                                    <i class="fa-solid fa-volume-high vocab-audio-icon"></i>
+                                </div>
+                                <div class="vocab-card face-card result-card child" onclick="playAudio('children', this)">
+                                    <div class="combo-faces">
+                                        <div class="face-img-container">
+                                            <div class="face-img-wrapper"><img src="../../../assets/activities/family-relationships/son.png" alt="Max"></div>
+                                        </div>
+                                        <div class="face-img-container">
+                                            <div class="face-img-wrapper"><img src="../../../assets/activities/family-relationships/daughter.png" alt="Lily"></div>
+                                        </div>
+                                    </div>
+                                    <div class="vocab-word">Children</div>
+                                    <div class="vocab-desc">Son and Daughter</div>
+                                    <i class="fa-solid fa-volume-high vocab-audio-icon"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tip-box">
+                            <div class="tip-header">
+                                <i data-lucide="info" style="width: 20px; height: 20px;"></i> Tip
+                            </div>
+                            <div class="tip-content">
+                                <ul>
+                                    <li><strong>Child</strong> is singular and <strong>children</strong> is plural. Example: "<strong>One child</strong>" or "<strong>two children</strong>".</li>
+                                    <li>The word <strong>child</strong> is <strong>gender-neutral</strong>. It can be used for <strong>boys or girls</strong>.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section 2: Extended Family -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">2</span>
+                            <h3>Extended Family</h3>
+                        </div>
+                        <p class="exercise-instructions">These are family members beyond the immediate family.</p>
+
+                        <!-- Two side-by-side family photos -->
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px;">
+                            <div class="family-photo-container" style="margin-bottom: 0;">
+                                <img src="../../../assets/activities/family-relationships/grandparents.png" alt="Grandparents" class="family-photo" style="height: 260px;">
+                                <div class="family-photo-label">Meet the grandparents</div>
+                            </div>
+                            <div class="family-photo-container" style="margin-bottom: 0;">
+                                <img src="../../../assets/activities/family-relationships/family-2.png" alt="Extended family" class="family-photo" style="height: 260px;">
+                                <div class="family-photo-label">Meet the extended family</div>
+                            </div>
+                        </div>
+
+                        <!-- Vocab cards with PNG images -->
+                        <div class="face-cards-group">
+                            <div class="face-cards-row" style="justify-content: center;">
+                                <div class="vocab-card face-card adult" onclick="playAudio('grandfather', this)" style="background-color: #EEE8FF; border-color: #D0BFFF;">
+                                    <div class="face-img-container">
+                                        <div class="face-img-wrapper">
+                                            <img src="../../../assets/activities/family-relationships/grandfather.png" alt="Grandfather">
+                                        </div>
+                                    </div>
+                                    <div class="vocab-word">Grandfather</div>
+                                    <div class="vocab-desc">Grandpa</div>
+                                    <i class="fa-solid fa-volume-high vocab-audio-icon"></i>
+                                </div>
+                                <div class="vocab-card face-card adult" onclick="playAudio('grandmother', this)" style="background-color: #EEE8FF; border-color: #D0BFFF;">
+                                    <div class="face-img-container">
+                                        <div class="face-img-wrapper">
+                                            <img src="../../../assets/activities/family-relationships/grandmother.png" alt="Grandmother">
+                                        </div>
+                                    </div>
+                                    <div class="vocab-word">Grandmother</div>
+                                    <div class="vocab-desc">Grandma</div>
+                                    <i class="fa-solid fa-volume-high vocab-audio-icon"></i>
+                                </div>
+                                <div class="vocab-card face-card result-card adult" onclick="playAudio('grandparents', this)" style="background-color: #EEE8FF; border-color: #D0BFFF;">
+                                    <div class="combo-faces">
+                                        <div class="face-img-container">
+                                            <div class="face-img-wrapper"><img src="../../../assets/activities/family-relationships/grandfather.png" alt="Grandfather"></div>
+                                        </div>
+                                        <div class="face-img-container">
+                                            <div class="face-img-wrapper"><img src="../../../assets/activities/family-relationships/grandmother.png" alt="Grandmother"></div>
+                                        </div>
+                                    </div>
+                                    <div class="vocab-word">Grandparents</div>
+                                    <div class="vocab-desc">Grandfather and Grandmother</div>
+                                    <i class="fa-solid fa-volume-high vocab-audio-icon"></i>
+                                </div>
+                                <div class="vocab-card face-card adult" onclick="playAudio('uncle', this)" style="background-color: #EEE8FF; border-color: #D0BFFF;">
+                                    <div class="face-img-container">
+                                        <div class="face-img-wrapper">
+                                            <img src="../../../assets/activities/family-relationships/uncle.png" alt="Uncle">
+                                        </div>
+                                    </div>
+                                    <div class="vocab-word">Uncle</div>
+                                    <div class="vocab-desc">Father's brother</div>
+                                    <i class="fa-solid fa-volume-high vocab-audio-icon"></i>
+                                </div>
+                                <div class="vocab-card face-card adult" onclick="playAudio('aunt', this)" style="background-color: #EEE8FF; border-color: #D0BFFF;">
+                                    <div class="face-img-container">
+                                        <div class="face-img-wrapper">
+                                            <img src="../../../assets/activities/family-relationships/aunt.png" alt="Aunt">
+                                        </div>
+                                    </div>
+                                    <div class="vocab-word">Aunt</div>
+                                    <div class="vocab-desc">Uncle's wife</div>
+                                    <i class="fa-solid fa-volume-high vocab-audio-icon"></i>
+                                </div>
+                                <div class="vocab-card face-card result-card child" onclick="playAudio('cousin', this)" style="background-color: #FFE8E8; border-color: #FFBFBF;">
+                                    <div class="combo-faces">
+                                        <div class="face-img-container">
+                                            <div class="face-img-wrapper"><img src="../../../assets/activities/family-relationships/cousin1.png" alt="Cousin 1"></div>
+                                        </div>
+                                        <div class="face-img-container">
+                                            <div class="face-img-wrapper"><img src="../../../assets/activities/family-relationships/cousin2.png" alt="Cousin 2"></div>
+                                        </div>
+                                    </div>
+                                    <div class="vocab-word">Cousins</div>
+                                    <div class="vocab-desc">Uncle and aunt's children</div>
+                                    <i class="fa-solid fa-volume-high vocab-audio-icon"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tip-box">
+                            <div class="tip-header">
+                                <i data-lucide="info" style="width: 20px; height: 20px;"></i> Tip
+                            </div>
+                            <div class="tip-content">
+                                <ul>
+                                    <li><strong>Uncle</strong> and <strong>aunt</strong> can be blood related (your parent's brother or sister) or by <strong>marriage</strong>.</li>
+                                    <li>The word <strong>cousin</strong> is <strong>gender-neutral</strong>. It can be used for <strong>boys or girls</strong>.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">3</span>
+                            <h3>Relationships</h3>
+                        </div>
+                        <p class="exercise-instructions">Learn how to describe relationships between family members.</p>
+
+                        <div class="family-sentences">
+                            <!-- Siblings -->
+                            <div class="family-sentence-card">
+                                <div class="family-sentence-faces">
+                                    <div class="face-sentence-person">
+                                        <div class="face-img-container">
+                                            <div class="face-img-wrapper"><img src="../../../assets/activities/family-relationships/son.png" alt="Max"></div>
+                                            <span class="face-name-tag">Max</span>
+                                        </div>
+                                    </div>
+                                    <div class="relationship-arrows">
+                                        <i class="fa-solid fa-arrow-right"></i>
+                                        <i class="fa-solid fa-arrow-left"></i>
+                                    </div>
+                                    <div class="face-sentence-person">
+                                        <div class="face-img-container">
+                                            <div class="face-img-wrapper"><img src="../../../assets/activities/family-relationships/daughter.png" alt="Lily"></div>
+                                            <span class="face-name-tag">Lily</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="family-sentence-text">
+                                    <p>Max is Lily's <strong class="audio-word" onclick="playAudio('brother', this)">brother <i class="fa-solid fa-volume-high"></i></strong>. Lily is Max's <strong class="audio-word" onclick="playAudio('sister', this)">sister <i class="fa-solid fa-volume-high"></i></strong>.</p>
+                                    <p>They are <strong class="audio-word" onclick="playAudio('siblings', this)">siblings <i class="fa-solid fa-volume-high"></i></strong>.</p>
+                                </div>
+                            </div>
+                            <!-- Married Couple -->
+                            <div class="family-sentence-card">
+                                <div class="family-sentence-faces">
+                                    <div class="face-sentence-person">
+                                        <div class="face-img-container">
+                                            <div class="face-img-wrapper"><img src="../../../assets/activities/family-relationships/father.png" alt="Edgard"></div>
+                                            <span class="face-name-tag">Edgard</span>
+                                        </div>
+                                    </div>
+                                    <div class="relationship-arrows">
+                                        <i class="fa-solid fa-arrow-right"></i>
+                                        <i class="fa-solid fa-arrow-left"></i>
+                                    </div>
+                                    <div class="face-sentence-person">
+                                        <div class="face-img-container">
+                                            <div class="face-img-wrapper"><img src="../../../assets/activities/family-relationships/mother.png" alt="Alice"></div>
+                                            <span class="face-name-tag">Alice</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="family-sentence-text">
+                                    <p>Edgard is Alice's <strong class="audio-word" onclick="playAudio('husband', this)">husband <i class="fa-solid fa-volume-high"></i></strong>. Alice is Edgard's <strong class="audio-word" onclick="playAudio('wife', this)">wife <i class="fa-solid fa-volume-high"></i></strong>.</p>
+                                    <p>They are a <strong class="audio-word" onclick="playAudio('married couple', this)">married couple <i class="fa-solid fa-volume-high"></i></strong>.</p>
+                                </div>
+                            </div>
+                            <!-- Grandchildren -->
+                            <div class="family-sentence-card">
+                                <div class="family-sentence-faces">
+                                    <div class="face-sentence-person">
+                                        <div class="face-img-container">
+                                            <div class="face-img-wrapper"><img src="../../../assets/activities/family-relationships/son.png" alt="Max"></div>
+                                            <span class="face-name-tag">Max</span>
+                                        </div>
+                                    </div>
+                                    <div class="face-sentence-person">
+                                        <div class="face-img-container">
+                                            <div class="face-img-wrapper"><img src="../../../assets/activities/family-relationships/daughter.png" alt="Lily"></div>
+                                            <span class="face-name-tag">Lily</span>
+                                        </div>
+                                    </div>
+                                    <div class="relationship-arrows">
+                                        <i class="fa-solid fa-arrow-right"></i>
+                                        <i class="fa-solid fa-arrow-left"></i>
+                                    </div>
+                                    <div class="face-sentence-person">
+                                        <div class="face-img-container">
+                                            <div class="face-img-wrapper"><img src="../../../assets/activities/family-relationships/grandmother.png" alt="Margaret"></div>
+                                            <span class="face-name-tag">Margaret</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="family-sentence-text">
+                                    <p>Max is Margaret's <strong class="audio-word" onclick="playAudio('grandson', this)">grandson <i class="fa-solid fa-volume-high"></i></strong>. Lily is Margaret's <strong class="audio-word" onclick="playAudio('granddaughter', this)">granddaughter <i class="fa-solid fa-volume-high"></i></strong>.</p>
+                                    <p>Max and Lily are Margaret's <strong class="audio-word" onclick="playAudio('grandchildren', this)">grandchildren <i class="fa-solid fa-volume-high"></i></strong>.</p>
+                                </div>
+                            </div>
+                            <!-- Niece and Nephew -->
+                            <div class="family-sentence-card">
+                                <div class="family-sentence-faces">
+                                    <div class="face-sentence-person">
+                                        <div class="face-img-container">
+                                            <div class="face-img-wrapper"><img src="../../../assets/activities/family-relationships/cousin1.png" alt="Tom"></div>
+                                            <span class="face-name-tag">Tom</span>
+                                        </div>
+                                    </div>
+                                    <div class="face-sentence-person">
+                                        <div class="face-img-container">
+                                            <div class="face-img-wrapper"><img src="../../../assets/activities/family-relationships/cousin2.png" alt="Sara"></div>
+                                            <span class="face-name-tag">Sara</span>
+                                        </div>
+                                    </div>
+                                    <div class="relationship-arrows">
+                                        <i class="fa-solid fa-arrow-right"></i>
+                                        <i class="fa-solid fa-arrow-left"></i>
+                                    </div>
+                                    <div class="face-sentence-person">
+                                        <div class="face-img-container">
+                                            <div class="face-img-wrapper"><img src="../../../assets/activities/family-relationships/father.png" alt="Edgard"></div>
+                                            <span class="face-name-tag">Edgard</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="family-sentence-text">
+                                    <p>Tom is Edgard's <strong class="audio-word" onclick="playAudio('nephew', this)">nephew <i class="fa-solid fa-volume-high"></i></strong>. Sara is Edgard's <strong class="audio-word" onclick="playAudio('niece', this)">niece <i class="fa-solid fa-volume-high"></i></strong>.</p>
+                                    <p>Edgard is Tom and Sara's <strong class="audio-word" onclick="playAudio('uncle', this)">uncle <i class="fa-solid fa-volume-high"></i></strong>.</p>
+                                </div>
+                            </div>
+                            <!-- Twins -->
+                            <div class="family-sentence-card full-width">
+                                <div class="family-sentence-faces">
+                                    <div class="face-sentence-person">
+                                        <div class="face-img-container">
+                                            <div class="face-img-wrapper"><img src="../../../assets/activities/family-relationships/father.png" alt="Edgard"></div>
+                                            <span class="face-name-tag">Edgard</span>
+                                        </div>
+                                    </div>
+                                    <div class="relationship-arrows">
+                                        <i class="fa-solid fa-arrow-right"></i>
+                                        <i class="fa-solid fa-arrow-left"></i>
+                                    </div>
+                                    <div class="face-sentence-person">
+                                        <div class="face-img-container">
+                                            <div class="face-img-wrapper"><img src="../../../assets/activities/family-relationships/uncle.png" alt="David"></div>
+                                            <span class="face-name-tag">David</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="family-sentence-text">
+                                    <p>Edgard and David are brothers who were born on the same day. They are <strong class="audio-word" onclick="playAudio('twins', this)">twins <i class="fa-solid fa-volume-high"></i></strong>.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tip-box">
+                            <div class="tip-header">
+                                <i data-lucide="info" style="width: 20px; height: 20px;"></i> Tip
+                            </div>
+                            <div class="tip-content">
+                                <ul>
+                                    <li>In English, <strong>'s</strong> shows belonging. <strong>"Lily's brother"</strong> means <strong>"the brother of Lily"</strong>.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Practice Tab -->
+                <div class="tab-content" id="practice">
+
+                    <!-- Exercise 1: Interactive Family Tree -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">1</span>
+                            <h3>Max's Family Tree</h3>
+                        </div>
+                        <p class="exercise-instructions">Complete the family tree. Write the correct family member for each person from Max's perspective.</p>
+
+                        <style>
+                        .ft-wrap { overflow-x: auto; margin-bottom: 24px; }
+                        .ft-box {
+                            background: #f9fafb;
+                            border: 1px solid #e5e7eb;
+                            border-radius: 12px;
+                            padding: 40px 32px 32px;
+                            display: inline-block;
+                        }
+                        .ft-node {
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            gap: 5px;
+                            width: 100px;
+                        }
+                        .ft-photo {
+                            width: 84px; height: 84px;
+                            border-radius: 12px;
+                            overflow: hidden;
+                            border: 3px solid #e5e7eb;
+                        }
+                        .ft-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+                        .ft-photo.gp     { border-color: #a855f7; }
+                        .ft-photo.red    { border-color: #ef4444; }
+                        .ft-photo.green  { border-color: #16a34a; }
+                        .ft-photo.me     { border-color: #ea580c; border-width: 4px; }
+                        .ft-name { font-family: 'Rubik',sans-serif; font-size: 14px; font-weight:700; color:#1f2937; text-align:center; }
+                        .ft-label { font-family:'Inter',sans-serif; font-size:13px; color:#6b7280; }
+                        .ft-input {
+                            border: none; border-bottom: 2px solid #d1d5db;
+                            background: #ffffff;
+                            font-family:'Inter',sans-serif; font-size:13px; color:#1f2937;
+                            width:88px; text-align:center; outline:none; padding:2px 0;
+                        }
+                        .ft-input:focus { border-color:#ea580c; }
+                        .ft-input.correct   { border-color:#16a34a; color:#166534; background:#dcfce7; border-radius:4px; }
+                        .ft-input.incorrect { border-color:#dc2626; color:#991b1b; background:#fee2e2; border-radius:4px; }
+                        .ft-me-badge { background:#ea580c; color:#fff; font-family:'Rubik',sans-serif; font-size:10px; font-weight:700; padding:2px 8px; border-radius:20px; }
+                        .ft-couple { display:flex; align-items:flex-start; }
+                        .ft-cline { height:2px; background:#9ca3af; width:32px; flex-shrink:0; margin-top:44px; }
+                        .ft-vline { width:2px; background:#9ca3af; }
+                        /* connector row uses border-top trick */
+                        .ft-conn-cell {
+                            border-top: 2px solid #9ca3af;
+                            height: 24px;
+                        }
+                        .ft-conn-left  { border-left:  2px solid #9ca3af; }
+                        .ft-conn-right { border-right: 2px solid #9ca3af; }
+                        </style>
+
+                        <div class="ft-wrap">
+                        <div style="text-align:center;">
+                        <div class="ft-box">
+
+                        <!-- === GEN 1: Robert & Margaret === -->
+                        <div class="ft-couple" style="justify-content:center;">
+                            <div class="ft-node">
+                                <div class="ft-photo gp"><img src="../../../assets/activities/family-relationships/grandfather.png" alt="Robert"></div>
+                                <div class="ft-name">Robert</div>
+                                <input type="text" class="ft-input gap-fill-tree" data-answer="grandfather" placeholder="">
+                            </div>
+                            <div class="ft-cline"></div>
+                            <div class="ft-node">
+                                <div class="ft-photo gp"><img src="../../../assets/activities/family-relationships/grandmother.png" alt="Margaret"></div>
+                                <div class="ft-name">Margaret</div>
+                                <input type="text" class="ft-input gap-fill-tree" data-answer="grandmother" placeholder="">
+                            </div>
+                        </div>
+
+                        <!-- Vertical down from Gen1 couple midpoint -->
+                        <div style="display:flex; justify-content:center;">
+                            <div class="ft-vline" style="height:24px;"></div>
+                        </div>
+
+                        <!-- Sibling connector: 3-cell row -->
+                        <div style="display:flex; justify-content:center; width:468px; margin:0 auto;">
+                            <!-- left empty -->
+                            <div style="width:161px; height:24px;"></div>
+                            <!-- bar with drops at each end -->
+                            <div style="width:146px; height:24px; border-top:2px solid #9ca3af; position:relative;">
+                                <!-- left drop -->
+                                <div style="position:absolute; left:0; top:0; width:2px; height:24px; background:#9ca3af;"></div>
+                                <!-- right drop -->
+                                <div style="position:absolute; right:0; top:0; width:2px; height:24px; background:#9ca3af;"></div>
+                            </div>
+                            <!-- right empty -->
+                            <div style="width:161px; height:24px;"></div>
+                        </div>
+
+                        <!-- === GEN 2: [Susan–David]  [Edgard–Alice] === -->
+                        <div style="display:flex; justify-content:center; gap:60px; align-items:flex-start;">
+
+                            <!-- LEFT: Susan – David -->
+                            <div style="display:flex; flex-direction:column; align-items:center;">
+                                <div class="ft-couple">
+                                    <div class="ft-node">
+                                        <div class="ft-photo red"><img src="../../../assets/activities/family-relationships/aunt.png" alt="Susan"></div>
+                                        <div class="ft-name">Susan</div>
+                                        <input type="text" class="ft-input gap-fill-tree" data-answer="aunt" placeholder="">
+                                    </div>
+                                    <div class="ft-cline"></div>
+                                    <div class="ft-node">
+                                        <div class="ft-photo red"><img src="../../../assets/activities/family-relationships/uncle.png" alt="David"></div>
+                                        <div class="ft-name">David</div>
+                                        <input type="text" class="ft-input gap-fill-tree" data-answer="uncle" placeholder="">
+                                    </div>
+                                </div>
+                                <!-- down from couple midpoint: midpoint = 86+16=102px from left, center of couple = 102px -->
+                                <div class="ft-vline" style="height:20px;"></div>
+                                <!-- children bar: Tom-center to Sara-center
+                                     couple width=204px, midpoint=102px
+                                     children are 86px wide each, gap=24px, total=196px
+                                     to center children under couple: offset = (204-196)/2 = 4px
+                                     Tom center = 4+43=47px, Sara center=4+86+24+43=157px from children-row-left
+                                     bar from 47 to 157 = width 110px, starting at 47px
+                                -->
+                                <div style="width:204px; position:relative; height:20px;">
+                                    <div style="position:absolute; left:47px; top:0; width:110px; height:2px; background:#9ca3af;"></div>
+                                    <div style="position:absolute; left:47px; top:0; width:2px; height:20px; background:#9ca3af;"></div>
+                                    <div style="position:absolute; left:157px; top:0; width:2px; height:20px; background:#9ca3af;"></div>
+                                </div>
+                                <!-- Tom & Sara centered -->
+                                <div style="display:flex; gap:24px;">
+                                    <div class="ft-node">
+                                        <div class="ft-photo red"><img src="../../../assets/activities/family-relationships/cousin1.png" alt="Tom"></div>
+                                        <div class="ft-name">Tom</div>
+                                        <input type="text" class="ft-input gap-fill-tree" data-answer="cousin" placeholder="">
+                                    </div>
+                                    <div class="ft-node">
+                                        <div class="ft-photo red"><img src="../../../assets/activities/family-relationships/cousin2.png" alt="Sara"></div>
+                                        <div class="ft-name">Sara</div>
+                                        <input type="text" class="ft-input gap-fill-tree" data-answer="cousin" placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- RIGHT: Edgard – Alice -->
+                            <div style="display:flex; flex-direction:column; align-items:center;">
+                                <div class="ft-couple">
+                                    <div class="ft-node">
+                                        <div class="ft-photo green"><img src="../../../assets/activities/family-relationships/father.png" alt="Edgard"></div>
+                                        <div class="ft-name">Edgard</div>
+                                        <input type="text" class="ft-input" value="Father" disabled style="color:#6b7280; background:#ffffff;">
+                                    </div>
+                                    <div class="ft-cline"></div>
+                                    <div class="ft-node">
+                                        <div class="ft-photo green"><img src="../../../assets/activities/family-relationships/mother.png" alt="Alice"></div>
+                                        <div class="ft-name">Alice</div>
+                                        <input type="text" class="ft-input gap-fill-tree" data-answer="mother" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="ft-vline" style="height:20px;"></div>
+                                <div style="width:204px; position:relative; height:20px;">
+                                    <div style="position:absolute; left:47px; top:0; width:110px; height:2px; background:#9ca3af;"></div>
+                                    <div style="position:absolute; left:47px; top:0; width:2px; height:20px; background:#9ca3af;"></div>
+                                    <div style="position:absolute; left:157px; top:0; width:2px; height:20px; background:#9ca3af;"></div>
+                                </div>
+                                <!-- Max & Lily -->
+                                <div style="display:flex; gap:24px;">
+                                    <div class="ft-node">
+                                        <div class="ft-photo me"><img src="../../../assets/activities/family-relationships/son.png" alt="Max"></div>
+                                        <div class="ft-name">Max</div>
+                                        <div class="ft-me-badge">ME</div>
+                                    </div>
+                                    <div class="ft-node">
+                                        <div class="ft-photo green"><img src="../../../assets/activities/family-relationships/daughter.png" alt="Lily"></div>
+                                        <div class="ft-name">Lily</div>
+                                        <input type="text" class="ft-input gap-fill-tree" data-answer="sister" placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div><!-- end gen2 -->
+
+                        </div>
+                        </div>
+                        </div>
+
+                        <div style="display: flex; gap: 12px; align-items: center; margin-top: 20px;">
+                            <button class="check-answers-btn" id="check-gap-1">
+                                <i class="fa-solid fa-check"></i> Check answers
+                            </button>
+                            <button class="check-answers-btn retry-btn" id="retry-gap-1" disabled>
+                                <i class="fa-solid fa-rotate-right"></i> Try again
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Exercise 2: True or False -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">2</span>
+                            <h3>True or False</h3>
+                        </div>
+                        <p class="exercise-instructions">Read the sentences about Max's family tree. Are they true or false?</p>
+
+                        <div class="tf-list" id="tf-list-1">
+                            <div class="tf-item" data-correct="true">
+                                <p class="tf-sentence"><strong>1.</strong> Alice is Lily's mother.</p>
+                                <div class="tf-options">
+                                    <button class="tf-btn" data-option="true">True</button>
+                                    <button class="tf-btn" data-option="false">False</button>
+                                </div>
+                            </div>
+                            <div class="tf-item" data-correct="false">
+                                <p class="tf-sentence"><strong>5.</strong> Margaret and Robert have four grandsons.</p>
+                                <div class="tf-options">
+                                    <button class="tf-btn" data-option="true">True</button>
+                                    <button class="tf-btn" data-option="false">False</button>
+                                </div>
+                            </div>
+                            <div class="tf-item" data-correct="false">
+                                <p class="tf-sentence"><strong>2.</strong> Tom is Sara's cousin.</p>
+                                <div class="tf-options">
+                                    <button class="tf-btn" data-option="true">True</button>
+                                    <button class="tf-btn" data-option="false">False</button>
+                                </div>
+                            </div>
+                            <div class="tf-item" data-correct="true">
+                                <p class="tf-sentence"><strong>6.</strong> David and Edgard are siblings.</p>
+                                <div class="tf-options">
+                                    <button class="tf-btn" data-option="true">True</button>
+                                    <button class="tf-btn" data-option="false">False</button>
+                                </div>
+                            </div>
+                            <div class="tf-item" data-correct="true">
+                                <p class="tf-sentence"><strong>3.</strong> Margaret and Robert have two children.</p>
+                                <div class="tf-options">
+                                    <button class="tf-btn" data-option="true">True</button>
+                                    <button class="tf-btn" data-option="false">False</button>
+                                </div>
+                            </div>
+                            <div class="tf-item" data-correct="false">
+                                <p class="tf-sentence"><strong>7.</strong> Robert is Max's grandson.</p>
+                                <div class="tf-options">
+                                    <button class="tf-btn" data-option="true">True</button>
+                                    <button class="tf-btn" data-option="false">False</button>
+                                </div>
+                            </div>
+                            <div class="tf-item" data-correct="true">
+                                <p class="tf-sentence"><strong>4.</strong> Sara is Susan's daughter.</p>
+                                <div class="tf-options">
+                                    <button class="tf-btn" data-option="true">True</button>
+                                    <button class="tf-btn" data-option="false">False</button>
+                                </div>
+                            </div>
+                            <div class="tf-item" data-correct="false">
+                                <p class="tf-sentence"><strong>8.</strong> Tom is Edgard's niece.</p>
+                                <div class="tf-options">
+                                    <button class="tf-btn" data-option="true">True</button>
+                                    <button class="tf-btn" data-option="false">False</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 12px; align-items: center; margin-top: 20px;">
+                            <button class="check-answers-btn" id="check-tf-1">
+                                <i class="fa-solid fa-check"></i> Check answers
+                            </button>
+                            <button class="check-answers-btn retry-btn" id="retry-tf-1" disabled>
+                                <i class="fa-solid fa-rotate-right"></i> Try again
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Completion Box -->
+                    <div class="completion-box">
+                        <h4><i class="fa-solid fa-party-horn"></i> Great Job!</h4>
+                        <p>You've completed the "Family Relationships" activity. You've practiced:</p>
+                        <ul class="completion-list">
+                            <li><i class="fa-solid fa-check"></i> Immediate family vocabulary</li>
+                            <li><i class="fa-solid fa-check"></i> Extended family vocabulary</li>
+                            <li><i class="fa-solid fa-check"></i> Describing family relationships</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="activity-nav">
+                    <button class="nav-btn nav-btn-back" id="btn-back" disabled>
+                        <i class="fa-solid fa-arrow-left"></i> Back
+                    </button>
+                    <button class="nav-btn nav-btn-next" id="btn-next">
+                        Next <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="../../../js/layout.js"></script>
+    <script src="../../../js/script.js" defer></script>
+    <script src="../../../js/checkanswers.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        lucide.createIcons();
+
+        // --- Gap Fill Exercise ---
+        const gapItems = document.querySelectorAll('.gap-fill-item');
+        const treeInputs = document.querySelectorAll('.gap-fill-tree');
+
+        treeInputs.forEach(input => {
+            input.addEventListener('input', function() {
+                this.classList.remove('correct', 'incorrect');
+            });
+        });
+
+        const checkGap1 = document.getElementById('check-gap-1');
+        const retryGap1 = document.getElementById('retry-gap-1');
+
+        if (checkGap1) {
+            checkGap1.addEventListener('click', function() {
+                let correct = 0;
+                let total = treeInputs.length;
+
+                treeInputs.forEach(input => {
+                    const correctAnswer = input.dataset.answer.toLowerCase();
+                    const userAnswer = input.value.trim().toLowerCase();
+                    input.classList.remove('correct', 'incorrect');
+                    if (userAnswer === correctAnswer) {
+                        input.classList.add('correct');
+                        correct++;
+                    } else if (userAnswer !== '') {
+                        input.classList.add('incorrect');
+                    }
+                });
+
+                showFeedbackPopup(correct, total);
+                retryGap1.disabled = false;
+            });
+        }
+
+        if (retryGap1) {
+            retryGap1.addEventListener('click', function() {
+                treeInputs.forEach(input => {
+                    input.value = '';
+                    input.classList.remove('correct', 'incorrect');
+                });
+                retryGap1.disabled = true;
+            });
+        }
+
+        // --- True or False Exercise ---
+        const tfItems = document.querySelectorAll('.tf-item');
+        tfItems.forEach(item => {
+            const btns = item.querySelectorAll('.tf-btn');
+            btns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    btns.forEach(b => b.classList.remove('selected'));
+                    this.classList.add('selected');
+                });
+            });
+        });
+
+        const checkTf1 = document.getElementById('check-tf-1');
+        const retryTf1 = document.getElementById('retry-tf-1');
+
+        if (checkTf1) {
+            checkTf1.addEventListener('click', function() {
+                let correct = 0;
+                let total = tfItems.length;
+
+                tfItems.forEach(item => {
+                    const correctAnswer = item.dataset.correct;
+                    const selected = item.querySelector('.tf-btn.selected');
+                    const btns = item.querySelectorAll('.tf-btn');
+
+                    btns.forEach(btn => btn.classList.remove('correct', 'incorrect'));
+
+                    if (selected) {
+                        if (selected.dataset.option === correctAnswer) {
+                            selected.classList.add('correct');
+                            correct++;
+                        } else {
+                            selected.classList.add('incorrect');
+                        }
+                    }
+                });
+
+                showFeedbackPopup(correct, total);
+                retryTf1.disabled = false;
+            });
+        }
+
+        if (retryTf1) {
+            retryTf1.addEventListener('click', function() {
+                tfItems.forEach(item => {
+                    item.querySelectorAll('.tf-btn').forEach(btn => {
+                        btn.classList.remove('selected', 'correct', 'incorrect');
+                    });
+                });
+                retryTf1.disabled = true;
+            });
+        }
+    });
+
+    let currentAudio = null;
+
+    function playAudio(word, cardElement) {
+        // Visual feedback
+        document.querySelectorAll('.vocab-card, .audio-word').forEach(c => c.classList.remove('playing'));
+        if (cardElement) cardElement.classList.add('playing');
+
+        if (currentAudio) {
+            currentAudio.pause();
+            currentAudio = null;
+        }
+
+        const audioPath = `../../../assets/activities/family-relationships/${word.toLowerCase()}.mp3`;
+        currentAudio = new Audio(audioPath);
+
+        currentAudio.play().catch(e => {
+            console.log('Audio not found or error playing:', e);
+            if (cardElement) cardElement.classList.remove('playing');
+        });
+
+        currentAudio.onended = () => {
+            if (cardElement) cardElement.classList.remove('playing');
+        };
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enbreak | Giving Directions</title>
+    <link rel="icon" type="image/x-icon" href="../../../favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../favicon/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../favicon/apple-touch-icon.png">
+    <link rel="manifest" href="../../../favicon/site.webmanifest">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="../../../css/buttons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rubik:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../../../css/activities.css">
+    <link rel="stylesheet" href="../../../css/tipbox.css">
+    <style>
+/* Hero Section */
+.activity-hero {
+    background-image: url('../../../assets/activities/giving-directions.jpg'); /* Placeholder image */
+}
+
+/* Intro Styles */
+.intro-grid { display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: start; }
+.intro-main { display: flex; flex-direction: column; gap: 24px; }
+.intro-text { font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.8; color: #4b5563; }
+.intro-text strong { color: #ea580c; }
+.intro-sidebar { display: flex; flex-direction: column; gap: 16px; max-width: 380px; }
+.info-card { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 12px; padding: 12px; display: flex; gap: 10px; }
+.info-card-icon { width: 36px; height: 36px; border-radius: 8px; background: #ffedd5; color: #ea580c; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+.info-card-content h4 { font-family: 'Rubik', sans-serif; font-size: 14px; font-weight: 600; color: #374151; margin: 0 0 4px 0; }
+.info-card-content p { font-family: 'Inter', sans-serif; font-size: 14px; color: #6b7280; margin: 0; }
+
+/* General Exercise Section Styles */
+.exercise-section { margin-bottom: 40px; }
+.exercise-header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+.exercise-number { width: 36px; height: 36px; border-radius: 50%; background: #ea580c; color: #ffffff; font-family: 'Rubik', sans-serif; font-size: 16px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.exercise-header h3 { font-family: 'Rubik', sans-serif; font-size: 20px; font-weight: 600; color: #1f2937; margin: 0; }
+.exercise-instructions { font-family: 'Inter', sans-serif; font-size: 15px; color: #6b7280; margin-bottom: 20px; line-height: 1.6; }
+
+[data-lucide] {
+    display: inline-block;
+    vertical-align: middle;
+}
+[data-lucide] svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* Completion Box */
+.completion-box {
+    background: linear-gradient(135deg, #dcfce7 0%, #d1fae5 100%);
+    border: 1px solid #86efac;
+    border-radius: 12px;
+    padding: 24px;
+    margin-top: 32px;
+}
+
+.completion-box h4 {
+    font-family: 'Rubik', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #166534;
+    margin: 0 0 12px 0;
+}
+
+.completion-box p {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #166534;
+    margin: 0 0 16px 0;
+}
+
+.completion-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.completion-list li {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #166534;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.completion-list li i {
+    color: #16a34a;
+}
+
+.vocab-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.vocab-card {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+    transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.vocab-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border-color: #ea580c;
+}
+
+.vocab-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: #ffedd5;
+    color: #ea580c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
+.vocab-word {
+    font-family: 'Rubik', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.vocab-desc {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: #6b7280;
+    line-height: 1.4;
+}
+
+.phrases-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.phrase-category {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.phrase-category-title {
+    font-family: 'Rubik', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: #374151;
+    margin: 0 0 14px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.phrase-category-title i {
+    color: #ea580c;
+}
+
+.phrase-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.phrase-list li {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #4b5563;
+}
+
+.phrase-highlight {
+    font-style: italic;
+    color: #1f2937;
+}
+
+.mc-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.mc-item {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.mc-question {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: #1f2937;
+    margin: 0 0 14px 0;
+    line-height: 1.6;
+}
+
+.mc-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.mc-btn {
+    padding: 8px 20px;
+    border-radius: 8px;
+    border: 2px solid #e5e7eb;
+    background: #ffffff;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #374151;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.mc-btn:hover {
+    border-color: #ea580c;
+    color: #ea580c;
+}
+
+.mc-btn.selected {
+    border-color: #ea580c;
+    background: #fff7ed;
+    color: #ea580c;
+}
+
+.mc-btn.correct {
+    border-color: #16a34a;
+    background: #dcfce7;
+    color: #166534;
+}
+
+.mc-btn.incorrect {
+    border-color: #dc2626;
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.map-container {
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+    margin-bottom: 24px;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f9fafb;
+}
+
+.directions-map {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.map-fallback {
+    padding: 40px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.map-directions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.map-direction-item {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.map-direction-item.correct-answer {
+    border-color: #16a34a;
+    background: #dcfce7;
+}
+
+.map-direction-item.incorrect-answer {
+    border-color: #dc2626;
+    background: #fee2e2;
+}
+
+.map-direction-text {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    flex: 1;
+}
+
+.map-direction-text p {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #4b5563;
+    margin: 0;
+    line-height: 1.7;
+    font-style: italic;
+}
+
+.direction-number {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #ea580c;
+    color: #ffffff;
+    font-family: 'Rubik', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.map-select-wrapper {
+    flex-shrink: 0;
+}
+
+.map-select {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 2px solid #e5e7eb;
+    background: #ffffff;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #374151;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    min-width: 180px;
+}
+
+.map-select:focus {
+    outline: none;
+    border-color: #ea580c;
+}
+
+.map-select.correct {
+    border-color: #16a34a;
+    background: #dcfce7;
+    color: #166534;
+}
+
+.map-select.incorrect {
+    border-color: #dc2626;
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+@media (max-width: 768px) {
+    .vocab-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    }
+    .phrases-grid {
+        grid-template-columns: 1fr;
+    }
+    .map-direction-item {
+        flex-direction: column;
+    }
+    .map-select {
+        width: 100%;
+    }
+}
+    </style>
+    <script>
+        const activityConfig = {
+            type: 'vocabulary',
+            tabs: ['introduction', 'preparation', 'practice'],
+            hiddenTab: null
+        };
+    </script>
+    <script src="../../../js/tabs.js"></script>
+</head>
+<body>
+
+    <div id="header-placeholder"></div>
+
+    <main class="activity-page">
+        <!-- Hero Section -->
+        <section class="activity-hero">
+            <div class="activity-hero-content">
+                <nav class="breadcrumb">
+                    <a href="/">Inicio</a>
+                    <span class="breadcrumb-separator">›</span>
+                    <a href="../actividades.html">Actividades</a>
+                    <span class="breadcrumb-separator">›</span>
+                    <span class="breadcrumb-current">Giving Directions</span>
+                </nav>
+                <h1>Giving Directions</h1>
+                <div class="activity-hero-badges">
+                    <span class="hero-badge"><i class="fa-solid fa-spell-check"></i> Vocabulary</span>
+                    <span class="hero-badge"><i class="fa-solid fa-layer-group"></i> Level A2</span>
+                    <span class="hero-badge"><i class="fa-regular fa-clock"></i> 20 min</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Activity Content -->
+        <section class="activity-container">
+            <div class="tabs-wrapper">
+                <!-- Tab Navigation -->
+                <nav class="tab-nav">
+                    <div class="tab-nav-main">
+                        <button class="tab-btn active" data-tab="introduction">Introduction</button>
+                        <button class="tab-btn" data-tab="preparation">Preparation</button>
+                        <button class="tab-btn" data-tab="practice">Practice</button>
+                    </div>
+                </nav>
+
+                <!-- Introduction Tab -->
+                <div class="tab-content active" id="introduction">
+                    <div class="intro-grid">
+                        <div class="intro-main">
+                            <p class="intro-text">
+                                Knowing how to give and understand directions is a <strong>fundamental skill</strong> for navigating in an English-speaking environment. Whether you're traveling, meeting friends, or just exploring a new city, clear communication is key.
+                            </p>
+                            <p class="intro-text">
+                                This activity will help you master common phrases and vocabulary used for <strong>giving and asking for directions</strong>. You'll learn how to describe locations, turns, and distances effectively.
+                            </p>
+                            <p class="intro-text">
+                                Through interactive exercises, you will build confidence in guiding others and understanding directions when you receive them.
+                            </p>
+                        </div>
+                        <div class="intro-sidebar">
+                            <div class="info-card">
+                                <div class="info-card-icon">
+                                    <i class="fa-solid fa-bullseye"></i>
+                                </div>
+                                <div class="info-card-content">
+                                    <h4>Learning Objective</h4>
+                                    <p>You will be able to give and understand directions clearly and accurately.</p>
+                                </div>
+                            </div>
+                            <div class="info-card">
+                                <div class="info-card-icon">
+                                    <i class="fa-solid fa-spell-check"></i>
+                                </div>
+                                <div class="info-card-content">
+                                    <h4>Skill Focus</h4>
+                                    <p>Vocabulary (A2 Level)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- Preparation Tab -->
+                <div class="tab-content" id="preparation">
+                    <!-- Section 1: Direction Verbs -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">1</span>
+                            <h3>Direction Verbs</h3>
+                        </div>
+                        <p class="exercise-instructions">Study these essential verbs used when giving directions.</p>
+
+                        <div class="vocab-grid">
+                            <div class="vocab-card">
+                                <div class="vocab-icon"><i class="fa-solid fa-arrow-up"></i></div>
+                                <div class="vocab-word">Go straight</div>
+                                <div class="vocab-desc">Continue forward without turning</div>
+                            </div>
+                            <div class="vocab-card">
+                                <div class="vocab-icon"><i class="fa-solid fa-arrow-turn-up" style="transform: rotate(-90deg);"></i></div>
+                                <div class="vocab-word">Turn left</div>
+                                <div class="vocab-desc">Change direction to the left side</div>
+                            </div>
+                            <div class="vocab-card">
+                                <div class="vocab-icon"><i class="fa-solid fa-arrow-turn-up" style="transform: rotate(90deg);"></i></div>
+                                <div class="vocab-word">Turn right</div>
+                                <div class="vocab-desc">Change direction to the right side</div>
+                            </div>
+                            <div class="vocab-card">
+                                <div class="vocab-icon"><i class="fa-solid fa-rotate-left"></i></div>
+                                <div class="vocab-word">Go back</div>
+                                <div class="vocab-desc">Return the way you came</div>
+                            </div>
+                            <div class="vocab-card">
+                                <div class="vocab-icon"><i class="fa-solid fa-person-walking"></i></div>
+                                <div class="vocab-word">Walk along</div>
+                                <div class="vocab-desc">Follow a street or path</div>
+                            </div>
+                            <div class="vocab-card">
+                                <div class="vocab-icon"><i class="fa-solid fa-road"></i></div>
+                                <div class="vocab-word">Cross</div>
+                                <div class="vocab-desc">Go from one side to the other</div>
+                            </div>
+                            <div class="vocab-card">
+                                <div class="vocab-icon"><i class="fa-solid fa-location-crosshairs"></i></div>
+                                <div class="vocab-word">Pass</div>
+                                <div class="vocab-desc">Go past something without stopping</div>
+                            </div>
+                            <div class="vocab-card">
+                                <div class="vocab-icon"><i class="fa-solid fa-flag-checkered"></i></div>
+                                <div class="vocab-word">Take</div>
+                                <div class="vocab-desc">Use a specific street or turn</div>
+                            </div>
+                        </div>
+
+                        <div class="tip-box">
+                            <div class="tip-header">
+                                <i data-lucide="info" style="width: 20px; height: 20px;"></i> Tip
+                            </div>
+                            <div class="tip-content">
+                                <p>Use the imperative form when giving directions. Say <strong>"Turn left"</strong>, not <strong>"You turn left"</strong>. It sounds more natural and direct.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section 2: Common Landmarks -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">2</span>
+                            <h3>Common Landmarks</h3>
+                        </div>
+                        <p class="exercise-instructions">These are the most common places used as reference points when giving directions.</p>
+
+                        <div class="vocab-grid">
+                            <div class="vocab-card">
+                                <div class="vocab-icon"><i class="fa-solid fa-building-columns"></i></div>
+                                <div class="vocab-word">Bank</div>
+                                <div class="vocab-desc">A financial institution</div>
+                            </div>
+                            <div class="vocab-card">
+                                <div class="vocab-icon"><i class="fa-solid fa-hospital"></i></div>
+                                <div class="vocab-word">Hospital</div>
+                                <div class="vocab-desc">A medical centre</div>
+                            </div>
+                            <div class="vocab-card">
+                                <div class="vocab-icon"><i class="fa-solid fa-school"></i></div>
+                                <div class="vocab-word">School</div>
+                                <div class="vocab-desc">An educational building</div>
+                            </div>
+                            <div class="vocab-card">
+                                <div class="vocab-icon"><i class="fa-solid fa-church"></i></div>
+                                <div class="vocab-word">Church</div>
+                                <div class="vocab-desc">A place of worship</div>
+                            </div>
+                            <div class="vocab-card">
+                                <div class="vocab-icon"><i class="fa-solid fa-train-subway"></i></div>
+                                <div class="vocab-word">Train station</div>
+                                <div class="vocab-desc">Where trains stop</div>
+                            </div>
+                            <div class="vocab-card">
+                                <div class="vocab-icon"><i class="fa-solid fa-cart-shopping"></i></div>
+                                <div class="vocab-word">Supermarket</div>
+                                <div class="vocab-desc">A large grocery store</div>
+                            </div>
+                            <div class="vocab-card">
+                                <div class="vocab-icon"><i class="fa-solid fa-tree"></i></div>
+                                <div class="vocab-word">Park</div>
+                                <div class="vocab-desc">A public green area</div>
+                            </div>
+                            <div class="vocab-card">
+                                <div class="vocab-icon"><i class="fa-solid fa-traffic-light"></i></div>
+                                <div class="vocab-word">Traffic lights</div>
+                                <div class="vocab-desc">Road signals that control traffic</div>
+                            </div>
+                            <div class="vocab-card">
+                                <div class="vocab-icon"><i class="fa-solid fa-road-circle-check"></i></div>
+                                <div class="vocab-word">Roundabout</div>
+                                <div class="vocab-desc">A circular road junction</div>
+                            </div>
+                            <div class="vocab-card">
+                                <div class="vocab-icon"><i class="fa-solid fa-road"></i></div>
+                                <div class="vocab-word">Crossroads</div>
+                                <div class="vocab-desc">Where two roads cross each other</div>
+                            </div>
+                            <div class="vocab-card">
+                                <div class="vocab-icon"><i class="fa-solid fa-turn-up"></i></div>
+                                <div class="vocab-word">Corner</div>
+                                <div class="vocab-desc">Where two streets meet at an angle</div>
+                            </div>
+                            <div class="vocab-card">
+                                <div class="vocab-icon"><i class="fa-solid fa-bridge"></i></div>
+                                <div class="vocab-word">Bridge</div>
+                                <div class="vocab-desc">A structure crossing over water or a road</div>
+                            </div>
+                        </div>
+
+                        <div class="tip-box">
+                            <div class="tip-header">
+                                <i data-lucide="info" style="width: 20px; height: 20px;"></i> Tip
+                            </div>
+                            <div class="tip-content">
+                                <p>Use landmarks to make directions clearer. Instead of just saying <strong>"turn left"</strong>, say <strong>"turn left at the traffic lights"</strong> or <strong>"turn left after the bank"</strong>.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section 3: Useful Phrases -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">3</span>
+                            <h3>Useful Phrases & Expressions</h3>
+                        </div>
+                        <p class="exercise-instructions">Learn these common expressions used when asking for and giving directions.</p>
+
+                        <div class="phrases-grid">
+                            <div class="phrase-category">
+                                <h4 class="phrase-category-title"><i class="fa-solid fa-circle-question"></i> Asking for directions</h4>
+                                <ul class="phrase-list">
+                                    <li><span class="phrase-highlight">Excuse me, how do I get to the station?</span></li>
+                                    <li><span class="phrase-highlight">Could you tell me the way to the hospital?</span></li>
+                                    <li><span class="phrase-highlight">Is it far from here?</span></li>
+                                    <li><span class="phrase-highlight">Am I going the right way?</span></li>
+                                    <li><span class="phrase-highlight">How long does it take to walk there?</span></li>
+                                </ul>
+                            </div>
+                            <div class="phrase-category">
+                                <h4 class="phrase-category-title"><i class="fa-solid fa-map-location-dot"></i> Giving directions</h4>
+                                <ul class="phrase-list">
+                                    <li><span class="phrase-highlight">It's on the left / on the right.</span></li>
+                                    <li><span class="phrase-highlight">It's opposite the bank.</span></li>
+                                    <li><span class="phrase-highlight">It's next to the supermarket.</span></li>
+                                    <li><span class="phrase-highlight">You can't miss it.</span></li>
+                                    <li><span class="phrase-highlight">It's about a 5-minute walk.</span></li>
+                                    <li><span class="phrase-highlight">Take the first / second turning on the left.</span></li>
+                                    <li><span class="phrase-highlight">Go past the church and keep going.</span></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="tip-box">
+                            <div class="tip-header">
+                                <i data-lucide="info" style="width: 20px; height: 20px;"></i> Tip
+                            </div>
+                            <div class="tip-content">
+                                <ul>
+                                    <li>Always start with <strong>"Excuse me"</strong> when asking a stranger for directions — it's polite and natural.</li>
+                                    <li><strong>"You can't miss it"</strong> is a very common English phrase that means the place is easy to find.</li>
+                                    <li>Use <strong>"opposite"</strong> (not "in front of") when a place is directly across the street from another.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Practice Tab -->
+                <div class="tab-content" id="practice">
+                    <!-- Exercise 1: Multiple choice -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">1</span>
+                            <h3>Choose the Correct Direction</h3>
+                        </div>
+                        <p class="exercise-instructions">Read each sentence and choose the correct word to complete it.</p>
+
+                        <div class="mc-list" id="mc-list-1">
+
+                            <div class="mc-item" data-correct="b">
+                                <p class="mc-question">Go _______ on Main Street until you reach the traffic lights.</p>
+                                <div class="mc-options">
+                                    <button class="mc-btn" data-option="a">turn</button>
+                                    <button class="mc-btn" data-option="b">straight</button>
+                                    <button class="mc-btn" data-option="c">cross</button>
+                                    <button class="mc-btn" data-option="d">back</button>
+                                </div>
+                            </div>
+
+                            <div class="mc-item" data-correct="c">
+                                <p class="mc-question">_______ the road at the pedestrian crossing.</p>
+                                <div class="mc-options">
+                                    <button class="mc-btn" data-option="a">Walk</button>
+                                    <button class="mc-btn" data-option="b">Pass</button>
+                                    <button class="mc-btn" data-option="c">Cross</button>
+                                    <button class="mc-btn" data-option="d">Take</button>
+                                </div>
+                            </div>
+
+                            <div class="mc-item" data-correct="a">
+                                <p class="mc-question">Turn left _______ the bank — the hotel is right there.</p>
+                                <div class="mc-options">
+                                    <button class="mc-btn" data-option="a">at</button>
+                                    <button class="mc-btn" data-option="b">on</button>
+                                    <button class="mc-btn" data-option="c">in</button>
+                                    <button class="mc-btn" data-option="d">by</button>
+                                </div>
+                            </div>
+
+                            <div class="mc-item" data-correct="d">
+                                <p class="mc-question">The supermarket is _______ the park — directly across the street.</p>
+                                <div class="mc-options">
+                                    <button class="mc-btn" data-option="a">next to</button>
+                                    <button class="mc-btn" data-option="b">behind</button>
+                                    <button class="mc-btn" data-option="c">along</button>
+                                    <button class="mc-btn" data-option="d">opposite</button>
+                                </div>
+                            </div>
+
+                            <div class="mc-item" data-correct="b">
+                                <p class="mc-question">_______ the first turning on the right after the roundabout.</p>
+                                <div class="mc-options">
+                                    <button class="mc-btn" data-option="a">Go</button>
+                                    <button class="mc-btn" data-option="b">Take</button>
+                                    <button class="mc-btn" data-option="c">Pass</button>
+                                    <button class="mc-btn" data-option="d">Walk</button>
+                                </div>
+                            </div>
+
+                            <div class="mc-item" data-correct="c">
+                                <p class="mc-question">Excuse me, _______ you tell me the way to the train station?</p>
+                                <div class="mc-options">
+                                    <button class="mc-btn" data-option="a">will</button>
+                                    <button class="mc-btn" data-option="b">shall</button>
+                                    <button class="mc-btn" data-option="c">could</button>
+                                    <button class="mc-btn" data-option="d">would</button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div style="display: flex; gap: 12px; align-items: center; margin-top: 20px;">
+                            <button class="check-answers-btn" id="check-mc-1">
+                                <i class="fa-solid fa-check"></i> Check answers
+                            </button>
+                            <button class="check-answers-btn retry-btn" id="retry-mc-1" disabled>
+                                <i class="fa-solid fa-rotate-right"></i> Try again
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Exercise 2: Map matching -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">2</span>
+                            <h3>Match the Directions to the Destination</h3>
+                        </div>
+                        <p class="exercise-instructions">Read each set of directions and select where they lead on the map below.</p>
+
+                        <div class="map-container">
+                            <img src="../../../assets/activities/giving-directions/map.png" alt="Street map" class="directions-map" onerror="this.style.display='none'; document.getElementById('map-fallback').style.display='block'">
+                            <div id="map-fallback" class="map-fallback" style="display:none;">
+                                <i class="fa-solid fa-map" style="font-size: 48px; color: #d1d5db; margin-bottom: 12px;"></i>
+                                <p style="font-family: 'Inter', sans-serif; color: #9ca3af; font-size: 14px;">Map image not found.<br>Add your map to: assets/activities/giving-directions/map.png</p>
+                            </div>
+                        </div>
+
+                        <div class="map-directions-list" id="map-list">
+
+                            <div class="map-direction-item" data-correct="hospital">
+                                <div class="map-direction-text">
+                                    <span class="direction-number">A</span>
+                                    <p>"Go straight along Park Street. Turn right at the traffic lights. Walk past the school. It's on your left, next to the roundabout."</p>
+                                </div>
+                                <div class="map-select-wrapper">
+                                    <select class="map-select" data-item="a">
+                                        <option value="">Select destination...</option>
+                                        <option value="bank">Bank</option>
+                                        <option value="hospital">Hospital</option>
+                                        <option value="park">Park</option>
+                                        <option value="station">Train Station</option>
+                                        <option value="supermarket">Supermarket</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="map-direction-item" data-correct="station">
+                                <div class="map-direction-text">
+                                    <span class="direction-number">B</span>
+                                    <p>"Take the second turning on the left. Walk along Bridge Road and cross the river. Turn right immediately after the bridge. You can't miss it."</p>
+                                </div>
+                                <div class="map-select-wrapper">
+                                    <select class="map-select" data-item="b">
+                                        <option value="">Select destination...</option>
+                                        <option value="bank">Bank</option>
+                                        <option value="hospital">Hospital</option>
+                                        <option value="park">Park</option>
+                                        <option value="station">Train Station</option>
+                                        <option value="supermarket">Supermarket</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="map-direction-item" data-correct="bank">
+                                <div class="map-direction-text">
+                                    <span class="direction-number">C</span>
+                                    <p>"Go past the church. At the crossroads, turn left onto High Street. It's opposite the supermarket, between the café and the chemist."</p>
+                                </div>
+                                <div class="map-select-wrapper">
+                                    <select class="map-select" data-item="c">
+                                        <option value="">Select destination...</option>
+                                        <option value="bank">Bank</option>
+                                        <option value="hospital">Hospital</option>
+                                        <option value="park">Park</option>
+                                        <option value="station">Train Station</option>
+                                        <option value="supermarket">Supermarket</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="map-direction-item" data-correct="park">
+                                <div class="map-direction-text">
+                                    <span class="direction-number">D</span>
+                                    <p>"Walk straight ahead for about five minutes. Turn left at the traffic lights. It's on the right, next to the school. There are big iron gates at the entrance."</p>
+                                </div>
+                                <div class="map-select-wrapper">
+                                    <select class="map-select" data-item="d">
+                                        <option value="">Select destination...</option>
+                                        <option value="bank">Bank</option>
+                                        <option value="hospital">Hospital</option>
+                                        <option value="park">Park</option>
+                                        <option value="station">Train Station</option>
+                                        <option value="supermarket">Supermarket</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="map-direction-item" data-correct="supermarket">
+                                <div class="map-direction-text">
+                                    <span class="direction-number">E</span>
+                                    <p>"Go back to the main road. Turn right and walk along for two blocks. It's on the corner, opposite the bank. It has a large car park in front."</p>
+                                </div>
+                                <div class="map-select-wrapper">
+                                    <select class="map-select" data-item="e">
+                                        <option value="">Select destination...</option>
+                                        <option value="bank">Bank</option>
+                                        <option value="hospital">Hospital</option>
+                                        <option value="park">Park</option>
+                                        <option value="station">Train Station</option>
+                                        <option value="supermarket">Supermarket</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div style="display: flex; gap: 12px; align-items: center; margin-top: 20px;">
+                            <button class="check-answers-btn" id="check-map">
+                                <i class="fa-solid fa-check"></i> Check answers
+                            </button>
+                            <button class="check-answers-btn retry-btn" id="retry-map" disabled>
+                                <i class="fa-solid fa-rotate-right"></i> Try again
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Completion Box -->
+                    <div class="completion-box">
+                        <h4><i class="fa-solid fa-party-horn"></i> Great Job!</h4>
+                        <p>You've completed the "Giving Directions" activity. You've practised:</p>
+                        <ul class="completion-list">
+                            <li><i class="fa-solid fa-check-circle"></i> Essential direction verbs</li>
+                            <li><i class="fa-solid fa-check-circle"></i> Common landmarks and reference points</li>
+                            <li><i class="fa-solid fa-check-circle"></i> Useful phrases for asking and giving directions</li>
+                            <li><i class="fa-solid fa-check-circle"></i> Reading and matching directions to destinations</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="activity-nav">
+                    <button class="nav-btn nav-btn-back" id="btn-back" disabled>
+                        <i class="fa-solid fa-arrow-left"></i> Back
+                    </button>
+                    <button class="nav-btn nav-btn-next" id="btn-next">
+                        Next <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="../../../js/layout.js"></script>
+    <script src="../../../js/script.js" defer></script>
+    <script src="../../../js/checkanswers.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        lucide.createIcons();
+
+        // Placeholder for generic audio functions if needed later
+        let currentAudio = null;
+        let currentBtn = null;
+
+        window.playAudio = function(filename) {
+            const btn = event.currentTarget;
+            const icon = btn.querySelector('i');
+            
+            if (currentBtn === btn && currentAudio) {
+                if (currentAudio.paused) {
+                    currentAudio.play();
+                    btn.classList.add('playing');
+                    icon.className = 'fa-solid fa-pause';
+                } else {
+                    currentAudio.pause();
+                    btn.classList.remove('playing');
+                    icon.className = 'fa-solid fa-play';
+                }
+                return;
+            }
+
+            if (currentAudio) {
+                currentAudio.pause();
+                if (currentBtn) {
+                    currentBtn.classList.remove('playing');
+                    currentBtn.querySelector('i').className = 'fa-solid fa-play';
+                }
+            }
+            
+            btn.classList.add('playing');
+            icon.className = 'fa-solid fa-pause';
+            
+            // Adjust path as needed for specific audio files for this activity
+            currentAudio = new Audio(`../../../assets/activities/giving-directions/${filename}.mp3`);
+            currentBtn = btn;
+
+            const speedBtn = btn.parentElement.querySelector('.speed-btn');
+            if (speedBtn) {
+                currentAudio.playbackRate = parseFloat(speedBtn.dataset.speed || 1);
+            }
+            
+            currentAudio.play().catch(e => {
+                console.log('Audio not found or error playing:', e);
+                btn.classList.remove('playing');
+                icon.className = 'fa-solid fa-play';
+                currentAudio = null;
+                currentBtn = null;
+            });
+            
+            currentAudio.onended = () => {
+                btn.classList.remove('playing');
+                icon.className = 'fa-solid fa-play';
+                currentAudio = null;
+                currentBtn = null;
+            };
+        };
+
+        window.toggleSpeed = function(btn) {
+            const speeds = [1, 0.75, 0.5];
+            const labels = ['1x', '0.75x', '0.5x'];
+            
+            let currentSpeed = parseFloat(btn.dataset.speed || 1);
+            let currentIndex = speeds.indexOf(currentSpeed);
+            let nextIndex = (currentIndex + 1) % speeds.length;
+            
+            let nextSpeed = speeds[nextIndex];
+            btn.dataset.speed = nextSpeed;
+            btn.textContent = labels[nextIndex];
+            
+            const playBtn = btn.parentElement.querySelector('.spelling-audio-btn'); // Assuming similar button class
+            if (playBtn === currentBtn && currentAudio) {
+                currentAudio.playbackRate = nextSpeed;
+            }
+        };
+
+        // Placeholder for setupSpellingExercise if needed for future practice
+        function setupSpellingExercise(checkBtnId, retryBtnId, listId) {
+            const checkBtn = document.getElementById(checkBtnId);
+            const retryBtn = document.getElementById(retryBtnId);
+            const list = document.getElementById(listId);
+            
+            if (checkBtn && retryBtn && list) {
+                list.addEventListener('input', function(e) {
+                    if (e.target.classList.contains('spelling-input')) {
+                        e.target.classList.remove('correct', 'incorrect');
+                    }
+                });
+
+                checkBtn.addEventListener('click', function() {
+                    const items = list.querySelectorAll('.spelling-item');
+                    let correctCount = 0;
+                    let total = items.length;
+
+                    items.forEach(item => {
+                        const input = item.querySelector('.spelling-input');
+                        const correctAnswer = item.dataset.answer;
+                        const userAnswer = input.value.trim().toUpperCase();
+
+                        input.classList.remove('correct', 'incorrect');
+
+                        if (userAnswer === correctAnswer) {
+                            input.classList.add('correct');
+                            correctCount++;
+                        } else if (userAnswer !== '') {
+                            input.classList.add('incorrect');
+                        }
+                    });
+
+                    showFeedbackPopup(correctCount, total);
+                    retryBtn.disabled = false;
+                });
+
+                retryBtn.addEventListener('click', function() {
+                    const items = list.querySelectorAll('.spelling-item');
+                    items.forEach(item => {
+                        const input = item.querySelector('.spelling-input');
+                        input.value = '';
+                        input.classList.remove('correct', 'incorrect');
+                    });
+                    retryBtn.disabled = true;
+                });
+            }
+        }
+
+        // No calls to setupSpellingExercise initially, as practice is "Coming Soon"
+
+        // Multiple Choice Exercise
+        const mcItems = document.querySelectorAll('.mc-item');
+        mcItems.forEach(item => {
+            const btns = item.querySelectorAll('.mc-btn');
+            btns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    btns.forEach(b => b.classList.remove('selected'));
+                    this.classList.add('selected');
+                });
+            });
+        });
+
+        const checkMc1 = document.getElementById('check-mc-1');
+        const retryMc1 = document.getElementById('retry-mc-1');
+
+        if (checkMc1) {
+            checkMc1.addEventListener('click', function() {
+                let correct = 0;
+                let total = mcItems.length;
+
+                mcItems.forEach(item => {
+                    const correctOption = item.dataset.correct;
+                    const selected = item.querySelector('.mc-btn.selected');
+                    const btns = item.querySelectorAll('.mc-btn');
+
+                    btns.forEach(btn => {
+                        btn.classList.remove('correct', 'incorrect');
+                        if (btn.dataset.option === correctOption) {
+                            btn.classList.add('correct');
+                        }
+                    });
+
+                    if (selected) {
+                        if (selected.dataset.option === correctOption) {
+                            correct++;
+                        } else {
+                            selected.classList.add('incorrect');
+                        }
+                    }
+                });
+
+                showFeedbackPopup(correct, total);
+                retryMc1.disabled = false;
+            });
+        }
+
+        if (retryMc1) {
+            retryMc1.addEventListener('click', function() {
+                mcItems.forEach(item => {
+                    item.querySelectorAll('.mc-btn').forEach(btn => {
+                        btn.classList.remove('selected', 'correct', 'incorrect');
+                    });
+                });
+                retryMc1.disabled = true;
+            });
+        }
+
+        // Map Matching Exercise
+        const checkMap = document.getElementById('check-map');
+        const retryMap = document.getElementById('retry-map');
+        const mapItems = document.querySelectorAll('.map-direction-item');
+
+        if (checkMap) {
+            checkMap.addEventListener('click', function() {
+                let correct = 0;
+                let total = mapItems.length;
+
+                mapItems.forEach(item => {
+                    const select = item.querySelector('.map-select');
+                    const correctAnswer = item.dataset.correct;
+
+                    select.classList.remove('correct', 'incorrect');
+                    item.classList.remove('correct-answer', 'incorrect-answer');
+
+                    if (select.value === correctAnswer) {
+                        select.classList.add('correct');
+                        item.classList.add('correct-answer');
+                        correct++;
+                    } else if (select.value !== '') {
+                        select.classList.add('incorrect');
+                        item.classList.add('incorrect-answer');
+                    }
+                });
+
+                showFeedbackPopup(correct, total);
+                retryMap.disabled = false;
+            });
+        }
+
+        if (retryMap) {
+            retryMap.addEventListener('click', function() {
+                mapItems.forEach(item => {
+                    const select = item.querySelector('.map-select');
+                    select.value = '';
+                    select.classList.remove('correct', 'incorrect');
+                    item.classList.remove('correct-answer', 'incorrect-answer');
+                });
+                retryMap.disabled = true;
+            });
+        }
+    });
+    </script>
+</body>
+</html>
