@@ -18,7 +18,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rubik:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../../css/style.css">
     <link rel="stylesheet" href="../../../css/activities.css">
-    <link rel="stylesheet" href="../../../css/tipbox.css">
     <style>
 /* Hero Section */
 .activity-hero {
@@ -33,75 +32,6 @@
     display: flex;
     margin-left: auto;
     padding-right: 0;
-}
-
-/* Introduction Tab */
-.intro-grid {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 32px;
-    align-items: start;
-}
-
-.intro-main {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-}
-
-.intro-text {
-    font-family: 'Inter', sans-serif;
-    font-size: 15px;
-    line-height: 1.8;
-    color: #4b5563;
-}
-
-.intro-text strong {
-    color: #ea580c;
-}
-
-.intro-sidebar {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    max-width: 380px;
-}
-
-.info-card {
-    background: #f9fafb;
-    border: 1px solid #e5e7eb;
-    border-radius: 12px;
-    padding: 12px;
-    display: flex;
-    gap: 10px;
-}
-
-.info-card-icon {
-    width: 36px;
-    height: 36px;
-    border-radius: 8px;
-    background: #ffedd5;
-    color: #ea580c;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    flex-shrink: 0;
-}
-
-.info-card-content h4 {
-    font-family: 'Rubik', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    color: #374151;
-    margin: 0 0 4px 0;
-}
-
-.info-card-content p {
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    color: #6b7280;
-    margin: 0;
 }
 
 .video-embed {
@@ -121,7 +51,6 @@
 
 /* Exercise Sections */
 .exercise-section {
-    margin-bottom: 40px;
     position: relative;
 }
 
@@ -138,28 +67,6 @@
     margin-bottom: 0;
 }
 
-.exercise-header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 20px;
-}
-
-.exercise-number {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: #ea580c;
-    color: #ffffff;
-    font-family: 'Rubik', sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-}
-
 .exercise-step {
     padding: 6px 14px;
     border-radius: 8px;
@@ -171,22 +78,6 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-}
-
-.exercise-header h3 {
-    font-family: 'Rubik', sans-serif;
-    font-size: 20px;
-    font-weight: 600;
-    color: #1f2937;
-    margin: 0;
-}
-
-.exercise-instructions {
-    font-family: 'Inter', sans-serif;
-    font-size: 15px;
-    color: #6b7280;
-    margin-bottom: 20px;
-    line-height: 1.6;
 }
 
 /* Reflection Questions */
@@ -951,52 +842,6 @@
     }
 }
 
-/* Completion Box */
-.completion-box {
-    background: linear-gradient(135deg, #dcfce7 0%, #d1fae5 100%);
-    border: 1px solid #86efac;
-    border-radius: 12px;
-    padding: 24px;
-    margin-top: 32px;
-}
-
-.completion-box h4 {
-    font-family: 'Rubik', sans-serif;
-    font-size: 18px;
-    font-weight: 600;
-    color: #166534;
-    margin: 0 0 12px 0;
-}
-
-.completion-box p {
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    color: #166534;
-    margin: 0 0 16px 0;
-}
-
-.completion-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.completion-list li {
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    color: #166534;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.completion-list li i {
-    color: #16a34a;
-}
-
 /* Lyrics Tab */
 .lyrics-container {
     max-width: 800px;
@@ -1295,40 +1140,6 @@
     margin-top: 24px;
 }
 
-/* Warning Box */
-.warning-box {
-    background: #fef9c3;
-    border: 1px solid #fde047;
-    border-radius: 10px;
-    padding: 12px 16px;
-    margin-bottom: 32px;
-    display: flex;
-    gap: 12px;
-    align-items: center;
-}
-
-.warning-box i {
-    color: #ca8a04;
-    font-size: 16px;
-}
-
-.warning-box-content h4 {
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    color: #854d0e;
-    margin: 0;
-    display: inline;
-}
-
-.warning-box-content p {
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    color: #a16207;
-    margin: 0;
-    display: inline;
-}
-
 /* Answer Feedback */
 .matching-input.correct {
     border-color: #86EFAC;
@@ -1552,6 +1363,13 @@
     .intro-grid {
         grid-template-columns: 1fr;
     }
+
+    .exercise-section .decorative-img {
+        position: static;
+        width: 100%;
+        height: auto;
+        margin-bottom: 24px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -1619,13 +1437,13 @@
                     <div class="intro-grid">
                         <div class="intro-main">
                             <p class="intro-text">
-                                Did you know that the average person spends <strong>over 4 hours a day</strong> on their phone? That's nearly 60 days per year! Studies show we check our phones <strong>over 140 times a day</strong> on average, and most people check their notifications within minutes of receiving them.
+                                Did you know the average person spends over 4 hours a day on their phone? That's nearly 60 days a year staring at a screen. In a world where notifications never stop, knowing how to talk about <strong>technology habits</strong> is more relevant than ever.
                             </p>
                             <p class="intro-text">
-                                Are you guilty of this too? When was the last time you went an entire day without your phone?
+                                In this activity, you will practise listening comprehension through a catchy song about <strong>phone addiction</strong>. You will work on understanding <strong>natural spoken language</strong>, picking up vocabulary related to technology and everyday habits, and following meaning even when the language moves fast.
                             </p>
                             <p class="intro-text">
-                                In this activity, we'll explore our relationship with technology through a catchy song by Rhett & Link.
+                                By the end, you will be able to understand the song's message, discuss technology habits, and give advice on difficult situations related to phone use.
                             </p>
                         </div>
                         <div class="intro-sidebar">
@@ -2196,14 +2014,34 @@
                     </div>
 
                     <div class="completion-box">
-                        <h4><i class="fa-solid fa-party-horn"></i> Great Job!</h4>
-                        <p>You've completed the "Get Off the Phone" listening activity. You've practiced:</p>
-                        <ul class="completion-list">
-                            <li><i class="fa-solid fa-check"></i> Listening comprehension with fast-paced audio</li>
-                            <li><i class="fa-solid fa-check"></i> Making predictions based on limited information</li>
-                            <li><i class="fa-solid fa-check"></i> Describing past events and situations</li>
-                            <li><i class="fa-solid fa-check"></i> Giving advice on technology-related problems</li>
-                        </ul>
+                        <div class="completion-bar"></div>
+                        <div class="completion-inner">
+                            <div class="completion-header">
+                                <div class="completion-icon">
+                                    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                                </div>
+                                <h2 class="completion-title">Activity Complete!</h2>
+                            </div>
+                            <p class="completion-subtitle">You've completed <strong>"Get Off the Phone"</strong>. Here's what you've practised:</p>
+                            <div class="skills-list">
+                                <div class="skill-item">
+                                    <div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+                                    Listening comprehension with fast-paced audio
+                                </div>
+                                <div class="skill-item">
+                                    <div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+                                    Making predictions based on limited information
+                                </div>
+                                <div class="skill-item">
+                                    <div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+                                    Describing past events and situations
+                                </div>
+                                <div class="skill-item">
+                                    <div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+                                    Giving advice on technology-related problems
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -2360,10 +2198,10 @@ It's crawling with e-coli bacteria anyway.
                 const buttons = parent.querySelectorAll('.tf-btn');
 
                 if (this.classList.contains('selected')) {
-                    this.classList.remove('selected');
+                    this.classList.remove('selected', 'correct', 'incorrect');
                 } else {
                     buttons.forEach(b => {
-                        b.classList.remove('selected');
+                        b.classList.remove('selected', 'correct', 'incorrect');
                     });
                     this.classList.add('selected');
                 }
@@ -2383,8 +2221,6 @@ It's crawling with e-coli bacteria anyway.
                 let allAnswered = true;
 
                 items.forEach(item => {
-                    const buttons = item.querySelectorAll('.tf-btn');
-                    buttons.forEach(btn => btn.disabled = true);
 
                     const selectedBtn = item.querySelector('.tf-btn.selected');
                     const correctValue = item.dataset.correct;
@@ -2407,7 +2243,6 @@ It's crawling with e-coli bacteria anyway.
 
                 showFeedbackPopup(correctCount, total);
                 retryTfBtn.disabled = false;
-                checkTfBtn.disabled = true;
             });
         }
 

@@ -18,23 +18,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rubik:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../../css/style.css">
     <link rel="stylesheet" href="../../../css/activities.css">
-    <link rel="stylesheet" href="../../../css/tipbox.css">
     <style>
 /* Hero Section */
 .activity-hero {
     background-image: url('../../../assets/activities/spelling.png');
 }
-
-/* Intro Styles */
-.intro-grid { display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: start; }
-.intro-main { display: flex; flex-direction: column; gap: 24px; }
-.intro-text { font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.8; color: #4b5563; }
-.intro-text strong { color: #ea580c; }
-.intro-sidebar { display: flex; flex-direction: column; gap: 16px; max-width: 380px; }
-.info-card { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 12px; padding: 12px; display: flex; gap: 10px; }
-.info-card-icon { width: 36px; height: 36px; border-radius: 8px; background: #ffedd5; color: #ea580c; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
-.info-card-content h4 { font-family: 'Rubik', sans-serif; font-size: 14px; font-weight: 600; color: #374151; margin: 0 0 4px 0; }
-.info-card-content p { font-family: 'Inter', sans-serif; font-size: 14px; color: #6b7280; margin: 0; }
 
 /* Alphabet Grid Styles */
 .alphabet-grid {
@@ -122,10 +110,6 @@
     0% { background-color: #fff7ed; border-color: #ea580c; }
     100% { background-color: white; border-color: #e5e7eb; }
 }
-
-/* ── Practice Exercises ─────────────────────────────────────── */
-.exercise-section { margin-bottom: 40px; }
-.exercise-header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
 
 /* Accent Toggle */
 .accent-toggle {
@@ -225,25 +209,12 @@
     letter-spacing: 1px;
 }
 
-/* ── Practice Exercises ─────────────────────────────────────── */
-.exercise-section { margin-bottom: 40px; }
-.exercise-header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
-.exercise-number { width: 36px; height: 36px; border-radius: 50%; background: #ea580c; color: #ffffff; font-family: 'Rubik', sans-serif; font-size: 16px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.exercise-header h3 { font-family: 'Rubik', sans-serif; font-size: 20px; font-weight: 600; color: #1f2937; margin: 0; }
-.exercise-instructions { font-family: 'Inter', sans-serif; font-size: 15px; color: #6b7280; margin-bottom: 20px; line-height: 1.6; }
-
 /* ── Spelling item card ──────────────────────────────────────── */
 .spelling-list {
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 16px;
     margin-top: 24px;
-}
-
-@media (min-width: 768px) {
-    .spelling-list {
-        grid-template-columns: 1fr 1fr;
-    }
 }
 
 .spelling-item {
@@ -254,6 +225,7 @@
     display: flex;
     align-items: center;
     gap: 16px;
+    width: fit-content;
     box-shadow: 0 1px 3px rgba(30,45,64,.07), 0 1px 2px rgba(30,45,64,.05);
     transition: border-color .2s, box-shadow .2s, transform .15s;
 }
@@ -351,7 +323,7 @@
 }
 
 .spelling-input {
-    width: 100%;
+    width: 300px;
     padding: 11px 16px;
     background: #F0F4FA;
     border: 2px solid transparent;
@@ -393,57 +365,11 @@
     box-shadow: 0 0 0 4px rgba(239,68,68,.08);
 }
 
-/* Completion Box */
-.completion-box {
-    background: linear-gradient(135deg, #dcfce7 0%, #d1fae5 100%);
-    border: 1px solid #86efac;
-    border-radius: 12px;
-    padding: 24px;
-    margin-top: 32px;
-}
-
-.completion-box h4 {
-    font-family: 'Rubik', sans-serif;
-    font-size: 18px;
-    font-weight: 600;
-    color: #166534;
-    margin: 0 0 12px 0;
-}
-
-.completion-box p {
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    color: #166534;
-    margin: 0 0 16px 0;
-}
-
-.completion-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.completion-list li {
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    color: #166534;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.completion-list li i {
-    color: #16a34a;
-}
-
 @media (max-width: 768px) {
     .exercise-header { flex-wrap: wrap; }
     .accent-toggle { margin-left: 0; width: 100%; margin-top: 10px; }
     .accent-btn { flex: 1; justify-content: center; }
-    .spelling-item { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .spelling-item { flex-direction: column; align-items: flex-start; gap: 12px; width: 100%; }
     .spelling-input-wrapper { width: 100%; }
     .spelling-input { width: 100%; }
 }
@@ -503,18 +429,18 @@
                     </div>
                 </nav>
 
-                <!-- Introduction Tab -->
+            <!-- Introduction Tab -->
                 <div class="tab-content active" id="introduction">
                     <div class="intro-grid">
                         <div class="intro-main">
                             <p class="intro-text">
-                                Spelling is a <strong>crucial skill</strong> in English. Unlike some languages where words are read exactly as they are written, English spelling can be tricky.
+                                How do you spell that? It is one of the most common questions in everyday communication, and not being able to answer it clearly can create real problems. Knowing how to spell out loud is a skill that comes up more often than you think.
                             </p>
                             <p class="intro-text">
-                                In professional and social situations, you will often need to spell your <strong>name</strong>, <strong>email address</strong>, or <strong>street name</strong> over the phone. Mastering the alphabet sounds is the first step to clear communication.
+                                In this activity, you will review the <strong>alphabet</strong> and learn how to spell common things like your <strong>name</strong>, <strong>email address</strong>, and <strong>street name</strong>. You will also cover special symbols used in everyday written communication.
                             </p>
                             <p class="intro-text">
-                                In this activity, you will start by reviewing the <strong>alphabet</strong> and <strong>special symbols</strong>. Then, you will put your skills to the test with practical exercises designed to help you communicate with confidence.
+                                Through vocabulary review and listening exercises, you will build the confidence to spell clearly and understand others when they spell things out to you.
                             </p>
                         </div>
                         <div class="intro-sidebar">
@@ -534,6 +460,15 @@
                                 <div class="info-card-content">
                                     <h4>Skill Focus</h4>
                                     <p>Vocabulary & Listening (A1 Level)</p>
+                                </div>
+                            </div>
+                            <div class="info-card">
+                                <div class="info-card-icon">
+                                    <i class="fa-solid fa-link"></i>
+                                </div>
+                                <div class="info-card-content">
+                                    <h4>Source</h4>
+                                    <p>Enbreak Original Content</p>
                                 </div>
                             </div>
                         </div>
@@ -615,7 +550,7 @@
                 <div class="tab-content" id="practice">
                     <div class="exercise-section">
                         <div class="exercise-header">
-                            <span class="exercise-number">1</span>
+                            <span class="exercise-number">3</span>
                             <h3>Spelling First Names</h3>
                         </div>
                         <p class="exercise-instructions">Listen and write the first names.</p>
@@ -670,7 +605,7 @@
 
                     <div class="exercise-section">
                         <div class="exercise-header">
-                            <span class="exercise-number">2</span>
+                            <span class="exercise-number">4</span>
                             <h3>Spelling Surnames</h3>
                         </div>
                         <p class="exercise-instructions">Listen and write the surnames.</p>
@@ -725,7 +660,7 @@
 
                     <div class="exercise-section">
                         <div class="exercise-header">
-                            <span class="exercise-number">3</span>
+                            <span class="exercise-number">5</span>
                             <h3>Spelling Addresses</h3>
                         </div>
                         <p class="exercise-instructions">Listen and write the street names or cities.</p>
@@ -780,7 +715,7 @@
 
                     <div class="exercise-section">
                         <div class="exercise-header">
-                            <span class="exercise-number">4</span>
+                            <span class="exercise-number">6</span>
                             <h3>Spelling Emails and Websites</h3>
                         </div>
                         <p class="exercise-instructions">Listen and write the email addresses or websites. Use symbols when necessary.</p>
@@ -834,13 +769,30 @@
                     </div>
 
                     <div class="completion-box">
-                        <h4><i class="fa-solid fa-party-horn"></i> Great Job!</h4>
-                        <p>You've completed the "Spelling Names" activity. You've practiced:</p>
-                        <ul class="completion-list">
-                            <li><i class="fa-solid fa-check"></i> The English alphabet pronunciation (British & American)</li>
-                            <li><i class="fa-solid fa-check"></i> Spelling first names, surnames, and addresses correctly</li>
-                            <li><i class="fa-solid fa-check"></i> Writing email addresses and website URLs with symbols</li>
-                        </ul>
+                        <div class="completion-bar"></div>
+                        <div class="completion-inner">
+                            <div class="completion-header">
+                                <div class="completion-icon">
+                                    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                                </div>
+                                <h2 class="completion-title">Activity Complete!</h2>
+                            </div>
+                            <p class="completion-subtitle">You've completed <strong>"Spelling Names"</strong>. Here's what you've practised:</p>
+                            <div class="skills-list">
+                                <div class="skill-item">
+                                    <div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+                                    The English alphabet pronunciation (British & American)
+                                </div>
+                                <div class="skill-item">
+                                    <div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+                                    Spelling first names, surnames, and addresses correctly
+                                </div>
+                                <div class="skill-item">
+                                    <div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+                                    Writing email addresses and website URLs with symbols
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -867,6 +819,15 @@
 
     document.addEventListener('DOMContentLoaded', function() {
         lucide.createIcons();
+        
+        // Disable autocomplete and spellcheck for all spelling inputs
+        document.querySelectorAll('.spelling-input').forEach(input => {
+            input.setAttribute('autocomplete', 'off');
+            input.setAttribute('spellcheck', 'false');
+            input.setAttribute('autocorrect', 'off');
+            input.setAttribute('autocapitalize', 'off');
+        });
+
         const tabBtns = document.querySelectorAll('.tab-btn');
         const tabContents = document.querySelectorAll('.tab-content');
         const btnBack = document.getElementById('btn-back');

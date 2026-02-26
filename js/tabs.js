@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             if (btnNext) {
                 btnNext.innerHTML = currentTabIndex === tabs.length - 2
-                    ? 'Back to Activities'
+                    ? 'Done'
                     : 'Next <i class="fa-solid fa-arrow-right"></i>';
             }
         }
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             if (btnNext) {
                 btnNext.innerHTML = currentTabIndex === tabs.length - 1
-                    ? 'Back to Activities'
+                    ? 'Done'
                     : 'Next <i class="fa-solid fa-arrow-right"></i>';
             }
         }
