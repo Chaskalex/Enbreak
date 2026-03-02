@@ -1,0 +1,1476 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enbreak | Family History</title>
+    <link rel="icon" type="image/x-icon" href="../../../favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../favicon/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../favicon/apple-touch-icon.png">
+    <link rel="manifest" href="../../../favicon/site.webmanifest">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rubik:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/buttons.css">
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../../../css/activities.css">
+
+    <style>
+    /* Activity Specific Styles */
+    .activity-hero {
+        background: url('../../../assets/activities/family-history.png') center 20%/cover no-repeat;
+    }
+
+    /* ============================================================
+       VOCAB CARDS (Days / Months)
+    ============================================================ */
+    .vocab-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+    .months-grid {
+        grid-template-columns: repeat(6, 1fr);
+    }
+    @media (max-width: 900px) {
+        .months-grid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); }
+    }
+
+    .vocab-card {
+        background: #f9fafb;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 8px;
+        cursor: pointer;
+        transition: box-shadow 0.2s, border-color 0.2s;
+        position: relative;
+        user-select: none;
+    }
+
+    .vocab-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-color: #ea580c; }
+    .vocab-card.playing { border-color: #ea580c; background: #ffedd5; box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.2); }
+
+    .vocab-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 10px;
+        background: #ffedd5;
+        color: #ea580c;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+    .vocab-word {
+        font-family: 'Rubik', sans-serif;
+        font-size: 15px;
+        font-weight: 600;
+        color: #1f2937;
+    }
+
+    .vocab-desc {
+        font-family: 'Inter', sans-serif;
+        font-size: 12px;
+        color: #6b7280;
+        line-height: 1.4;
+    }
+
+    .vocab-audio-icon {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        font-size: 14px;
+        color: #ea580c;
+        opacity: 0;
+        transition: opacity 0.2s;
+    }
+    .vocab-card:hover .vocab-audio-icon,
+    .vocab-card.playing .vocab-audio-icon { opacity: 1; }
+
+    /* ============================================================
+       PREPOSITION TABLE
+    ============================================================ */
+    .prep-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid #e5e7eb;
+        margin-bottom: 20px;
+        font-size: 14px;
+    }
+
+    .prep-table th {
+        background: #1f2937;
+        color: #fff;
+        font-family: 'Rubik', sans-serif;
+        font-weight: 700;
+        font-size: 13px;
+        padding: 12px 16px;
+        text-align: left;
+    }
+
+    .prep-table td {
+        padding: 12px 16px;
+        border-bottom: 1px solid #f3f4f6;
+        vertical-align: top;
+        line-height: 1.6;
+    }
+
+    .prep-table tr:last-child td { border-bottom: none; }
+    .prep-table tr:nth-child(even) td { background: #fafafa; }
+
+    .prep-badge {
+        display: inline-block;
+        background: #ea580c;
+        color: #fff;
+        font-family: 'Rubik', sans-serif;
+        font-size: 13px;
+        font-weight: 700;
+        padding: 3px 10px;
+        border-radius: 6px;
+        margin-right: 4px;
+    }
+
+    .prep-example {
+        color: #374151;
+    }
+
+    .prep-example em {
+        color: #ea580c;
+        font-style: normal;
+        font-weight: 600;
+    }
+
+    /* ============================================================
+       CHRONOLOGICAL ORDER EXERCISE
+    ============================================================ */
+    .timeline-sort {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 20px;
+    }
+
+    .sortable-event {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        background: #fff;
+        border: 1.5px solid #e5e7eb;
+        border-radius: 10px;
+        padding: 12px 16px;
+        cursor: grab;
+        user-select: none;
+        transition: all 0.2s;
+        font-size: 14px;
+        color: #374151;
+    }
+
+    .sortable-event:hover { border-color: #ea580c; box-shadow: 0 2px 8px rgba(234,88,12,0.08); }
+    .sortable-event.dragging { opacity: 0.4; }
+    .sortable-event.drag-over { border-color: #ea580c; background: #ffedd5; }
+
+    .drag-handle {
+        color: #9ca3af;
+        font-size: 14px;
+        cursor: grab;
+        flex-shrink: 0;
+    }
+
+    .event-year-tag {
+        background: #ffedd5;
+        border: 1px solid #fed7aa;
+        color: #ea580c;
+        font-family: 'Rubik', sans-serif;
+        font-size: 12px;
+        font-weight: 700;
+        padding: 2px 8px;
+        border-radius: 6px;
+        flex-shrink: 0;
+    }
+
+    .event-text { flex: 1; }
+
+    .sortable-event.correct-order { border-color: #16a34a; background: #f0fdf4; }
+    .sortable-event.incorrect-order { border-color: #dc2626; background: #fef2f2; }
+
+    /* ============================================================
+       READING PASSAGE
+    ============================================================ */
+    .reading-header {
+        text-align: center;
+        margin-bottom: 28px;
+        padding-bottom: 20px;
+        border-bottom: 2px solid #f3f4f6;
+    }
+
+    .reading-header h2 {
+        font-family: 'Rubik', sans-serif;
+        font-size: 22px;
+        font-weight: 700;
+        color: #1f2937;
+        margin-bottom: 6px;
+    }
+
+    .reading-header p {
+        font-size: 13px;
+        color: #9ca3af;
+    }
+
+    .reading-passage {
+        background: #fafafa;
+        border: 1px solid #e5e7eb;
+        border-radius: 14px;
+        padding: 32px 36px;
+        margin-bottom: 32px;
+        line-height: 1.9;
+        font-size: 15.5px;
+        color: #374151;
+    }
+
+    .reading-passage p { margin-bottom: 18px; }
+    .reading-passage p:last-child { margin-bottom: 0; }
+
+    .reading-passage .year-highlight {
+        font-family: 'Rubik', sans-serif;
+        font-weight: 700;
+        color: #ea580c;
+    }
+
+    .reading-passage .life-event {
+        font-style: italic;
+    }
+
+    /* ============================================================
+       MULTIPLE CHOICE (Reading Comprehension)
+    ============================================================ */
+    .mc-list {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .mc-item {
+        background: #f9fafb;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 18px 20px;
+    }
+
+    .mc-question {
+        font-size: 14.5px;
+        font-weight: 600;
+        color: #1f2937;
+        margin-bottom: 14px;
+        line-height: 1.5;
+    }
+
+    .mc-options {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .mc-btn {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 14px;
+        border-radius: 8px;
+        border: 1.5px solid #e5e7eb;
+        background: #ffffff;
+        font-family: 'Inter', sans-serif;
+        font-size: 14px;
+        color: #374151;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-align: left;
+        width: 100%;
+    }
+
+    .mc-letter {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: #f3f4f6;
+        border: 1.5px solid #d1d5db;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: 700;
+        color: #6b7280;
+        flex-shrink: 0;
+        transition: all 0.2s;
+    }
+
+    .mc-btn:hover { border-color: #ea580c; }
+    .mc-btn:hover .mc-letter { background: #ffedd5; border-color: #ea580c; color: #ea580c; }
+    .mc-btn.selected { border-color: #ea580c; background: #fff7ed; }
+    .mc-btn.selected .mc-letter { background: #ea580c; border-color: #ea580c; color: #fff; }
+    .mc-btn.correct { border-color: #16a34a; background: #f0fdf4; }
+    .mc-btn.correct .mc-letter { background: #16a34a; border-color: #16a34a; color: #fff; }
+    .mc-btn.incorrect { border-color: #dc2626; background: #fef2f2; }
+    .mc-btn.incorrect .mc-letter { background: #dc2626; border-color: #dc2626; color: #fff; }
+
+    /* ============================================================
+       TIMELINE BUILDER (Post-Reading)
+    ============================================================ */
+    .timeline-builder {
+        position: relative;
+        margin: 32px 0;
+    }
+
+    .timeline-spine {
+        position: absolute;
+        left: 50%;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background: linear-gradient(to bottom, #ea580c, #fed7aa);
+        transform: translateX(-50%);
+        border-radius: 99px;
+    }
+
+    .timeline-event {
+        display: flex;
+        align-items: flex-start;
+        gap: 0;
+        margin-bottom: 28px;
+        position: relative;
+    }
+
+    .timeline-event:nth-child(odd) { flex-direction: row; }
+    .timeline-event:nth-child(even) { flex-direction: row-reverse; }
+
+    .timeline-card {
+        width: calc(50% - 36px);
+        background: #fff;
+        border: 1.5px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 14px 18px;
+        font-size: 13.5px;
+        color: #374151;
+        line-height: 1.6;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .timeline-event:nth-child(odd) .timeline-card { margin-right: auto; }
+    .timeline-event:nth-child(even) .timeline-card { margin-left: auto; }
+
+    .timeline-year {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #ea580c;
+        color: #fff;
+        font-family: 'Rubik', sans-serif;
+        font-size: 13px;
+        font-weight: 700;
+        padding: 4px 12px;
+        border-radius: 20px;
+        white-space: nowrap;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2;
+    }
+
+    .timeline-card-year {
+        font-family: 'Rubik', sans-serif;
+        font-size: 12px;
+        font-weight: 700;
+        color: #ea580c;
+        margin-bottom: 4px;
+        display: block;
+    }
+
+    .timeline-card-text {
+        font-size: 13.5px;
+        color: #374151;
+    }
+
+    /* ============================================================
+       GAP FILL SENTENCES (Post-Reading)
+    ============================================================ */
+    .sentence-fill-list {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        margin-bottom: 20px;
+    }
+
+    .sentence-fill-item {
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
+        background: #f9fafb;
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+        padding: 14px 16px;
+        font-size: 14.5px;
+        color: #374151;
+        line-height: 1.9;
+        flex-wrap: wrap;
+    }
+
+    .fill-number {
+        font-family: 'Rubik', sans-serif;
+        font-size: 13px;
+        font-weight: 700;
+        color: #ea580c;
+        flex-shrink: 0;
+    }
+
+    .fill-input {
+        border: none;
+        border-bottom: 2px solid #d1d5db;
+        background: transparent;
+        font-family: 'Inter', sans-serif;
+        font-size: 14.5px;
+        color: #1f2937;
+        padding: 2px 6px;
+        min-width: 100px;
+        outline: none;
+        transition: border-color 0.2s;
+    }
+
+    .fill-input:focus { border-color: #ea580c; }
+    .fill-input.correct { border-color: #16a34a; color: #166534; background: #dcfce7; border-radius: 4px; }
+    .fill-input.incorrect { border-color: #dc2626; color: #991b1b; background: #fee2e2; border-radius: 4px; }
+
+    /* Family Sentence Card Styles (from family-relationships) */
+    .family-sentence-card {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        background: #fff7ed;
+        border: 1px solid #fed7aa;
+        border-radius: 14px;
+        padding: 24px;
+        margin-bottom: 24px;
+    }
+    .family-sentence-card.full-width {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+    .family-sentence-faces {
+        display: flex;
+        gap: 12px;
+        flex-shrink: 0;
+        justify-content: center;
+    }
+    .face-sentence-person {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+    }
+    .face-img-container {
+        position: relative;
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 14px;
+    }
+    .face-img-wrapper {
+        width: 210px;
+        height: 210px;
+        border-radius: 20px;
+        overflow: hidden;
+        border: 3px solid #e5e7eb;
+        transition: border-color 0.2s;
+        flex-shrink: 0;
+        background: #fff;
+    }
+    .face-img-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+    .face-name-tag {
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%) translateZ(0);
+        background: #1f2937;
+        color: #ffffff;
+        font-family: 'Inter', sans-serif;
+        font-size: 10px;
+        font-weight: 600;
+        padding: 2px 8px;
+        border-radius: 20px;
+        white-space: nowrap;
+        letter-spacing: 0.3px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+    }
+    .family-sentence-text {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.95rem;
+        color: #374151;
+        line-height: 1.7;
+        width: 100%;
+    }
+    .audio-word {
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 0 4px;
+        border-radius: 4px;
+        transition: background-color 0.2s;
+        color: #ea580c;
+        font-weight: 700;
+    }
+    .audio-word:hover, .audio-word.playing {
+        background-color: #ffedd5;
+        color: #c2410c;
+    }
+    .audio-word i {
+        font-size: 0.85em;
+    }
+    @media (max-width: 600px) {
+        .family-sentence-card.full-width {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .family-sentence-text ul {
+            text-align: left;
+        }
+    }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 768px) {
+        .vocab-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
+        .timeline-spine { display: none; }
+        .timeline-event, .timeline-event:nth-child(even) { flex-direction: column; }
+        .timeline-card { width: 100%; margin: 0; }
+        .timeline-year { position: static; transform: none; margin-bottom: 8px; display: inline-block; }
+        .reading-passage { padding: 20px; }
+    }
+    [data-lucide] { display: inline-block; vertical-align: middle; }
+    [data-lucide] svg { display: block; width: 100%; height: 100%; }
+    </style>
+
+    <script>
+        const activityConfig = {
+            type: 'reading',
+            tabs: ['introduction', 'pre-reading', 'reading', 'post-reading'],
+            hiddenTab: null
+        };
+    </script>
+    <script src="../../../js/tabs.js"></script>
+</head>
+<body>
+
+    <!-- ============================================================
+         HERO
+    ============================================================ -->
+    <div id="header-placeholder"></div>
+
+    <main class="activity-page">
+        <section class="activity-hero">
+            <div class="activity-hero-content">
+                <nav class="breadcrumb">
+                    <a href="/">Inicio</a>
+                    <span class="breadcrumb-separator">›</span>
+                    <a href="../actividades.html">Actividades</a>
+                    <span class="breadcrumb-separator">›</span>
+                    <span class="breadcrumb-current">Family History</span>
+                </nav>
+                <h1>Family History</h1>
+                <div class="activity-hero-badges">
+                    <span class="hero-badge"><i class="fa-solid fa-book-open"></i> Reading</span>
+                    <span class="hero-badge"><i class="fa-solid fa-layer-group"></i> Level A2</span>
+                    <span class="hero-badge"><i class="fa-regular fa-clock"></i> 20 min</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+             ACTIVITY CONTENT
+        ============================================================ -->
+        <section class="activity-container">
+            <div class="tabs-wrapper">
+
+                <!-- TAB NAV -->
+                <nav class="tab-nav">
+                    <div class="tab-nav-main">
+                        <button class="tab-btn active" data-tab="introduction">Introduction</button>
+                        <button class="tab-btn" data-tab="pre-reading">Pre-Reading</button>
+                        <button class="tab-btn" data-tab="reading">Reading</button>
+                        <button class="tab-btn" data-tab="post-reading">Post-Reading</button>
+                    </div>
+                </nav>
+
+                <!-- ================================================
+                     INTRODUCTION TAB
+                ================================================ -->
+                <div class="tab-content active" id="introduction">
+                    <div class="intro-grid">
+                        <div class="intro-main">
+                            <p class="intro-text">
+                                When we tell the story of a person's life, we often talk about key moments: when they were born, when they went to school, when they got married. These are <strong>life events</strong>, and we use specific words and dates to describe them.
+                            </p>
+                            <p class="intro-text">
+                                In this activity, you will learn how to say and understand <strong>years and dates</strong>, how to use <strong>prepositions of time</strong> correctly, and how to talk about past events using the <strong>past simple</strong>.
+                            </p>
+                            <p class="intro-text">
+                                By the end of this activity, you will be able to organise events, build sentences with years and dates, and talk about life events in <strong>chronological order</strong>.
+                            </p>
+                        </div>
+                        <div class="intro-sidebar">
+                            <div class="info-card">
+                                <div class="info-card-icon"><i class="fa-solid fa-bullseye"></i></div>
+                                <div class="info-card-content">
+                                    <h4>Learning Objective</h4>
+                                    <p>Read and understand a chronological story using years and life-event language.</p>
+                                </div>
+                            </div>
+                            <div class="info-card">
+                                <div class="info-card-icon"><i class="fa-solid fa-book-open"></i></div>
+                                <div class="info-card-content">
+                                    <h4>Skill Focus</h4>
+                                    <p>Reading Comprehension (A2 Level)</p>
+                                </div>
+                            </div>
+                            <div class="info-card">
+                                <div class="info-card-icon"><i class="fa-solid fa-link"></i></div>
+                                <div class="info-card-content">
+                                    <h4>Source</h4>
+                                    <p>Enbreak Original Content</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ================================================
+                     PRE-READING TAB
+                ================================================ -->
+                <div class="tab-content" id="pre-reading">
+
+                    <!-- SECTION 1: Days of the week -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">1</span>
+                            <h3>Days of the Week</h3>
+                        </div>
+                        <p class="exercise-instructions">Click on each day to hear its pronunciation.</p>
+
+                        <div class="vocab-grid" style="grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));">
+                            <div class="vocab-card" onclick="playVocab('monday', this)">
+                                <div class="vocab-icon">M</div>
+                                <div class="vocab-word">Monday</div>
+                                <div class="vocab-desc">Day 1</div>
+                                <i class="fa-solid fa-volume-high vocab-audio-icon"></i>
+                            </div>
+                            <div class="vocab-card" onclick="playVocab('tuesday', this)">
+                                <div class="vocab-icon">T</div>
+                                <div class="vocab-word">Tuesday</div>
+                                <div class="vocab-desc">Day 2</div>
+                                <i class="fa-solid fa-volume-high vocab-audio-icon"></i>
+                            </div>
+                            <div class="vocab-card" onclick="playVocab('wednesday', this)">
+                                <div class="vocab-icon">W</div>
+                                <div class="vocab-word">Wednesday</div>
+                                <div class="vocab-desc">Day 3</div>
+                                <i class="fa-solid fa-volume-high vocab-audio-icon"></i>
+                            </div>
+                            <div class="vocab-card" onclick="playVocab('thursday', this)">
+                                <div class="vocab-icon">T</div>
+                                <div class="vocab-word">Thursday</div>
+                                <div class="vocab-desc">Day 4</div>
+                                <i class="fa-solid fa-volume-high vocab-audio-icon"></i>
+                            </div>
+                            <div class="vocab-card" onclick="playVocab('friday', this)">
+                                <div class="vocab-icon">F</div>
+                                <div class="vocab-word">Friday</div>
+                                <div class="vocab-desc">Day 5</div>
+                                <i class="fa-solid fa-volume-high vocab-audio-icon"></i>
+                            </div>
+                            <div class="vocab-card" onclick="playVocab('saturday', this)">
+                                <div class="vocab-icon">S</div>
+                                <div class="vocab-word">Saturday</div>
+                                <div class="vocab-desc">Day 6</div>
+                                <i class="fa-solid fa-volume-high vocab-audio-icon"></i>
+                            </div>
+                            <div class="vocab-card" onclick="playVocab('sunday', this)">
+                                <div class="vocab-icon">S</div>
+                                <div class="vocab-word">Sunday</div>
+                                <div class="vocab-desc">Day 7</div>
+                                <i class="fa-solid fa-volume-high vocab-audio-icon"></i>
+                            </div>
+                        </div>
+
+                        <div class="tip-box">
+                            <div class="tip-header"><i data-lucide="info" style="width: 20px; height: 20px;"></i> Tip</div>
+                            <div class="tip-content">
+                                <ul>
+                                    <li>Days of the week always start with a <strong>capital letter</strong> in English.</li>
+                                    <li>We often use the word <strong>"on"</strong> before days of the week.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SECTION 2: Months -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">2</span>
+                            <h3>Months of the Year</h3>
+                        </div>
+                        <p class="exercise-instructions">Click on each month to hear its pronunciation.</p>
+
+                        <div class="vocab-grid months-grid">
+                            <div class="vocab-card" onclick="playVocab('january', this)">
+                                <div class="vocab-icon"><i data-lucide="snowflake" style="width: 20px; height: 20px;"></i></div>
+                                <div class="vocab-word">January</div>
+                                <div class="vocab-desc">Month 1</div>
+                                <i class="fa-solid fa-volume-high vocab-audio-icon"></i>
+                            </div>
+                            <div class="vocab-card" onclick="playVocab('february', this)">
+                                <div class="vocab-icon"><i data-lucide="heart" style="width: 20px; height: 20px;"></i></div>
+                                <div class="vocab-word">February</div>
+                                <div class="vocab-desc">Month 2</div>
+                                <i class="fa-solid fa-volume-high vocab-audio-icon"></i>
+                            </div>
+                            <div class="vocab-card" onclick="playVocab('march', this)">
+                                <div class="vocab-icon"><i data-lucide="wind" style="width: 20px; height: 20px;"></i></div>
+                                <div class="vocab-word">March</div>
+                                <div class="vocab-desc">Month 3</div>
+                                <i class="fa-solid fa-volume-high vocab-audio-icon"></i>
+                            </div>
+                            <div class="vocab-card" onclick="playVocab('april', this)">
+                                <div class="vocab-icon"><i data-lucide="cloud-rain" style="width: 20px; height: 20px;"></i></div>
+                                <div class="vocab-word">April</div>
+                                <div class="vocab-desc">Month 4</div>
+                                <i class="fa-solid fa-volume-high vocab-audio-icon"></i>
+                            </div>
+                            <div class="vocab-card" onclick="playVocab('may', this)">
+                                <div class="vocab-icon"><i data-lucide="flower-2" style="width: 20px; height: 20px;"></i></div>
+                                <div class="vocab-word">May</div>
+                                <div class="vocab-desc">Month 5</div>
+                                <i class="fa-solid fa-volume-high vocab-audio-icon"></i>
+                            </div>
+                            <div class="vocab-card" onclick="playVocab('june', this)">
+                                <div class="vocab-icon"><i data-lucide="sun" style="width: 20px; height: 20px;"></i></div>
+                                <div class="vocab-word">June</div>
+                                <div class="vocab-desc">Month 6</div>
+                                <i class="fa-solid fa-volume-high vocab-audio-icon"></i>
+                            </div>
+                            <div class="vocab-card" onclick="playVocab('july', this)">
+                                <div class="vocab-icon"><i data-lucide="sun" style="width: 20px; height: 20px;"></i></div>
+                                <div class="vocab-word">July</div>
+                                <div class="vocab-desc">Month 7</div>
+                                <i class="fa-solid fa-volume-high vocab-audio-icon"></i>
+                            </div>
+                            <div class="vocab-card" onclick="playVocab('august', this)">
+                                <div class="vocab-icon"><i data-lucide="palmtree" style="width: 20px; height: 20px;"></i></div>
+                                <div class="vocab-word">August</div>
+                                <div class="vocab-desc">Month 8</div>
+                                <i class="fa-solid fa-volume-high vocab-audio-icon"></i>
+                            </div>
+                            <div class="vocab-card" onclick="playVocab('september', this)">
+                                <div class="vocab-icon"><i data-lucide="leaf" style="width: 20px; height: 20px;"></i></div>
+                                <div class="vocab-word">September</div>
+                                <div class="vocab-desc">Month 9</div>
+                                <i class="fa-solid fa-volume-high vocab-audio-icon"></i>
+                            </div>
+                            <div class="vocab-card" onclick="playVocab('october', this)">
+                                <div class="vocab-icon"><i data-lucide="ghost" style="width: 20px; height: 20px;"></i></div>
+                                <div class="vocab-word">October</div>
+                                <div class="vocab-desc">Month 10</div>
+                                <i class="fa-solid fa-volume-high vocab-audio-icon"></i>
+                            </div>
+                            <div class="vocab-card" onclick="playVocab('november', this)">
+                                <div class="vocab-icon"><i data-lucide="cloud-fog" style="width: 20px; height: 20px;"></i></div>
+                                <div class="vocab-word">November</div>
+                                <div class="vocab-desc">Month 11</div>
+                                <i class="fa-solid fa-volume-high vocab-audio-icon"></i>
+                            </div>
+                            <div class="vocab-card" onclick="playVocab('december', this)">
+                                <div class="vocab-icon"><i data-lucide="gift" style="width: 20px; height: 20px;"></i></div>
+                                <div class="vocab-word">December</div>
+                                <div class="vocab-desc">Month 12</div>
+                                <i class="fa-solid fa-volume-high vocab-audio-icon"></i>
+                            </div>
+                        </div>
+
+                        <div class="tip-box">
+                            <div class="tip-header"><i data-lucide="info" style="width: 20px; height: 20px;"></i> Tip</div>
+                            <div class="tip-content">
+                                <ul>
+                                    <li>Months always start with a <strong>capital letter</strong> in English.</li>
+                                    <li>We often use the word <strong>"in"</strong> before months.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SECTION 3: How to say years -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">3</span>
+                            <h3>Years</h3>
+                        </div>
+                        <p class="exercise-instructions">Read about Rose's life. Click on the years to hear how they are pronounced.</p>
+
+                        <div class="family-sentence-card full-width" style="align-items: center; gap: 32px;">
+                            <div class="family-sentence-faces">
+                                <div class="face-sentence-person">
+                                    <div class="face-img-container">
+                                        <div class="face-img-wrapper">
+                                            <img src="../../../assets/activities/family-history/rose.png" alt="Rose">
+                                        </div>
+                                        <span class="face-name-tag">Rose, 2024</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="family-sentence-text">
+                                <ul style="list-style-type: disc; padding-left: 20px; display: flex; flex-direction: column; gap: 12px;">
+                                    <li>Rose was born in <strong class="audio-word" onclick="playYear('1952', this)">1952 <i class="fa-solid fa-volume-high"></i></strong> in a small village near Oxford.</li>
+                                    <li>She moved to London in <strong class="audio-word" onclick="playYear('1975', this)">1975 <i class="fa-solid fa-volume-high"></i></strong> to study medicine at university.</li>
+                                    <li>In <strong class="audio-word" onclick="playYear('1981', this)">1981 <i class="fa-solid fa-volume-high"></i></strong>, she started her first job as a doctor at the city hospital.</li>
+                                    <li>She published her first book about patient care in <strong class="audio-word" onclick="playYear('1994', this)">1994 <i class="fa-solid fa-volume-high"></i></strong>.</li>
+                                    <li>Rose retired in <strong class="audio-word" onclick="playYear('2018', this)">2018 <i class="fa-solid fa-volume-high"></i></strong> and now spends her time gardening.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="tip-box">
+                            <div class="tip-header"><i data-lucide="info" style="width: 20px; height: 20px;"></i> Tip</div>
+                            <div class="tip-content">
+                                <ul>
+                                    <li>Years are often separated in two parts. Example: <strong>1985 > 19|85 > nineteen eighty-five</strong>.</li>
+                                    <li>Years from <strong>2000 to 2009</strong> are often pronounced <strong>"two thousand and..."</strong>.</li>
+                                    <li>We often use the word <strong>"in"</strong> before years.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SECTION 4: Prepositions of time -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">4</span>
+                            <h3>Prepositions with Dates</h3>
+                        </div>
+                        <p class="exercise-instructions">In English, we use different prepositions depending on whether we are talking about a day, a month, or a year.</p>
+
+                        <table class="prep-table">
+                            <thead>
+                                <tr>
+                                    <th>Preposition</th>
+                                    <th>Use it for...</th>
+                                    <th>Examples</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="prep-badge">on</span></td>
+                                    <td>Specific days &amp; dates</td>
+                                    <td class="prep-example">
+                                        She was born <em>on</em> Monday.<br>
+                                        He graduated <em>on</em> June 15th.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><span class="prep-badge">in</span></td>
+                                    <td>Months &amp; years</td>
+                                    <td class="prep-example">
+                                        They met <em>in</em> September.<br>
+                                        I was born <em>in</em> 1993.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><span class="prep-badge">at</span></td>
+                                    <td>Times of day &amp; holidays</td>
+                                    <td class="prep-example">
+                                        He arrived <em>at</em> midnight.<br>
+                                        We celebrate <em>at</em> Christmas.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="tip-box">
+                            <div class="tip-header"><i data-lucide="info" style="width: 20px; height: 20px;"></i> Tip</div>
+                            <div class="tip-content">
+                                <p>A simple way to remember: <strong>"on"</strong> for days (you can stand <em>on</em> a day), <strong>"in"</strong> for periods (you can be <em>inside</em> a month or year), <strong>"at"</strong> for exact points in time.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SECTION 7: Time linkers -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">5</span>
+                            <h3>Linking Ideas in the Past</h3>
+                        </div>
+                        <p class="exercise-instructions">Good life stories don't just list events — they connect them. These words and phrases help you show the order and timing of events.</p>
+
+                        <table class="prep-table">
+                            <thead>
+                                <tr>
+                                    <th>Expression</th>
+                                    <th>Use</th>
+                                    <th>Example</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="prep-badge">in</span></td>
+                                    <td>With a year or month</td>
+                                    <td class="prep-example"><em>In</em> 1970, she got married.</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="prep-badge">when</span></td>
+                                    <td>To connect two events at the same time</td>
+                                    <td class="prep-example">She met Thomas <em>when</em> she was at university.</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="prep-badge">later</span></td>
+                                    <td>After some unspecified time</td>
+                                    <td class="prep-example">She moved to London. <em>Later</em>, she became a teacher.</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="prep-badge">X years/months later</span></td>
+                                    <td>After a specific amount of time</td>
+                                    <td class="prep-example">She graduated in June. Three months <em>later</em>, she got married.</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="prep-badge">then</span></td>
+                                    <td>To show the next event in sequence</td>
+                                    <td class="prep-example">She retired. <em>Then</em> she moved back to Ireland.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="tip-box">
+                            <div class="tip-header"><i data-lucide="info" style="width: 20px; height: 20px;"></i> Tip</div>
+                            <div class="tip-content">
+                                <p>Use <strong>in</strong> with years and months. Use <strong>when</strong> in longer sentences with a subject and verb. Use <strong>later</strong> to move the story forward in time without repeating the year.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- ================================================
+                     READING TAB
+                ================================================ -->
+                <div class="tab-content" id="reading">
+
+                    <!-- The passage -->
+                    <div class="reading-header">
+                        <h2>Margaret's Story</h2>
+                        <p>Read the text carefully. You will answer questions about it afterwards.</p>
+                    </div>
+
+                    <div class="reading-passage">
+                        <p>
+                            Margaret Collins was born on <span class="year-highlight">14th March, 1948</span>, in a small coastal town called Kilkee, on the west coast of Ireland. She was the second of five children. Her father was a fisherman, and her mother worked in a bakery. Life was simple but happy.
+                        </p>
+                        <p>
+                            In <span class="year-highlight">1966</span>, Margaret finished secondary school and moved to Dublin to study at university. She studied History and loved every moment of it. She made many friends, and in <span class="year-highlight">1969</span>, during her final year, she met a young man named Thomas Collins at a library. They fell in love quickly.
+                        </p>
+                        <p>
+                            Margaret graduated in <span class="year-highlight">June 1970</span> and married Thomas just three months later, in <span class="year-highlight">September 1970</span>. They moved to London, where Thomas found work as an engineer. Margaret started her career as a secondary school history teacher in <span class="year-highlight">1971</span>. She loved teaching, and her students loved her.
+                        </p>
+                        <p>
+                            Their first child, a daughter named Claire, was born in <span class="year-highlight">1972</span>. Two years later, in <span class="year-highlight">1974</span>, their son Daniel was born. The family lived a full and busy life in London. In <span class="year-highlight">1985</span>, Margaret's parents moved from Ireland to live closer to the family. It was a very happy time.
+                        </p>
+                        <p>
+                            Sadly, Thomas passed away in <span class="year-highlight">February 1999</span> after a short illness. Margaret was devastated, but her children and grandchildren — Claire's first child was born in <span class="year-highlight">1997</span> — gave her the strength to continue.
+                        </p>
+                        <p>
+                            Margaret retired from teaching in <span class="year-highlight">2003</span>, after 32 years in the classroom. She moved back to Ireland and settled in Galway. In <span class="year-highlight">2010</span>, she started writing a blog about Irish history, which became surprisingly popular. By <span class="year-highlight">2015</span>, she had published her first book.
+                        </p>
+                        <p>
+                            Today, Margaret is 76 years old. She has four grandchildren and still writes every day. She says: <em>"Every year of my life taught me something. The important thing is to pay attention."</em>
+                        </p>
+                    </div>
+
+                    <!-- Comprehension: Multiple Choice -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">6</span>
+                            <h3>Comprehension Check</h3>
+                        </div>
+                        <p class="exercise-instructions">Choose the correct answer based on the text. Read carefully — some options look similar!</p>
+
+                        <div class="mc-list" id="mc-list-1">
+
+                            <div class="mc-item" data-correct="b">
+                                <p class="mc-question">1. Where was Margaret born?</p>
+                                <div class="mc-options">
+                                    <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> Dublin, Ireland</button>
+                                    <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> Kilkee, Ireland</button>
+                                    <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> London, England</button>
+                                    <button class="mc-btn" data-option="d"><span class="mc-letter">D</span> Galway, Ireland</button>
+                                </div>
+                            </div>
+
+                            <div class="mc-item" data-correct="c">
+                                <p class="mc-question">2. In which year did Margaret start university?</p>
+                                <div class="mc-options">
+                                    <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> 1948</button>
+                                    <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> 1968</button>
+                                    <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> 1966</button>
+                                    <button class="mc-btn" data-option="d"><span class="mc-letter">D</span> 1970</button>
+                                </div>
+                            </div>
+
+                            <div class="mc-item" data-correct="a">
+                                <p class="mc-question">3. Where did Margaret meet Thomas?</p>
+                                <div class="mc-options">
+                                    <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> At a library in Dublin</button>
+                                    <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> At a bakery in Kilkee</button>
+                                    <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> At a school in London</button>
+                                    <button class="mc-btn" data-option="d"><span class="mc-letter">D</span> At a university in Galway</button>
+                                </div>
+                            </div>
+
+                            <div class="mc-item" data-correct="d">
+                                <p class="mc-question">4. How long did Margaret work as a teacher?</p>
+                                <div class="mc-options">
+                                    <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> 20 years</button>
+                                    <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> 25 years</button>
+                                    <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> 30 years</button>
+                                    <button class="mc-btn" data-option="d"><span class="mc-letter">D</span> 32 years</button>
+                                </div>
+                            </div>
+
+                            <div class="mc-item" data-correct="b">
+                                <p class="mc-question">5. In what month did Thomas pass away?</p>
+                                <div class="mc-options">
+                                    <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> January</button>
+                                    <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> February</button>
+                                    <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> March</button>
+                                    <button class="mc-btn" data-option="d"><span class="mc-letter">D</span> September</button>
+                                </div>
+                            </div>
+
+                            <div class="mc-item" data-correct="c">
+                                <p class="mc-question">6. What did Margaret do in 2010?</p>
+                                <div class="mc-options">
+                                    <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> She published her first book</button>
+                                    <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> She retired from teaching</button>
+                                    <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> She started writing a blog</button>
+                                    <button class="mc-btn" data-option="d"><span class="mc-letter">D</span> She moved back to Ireland</button>
+                                </div>
+                            </div>
+
+                            <div class="mc-item" data-correct="a">
+                                <p class="mc-question">7. How many grandchildren does Margaret have today?</p>
+                                <div class="mc-options">
+                                    <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> Four</button>
+                                    <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> Two</button>
+                                    <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> Five</button>
+                                    <button class="mc-btn" data-option="d"><span class="mc-letter">D</span> Three</button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div style="display: flex; gap: 12px; align-items: center; margin-top: 24px;">
+                            <button class="check-answers-btn" id="check-mc">
+                                <i class="fa-solid fa-check"></i> Check answers
+                            </button>
+                            <button class="check-answers-btn retry-btn" id="retry-mc" disabled>
+                                <i class="fa-solid fa-rotate-right"></i> Try again
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- ================================================
+                     POST-READING TAB
+                ================================================ -->
+                <div class="tab-content" id="post-reading">
+
+                    <!-- SECTION 7: Timeline reconstruction -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">7</span>
+                            <h3>Margaret's Timeline</h3>
+                        </div>
+                        <p class="exercise-instructions">Look at the timeline of Margaret's life. Write the correct year in each gap using information from the story.</p>
+
+                        <div class="sentence-fill-list" id="timeline-fill">
+
+                            <div class="sentence-fill-item" data-answer="1948">
+                                <span class="fill-number">1.</span>
+                                <span>Margaret was born in</span>
+                                <input type="text" class="fill-input timeline-input" data-answer="1948" placeholder="year">
+                                <span>in Kilkee, Ireland.</span>
+                            </div>
+
+                            <div class="sentence-fill-item" data-answer="1966">
+                                <span class="fill-number">2.</span>
+                                <span>In</span>
+                                <input type="text" class="fill-input timeline-input" data-answer="1966" placeholder="year">
+                                <span>, she moved to Dublin to go to university.</span>
+                            </div>
+
+                            <div class="sentence-fill-item" data-answer="1969">
+                                <span class="fill-number">3.</span>
+                                <span>She met Thomas in</span>
+                                <input type="text" class="fill-input timeline-input" data-answer="1969" placeholder="year">
+                                <span>, during her final year at university.</span>
+                            </div>
+
+                            <div class="sentence-fill-item" data-answer="1970">
+                                <span class="fill-number">4.</span>
+                                <span>Margaret and Thomas got married in September</span>
+                                <input type="text" class="fill-input timeline-input" data-answer="1970" placeholder="year">
+                                <span>.</span>
+                            </div>
+
+                            <div class="sentence-fill-item" data-answer="1971">
+                                <span class="fill-number">5.</span>
+                                <span>She started teaching in</span>
+                                <input type="text" class="fill-input timeline-input" data-answer="1971" placeholder="year">
+                                <span>.</span>
+                            </div>
+
+                            <div class="sentence-fill-item" data-answer="1999">
+                                <span class="fill-number">6.</span>
+                                <span>Thomas passed away in February</span>
+                                <input type="text" class="fill-input timeline-input" data-answer="1999" placeholder="year">
+                                <span>.</span>
+                            </div>
+
+                            <div class="sentence-fill-item" data-answer="2003">
+                                <span class="fill-number">7.</span>
+                                <span>Margaret retired from teaching in</span>
+                                <input type="text" class="fill-input timeline-input" data-answer="2003" placeholder="year">
+                                <span>after 32 years in the classroom.</span>
+                            </div>
+
+                            <div class="sentence-fill-item" data-answer="2015">
+                                <span class="fill-number">8.</span>
+                                <span>Her first book was published in</span>
+                                <input type="text" class="fill-input timeline-input" data-answer="2015" placeholder="year">
+                                <span>.</span>
+                            </div>
+
+                        </div>
+
+                        <div style="display: flex; gap: 12px; align-items: center; margin-top: 16px;">
+                            <button class="check-answers-btn" id="check-timeline">
+                                <i class="fa-solid fa-check"></i> Check answers
+                            </button>
+                            <button class="check-answers-btn retry-btn" id="retry-timeline" disabled>
+                                <i class="fa-solid fa-rotate-right"></i> Try again
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- SECTION 8: How do you say these years? -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">8</span>
+                            <h3>Say It Out Loud</h3>
+                        </div>
+                        <p class="exercise-instructions">These are years from Margaret's story. Select how you would say each year in English.</p>
+
+                        <div class="mc-list" id="year-say-list">
+
+                            <div class="mc-item" data-correct="b">
+                                <p class="mc-question">How do you say <strong>1948</strong>?</p>
+                                <div class="mc-options">
+                                    <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> one thousand nine hundred forty-eight</button>
+                                    <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> nineteen forty-eight</button>
+                                    <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> nineteen hundred and forty-eight</button>
+                                </div>
+                            </div>
+
+                            <div class="mc-item" data-correct="a">
+                                <p class="mc-question">How do you say <strong>1970</strong>?</p>
+                                <div class="mc-options">
+                                    <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> nineteen seventy</button>
+                                    <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> one nine seven zero</button>
+                                    <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> two thousand and seventy</button>
+                                </div>
+                            </div>
+
+                            <div class="mc-item" data-correct="c">
+                                <p class="mc-question">How do you say <strong>1999</strong>?</p>
+                                <div class="mc-options">
+                                    <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> two thousand minus one</button>
+                                    <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> nineteen hundred and ninety-nine</button>
+                                    <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> nineteen ninety-nine</button>
+                                </div>
+                            </div>
+
+                            <div class="mc-item" data-correct="a">
+                                <p class="mc-question">How do you say <strong>2003</strong>?</p>
+                                <div class="mc-options">
+                                    <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> two thousand and three</button>
+                                    <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> twenty oh three</button>
+                                    <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> two zero zero three</button>
+                                </div>
+                            </div>
+
+                            <div class="mc-item" data-correct="b">
+                                <p class="mc-question">How do you say <strong>2015</strong>?</p>
+                                <div class="mc-options">
+                                    <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> two thousand fifteen</button>
+                                    <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> twenty fifteen</button>
+                                    <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> two zero one five</button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div style="display: flex; gap: 12px; align-items: center; margin-top: 24px;">
+                            <button class="check-answers-btn" id="check-year-say">
+                                <i class="fa-solid fa-check"></i> Check answers
+                            </button>
+                            <button class="check-answers-btn retry-btn" id="retry-year-say" disabled>
+                                <i class="fa-solid fa-rotate-right"></i> Try again
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Completion Box -->
+                    <div class="completion-box">
+                        <div class="completion-bar"></div>
+                        <div class="completion-inner">
+                            <div class="completion-header">
+                                <div class="completion-icon">
+                                    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                                </div>
+                                <h2 class="completion-title">Activity Complete!</h2>
+                            </div>
+                            <p class="completion-subtitle">You've completed <strong>"Family History"</strong>. Here's what you've practised:</p>
+                            <div class="skills-list">
+                                <div class="skill-item">
+                                    <div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+                                    Days of the week and months of the year
+                                </div>
+                                <div class="skill-item">
+                                    <div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+                                    Prepositions with time: on, in, at
+                                </div>
+                                <div class="skill-item">
+                                    <div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+                                    How to say years in English
+                                </div>
+                                <div class="skill-item">
+                                    <div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+                                    Reading and understanding a chronological story
+                                </div>
+                                <div class="skill-item">
+                                    <div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+                                    Past simple <em>be</em>: was, were, wasn't, weren't
+                                </div>
+                                <div class="skill-item">
+                                    <div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+                                    Time linkers: in, when, later, then, X months later
+                                </div>
+                                <div class="skill-item">
+                                    <div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+                                    Using years and dates in life-event sentences
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- NAV BUTTONS -->
+                <div class="activity-nav">
+                    <button class="nav-btn nav-btn-back" id="btn-back" disabled>
+                        <i class="fa-solid fa-arrow-left"></i> Back
+                    </button>
+                    <button class="nav-btn nav-btn-next" id="btn-next">
+                        Next <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="../../../js/layout.js"></script>
+    <script src="../../../js/script.js" defer></script>
+    <script src="../../../js/checkanswers.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        lucide.createIcons();
+
+        // ============================================================
+        // AUDIO (uses Web Speech API as fallback since no actual MP3s)
+        // ============================================================
+        function speak(text, rate = 0.85) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utter = new SpeechSynthesisUtterance(text);
+                utter.lang = 'en-GB';
+                utter.rate = rate;
+                window.speechSynthesis.speak(utter);
+            }
+        }
+
+        const dayMap = {
+            monday: 'Monday', tuesday: 'Tuesday', wednesday: 'Wednesday',
+            thursday: 'Thursday', friday: 'Friday', saturday: 'Saturday', sunday: 'Sunday'
+        };
+
+        const monthMap = {
+            january: 'January', february: 'February', march: 'March', april: 'April',
+            may: 'May', june: 'June', july: 'July', august: 'August',
+            september: 'September', october: 'October', november: 'November', december: 'December'
+        };
+
+        const yearSpokenMap = {
+            '1952': 'nineteen fifty two',
+            '1975': 'nineteen seventy five',
+            '1981': 'nineteen eighty one',
+            '1989': 'nineteen eighty nine',
+            '1994': 'nineteen ninety four',
+            '2000': 'two thousand',
+            '2005': 'two thousand and five',
+            '2010': 'twenty ten',
+            '2018': 'twenty eighteen',
+            '2024': 'twenty twenty four'
+        };
+
+        window.playVocab = function(key, card) {
+            document.querySelectorAll('.vocab-card').forEach(c => c.classList.remove('playing'));
+            card.classList.add('playing');
+            const word = dayMap[key] || monthMap[key] || key;
+            speak(word);
+            setTimeout(() => card.classList.remove('playing'), 1500);
+        };
+
+        window.playYear = function(year, card) {
+            document.querySelectorAll('.vocab-card, .audio-word').forEach(c => c.classList.remove('playing'));
+            card.classList.add('playing');
+            const spoken = yearSpokenMap[year] || year;
+            speak(spoken);
+            setTimeout(() => card.classList.remove('playing'), 2000);
+        };
+
+        // ============================================================
+        // MULTIPLE CHOICE (Reading Comprehension)
+        // ============================================================
+        function setupMCSection(listId, checkId, retryId) {
+            const list = document.getElementById(listId);
+            if (!list) return;
+
+            list.querySelectorAll('.mc-item').forEach(item => {
+                item.querySelectorAll('.mc-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        if (item.classList.contains('checked')) return;
+                        item.querySelectorAll('.mc-btn').forEach(b => b.classList.remove('selected'));
+                        this.classList.add('selected');
+                    });
+                });
+            });
+
+            document.getElementById(checkId).addEventListener('click', function() {
+                let correct = 0, total = 0;
+                list.querySelectorAll('.mc-item').forEach(item => {
+                    total++;
+                    item.classList.add('checked');
+                    const correctAns = item.dataset.correct;
+                    const selected = item.querySelector('.mc-btn.selected');
+                    item.querySelectorAll('.mc-btn').forEach(btn => {
+                        btn.classList.remove('correct', 'incorrect');
+                    });
+                    if (selected) {
+                        if (selected.dataset.option === correctAns) {
+                            selected.classList.add('correct');
+                            correct++;
+                        } else {
+                            selected.classList.add('incorrect');
+                            // Show correct
+                            item.querySelector(`.mc-btn[data-option="${correctAns}"]`)?.classList.add('correct');
+                        }
+                    }
+                });
+                showFeedbackPopup(correct, total);
+                document.getElementById(retryId).disabled = false;
+            });
+
+            document.getElementById(retryId).addEventListener('click', function() {
+                list.querySelectorAll('.mc-item').forEach(item => {
+                    item.classList.remove('checked');
+                    item.querySelectorAll('.mc-btn').forEach(btn => {
+                        btn.classList.remove('selected', 'correct', 'incorrect');
+                    });
+                });
+                this.disabled = true;
+            });
+        }
+
+        setupMCSection('mc-list-1', 'check-mc', 'retry-mc');
+        setupMCSection('year-say-list', 'check-year-say', 'retry-year-say');
+
+        // ============================================================
+        // TIMELINE FILL
+        // ============================================================
+        const timelineInputs = document.querySelectorAll('.timeline-input');
+
+        timelineInputs.forEach(input => {
+            input.addEventListener('input', function() {
+                this.classList.remove('correct', 'incorrect');
+            });
+        });
+
+        document.getElementById('check-timeline').addEventListener('click', function() {
+            let correct = 0;
+            timelineInputs.forEach(input => {
+                const answer = input.dataset.answer;
+                const val = input.value.trim();
+                input.classList.remove('correct', 'incorrect');
+                if (val === answer) {
+                    input.classList.add('correct');
+                    correct++;
+                } else if (val !== '') {
+                    input.classList.add('incorrect');
+                }
+            });
+            showFeedbackPopup(correct, timelineInputs.length);
+            document.getElementById('retry-timeline').disabled = false;
+        });
+
+        document.getElementById('retry-timeline').addEventListener('click', function() {
+            timelineInputs.forEach(input => {
+                input.value = '';
+                input.classList.remove('correct', 'incorrect');
+            });
+            this.disabled = true;
+        });
+
+    });
+    </script>
+
+</body>
+</html>

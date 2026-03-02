@@ -62,10 +62,38 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
+        if (type === 'reading') {
+            navContainer.style.display = 'flex';
+            if (btnBack) {
+                btnBack.disabled = currentTabIndex === 0;
+                btnBack.classList.toggle('hidden', currentTabIndex === 0);
+            }
+            if (btnNext) {
+                btnNext.innerHTML = currentTabIndex === tabs.length - 1
+                    ? 'Done'
+                    : 'Next <i class="fa-solid fa-arrow-right"></i>';
+            }
+        }
+
         if (type === 'speaking') {
         }
 
         if (type === 'writing') {
+            if (activityConfig.hiddenTab && currentTabIndex === tabs.length - 1) {
+                navContainer.style.display = 'none';
+                return;
+            }
+            navContainer.style.display = 'flex';
+            if (btnBack) {
+                btnBack.disabled = currentTabIndex === 0;
+                btnBack.classList.toggle('hidden', currentTabIndex === 0);
+            }
+            if (btnNext) {
+                const lastStep = activityConfig.hiddenTab ? tabs.length - 2 : tabs.length - 1;
+                btnNext.innerHTML = currentTabIndex === lastStep
+                    ? 'Done'
+                    : 'Next <i class="fa-solid fa-arrow-right"></i>';
+            }
         }
     }
 
@@ -90,6 +118,17 @@ document.addEventListener('DOMContentLoaded', function() {
             if (type === 'vocabulary' && currentTabIndex === tabs.length - 1) {
                 window.location.href = '../actividades.html';
                 return;
+            }
+            if (type === 'reading' && currentTabIndex === tabs.length - 1) {
+                window.location.href = '../actividades.html';
+                return;
+            }
+            if (type === 'writing') {
+                const lastStep = activityConfig.hiddenTab ? tabs.length - 2 : tabs.length - 1;
+                if (currentTabIndex === lastStep) {
+                    window.location.href = '../actividades.html';
+                    return;
+                }
             }
             if (currentTabIndex < tabs.length - 1) switchTab(tabs[currentTabIndex + 1], true);
         });
