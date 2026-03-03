@@ -784,7 +784,7 @@ canvas:active { cursor: grabbing; }
 
 .transcript-header {
     text-align: center;
-    margin-bottom: 32px;
+    margin-bottom: 24px;
 }
 
 .transcript-header h3 {
@@ -801,53 +801,12 @@ canvas:active { cursor: grabbing; }
     color: #6b7280;
 }
 
-/* Sentence Completion (Post-Listening) */
-.sentence-completion-list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.sentence-dropdown {
-    display: inline-block;
-    width: auto;
-    min-width: 180px;
-    padding: 6px 12px;
-    margin: 0 8px;
-    border: 1px solid #e5e7eb;
-    border-radius: 6px;
-    background: #ffffff;
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    color: #374151;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-
-.sentence-dropdown:focus {
-    outline: none;
-    border-color: #ea580c;
-}
-
-.sentence-dropdown.correct {
-    border-color: #16a34a;
-    background: #f0fdf4;
-    color: #16a34a;
-    font-weight: 600;
-}
-
-.sentence-dropdown.incorrect {
-    border-color: #dc2626;
-    background: #fef2f2;
-    color: #dc2626;
-    font-weight: 600;
-}
-
 .transcript-box {
     background: #f9fafb;
     border: 1px solid #e5e7eb;
     border-radius: 12px;
     padding: 32px;
+    margin-bottom: 32px;
 }
 
 .transcript-text {
@@ -856,6 +815,147 @@ canvas:active { cursor: grabbing; }
     line-height: 1.8;
     color: #374151;
     white-space: pre-line;
+}
+
+/* Post-Listening Writing Challenge */
+.suggestions-container {
+    margin: 24px 0;
+}
+
+.suggestions-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 12px;
+}
+
+.suggestions-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.suggestion-chip {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: #374151;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+    cursor: pointer;
+    user-select: none;
+}
+
+.suggestion-chip i {
+    color: #ea580c;
+}
+
+.suggestion-chip:hover {
+    border-color: #ea580c;
+    background: #fff7ed;
+}
+
+.routine-builder {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+.routine-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.row-number {
+    font-family: 'Rubik', sans-serif;
+    font-weight: 700;
+    color: #ea580c;
+    font-size: 14px;
+    width: 20px;
+}
+
+.routine-input {
+    padding: 10px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #1f2937;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    background: #ffffff;
+}
+
+.routine-input:focus {
+    border-color: #ea580c;
+    box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.1);
+}
+
+.routine-input.full-sentence {
+    flex: 1;
+    width: 100%;
+}
+
+.add-row-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 12px;
+    background: transparent;
+    border: 2px dashed #cbd5e1;
+    border-radius: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #4b5563;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-bottom: 24px;
+}
+
+.add-row-btn:hover {
+    background: #fff7ed;
+    border-color: #ea580c;
+    color: #ea580c;
+}
+
+@media (max-width: 600px) {
+    .routine-row {
+        gap: 8px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid #e5e7eb;
+    }
+    .routine-row:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+}
+
+.speaking-callout {
+    background: #f1f5f9;
+    border-left: 4px solid #ea580c;
+    padding: 16px 20px;
+    border-radius: 0 8px 8px 0;
+    margin-top: 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #334155;
+    line-height: 1.6;
 }
     </style>
     <script>
@@ -872,7 +972,6 @@ canvas:active { cursor: grabbing; }
     <div id="header-placeholder"></div>
 
     <main class="activity-page">
-        <!-- Hero Section -->
         <section class="activity-hero">
             <div class="activity-hero-content">
                 <nav class="breadcrumb">
@@ -891,10 +990,8 @@ canvas:active { cursor: grabbing; }
             </div>
         </section>
 
-        <!-- Activity Content -->
         <section class="activity-container">
             <div class="tabs-wrapper">
-                <!-- Tab Navigation -->
                 <nav class="tab-nav">
                     <div class="tab-nav-main">
                         <button class="tab-btn active" data-tab="introduction">Introduction</button>
@@ -905,7 +1002,6 @@ canvas:active { cursor: grabbing; }
                     </div>
                 </nav>
 
-                <!-- Introduction Tab -->
                 <div class="tab-content active" id="introduction">
                     <div class="intro-grid">
                         <div class="intro-main">
@@ -951,7 +1047,6 @@ canvas:active { cursor: grabbing; }
                     </div>
                 </div>
 
-                <!-- Pre-Listening Tab -->
                 <div class="tab-content" id="pre-listening">
                     <div class="exercise-section">
                         <div class="exercise-header">
@@ -961,7 +1056,6 @@ canvas:active { cursor: grabbing; }
                         <p class="exercise-instructions">Drag the hour or minute hand to set the time. See below the different ways to tell the time in English.</p>
 
                         <div class="preparation-grid" id="clockContainer">
-                            <!-- Left: Analog Clock -->
                             <div class="clock-container">
                                 <div class="clock-border">
                                     <div class="clock-face-wrapper">
@@ -979,9 +1073,7 @@ canvas:active { cursor: grabbing; }
                                 </div>
                             </div>
 
-                            <!-- Right: Digital + Chat -->
                             <div class="time-display-wrapper">
-                                <!-- Digital Clock -->
                                 <div class="digital-display" id="digitalDisplay">
                                     <div class="digital-fused-block">
                                         <input type="text" class="num-input" id="h1" maxlength="1" value="1" autocomplete="off">
@@ -1002,7 +1094,6 @@ canvas:active { cursor: grabbing; }
                                     </div>
                                 </div>
 
-                                <!-- Chat Panel -->
                                 <div class="chat-panel">
                                     <div class="chat-header">
                                         <div class="chat-header-dot"></div>
@@ -1056,7 +1147,6 @@ canvas:active { cursor: grabbing; }
                         </div>
                     </div>
                 
-                <!-- Section 2: Past & To -->
                 <div class="exercise-section">
                     <div class="exercise-header">
                         <span class="exercise-number">2</span>
@@ -1065,7 +1155,6 @@ canvas:active { cursor: grabbing; }
                     <p class="exercise-instructions">Learn the difference between "past" and "to" when telling time.</p>
                     
                     <div class="clock-examples-grid">
-                        <!-- PAST -->
                         <div class="clock-example-card">
                             <div class="clock-example-header">PAST</div>
                             <div class="static-clock-wrapper">
@@ -1076,7 +1165,6 @@ canvas:active { cursor: grabbing; }
                             <div class="clock-explanation">Use 'past' before the 30-minute mark</div>
                         </div>
 
-                        <!-- HALF PAST -->
                         <div class="clock-example-card">
                             <div class="clock-example-header">HALF PAST</div>
                             <div class="static-clock-wrapper">
@@ -1086,7 +1174,6 @@ canvas:active { cursor: grabbing; }
                             <div class="clock-conversational">"It's <strong>half past</strong> six"</div>
                             <div class="clock-explanation">Use 'half past' at exactly 30 minutes</div>
                         </div>
-                        <!-- TO -->
                         <div class="clock-example-card">
                             <div class="clock-example-header">TO</div>
                             <div class="static-clock-wrapper">
@@ -1193,57 +1280,11 @@ canvas:active { cursor: grabbing; }
                     </div>
                 </div>
 
-                <!-- Listening Tab -->
                 <div class="tab-content" id="listening">
+                    
                     <div class="exercise-section">
                         <div class="exercise-header">
                             <span class="exercise-number">4</span>
-                            <h3>A Typical Day</h3>
-                        </div>
-                        <p class="exercise-instructions">Listen to the audio and drag the correct times into the sentences.</p>
-                        
-                        <div style="margin-bottom: 24px; display: flex; justify-content: center;">
-                            <div id="player-container" style="width: 100%; max-width: 520px;"></div>
-                        </div>
-
-                        <div class="practice-layout">
-                            <!-- Draggable Times (Top) -->
-                            <div class="times-column" id="timesContainer">
-                                <div class="draggable-time" draggable="true" data-time="12:00">12:00</div>
-                                <div class="draggable-time" draggable="true" data-time="7:15">7:15</div>
-                                <div class="draggable-time" draggable="true" data-time="5:30">5:30</div>
-                                <div class="draggable-time" draggable="true" data-time="9:30">9:30</div>
-                                <div class="draggable-time" draggable="true" data-time="6:45">6:45</div>
-                                <div class="draggable-time" draggable="true" data-time="3:30">3:30</div>
-                                <div class="draggable-time" draggable="true" data-time="8:00">8:00</div>
-                                <div class="draggable-time" draggable="true" data-time="12:45">12:45</div>
-                                <div class="draggable-time" draggable="true" data-time="10:00">10:00</div>
-                                <div class="draggable-time" draggable="true" data-time="5:00">5:00</div>
-                                <div class="draggable-time" draggable="true" data-time="6:15">6:15</div>
-                            </div>
-
-                            <!-- Sentences (Bottom) -->
-                            <div class="sentences-column">
-                                <div class="sentence-item"><strong>1.</strong> Clara wakes up at <div class="time-gap" data-correct="7:15"></div> and leaves her house at <div class="time-gap" data-correct="8:00"></div>.</div>
-                                <div class="sentence-item"><strong>2.</strong> Her first meeting begins at <div class="time-gap" data-correct="9:30"></div> and she stays at the office until <div class="time-gap" data-correct="12:00"></div>.</div>
-                                <div class="sentence-item"><strong>3.</strong> She has lunch at <div class="time-gap" data-correct="12:45"></div>.</div>
-                                <div class="sentence-item"><strong>4.</strong> In the afternoon, she works on projects until <div class="time-gap" data-correct="3:30"></div>.</div>
-                                <div class="sentence-item"><strong>5.</strong> Her workday ends at <div class="time-gap" data-correct="5:00"></div> and she gets home around <div class="time-gap" data-correct="5:30"></div>.</div>
-                                <div class="sentence-item"><strong>6.</strong> She starts cooking dinner at <div class="time-gap" data-correct="6:15"></div> and eats around <div class="time-gap" data-correct="6:45"></div>.</div>
-                                <div class="sentence-item"><strong>7.</strong> Clara goes to bed at <div class="time-gap" data-correct="10:00"></div>.</div>
-                            </div>
-                        </div>
-
-                        <div style="display: flex; gap: 12px;">
-                            <button class="check-answers-btn" id="checkPracticeBtn"><i class="fa-solid fa-check"></i> Check answers</button>
-                            <button class="check-answers-btn retry-btn" id="retryPracticeBtn" disabled><i class="fa-solid fa-rotate-right"></i> Try again</button>
-                        </div>
-                        <div id="practiceFeedback" style="margin-top: 16px; font-family: 'Inter', sans-serif; font-size: 14px;"></div>
-                    </div>
-
-                    <div class="exercise-section">
-                        <div class="exercise-header">
-                            <span class="exercise-number">5</span>
                             <h3>Short Stories</h3>
                         </div>
                         <p class="exercise-instructions">Listen to the speakers and select the correct time from the options.</p>
@@ -1312,77 +1353,117 @@ canvas:active { cursor: grabbing; }
                             <button class="check-answers-btn retry-btn" id="retryStoriesBtn" disabled><i class="fa-solid fa-rotate-right"></i> Try again</button>
                         </div>
                     </div>
+
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">5</span>
+                            <h3>A Typical Day</h3>
+                        </div>
+                        <p class="exercise-instructions">Listen to the audio and drag the correct times into the sentences.</p>
+                        
+                        <div style="margin-bottom: 24px; display: flex; justify-content: center;">
+                            <div id="player-container" style="width: 100%; max-width: 520px;"></div>
+                        </div>
+
+                        <div class="practice-layout">
+                            <div class="times-column" id="timesContainer">
+                                <div class="draggable-time" draggable="true" data-time="12:00">12:00</div>
+                                <div class="draggable-time" draggable="true" data-time="7:15">7:15</div>
+                                <div class="draggable-time" draggable="true" data-time="5:30">5:30</div>
+                                <div class="draggable-time" draggable="true" data-time="9:30">9:30</div>
+                                <div class="draggable-time" draggable="true" data-time="6:45">6:45</div>
+                                <div class="draggable-time" draggable="true" data-time="3:30">3:30</div>
+                                <div class="draggable-time" draggable="true" data-time="8:00">8:00</div>
+                                <div class="draggable-time" draggable="true" data-time="12:45">12:45</div>
+                                <div class="draggable-time" draggable="true" data-time="10:00">10:00</div>
+                                <div class="draggable-time" draggable="true" data-time="5:00">5:00</div>
+                                <div class="draggable-time" draggable="true" data-time="6:15">6:15</div>
+                            </div>
+
+                            <div class="sentences-column">
+                                <div class="sentence-item"><strong>1.</strong> Clara wakes up at <div class="time-gap" data-correct="7:15"></div> and leaves her house at <div class="time-gap" data-correct="8:00"></div>.</div>
+                                <div class="sentence-item"><strong>2.</strong> Her first meeting begins at <div class="time-gap" data-correct="9:30"></div> and she stays at the office until <div class="time-gap" data-correct="12:00"></div>.</div>
+                                <div class="sentence-item"><strong>3.</strong> She has lunch at <div class="time-gap" data-correct="12:45"></div>.</div>
+                                <div class="sentence-item"><strong>4.</strong> In the afternoon, she works on projects until <div class="time-gap" data-correct="3:30"></div>.</div>
+                                <div class="sentence-item"><strong>5.</strong> Her workday ends at <div class="time-gap" data-correct="5:00"></div> and she gets home around <div class="time-gap" data-correct="5:30"></div>.</div>
+                                <div class="sentence-item"><strong>6.</strong> She starts cooking dinner at <div class="time-gap" data-correct="6:15"></div> and eats around <div class="time-gap" data-correct="6:45"></div>.</div>
+                                <div class="sentence-item"><strong>7.</strong> Clara goes to bed at <div class="time-gap" data-correct="10:00"></div>.</div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 12px;">
+                            <button class="check-answers-btn" id="checkPracticeBtn"><i class="fa-solid fa-check"></i> Check answers</button>
+                            <button class="check-answers-btn retry-btn" id="retryPracticeBtn" disabled><i class="fa-solid fa-rotate-right"></i> Try again</button>
+                        </div>
+                        <div id="practiceFeedback" style="margin-top: 16px; font-family: 'Inter', sans-serif; font-size: 14px;"></div>
+                    </div>
                 </div>
 
-                <!-- Post-Listening Tab -->
                 <div class="tab-content" id="post-listening">
                     <div class="exercise-section">
                         <div class="exercise-header">
                             <span class="exercise-number">6</span>
-                            <h3>Time Conversion Challenge</h3>
+                            <h3>Your Typical Day</h3>
                         </div>
-                        <p class="exercise-instructions">Select the correct conversational expression for each digital time.</p>
+                        <p class="exercise-instructions">Write about your daily routine. Fill in 5 typical activities you do and the time you do them. You can write the time in digits or in words.</p>
                         
-                        <div class="sentence-completion-list" id="post-listening-list">
-                            <div class="sentence-item" data-correct="b">
-                                <p class="sentence-text"><strong>1. 04:15</strong> is
-                                    <select class="sentence-dropdown">
-                                        <option value="">Select...</option>
-                                        <option value="a">fifteen to four</option>
-                                        <option value="b">a quarter past four</option>
-                                        <option value="c">four fifteen o'clock</option>
-                                    </select>
-                                </p>
+                        <div class="tip-box">
+                            <div class="tip-header">
+                                <i data-lucide="info" style="width: 20px; height: 20px;"></i> Tip
                             </div>
-                            <div class="sentence-item" data-correct="a">
-                                <p class="sentence-text"><strong>2. 09:30</strong> is
-                                    <select class="sentence-dropdown">
-                                        <option value="">Select...</option>
-                                        <option value="a">half past nine</option>
-                                        <option value="b">nine thirty past</option>
-                                        <option value="c">half to ten</option>
-                                    </select>
-                                </p>
-                            </div>
-                            <div class="sentence-item" data-correct="b">
-                                <p class="sentence-text"><strong>3. 02:45</strong> is
-                                    <select class="sentence-dropdown">
-                                        <option value="">Select...</option>
-                                        <option value="a">a quarter past two</option>
-                                        <option value="b">a quarter to three</option>
-                                        <option value="c">two forty-five past</option>
-                                    </select>
-                                </p>
-                            </div>
-                            <div class="sentence-item" data-correct="b">
-                                <p class="sentence-text"><strong>4. 11:55</strong> is
-                                    <select class="sentence-dropdown">
-                                        <option value="">Select...</option>
-                                        <option value="a">fifty-five past eleven</option>
-                                        <option value="b">five to twelve</option>
-                                        <option value="c">five past twelve</option>
-                                    </select>
-                                </p>
-                            </div>
-                            <div class="sentence-item" data-correct="a">
-                                <p class="sentence-text"><strong>5. 06:00</strong> is
-                                    <select class="sentence-dropdown">
-                                        <option value="">Select...</option>
-                                        <option value="a">six o'clock</option>
-                                        <option value="b">six zero zero</option>
-                                        <option value="c">six past</option>
-                                    </select>
-                                </p>
+                            <div class="tip-content">
+                                <p>Remember to use <strong>at</strong> before the time. Example: <em>"I wake up <strong>at</strong> 7:00."</em></p>
                             </div>
                         </div>
 
-                        <div style="display: flex; gap: 12px; align-items: center; margin-top: 24px;">
-                            <button class="check-answers-btn" id="checkPostListeningBtn">
-                                <i class="fa-solid fa-circle-check"></i> Check answers
-                            </button>
-                            <button class="check-answers-btn retry-btn" id="retryPostListeningBtn" disabled>
-                                <i class="fa-solid fa-rotate-right"></i> Try again
-                            </button>
+                        <div class="suggestions-container">
+                            <p class="suggestions-label">Useful vocabulary:</p>
+                            <div class="suggestions-grid">
+                                <div class="suggestion-chip" data-text="wake up"><i class="fa-solid fa-sun"></i> wake up</div>
+                                <div class="suggestion-chip" data-text="have a shower"><i class="fa-solid fa-shower"></i> have a shower</div>
+                                <div class="suggestion-chip" data-text="have breakfast"><i class="fa-solid fa-mug-hot"></i> have breakfast</div>
+                                <div class="suggestion-chip" data-text="go to work"><i class="fa-solid fa-briefcase"></i> go to work</div>
+                                <div class="suggestion-chip" data-text="go to school"><i class="fa-solid fa-school"></i> go to school</div>
+                                <div class="suggestion-chip" data-text="have lunch"><i class="fa-solid fa-utensils"></i> have lunch</div>
+                                <div class="suggestion-chip" data-text="finish work"><i class="fa-solid fa-house-chimney"></i> finish work</div>
+                                <div class="suggestion-chip" data-text="go to the gym"><i class="fa-solid fa-dumbbell"></i> go to the gym</div>
+                                <div class="suggestion-chip" data-text="walk my dog"><i class="fa-solid fa-dog"></i> walk my dog</div>
+                                <div class="suggestion-chip" data-text="have dinner"><i class="fa-solid fa-bowl-food"></i> have dinner</div>
+                                <div class="suggestion-chip" data-text="watch TV"><i class="fa-solid fa-tv"></i> watch TV</div>
+                                <div class="suggestion-chip" data-text="go to bed"><i class="fa-solid fa-moon"></i> go to bed</div>
+                                <div class="suggestion-chip" data-text="play videogames"><i class="fa-solid fa-gamepad"></i> play videogames</div>
+                                <div class="suggestion-chip" data-text="go online"><i class="fa-solid fa-globe"></i> go online</div>
+                            </div>
+                        </div>
+
+                        <div class="routine-builder">
+                            <div class="routine-row">
+                                <span class="row-number">1.</span>
+                                <input type="text" class="routine-input full-sentence" placeholder="e.g., I wake up at 6:00 AM">
+                            </div>
+                            <div class="routine-row">
+                                <span class="row-number">2.</span>
+                                <input type="text" class="routine-input full-sentence" placeholder="">
+                            </div>
+                            <div class="routine-row">
+                                <span class="row-number">3.</span>
+                                <input type="text" class="routine-input full-sentence" placeholder="">
+                            </div>
+                            <div class="routine-row">
+                                <span class="row-number">4.</span>
+                                <input type="text" class="routine-input full-sentence" placeholder="">
+                            </div>
+                            <div class="routine-row">
+                                <span class="row-number">5.</span>
+                                <input type="text" class="routine-input full-sentence" placeholder="">
+                            </div>
+                        </div>
+
+                        <button id="add-routine-btn" class="add-row-btn"><i class="fa-solid fa-plus"></i> Add another activity</button>
+
+                        <div class="speaking-callout">
+                            <strong><i class="fa-solid fa-microphone"></i> Now, say it out loud!</strong><br>
+                            Read your routine aloud to practice your pronunciation.
                         </div>
                     </div>
 
@@ -1411,14 +1492,13 @@ canvas:active { cursor: grabbing; }
                                 </div>
                                 <div class="skill-item">
                                     <div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
-                                    Converting between digital and conversational time
+                                    Writing about your own daily schedule
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Transcript Tab -->
                 <div class="tab-content" id="transcript">
                     <div class="warning-box">
                         <i class="fa-solid fa-triangle-exclamation"></i>
@@ -1427,6 +1507,20 @@ canvas:active { cursor: grabbing; }
                         </div>
                     </div>
                     <div class="transcript-container">
+                        
+                        <div class="transcript-header">
+                            <h3>Short Stories</h3>
+                            <p>Enbreak Original Content</p>
+                        </div>
+                        <div class="transcript-box">
+                            <p class="transcript-text">
+<strong>1.</strong> I looked at my phone, and it was 2:05! So, I stopped watching TV and went to study.
+<strong>2.</strong> I was finishing some work when I noticed it was 5:45 so I saved everything and went home.
+<strong>3.</strong> I wanted to work until 9:00 but I got distracted and I finished at 10:30.
+<strong>4.</strong> I usually feel hungry at around 11:00 so I prefer to have my lunch break at noon.
+                            </p>
+                        </div>
+
                         <div class="transcript-header">
                             <h3>A Typical Day</h3>
                             <p>Enbreak Original Content</p>
@@ -1445,7 +1539,6 @@ That's a typical day for me, what about you?</p>
                     </div>
                 </div>
 
-                <!-- Navigation Buttons -->
                 <div class="activity-nav">
                     <button class="nav-btn nav-btn-back" id="btn-back" disabled>
                         <i class="fa-solid fa-arrow-left"></i> Back
@@ -2010,44 +2103,6 @@ That's a typical day for me, what about you?</p>
             retryListeningBtn.disabled = true;
         });
 
-        // â”€â”€ Post-Listening Logic â”€â”€
-        const checkPostListeningBtn = document.getElementById('checkPostListeningBtn');
-        const retryPostListeningBtn = document.getElementById('retryPostListeningBtn');
-        const postListeningList = document.getElementById('post-listening-list');
-
-        if (checkPostListeningBtn) {
-            checkPostListeningBtn.addEventListener('click', () => {
-                const items = postListeningList.querySelectorAll('.sentence-item');
-                let correctCount = 0;
-                let total = items.length;
-
-                items.forEach(item => {
-                    const select = item.querySelector('.sentence-dropdown');
-                    const correctAnswer = item.dataset.correct;
-                    
-                    select.classList.remove('correct', 'incorrect');
-                    
-                    if (select.value === correctAnswer) {
-                        select.classList.add('correct');
-                        correctCount++;
-                    } else if (select.value !== '') {
-                        select.classList.add('incorrect');
-                    }
-                });
-
-                showFeedbackPopup(correctCount, total);
-                retryPostListeningBtn.disabled = false;
-            });
-
-            retryPostListeningBtn.addEventListener('click', () => {
-                postListeningList.querySelectorAll('.sentence-dropdown').forEach(select => {
-                    select.value = "";
-                    select.classList.remove('correct', 'incorrect');
-                });
-                retryPostListeningBtn.disabled = true;
-            });
-        }
-
         // â”€â”€ Short Stories Logic â”€â”€
         const checkStoriesBtn = document.getElementById('checkStoriesBtn');
         const retryStoriesBtn = document.getElementById('retryStoriesBtn');
@@ -2342,6 +2397,53 @@ if (highlightColor === 'red') {
 
         // Load and Initialize Custom Audio Player
         new EnbreakAudioPlayer('player-container', '../../../assets/activities/telling-the-time/CLARA.mp3');
+
+        // Post-Listening Routine Activity Logic
+        const routineBuilder = document.querySelector('.routine-builder');
+        let lastFocusedInput = null;
+
+        if (routineBuilder) {
+            routineBuilder.addEventListener('focusin', (e) => {
+                if (e.target.classList.contains('routine-input')) {
+                    lastFocusedInput = e.target;
+                }
+            });
+        }
+
+        const suggestionChips = document.querySelectorAll('.suggestion-chip');
+        suggestionChips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                const text = chip.dataset.text;
+                // Use lastFocusedInput, or default to the first input if never focused
+                let targetInput = lastFocusedInput || document.querySelector('.routine-builder .routine-input.full-sentence');
+
+                if (targetInput) {
+                    // Always overwrite with the sentence starter
+                    targetInput.value = `I ${text} at `;
+                    targetInput.focus();
+                }
+            });
+        });
+
+        // Add new routine row logic
+        const addBtn = document.getElementById('add-routine-btn');
+        if (addBtn && routineBuilder) {
+            addBtn.addEventListener('click', () => {
+                const rows = routineBuilder.querySelectorAll('.routine-row');
+                if (rows.length >= 8) return;
+
+                const newRow = rows[rows.length - 1].cloneNode(true);
+                newRow.querySelector('.row-number').textContent = `${rows.length + 1}.`;
+                const input = newRow.querySelector('.routine-input');
+                input.value = '';
+                input.placeholder = '';
+                routineBuilder.appendChild(newRow);
+
+                if (routineBuilder.querySelectorAll('.routine-row').length >= 8) {
+                    addBtn.style.display = 'none';
+                }
+            });
+        }
     });
     </script>
 </body>

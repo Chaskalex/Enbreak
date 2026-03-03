@@ -211,9 +211,9 @@
 
 /* ── Spelling item card ──────────────────────────────────────── */
 .spelling-list {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
     margin-top: 24px;
 }
 
@@ -226,6 +226,7 @@
     align-items: center;
     gap: 16px;
     width: fit-content;
+    justify-content: space-between;
     box-shadow: 0 1px 3px rgba(30,45,64,.07), 0 1px 2px rgba(30,45,64,.05);
     transition: border-color .2s, box-shadow .2s, transform .15s;
 }
@@ -323,7 +324,7 @@
 }
 
 .spelling-input {
-    width: 300px;
+    width: 280px;
     padding: 11px 16px;
     background: #F0F4FA;
     border: 2px solid transparent;
@@ -336,12 +337,9 @@
     text-transform: uppercase;
 }
 
-#list-emails .spelling-input {
-    text-transform: lowercase;
-}
-
 .spelling-input::placeholder {
     text-transform: none;
+    font-size: 13px;
 }
 
 .spelling-input:focus {
@@ -369,8 +367,9 @@
     .exercise-header { flex-wrap: wrap; }
     .accent-toggle { margin-left: 0; width: 100%; margin-top: 10px; }
     .accent-btn { flex: 1; justify-content: center; }
-    .spelling-item { flex-direction: column; align-items: flex-start; gap: 12px; width: 100%; }
-    .spelling-input-wrapper { width: 100%; }
+    .spelling-list { grid-template-columns: 1fr; }
+    .spelling-item { justify-content: flex-start; width: 100%; }
+    .spelling-input-wrapper { width: 100%; justify-content: flex-start; }
     .spelling-input { width: 100%; }
 }
 
@@ -553,7 +552,7 @@
                             <span class="exercise-number">3</span>
                             <h3>Spelling First Names</h3>
                         </div>
-                        <p class="exercise-instructions">Listen and write the first names.</p>
+                        <p class="exercise-instructions">Listen carefully to each recording and write the names you hear.</p>
                         
                         <div class="spelling-list" id="list-names">
                             <div class="spelling-item" data-answer="ADRIAN">
@@ -564,7 +563,7 @@
                                     <button class="speed-btn" onclick="toggleSpeed(this)" data-speed="1">1x</button>
                                 </div>
                                 <div class="spelling-input-wrapper">
-                                    <input type="text" class="spelling-input" placeholder="Type the name..." autocomplete="off">
+                                    <input type="text" class="spelling-input" placeholder="type the name..." autocomplete="off">
                                 </div>
                             </div>
 
@@ -576,7 +575,7 @@
                                     <button class="speed-btn" onclick="toggleSpeed(this)" data-speed="1">1x</button>
                                 </div>
                                 <div class="spelling-input-wrapper">
-                                    <input type="text" class="spelling-input" placeholder="Type the name..." autocomplete="off">
+                                    <input type="text" class="spelling-input" placeholder="type the name..." autocomplete="off">
                                 </div>
                             </div>
 
@@ -588,7 +587,7 @@
                                     <button class="speed-btn" onclick="toggleSpeed(this)" data-speed="1">1x</button>
                                 </div>
                                 <div class="spelling-input-wrapper">
-                                    <input type="text" class="spelling-input" placeholder="Type the name..." autocomplete="off">
+                                    <input type="text" class="spelling-input" placeholder="type the name..." autocomplete="off">
                                 </div>
                             </div>
                         </div>
@@ -608,7 +607,7 @@
                             <span class="exercise-number">4</span>
                             <h3>Spelling Surnames</h3>
                         </div>
-                        <p class="exercise-instructions">Listen and write the surnames.</p>
+                        <p class="exercise-instructions">Listen carefully to each recording and write the surnames you hear.</p>
                         
                         <div class="spelling-list" id="list-surnames">
                             <div class="spelling-item" data-answer="FEATHERSTONE">
@@ -619,7 +618,7 @@
                                     <button class="speed-btn" onclick="toggleSpeed(this)" data-speed="1">1x</button>
                                 </div>
                                 <div class="spelling-input-wrapper">
-                                    <input type="text" class="spelling-input" placeholder="Type the surname..." autocomplete="off">
+                                    <input type="text" class="spelling-input" placeholder="type the surname..." autocomplete="off">
                                 </div>
                             </div>
 
@@ -631,7 +630,7 @@
                                     <button class="speed-btn" onclick="toggleSpeed(this)" data-speed="1">1x</button>
                                 </div>
                                 <div class="spelling-input-wrapper">
-                                    <input type="text" class="spelling-input" placeholder="Type the surname..." autocomplete="off">
+                                    <input type="text" class="spelling-input" placeholder="type the surname..." autocomplete="off">
                                 </div>
                             </div>
 
@@ -643,7 +642,7 @@
                                     <button class="speed-btn" onclick="toggleSpeed(this)" data-speed="1">1x</button>
                                 </div>
                                 <div class="spelling-input-wrapper">
-                                    <input type="text" class="spelling-input" placeholder="Type the surname..." autocomplete="off">
+                                    <input type="text" class="spelling-input" placeholder="type the surname..." autocomplete="off">
                                 </div>
                             </div>
                         </div>
@@ -663,7 +662,7 @@
                             <span class="exercise-number">5</span>
                             <h3>Spelling Addresses</h3>
                         </div>
-                        <p class="exercise-instructions">Listen and write the street names or cities.</p>
+                        <p class="exercise-instructions">Listen carefully to each recording and write the street or city names you hear.</p>
                         
                         <div class="spelling-list" id="list-addresses">
                             <div class="spelling-item" data-answer="LEICESTER">
@@ -674,7 +673,7 @@
                                     <button class="speed-btn" onclick="toggleSpeed(this)" data-speed="1">1x</button>
                                 </div>
                                 <div class="spelling-input-wrapper">
-                                    <input type="text" class="spelling-input" placeholder="Type the name of the city..." autocomplete="off">
+                                    <input type="text" class="spelling-input" placeholder="type the name of the city..." autocomplete="off">
                                 </div>
                             </div>
 
@@ -686,7 +685,7 @@
                                     <button class="speed-btn" onclick="toggleSpeed(this)" data-speed="1">1x</button>
                                 </div>
                                 <div class="spelling-input-wrapper">
-                                    <input type="text" class="spelling-input" placeholder="Type the name of the street..." autocomplete="off">
+                                    <input type="text" class="spelling-input" placeholder="type the name of the street..." autocomplete="off">
                                 </div>
                             </div>
 
@@ -698,7 +697,7 @@
                                     <button class="speed-btn" onclick="toggleSpeed(this)" data-speed="1">1x</button>
                                 </div>
                                 <div class="spelling-input-wrapper">
-                                    <input type="text" class="spelling-input" placeholder="Type the name of the road..." autocomplete="off">
+                                    <input type="text" class="spelling-input" placeholder="type the name of the road..." autocomplete="off">
                                 </div>
                             </div>
                         </div>
@@ -718,7 +717,7 @@
                             <span class="exercise-number">6</span>
                             <h3>Spelling Emails and Websites</h3>
                         </div>
-                        <p class="exercise-instructions">Listen and write the email addresses or websites. Use symbols when necessary.</p>
+                        <p class="exercise-instructions">Listen carefully to each recording and write the emails or websites you hear.</p>
                         
                         <div class="spelling-list" id="list-emails">
                             <div class="spelling-item" data-answer="SOPHIE.BENNETT_92@EMAIL.COM">
@@ -729,7 +728,7 @@
                                     <button class="speed-btn" onclick="toggleSpeed(this)" data-speed="1">1x</button>
                                 </div>
                                 <div class="spelling-input-wrapper">
-                                    <input type="text" class="spelling-input" placeholder="Type the email..." autocomplete="off">
+                                    <input type="text" class="spelling-input" placeholder="type the email..." autocomplete="off">
                                 </div>
                             </div>
 
@@ -741,7 +740,7 @@
                                     <button class="speed-btn" onclick="toggleSpeed(this)" data-speed="1">1x</button>
                                 </div>
                                 <div class="spelling-input-wrapper">
-                                    <input type="text" class="spelling-input" placeholder="Type the email..." autocomplete="off">
+                                    <input type="text" class="spelling-input" placeholder="type the email..." autocomplete="off">
                                 </div>
                             </div>
 
@@ -753,7 +752,7 @@
                                     <button class="speed-btn" onclick="toggleSpeed(this)" data-speed="1">1x</button>
                                 </div>
                                 <div class="spelling-input-wrapper">
-                                    <input type="text" class="spelling-input" placeholder="Type the website..." autocomplete="off">
+                                    <input type="text" class="spelling-input" placeholder="type the website..." autocomplete="off">
                                 </div>
                             </div>
                         </div>

@@ -534,23 +534,23 @@
 }
 
 .tf-btn.selected {
-    background: #ffedd5;
-    border-color: #fed7aa;
-    color: #6b7280;
+    background: #ea580c;
+    border-color: #ea580c;
+    color: #ffffff;
 }
 
 .tf-btn.correct {
-    background: #F0FDF4;
-    border-color: #86EFAC;
-    color: #166534;
-    box-shadow: 0 0 0 4px rgba(34,197,94,.08);
+    background: #16a34a;
+    border-color: #16a34a;
+    color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.2);
 }
 
 .tf-btn.incorrect {
-    background: #FFF1F2;
-    border-color: #FCA5A5;
-    color: #9F1239;
-    box-shadow: 0 0 0 4px rgba(239,68,68,.08);
+    background: #dc2626;
+    border-color: #dc2626;
+    color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.2);
 }
 
 /* Sentence Completion Exercise */
@@ -653,9 +653,9 @@
 }
 
 .choice-option.selected {
-    background: #ffedd5;
-    color: #6b7280;
-    border-color: #fed7aa;
+    background: #ea580c;
+    color: #ffffff;
+    border-color: #ea580c;
     box-shadow: none;
 }
 
@@ -663,14 +663,14 @@
     background: #16a34a;
     color: #ffffff;
     border-color: #16a34a;
-    box-shadow: 0 2px 4px rgba(22, 163, 74, 0.25);
+    box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.2);
 }
 
 .choice-option.incorrect {
     background: #dc2626;
     color: #ffffff;
     border-color: #dc2626;
-    box-shadow: 0 2px 4px rgba(220, 38, 38, 0.25);
+    box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.2);
 }
 
 /* Description Exercise */
@@ -2248,12 +2248,16 @@ It's crawling with e-coli bacteria anyway.
                 if (e.target.classList.contains('choice-option')) {
                     // Find parent group
                     const group = e.target.closest('.choice-group');
+                    const isSelected = e.target.classList.contains('selected');
+
                     // Deselect siblings
                     group.querySelectorAll('.choice-option').forEach(opt => {
                         opt.classList.remove('selected', 'correct', 'incorrect');
                     });
-                    // Select this
-                    e.target.classList.add('selected');
+                    
+                    if (!isSelected) {
+                        e.target.classList.add('selected');
+                    }
                 }
             });
         }

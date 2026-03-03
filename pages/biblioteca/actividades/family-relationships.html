@@ -706,23 +706,23 @@
 }
 
 .tf-btn.selected {
-    background: #ffedd5;
-    border-color: #fed7aa;
-    color: #6b7280;
+    background: #ea580c;
+    border-color: #ea580c;
+    color: #ffffff;
 }
 
 .tf-btn.correct {
-    background: #F0FDF4;
-    border-color: #86EFAC;
-    color: #166534;
-    box-shadow: 0 0 0 4px rgba(34,197,94,.08);
+    background: #16a34a;
+    border-color: #16a34a;
+    color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.2);
 }
 
 .tf-btn.incorrect {
-    background: #FFF1F2;
-    border-color: #FCA5A5;
-    color: #9F1239;
-    box-shadow: 0 0 0 4px rgba(239,68,68,.08);
+    background: #dc2626;
+    border-color: #dc2626;
+    color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.2);
 }
 
 .relationship-arrows {
@@ -1593,9 +1593,14 @@
             const btns = item.querySelectorAll('.tf-btn');
             btns.forEach(btn => {
                 btn.addEventListener('click', function() {
-                    // Clear previous feedback when changing answer
+                    const isSelected = this.classList.contains('selected');
+                    
+                    // Clear all states
                     btns.forEach(b => b.classList.remove('selected', 'correct', 'incorrect'));
-                    this.classList.add('selected');
+                    
+                    if (!isSelected) {
+                        this.classList.add('selected');
+                    }
                 });
             });
         });
