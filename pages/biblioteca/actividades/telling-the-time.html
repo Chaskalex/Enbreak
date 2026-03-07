@@ -23,6 +23,7 @@
 /* Hero background — activity specific */
 .activity-hero {
     background-image: url('../../../assets/activities/telling-the-time.png');
+    background-position: center 70%;
 }
 
 .clock-container {
@@ -957,6 +958,28 @@ canvas:active { cursor: grabbing; }
     color: #334155;
     line-height: 1.6;
 }
+.input-with-icon-wrapper {
+    position: relative;
+    flex: 1;
+    display: flex;
+}
+.input-with-icon-wrapper .routine-input {
+    padding-right: 32px;
+}
+.remove-row-btn {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9ca3af;
+    cursor: pointer;
+    padding: 8px;
+    font-size: 14px;
+    transition: color 0.2s;
+}
+.remove-row-btn:hover {
+    color: #ef4444;
+}
     </style>
     <script>
         const activityConfig = {
@@ -1287,7 +1310,7 @@ canvas:active { cursor: grabbing; }
                             <span class="exercise-number">4</span>
                             <h3>Short Stories</h3>
                         </div>
-                        <p class="exercise-instructions">Listen to the speakers and select the correct time from the options.</p>
+                        <p class="exercise-instructions">Listen to each speaker and answer the questions.</p>
 
                         <div class="stories-list">
                             <div class="story-unit" data-answer="02:05">
@@ -1405,17 +1428,8 @@ canvas:active { cursor: grabbing; }
                             <span class="exercise-number">6</span>
                             <h3>Your Typical Day</h3>
                         </div>
-                        <p class="exercise-instructions">Write about your daily routine. Fill in 5 typical activities you do and the time you do them. You can write the time in digits or in words.</p>
+                        <p class="exercise-instructions">Write about your daily routine. Fill in 5 typical activities you do and the time you do them.</p>
                         
-                        <div class="tip-box">
-                            <div class="tip-header">
-                                <i data-lucide="info" style="width: 20px; height: 20px;"></i> Tip
-                            </div>
-                            <div class="tip-content">
-                                <p>Remember to use <strong>at</strong> before the time. Example: <em>"I wake up <strong>at</strong> 7:00."</em></p>
-                            </div>
-                        </div>
-
                         <div class="suggestions-container">
                             <p class="suggestions-label">Useful vocabulary:</p>
                             <div class="suggestions-grid">
@@ -1461,9 +1475,13 @@ canvas:active { cursor: grabbing; }
 
                         <button id="add-routine-btn" class="add-row-btn"><i class="fa-solid fa-plus"></i> Add another activity</button>
 
-                        <div class="speaking-callout">
-                            <strong><i class="fa-solid fa-microphone"></i> Now, say it out loud!</strong><br>
-                            Read your routine aloud to practice your pronunciation.
+                        <div class="tip-box">
+                            <div class="tip-header">
+                                <i data-lucide="info" style="width: 20px; height: 20px;"></i> Tip
+                            </div>
+                            <div class="tip-content">
+                                <p>Read your routine aloud to practice your pronunciation.</p>
+                            </div>
                         </div>
                     </div>
 
@@ -2428,15 +2446,35 @@ if (highlightColor === 'red') {
         // Add new routine row logic
         const addBtn = document.getElementById('add-routine-btn');
         if (addBtn && routineBuilder) {
+            const renumberRows = () => {
+                const rows = routineBuilder.querySelectorAll('.routine-row');
+                rows.forEach((row, index) => {
+                    row.querySelector('.row-number').textContent = `${index + 1}.`;
+                });
+            };
+
             addBtn.addEventListener('click', () => {
                 const rows = routineBuilder.querySelectorAll('.routine-row');
                 if (rows.length >= 8) return;
 
-                const newRow = rows[rows.length - 1].cloneNode(true);
-                newRow.querySelector('.row-number').textContent = `${rows.length + 1}.`;
-                const input = newRow.querySelector('.routine-input');
-                input.value = '';
-                input.placeholder = '';
+                const newRow = document.createElement('div');
+                newRow.className = 'routine-row';
+                newRow.innerHTML = `
+                    <span class="row-number">${rows.length + 1}.</span>
+                    <div class="input-with-icon-wrapper">
+                        <input type="text" class="routine-input full-sentence" placeholder="">
+                        <i class="fa-solid fa-xmark remove-row-btn" title="Remove"></i>
+                    </div>
+                `;
+
+                newRow.querySelector('.remove-row-btn').addEventListener('click', function() {
+                    newRow.remove();
+                    renumberRows();
+                    if (routineBuilder.querySelectorAll('.routine-row').length < 8) {
+                        addBtn.style.display = 'flex';
+                    }
+                });
+
                 routineBuilder.appendChild(newRow);
 
                 if (routineBuilder.querySelectorAll('.routine-row').length >= 8) {

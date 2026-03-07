@@ -111,7 +111,7 @@
         overflow: hidden;
         border: 1px solid #e5e7eb;
         margin-bottom: 20px;
-        font-size: 14px;
+        font-size: 13px;
     }
 
     .prep-table th {
@@ -125,25 +125,25 @@
     }
 
     .prep-table td {
-        padding: 12px 16px;
+        padding: 8px 16px;
         border-bottom: 1px solid #f3f4f6;
         vertical-align: top;
         line-height: 1.6;
     }
 
     .prep-table tr:last-child td { border-bottom: none; }
-    .prep-table tr:nth-child(even) td { background: #fafafa; }
 
     .prep-badge {
         display: inline-block;
         background: #ea580c;
         color: #fff;
         font-family: 'Rubik', sans-serif;
-        font-size: 13px;
+        font-size: 15px;
         font-weight: 700;
-        padding: 3px 10px;
+        padding: 6px 14px;
         border-radius: 6px;
         margin-right: 4px;
+        text-transform: uppercase;
     }
 
     .prep-example {
@@ -402,6 +402,89 @@
     .timeline-card-text {
         font-size: 13.5px;
         color: #374151;
+    }
+
+    /* Navigation for MC questions */
+    .mc-navigation {
+        background: #fff;
+        border-radius: 16px 16px 0 0;
+        border: 1px solid #e5e7eb;
+        border-bottom: 1px solid #f3f4f6;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        margin-bottom: 0;
+        overflow: hidden;
+    }
+    .progress-track {
+        height: 4px;
+        background: #f3f4f6;
+        width: 100%;
+    }
+    .progress-fill {
+        height: 100%;
+        background: #ea580c;
+        width: 0%;
+        transition: width 0.3s ease;
+    }
+    .nav-controls {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 24px;
+    }
+    .question-counter {
+        font-family: 'Rubik', sans-serif;
+        font-weight: 600;
+        color: #374151;
+        font-size: 14px;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+    }
+    .nav-arrows {
+        display: flex;
+        gap: 12px;
+    }
+    .arrow-btn {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        border: 1px solid #e5e7eb;
+        background: #fff;
+        color: #6b7280;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .arrow-btn:hover:not(:disabled) {
+        border-color: #ea580c;
+        color: #ea580c;
+        background: #fff7ed;
+        box-shadow: 0 2px 4px rgba(234, 88, 12, 0.1);
+    }
+    .arrow-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        background: #f9fafb;
+        border-color: #f3f4f6;
+        color: #d1d5db;
+    }
+    .mc-list.single-view .mc-item {
+        display: none;
+        border: 1px solid #e5e7eb;
+        border-top: none;
+        border-radius: 0 0 16px 16px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        background: #fff;
+        padding: 24px;
+    }
+    .mc-list.single-view .mc-item.active {
+        display: block;
+        animation: slideUpFade 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    @keyframes slideUpFade {
+        from { opacity: 0; }
+        to { opacity: 1; }
     }
 
     /* ============================================================
@@ -673,7 +756,7 @@
                     <div class="exercise-section">
                         <div class="exercise-header">
                             <span class="exercise-number">1</span>
-                            <h3>Days of the Week</h3>
+                            <h3>Days</h3>
                         </div>
                         <p class="exercise-instructions">Click on each day to hear its pronunciation.</p>
 
@@ -726,8 +809,8 @@
                             <div class="tip-header"><i data-lucide="info" style="width: 20px; height: 20px;"></i> Tip</div>
                             <div class="tip-content">
                                 <ul>
-                                    <li>Days of the week always start with a <strong>capital letter</strong> in English.</li>
-                                    <li>We often use the word <strong>"on"</strong> before days of the week.</li>
+                                    <li>Days always start with a <strong>capital letter</strong> in English.</li>
+                                    <li>We often use the word <strong>"on"</strong> before days.</li>
                                 </ul>
                             </div>
                         </div>
@@ -737,7 +820,7 @@
                     <div class="exercise-section">
                         <div class="exercise-header">
                             <span class="exercise-number">2</span>
-                            <h3>Months of the Year</h3>
+                            <h3>Months</h3>
                         </div>
                         <p class="exercise-instructions">Click on each month to hear its pronunciation.</p>
 
@@ -861,7 +944,7 @@
                             <div class="tip-header"><i data-lucide="info" style="width: 20px; height: 20px;"></i> Tip</div>
                             <div class="tip-content">
                                 <ul>
-                                    <li>Years are often separated in two parts. Example: <strong>1985 > 19|85 > nineteen eighty-five</strong>.</li>
+                                    <li>Years are often separated in two parts. Example: <strong>1985</strong> > <strong>19|85</strong> > <strong>nineteen eighty-five</strong>.</li>
                                     <li>Years from <strong>2000 to 2009</strong> are often pronounced <strong>"two thousand and..."</strong>.</li>
                                     <li>We often use the word <strong>"in"</strong> before years.</li>
                                 </ul>
@@ -873,42 +956,88 @@
                     <div class="exercise-section">
                         <div class="exercise-header">
                             <span class="exercise-number">4</span>
-                            <h3>Prepositions with Dates</h3>
+                            <h3>Prepositions of Time</h3>
                         </div>
-                        <p class="exercise-instructions">In English, we use different prepositions depending on whether we are talking about a day, a month, or a year.</p>
+                        <p class="exercise-instructions">We use different prepositions depending on how general or specific a time is. Check the table below.</p>
 
-                        <table class="prep-table">
+                        <!-- Expanded table -->
+                        <table class="prep-table" style="border: 2px solid #e5e7eb; width: 100%;">
                             <thead>
                                 <tr>
-                                    <th>Preposition</th>
-                                    <th>Use it for...</th>
-                                    <th>Examples</th>
+                                    <th style="width: 110px; text-align: center; border-right: 1px solid #e5e7eb;">Preposition</th>
+                                    <th style="width: 160px; text-align: center; border-right: 1px solid #e5e7eb;">Specificity</th>
+                                    <th style="width: 175px; text-align: center; border-right: 1px solid #e5e7eb;">Used for...</th>
+                                    <th style="width: 260px; text-align: center;">Example</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                <!-- IN rows -->
                                 <tr>
-                                    <td><span class="prep-badge">on</span></td>
-                                    <td>Specific days &amp; dates</td>
-                                    <td class="prep-example">
-                                        She was born <em>on</em> Monday.<br>
-                                        He graduated <em>on</em> June 15th.
+                                    <td rowspan="4" style="vertical-align: middle; text-align: center; border-right: 1px solid #e5e7eb;"><span class="prep-badge">in</span></td>
+                                    <td rowspan="4" style="vertical-align: middle; border-right: 1px solid #e5e7eb;">
+                                        <div style="font-family: 'Rubik', sans-serif; font-size: 15px; font-weight: 700; color: #ea580c; text-transform: uppercase; letter-spacing: 0.04em;">General</div>
+                                        <div style="font-size: 13px; color: #374151; margin-top: 3px; line-height: 1.4;">Large periods of time</div>
                                     </td>
+                                    <td style="border-right: 1px solid #e5e7eb;">Months</td>
+                                    <td class="prep-example">They met <em>in</em> September.</td>
                                 </tr>
                                 <tr>
-                                    <td><span class="prep-badge">in</span></td>
-                                    <td>Months &amp; years</td>
-                                    <td class="prep-example">
-                                        They met <em>in</em> September.<br>
-                                        I was born <em>in</em> 1993.
-                                    </td>
+                                    <td style="border-right: 1px solid #e5e7eb;">Years</td>
+                                    <td class="prep-example">I was born <em>in</em> 1993.</td>
                                 </tr>
                                 <tr>
-                                    <td><span class="prep-badge">at</span></td>
-                                    <td>Times of day &amp; holidays</td>
-                                    <td class="prep-example">
-                                        He arrived <em>at</em> midnight.<br>
-                                        We celebrate <em>at</em> Christmas.
+                                    <td style="border-right: 1px solid #e5e7eb;">Seasons</td>
+                                    <td class="prep-example">We travel <em>in</em> summer.</td>
+                                </tr>
+                                <tr>
+                                    <td style="border-right: 1px solid #e5e7eb;">Parts of the day</td>
+                                    <td class="prep-example">I study <em>in</em> the morning.</td>
+                                </tr>
+                                <!-- ON separator -->
+                                <!-- ON rows -->
+                                <tr>
+                                    <td rowspan="4" style="vertical-align: middle; text-align: center; border-right: 1px solid #e5e7eb; border-top: 2px solid #e5e7eb;"><span class="prep-badge">on</span></td>
+                                    <td rowspan="4" style="vertical-align: middle; border-right: 1px solid #e5e7eb; border-top: 2px solid #e5e7eb;">
+                                        <div style="font-family: 'Rubik', sans-serif; font-size: 15px; font-weight: 700; color: #ea580c; text-transform: uppercase; letter-spacing: 0.04em;">Specific</div>
+                                        <div style="font-size: 13px; color: #374151; margin-top: 3px; line-height: 1.4;">A single day</div>
                                     </td>
+                                    <td style="border-right: 1px solid #e5e7eb; border-top: 2px solid #e5e7eb;">Days of the week</td>
+                                    <td class="prep-example" style="border-top: 2px solid #e5e7eb;">Class is <em>on</em> Monday.</td>
+                                </tr>
+                                <tr>
+                                    <td style="border-right: 1px solid #e5e7eb;">Specific dates</td>
+                                    <td class="prep-example">She was born <em>on</em> March 14th.</td>
+                                </tr>
+                                <tr>
+                                    <td style="border-right: 1px solid #e5e7eb;">Named days</td>
+                                    <td class="prep-example">She called <em>on</em> my birthday.</td>
+                                </tr>
+                                <tr>
+                                    <td style="border-right: 1px solid #e5e7eb;">Holiday days</td>
+                                    <td class="prep-example">No work <em>on</em> Christmas Day.</td>
+                                </tr>
+                                <!-- AT separator -->
+                                <!-- AT rows -->
+                                <tr>
+                                    <td rowspan="4" style="vertical-align: middle; text-align: center; border-right: 1px solid #e5e7eb; border-top: 2px solid #e5e7eb;"><span class="prep-badge">at</span></td>
+                                    <td rowspan="4" style="vertical-align: middle; border-right: 1px solid #e5e7eb; border-top: 2px solid #e5e7eb;">
+                                        <div style="font-family: 'Rubik', sans-serif; font-size: 15px; font-weight: 700; color: #ea580c; text-transform: uppercase; letter-spacing: 0.04em;">Very Specific</div>
+                                        <div style="font-size: 13px; color: #374151; margin-top: 3px; line-height: 1.4;">An exact point in time</div>
+                                    </td>
+                                    <td style="border-right: 1px solid #e5e7eb; border-top: 2px solid #e5e7eb;">Exact times</td>
+                                    <td class="prep-example" style="border-top: 2px solid #e5e7eb;">Class starts <em>at</em> 9:00 AM.</td>
+                                </tr>
+                                <tr>
+                                    <td style="border-right: 1px solid #e5e7eb;">Specific moments</td>
+                                    <td class="prep-example">He arrived <em>at</em> midnight.</td>
+                                </tr>
+                                <tr>
+                                    <td style="border-right: 1px solid #e5e7eb;">Holiday periods</td>
+                                    <td class="prep-example">We celebrate <em>at</em> Christmas.</td>
+                                </tr>
+                                <tr>
+                                    <td style="border-right: 1px solid #e5e7eb;">Age</td>
+                                    <td class="prep-example">She retired <em>at</em> 65.</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -916,60 +1045,7 @@
                         <div class="tip-box">
                             <div class="tip-header"><i data-lucide="info" style="width: 20px; height: 20px;"></i> Tip</div>
                             <div class="tip-content">
-                                <p>A simple way to remember: <strong>"on"</strong> for days (you can stand <em>on</em> a day), <strong>"in"</strong> for periods (you can be <em>inside</em> a month or year), <strong>"at"</strong> for exact points in time.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- SECTION 7: Time linkers -->
-                    <div class="exercise-section">
-                        <div class="exercise-header">
-                            <span class="exercise-number">5</span>
-                            <h3>Linking Ideas in the Past</h3>
-                        </div>
-                        <p class="exercise-instructions">Good life stories don't just list events — they connect them. These words and phrases help you show the order and timing of events.</p>
-
-                        <table class="prep-table">
-                            <thead>
-                                <tr>
-                                    <th>Expression</th>
-                                    <th>Use</th>
-                                    <th>Example</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><span class="prep-badge">in</span></td>
-                                    <td>With a year or month</td>
-                                    <td class="prep-example"><em>In</em> 1970, she got married.</td>
-                                </tr>
-                                <tr>
-                                    <td><span class="prep-badge">when</span></td>
-                                    <td>To connect two events at the same time</td>
-                                    <td class="prep-example">She met Thomas <em>when</em> she was at university.</td>
-                                </tr>
-                                <tr>
-                                    <td><span class="prep-badge">later</span></td>
-                                    <td>After some unspecified time</td>
-                                    <td class="prep-example">She moved to London. <em>Later</em>, she became a teacher.</td>
-                                </tr>
-                                <tr>
-                                    <td><span class="prep-badge">X years/months later</span></td>
-                                    <td>After a specific amount of time</td>
-                                    <td class="prep-example">She graduated in June. Three months <em>later</em>, she got married.</td>
-                                </tr>
-                                <tr>
-                                    <td><span class="prep-badge">then</span></td>
-                                    <td>To show the next event in sequence</td>
-                                    <td class="prep-example">She retired. <em>Then</em> she moved back to Ireland.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                        <div class="tip-box">
-                            <div class="tip-header"><i data-lucide="info" style="width: 20px; height: 20px;"></i> Tip</div>
-                            <div class="tip-content">
-                                <p>Use <strong>in</strong> with years and months. Use <strong>when</strong> in longer sentences with a subject and verb. Use <strong>later</strong> to move the story forward in time without repeating the year.</p>
+                                <p>For holidays, use <strong>"on"</strong> for a single day (<em>on Christmas Day</em>), and use <strong>"at"</strong> for the whole holiday period (<em>at Christmas</em>, meaning the season).</p>
                             </div>
                         </div>
                     </div>
@@ -981,10 +1057,15 @@
                 ================================================ -->
                 <div class="tab-content" id="reading">
 
-                    <!-- The passage -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">5</span>
+                            <h3>Reading Comprehension</h3>
+                        </div>
+                        <p class="exercise-instructions">Read the following text and choose the best alternative for each question below.</p>
+
                     <div class="reading-header">
                         <h2>Margaret's Story</h2>
-                        <p>Read the text carefully. You will answer questions about it afterwards.</p>
                     </div>
 
                     <div class="reading-passage">
@@ -1011,15 +1092,17 @@
                         </p>
                     </div>
 
-                    <!-- Comprehension: Multiple Choice -->
-                    <div class="exercise-section">
-                        <div class="exercise-header">
-                            <span class="exercise-number">6</span>
-                            <h3>Comprehension Check</h3>
+                        <div class="mc-navigation">
+                            <div class="nav-controls">
+                                <span class="question-counter" id="q-counter">1 / 7</span>
+                                <div class="nav-arrows">
+                                    <button class="arrow-btn" id="prev-btn" disabled><i class="fa-solid fa-chevron-left"></i></button>
+                                    <button class="arrow-btn" id="next-btn"><i class="fa-solid fa-chevron-right"></i></button>
+                                </div>
+                            </div>
                         </div>
-                        <p class="exercise-instructions">Choose the correct answer based on the text. Read carefully — some options look similar!</p>
 
-                        <div class="mc-list" id="mc-list-1">
+                        <div class="mc-list single-view" id="mc-list-1">
 
                             <div class="mc-item" data-correct="b">
                                 <p class="mc-question">1. Where was Margaret born?</p>
@@ -1113,7 +1196,7 @@
                     <!-- SECTION 7: Timeline reconstruction -->
                     <div class="exercise-section">
                         <div class="exercise-header">
-                            <span class="exercise-number">7</span>
+                            <span class="exercise-number">6</span>
                             <h3>Margaret's Timeline</h3>
                         </div>
                         <p class="exercise-instructions">Look at the timeline of Margaret's life. Write the correct year in each gap using information from the story.</p>
@@ -1191,7 +1274,7 @@
                     <!-- SECTION 8: How do you say these years? -->
                     <div class="exercise-section">
                         <div class="exercise-header">
-                            <span class="exercise-number">8</span>
+                            <span class="exercise-number">7</span>
                             <h3>Say It Out Loud</h3>
                         </div>
                         <p class="exercise-instructions">These are years from Margaret's story. Select how you would say each year in English.</p>
@@ -1325,8 +1408,10 @@
         lucide.createIcons();
 
         // ============================================================
-        // AUDIO (uses Web Speech API as fallback since no actual MP3s)
+        // AUDIO
         // ============================================================
+        let currentAudio = null;
+
         function speak(text, rate = 0.85) {
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
@@ -1364,17 +1449,48 @@
         window.playVocab = function(key, card) {
             document.querySelectorAll('.vocab-card').forEach(c => c.classList.remove('playing'));
             card.classList.add('playing');
+
             const word = dayMap[key] || monthMap[key] || key;
-            speak(word);
-            setTimeout(() => card.classList.remove('playing'), 1500);
+            
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio = null;
+            }
+
+            const audioPath = `../../../assets/activities/family-history/${word}.mp3`;
+            currentAudio = new Audio(audioPath);
+            
+            currentAudio.play().catch(e => {
+                speak(word);
+                setTimeout(() => card.classList.remove('playing'), 1500);
+            });
+            
+            currentAudio.onended = () => {
+                card.classList.remove('playing');
+            };
         };
 
         window.playYear = function(year, card) {
             document.querySelectorAll('.vocab-card, .audio-word').forEach(c => c.classList.remove('playing'));
             card.classList.add('playing');
-            const spoken = yearSpokenMap[year] || year;
-            speak(spoken);
-            setTimeout(() => card.classList.remove('playing'), 2000);
+            
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio = null;
+            }
+
+            const audioPath = `../../../assets/activities/family-history/${year}.mp3`;
+            currentAudio = new Audio(audioPath);
+            
+            currentAudio.play().catch(e => {
+                const spoken = yearSpokenMap[year] || year;
+                speak(spoken);
+                setTimeout(() => card.classList.remove('playing'), 2000);
+            });
+            
+            currentAudio.onended = () => {
+                card.classList.remove('playing');
+            };
         };
 
         // ============================================================
@@ -1432,6 +1548,42 @@
 
         setupMCSection('mc-list-1', 'check-mc', 'retry-mc');
         setupMCSection('year-say-list', 'check-year-say', 'retry-year-say');
+
+        // Reading Comprehension Navigation
+        const mcList1 = document.getElementById('mc-list-1');
+        if (mcList1) {
+            const items = mcList1.querySelectorAll('.mc-item');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const counter = document.getElementById('q-counter');
+            
+            let currentIndex = 0;
+
+            function updateView() {
+                items.forEach((item, index) => {
+                    if (index === currentIndex) {
+                        item.classList.add('active');
+                    } else {
+                        item.classList.remove('active');
+                    }
+                });
+                
+                counter.textContent = `${currentIndex + 1} / ${items.length}`;
+                
+                prevBtn.disabled = currentIndex === 0;
+                nextBtn.disabled = currentIndex === items.length - 1;
+            }
+
+            prevBtn.addEventListener('click', () => {
+                if (currentIndex > 0) { currentIndex--; updateView(); }
+            });
+
+            nextBtn.addEventListener('click', () => {
+                if (currentIndex < items.length - 1) { currentIndex++; updateView(); }
+            });
+
+            updateView();
+        }
 
         // ============================================================
         // TIMELINE FILL
