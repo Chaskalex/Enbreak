@@ -215,8 +215,6 @@
     .reading-header {
         text-align: center;
         margin-bottom: 28px;
-        padding-bottom: 20px;
-        border-bottom: 2px solid #f3f4f6;
     }
 
     .reading-header h2 {
@@ -224,12 +222,6 @@
         font-size: 22px;
         font-weight: 700;
         color: #1f2937;
-        margin-bottom: 6px;
-    }
-
-    .reading-header p {
-        font-size: 13px;
-        color: #9ca3af;
     }
 
     .reading-passage {
@@ -239,7 +231,7 @@
         padding: 32px 36px;
         margin-bottom: 32px;
         line-height: 1.9;
-        font-size: 15.5px;
+        font-size: 14.5px;
         color: #374151;
     }
 
@@ -264,69 +256,6 @@
         flex-direction: column;
         gap: 20px;
     }
-
-    .mc-item {
-        background: #f9fafb;
-        border: 1px solid #e5e7eb;
-        border-radius: 12px;
-        padding: 18px 20px;
-    }
-
-    .mc-question {
-        font-size: 14.5px;
-        font-weight: 600;
-        color: #1f2937;
-        margin-bottom: 14px;
-        line-height: 1.5;
-    }
-
-    .mc-options {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-    }
-
-    .mc-btn {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        padding: 10px 14px;
-        border-radius: 8px;
-        border: 1.5px solid #e5e7eb;
-        background: #ffffff;
-        font-family: 'Inter', sans-serif;
-        font-size: 14px;
-        color: #374151;
-        cursor: pointer;
-        transition: all 0.2s;
-        text-align: left;
-        width: 100%;
-    }
-
-    .mc-letter {
-        width: 24px;
-        height: 24px;
-        border-radius: 50%;
-        background: #f3f4f6;
-        border: 1.5px solid #d1d5db;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 12px;
-        font-weight: 700;
-        color: #6b7280;
-        flex-shrink: 0;
-        transition: all 0.2s;
-    }
-
-    .mc-btn:hover { border-color: #ea580c; }
-    .mc-btn:hover .mc-letter { background: #ffedd5; border-color: #ea580c; color: #ea580c; }
-    .mc-btn.selected { border-color: #ea580c; background: #fff7ed; }
-    .mc-btn.selected .mc-letter { background: #ea580c; border-color: #ea580c; color: #fff; }
-    .mc-btn.correct { border-color: #16a34a; background: #f0fdf4; }
-    .mc-btn.correct .mc-letter { background: #16a34a; border-color: #16a34a; color: #fff; }
-    .mc-btn.incorrect { border-color: #dc2626; background: #fef2f2; }
-    .mc-btn.incorrect .mc-letter { background: #dc2626; border-color: #dc2626; color: #fff; }
 
     /* ============================================================
        TIMELINE BUILDER (Post-Reading)
@@ -404,87 +333,140 @@
         color: #374151;
     }
 
-    /* Navigation for MC questions */
-    .mc-navigation {
-        background: #fff;
-        border-radius: 16px 16px 0 0;
+    /* ============================================================
+       MC QUESTION CONTAINER
+    ============================================================ */
+    .mc-navigation { display: none; }
+    .progress-track, .progress-fill { display: none; }
+
+    .mc-container {
+        background: #f9fafb;
         border: 1px solid #e5e7eb;
-        border-bottom: 1px solid #f3f4f6;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-        margin-bottom: 0;
-        overflow: hidden;
+        border-radius: 12px;
+        padding: 18px 20px;
     }
-    .progress-track {
-        height: 4px;
-        background: #f3f4f6;
+
+    .mc-list.single-view .mc-item {
+        display: none;
+        background: transparent;
+        border: none;
+        border-radius: 0;
+        padding: 0;
+    }
+    .mc-list.single-view .mc-item.active {
+        display: block;
+        animation: fadeSlide 0.22s ease;
+    }
+    @keyframes fadeSlide {
+        from { opacity: 0; transform: translateY(6px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .mc-question {
+        font-size: 14.5px;
+        font-weight: 600;
+        color: #1f2937;
+        margin-bottom: 14px;
+        line-height: 1.5;
+    }
+
+    .mc-options {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 0;
+    }
+
+    .mc-btn {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 14px;
+        border-radius: 8px;
+        border: 1.5px solid #e5e7eb;
+        background: #ffffff;
+        font-family: 'Inter', sans-serif;
+        font-size: 14px;
+        color: #374151;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-align: left;
         width: 100%;
     }
-    .progress-fill {
-        height: 100%;
-        background: #ea580c;
-        width: 0%;
-        transition: width 0.3s ease;
-    }
-    .nav-controls {
+
+    .mc-letter {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: #f3f4f6;
+        border: 1.5px solid #d1d5db;
         display: flex;
-        justify-content: space-between;
         align-items: center;
-        padding: 16px 24px;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: 700;
+        color: #6b7280;
+        flex-shrink: 0;
+        transition: all 0.2s;
     }
-    .question-counter {
-        font-family: 'Rubik', sans-serif;
-        font-weight: 600;
-        color: #374151;
-        font-size: 14px;
-        letter-spacing: 0.5px;
-        text-transform: uppercase;
-    }
-    .nav-arrows {
+
+    .mc-btn:hover { border-color: #ea580c; }
+    .mc-btn:hover .mc-letter { background: #ffedd5; border-color: #ea580c; color: #ea580c; }
+    .mc-btn.selected { border-color: #ea580c; background: #fff7ed; }
+    .mc-btn.selected .mc-letter { background: #ea580c; border-color: #ea580c; color: #fff; }
+    .mc-btn.correct { border-color: #16a34a; background: #f0fdf4; }
+    .mc-btn.correct .mc-letter { background: #16a34a; border-color: #16a34a; color: #fff; }
+    .mc-btn.incorrect { border-color: #dc2626; background: #fef2f2; }
+    .mc-btn.incorrect .mc-letter { background: #dc2626; border-color: #dc2626; color: #fff; }
+
+    .mc-card-nav {
         display: flex;
-        gap: 12px;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 20px;
+        margin-top: 20px;
+        border-top: 1px solid #e5e7eb;
     }
+    .mc-card-counter {
+        font-family: 'Inter', sans-serif;
+        font-size: 13px;
+        color: #6b7280;
+        font-weight: 500;
+        letter-spacing: 0.02em;
+    }
+    .mc-card-counter span {
+        font-family: 'Rubik', sans-serif;
+        font-size: 14px;
+        font-weight: 700;
+        color: #111827;
+    }
+    .mc-card-arrows { display: flex; gap: 8px; }
     .arrow-btn {
-        width: 40px;
-        height: 40px;
-        border-radius: 10px;
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
         border: 1px solid #e5e7eb;
         background: #fff;
-        color: #6b7280;
+        color: #374151;
         display: flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
-        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: all 0.2s ease;
+        font-size: 14px;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.05);
     }
     .arrow-btn:hover:not(:disabled) {
         border-color: #ea580c;
-        color: #ea580c;
-        background: #fff7ed;
-        box-shadow: 0 2px 4px rgba(234, 88, 12, 0.1);
+        color: #fff;
+        background: #ea580c;
+        box-shadow: 0 4px 6px -1px rgba(234, 88, 12, 0.2);
     }
     .arrow-btn:disabled {
         opacity: 0.5;
         cursor: not-allowed;
         background: #f9fafb;
-        border-color: #f3f4f6;
-        color: #d1d5db;
-    }
-    .mc-list.single-view .mc-item {
-        display: none;
-        border: 1px solid #e5e7eb;
-        border-top: none;
-        border-radius: 0 0 16px 16px;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-        background: #fff;
-        padding: 24px;
-    }
-    .mc-list.single-view .mc-item.active {
-        display: block;
-        animation: slideUpFade 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-    @keyframes slideUpFade {
-        from { opacity: 0; }
-        to { opacity: 1; }
+        box-shadow: none;
     }
 
     /* ============================================================
@@ -650,6 +632,314 @@
         .timeline-year { position: static; transform: none; margin-bottom: 8px; display: inline-block; }
         .reading-passage { padding: 20px; }
     }
+    /* ============================================================
+       POST-READING: TIMELINE BUILDER
+    ============================================================ */
+    .timeline-task-intro {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        background: #fff7ed;
+        border: 1.5px solid #fed7aa;
+        border-radius: 14px;
+        padding: 18px 20px;
+        margin-bottom: 20px;
+    }
+    .tti-icon {
+        width: 44px;
+        height: 44px;
+        background: #ea580c;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 18px;
+        flex-shrink: 0;
+    }
+    .tti-text {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        flex: 1;
+        font-family: 'Inter', sans-serif;
+        font-size: 14px;
+        color: #374151;
+        font-weight: 600;
+    }
+    .person-name-input {
+        border: 1.5px solid #e5e7eb;
+        border-radius: 8px;
+        padding: 8px 12px;
+        font-family: 'Inter', sans-serif;
+        font-size: 14px;
+        color: #1f2937;
+        outline: none;
+        transition: border-color 0.2s;
+        max-width: 320px;
+        background: #fff;
+    }
+    .person-name-input:focus { border-color: #ea580c; }
+
+    .event-form-card {
+        background: #f9fafb;
+        border: 1.5px solid #e5e7eb;
+        border-radius: 14px;
+        padding: 20px;
+        margin-bottom: 24px;
+    }
+    .event-form-row {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+    .event-form-field {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        min-width: 120px;
+    }
+    .efl {
+        font-family: 'Inter', sans-serif;
+        font-size: 11.5px;
+        font-weight: 600;
+        color: #6b7280;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+    .evt-input {
+        border: 1.5px solid #e5e7eb;
+        border-radius: 8px;
+        padding: 9px 12px;
+        font-family: 'Inter', sans-serif;
+        font-size: 14px;
+        color: #1f2937;
+        background: #fff;
+        outline: none;
+        transition: border-color 0.2s;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .evt-input:focus { border-color: #ea580c; }
+    .evt-select { cursor: pointer; }
+    .add-event-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: #ea580c;
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        padding: 10px 20px;
+        font-family: 'Rubik', sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s, transform 0.1s;
+    }
+    .add-event-btn:hover { background: #c2410c; }
+    .add-event-btn:active { transform: scale(0.97); }
+    .evt-error {
+        margin-top: 10px;
+        font-family: 'Inter', sans-serif;
+        font-size: 13px;
+        color: #dc2626;
+        background: #fef2f2;
+        border: 1px solid #fecaca;
+        border-radius: 8px;
+        padding: 8px 12px;
+    }
+
+    /* Timeline */
+    .tl-wrapper {
+        position: relative;
+        min-height: 120px;
+        padding: 8px 0 8px 0;
+    }
+    .tl-empty {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 48px 20px;
+        text-align: center;
+        font-family: 'Inter', sans-serif;
+        font-size: 14px;
+        color: #9ca3af;
+        line-height: 1.6;
+        background: #f9fafb;
+        border: 2px dashed #e5e7eb;
+        border-radius: 14px;
+    }
+    .tl-events {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        padding-left: 36px;
+    }
+    .tl-spine {
+        position: absolute;
+        left: 16px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(to bottom, #ea580c 0%, #fed7aa 100%);
+        border-radius: 99px;
+        z-index: 0;
+    }
+    .tl-event-item {
+        display: flex;
+        align-items: flex-start;
+        position: relative;
+        padding: 0 0 20px 0;
+        animation: tlSlideIn 0.35s cubic-bezier(0.34, 1.4, 0.64, 1);
+    }
+    @keyframes tlSlideIn {
+        from { opacity: 0; transform: translateX(-12px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+    .tl-dot {
+        position: absolute;
+        left: -26px;
+        top: 16px;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        z-index: 1;
+        flex-shrink: 0;
+    }
+    .tl-card {
+        background: #fff;
+        border: 1.5px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 14px 16px;
+        flex: 1;
+        position: relative;
+        transition: box-shadow 0.2s;
+    }
+    .tl-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+    .tl-card-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 6px;
+        gap: 10px;
+    }
+    .tl-year-tag {
+        font-family: 'Rubik', sans-serif;
+        font-size: 13px;
+        font-weight: 700;
+        color: #ea580c;
+        background: #fff7ed;
+        border: 1px solid #fed7aa;
+        padding: 3px 10px;
+        border-radius: 20px;
+    }
+    .tl-cat-tag {
+        font-family: 'Inter', sans-serif;
+        font-size: 12px;
+        color: #6b7280;
+        background: #f3f4f6;
+        padding: 3px 9px;
+        border-radius: 20px;
+    }
+    .tl-delete-btn {
+        background: none;
+        border: none;
+        color: #d1d5db;
+        cursor: pointer;
+        font-size: 13px;
+        padding: 2px 4px;
+        border-radius: 6px;
+        transition: color 0.15s;
+        margin-left: auto;
+    }
+    .tl-delete-btn:hover { color: #dc2626; }
+    .tl-card-desc {
+        font-family: 'Inter', sans-serif;
+        font-size: 14px;
+        color: #374151;
+        line-height: 1.6;
+    }
+
+    /* Grammar hint badge on card */
+    .tl-grammar-hint {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-family: 'Inter', sans-serif;
+        font-size: 11.5px;
+        color: #b45309;
+        background: #fef9c3;
+        border: 1px solid #fde68a;
+        border-radius: 6px;
+        padding: 3px 8px;
+        margin-top: 8px;
+    }
+    .tl-vocab-highlight {
+        background: #dcfce7;
+        border: 1px solid #bbf7d0;
+        border-radius: 6px;
+        padding: 3px 8px;
+        font-size: 11.5px;
+        color: #15803d;
+        font-family: 'Inter', sans-serif;
+        margin-top: 8px;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .tl-footer {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: 16px;
+        padding-top: 16px;
+        border-top: 1px solid #f3f4f6;
+        flex-wrap: wrap;
+    }
+    .tl-count-badge {
+        font-family: 'Rubik', sans-serif;
+        font-size: 13px;
+        font-weight: 700;
+        background: #ea580c;
+        color: #fff;
+        padding: 4px 14px;
+        border-radius: 20px;
+    }
+    .tl-count-hint {
+        font-family: 'Inter', sans-serif;
+        font-size: 13px;
+        color: #6b7280;
+        flex: 1;
+    }
+    .tl-clear-btn {
+        background: none;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        padding: 6px 12px;
+        font-family: 'Inter', sans-serif;
+        font-size: 12px;
+        color: #9ca3af;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        transition: all 0.15s;
+    }
+    .tl-clear-btn:hover { border-color: #dc2626; color: #dc2626; }
+
+    .evt-year-no-spin::-webkit-outer-spin-button,
+    .evt-year-no-spin::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+    .evt-year-no-spin { -moz-appearance: textfield; appearance: textfield; }
+
+    @media (max-width: 600px) {
+        .event-form-row { flex-direction: column; }
+        .event-form-field { flex: 1 !important; }
+        .timeline-task-intro { flex-direction: column; align-items: flex-start; }
+    }
+
     [data-lucide] { display: inline-block; vertical-align: middle; }
     [data-lucide] svg { display: block; width: 100%; height: 100%; }
     </style>
@@ -726,7 +1016,7 @@
                                 <div class="info-card-icon"><i class="fa-solid fa-bullseye"></i></div>
                                 <div class="info-card-content">
                                     <h4>Learning Objective</h4>
-                                    <p>Read and understand a chronological story using years and life-event language.</p>
+                                    <p>You will be able to read and understand a chronological story using years and life-event language.</p>
                                 </div>
                             </div>
                             <div class="info-card">
@@ -925,7 +1215,7 @@
                                         <div class="face-img-wrapper">
                                             <img src="../../../assets/activities/family-history/rose.png" alt="Rose">
                                         </div>
-                                        <span class="face-name-tag">Rose, 2024</span>
+                                        <span class="face-name-tag">Rose, 2026</span>
                                     </div>
                                 </div>
                             </div>
@@ -1064,117 +1354,129 @@
                         </div>
                         <p class="exercise-instructions">Read the following text and choose the best alternative for each question below.</p>
 
-                    <div class="reading-header">
-                        <h2>Margaret's Story</h2>
-                    </div>
-
                     <div class="reading-passage">
+                        <div class="reading-header">
+                            <h2>My Grandmother Rose</h2>
+                        </div>
                         <p>
-                            Margaret Collins was born on <span class="year-highlight">14th March, 1948</span>, in a small coastal town called Kilkee, on the west coast of Ireland. She was the second of five children. Her father was a fisherman, and her mother worked in a bakery. Life was simple but happy.
+                            My grandmother, Rose, was born on the <span class="year-highlight">3rd of July, 1952</span>, in a small village called Bampton, near Oxford. She was the youngest of three children. Her father worked at the local post office and her mother was a nurse. She grew up with lots of books and a big garden full of flowers.
                         </p>
                         <p>
-                            In <span class="year-highlight">1966</span>, Margaret finished secondary school and moved to Dublin to study at university. She studied History and loved every moment of it. She made many friends, and in <span class="year-highlight">1969</span>, during her final year, she met a young man named Thomas Collins at a library. They fell in love quickly.
+                            My grandma always wanted to be a doctor. In <span class="year-highlight">1963</span>, when she was eleven years old, she visited her mother at the hospital and knew that was what she wanted to do. She worked very hard at school. In <span class="year-highlight">1970</span>, she finished secondary school with very good results. But she did not go to university straight away. First, she worked for two years at a pharmacy near her home to save money.
                         </p>
                         <p>
-                            Margaret graduated in <span class="year-highlight">June 1970</span> and married Thomas just three months later, in <span class="year-highlight">September 1970</span>. They moved to London, where Thomas found work as an engineer. Margaret started her career as a secondary school history teacher in <span class="year-highlight">1971</span>. She loved teaching, and her students loved her.
+                            In <span class="year-highlight">September 1972</span>, she started her medical degree at University College London. It was a long course — six years. She graduated in <span class="year-highlight">June 1978</span>. Our whole family was so proud. Later that year, in <span class="year-highlight">October 1978</span>, she met my grandfather, James, at a hospital conference in Edinburgh. They got married in <span class="year-highlight">April 1980</span>.
                         </p>
                         <p>
-                            Their first child, a daughter named Claire, was born in <span class="year-highlight">1972</span>. Two years later, in <span class="year-highlight">1974</span>, their son Daniel was born. The family lived a full and busy life in London. In <span class="year-highlight">1985</span>, Margaret's parents moved from Ireland to live closer to the family. It was a very happy time.
+                            Rose started her first job as a doctor at St Thomas' Hospital in London in <span class="year-highlight">1981</span>. It was a busy job, but she loved it. In <span class="year-highlight">1983</span>, my mum, Sarah, was born, and my uncle Tom came along two years later in <span class="year-highlight">1985</span>. That same year, she began to specialise in paediatrics — that means looking after children. She became one of the best doctors in her department.
                         </p>
                         <p>
-                            Sadly, Thomas passed away in <span class="year-highlight">February 1999</span> after a short illness. Margaret was devastated, but her children and grandchildren — Claire's first child was born in <span class="year-highlight">1997</span> — gave her the strength to continue.
+                            My grandmother always said that a good doctor needs to talk clearly with patients. In <span class="year-highlight">1994</span>, she wrote her first book, <em>Talking to Young Patients</em>. It was a guide for doctors who work with children. The book sold over 40,000 copies and was translated into five languages. A lot of people read it.
                         </p>
                         <p>
-                            Margaret retired from teaching in <span class="year-highlight">2003</span>, after 32 years in the classroom. She moved back to Ireland and settled in Galway. In <span class="year-highlight">2010</span>, she started writing a blog about Irish history, which became surprisingly popular. By <span class="year-highlight">2015</span>, she had published her first book.
+                            In <span class="year-highlight">November 2005</span>, something scary happened. My grandfather James had a serious heart attack and stayed in hospital for three months. Luckily, he got better. After that, Rose decided to work fewer hours and spend more time with her family. James retired in <span class="year-highlight">2007</span>, and they left London and moved to a quiet house in the Cotswolds.
                         </p>
                         <p>
-                            Today, Margaret is 76 years old. She has four grandchildren and still writes every day. She says: <em>"Every year of my life taught me something. The important thing is to pay attention."</em>
+                            My grandma retired from medicine in <span class="year-highlight">2018</span>, after 37 years as a doctor. Now she spends her time in the garden, reading, and writing. In <span class="year-highlight">2022</span>, she published a book about her life called <em>A Life in Good Hands</em>. I read the whole thing in one weekend.
+                        </p>
+                        <p>
+                            Today, she is 73 years old. Every morning she gets up early, waters her roses, and reads the newspaper. She always says to me: <em>"It is never too late to start, Lily. I waited until I was twenty to go to university, and I never looked back."</em>
                         </p>
                     </div>
 
-                        <div class="mc-navigation">
-                            <div class="nav-controls">
-                                <span class="question-counter" id="q-counter">1 / 7</span>
-                                <div class="nav-arrows">
-                                    <button class="arrow-btn" id="prev-btn" disabled><i class="fa-solid fa-chevron-left"></i></button>
-                                    <button class="arrow-btn" id="next-btn"><i class="fa-solid fa-chevron-right"></i></button>
-                                </div>
-                            </div>
-                        </div>
-
+                    <div class="mc-container">
                         <div class="mc-list single-view" id="mc-list-1">
 
-                            <div class="mc-item" data-correct="b">
-                                <p class="mc-question">1. Where was Margaret born?</p>
-                                <div class="mc-options">
-                                    <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> Dublin, Ireland</button>
-                                    <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> Kilkee, Ireland</button>
-                                    <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> London, England</button>
-                                    <button class="mc-btn" data-option="d"><span class="mc-letter">D</span> Galway, Ireland</button>
-                                </div>
-                            </div>
-
                             <div class="mc-item" data-correct="c">
-                                <p class="mc-question">2. In which year did Margaret start university?</p>
+                                <p class="mc-question">Where was Rose born?</p>
                                 <div class="mc-options">
-                                    <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> 1948</button>
-                                    <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> 1968</button>
-                                    <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> 1966</button>
-                                    <button class="mc-btn" data-option="d"><span class="mc-letter">D</span> 1970</button>
+                                    <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> London, England</button>
+                                    <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> Edinburgh, Scotland</button>
+                                    <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> Bampton, near Oxford</button>
+                                    <button class="mc-btn" data-option="d"><span class="mc-letter">D</span> The Cotswolds</button>
                                 </div>
                             </div>
 
-                            <div class="mc-item" data-correct="a">
-                                <p class="mc-question">3. Where did Margaret meet Thomas?</p>
+                            <div class="mc-item" data-correct="b">
+                                <p class="mc-question">In which year did Rose start her medical degree at university?</p>
                                 <div class="mc-options">
-                                    <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> At a library in Dublin</button>
-                                    <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> At a bakery in Kilkee</button>
-                                    <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> At a school in London</button>
-                                    <button class="mc-btn" data-option="d"><span class="mc-letter">D</span> At a university in Galway</button>
+                                    <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> 1970</button>
+                                    <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> 1972</button>
+                                    <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> 1975</button>
+                                    <button class="mc-btn" data-option="d"><span class="mc-letter">D</span> 1978</button>
                                 </div>
                             </div>
 
                             <div class="mc-item" data-correct="d">
-                                <p class="mc-question">4. How long did Margaret work as a teacher?</p>
+                                <p class="mc-question">How many years did Rose study medicine at university?</p>
                                 <div class="mc-options">
-                                    <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> 20 years</button>
-                                    <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> 25 years</button>
-                                    <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> 30 years</button>
-                                    <button class="mc-btn" data-option="d"><span class="mc-letter">D</span> 32 years</button>
-                                </div>
-                            </div>
-
-                            <div class="mc-item" data-correct="b">
-                                <p class="mc-question">5. In what month did Thomas pass away?</p>
-                                <div class="mc-options">
-                                    <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> January</button>
-                                    <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> February</button>
-                                    <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> March</button>
-                                    <button class="mc-btn" data-option="d"><span class="mc-letter">D</span> September</button>
-                                </div>
-                            </div>
-
-                            <div class="mc-item" data-correct="c">
-                                <p class="mc-question">6. What did Margaret do in 2010?</p>
-                                <div class="mc-options">
-                                    <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> She published her first book</button>
-                                    <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> She retired from teaching</button>
-                                    <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> She started writing a blog</button>
-                                    <button class="mc-btn" data-option="d"><span class="mc-letter">D</span> She moved back to Ireland</button>
+                                    <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> Four years</button>
+                                    <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> Five years</button>
+                                    <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> Seven years</button>
+                                    <button class="mc-btn" data-option="d"><span class="mc-letter">D</span> Six years</button>
                                 </div>
                             </div>
 
                             <div class="mc-item" data-correct="a">
-                                <p class="mc-question">7. How many grandchildren does Margaret have today?</p>
+                                <p class="mc-question">Where did Rose meet her husband, James?</p>
                                 <div class="mc-options">
-                                    <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> Four</button>
-                                    <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> Two</button>
-                                    <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> Five</button>
-                                    <button class="mc-btn" data-option="d"><span class="mc-letter">D</span> Three</button>
+                                    <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> At a hospital conference in Edinburgh</button>
+                                    <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> At university in London</button>
+                                    <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> At St Thomas' Hospital</button>
+                                    <button class="mc-btn" data-option="d"><span class="mc-letter">D</span> At a pharmacy near Oxford</button>
+                                </div>
+                            </div>
+
+                            <div class="mc-item" data-correct="c">
+                                <p class="mc-question">What area of medicine did Rose specialise in from 1985?</p>
+                                <div class="mc-options">
+                                    <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> Cardiology</button>
+                                    <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> Nursing education</button>
+                                    <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> Paediatrics</button>
+                                    <button class="mc-btn" data-option="d"><span class="mc-letter">D</span> General medicine</button>
+                                </div>
+                            </div>
+
+                            <div class="mc-item" data-correct="b">
+                                <p class="mc-question">In what month did James have his heart attack?</p>
+                                <div class="mc-options">
+                                    <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> October</button>
+                                    <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> November</button>
+                                    <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> December</button>
+                                    <button class="mc-btn" data-option="d"><span class="mc-letter">D</span> September</button>
+                                </div>
+                            </div>
+
+                            <div class="mc-item" data-correct="d">
+                                <p class="mc-question">How many years did Rose work as a doctor before she retired?</p>
+                                <div class="mc-options">
+                                    <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> 32 years</button>
+                                    <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> 30 years</button>
+                                    <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> 40 years</button>
+                                    <button class="mc-btn" data-option="d"><span class="mc-letter">D</span> 37 years</button>
+                                </div>
+                            </div>
+
+                            <div class="mc-item" data-correct="a">
+                                <p class="mc-question">Why did Rose wait until she was twenty to go to university?</p>
+                                <div class="mc-options">
+                                    <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> She worked first to save money</button>
+                                    <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> She failed her final exams</button>
+                                    <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> She moved to a different city</button>
+                                    <button class="mc-btn" data-option="d"><span class="mc-letter">D</span> She changed her mind about medicine</button>
                                 </div>
                             </div>
 
                         </div>
+
+                        <div class="mc-card-nav">
+                            <p class="mc-card-counter"><span id="q-counter">1</span> / 8</p>
+                            <div class="mc-card-arrows">
+                                <button class="arrow-btn" id="prev-btn" disabled><i class="fa-solid fa-chevron-left"></i></button>
+                                <button class="arrow-btn" id="next-btn"><i class="fa-solid fa-chevron-right"></i></button>
+                            </div>
+                        </div>
+                    </div>
 
                         <div style="display: flex; gap: 12px; align-items: center; margin-top: 24px;">
                             <button class="check-answers-btn" id="check-mc">
@@ -1193,152 +1495,69 @@
                 ================================================ -->
                 <div class="tab-content" id="post-reading">
 
-                    <!-- SECTION 7: Timeline reconstruction -->
                     <div class="exercise-section">
                         <div class="exercise-header">
                             <span class="exercise-number">6</span>
-                            <h3>Margaret's Timeline</h3>
+                            <h3>My Life Events</h3>
                         </div>
-                        <p class="exercise-instructions">Look at the timeline of Margaret's life. Write the correct year in each gap using information from the story.</p>
+                        <p class="exercise-instructions">
+                            Now it is your turn. Write at least 5 important events from your own life. Use the past simple to describe each one.
+                        </p>
 
-                        <div class="sentence-fill-list" id="timeline-fill">
-
-                            <div class="sentence-fill-item" data-answer="1948">
-                                <span class="fill-number">1.</span>
-                                <span>Margaret was born in</span>
-                                <input type="text" class="fill-input timeline-input" data-answer="1948" placeholder="year">
-                                <span>in Kilkee, Ireland.</span>
+                        <!-- Event form -->
+                        <div class="event-form-card">
+                            <div class="event-form-row">
+                                <div class="event-form-field" style="flex:0 0 130px;">
+                                    <label class="efl">Year</label>
+                                    <input type="number" id="evt-year" class="evt-input evt-year-no-spin" placeholder="e.g. 1995" min="1900" max="2026" />
+                                </div>
+                                <div class="event-form-field" style="flex:0 0 150px;">
+                                    <label class="efl">Category</label>
+                                    <select id="evt-cat" class="evt-input evt-select">
+                                        <option value="" disabled selected>Select...</option>
+                                        <option value="birth">👶 Birth</option>
+                                        <option value="school">🎓 Education</option>
+                                        <option value="work">💼 Work</option>
+                                        <option value="love">❤️ Relationship</option>
+                                        <option value="family">👨‍👩‍👧 Family</option>
+                                        <option value="move">🏠 Moving</option>
+                                        <option value="health">🏥 Health</option>
+                                        <option value="achievement">⭐ Achievement</option>
+                                        <option value="other">📌 Other</option>
+                                    </select>
+                                </div>
+                                <div class="event-form-field" style="flex:1;">
+                                    <label class="efl">What happened? <span style="font-weight:400;color:#9ca3af;">(use past simple)</span></label>
+                                    <input type="text" id="evt-desc" class="evt-input" placeholder='e.g. "I moved to Madrid to study."' maxlength="120" />
+                                </div>
                             </div>
-
-                            <div class="sentence-fill-item" data-answer="1966">
-                                <span class="fill-number">2.</span>
-                                <span>In</span>
-                                <input type="text" class="fill-input timeline-input" data-answer="1966" placeholder="year">
-                                <span>, she moved to Dublin to go to university.</span>
+                            <div style="display:flex; justify-content:flex-end; margin-top:12px;">
+                                <button class="add-event-btn" id="add-event-btn">
+                                    <i class="fa-solid fa-plus"></i> Add to timeline
+                                </button>
                             </div>
-
-                            <div class="sentence-fill-item" data-answer="1969">
-                                <span class="fill-number">3.</span>
-                                <span>She met Thomas in</span>
-                                <input type="text" class="fill-input timeline-input" data-answer="1969" placeholder="year">
-                                <span>, during her final year at university.</span>
-                            </div>
-
-                            <div class="sentence-fill-item" data-answer="1970">
-                                <span class="fill-number">4.</span>
-                                <span>Margaret and Thomas got married in September</span>
-                                <input type="text" class="fill-input timeline-input" data-answer="1970" placeholder="year">
-                                <span>.</span>
-                            </div>
-
-                            <div class="sentence-fill-item" data-answer="1971">
-                                <span class="fill-number">5.</span>
-                                <span>She started teaching in</span>
-                                <input type="text" class="fill-input timeline-input" data-answer="1971" placeholder="year">
-                                <span>.</span>
-                            </div>
-
-                            <div class="sentence-fill-item" data-answer="1999">
-                                <span class="fill-number">6.</span>
-                                <span>Thomas passed away in February</span>
-                                <input type="text" class="fill-input timeline-input" data-answer="1999" placeholder="year">
-                                <span>.</span>
-                            </div>
-
-                            <div class="sentence-fill-item" data-answer="2003">
-                                <span class="fill-number">7.</span>
-                                <span>Margaret retired from teaching in</span>
-                                <input type="text" class="fill-input timeline-input" data-answer="2003" placeholder="year">
-                                <span>after 32 years in the classroom.</span>
-                            </div>
-
-                            <div class="sentence-fill-item" data-answer="2015">
-                                <span class="fill-number">8.</span>
-                                <span>Her first book was published in</span>
-                                <input type="text" class="fill-input timeline-input" data-answer="2015" placeholder="year">
-                                <span>.</span>
-                            </div>
-
+                            <div class="evt-error" id="evt-error" style="display:none;"></div>
                         </div>
 
-                        <div style="display: flex; gap: 12px; align-items: center; margin-top: 16px;">
-                            <button class="check-answers-btn" id="check-timeline">
-                                <i class="fa-solid fa-check"></i> Check answers
-                            </button>
-                            <button class="check-answers-btn retry-btn" id="retry-timeline" disabled>
-                                <i class="fa-solid fa-rotate-right"></i> Try again
-                            </button>
+                        <!-- Timeline display -->
+                        <div class="tl-wrapper" id="tl-wrapper">
+                            <div class="tl-empty" id="tl-empty">
+                                <i class="fa-regular fa-clock" style="font-size:28px;color:#d1d5db;margin-bottom:10px;"></i>
+                                <p>Your timeline will appear here.<br>Add the first event above to get started.</p>
+                            </div>
+                            <div class="tl-spine" id="tl-spine" style="display:none;"></div>
+                            <div class="tl-events" id="tl-events"></div>
                         </div>
+
+                        <!-- Event count badge -->
+                        <div class="tl-footer" id="tl-footer" style="display:none;">
+                            <span class="tl-count-badge" id="tl-count-badge">0 events</span>
+                            <span class="tl-count-hint" id="tl-count-hint"></span>
+                            <button class="tl-clear-btn" id="tl-clear-btn"><i class="fa-solid fa-trash"></i> Clear all</button>
+                        </div>
+
                     </div>
 
-                    <!-- SECTION 8: How do you say these years? -->
-                    <div class="exercise-section">
-                        <div class="exercise-header">
-                            <span class="exercise-number">7</span>
-                            <h3>Say It Out Loud</h3>
-                        </div>
-                        <p class="exercise-instructions">These are years from Margaret's story. Select how you would say each year in English.</p>
-
-                        <div class="mc-list" id="year-say-list">
-
-                            <div class="mc-item" data-correct="b">
-                                <p class="mc-question">How do you say <strong>1948</strong>?</p>
-                                <div class="mc-options">
-                                    <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> one thousand nine hundred forty-eight</button>
-                                    <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> nineteen forty-eight</button>
-                                    <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> nineteen hundred and forty-eight</button>
-                                </div>
-                            </div>
-
-                            <div class="mc-item" data-correct="a">
-                                <p class="mc-question">How do you say <strong>1970</strong>?</p>
-                                <div class="mc-options">
-                                    <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> nineteen seventy</button>
-                                    <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> one nine seven zero</button>
-                                    <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> two thousand and seventy</button>
-                                </div>
-                            </div>
-
-                            <div class="mc-item" data-correct="c">
-                                <p class="mc-question">How do you say <strong>1999</strong>?</p>
-                                <div class="mc-options">
-                                    <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> two thousand minus one</button>
-                                    <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> nineteen hundred and ninety-nine</button>
-                                    <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> nineteen ninety-nine</button>
-                                </div>
-                            </div>
-
-                            <div class="mc-item" data-correct="a">
-                                <p class="mc-question">How do you say <strong>2003</strong>?</p>
-                                <div class="mc-options">
-                                    <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> two thousand and three</button>
-                                    <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> twenty oh three</button>
-                                    <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> two zero zero three</button>
-                                </div>
-                            </div>
-
-                            <div class="mc-item" data-correct="b">
-                                <p class="mc-question">How do you say <strong>2015</strong>?</p>
-                                <div class="mc-options">
-                                    <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> two thousand fifteen</button>
-                                    <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> twenty fifteen</button>
-                                    <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> two zero one five</button>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div style="display: flex; gap: 12px; align-items: center; margin-top: 24px;">
-                            <button class="check-answers-btn" id="check-year-say">
-                                <i class="fa-solid fa-check"></i> Check answers
-                            </button>
-                            <button class="check-answers-btn retry-btn" id="retry-year-say" disabled>
-                                <i class="fa-solid fa-rotate-right"></i> Try again
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Completion Box -->
                     <div class="completion-box">
                         <div class="completion-bar"></div>
                         <div class="completion-inner">
@@ -1352,31 +1571,19 @@
                             <div class="skills-list">
                                 <div class="skill-item">
                                     <div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
-                                    Days of the week and months of the year
+                                    Saying and understanding years and dates
                                 </div>
                                 <div class="skill-item">
                                     <div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
-                                    Prepositions with time: on, in, at
+                                    Using prepositions of time correctly
                                 </div>
                                 <div class="skill-item">
                                     <div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
-                                    How to say years in English
+                                    Reading comprehension of a life story
                                 </div>
                                 <div class="skill-item">
                                     <div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
-                                    Reading and understanding a chronological story
-                                </div>
-                                <div class="skill-item">
-                                    <div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
-                                    Past simple <em>be</em>: was, were, wasn't, weren't
-                                </div>
-                                <div class="skill-item">
-                                    <div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
-                                    Time linkers: in, when, later, then, X months later
-                                </div>
-                                <div class="skill-item">
-                                    <div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
-                                    Using years and dates in life-event sentences
+                                    Describing past life events
                                 </div>
                             </div>
                         </div>
@@ -1547,7 +1754,159 @@
         }
 
         setupMCSection('mc-list-1', 'check-mc', 'retry-mc');
-        setupMCSection('year-say-list', 'check-year-say', 'retry-year-say');
+
+        // ============================================================
+        // TIMELINE BUILDER (Post-Reading)
+        // ============================================================
+        const catLabels = {
+            birth: '👶 Birth', school: '🎓 Education', work: '💼 Work',
+            love: '❤️ Relationship', family: '👨‍👩‍👧 Family', move: '🏠 Moving',
+            health: '🏥 Health', achievement: '⭐ Achievement', other: '📌 Other'
+        };
+        const catColors = {
+            birth: '#ec4899', school: '#8b5cf6', work: '#0ea5e9',
+            love: '#f43f5e', family: '#f59e0b', move: '#10b981',
+            health: '#ef4444', achievement: '#f97316', other: '#6b7280'
+        };
+
+        // Vocabulary bank — words to recognise and celebrate
+        const vocabBank = {
+            'Relationships': ['met', 'fell in love', 'got married', 'got divorced', 'had a baby', 'got engaged', 'married', 'divorced'],
+            'Education': ['graduated', 'studied', 'passed', 'started school', 'finished school', 'got a degree', 'enrolled'],
+            'Work': ['retired', 'promoted', 'founded', 'published', 'opened', 'got a job', 'started working', 'was promoted'],
+            'Life events': ['was born', 'moved', 'immigrated', 'passed away', 'travelled', 'emigrated', 'adopted']
+        };
+        const allVocabWords = Object.values(vocabBank).flat();
+
+        function detectRichVocab(text) {
+            const lower = text.toLowerCase();
+            return allVocabWords.filter(w => lower.includes(w.toLowerCase()));
+        }
+
+        let events = [];
+
+        const addBtn = document.getElementById('add-event-btn');
+        const evtYear = document.getElementById('evt-year');
+        const evtCat = document.getElementById('evt-cat');
+        const evtDesc = document.getElementById('evt-desc');
+        const evtError = document.getElementById('evt-error');
+        const tlEmpty = document.getElementById('tl-empty');
+        const tlSpine = document.getElementById('tl-spine');
+        const tlEvents = document.getElementById('tl-events');
+        const tlFooter = document.getElementById('tl-footer');
+        const tlCountBadge = document.getElementById('tl-count-badge');
+        const tlCountHint = document.getElementById('tl-count-hint');
+        const tlClearBtn = document.getElementById('tl-clear-btn');
+
+        function showError(msg) {
+            evtError.textContent = msg;
+            evtError.style.display = 'block';
+            setTimeout(() => { evtError.style.display = 'none'; }, 3000);
+        }
+
+        function renderTimeline() {
+            tlEvents.innerHTML = '';
+            if (events.length === 0) {
+                tlEmpty.style.display = 'flex';
+                tlSpine.style.display = 'none';
+                tlFooter.style.display = 'none';
+                return;
+            }
+            tlEmpty.style.display = 'none';
+            tlSpine.style.display = 'block';
+            tlFooter.style.display = 'flex';
+
+            const sorted = [...events].sort((a, b) => a.year - b.year);
+
+            sorted.forEach((evt) => {
+                const richFound = detectRichVocab(evt.desc);
+                const color = catColors[evt.cat] || '#6b7280';
+
+                const item = document.createElement('div');
+                item.className = 'tl-event-item';
+                item.innerHTML = `
+                    <div class="tl-dot" style="background:${color}; box-shadow: 0 0 0 3px #fff, 0 0 0 5px ${color};"></div>
+                    <div class="tl-card">
+                        <div class="tl-card-top">
+                            <span class="tl-year-tag" style="color:${color}; background:${color}18; border-color:${color}40;">${evt.year}</span>
+                            <span class="tl-cat-tag">${catLabels[evt.cat] || evt.cat}</span>
+                            <button class="tl-delete-btn" data-id="${evt.id}" title="Remove this event"><i class="fa-solid fa-xmark"></i></button>
+                        </div>
+                        <div class="tl-card-desc">${evt.desc}</div>
+                        ${richFound.length > 0 ? `<div class="tl-vocab-highlight"><i class="fa-solid fa-star"></i> Great word: <strong>${richFound[0]}</strong></div>` : ''}
+                    </div>`;
+                tlEvents.appendChild(item);
+            });
+
+            tlEvents.querySelectorAll('.tl-delete-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const id = parseInt(this.dataset.id);
+                    events = events.filter(e => e.id !== id);
+                    renderTimeline();
+                    updateFooter();
+                });
+            });
+
+            updateFooter();
+        }
+
+        function updateFooter() {
+            const n = events.length;
+            tlCountBadge.textContent = `${n} event${n !== 1 ? 's' : ''}`;
+            if (n < 5) {
+                tlCountHint.textContent = `Add ${5 - n} more.`;
+                tlCountHint.style.color = '#ea580c';
+            } else {
+                tlCountHint.textContent = '✓ Task complete!';
+                tlCountHint.style.color = '#16a34a';
+            }
+        }
+
+        if (addBtn) {
+            addBtn.addEventListener('click', function() {
+                const year = parseInt(evtYear.value);
+                const desc = evtDesc.value.trim();
+                const cat = evtCat.value;
+
+                if (!year || year < 1900 || year > 2026) {
+                    showError('Please enter a valid year between 1900 and 2026.');
+                    evtYear.focus();
+                    return;
+                }
+                if (!cat) {
+                    showError('Please select a category.');
+                    evtCat.focus();
+                    return;
+                }
+                if (!desc || desc.length < 8) {
+                    showError('Please describe what happened (at least a few words).');
+                    evtDesc.focus();
+                    return;
+                }
+
+                events.push({ id: Date.now(), year, cat, desc });
+                evtYear.value = '';
+                evtDesc.value = '';
+                evtCat.value = '';
+                evtError.style.display = 'none';
+                renderTimeline();
+            });
+        }
+
+        if (evtDesc) {
+            evtDesc.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') { e.preventDefault(); addBtn && addBtn.click(); }
+            });
+        }
+
+        if (tlClearBtn) {
+            tlClearBtn.addEventListener('click', function() {
+                if (confirm('Are you sure you want to clear all events?')) {
+                    events = [];
+                    renderTimeline();
+                }
+            });
+        }
 
         // Reading Comprehension Navigation
         const mcList1 = document.getElementById('mc-list-1');
@@ -1556,20 +1915,14 @@
             const prevBtn = document.getElementById('prev-btn');
             const nextBtn = document.getElementById('next-btn');
             const counter = document.getElementById('q-counter');
-            
+
             let currentIndex = 0;
 
             function updateView() {
                 items.forEach((item, index) => {
-                    if (index === currentIndex) {
-                        item.classList.add('active');
-                    } else {
-                        item.classList.remove('active');
-                    }
+                    item.classList.toggle('active', index === currentIndex);
                 });
-                
-                counter.textContent = `${currentIndex + 1} / ${items.length}`;
-                
+                if (counter) counter.textContent = currentIndex + 1;
                 prevBtn.disabled = currentIndex === 0;
                 nextBtn.disabled = currentIndex === items.length - 1;
             }
@@ -1584,42 +1937,6 @@
 
             updateView();
         }
-
-        // ============================================================
-        // TIMELINE FILL
-        // ============================================================
-        const timelineInputs = document.querySelectorAll('.timeline-input');
-
-        timelineInputs.forEach(input => {
-            input.addEventListener('input', function() {
-                this.classList.remove('correct', 'incorrect');
-            });
-        });
-
-        document.getElementById('check-timeline').addEventListener('click', function() {
-            let correct = 0;
-            timelineInputs.forEach(input => {
-                const answer = input.dataset.answer;
-                const val = input.value.trim();
-                input.classList.remove('correct', 'incorrect');
-                if (val === answer) {
-                    input.classList.add('correct');
-                    correct++;
-                } else if (val !== '') {
-                    input.classList.add('incorrect');
-                }
-            });
-            showFeedbackPopup(correct, timelineInputs.length);
-            document.getElementById('retry-timeline').disabled = false;
-        });
-
-        document.getElementById('retry-timeline').addEventListener('click', function() {
-            timelineInputs.forEach(input => {
-                input.value = '';
-                input.classList.remove('correct', 'incorrect');
-            });
-            this.disabled = true;
-        });
 
     });
     </script>
