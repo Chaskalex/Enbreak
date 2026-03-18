@@ -31,20 +31,21 @@
 
     <div class="diagonal-overlay"></div>
 
-    <img src="assets/backgrounds/hero1.jpeg" alt="Student learning" class="student-image">
+    <div class="hero-slider">
+        <!-- Slide 1 -->
+        <div class="hero-slide active">
+            <img src="assets/backgrounds/hero1.jpeg" alt="Student learning" class="student-image">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 data-i18n-html="hero.slide1.title"><span class="white">Clases de Inglés</span> <span class="white">Particulares</span></h1>
 
-    <div class="hero-content">
-        <div class="hero-text">
-            <h1>
-                <span class="white">Clases de Inglés</span>
-                <span class="white">Particulares</span>
-            </h1>
+                    <p data-i18n="hero.slide1.desc">Clases 100% online adaptadas a tu ritmo y necesidades. Comienza a aprender hoy.</p>
 
-            <p>Clases 100% online adaptadas a tu ritmo y necesidades. Comienza a aprender hoy.</p>
-
-            <div class="button-group">
-                <a href="pages/clases/planes.html" class="hero-btn"><span>Ver Planes</span></a>
-                <a href="pages/clases/test.html" class="hero-btn-secondary">Test Gratuito</a>
+                    <div class="button-group">
+                        <a href="pages/clases/planes.html" class="hero-btn"><span data-i18n="nav.plans">Ver Planes</span></a>
+                        <a href="pages/clases/test.html" class="hero-btn-secondary" data-i18n="nav.test">Test de Nivel</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -83,29 +84,29 @@
         <div class="value-card">
             <img src="assets/icons/schedule.svg" alt="Horarios Flexibles" class="value-icon">
             <div class="value-content">
-                <h3>Horarios Flexibles</h3>
-                <p>Diseñados para ajustarse a tu rutina y estilo de vida. Clases 100% online.</p>
+                <h3 data-i18n="value.flex.title">Horarios Flexibles</h3>
+                <p data-i18n="value.flex.desc">Diseñados para ajustarse a tu rutina y estilo de vida. Clases 100% online.</p>
             </div>
         </div>
         <div class="value-card">
             <img src="assets/icons/badge.svg" alt="Preparación para Examenes" class="value-icon">
             <div class="value-content">
-                <h3>Preparación para Examenes</h3>
-                <p>Entrenamiento específico para certificaciones de Cambridge, TOEFL, IELTS, y más.</p>
+                <h3 data-i18n="value.exam.title">Preparación para Examenes</h3>
+                <p data-i18n="value.exam.desc">Entrenamiento específico para certificaciones de Cambridge, TOEFL, IELTS, y más.</p>
             </div>
         </div>
         <div class="value-card">
             <img src="assets/icons/piggy.svg" alt="Precios Justos" class="value-icon">
             <div class="value-content">
-                <h3>Precios Justos</h3>
-                <p>Clases de calidad sin pagar de más. Precios adaptados a tus requerimientos.</p>
+                <h3 data-i18n="value.price.title">Precios Justos</h3>
+                <p data-i18n="value.price.desc">Clases de calidad sin pagar de más. Precios adaptados a tus requerimientos.</p>
             </div>
         </div>
         <div class="value-card">
             <img src="assets/icons/media.svg" alt="Contenido Gratuito" class="value-icon">
             <div class="value-content">
-                <h3>Contenido Gratuito</h3>
-                <p>Accede a la biblioteca de recursos para encontrar videos, podcasts y mini-clases.</p>
+                <h3 data-i18n="value.free.title">Contenido Gratuito</h3>
+                <p data-i18n="value.free.desc">Accede a la biblioteca de recursos para encontrar videos, podcasts y mini-clases.</p>
             </div>
         </div>
     </div>
@@ -149,9 +150,9 @@
    <section class="services-section">
         <div class="container">
             <div class="section-header">
-                <span class="section-label">Oferta Educativa</span>
-                <h2 class="section-title">Clases de inglés personalizadas y recursos educativos</h2>
-                <p class="section-description"><span class="title-highlight">Enbreak</span> te acompaña en cada etapa de tu aprendizaje con opciones adaptadas a tu nivel, horarios flexibles y material educativo de calidad para alcanzar tus objetivos en inglés.</p>
+                <span class="section-label" data-i18n="services.label">Oferta Educativa</span>
+                <h2 class="section-title" data-i18n="services.title">Clases de inglés personalizadas y recursos educativos</h2>
+                <div class="section-description" data-i18n-html="services.desc"><span class="title-highlight">Enbreak</span> te acompaña en cada etapa de tu aprendizaje con opciones adaptadas a tu nivel, horarios flexibles y material educativo de calidad para alcanzar tus objetivos en inglés.</div>
             </div>
 
             <div class="services-grid">
@@ -160,9 +161,9 @@
                         <img src="assets/panels/class.jpg" alt="Clases Particulares">
                     </div>
                     <div class="service-card-content">
-                        <h3>Clases Particulares</h3>
-                        <p>Sesiones completamente adaptadas a tus necesidades y objetivos personales con atención exclusiva. Horarios flexibles.</p>
-                        <a href="pages/clases/agendar.html" class="service-card-btn">Agendar Clase</a>
+                        <h3 data-i18n="services.private.title">Clases Particulares</h3>
+                        <p data-i18n="services.private.desc">Sesiones completamente adaptadas a tus necesidades y objetivos personales con atención exclusiva. Horarios flexibles.</p>
+                        <a href="pages/clases/agendar.html" class="service-card-btn" data-i18n="nav.book">Agendar Clase</a>
                     </div>
                 </div>
 
@@ -171,9 +172,9 @@
                         <img src="assets/panels/course.jpg" alt="Clases Grupales">
                     </div>
                     <div class="service-card-content">
-                        <h3>Clases Grupales</h3>
-                        <p>Aprende en conjunto con otros estudiantes de tu mismo nivel en un ambiente colaborativo y dinámico. Grupos reducidos de 6 estudiantes máximo.</p>
-                        <a href="pages/clases/cursos.html" class="service-card-btn">Ver Cursos</a>
+                        <h3 data-i18n="services.group.title">Clases Grupales</h3>
+                        <p data-i18n="services.group.desc">Aprende en conjunto con otros estudiantes de tu mismo nivel en un ambiente colaborativo y dinámico. Grupos reducidos de 6 estudiantes máximo.</p>
+                        <a href="pages/clases/cursos.html" class="service-card-btn" data-i18n="services.group.btn">Ver Cursos</a>
                     </div>
                 </div>
 
@@ -182,9 +183,9 @@
                         <img src="assets/panels/test.jpg" alt="Test de Nivelación Gratuito">
                     </div>
                     <div class="service-card-content">
-                        <h3>Test de Nivelación</h3>
-                        <p>Descubre tu nivel de inglés actual con un test diagnóstico basado en el Marco Común Europeo de Referencia (CEFR).</p>
-                        <a href="pages/clases/test.html" class="service-card-btn">Realizar Test</a>
+                        <h3 data-i18n="services.test.title">Test de Nivelación</h3>
+                        <p data-i18n="services.test.desc">Descubre tu nivel de inglés actual con un test diagnóstico basado en el Marco Común Europeo de Referencia (CEFR).</p>
+                        <a href="pages/clases/test.html" class="service-card-btn" data-i18n="services.test.btn">Realizar Test</a>
                     </div>
                 </div>
 
@@ -193,9 +194,9 @@
                         <img src="assets/panels/cambridge.jpg" alt="Preparación para Exámenes">
                     </div>
                     <div class="service-card-content">
-                        <h3>Preparación para Exámenes</h3>
-                        <p>Entrenamiento específico para certificaciones de Cambridge, TOEFL, IELTS y más.</p>
-                        <a href="pages/clases/agendar.html" class="service-card-btn">Agendar Clase</a>
+                        <h3 data-i18n="services.exam.title">Preparación para Exámenes</h3>
+                        <p data-i18n="services.exam.desc">Entrenamiento específico para certificaciones de Cambridge, TOEFL, IELTS y más.</p>
+                        <a href="pages/clases/agendar.html" class="service-card-btn" data-i18n="nav.book">Agendar Clase</a>
                     </div>
                 </div>
 
@@ -204,9 +205,9 @@
                         <img src="assets/panels/mini-class.jpg" alt="Mini-clases">
                     </div>
                     <div class="service-card-content">
-                        <h3>Mini-clases</h3>
-                        <p>Cápsulas educativas para estudiar conceptos específicos de forma eficiente y práctica.</p>
-                        <a href="pages/biblioteca/mini-clases.html" class="service-card-btn">Estudiar</a>
+                        <h3 data-i18n="services.mini.title">Mini-clases</h3>
+                        <p data-i18n="services.mini.desc">Cápsulas educativas para estudiar conceptos específicos de forma eficiente y práctica.</p>
+                        <a href="pages/biblioteca/mini-clases.html" class="service-card-btn" data-i18n="services.mini.btn">Estudiar</a>
                     </div>
                 </div>
 
@@ -215,9 +216,9 @@
                         <img src="assets/panels/activities.jpg" alt="Actividades">
                     </div>
                     <div class="service-card-content">
-                        <h3>Actividades</h3>
-                        <p>Practica las 4 habilidades del idioma: Reading, Listening, Writing y Speaking con ejercicios interactivos.</p>
-                        <a href="pages/biblioteca/actividades.html" class="service-card-btn">Practicar</a>
+                        <h3 data-i18n="services.activities.title">Actividades</h3>
+                        <p data-i18n="services.activities.desc">Practica las 4 habilidades del idioma: Reading, Listening, Writing y Speaking con ejercicios interactivos.</p>
+                        <a href="pages/biblioteca/actividades.html" class="service-card-btn" data-i18n="services.activities.btn">Practicar</a>
                     </div>
                 </div>
 
@@ -226,9 +227,9 @@
                         <img src="assets/panels/academic.jpg" alt="Acompañamiento Académico">
                     </div>
                     <div class="service-card-content">
-                        <h3>Acompañamiento Académico</h3>
-                        <p>Asistencia personalizada en tareas, informes, proyectos y presentaciones académicas.</p>
-                        <a href="pages/clases/agendar.html" class="service-card-btn">Solicitar Ayuda</a>
+                        <h3 data-i18n="services.academic.title">Acompañamiento Académico</h3>
+                        <p data-i18n="services.academic.desc">Asistencia personalizada en tareas, informes, proyectos y presentaciones académicas.</p>
+                        <a href="pages/clases/agendar.html" class="service-card-btn" data-i18n="services.academic.btn">Solicitar Ayuda</a>
                     </div>
                 </div>
 
@@ -237,9 +238,9 @@
                         <img src="assets/panels/podcast.jpg" alt="Podcasts">
                     </div>
                     <div class="service-card-content">
-                        <h3>Podcasts</h3>
-                        <p>Accede a contenido educativo y relevante para escuchar donde estés y cuando quieras.</p>
-                        <a href="pages/biblioteca/podcast.html" class="service-card-btn">Escuchar</a>
+                        <h3 data-i18n="services.podcast.title">Podcasts</h3>
+                        <p data-i18n="services.podcast.desc">Accede a contenido educativo y relevante para escuchar donde estés y cuando quieras.</p>
+                        <a href="pages/biblioteca/podcast.html" class="service-card-btn" data-i18n="services.podcast.btn">Escuchar</a>
                     </div>
                 </div>
 
@@ -248,9 +249,9 @@
                         <img src="assets/panels/business.jpg" alt="Soluciones para Empresas">
                     </div>
                     <div class="service-card-content">
-                        <h3>Empresas</h3>
-                        <p>Cursos grupales de inglés diseñados para mejorar las habilidades del idioma en tu equipo de trabajo.</p>
-                        <a href="pages/soporte/contacto.html" class="service-card-btn">Contáctanos</a>
+                        <h3 data-i18n="services.business.title">Empresas</h3>
+                        <p data-i18n="services.business.desc">Cursos grupales de inglés diseñados para mejorar las habilidades del idioma en tu equipo de trabajo.</p>
+                        <a href="pages/soporte/contacto.html" class="service-card-btn" data-i18n="services.business.btn">Contáctanos</a>
                     </div>
                 </div>
             </div>
@@ -299,21 +300,21 @@
             <div class="teacher-content">
                 <div class="teacher-header">
                     <div class="teacher-tabs">
-                        <button class="teacher-tab active" onclick="switchTab('profesor')">Profesor</button>
-                        <button class="teacher-tab" onclick="switchTab('carrera')">Carrera</button>
+                        <button class="teacher-tab active" onclick="switchTab('profesor')" data-i18n="teacher.tab.prof">Profesor</button>
+                        <button class="teacher-tab" onclick="switchTab('carrera')" data-i18n="teacher.tab.career">Carrera</button>
                         <button class="teacher-tab" onclick="switchTab('enbreak')">Enbreak</button>
                     </div>
                     <h2 id="teacher-name">Alexis Inostroza Díaz</h2>
                 </div>
 
                 <div class="teacher-tab-content active" id="profesor-content">
-                    <div class="teacher-bio">
+                    <div class="teacher-bio" data-i18n-html="teacher.bio.profesor">
                         <p>¡Hola! Soy Alexis. Profesor de Inglés como Lengua Extranjera (EFL Teacher). Me gradué de la <span class="highlight">Pontificia Universidad Católica de Valparaíso</span>, institución donde también he trabajado como docente durante los últimos cinco años.</p>
                     </div>
                 </div>
 
                 <div class="teacher-tab-content" id="carrera-content">
-                    <div class="teacher-bio">
+                    <div class="teacher-bio" data-i18n-html="teacher.bio.carrera">
                         <p><span class="highlight">2011:</span> Certificado en Productividad Digital (Universidad de Concepción)</p>
                         <p><span class="highlight">2018:</span> Acreditación C1 Advanced (Cambridge University)</p>
                         <p><span class="highlight">2020:</span> Licenciado en Educación (PUCV) - Distinción Cum Laude</p>
@@ -323,7 +324,7 @@
                 </div>
 
                 <div class="teacher-tab-content" id="enbreak-content">
-                    <div class="teacher-bio">
+                    <div class="teacher-bio" data-i18n-html="teacher.bio.enbreak">
                         <p>En 2020 creé la plataforma online <span class="highlight">English Break (Enbreak)</span> como mi proyecto de título. En 2025 decidí llevar a Enbreak al siguiente nivel, transformándolo en un espacio de aprendizaje virtual abierto a todos y todas.</p>
                         <p>La misión de Enbreak es clara: ayudarte a dominar el inglés de manera práctica y libre de estrés. <span class="highlight">Toma un break con Enbreak</span> y comienza a construir confianza, superar miedos y avanzar paso a paso hacia tus objetivos.</p>
                     </div>
@@ -342,19 +343,19 @@
         <div class="teacher-stats">
             <div class="stat-item">
                 <div class="stat-number" data-target="6">6</div>
-                <div class="stat-label">Años de Experiencia</div>
+                <div class="stat-label" data-i18n="teacher.stats.exp">Años de Experiencia</div>
             </div>
             <div class="stat-item">
                 <div class="stat-number" data-target="1200">1,200</div>
-                <div class="stat-label">Estudiantes</div>
+                <div class="stat-label" data-i18n="teacher.stats.students">Estudiantes</div>
             </div>
             <div class="stat-item">
                 <div class="stat-number" data-target="48">48</div>
-                <div class="stat-label">Cursos</div>
+                <div class="stat-label" data-i18n="teacher.stats.courses">Cursos</div>
             </div>
             <div class="stat-item">
                 <div class="stat-number" data-target="17">17</div>
-                <div class="stat-label">Países</div>
+                <div class="stat-label" data-i18n="teacher.stats.countries">Países</div>
             </div>
         </div>
     </section>
@@ -362,8 +363,8 @@
     <section class="testimonials-section" id="testimonials">
         <div class="testimonials-container">
             <div class="testimonials-header">
-                <h2>Lo Que Dicen Mis Estudiantes</h2>
-                <p>Descubre las experiencias reales de estudiantes que han mejorado su inglés conmigo</p>
+                <h2 data-i18n="testimonials.title">Lo Que Dicen Mis Estudiantes</h2>
+                <p data-i18n="testimonials.desc">Descubre las experiencias reales de estudiantes que han mejorado su inglés conmigo</p>
             </div>
 
             <div class="testimonials-wrapper">
@@ -388,7 +389,7 @@
                             <i class="fas fa-star"></i>
                         </div>
                         <div class="testimonial-name">María González</div>
-                        <div class="testimonial-role">Ingeniera de Software</div>
+                        <div class="testimonial-role" data-i18n="role.software">Ingeniera de Software</div>
                     </div>
                 </div>
 
@@ -408,7 +409,7 @@
                             <i class="fas fa-star"></i>
                         </div>
                         <div class="testimonial-name">Carlos Mendoza</div>
-                        <div class="testimonial-role">Estudiante Universitario</div>
+                        <div class="testimonial-role" data-i18n="role.student">Estudiante Universitario</div>
                     </div>
                 </div>
 
@@ -428,7 +429,7 @@
                             <i class="fas fa-star"></i>
                         </div>
                         <div class="testimonial-name">Ana Rodríguez</div>
-                        <div class="testimonial-role">Ejecutiva de Ventas</div>
+                        <div class="testimonial-role" data-i18n="role.sales">Ejecutiva de Ventas</div>
                     </div>
                 </div>
 
@@ -448,7 +449,7 @@
                             <i class="fas fa-star"></i>
                         </div>
                         <div class="testimonial-name">Pedro Silva</div>
-                        <div class="testimonial-role">Emprendedor</div>
+                        <div class="testimonial-role" data-i18n="role.entrepreneur">Emprendedor</div>
                     </div>
                 </div>
 
@@ -468,7 +469,7 @@
                             <i class="fas fa-star"></i>
                         </div>
                         <div class="testimonial-name">Laura Fernández</div>
-                        <div class="testimonial-role">Diseñadora Gráfica</div>
+                        <div class="testimonial-role" data-i18n="role.designer">Diseñadora Gráfica</div>
                     </div>
                 </div>
 
@@ -488,7 +489,7 @@
                             <i class="fas fa-star"></i>
                         </div>
                         <div class="testimonial-name">Diego Vargas</div>
-                        <div class="testimonial-role">Gerente de Proyectos</div>
+                        <div class="testimonial-role" data-i18n="role.manager">Gerente de Proyectos</div>
                     </div>
                 </div>
                 </div>
@@ -505,39 +506,39 @@
         <div class="question-form-container">
             <div class="question-form-content">
                 <div class="question-form-header">
-                    <h2>¿Tienes una Pregunta?</h2>
-                    <p>Envíanos un mensaje y cuéntanos qué necesitas.</p>
+                    <h2 data-i18n="form.title">¿Tienes una Pregunta?</h2>
+                    <p data-i18n="form.desc">Envíanos un mensaje y cuéntanos qué necesitas.</p>
                 </div>
                 <form action="#" method="POST">
                     <div class="form-row">
                         <div class="form-group">
-                            <input type="text" name="nombre" placeholder="Nombre" required>
+                            <input type="text" name="nombre" placeholder="Nombre" required data-i18n="form.name">
                         </div>
                         <div class="form-group">
-                            <input type="text" name="apellido" placeholder="Apellido" required>
+                            <input type="text" name="apellido" placeholder="Apellido" required data-i18n="form.lastname">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group">
                             <select name="servicio" required>
-                                <option value="">Selecciona una opción</option>
-                                <option value="particulares">Clases Particulares</option>
-                                <option value="grupales">Clases Grupales</option>
-                                <option value="academica">Ayuda Académica</option>
-                                <option value="examenes">Exámenes Internacionales</option>
-                                <option value="otro">Otro</option>
+                                <option value="" data-i18n="form.select">Selecciona una opción</option>
+                                <option value="particulares" data-i18n="form.opt.private">Clases Particulares</option>
+                                <option value="grupales" data-i18n="form.opt.group">Clases Grupales</option>
+                                <option value="academica" data-i18n="form.opt.academic">Ayuda Académica</option>
+                                <option value="examenes" data-i18n="form.opt.exam">Exámenes Internacionales</option>
+                                <option value="otro" data-i18n="form.opt.other">Otro</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <input type="email" name="correo" placeholder="Correo" required>
+                            <input type="email" name="correo" placeholder="Correo" required data-i18n="form.email">
                         </div>
                     </div>
                     <div class="form-row-submit">
                         <div class="form-group form-group-message">
-                            <textarea name="mensaje" placeholder="Mensaje" required></textarea>
+                            <textarea name="mensaje" placeholder="Mensaje" required data-i18n="form.message"></textarea>
                         </div>
                         <div class="form-group form-group-submit">
-                            <button type="submit" class="form-submit-btn">Envía tu Consulta</button>
+                            <button type="submit" class="form-submit-btn" data-i18n="form.submit">Envía tu Consulta</button>
                         </div>
                     </div>
                 </form>
@@ -548,20 +549,44 @@
     <section class="recursos-section" id="recursos">
         <div class="recursos-container">
             <div class="recursos-header">
-                <h2>Recursos Recientes</h2>
-                <p>Explora los últimos recursos educativos: mini-clases, podcasts y contenido diseñado para potenciar tu aprendizaje del inglés.</p>
+                <h2 data-i18n="resources.title">Recursos Recientes</h2>
+                <p data-i18n="resources.desc">Explora los últimos recursos educativos: mini-clases, podcasts y contenido diseñado para potenciar tu aprendizaje del inglés.</p>
             </div>
 
             <div class="recursos-list">
                 <div class="recurso-item">
                     <div class="recurso-image">
+                        <img src="assets/activities/getoff.jpg" alt="Activity: Get Off the Phone">
+                    </div>
+                    <div class="recurso-content">
+                        <span class="recurso-category" data-i18n="resource.cat">Actividad</span>
+                        <h3>Get Off the Phone</h3>
+                        <p>Practice listening comprehension with a catchy song about phone addiction and learn vocabulary for technology habits.</p>
+                        <a href="pages/biblioteca/actividades/get-off-the-phone.html" class="recurso-btn"><span data-i18n="resource.btn">Ver recurso</span> <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="recurso-item">
+                    <div class="recurso-image">
+                        <img src="assets/activities/my-life-story.png" alt="Activity: My Life Story">
+                    </div>
+                    <div class="recurso-content">
+                        <span class="recurso-category" data-i18n="resource.cat">Actividad</span>
+                        <h3>My Life Story</h3>
+                        <p>Learn to use key time connectors to link life events chronologically and write a short biography about a family member.</p>
+                        <a href="pages/biblioteca/actividades/my-life-story.html" class="recurso-btn"><span data-i18n="resource.btn">Ver recurso</span> <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="recurso-item">
+                    <div class="recurso-image">
                         <img src="assets/activities/family.png" alt="Activity: Family Relationships">
                     </div>
                     <div class="recurso-content">
-                        <span class="recurso-category">Actividad</span>
+                        <span class="recurso-category" data-i18n="resource.cat">Actividad</span>
                         <h3>Family Relationships</h3>
                         <p>Learn essential vocabulary to describe family members and relationships, from immediate family to extended relatives.</p>
-                        <a href="pages/biblioteca/actividades/family-relationships.html" class="recurso-btn">Ver recurso <i class="fas fa-arrow-right"></i></a>
+                        <a href="pages/biblioteca/actividades/family-relationships.html" class="recurso-btn"><span data-i18n="resource.btn">Ver recurso</span> <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
 
@@ -570,34 +595,10 @@
                         <img src="assets/activities/giving-directions.png" alt="Activity: Giving Directions">
                     </div>
                     <div class="recurso-content">
-                        <span class="recurso-category">Actividad</span>
+                        <span class="recurso-category" data-i18n="resource.cat">Actividad</span>
                         <h3>Giving Directions</h3>
                         <p>Master the phrases you need to navigate a city, ask for help, and guide others to their destination.</p>
-                        <a href="pages/biblioteca/actividades/giving-directions.html" class="recurso-btn">Ver recurso <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-
-                <div class="recurso-item">
-                    <div class="recurso-image">
-                        <img src="assets/activities/telling-the-time.png" alt="Activity: Telling the Time">
-                    </div>
-                    <div class="recurso-content">
-                        <span class="recurso-category">Actividad</span>
-                        <h3>Telling the Time</h3>
-                        <p>Practice listening to different ways of telling time in English and improve your daily scheduling skills.</p>
-                        <a href="pages/biblioteca/actividades/telling-the-time.html" class="recurso-btn">Ver recurso <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-
-                <div class="recurso-item">
-                    <div class="recurso-image">
-                        <img src="assets/activities/numbers.jpg" alt="Activity: Numbers">
-                    </div>
-                    <div class="recurso-content">
-                        <span class="recurso-category">Actividad</span>
-                        <h3>Numbers</h3>
-                        <p>From zero to billions. Learn how to pronounce, write, and understand numbers in various contexts.</p>
-                        <a href="pages/biblioteca/actividades/numbers.html" class="recurso-btn">Ver recurso <i class="fas fa-arrow-right"></i></a>
+                        <a href="pages/biblioteca/actividades/giving-directions.html" class="recurso-btn"><span data-i18n="resource.btn">Ver recurso</span> <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -607,6 +608,7 @@
     <!-- Footer Placeholder -->
     <div id="footer-placeholder"></div>
 
+<script src="js/translate.js" defer></script>
 <script src="js/script.js" defer></script>
 
 </body>

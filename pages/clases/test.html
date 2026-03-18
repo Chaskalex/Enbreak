@@ -1280,7 +1280,8 @@ function loadQuestion() {
   question.options.forEach((opt, idx) => {
     const btn = document.createElement('button');
     btn.className = 'option-btn';
-    btn.textContent = opt;
+    const letter = String.fromCharCode(65 + idx);
+    btn.textContent = `${letter}) ${opt}`;
     btn.onclick = () => selectOption(idx);
     container.appendChild(btn);
   });
@@ -1527,7 +1528,8 @@ function displayReviewLevel(level) {
           icon = '<i data-lucide="x" style="color: #ef4444; width: 18px; height: 18px; display: inline-block; vertical-align: middle; margin-left: 8px;"></i>';
         }
 
-        return `<div class="${classes}">${opt}${icon}</div>`;
+        const letter = String.fromCharCode(65 + i);
+        return `<div class="${classes}">${letter}) ${opt}${icon}</div>`;
       }).join('')}
     `;
     container.appendChild(div);

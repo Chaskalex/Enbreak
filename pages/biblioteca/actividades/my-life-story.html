@@ -70,9 +70,9 @@
         border-radius: 6px;
     }
 
-    .badge-in    { background: #dbeafe; color: #1d4ed8; }
-    .badge-when  { background: #dcfce7; color: #166534; }
-    .badge-later { background: #fae8ff; color: #7e22ce; }
+    .badge-start  { background: #dbeafe; color: #1d4ed8; }
+    .badge-cont   { background: #dcfce7; color: #166534; }
+    .badge-end    { background: #fae8ff; color: #7e22ce; }
 
     .connector-rule {
         font-size: 13px;
@@ -86,9 +86,57 @@
         line-height: 1.7;
     }
 
-    .ex-in    { color: #1d4ed8; font-weight: 600; }
-    .ex-when  { color: #166534; font-weight: 600; }
-    .ex-later { color: #7e22ce; font-weight: 600; }
+    .ex-start { color: #1d4ed8; font-weight: 600; }
+    .ex-cont  { color: #166534; font-weight: 600; }
+    .ex-end   { color: #7e22ce; font-weight: 600; }
+
+    /* ============================================================
+       VOCAB GRID
+    ============================================================ */
+    .vocab-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .vocab-pill {
+        background: #f9fafb;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        padding: 10px 14px;
+        font-size: 13.5px;
+        color: #374151;
+        line-height: 1.5;
+    }
+
+    .vocab-pill strong {
+        display: block;
+        font-family: 'Rubik', sans-serif;
+        font-size: 13px;
+        color: #ea580c;
+        margin-bottom: 2px;
+    }
+
+    /* ============================================================
+       TIME EXPRESSION CHIPS
+    ============================================================ */
+    .time-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 20px;
+    }
+
+    .time-chip {
+        background: #fff7ed;
+        border: 1.5px solid #fed7aa;
+        color: #92400e;
+        border-radius: 6px;
+        padding: 5px 13px;
+        font-size: 13px;
+        font-weight: 500;
+    }
 
     /* ============================================================
        MODEL STORY BOX
@@ -124,9 +172,9 @@
     .model-box p:last-child { margin-bottom: 0; }
 
     .hi { font-weight: 700; padding: 1px 4px; border-radius: 3px; }
-    .hi-in    { background: #dbeafe; color: #1d4ed8; }
-    .hi-when  { background: #dcfce7; color: #166534; }
-    .hi-later { background: #fae8ff; color: #7e22ce; }
+    .hi-start { background: #dbeafe; color: #1d4ed8; }
+    .hi-cont  { background: #dcfce7; color: #166534; }
+    .hi-end   { background: #fae8ff; color: #7e22ce; }
 
     .model-legend {
         display: flex;
@@ -153,262 +201,23 @@
     }
 
     /* ============================================================
-       SENTENCE SORT (drag & drop)
+       VISUAL TIMELINE (Ana Rojas)
     ============================================================ */
-    .sentence-sort-list {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        margin-bottom: 20px;
-    }
-
-    .sort-item {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        background: #fff;
-        border: 1.5px solid #e5e7eb;
-        border-radius: 10px;
-        padding: 12px 16px;
-        cursor: grab;
-        user-select: none;
-        transition: all 0.2s;
-        font-size: 14px;
-        color: #374151;
-        line-height: 1.5;
-    }
-
-    .sort-item:hover { border-color: #ea580c; box-shadow: 0 2px 8px rgba(234,88,12,0.08); }
-    .sort-item.dragging { opacity: 0.4; }
-    .sort-item.drag-over { border-color: #ea580c; background: #ffedd5; }
-    .sort-item.correct-order { border-color: #16a34a; background: #f0fdf4; }
-    .sort-item.incorrect-order { border-color: #dc2626; background: #fef2f2; }
-
-    .sort-handle {
-        color: #9ca3af;
-        font-size: 14px;
-        flex-shrink: 0;
-    }
-
-    .sort-label {
-        font-family: 'Rubik', sans-serif;
-        font-size: 12px;
-        font-weight: 700;
-        color: #9ca3af;
-        background: #f3f4f6;
-        border: 1.5px solid #e5e7eb;
-        border-radius: 6px;
-        width: 26px;
-        height: 26px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-    }
-
-    /* ============================================================
-       GAP FILL — SELECT DROPDOWN
-    ============================================================ */
-    .gap-list {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        margin-bottom: 20px;
-    }
-
-    .gap-item {
-        display: flex;
-        align-items: baseline;
-        flex-wrap: wrap;
-        gap: 6px 8px;
-        background: #f9fafb;
-        border: 1px solid #e5e7eb;
-        border-radius: 10px;
-        padding: 14px 16px;
-        font-size: 14.5px;
-        color: #374151;
-        line-height: 1.9;
-    }
-
-    .gap-num {
-        font-family: 'Rubik', sans-serif;
-        font-size: 13px;
-        font-weight: 700;
-        color: #ea580c;
-        flex-shrink: 0;
-        margin-right: 2px;
-    }
-
-    .gap-select {
-        border: none;
-        border-bottom: 2px solid #d1d5db;
-        background: transparent;
-        font-family: 'Inter', sans-serif;
-        font-size: 14px;
-        color: #1f2937;
-        padding: 2px 4px;
-        outline: none;
-        cursor: pointer;
-        transition: border-color 0.2s;
-        min-width: 90px;
-    }
-
-    .gap-select:focus { border-color: #ea580c; }
-    .gap-select.correct { border-color: #16a34a; color: #166534; background: #dcfce7; border-radius: 4px; }
-    .gap-select.incorrect { border-color: #dc2626; color: #991b1b; background: #fee2e2; border-radius: 4px; }
-
-    /* ============================================================
-       GAP FILL — TEXT INPUT
-    ============================================================ */
-    .gap-input {
-        border: none;
-        border-bottom: 2px solid #d1d5db;
-        background: transparent;
-        font-family: 'Inter', sans-serif;
-        font-size: 14.5px;
-        color: #1f2937;
-        padding: 2px 6px;
-        min-width: 130px;
-        outline: none;
-        transition: border-color 0.2s;
-    }
-
-    .gap-input:focus { border-color: #ea580c; }
-    .gap-input.correct { border-color: #16a34a; color: #166534; background: #dcfce7; border-radius: 4px; }
-    .gap-input.incorrect { border-color: #dc2626; color: #991b1b; background: #fee2e2; border-radius: 4px; }
-
-    /* ============================================================
-       MULTIPLE CHOICE
-    ============================================================ */
-    .mc-list { display: flex; flex-direction: column; gap: 20px; }
-
-    .mc-item {
-        background: #f9fafb;
-        border: 1px solid #e5e7eb;
-        border-radius: 12px;
-        padding: 18px 20px;
-    }
-
-    .mc-question {
-        font-size: 14.5px;
-        font-weight: 600;
-        color: #1f2937;
-        margin-bottom: 14px;
-        line-height: 1.5;
-    }
-
-    .mc-options { display: flex; flex-direction: column; gap: 8px; }
-
-    .mc-btn {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        padding: 10px 14px;
-        border-radius: 8px;
-        border: 1.5px solid #e5e7eb;
-        background: #fff;
-        font-family: 'Inter', sans-serif;
-        font-size: 14px;
-        color: #374151;
-        cursor: pointer;
-        transition: all 0.2s;
-        text-align: left;
-        width: 100%;
-    }
-
-    .mc-letter {
-        width: 24px;
-        height: 24px;
-        border-radius: 50%;
-        background: #f3f4f6;
-        border: 1.5px solid #d1d5db;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 12px;
-        font-weight: 700;
-        color: #6b7280;
-        flex-shrink: 0;
-        transition: all 0.2s;
-    }
-
-    .mc-btn:hover { border-color: #ea580c; }
-    .mc-btn:hover .mc-letter { background: #ffedd5; border-color: #ea580c; color: #ea580c; }
-    .mc-btn.selected { border-color: #ea580c; background: #fff7ed; }
-    .mc-btn.selected .mc-letter { background: #ea580c; border-color: #ea580c; color: #fff; }
-    .mc-btn.correct { border-color: #16a34a; background: #f0fdf4; }
-    .mc-btn.correct .mc-letter { background: #16a34a; border-color: #16a34a; color: #fff; }
-    .mc-btn.incorrect { border-color: #dc2626; background: #fef2f2; }
-    .mc-btn.incorrect .mc-letter { background: #dc2626; border-color: #dc2626; color: #fff; }
-
-    /* ============================================================
-       REWRITE EXERCISE
-    ============================================================ */
-    .rewrite-list { display: flex; flex-direction: column; gap: 20px; margin-bottom: 20px; }
-
-    .rewrite-item {
-        background: #f9fafb;
-        border: 1px solid #e5e7eb;
-        border-radius: 12px;
-        padding: 18px 20px;
-    }
-
-    .rewrite-source {
-        font-size: 14px;
-        color: #374151;
-        line-height: 1.7;
-        padding-bottom: 12px;
-        margin-bottom: 12px;
-        border-bottom: 1px solid #f3f4f6;
-    }
-
-    .rewrite-source strong { color: #1f2937; }
-
-    .rewrite-prompt {
-        font-size: 12px;
-        color: #9ca3af;
-        font-style: italic;
-        margin-bottom: 8px;
-    }
-
-    .rewrite-textarea {
-        width: 100%;
-        background: #fff;
-        border: 1.5px solid #e5e7eb;
-        border-radius: 8px;
-        padding: 10px 14px;
-        font-family: 'Inter', sans-serif;
-        font-size: 14px;
-        color: #374151;
-        resize: none;
-        outline: none;
-        transition: border-color 0.2s;
-        line-height: 1.7;
-        min-height: 64px;
-    }
-
-    .rewrite-textarea:focus { border-color: #ea580c; box-shadow: 0 0 0 3px rgba(234,88,12,0.07); }
-    .rewrite-textarea.correct { border-color: #16a34a; background: #f0fdf4; }
-    .rewrite-textarea.incorrect { border-color: #dc2626; background: #fef2f2; }
-
-    /* ============================================================
-       OKAN'S VISUAL TIMELINE STRIP
-    ============================================================ */
-    .okan-strip-wrapper {
+    .ana-strip-wrapper {
         overflow-x: auto;
         margin-bottom: 28px;
         padding-bottom: 4px;
     }
 
-    .okan-strip {
+    .ana-strip {
         display: flex;
         align-items: flex-start;
-        min-width: 640px;
+        min-width: 680px;
         gap: 0;
         padding: 8px 0 12px;
     }
 
-    .okan-node {
+    .ana-node {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -416,7 +225,7 @@
         position: relative;
     }
 
-    .okan-dot {
+    .ana-dot {
         width: 46px;
         height: 46px;
         border-radius: 50%;
@@ -431,16 +240,16 @@
         flex-shrink: 0;
     }
 
-    .okan-connector {
+    .ana-connector {
         flex: 1;
         height: 3px;
         background: linear-gradient(to right, #ea580c, #fed7aa);
         align-self: center;
         margin-top: -22px;
-        min-width: 36px;
+        min-width: 30px;
     }
 
-    .okan-year {
+    .ana-year {
         font-family: 'Rubik', sans-serif;
         font-size: 13px;
         font-weight: 700;
@@ -448,11 +257,11 @@
         margin-top: 10px;
     }
 
-    .okan-label {
+    .ana-label {
         font-size: 11px;
         color: #9ca3af;
         text-align: center;
-        max-width: 70px;
+        max-width: 75px;
         line-height: 1.3;
         margin-top: 3px;
     }
@@ -650,7 +459,7 @@
 
     .writing-textarea {
         width: 100%;
-        min-height: 240px;
+        min-height: 220px;
         border: none;
         padding: 22px 26px;
         font-family: 'Inter', sans-serif;
@@ -660,6 +469,7 @@
         resize: vertical;
         outline: none;
         background: #fff;
+        box-sizing: border-box;
     }
 
     .writing-toolbar {
@@ -692,55 +502,30 @@
         transition: all 0.15s;
     }
 
-    .chip-in    { color: #1d4ed8; background: #eff6ff; border-color: #bfdbfe; }
-    .chip-when  { color: #166534; background: #f0fdf4; border-color: #bbf7d0; }
-    .chip-later { color: #7e22ce; background: #faf5ff; border-color: #e9d5ff; }
+    .chip-start  { color: #1d4ed8; background: #eff6ff; border-color: #bfdbfe; }
+    .chip-cont   { color: #166534; background: #f0fdf4; border-color: #bbf7d0; }
+    .chip-end    { color: #7e22ce; background: #faf5ff; border-color: #e9d5ff; }
 
-    .chip-in:hover    { background: #dbeafe; }
-    .chip-when:hover  { background: #dcfce7; }
-    .chip-later:hover { background: #f3e8ff; }
+    .chip-start:hover { background: #dbeafe; }
+    .chip-cont:hover  { background: #dcfce7; }
+    .chip-end:hover   { background: #f3e8ff; }
 
     /* ============================================================
-       SENTENCE STARTERS (reference card)
+       WORD LIMIT WARNING
     ============================================================ */
-    .starter-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-        margin-bottom: 20px;
-    }
-
-    .starter-card {
-        background: #f9fafb;
-        border: 1px solid #e5e7eb;
-        border-radius: 10px;
-        padding: 14px 16px;
-    }
-
-    .starter-card-label {
-        font-family: 'Rubik', sans-serif;
-        font-size: 11px;
-        font-weight: 700;
+    .word-limit-note {
+        font-size: 12px;
         color: #9ca3af;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        margin-bottom: 8px;
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
     }
 
-    .starter-card-line {
-        font-size: 13.5px;
-        color: #374151;
-        line-height: 1.7;
-    }
-
-    .blank {
-        display: inline-block;
-        min-width: 50px;
-        border-bottom: 1.5px solid #d1d5db;
-    }
+    .word-limit-note i { color: #ea580c; }
 
     /* ============================================================
-       CHECKLIST (post-writing self-assessment)
+       CHECKLIST (self-assessment)
     ============================================================ */
     .checklist { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
 
@@ -786,71 +571,81 @@
     .checklist-text strong { color: #1f2937; }
     .checklist-text small { display: block; font-size: 12px; color: #9ca3af; margin-top: 2px; }
 
-    /* ============================================================
-       SCORE PANEL
-    ============================================================ */
-    .score-panel {
-        background: #fff;
-        border: 1px solid #e5e7eb;
-        border-radius: 14px;
-        padding: 24px 28px;
-        margin-top: 24px;
-        display: none;
+    .checklist-category {
+        font-family: 'Rubik', sans-serif;
+        font-size: 11px;
+        font-weight: 700;
+        color: #9ca3af;
+        text-transform: uppercase;
+        letter-spacing: 0.6px;
+        margin: 18px 0 8px;
     }
 
-    .score-panel.visible { display: block; }
+    .checklist-category:first-child { margin-top: 0; }
 
-    .score-row {
+    /* ============================================================
+       MULTIPLE CHOICE
+    ============================================================ */
+    .mc-list { display: flex; flex-direction: column; gap: 20px; }
+
+    .mc-item {
+        background: #f9fafb;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 18px 20px;
+    }
+
+    .mc-question {
+        font-size: 14.5px;
+        font-weight: 600;
+        color: #1f2937;
+        margin-bottom: 14px;
+        line-height: 1.5;
+    }
+
+    .mc-options { display: flex; flex-direction: column; gap: 8px; }
+
+    .mc-btn {
         display: flex;
         align-items: center;
-        gap: 14px;
-        margin-bottom: 12px;
-    }
-
-    .score-row-label {
-        font-size: 13px;
-        color: #6b7280;
-        width: 160px;
-        flex-shrink: 0;
-    }
-
-    .score-track {
-        flex: 1;
-        height: 8px;
-        background: #f3f4f6;
-        border-radius: 99px;
-        overflow: hidden;
-    }
-
-    .score-fill {
-        height: 100%;
-        background: linear-gradient(to right, #ea580c, #fb923c);
-        border-radius: 99px;
-        width: 0;
-        transition: width 0.7s ease;
-    }
-
-    .score-value {
-        font-family: 'Rubik', sans-serif;
-        font-size: 13px;
-        font-weight: 700;
-        color: #ea580c;
-        width: 36px;
-        text-align: right;
-        flex-shrink: 0;
-    }
-
-    .score-message {
-        margin-top: 18px;
-        padding: 14px 18px;
-        border-radius: 10px;
+        gap: 10px;
+        padding: 10px 14px;
+        border-radius: 8px;
+        border: 1.5px solid #e5e7eb;
+        background: #fff;
+        font-family: 'Inter', sans-serif;
         font-size: 14px;
-        line-height: 1.6;
+        color: #374151;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-align: left;
+        width: 100%;
     }
 
-    .score-message.great  { background: #f0fdf4; border: 1px solid #86efac; color: #166534; }
-    .score-message.good   { background: #fff7ed; border: 1px solid #fed7aa; color: #92400e; }
-    .score-message.revise { background: #fef2f2; border: 1px solid #fca5a5; color: #991b1b; }
+    .mc-letter {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: #f3f4f6;
+        border: 1.5px solid #d1d5db;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: 700;
+        color: #6b7280;
+        flex-shrink: 0;
+        transition: all 0.2s;
+    }
+
+    .mc-btn:hover { border-color: #ea580c; }
+    .mc-btn:hover .mc-letter { background: #ffedd5; border-color: #ea580c; color: #ea580c; }
+    .mc-btn.selected { border-color: #ea580c; background: #fff7ed; }
+    .mc-btn.selected .mc-letter { background: #ea580c; border-color: #ea580c; color: #fff; }
+    .mc-btn.correct { border-color: #16a34a; background: #f0fdf4; }
+    .mc-btn.correct .mc-letter { background: #16a34a; border-color: #16a34a; color: #fff; }
+    .mc-btn.incorrect { border-color: #dc2626; background: #fef2f2; }
+    .mc-btn.incorrect .mc-letter { background: #dc2626; border-color: #dc2626; color: #fff; }
 
     /* ============================================================
        RESPONSIVE
@@ -860,9 +655,8 @@
 
     @media (max-width: 768px) {
         .builder-grid { grid-template-columns: 1fr; }
-        .starter-grid { grid-template-columns: 1fr; }
-        .model-box { padding: 22px 18px 18px; }
-        .okan-strip { min-width: 560px; }
+        .vocab-grid { grid-template-columns: 1fr 1fr; }
+        .ana-strip { min-width: 560px; }
         .builder-label { width: 90px; }
     }
     </style>
@@ -892,11 +686,11 @@
                     <span class="breadcrumb-separator">›</span>
                     <span class="breadcrumb-current">My Life Story</span>
                 </nav>
-                <h1>My Life Story</h1>
+                <h1>A Life Story</h1>
                 <div class="activity-hero-badges">
                     <span class="hero-badge"><i class="fa-solid fa-pen-nib"></i> Writing</span>
-                    <span class="hero-badge"><i class="fa-solid fa-layer-group"></i> Level A2</span>
-                    <span class="hero-badge"><i class="fa-regular fa-clock"></i> 25 min</span>
+                    <span class="hero-badge"><i class="fa-solid fa-layer-group"></i> Level A2–B1</span>
+                    <span class="hero-badge"><i class="fa-regular fa-clock"></i> 30 min</span>
                 </div>
             </div>
         </section>
@@ -921,13 +715,13 @@
                     <div class="intro-grid">
                         <div class="intro-main">
                             <p class="intro-text">
-                                Think about someone in your family: a parent, a grandparent, an aunt or uncle. They have a story. They were born somewhere, went to school, got a job, maybe moved to another city. In English, we call these <strong>life events</strong>, and writing about them in a clear, connected way is an important skill.
+                                Everyone has a story. They were born somewhere, went to school, found a job, perhaps moved to a new city or started a family. In English, we call these <strong>life events</strong>, and being able to write about them in a clear, connected way is a key skill.
                             </p>
                             <p class="intro-text">
-                                In this activity, you will learn to use three key connectors: <strong>in</strong>, <strong>when</strong>, and <strong>later</strong> to link life events together and create a story that flows naturally from one moment to the next.
+                                In this activity, you will learn to write a <strong>timeline paragraph</strong> — a short text that takes someone's life events in order and connects them using time expressions and narrative connectors like <em>after that</em>, <em>a few years later</em>, and <em>since</em>.
                             </p>
                             <p class="intro-text">
-                                You will practise with a model story, do controlled exercises, and then write your own life story about a family member, using <em>he</em> or <em>she</em>, without naming the person. This is a skill you can use immediately in real life: talking about your family, writing a biography, or even introducing someone in English.
+                                You will study a model story, build your own visual timeline, and then write a paragraph about someone — a real person or an imaginary one. This is a skill you can use immediately: in conversation, in writing tasks, and in formal English exams.
                             </p>
                         </div>
                         <div class="intro-sidebar">
@@ -935,14 +729,14 @@
                                 <div class="info-card-icon"><i class="fa-solid fa-bullseye"></i></div>
                                 <div class="info-card-content">
                                     <h4>Learning Objective</h4>
-                                    <p>Write a short life story using <em>in</em>, <em>when</em>, and <em>later</em> to link events chronologically.</p>
+                                    <p>Write a short life story in chronological order using narrative connectors and the past simple.</p>
                                 </div>
                             </div>
                             <div class="info-card">
                                 <div class="info-card-icon"><i class="fa-solid fa-pen"></i></div>
                                 <div class="info-card-content">
                                     <h4>Skill Focus</h4>
-                                    <p>Writing (A2 Level)</p>
+                                    <p>Writing (A2–B1 Level)</p>
                                 </div>
                             </div>
                             <div class="info-card">
@@ -961,348 +755,317 @@
                 ================================================ -->
                 <div class="tab-content" id="preparation">
 
-                    <!-- Section 1: Three connectors -->
+                    <!-- Section 1: Key Vocabulary -->
                     <div class="exercise-section">
                         <div class="exercise-header">
                             <span class="exercise-number">1</span>
-                            <h3>Three Ways to Link Events</h3>
+                            <h3>Key Vocabulary — Life Events</h3>
                         </div>
-                        <p class="exercise-instructions">In English, we use three key words to connect life events in a story. Study the table, then look at how they appear in the model story below.</p>
+                        <p class="exercise-instructions">These are the most useful past simple verbs and phrases for writing about someone's life. Study them before reading the model story.</p>
+
+                        <div class="vocab-grid">
+                            <div class="vocab-pill"><strong>was born</strong> He was born in 1985.</div>
+                            <div class="vocab-pill"><strong>grew up</strong> She grew up in Santiago.</div>
+                            <div class="vocab-pill"><strong>studied</strong> He studied engineering.</div>
+                            <div class="vocab-pill"><strong>moved</strong> She moved to Valparaíso.</div>
+                            <div class="vocab-pill"><strong>started</strong> He started university.</div>
+                            <div class="vocab-pill"><strong>finished</strong> She finished school in 2003.</div>
+                            <div class="vocab-pill"><strong>got married</strong> They got married in 2012.</div>
+                            <div class="vocab-pill"><strong>had</strong> She had her first child.</div>
+                            <div class="vocab-pill"><strong>became</strong> He became a teacher.</div>
+                            <div class="vocab-pill"><strong>worked</strong> She worked in Concepción.</div>
+                            <div class="vocab-pill"><strong>graduated</strong> He graduated in 2009.</div>
+                            <div class="vocab-pill"><strong>got a job</strong> She got a job at PUCV.</div>
+                        </div>
+
+                        <div class="tip-box">
+                            <div class="tip-header"><i data-lucide="info" style="width: 20px; height: 20px;"></i> Tip</div>
+                            <div class="tip-content">
+                                <p>All these verbs are in the <strong>past simple</strong>. When writing a life story, keep all verbs in the past simple unless you are talking about the present with <em>since</em> or <em>today</em>.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section 2: Connectors -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">2</span>
+                            <h3>Connectors &amp; Time Expressions</h3>
+                        </div>
+                        <p class="exercise-instructions">Good timeline writing uses different connectors for each sentence — avoid repeating <em>then, then, then</em>. Study the three groups below.</p>
 
                         <table class="connector-table">
                             <thead>
                                 <tr>
-                                    <th style="width:90px;">Word</th>
-                                    <th style="width:200px;">Use it with...</th>
-                                    <th>Examples</th>
+                                    <th style="width:110px;">Function</th>
+                                    <th style="width:220px;">Connectors</th>
+                                    <th>Example</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><span class="connector-badge badge-in">in</span></td>
-                                    <td class="connector-rule">Years and months<br><em>→ a specific point in time</em></td>
+                                    <td><span class="connector-badge badge-start">To start</span></td>
+                                    <td class="connector-rule">
+                                        <em>In [year],</em><br>
+                                        <em>At the age of [X],</em><br>
+                                        <em>He/She was born in...</em>
+                                    </td>
                                     <td class="connector-example">
-                                        <span class="ex-in">In 1991</span>, he was born in Ankara.<br>
-                                        <span class="ex-in">In September</span>, she started her new job.
+                                        <span class="ex-start">In 1985</span>, Ana was born in Concepción.<br>
+                                        <span class="ex-start">At the age of six</span>, she started school.
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><span class="connector-badge badge-when">when</span></td>
-                                    <td class="connector-rule">Ages or events<br><em>→ two things happening together</em></td>
+                                    <td><span class="connector-badge badge-cont">To continue</span></td>
+                                    <td class="connector-rule">
+                                        <em>After that,</em><br>
+                                        <em>Then,</em><br>
+                                        <em>A few years later,</em><br>
+                                        <em>[X] years later,</em><br>
+                                        <em>After [X] years,</em><br>
+                                        <em>Shortly after,</em>
+                                    </td>
                                     <td class="connector-example">
-                                        <span class="ex-when">When he was 11</span>, he moved to Istanbul.<br>
-                                        <span class="ex-when">When she left school</span>, she found a job.
+                                        <span class="ex-cont">After finishing school</span>, she studied at UDEC.<br>
+                                        <span class="ex-cont">Three years later</span>, she got married.
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><span class="connector-badge badge-later">later</span></td>
-                                    <td class="connector-rule">After a time expression<br><em>→ connects two separate sentences</em></td>
+                                    <td><span class="connector-badge badge-end">To conclude</span></td>
+                                    <td class="connector-rule">
+                                        <em>Finally,</em><br>
+                                        <em>Eventually,</em><br>
+                                        <em>Today,</em><br>
+                                        <em>Since [year],</em>
+                                    </td>
                                     <td class="connector-example">
-                                        She got a job. A year <span class="ex-later">later</span>, she got married.<br>
-                                        He left school. Two years <span class="ex-later">later</span>, he went to university.
+                                        <span class="ex-end">Since 2015</span>, she has been teaching at PUCV.<br>
+                                        <span class="ex-end">Today</span>, she lives in Valparaíso with her family.
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
 
-                        <div class="model-box">
-                            <div class="model-box-label">Model Story — Okan</div>
-                            <p>
-                                <span class="hi hi-in">In 1991</span>, Okan was born in Ankara, Turkey.
-                                <span class="hi hi-when">When he was 11</span>, his family moved to Istanbul and he went to school there.
-                            </p>
-                            <p>
-                                He left school in 2009 and got a job in a bank. A year <span class="hi hi-later">later</span>, he went to university in Istanbul and studied engineering.
-                            </p>
-                            <p>
-                                <span class="hi hi-in">In 2013</span>, he met Carolina. Two years <span class="hi hi-later">later</span>, they got married.
-                                <span class="hi hi-in">In 2016</span>, Okan got a job as an engineer in the UK and they moved there together.
-                            </p>
-                            <div class="model-legend">
-                                <div class="legend-item">
-                                    <div class="legend-swatch" style="background:#dbeafe; border:1.5px solid #93c5fd;"></div>
-                                    <strong style="color:#1d4ed8;">in</strong> + year / month
-                                </div>
-                                <div class="legend-item">
-                                    <div class="legend-swatch" style="background:#dcfce7; border:1.5px solid #86efac;"></div>
-                                    <strong style="color:#166534;">when</strong> + age / event
-                                </div>
-                                <div class="legend-item">
-                                    <div class="legend-swatch" style="background:#fae8ff; border:1.5px solid #d8b4fe;"></div>
-                                    time expression + <strong style="color:#7e22ce;">later</strong>
-                                </div>
-                            </div>
+                        <p class="exercise-instructions" style="margin-bottom: 10px;">You can also use these <strong>time expressions</strong> to say exactly when something happened:</p>
+                        <div class="time-chips">
+                            <span class="time-chip">in 1990</span>
+                            <span class="time-chip">in May 1990</span>
+                            <span class="time-chip">on 15 May 1990</span>
+                            <span class="time-chip">from 2005 to 2010</span>
+                            <span class="time-chip">between 2005 and 2010</span>
+                            <span class="time-chip">for five years</span>
+                            <span class="time-chip">at the age of 18</span>
                         </div>
 
                         <div class="tip-box">
                             <div class="tip-header"><i data-lucide="info" style="width: 20px; height: 20px;"></i> Tip</div>
                             <div class="tip-content">
                                 <ul>
-                                    <li>Use <strong>"in"</strong> before a year: <strong>"In 2005"</strong>. Use <strong>"when"</strong> before an age or an event: <strong>"When he was 18"</strong> or <strong>"When she left school"</strong>.</li>
-                                    <li><strong>"Later"</strong> always comes after a time word: <strong>"A month later"</strong>, <strong>"Three years later"</strong> — never at the start on its own.</li>
+                                    <li>Use a <strong>comma</strong> after connectors at the start of a sentence: <strong>"After that, she..."</strong> ✓ &nbsp;&nbsp; <strong>"After that she..."</strong> ✗</li>
+                                    <li>Try to use a <strong>different connector each sentence</strong> — this makes your writing flow much better.</li>
                                 </ul>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Section 2: Order Okan's story -->
-                    <div class="exercise-section">
-                        <div class="exercise-header">
-                            <span class="exercise-number">2</span>
-                            <h3>Order Okan's Story</h3>
-                        </div>
-                        <p class="exercise-instructions">These sentences about Okan are shuffled. Use his timeline below as a guide and drag them into the correct chronological order.</p>
-
-                        <!-- Okan's visual timeline -->
-                        <div class="okan-strip-wrapper">
-                            <div class="okan-strip">
-                                <div class="okan-node">
-                                    <div class="okan-dot"><i class="fa-solid fa-baby"></i></div>
-                                    <div class="okan-year">1991</div>
-                                    <div class="okan-label">Born, Ankara</div>
-                                </div>
-                                <div class="okan-connector"></div>
-                                <div class="okan-node">
-                                    <div class="okan-dot"><i class="fa-solid fa-school"></i></div>
-                                    <div class="okan-year">2002</div>
-                                    <div class="okan-label">Moved to Istanbul</div>
-                                </div>
-                                <div class="okan-connector"></div>
-                                <div class="okan-node">
-                                    <div class="okan-dot"><i class="fa-solid fa-briefcase"></i></div>
-                                    <div class="okan-year">2009</div>
-                                    <div class="okan-label">Left school, got job</div>
-                                </div>
-                                <div class="okan-connector"></div>
-                                <div class="okan-node">
-                                    <div class="okan-dot"><i class="fa-solid fa-graduation-cap"></i></div>
-                                    <div class="okan-year">2010</div>
-                                    <div class="okan-label">University</div>
-                                </div>
-                                <div class="okan-connector"></div>
-                                <div class="okan-node">
-                                    <div class="okan-dot"><i class="fa-solid fa-heart"></i></div>
-                                    <div class="okan-year">2013</div>
-                                    <div class="okan-label">Met Carolina</div>
-                                </div>
-                                <div class="okan-connector"></div>
-                                <div class="okan-node">
-                                    <div class="okan-dot"><i class="fa-solid fa-rings-wedding"></i></div>
-                                    <div class="okan-year">2015</div>
-                                    <div class="okan-label">Got married</div>
-                                </div>
-                                <div class="okan-connector"></div>
-                                <div class="okan-node">
-                                    <div class="okan-dot"><i class="fa-solid fa-plane"></i></div>
-                                    <div class="okan-year">2016</div>
-                                    <div class="okan-label">Engineer, UK</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="sentence-sort-list" id="okan-sort">
-                            <div class="sort-item" draggable="true" data-order="3">
-                                <i class="fa-solid fa-grip-vertical sort-handle"></i>
-                                <div class="sort-label">a</div>
-                                <span>When he was 11, he moved to Istanbul and went to school there.</span>
-                            </div>
-                            <div class="sort-item" draggable="true" data-order="1">
-                                <i class="fa-solid fa-grip-vertical sort-handle"></i>
-                                <div class="sort-label">b</div>
-                                <span>He was born in 1991 in Ankara, Turkey.</span>
-                            </div>
-                            <div class="sort-item" draggable="true" data-order="6">
-                                <i class="fa-solid fa-grip-vertical sort-handle"></i>
-                                <div class="sort-label">c</div>
-                                <span>Then in 2016, he got a job as an engineer in the UK.</span>
-                            </div>
-                            <div class="sort-item" draggable="true" data-order="4">
-                                <i class="fa-solid fa-grip-vertical sort-handle"></i>
-                                <div class="sort-label">d</div>
-                                <span>A year later, he went to university in Istanbul and studied engineering.</span>
-                            </div>
-                            <div class="sort-item" draggable="true" data-order="2">
-                                <i class="fa-solid fa-grip-vertical sort-handle"></i>
-                                <div class="sort-label">e</div>
-                                <span>He left school in 2009 and got a job in a bank.</span>
-                            </div>
-                            <div class="sort-item" draggable="true" data-order="5">
-                                <i class="fa-solid fa-grip-vertical sort-handle"></i>
-                                <div class="sort-label">f</div>
-                                <span>After university, he met Carolina and they got married a few months later.</span>
-                            </div>
-                        </div>
-
-                        <div style="display:flex; gap:12px; align-items:center; margin-top:16px;">
-                            <button class="check-answers-btn" id="check-sort"><i class="fa-solid fa-check"></i> Check order</button>
-                            <button class="check-answers-btn retry-btn" id="retry-sort" disabled><i class="fa-solid fa-rotate-right"></i> Shuffle again</button>
-                        </div>
-                    </div>
-
-                    <!-- Section 3: In or When? -->
+                    <!-- Section 3: Ana's Profile + Visual Timeline -->
                     <div class="exercise-section">
                         <div class="exercise-header">
                             <span class="exercise-number">3</span>
-                            <h3>In or When?</h3>
+                            <h3>Read Ana's Profile</h3>
                         </div>
-                        <p class="exercise-instructions">Choose the correct connector to complete each sentence.</p>
+                        <p class="exercise-instructions">Look at Ana Rojas's profile below. The key events from her life are shown on the timeline. Then read the example paragraph on the next section to see how the events are written in English.</p>
 
-                        <div class="gap-list" id="in-when-list">
-                            <div class="gap-item">
-                                <span class="gap-num">1.</span>
-                                <select class="gap-select" data-answer="In"><option value="">___</option><option>In</option><option>When</option></select>
-                                <span>1992, her family moved to Germany.</span>
-                            </div>
-                            <div class="gap-item">
-                                <span class="gap-num">2.</span>
-                                <select class="gap-select" data-answer="When"><option value="">___</option><option>In</option><option>When</option></select>
-                                <span>she was 18, she left school and got a job.</span>
-                            </div>
-                            <div class="gap-item">
-                                <span class="gap-num">3.</span>
-                                <select class="gap-select" data-answer="In"><option value="">___</option><option>In</option><option>When</option></select>
-                                <span>June 2005, they had their first child.</span>
-                            </div>
-                            <div class="gap-item">
-                                <span class="gap-num">4.</span>
-                                <select class="gap-select" data-answer="When"><option value="">___</option><option>In</option><option>When</option></select>
-                                <span>he finished university, he moved to London.</span>
-                            </div>
-                            <div class="gap-item">
-                                <span class="gap-num">5.</span>
-                                <select class="gap-select" data-answer="In"><option value="">___</option><option>In</option><option>When</option></select>
-                                <span>2019, she retired from her job as a teacher.</span>
-                            </div>
-                            <div class="gap-item">
-                                <span class="gap-num">6.</span>
-                                <select class="gap-select" data-answer="When"><option value="">___</option><option>In</option><option>When</option></select>
-                                <span>he was 30, he started his own business.</span>
-                            </div>
-                            <div class="gap-item">
-                                <span class="gap-num">7.</span>
-                                <select class="gap-select" data-answer="In"><option value="">___</option><option>In</option><option>When</option></select>
-                                <span>March, she met her husband at a friend's wedding.</span>
+                        <!-- Profile card -->
+                        <div class="model-box" style="margin-bottom: 24px;">
+                            <div class="model-box-label">Profile — Ana Rojas</div>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px 24px; font-size: 14px; color: #374151; line-height: 1.8;">
+                                <div><span style="color:#9ca3af; font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px;">Born</span><br>12 March 1985 · Concepción, Chile</div>
+                                <div><span style="color:#9ca3af; font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px;">School</span><br>1991–2003 · Liceo Santa Teresa</div>
+                                <div><span style="color:#9ca3af; font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px;">University</span><br>2004–2009 · Pedagogía en Inglés, UDEC</div>
+                                <div><span style="color:#9ca3af; font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px;">First Job</span><br>2009–2014 · English Teacher, Concepción</div>
+                                <div><span style="color:#9ca3af; font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px;">Marriage</span><br>2012 · Pedro Muñoz</div>
+                                <div><span style="color:#9ca3af; font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px;">Child</span><br>2014 · Son, Benjamín</div>
+                                <div><span style="color:#9ca3af; font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px;">Move</span><br>2015 · Moved to Valparaíso</div>
+                                <div><span style="color:#9ca3af; font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px;">Present</span><br>Since 2015 · Teacher at PUCV</div>
                             </div>
                         </div>
 
-                        <div style="display:flex; gap:12px; align-items:center; margin-top:16px;">
-                            <button class="check-answers-btn" id="check-in-when"><i class="fa-solid fa-check"></i> Check answers</button>
-                            <button class="check-answers-btn retry-btn" id="retry-in-when" disabled><i class="fa-solid fa-rotate-right"></i> Try again</button>
+                        <!-- Visual timeline -->
+                        <div class="ana-strip-wrapper">
+                            <div class="ana-strip">
+                                <div class="ana-node">
+                                    <div class="ana-dot"><i class="fa-solid fa-baby"></i></div>
+                                    <div class="ana-year">1985</div>
+                                    <div class="ana-label">Born, Concepción</div>
+                                </div>
+                                <div class="ana-connector"></div>
+                                <div class="ana-node">
+                                    <div class="ana-dot"><i class="fa-solid fa-school"></i></div>
+                                    <div class="ana-year">1991</div>
+                                    <div class="ana-label">Started school</div>
+                                </div>
+                                <div class="ana-connector"></div>
+                                <div class="ana-node">
+                                    <div class="ana-dot"><i class="fa-solid fa-graduation-cap"></i></div>
+                                    <div class="ana-year">2004</div>
+                                    <div class="ana-label">University, UDEC</div>
+                                </div>
+                                <div class="ana-connector"></div>
+                                <div class="ana-node">
+                                    <div class="ana-dot"><i class="fa-solid fa-briefcase"></i></div>
+                                    <div class="ana-year">2009</div>
+                                    <div class="ana-label">First job, teacher</div>
+                                </div>
+                                <div class="ana-connector"></div>
+                                <div class="ana-node">
+                                    <div class="ana-dot"><i class="fa-solid fa-rings-wedding"></i></div>
+                                    <div class="ana-year">2012</div>
+                                    <div class="ana-label">Got married</div>
+                                </div>
+                                <div class="ana-connector"></div>
+                                <div class="ana-node">
+                                    <div class="ana-dot"><i class="fa-solid fa-baby-carriage"></i></div>
+                                    <div class="ana-year">2014</div>
+                                    <div class="ana-label">Son Benjamín</div>
+                                </div>
+                                <div class="ana-connector"></div>
+                                <div class="ana-node">
+                                    <div class="ana-dot"><i class="fa-solid fa-location-dot"></i></div>
+                                    <div class="ana-year">2015</div>
+                                    <div class="ana-label">Moved, PUCV</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tip-box">
+                            <div class="tip-header"><i data-lucide="info" style="width: 20px; height: 20px;"></i> Notice</div>
+                            <div class="tip-content">
+                                <p>The timeline moves from left to right — <strong>past to present</strong>. When you write your paragraph, your sentences should follow the same order: start with birth and end with the most recent event.</p>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Section 4: Rewrite using "later" -->
+                    <!-- Section 4: Model paragraph -->
                     <div class="exercise-section">
                         <div class="exercise-header">
                             <span class="exercise-number">4</span>
-                            <h3>Rewrite Using "Later"</h3>
+                            <h3>Read the Example Paragraph</h3>
                         </div>
-                        <p class="exercise-instructions">Join each pair of sentences into a paragraph using the time expression given. Study the example first.</p>
+                        <p class="exercise-instructions">Read this paragraph about Ana. Pay attention to how each sentence starts with a different connector. The connectors are highlighted in colour.</p>
 
-                        <div class="model-box" style="margin-bottom:20px;">
-                            <div class="model-box-label">Example</div>
-                            <p style="margin-bottom:6px;"><strong>Original:</strong> She came to the UK in January 2018. She found a job in April 2018.</p>
-                            <p style="margin-bottom:0;"><strong>Rewritten (three months later):</strong> She came to the UK in January 2018. <span class="hi hi-later">Three months later</span>, she found a job.</p>
-                        </div>
-
-                        <div class="rewrite-list" id="later-list">
-                            <div class="rewrite-item">
-                                <div class="rewrite-source">
-                                    <strong>1.</strong> He left university in 2010. He got married in 2011.
-                                    <br><em>→ Use: <strong>A year later</strong></em>
+                        <div class="model-box">
+                            <div class="model-box-label">Example Paragraph — Ana Rojas</div>
+                            <p>
+                                Ana Rojas was born on 12 March 1985 in Concepción, Chile.
+                                <span class="hi hi-start">In 1991</span>, she started primary school at Liceo Santa Teresa, where she studied for twelve years.
+                            </p>
+                            <p>
+                                <span class="hi hi-cont">After finishing school</span>, she studied Pedagogía en Inglés at UDEC and graduated in 2009.
+                                <span class="hi hi-cont">Shortly after</span>, she got her first job as an English teacher in Concepción.
+                            </p>
+                            <p>
+                                <span class="hi hi-cont">Three years later</span>, she got married to Pedro Muñoz.
+                                <span class="hi hi-start">In 2014</span>, their son Benjamín was born.
+                                <span class="hi hi-cont">A year later</span>, the family moved to Valparaíso, and
+                                <span class="hi hi-end">since 2015</span> Ana has been teaching at PUCV.
+                            </p>
+                            <div class="model-legend">
+                                <div class="legend-item">
+                                    <div class="legend-swatch" style="background:#dbeafe; border:1.5px solid #93c5fd;"></div>
+                                    <strong style="color:#1d4ed8;">Starting</strong> — year / age
                                 </div>
-                                <div class="rewrite-prompt">Write your sentence below:</div>
-                                <textarea class="rewrite-textarea" data-contains="a year later" placeholder="He left university in 2010. A year later, ..."></textarea>
-                            </div>
-                            <div class="rewrite-item">
-                                <div class="rewrite-source">
-                                    <strong>2.</strong> She started her job in March. She got a promotion in September.
-                                    <br><em>→ Use: <strong>Six months later</strong></em>
+                                <div class="legend-item">
+                                    <div class="legend-swatch" style="background:#dcfce7; border:1.5px solid #86efac;"></div>
+                                    <strong style="color:#166534;">Continuing</strong> — later / after
                                 </div>
-                                <div class="rewrite-prompt">Write your sentence below:</div>
-                                <textarea class="rewrite-textarea" data-contains="six months later" placeholder="She started her job in March. Six months later, ..."></textarea>
-                            </div>
-                            <div class="rewrite-item">
-                                <div class="rewrite-source">
-                                    <strong>3.</strong> They met in Istanbul in 2013. They moved to London in 2016.
-                                    <br><em>→ Use: <strong>Three years later</strong></em>
+                                <div class="legend-item">
+                                    <div class="legend-swatch" style="background:#fae8ff; border:1.5px solid #d8b4fe;"></div>
+                                    <strong style="color:#7e22ce;">Concluding</strong> — since / today
                                 </div>
-                                <div class="rewrite-prompt">Write your sentence below:</div>
-                                <textarea class="rewrite-textarea" data-contains="three years later" placeholder="They met in Istanbul in 2013. Three years later, ..."></textarea>
                             </div>
                         </div>
 
-                        <div style="display:flex; gap:12px; align-items:center; margin-top:16px;">
-                            <button class="check-answers-btn" id="check-later"><i class="fa-solid fa-check"></i> Check answers</button>
-                            <button class="check-answers-btn retry-btn" id="retry-later" disabled><i class="fa-solid fa-rotate-right"></i> Try again</button>
-                        </div>
-
-                        <div class="tip-box" style="margin-top:20px;">
-                            <div class="tip-header"><i data-lucide="info" style="width: 20px; height: 20px;"></i> Tip</div>
+                        <div class="tip-box">
+                            <div class="tip-header"><i data-lucide="info" style="width: 20px; height: 20px;"></i> Notice</div>
                             <div class="tip-content">
                                 <ul>
-                                    <li><strong>"Later"</strong> always goes at the start of the <em>second</em> sentence: <strong>"Two years later, she..."</strong></li>
-                                    <li>Don't repeat the year in the second sentence — the reader already knows roughly when it happened.</li>
+                                    <li>Each sentence starts with a <strong>different connector</strong> — no two sentences begin the same way.</li>
+                                    <li>All main verbs are in the <strong>past simple</strong>: <em>was born, started, studied, graduated, got, moved</em>.</li>
+                                    <li>Time moves <strong>forward</strong> throughout — birth → school → university → job → family → present.</li>
                                 </ul>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Section 5: Spot the mistake -->
+                    <!-- Section 5: Connector practice -->
                     <div class="exercise-section">
                         <div class="exercise-header">
                             <span class="exercise-number">5</span>
-                            <h3>Spot the Mistake</h3>
+                            <h3>Choose the Right Connector</h3>
                         </div>
-                        <p class="exercise-instructions">Each pair contains one correct sentence and one with a connector mistake. Choose the correct one.</p>
+                        <p class="exercise-instructions">Choose the best connector to complete each sentence about Ana's life.</p>
 
-                        <div class="mc-list" id="spot-list">
+                        <div class="mc-list" id="connector-list">
 
                             <div class="mc-item" data-correct="b">
-                                <p class="mc-question">1. Which sentence is correct?</p>
+                                <p class="mc-question">_____ 1985, Ana was born in Concepción.</p>
                                 <div class="mc-options">
-                                    <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> When 1995, her family moved to Spain.</button>
-                                    <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> In 1995, her family moved to Spain.</button>
+                                    <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> Since</button>
+                                    <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> In</button>
+                                    <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> After</button>
                                 </div>
                             </div>
 
                             <div class="mc-item" data-correct="a">
-                                <p class="mc-question">2. Which sentence is correct?</p>
+                                <p class="mc-question">She studied at UDEC. _____ graduating, she got a job as a teacher.</p>
                                 <div class="mc-options">
-                                    <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> When he was 22, he started his first job.</button>
-                                    <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> In he was 22, he started his first job.</button>
+                                    <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> After</button>
+                                    <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> In</button>
+                                    <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> Since</button>
+                                </div>
+                            </div>
+
+                            <div class="mc-item" data-correct="c">
+                                <p class="mc-question">She got her first job in 2009. _____ years later, she got married.</p>
+                                <div class="mc-options">
+                                    <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> In three</button>
+                                    <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> After three</button>
+                                    <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> Three</button>
                                 </div>
                             </div>
 
                             <div class="mc-item" data-correct="b">
-                                <p class="mc-question">3. Which sentence is correct?</p>
+                                <p class="mc-question">The family moved to Valparaíso in 2015. _____ 2015, Ana has been teaching at PUCV.</p>
                                 <div class="mc-options">
-                                    <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> She got married. Later two years, they moved abroad.</button>
-                                    <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> She got married. Two years later, they moved abroad.</button>
+                                    <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> In</button>
+                                    <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> Since</button>
+                                    <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> After</button>
                                 </div>
                             </div>
 
                             <div class="mc-item" data-correct="a">
-                                <p class="mc-question">4. Which sentence is correct?</p>
+                                <p class="mc-question">Which sentence uses a connector correctly?</p>
                                 <div class="mc-options">
-                                    <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> When she left school, she studied medicine in Dublin.</button>
-                                    <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> When she left school. She studied medicine in Dublin.</button>
-                                </div>
-                            </div>
-
-                            <div class="mc-item" data-correct="b">
-                                <p class="mc-question">5. Which sentence is correct?</p>
-                                <div class="mc-options">
-                                    <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> In he finished engineering, he got a job in London.</button>
-                                    <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> When he finished engineering, he got a job in London.</button>
+                                    <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> After that, she moved to Valparaíso and started a new job.</button>
+                                    <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> After that she moved to Valparaíso and started a new job.</button>
+                                    <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> After that — she moved to Valparaíso and started a new job.</button>
                                 </div>
                             </div>
 
                         </div>
 
                         <div style="display:flex; gap:12px; align-items:center; margin-top:24px;">
-                            <button class="check-answers-btn" id="check-spot"><i class="fa-solid fa-check"></i> Check answers</button>
-                            <button class="check-answers-btn retry-btn" id="retry-spot" disabled><i class="fa-solid fa-rotate-right"></i> Try again</button>
+                            <button class="check-answers-btn" id="check-conn"><i class="fa-solid fa-check"></i> Check answers</button>
+                            <button class="check-answers-btn retry-btn" id="retry-conn" disabled><i class="fa-solid fa-rotate-right"></i> Try again</button>
+                        </div>
+                    </div>
+
+                    <!-- Feedback popup (shared) -->
+                    <div class="feedback-popup" id="feedback-popup">
+                        <div class="feedback-popup-inner">
+                            <div class="feedback-score" id="feedback-score"></div>
+                            <div class="feedback-msg" id="feedback-msg"></div>
                         </div>
                     </div>
 
@@ -1313,63 +1076,45 @@
                 ================================================ -->
                 <div class="tab-content" id="writing">
 
-                    <!-- Step 6: Build a timeline -->
+                    <!-- Step 1: Build a timeline -->
                     <div class="exercise-section">
                         <div class="exercise-header">
-                            <span class="exercise-number">6</span>
+                            <span class="exercise-number">1</span>
                             <h3>Build Your Timeline</h3>
                         </div>
-                        <p class="exercise-instructions">Think of a family member. Fill in as many events as you know. Add the year and a short note for each one. The preview on the right will update as you type.</p>
+                        <p class="exercise-instructions">Think of someone you know — a family member, a friend, or even yourself. Fill in the key events below. You don't need every field. The preview on the right updates as you type.</p>
 
                         <div class="builder-grid">
                             <div class="builder-rows">
                                 <div class="builder-row">
                                     <div class="builder-icon"><i class="fa-solid fa-baby"></i></div>
-                                    <div class="builder-label">Born</div>
+                                    <div class="builder-label">Birth</div>
                                     <input type="text" class="builder-year" maxlength="4" placeholder="year" data-key="born">
                                     <input type="text" class="builder-detail" placeholder="where?" data-key="born-d">
                                 </div>
                                 <div class="builder-row">
                                     <div class="builder-icon"><i class="fa-solid fa-school"></i></div>
-                                    <div class="builder-label">Started school</div>
+                                    <div class="builder-label">Education</div>
                                     <input type="text" class="builder-year" maxlength="4" placeholder="year" data-key="school">
-                                    <input type="text" class="builder-detail" placeholder="where?" data-key="school-d">
-                                </div>
-                                <div class="builder-row">
-                                    <div class="builder-icon"><i class="fa-solid fa-graduation-cap"></i></div>
-                                    <div class="builder-label">Left school / uni</div>
-                                    <input type="text" class="builder-year" maxlength="4" placeholder="year" data-key="uni">
-                                    <input type="text" class="builder-detail" placeholder="details?" data-key="uni-d">
-                                </div>
-                                <div class="builder-row">
-                                    <div class="builder-icon"><i class="fa-solid fa-briefcase"></i></div>
-                                    <div class="builder-label">Got a job</div>
-                                    <input type="text" class="builder-year" maxlength="4" placeholder="year" data-key="job">
-                                    <input type="text" class="builder-detail" placeholder="what job?" data-key="job-d">
-                                </div>
-                                <div class="builder-row">
-                                    <div class="builder-icon"><i class="fa-solid fa-heart"></i></div>
-                                    <div class="builder-label">Met partner</div>
-                                    <input type="text" class="builder-year" maxlength="4" placeholder="year" data-key="partner">
-                                    <input type="text" class="builder-detail" placeholder="where / how?" data-key="partner-d">
-                                </div>
-                                <div class="builder-row">
-                                    <div class="builder-icon"><i class="fa-solid fa-rings-wedding"></i></div>
-                                    <div class="builder-label">Got married</div>
-                                    <input type="text" class="builder-year" maxlength="4" placeholder="year" data-key="married">
-                                    <input type="text" class="builder-detail" placeholder="details?" data-key="married-d">
-                                </div>
-                                <div class="builder-row">
-                                    <div class="builder-icon"><i class="fa-solid fa-house"></i></div>
-                                    <div class="builder-label">Moved</div>
-                                    <input type="text" class="builder-year" maxlength="4" placeholder="year" data-key="moved">
-                                    <input type="text" class="builder-detail" placeholder="where?" data-key="moved-d">
+                                    <input type="text" class="builder-detail" placeholder="school / university?" data-key="school-d">
                                 </div>
                                 <div class="builder-row">
                                     <div class="builder-icon"><i class="fa-solid fa-star"></i></div>
-                                    <div class="builder-label">Other event</div>
-                                    <input type="text" class="builder-year" maxlength="4" placeholder="year" data-key="other">
-                                    <input type="text" class="builder-detail" placeholder="what happened?" data-key="other-d">
+                                    <div class="builder-label">Event 1</div>
+                                    <input type="text" class="builder-year" maxlength="4" placeholder="year" data-key="event1">
+                                    <input type="text" class="builder-detail" placeholder="what happened?" data-key="event1-d">
+                                </div>
+                                <div class="builder-row">
+                                    <div class="builder-icon"><i class="fa-solid fa-star"></i></div>
+                                    <div class="builder-label">Event 2</div>
+                                    <input type="text" class="builder-year" maxlength="4" placeholder="year" data-key="event2">
+                                    <input type="text" class="builder-detail" placeholder="what happened?" data-key="event2-d">
+                                </div>
+                                <div class="builder-row">
+                                    <div class="builder-icon"><i class="fa-solid fa-circle-dot"></i></div>
+                                    <div class="builder-label">Now (present)</div>
+                                    <input type="text" class="builder-year" maxlength="4" placeholder="year" data-key="now">
+                                    <input type="text" class="builder-detail" placeholder="what do they do now?" data-key="now-d">
                                 </div>
                             </div>
 
@@ -1380,56 +1125,35 @@
                                     <div class="preview-dot"></div>
                                     <div>
                                         <div class="preview-year-text">—</div>
-                                        <div class="preview-detail-text">Born</div>
+                                        <div class="preview-detail-text">Birth</div>
                                     </div>
                                 </div>
                                 <div class="preview-event" id="prev-school">
                                     <div class="preview-dot"></div>
                                     <div>
                                         <div class="preview-year-text">—</div>
-                                        <div class="preview-detail-text">Started school</div>
+                                        <div class="preview-detail-text">Education</div>
                                     </div>
                                 </div>
-                                <div class="preview-event" id="prev-uni">
+                                <div class="preview-event" id="prev-event1">
                                     <div class="preview-dot"></div>
                                     <div>
                                         <div class="preview-year-text">—</div>
-                                        <div class="preview-detail-text">Left school / uni</div>
+                                        <div class="preview-detail-text">Event 1</div>
                                     </div>
                                 </div>
-                                <div class="preview-event" id="prev-job">
+                                <div class="preview-event" id="prev-event2">
                                     <div class="preview-dot"></div>
                                     <div>
                                         <div class="preview-year-text">—</div>
-                                        <div class="preview-detail-text">Got a job</div>
+                                        <div class="preview-detail-text">Event 2</div>
                                     </div>
                                 </div>
-                                <div class="preview-event" id="prev-partner">
+                                <div class="preview-event" id="prev-now">
                                     <div class="preview-dot"></div>
                                     <div>
                                         <div class="preview-year-text">—</div>
-                                        <div class="preview-detail-text">Met partner</div>
-                                    </div>
-                                </div>
-                                <div class="preview-event" id="prev-married">
-                                    <div class="preview-dot"></div>
-                                    <div>
-                                        <div class="preview-year-text">—</div>
-                                        <div class="preview-detail-text">Got married</div>
-                                    </div>
-                                </div>
-                                <div class="preview-event" id="prev-moved">
-                                    <div class="preview-dot"></div>
-                                    <div>
-                                        <div class="preview-year-text">—</div>
-                                        <div class="preview-detail-text">Moved</div>
-                                    </div>
-                                </div>
-                                <div class="preview-event" id="prev-other">
-                                    <div class="preview-dot"></div>
-                                    <div>
-                                        <div class="preview-year-text">—</div>
-                                        <div class="preview-detail-text">Other event</div>
+                                        <div class="preview-detail-text">Now</div>
                                     </div>
                                 </div>
                             </div>
@@ -1438,214 +1162,128 @@
                         <div class="tip-box">
                             <div class="tip-header"><i data-lucide="info" style="width: 20px; height: 20px;"></i> Tip</div>
                             <div class="tip-content">
-                                <p>You don't need to know every date. If you don't know the exact year, you can write approximate phrases in your story like <strong>"in her twenties"</strong>, <strong>"a few years later"</strong>, or <strong>"when she was young"</strong>.</p>
+                                <p>You don't need to know exact dates. You can write approximate phrases in your paragraph like <strong>"in her twenties"</strong>, <strong>"a few years later"</strong>, or <strong>"when she was young"</strong>. Use the timeline to plan — not to limit yourself.</p>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Step 7: Write the story -->
+                    <!-- Step 2: Write the paragraph -->
                     <div class="exercise-section">
                         <div class="exercise-header">
-                            <span class="exercise-number">7</span>
-                            <h3>Write Their Story</h3>
+                            <span class="exercise-number">2</span>
+                            <h3>Write the Paragraph</h3>
                         </div>
-                        <p class="exercise-instructions">Use your timeline to write a short life story. Use <strong>he</strong> or <strong>she</strong> — <strong>do not write their name</strong>. Try to use <em>in</em>, <em>when</em>, and <em>later</em> to link your sentences. Aim for at least 60 words.</p>
+                        <p class="exercise-instructions">Use your timeline to write a short life story. You can write about the person in the third person (<strong>he / she</strong>), or about yourself (<strong>I</strong>). Use connectors from the Preparation tab to link your events. <strong>Maximum 60 words.</strong></p>
 
-                        <!-- Sentence starters reference -->
-                        <div class="starter-grid">
-                            <div class="starter-card">
-                                <div class="starter-card-label">Starting the story</div>
-                                <div class="starter-card-line">
-                                    He / She was born in <span class="blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> in <span class="blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>.<br>
-                                    In <span class="blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>, he / she...
-                                </div>
-                            </div>
-                            <div class="starter-card">
-                                <div class="starter-card-label">Using "when"</div>
-                                <div class="starter-card-line">
-                                    When he / she was <span class="blank">&nbsp;&nbsp;&nbsp;</span>, he / she...<br>
-                                    When he / she left school, he / she...
-                                </div>
-                            </div>
-                            <div class="starter-card">
-                                <div class="starter-card-label">Using "later"</div>
-                                <div class="starter-card-line">
-                                    A year later, he / she...<br>
-                                    A few months later, they...
-                                </div>
-                            </div>
-                            <div class="starter-card">
-                                <div class="starter-card-label">Ending the story</div>
-                                <div class="starter-card-line">
-                                    Today, he / she is <span class="blank">&nbsp;&nbsp;&nbsp;</span> years old.<br>
-                                    Now he / she lives in <span class="blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>.
-                                </div>
-                            </div>
-                        </div>
+                        <p class="word-limit-note"><i class="fa-solid fa-circle-info"></i> Keep it concise — aim for quality over quantity. 60 words is enough for 4–6 well-connected sentences.</p>
 
                         <div class="writing-wrapper">
                             <div class="writing-header">
-                                <span class="writing-header-title">My Life Story</span>
-                                <span class="word-count">Words: <span id="word-count">0</span></span>
+                                <div class="writing-header-title">Your paragraph</div>
+                                <div class="word-count">Words: <span id="word-count">0</span> / 60</div>
                             </div>
-                            <textarea class="writing-textarea" id="writing-area" placeholder="He / She was born in ..."></textarea>
+                            <textarea class="writing-textarea" id="writing-area" placeholder="Start writing here... e.g. She was born in 1990 in Santiago, Chile. In 2008, she started university..."></textarea>
                             <div class="writing-toolbar">
                                 <span class="toolbar-label">Insert:</span>
-                                <span class="toolbar-chip chip-in" onclick="insertChip('In [year], ')">in + year</span>
-                                <span class="toolbar-chip chip-when" onclick="insertChip('When he/she was [age], ')">when + age</span>
-                                <span class="toolbar-chip chip-when" onclick="insertChip('When he/she left [place], ')">when + event</span>
-                                <span class="toolbar-chip chip-later" onclick="insertChip('A year later, ')">a year later</span>
-                                <span class="toolbar-chip chip-later" onclick="insertChip('A few months later, ')">a few months later</span>
-                                <span class="toolbar-chip chip-later" onclick="insertChip('Three years later, ')">three years later</span>
+                                <span class="toolbar-chip chip-start" onclick="insertChip('In [year], ')">In [year],</span>
+                                <span class="toolbar-chip chip-start" onclick="insertChip('At the age of ')">At the age of</span>
+                                <span class="toolbar-chip chip-cont" onclick="insertChip('After that, ')">After that,</span>
+                                <span class="toolbar-chip chip-cont" onclick="insertChip('A few years later, ')">A few years later,</span>
+                                <span class="toolbar-chip chip-cont" onclick="insertChip('Shortly after, ')">Shortly after,</span>
+                                <span class="toolbar-chip chip-end" onclick="insertChip('Since [year], ')">Since [year],</span>
+                                <span class="toolbar-chip chip-end" onclick="insertChip('Today, ')">Today,</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Section 8: Self-assessment checklist -->
+                    <!-- Step 3: Self-assessment checklist -->
                     <div class="exercise-section">
                         <div class="exercise-header">
-                            <span class="exercise-number">8</span>
+                            <span class="exercise-number">3</span>
                             <h3>Check Your Writing</h3>
                         </div>
-                        <p class="exercise-instructions">Read your life story again carefully. Tick every box that applies to your writing. Be honest — this shows you exactly what you did well and what to work on next.</p>
+                        <p class="exercise-instructions">Read your paragraph again and tick each item you have included. Be honest — this is for you.</p>
 
-                        <div class="checklist" id="checklist">
-                            <div class="checklist-item" data-category="connector" onclick="toggleCheck(this)">
+                        <div class="checklist" id="self-checklist">
+
+                            <div class="checklist-category">Content</div>
+                            <div class="checklist-item" onclick="toggleCheck(this)" data-category="content">
                                 <div class="checklist-box"><i class="fa-solid fa-check"></i></div>
                                 <div class="checklist-text">
-                                    <strong>I used "in" before a year or month.</strong>
-                                    <small>e.g. "In 1985, she moved to London." / "In September, he started work."</small>
+                                    <strong>I included the key life events.</strong>
+                                    <small>Birth, education, at least one event, and the present (if relevant).</small>
                                 </div>
                             </div>
-                            <div class="checklist-item" data-category="connector" onclick="toggleCheck(this)">
+                            <div class="checklist-item" onclick="toggleCheck(this)" data-category="content">
                                 <div class="checklist-box"><i class="fa-solid fa-check"></i></div>
                                 <div class="checklist-text">
-                                    <strong>I used "when" before an age or an event.</strong>
-                                    <small>e.g. "When she was 18..." / "When he left school..."</small>
+                                    <strong>The events are in chronological order.</strong>
+                                    <small>Past → present, from left to right on the timeline.</small>
                                 </div>
                             </div>
-                            <div class="checklist-item" data-category="connector" onclick="toggleCheck(this)">
+
+                            <div class="checklist-category">Past Simple</div>
+                            <div class="checklist-item" onclick="toggleCheck(this)" data-category="grammar">
                                 <div class="checklist-box"><i class="fa-solid fa-check"></i></div>
                                 <div class="checklist-text">
-                                    <strong>I used "later" to link two events.</strong>
-                                    <small>e.g. "She got a job. A year later, she got married."</small>
+                                    <strong>I used past simple verbs correctly.</strong>
+                                    <small>was born, studied, moved, got, started — not "is born" or "has moved".</small>
                                 </div>
                             </div>
-                            <div class="checklist-item" data-category="structure" onclick="toggleCheck(this)">
+
+                            <div class="checklist-category">Connectors</div>
+                            <div class="checklist-item" onclick="toggleCheck(this)" data-category="connector">
                                 <div class="checklist-box"><i class="fa-solid fa-check"></i></div>
                                 <div class="checklist-text">
-                                    <strong>My events are in chronological order.</strong>
-                                    <small>The story moves from the earliest event to the most recent.</small>
+                                    <strong>I used at least one connector to start an event.</strong>
+                                    <small>"In [year]," / "At the age of [X]," / "He/She was born in..."</small>
                                 </div>
                             </div>
-                            <div class="checklist-item" data-category="structure" onclick="toggleCheck(this)">
+                            <div class="checklist-item" onclick="toggleCheck(this)" data-category="connector">
                                 <div class="checklist-box"><i class="fa-solid fa-check"></i></div>
                                 <div class="checklist-text">
-                                    <strong>I used "he" or "she" throughout — not the person's name.</strong>
-                                    <small>The task is to write without naming the person.</small>
+                                    <strong>I used at least one connector to continue the story.</strong>
+                                    <small>"After that," / "A few years later," / "Shortly after," / "[X] years later,"</small>
                                 </div>
                             </div>
-                            <div class="checklist-item" data-category="content" onclick="toggleCheck(this)">
+                            <div class="checklist-item" onclick="toggleCheck(this)" data-category="connector">
                                 <div class="checklist-box"><i class="fa-solid fa-check"></i></div>
                                 <div class="checklist-text">
-                                    <strong>I included at least four different life events.</strong>
-                                    <small>e.g. birth, school, job, marriage, move...</small>
+                                    <strong>I avoided repeating the same connector.</strong>
+                                    <small>No "Then, ... Then, ... Then, ..." — each sentence starts differently.</small>
                                 </div>
                             </div>
-                            <div class="checklist-item" data-category="content" onclick="toggleCheck(this)">
+
+                            <div class="checklist-category">Punctuation &amp; Length</div>
+                            <div class="checklist-item" onclick="toggleCheck(this)" data-category="punctuation">
                                 <div class="checklist-box"><i class="fa-solid fa-check"></i></div>
                                 <div class="checklist-text">
-                                    <strong>I wrote complete sentences</strong> (subject + verb in every sentence).
-                                    <small>Not just notes — full, grammatically complete sentences.</small>
+                                    <strong>I used capital letters and full stops correctly.</strong>
+                                    <small>Every sentence starts with a capital and ends with a full stop.</small>
                                 </div>
                             </div>
-                        </div>
-
-                        <div style="display:flex; gap:12px; align-items:center; margin-top:20px;">
-                            <button class="check-answers-btn" id="submit-checklist"><i class="fa-solid fa-chart-bar"></i> See my results</button>
-                            <button class="check-answers-btn retry-btn" id="reset-checklist" disabled><i class="fa-solid fa-rotate-right"></i> Reset</button>
-                        </div>
-
-                        <div class="score-panel" id="score-panel">
-                            <div class="score-row">
-                                <div class="score-row-label">Connectors (in / when / later)</div>
-                                <div class="score-track"><div class="score-fill" id="fill-connectors"></div></div>
-                                <div class="score-value" id="val-connectors">0/3</div>
-                            </div>
-                            <div class="score-row">
-                                <div class="score-row-label">Structure &amp; pronouns</div>
-                                <div class="score-track"><div class="score-fill" id="fill-structure"></div></div>
-                                <div class="score-value" id="val-structure">0/2</div>
-                            </div>
-                            <div class="score-row">
-                                <div class="score-row-label">Content &amp; completeness</div>
-                                <div class="score-track"><div class="score-fill" id="fill-content"></div></div>
-                                <div class="score-value" id="val-content">0/2</div>
-                            </div>
-                            <div class="score-message" id="score-message"></div>
-                        </div>
-                    </div>
-
-                    <!-- Section 9: Language check MC -->
-                    <div class="exercise-section">
-                        <div class="exercise-header">
-                            <span class="exercise-number">9</span>
-                            <h3>Language Check</h3>
-                        </div>
-                        <p class="exercise-instructions">Look back at your story and answer these questions about the language you used.</p>
-
-                        <div class="mc-list" id="lang-list">
-
-                            <div class="mc-item" data-correct="a">
-                                <p class="mc-question">Which preposition goes before a year in a life story?</p>
-                                <div class="mc-options">
-                                    <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> in — "In 1985, she moved..."</button>
-                                    <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> on — "On 1985, she moved..."</button>
-                                    <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> at — "At 1985, she moved..."</button>
+                            <div class="checklist-item" onclick="toggleCheck(this)" data-category="punctuation">
+                                <div class="checklist-box"><i class="fa-solid fa-check"></i></div>
+                                <div class="checklist-text">
+                                    <strong>I used a comma after the connector at the start of each sentence.</strong>
+                                    <small>"After that<strong>,</strong> she..." · "In 1990<strong>,</strong> he..."</small>
                                 </div>
                             </div>
-
-                            <div class="mc-item" data-correct="c">
-                                <p class="mc-question">You wrote: "When she was 25, she got her first job." What is the role of the comma?</p>
-                                <div class="mc-options">
-                                    <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> It is optional — you can remove it.</button>
-                                    <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> It goes before "when".</button>
-                                    <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> It separates the "when" clause from the main clause.</button>
-                                </div>
-                            </div>
-
-                            <div class="mc-item" data-correct="b">
-                                <p class="mc-question">Where does "later" appear in the sentence?</p>
-                                <div class="mc-options">
-                                    <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> At the beginning: "Later, two years she got married."</button>
-                                    <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> After the time expression: "Two years later, she got married."</button>
-                                    <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> At the end: "She got married, two years later."</button>
-                                </div>
-                            </div>
-
-                            <div class="mc-item" data-correct="a">
-                                <p class="mc-question">Your story is about a family member. Which pronouns should you use?</p>
-                                <div class="mc-options">
-                                    <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> He or she — depending on the person</button>
-                                    <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> I — because you are writing about someone you know</button>
-                                    <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> You — to address the reader directly</button>
-                                </div>
-                            </div>
-
-                            <div class="mc-item" data-correct="c">
-                                <p class="mc-question">Which sentence uses the connectors correctly?</p>
-                                <div class="mc-options">
-                                    <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> When 2003, she moved to Paris and started a new job.</button>
-                                    <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> In she was 30, she moved to Paris and started a new job.</button>
-                                    <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> In 2003, when she was 30, she moved to Paris and started a new job.</button>
+                            <div class="checklist-item" onclick="toggleCheck(this)" data-category="length">
+                                <div class="checklist-box"><i class="fa-solid fa-check"></i></div>
+                                <div class="checklist-text">
+                                    <strong>My paragraph is within the 60-word limit.</strong>
+                                    <small>Check the word counter above the writing box.</small>
                                 </div>
                             </div>
 
                         </div>
 
-                        <div style="display:flex; gap:12px; align-items:center; margin-top:24px;">
-                            <button class="check-answers-btn" id="check-lang"><i class="fa-solid fa-check"></i> Check answers</button>
-                            <button class="check-answers-btn retry-btn" id="retry-lang" disabled><i class="fa-solid fa-rotate-right"></i> Try again</button>
+                        <div class="tip-box">
+                            <div class="tip-header"><i data-lucide="info" style="width: 20px; height: 20px;"></i> What to do next</div>
+                            <div class="tip-content">
+                                <p>If you have unchecked items, go back and revise your paragraph. Once you are happy with your writing, click <strong>View Sample</strong> above to compare your paragraph with a model answer.</p>
+                            </div>
                         </div>
                     </div>
 
@@ -1659,19 +1297,19 @@
                                 </div>
                                 <h2 class="completion-title">Activity Complete!</h2>
                             </div>
-                            <p class="completion-subtitle">You've completed <strong>"Write a Life Story"</strong>. Here's what you've practised:</p>
+                            <p class="completion-subtitle">You've completed <strong>"A Life Story"</strong>. Here's what you've practised:</p>
                             <div class="skills-list">
                                 <div class="skill-item">
                                     <div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
-                                    Using <em>in</em>, <em>when</em>, and <em>later</em> to link events in the past
+                                    Key life events vocabulary and past simple verbs
                                 </div>
                                 <div class="skill-item">
                                     <div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
-                                    Ordering life events chronologically in a written story
+                                    Using narrative connectors to link events chronologically
                                 </div>
                                 <div class="skill-item">
                                     <div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
-                                    Writing a short biography about a family member using he / she
+                                    Planning a text with a visual timeline before writing
                                 </div>
                                 <div class="skill-item">
                                     <div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
@@ -1690,158 +1328,92 @@
                     <div class="warning-box">
                         <i class="fa-solid fa-triangle-exclamation"></i>
                         <div class="warning-box-content">
-                            <h4>Before you look:</h4> <p>Try to write your own story first. Use this sample only to compare your work.</p>
+                            <h4>Before you look:</h4> <p>Make sure you have written your own paragraph first. Use this sample only to compare your work — not to copy it.</p>
                         </div>
                     </div>
+
                     <div class="model-box">
-                        <div class="model-box-label">Sample Story</div>
+                        <div class="model-box-label">Sample Paragraph — Ana Rojas</div>
                         <p>
-                            <span class="hi hi-in">In 1955</span>, he was born in a small village in Italy. <span class="hi hi-when">When he was 18</span>, he moved to Rome to study architecture. He loved living in the big city.
+                            Ana Rojas was born on 12 March 1985 in Concepción, Chile.
+                            <span class="hi hi-start">In 1991</span>, she started primary school at Liceo Santa Teresa, where she studied for twelve years.
                         </p>
                         <p>
-                            <span class="hi hi-in">In 1980</span>, he finished university and started his first job. Three years <span class="hi hi-later">later</span>, he met his wife at a party. They got married <span class="hi hi-in">in 1985</span>.
+                            <span class="hi hi-cont">After finishing school</span>, she studied Pedagogía en Inglés at UDEC and graduated in 2009.
+                            <span class="hi hi-cont">Shortly after</span>, she got her first job as an English teacher in Concepción.
                         </p>
                         <p>
-                            A few years <span class="hi hi-later">later</span>, they moved to the countryside and had two children. Now, he is retired and enjoys gardening.
+                            <span class="hi hi-cont">Three years later</span>, she got married to Pedro Muñoz.
+                            <span class="hi hi-start">In 2014</span>, their son Benjamín was born.
+                            <span class="hi hi-cont">A year later</span>, the family moved to Valparaíso, and
+                            <span class="hi hi-end">since 2015</span> Ana has been teaching at PUCV.
                         </p>
+                        <div class="model-legend">
+                            <div class="legend-item">
+                                <div class="legend-swatch" style="background:#dbeafe; border:1.5px solid #93c5fd;"></div>
+                                <strong style="color:#1d4ed8;">Starting</strong> connectors
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-swatch" style="background:#dcfce7; border:1.5px solid #86efac;"></div>
+                                <strong style="color:#166534;">Continuing</strong> connectors
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-swatch" style="background:#fae8ff; border:1.5px solid #d8b4fe;"></div>
+                                <strong style="color:#7e22ce;">Concluding</strong> connectors
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tip-box">
+                        <div class="tip-header"><i data-lucide="info" style="width: 20px; height: 20px;"></i> Compare your writing</div>
+                        <div class="tip-content">
+                            <ul>
+                                <li>Did you use a <strong>different connector</strong> at the start of each sentence?</li>
+                                <li>Are all your verbs in the <strong>past simple</strong>?</li>
+                                <li>Do your sentences follow the <strong>same order</strong> as the timeline?</li>
+                                <li>Did you use a <strong>comma</strong> after every opening connector?</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
-                <!-- NAV BUTTONS -->
-                <div class="activity-nav">
-                    <button class="nav-btn nav-btn-back" id="btn-back" disabled>
-                        <i class="fa-solid fa-arrow-left"></i> Back
-                    </button>
-                    <button class="nav-btn nav-btn-next" id="btn-next">
-                        Next <i class="fa-solid fa-arrow-right"></i>
-                    </button>
-                </div>
-
-            </div>
+            </div><!-- /.tabs-wrapper -->
         </section>
+
     </main>
 
     <div id="footer-placeholder"></div>
 
     <script src="../../../js/layout.js"></script>
     <script src="../../../js/script.js" defer></script>
-    <script src="../../../js/checkanswers.js"></script>
+
     <script>
     document.addEventListener('DOMContentLoaded', function () {
+
         lucide.createIcons();
 
-        // ── Drag & drop sort ─────────────────────────────────────────
-        function setupDragSort(listId, checkId, retryId) {
-            const list = document.getElementById(listId);
-            if (!list) return;
-            let dragSrc = null;
-
-            function attach() {
-                list.querySelectorAll('.sort-item').forEach(item => {
-                    item.addEventListener('dragstart', function (e) {
-                        dragSrc = this;
-                        this.classList.add('dragging');
-                        e.dataTransfer.effectAllowed = 'move';
-                    });
-                    item.addEventListener('dragend', function () {
-                        this.classList.remove('dragging');
-                        list.querySelectorAll('.sort-item').forEach(el => el.classList.remove('drag-over'));
-                    });
-                    item.addEventListener('dragover', function (e) {
-                        e.preventDefault();
-                        if (this !== dragSrc) {
-                            list.querySelectorAll('.sort-item').forEach(el => el.classList.remove('drag-over'));
-                            this.classList.add('drag-over');
-                        }
-                    });
-                    item.addEventListener('drop', function (e) {
-                        e.preventDefault();
-                        if (this !== dragSrc) {
-                            const all = [...list.querySelectorAll('.sort-item')];
-                            const si = all.indexOf(dragSrc), ti = all.indexOf(this);
-                            list.insertBefore(dragSrc, si < ti ? this.nextSibling : this);
-                        }
-                        this.classList.remove('drag-over');
-                    });
-                });
+        // ── Feedback popup ────────────────────────────────────────
+        function showFeedbackPopup(correct, total) {
+            const popup = document.getElementById('feedback-popup');
+            const scoreEl = document.getElementById('feedback-score');
+            const msgEl = document.getElementById('feedback-msg');
+            if (!popup) return;
+            scoreEl.textContent = correct + ' / ' + total;
+            if (correct === total) {
+                scoreEl.style.color = '#16a34a';
+                msgEl.textContent = 'Excellent! All correct.';
+            } else if (correct >= total / 2) {
+                scoreEl.style.color = '#ea580c';
+                msgEl.textContent = 'Good effort! Review the incorrect ones.';
+            } else {
+                scoreEl.style.color = '#dc2626';
+                msgEl.textContent = 'Keep practising — check the connector table again.';
             }
-
-            attach();
-
-            document.getElementById(checkId).addEventListener('click', function () {
-                const items = [...list.querySelectorAll('.sort-item')];
-                const orders = items.map(el => parseInt(el.dataset.order));
-                const sorted = [...orders].sort((a, b) => a - b);
-                let correct = 0;
-                items.forEach((item, i) => {
-                    item.classList.remove('correct-order', 'incorrect-order');
-                    if (orders[i] === sorted[i]) { item.classList.add('correct-order'); correct++; }
-                    else item.classList.add('incorrect-order');
-                });
-                showFeedbackPopup(correct, items.length);
-                document.getElementById(retryId).disabled = false;
-            });
-
-            document.getElementById(retryId).addEventListener('click', function () {
-                const items = [...list.querySelectorAll('.sort-item')];
-                for (let i = items.length - 1; i > 0; i--) {
-                    list.insertBefore(items[Math.floor(Math.random() * (i + 1))], items[i]);
-                }
-                list.querySelectorAll('.sort-item').forEach(el => el.classList.remove('correct-order', 'incorrect-order'));
-                attach();
-                this.disabled = true;
-            });
+            popup.classList.add('visible');
+            setTimeout(() => popup.classList.remove('visible'), 3500);
         }
 
-        setupDragSort('okan-sort', 'check-sort', 'retry-sort');
-
-        // ── Select gap fill ───────────────────────────────────────────
-        function setupSelectFill(listId, checkId, retryId) {
-            const list = document.getElementById(listId);
-            if (!list) return;
-            document.getElementById(checkId).addEventListener('click', function () {
-                const selects = list.querySelectorAll('.gap-select');
-                let correct = 0;
-                selects.forEach(sel => {
-                    sel.classList.remove('correct', 'incorrect');
-                    if (sel.value === sel.dataset.answer) { sel.classList.add('correct'); correct++; }
-                    else if (sel.value) sel.classList.add('incorrect');
-                });
-                showFeedbackPopup(correct, selects.length);
-                document.getElementById(retryId).disabled = false;
-            });
-            document.getElementById(retryId).addEventListener('click', function () {
-                list.querySelectorAll('.gap-select').forEach(sel => { sel.value = ''; sel.classList.remove('correct', 'incorrect'); });
-                this.disabled = true;
-            });
-        }
-
-        setupSelectFill('in-when-list', 'check-in-when', 'retry-in-when');
-
-        // ── Rewrite "later" check ─────────────────────────────────────
-        document.getElementById('check-later').addEventListener('click', function () {
-            const textareas = document.querySelectorAll('#later-list .rewrite-textarea');
-            let correct = 0;
-            textareas.forEach(ta => {
-                ta.classList.remove('correct', 'incorrect');
-                const val = ta.value.trim().toLowerCase();
-                const required = ta.dataset.contains;
-                if (val.includes(required) && val.length > 20) { ta.classList.add('correct'); correct++; }
-                else if (val.length > 0) ta.classList.add('incorrect');
-            });
-            showFeedbackPopup(correct, textareas.length);
-            document.getElementById('retry-later').disabled = false;
-        });
-
-        document.getElementById('retry-later').addEventListener('click', function () {
-            document.querySelectorAll('#later-list .rewrite-textarea').forEach(ta => {
-                ta.value = '';
-                ta.classList.remove('correct', 'incorrect');
-            });
-            this.disabled = true;
-        });
-
-        // ── Multiple choice ───────────────────────────────────────────
+        // ── Multiple choice setup ─────────────────────────────────
         function setupMC(listId, checkId, retryId) {
             const list = document.getElementById(listId);
             if (!list) return;
@@ -1882,15 +1454,16 @@
             });
         }
 
-        setupMC('spot-list', 'check-spot', 'retry-spot');
-        setupMC('lang-list', 'check-lang', 'retry-lang');
+        setupMC('connector-list', 'check-conn', 'retry-conn');
 
-        // ── Timeline live preview ─────────────────────────────────────
-        const previewKeys = ['born', 'school', 'uni', 'job', 'partner', 'married', 'moved', 'other'];
+        // ── Timeline live preview ─────────────────────────────────
+        const previewKeys = ['born', 'school', 'event1', 'event2', 'now'];
         const defaultLabels = {
-            born: 'Born', school: 'Started school', uni: 'Left school / uni',
-            job: 'Got a job', partner: 'Met partner', married: 'Got married',
-            moved: 'Moved', other: 'Other event'
+            born: 'Birth',
+            school: 'Education',
+            event1: 'Event 1',
+            event2: 'Event 2',
+            now: 'Now'
         };
 
         previewKeys.forEach(key => {
@@ -1925,15 +1498,17 @@
             if (detailIn) detailIn.addEventListener('input', update);
         });
 
-        // ── Word counter ──────────────────────────────────────────────
+        // ── Word counter ──────────────────────────────────────────
         const writingArea = document.getElementById('writing-area');
         const wordCountEl = document.getElementById('word-count');
         writingArea.addEventListener('input', function () {
             const words = this.value.trim().split(/\s+/).filter(w => w.length > 0);
-            wordCountEl.textContent = words.length;
+            const count = words.length;
+            wordCountEl.textContent = count;
+            wordCountEl.style.color = count > 60 ? '#dc2626' : '#fb923c';
         });
 
-        // ── Toolbar chip insert ───────────────────────────────────────
+        // ── Toolbar chip insert ───────────────────────────────────
         window.insertChip = function (text) {
             const ta = writingArea;
             const s = ta.selectionStart, e = ta.selectionEnd;
@@ -1943,56 +1518,10 @@
             ta.dispatchEvent(new Event('input'));
         };
 
-        // ── Checklist toggle ──────────────────────────────────────────
+        // ── Checklist toggle ──────────────────────────────────────
         window.toggleCheck = function (item) {
             item.classList.toggle('checked');
         };
-
-        // ── Checklist submit → score ──────────────────────────────────
-        document.getElementById('submit-checklist').addEventListener('click', function () {
-            const items   = [...document.querySelectorAll('.checklist-item')];
-            const checked = items.filter(el => el.classList.contains('checked'));
-
-            const connectors = items.filter(el => el.dataset.category === 'connector' && el.classList.contains('checked')).length;
-            const structure  = items.filter(el => el.dataset.category === 'structure'  && el.classList.contains('checked')).length;
-            const content    = items.filter(el => el.dataset.category === 'content'    && el.classList.contains('checked')).length;
-            const total      = checked.length;
-
-            // Animate bars after a small delay so transition plays
-            setTimeout(() => {
-                document.getElementById('fill-connectors').style.width = (connectors / 3 * 100) + '%';
-                document.getElementById('fill-structure').style.width  = (structure  / 2 * 100) + '%';
-                document.getElementById('fill-content').style.width    = (content    / 2 * 100) + '%';
-            }, 50);
-
-            document.getElementById('val-connectors').textContent = `${connectors}/3`;
-            document.getElementById('val-structure').textContent  = `${structure}/2`;
-            document.getElementById('val-content').textContent    = `${content}/2`;
-
-            const msg = document.getElementById('score-message');
-            if (total >= 6) {
-                msg.className = 'score-message great';
-                msg.innerHTML = '🎉 <strong>Excellent!</strong> You used all three connectors, kept events in order, and wrote a complete story. Outstanding work!';
-            } else if (total >= 4) {
-                msg.className = 'score-message good';
-                msg.innerHTML = '👍 <strong>Good effort!</strong> Check the unchecked items — can you revise your story to include them?';
-            } else {
-                msg.className = 'score-message revise';
-                msg.innerHTML = '📝 <strong>Keep going!</strong> Go back to your story and add at least one use each of <em>in</em>, <em>when</em>, and <em>later</em>.';
-            }
-
-            document.getElementById('score-panel').classList.add('visible');
-            document.getElementById('reset-checklist').disabled = false;
-        });
-
-        document.getElementById('reset-checklist').addEventListener('click', function () {
-            document.querySelectorAll('.checklist-item').forEach(el => el.classList.remove('checked'));
-            document.getElementById('score-panel').classList.remove('visible');
-            document.getElementById('fill-connectors').style.width = '0';
-            document.getElementById('fill-structure').style.width  = '0';
-            document.getElementById('fill-content').style.width    = '0';
-            this.disabled = true;
-        });
 
     });
     </script>

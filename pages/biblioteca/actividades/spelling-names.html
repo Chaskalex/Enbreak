@@ -1126,36 +1126,4 @@
     }
     </script>
 </body>
-</html> btn.style.color = 'white';
-        
-        if (currentExampleAudio) {
-            currentExampleAudio.pause();
-            currentExampleAudio = null;
-        }
-        
-        const fileMap = {
-            'alex': 'ALEX',
-            'emma': 'EMMA',
-            'email1_example': 'alex@email.com',
-            'email2_example': 'emma.smith@web.net'
-        };
-
-        const filename = fileMap[id] || id;
-        const audioPath = `../../../assets/activities/spelling-names/${filename}.mp3`;
-        
-        currentExampleAudio = new Audio(audioPath);
-        
-        currentExampleAudio.play().catch(e => {
-            console.log('Audio not found:', audioPath);
-            btn.style.background = '';
-            btn.style.color = '';
-        });
-        
-        currentExampleAudio.onended = () => {
-            btn.style.background = '';
-            btn.style.color = '';
-        };
-    }
-    </script>
-</body>
 </html>

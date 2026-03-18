@@ -50,6 +50,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 loader.classList.add('hidden');
             }
             document.body.classList.add('loaded');
+            
+            // Notify that components are loaded so we can translate them
+            document.dispatchEvent(new Event('componentsLoaded'));
         }, 0);
     });
 });
