@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enbreak | Drafting an Academic Introduction</title>
+    <title>Enbreak | Drafting an Essay Introduction</title>
     <link rel="icon" type="image/x-icon" href="../../../favicon/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="../../../favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../../../favicon/favicon-16x16.png">
@@ -346,7 +346,7 @@
         }
 
         .sortable-item {
-            background: #ffffff;
+            background: #f9fafb;
             border: 1px solid #e5e7eb;
             border-radius: 10px;
             padding: 16px 20px; 
@@ -373,7 +373,7 @@
 
         .sortable-item.dragging {
             opacity: 0.5;
-            background: #f9fafb;
+            background: #f3f4f6;
         }
 
         .sortable-item.correct {
@@ -440,7 +440,7 @@
         .topic-card-text {
             font-family: 'Inter', sans-serif;
             font-size: 15px;
-            font-weight: 400; /* Normal weight */
+            font-weight: 400; 
             color: #1f2937;
             line-height: 1.5;
         }
@@ -782,7 +782,7 @@
                 <div class="activity-hero-badges">
                     <span class="hero-badge"><i class="fa-solid fa-pen-nib"></i> Writing</span>
                     <span class="hero-badge"><i class="fa-solid fa-layer-group"></i> Level A2+</span>
-                    <span class="hero-badge"><i class="fa-regular fa-clock"></i> 25 min</span>
+                    <span class="hero-badge"><i class="fa-regular fa-clock"></i> 30 min</span>
                 </div>
             </div>
         </section>
@@ -818,7 +818,7 @@
                                 </div>
                                 <div class="info-card-content">
                                     <h4>Learning Objective</h4>
-                                    <p>Structure an academic introduction following a general-to-specific pattern using connectors of sequence.</p>
+                                    <p>Structure an academic introduction following the inverted triangle model using connectors of sequence.</p>
                                 </div>
                             </div>
                             <div class="info-card">
@@ -1027,7 +1027,7 @@
 
                         <div class="paragraph-grid">
                             <div class="paragraph-box">
-                                <div class="paragraph-title">Intro 1</div>
+                                <div class="paragraph-title">Introduction 1</div>
                                 <span class="clickable-sentence">Despite making up less than 5% of the world's population, the United States produces nearly 25% of global carbon emissions.</span>
                                 <span class="clickable-sentence">In recent decades, there has been a growing interest in transitioning to renewable energy to reduce these effects.</span>
                                 <span class="clickable-sentence">However, not much attention has been given to the economic barriers faced by low-income communities during this transition.</span>
@@ -1035,7 +1035,7 @@
                             </div>
 
                             <div class="paragraph-box">
-                                <div class="paragraph-title">Intro 2</div>
+                                <div class="paragraph-title">Introduction 2</div>
                                 <span class="clickable-sentence">What does it mean to be literate in an age where most information is consumed through images and short video clips?</span>
                                 <span class="clickable-sentence">Studies consistently show that traditional reading habits among teenagers have declined significantly over the past ten years.</span>
                                 <span class="clickable-sentence">In this context, teachers are struggling to adapt their methods to keep students engaged.</span>
@@ -1055,7 +1055,7 @@
                             <span class="exercise-number">6</span>
                             <h3>Put It in Order</h3>
                         </div>
-                        <p class="exercise-instructions">The sentences below form a complete essay introduction, but they have been shuffled. Drag and drop the sentences into the correct order from general to specific. Use reference words (like "this question" or "these benefits") to help you connect the ideas.</p>
+                        <p class="exercise-instructions">The sentences below form a complete academic introduction, but they have been shuffled. Drag and drop the sentences into the correct order from general to specific. Use reference words (like "this question" or "these benefits") to help you connect the ideas.</p>
 
                         <div class="sortable-container">
                             <div class="sortable-list" id="sortable-intro">
@@ -1100,7 +1100,7 @@
                             <h3>Draft Your Introduction</h3>
                         </div>
 
-                        <p class="exercise-instructions" style="margin-bottom: 24px;">Choose <strong>one</strong> of the essay topics below and write a complete introduction paragraph of 100 to 160 words. Your introduction must include a <strong>hook</strong>, <strong>background information</strong>, and a clear <strong>thesis statement</strong>.</p>
+                        <p class="exercise-instructions" style="margin-bottom: 24px;">Choose one of the essay topics below and write a complete introduction paragraph of 100 to 160 words. Your introduction must include a <strong>hook</strong>, <strong>background information</strong>, and a clear <strong>thesis statement</strong>.</p>
                         
                         <div class="topic-grid">
                             <div class="topic-card" id="topic-1" onclick="selectTopic(1)">
@@ -1127,8 +1127,8 @@
                         </div>
 
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
-                            <span style="font-family: 'Inter', sans-serif; font-size: 13px; color: #6b7280;">Target: 100 to 160 words</span>
                             <span id="word-count" style="font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; color: #9ca3af;">0 words</span>
+                            <span style="font-family: 'Inter', sans-serif; font-size: 13px; color: #6b7280;">Target: 100 to 160 words</span>
                         </div>
                     </div>
 
@@ -1430,7 +1430,6 @@
                 retryOrderBtn.addEventListener('click', function() {
                     sortableList.innerHTML = originalSequenceHTML;
                     initSortable();
-                    this.disabled = true;
                 });
             }
 
@@ -1472,16 +1471,20 @@
             // Copy to Clipboard Logic
             const copyBtn = document.getElementById('copyTextBtn');
             if (copyBtn && writingArea) {
+                const originalHTML = copyBtn.innerHTML; 
                 copyBtn.addEventListener('click', function() {
                     writingArea.select();
                     document.execCommand('copy');
                     window.getSelection().removeAllRanges();
-
-                    const originalHtml = copyBtn.innerHTML;
-                    copyBtn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+                    
+                    this.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+                    this.style.backgroundColor = '#dcfce7'; 
+                    this.style.color = '#16a34a'; 
 
                     setTimeout(() => {
-                        copyBtn.innerHTML = originalHtml;
+                        this.innerHTML = originalHTML;
+                        this.style.backgroundColor = '';
+                        this.style.color = '';
                     }, 1000);
                 });
             }
