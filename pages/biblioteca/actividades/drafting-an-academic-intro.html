@@ -1,0 +1,1543 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enbreak | Drafting an Academic Introduction</title>
+    <link rel="icon" type="image/x-icon" href="../../../favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../favicon/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../favicon/apple-touch-icon.png">
+    <link rel="manifest" href="../../../favicon/site.webmanifest">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rubik:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/buttons.css">
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../../../css/activities.css">
+    <style>
+        .activity-hero {
+            background-image: url('../../../assets/activities/academic-intro.png');
+            background-position: center 30%;
+        }
+
+        /* ── Funnel diagram ── */
+        .funnel-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+            margin: 24px 0;
+        }
+
+        .funnel-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 12px 20px;
+            border-radius: 12px;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            cursor: default;
+        }
+
+        .funnel-step:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+        }
+
+        /* Consistent Colors: Green (Hook), Yellow (Context), Red (Thesis) */
+        .funnel-step-1 { 
+            width: 100%; max-width: 580px; 
+            border: 2px solid #22c55e; 
+            background: #f0fdf4;
+        } 
+        .funnel-step-2 { 
+            width: 78%; max-width: 452px; 
+            border: 2px solid #eab308; 
+            background: #fefce8;
+        } 
+        .funnel-step-3 { 
+            width: 58%; max-width: 336px; 
+            border: 2px solid #ef4444; 
+            background: #fef2f2; 
+        } 
+
+        .funnel-step-label { 
+            font-family: 'Inter', sans-serif; 
+            font-size: 11px; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            letter-spacing: 0.8px; 
+            margin-bottom: 2px;
+        }
+
+        .funnel-step-1 .funnel-step-label { color: #15803d; }
+        .funnel-step-2 .funnel-step-label { color: #ca8a04; }
+        .funnel-step-3 .funnel-step-label { color: #b91c1c; } 
+
+        .funnel-step-title { 
+            font-family: 'Inter', sans-serif; 
+            font-size: 15px; 
+            font-weight: 600; 
+            margin-bottom: 4px;
+            color: #374151;
+        }
+
+        .funnel-step-desc { 
+            font-family: 'Inter', sans-serif; 
+            font-size: 13px; 
+            line-height: 1.5; 
+            color: #4b5563;
+            margin: 0;
+        }
+
+        .funnel-connector {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .funnel-arrow {
+            font-size: 18px;
+            color: #d1d5db;
+            line-height: 1;
+            margin: 6px 0;
+            user-select: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ── Phrase cards grid ── */
+        .phrase-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px 16px; 
+        }
+
+        .hook-card {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 16px 18px;
+            flex: 1 1 260px;
+            transition: all 0.2s ease;
+            cursor: default;
+        }
+
+        .hook-card-blue:hover { border-color: #2563eb; background-color: #eff6ff; }
+        .hook-card-purple:hover { border-color: #9333ea; background-color: #faf5ff; }
+        .hook-card-pink:hover { border-color: #db2777; background-color: #fdf2f8; }
+        .hook-card-green:hover { border-color: #16a34a; background-color: #f0fdf4; }
+        .hook-card-orange:hover { border-color: #f97316; background-color: #fff7ed; }
+        .hook-card-teal:hover { border-color: #0d9488; background-color: #f0fdfa; }
+
+        .phrase-card-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #9ca3af;
+            margin-bottom: 8px;
+        }
+
+        .phrase-card-example {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-style: italic;
+            color: #374151;
+            line-height: 1.5;
+        }
+
+        /* ── Step 4 Thesis Boxes ── */
+        .thesis-eval-box {
+            border-radius: 12px;
+            padding: 16px 18px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .thesis-eval-box:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+        }
+
+        .thesis-eval-box.weak {
+            background: #fef2f2;
+            border: 2px solid #ef4444;
+        }
+
+        .thesis-eval-box.strong {
+            background: #f0fdf4;
+            border: 2px solid #22c55e;
+        }
+
+        .thesis-verb-card {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 16px 18px;
+            flex: 1 1 200px;
+            transition: all 0.2s ease;
+            cursor: default;
+        }
+
+        .thesis-verb-card:hover {
+            border-color: #ea580c;
+            background: #fff7ed;
+        }
+
+        .thesis-verb-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #ea580c;
+            margin-bottom: 6px;
+        }
+
+        .thesis-verb-example {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-style: italic;
+            color: #374151;
+            line-height: 1.5;
+        }
+
+        .connector-chip {
+            display: inline-block;
+            background: #ffedd5;
+            border: 1px solid #fed7aa;
+            color: #ea580c;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 13px;
+        }
+
+        .connector-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+        }
+
+        .connector-table thead th {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #9ca3af;
+            padding: 0 16px 4px;
+            text-align: left;
+        }
+
+        .connector-table tbody tr td {
+            padding: 10px 16px;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-left: none;
+            border-right: none;
+            color: #374151;
+        }
+
+        .connector-table tbody tr td:first-child {
+            border-left: 1px solid #e5e7eb;
+            border-radius: 8px 0 0 8px;
+        }
+
+        .connector-table tbody tr td:last-child {
+            border-right: 1px solid #e5e7eb;
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* ── Clickable Paragraph Activity (Step 5) ── */
+        .paragraph-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .paragraph-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .paragraph-box {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 24px;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            line-height: 2;
+            color: #374151;
+            position: relative;
+        }
+
+        .paragraph-title {
+            font-family: 'Rubik', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 8px;
+        }
+
+        .clickable-sentence {
+            cursor: pointer;
+            border-radius: 4px;
+            padding: 2px 4px;
+            margin: 0 -2px; 
+            transition: all 0.2s;
+            user-select: none;
+        }
+
+        .clickable-sentence:hover {
+            background: #fef08a; 
+            color: #854d0e;
+        }
+
+        .clickable-sentence.selected {
+            background: #ffedd5;
+            box-shadow: 0 0 0 2px #ea580c;
+            color: #9a3412;
+        }
+
+        .clickable-sentence.correct {
+            background: #dcfce7;
+            box-shadow: 0 0 0 2px #16a34a;
+            color: #166534;
+        }
+
+        .clickable-sentence.incorrect {
+            background: #fee2e2;
+            box-shadow: 0 0 0 2px #dc2626;
+            color: #991b1b;
+        }
+
+        /* ── Drag & Drop Activity (Step 6) ── */
+        .sortable-container {
+            display: flex;
+            gap: 16px;
+            margin-top: 16px;
+            align-items: stretch;
+        }
+
+        .sortable-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            flex: 1;
+        }
+
+        .sortable-item {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 16px 20px; 
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            color: #374151;
+            cursor: grab;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            min-height: 56px;
+        }
+
+        .sortable-item:active {
+            cursor: grabbing;
+        }
+
+        .sortable-item i {
+            color: #9ca3af;
+            font-size: 16px;
+            cursor: grab;
+        }
+
+        .sortable-item.dragging {
+            opacity: 0.5;
+            background: #f9fafb;
+        }
+
+        .sortable-item.correct {
+            background: #f0fdf4;
+            border-color: #86efac;
+        }
+
+        .sortable-item.incorrect {
+            background: #fef2f2;
+            border-color: #fca5a5;
+        }
+
+        /* ── NEW: Writing Task Styles ── */
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+            margin-bottom: 28px;
+            margin-top: 16px;
+        }
+
+        .topic-card {
+            background: #f9fafb;
+            border: 1.5px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 16px 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .topic-card:hover {
+            border-color: #fdba74;
+            background: #fff7ed;
+            transform: translateY(-2px);
+        }
+
+        .topic-card.active {
+            border-color: #ea580c;
+            background: #fff7ed;
+        }
+
+        .topic-card-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #6b7280;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: color 0.2s;
+        }
+
+        .topic-card.active .topic-card-label {
+            color: #ea580c;
+        }
+
+        .topic-card.active .topic-card-label i {
+            color: #ea580c !important;
+        }
+
+        .topic-card-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            font-weight: 400; /* Normal weight */
+            color: #1f2937;
+            line-height: 1.5;
+        }
+
+        .writing-task-area-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: #f3f4f6;
+            border: none;
+            border-radius: 6px;
+            padding: 6px 10px;
+            color: #6b7280;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+            z-index: 10;
+        }
+
+        .copy-btn:hover {
+            background: #e5e7eb;
+            color: #1f2937;
+        }
+
+        .writing-task-area {
+            background: #ffffff;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            width: 100%;
+            min-height: 240px;
+            padding: 44px 20px 20px 20px; 
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            color: #374151;
+            resize: vertical;
+            transition: all 0.2s ease;
+            line-height: 1.8;
+            box-sizing: border-box;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .writing-task-area:focus {
+            outline: none;
+            border-color: #ea580c;
+            box-shadow: 0 0 0 4px rgba(234, 88, 12, 0.1);
+        }
+
+        .writing-task-area::placeholder { color: #9ca3af; }
+
+        /* Checklist */
+        .self-check-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .self-check-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 16px 20px;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .self-check-item:hover { 
+            background: #f3f4f6; 
+            border-color: #d1d5db;
+        }
+
+        .self-check-item.checked {
+            background: #f0fdf4;
+            border-color: #86efac;
+            box-shadow: 0 2px 8px rgba(34, 197, 94, 0.08);
+        }
+
+        .self-check-box {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #cbd5e1;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.2s;
+            color: transparent;
+            font-size: 13px;
+            background: #ffffff;
+            margin-top: 2px;
+        }
+
+        .self-check-item.checked .self-check-box {
+            background: #16a34a;
+            border-color: #16a34a;
+            color: #ffffff;
+        }
+
+        .self-check-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            color: #4b5563;
+            line-height: 1.5;
+            transition: color 0.2s;
+        }
+
+        .self-check-item.checked .self-check-label {
+            color: #166534;
+            font-weight: 500;
+        }
+
+        /* Completion Box */
+        .completion-box {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            margin-top: 32px;
+            display: block; 
+        }
+        .completion-bar { height: 6px; background: #10b981; }
+        .completion-inner { padding: 32px; }
+        .completion-header { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+        .completion-icon { width: 48px; height: 48px; border-radius: 50%; background: #dcfce7; display: flex; align-items: center; justify-content: center; }
+        .completion-icon svg { width: 24px; height: 24px; stroke: #16a34a; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+        .completion-title { font-family: 'Rubik', sans-serif; font-size: 24px; color: #1f2937; margin: 0; }
+        .completion-subtitle { font-family: 'Inter', sans-serif; font-size: 15px; color: #4b5563; margin-bottom: 20px; }
+        .skills-list { display: flex; flex-direction: column; gap: 12px; }
+        .skill-item { display: flex; align-items: center; gap: 10px; font-family: 'Inter', sans-serif; font-size: 14px; color: #374151; }
+        .skill-check { width: 16px; height: 16px; border-radius: 50%; background: #10b981; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .skill-check svg { width: 10px; height: 10px; stroke: #ffffff; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+
+
+        /* ── NEW: View Sample Styles ── */
+        .sample-card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            overflow: hidden;
+            margin-bottom: 32px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+
+        .sample-card:last-child { margin-bottom: 0; }
+
+        .sample-card-header {
+            background: #1e293b; 
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .sample-card-title {
+            font-family: 'Rubik', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: #ffffff;
+            line-height: 1.4;
+        }
+
+        .sample-card-level {
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            background: rgba(255,255,255,0.15);
+            color: #ffffff;
+            padding: 4px 12px;
+            border-radius: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        .sample-card-body {
+            padding: 24px 32px;
+            background: #f9fafb;
+        }
+
+        .annotated-paragraph {
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            line-height: 1.9;
+            color: #374151;
+            margin: 0;
+        }
+
+        /* Inline Sentence Highlights */
+        .hl-hook {
+            background-color: #dcfce7;
+            border-radius: 4px;
+            padding: 2px 0;
+        }
+        .hl-background {
+            background-color: #fef9c3;
+            border-radius: 4px;
+            padding: 2px 0;
+        }
+        .hl-thesis {
+            background-color: #fee2e2;
+            border-radius: 4px;
+            padding: 2px 0;
+        }
+
+        .anno-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .anno-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            color: #6b7280;
+            background: #ffffff;
+            padding: 6px 12px 6px 6px;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .color-box {
+            width: 14px;
+            height: 14px;
+            border-radius: 4px;
+        }
+
+        .cbox-hook { background: #dcfce7; border: 1px solid #86efac; }
+        .cbox-background { background: #fef9c3; border: 1px solid #fde047; }
+        .cbox-thesis { background: #fee2e2; border: 1px solid #fca5a5; }
+
+        /* Feedback Popups */
+        .feedback-popup-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+        }
+        .feedback-popup-overlay.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+        .feedback-popup {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            transform: translateY(20px);
+            transition: transform 0.2s;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .feedback-popup-overlay.show .feedback-popup {
+            transform: translateY(0);
+        }
+        .feedback-popup-icon {
+            font-size: 40px;
+            margin-bottom: 16px;
+        }
+        .feedback-popup-title {
+            font-family: 'Rubik', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 8px;
+        }
+        .feedback-popup-score {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: #4b5563;
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+
+    </style>
+    <script>
+        const activityConfig = {
+            type: 'writing',
+            tabs: ['introduction', 'preparation', 'writing', 'sample'],
+            hiddenTab: 'sample'
+        };
+    </script>
+    <script src="../../../js/tabs.js"></script>
+</head>
+<body>
+
+    <div id="header-placeholder"></div>
+
+    <!-- Done Writing Warning Overlay -->
+    <div class="feedback-popup-overlay" id="done-warning-overlay">
+        <div class="feedback-popup">
+            <div class="feedback-popup-icon"><i class="fa-solid fa-triangle-exclamation" style="color: #ea580c;"></i></div>
+            <div class="feedback-popup-title">Are you sure?</div>
+            <div class="feedback-popup-score">Your progress will be lost if you continue.</div>
+            <div style="display: flex; gap: 12px; justify-content: center;">
+                <button class="nav-btn nav-btn-back" id="cancel-done" style="width: auto;">Cancel</button>
+                <button class="nav-btn nav-btn-next" id="confirm-done" style="width: auto;">Continue</button>
+            </div>
+        </div>
+    </div>
+
+    <main class="activity-page">
+        <section class="activity-hero">
+            <div class="activity-hero-content">
+                <nav class="breadcrumb">
+                    <a href="/">Inicio</a>
+                    <span class="breadcrumb-separator">›</span>
+                    <a href="../actividades.html">Actividades</a>
+                    <span class="breadcrumb-separator">›</span>
+                    <span class="breadcrumb-current">Essay Introduction</span>
+                </nav>
+                <h1>Drafting an Essay Introduction</h1>
+                <div class="activity-hero-badges">
+                    <span class="hero-badge"><i class="fa-solid fa-pen-nib"></i> Writing</span>
+                    <span class="hero-badge"><i class="fa-solid fa-layer-group"></i> Level A2+</span>
+                    <span class="hero-badge"><i class="fa-regular fa-clock"></i> 25 min</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="activity-container">
+            <div class="tabs-wrapper">
+                <nav class="tab-nav">
+                    <div class="tab-nav-main">
+                        <button class="tab-btn active" data-tab="introduction">Introduction</button>
+                        <button class="tab-btn" data-tab="preparation">Preparation</button>
+                        <button class="tab-btn" data-tab="writing">Writing Task</button>
+                        <button class="tab-btn" data-tab="sample">View Sample</button>
+                    </div>
+                </nav>
+
+                <div class="tab-content active" id="introduction">
+                    <div class="intro-grid">
+                        <div class="intro-main">
+                            <p class="intro-text">
+                                First impressions count. In academic writing, your <strong>introduction</strong> is the first part your reader encounters. It serves as a map that guides the reader from a general topic toward the specific goal of your work.
+                            </p>
+                            <p class="intro-text">
+                                In this activity, you will explore the typical <strong>inverted triangle</strong> model of an academic introduction, moving from general context and common knowledge to a specific thesis statement. You will learn how to use <strong>connectors of sequence</strong> and formal vocabulary to present your ideas logically.
+                            </p>
+                            <p class="intro-text">
+                                Through analysis and practice, you will build the skills to draft introductory paragraphs that are clear, professional, and effectively communicate the purpose of your academic projects or essays.
+                            </p>
+                        </div>
+                        <div class="intro-sidebar">
+                            <div class="info-card">
+                                <div class="info-card-icon">
+                                    <i class="fa-solid fa-bullseye"></i>
+                                </div>
+                                <div class="info-card-content">
+                                    <h4>Learning Objective</h4>
+                                    <p>Structure an academic introduction following a general-to-specific pattern using connectors of sequence.</p>
+                                </div>
+                            </div>
+                            <div class="info-card">
+                                <div class="info-card-icon">
+                                    <i class="fa-solid fa-pen-nib"></i>
+                                </div>
+                                <div class="info-card-content">
+                                    <h4>Skill Focus</h4>
+                                    <p>Academic Writing (A2+ Level)</p>
+                                </div>
+                            </div>
+                            <div class="info-card">
+                                <div class="info-card-icon">
+                                    <i class="fa-solid fa-link"></i>
+                                </div>
+                                <div class="info-card-content">
+                                    <h4>Source</h4>
+                                    <p>Enbreak Original Content</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="preparation">
+
+                    <!-- 1. The funnel model -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">1</span>
+                            <h3>The Inverted Triangle</h3>
+                        </div>
+                        <p class="exercise-instructions">Also known as the funnel model, this structure guides the reader from a broad topic to a specific argument through three key stages.</p>
+
+                        <div class="funnel-wrapper">
+                            <div class="funnel-step funnel-step-1">
+                                <div class="funnel-step-label">Step 1</div>
+                                <div class="funnel-step-title">Open with a Hook</div>
+                                <div class="funnel-step-desc">Introduce the topic. Engage the reader with a striking fact, a question, a concession, or a quotation.</div>
+                            </div>
+
+                            <div class="funnel-connector">
+                                <div class="funnel-arrow"><i class="fa-solid fa-chevron-down"></i></div>
+                            </div>
+
+                            <div class="funnel-step funnel-step-2">
+                                <div class="funnel-step-label">Step 2</div>
+                                <div class="funnel-step-title">Build the Context</div>
+                                <div class="funnel-step-desc">Provide background: accepted facts, current trends, or a brief review of the existing conversation on the topic.</div>
+                            </div>
+
+                            <div class="funnel-connector">
+                                <div class="funnel-arrow"><i class="fa-solid fa-chevron-down"></i></div>
+                            </div>
+
+                            <div class="funnel-step funnel-step-3">
+                                <div class="funnel-step-label">Step 3</div>
+                                <div class="funnel-step-title">State Your Thesis</div>
+                                <div class="funnel-step-desc">State the specific, arguable claim your essay will develop and defend.</div>
+                            </div>
+                        </div>
+
+                        <div class="tip-box">
+                            <div class="tip-header">
+                                <i data-lucide="info" style="width: 20px; height: 20px;"></i> Tip
+                            </div>
+                            <div class="tip-content">
+                                <p>Context and background together are typically longer than the thesis, but the thesis is the most important sentence of the paragraph.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. Hook strategies -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">2</span>
+                            <h3>Hook Strategies</h3>
+                        </div>
+                        <p class="exercise-instructions">The opening of your introduction must generate interest. There is no single correct approach, but certain strategies are particularly effective in academic writing.</p>
+
+                        <div class="phrase-grid">
+                            <div class="hook-card hook-card-blue">
+                                <div class="phrase-card-label"><i class="fa-solid fa-chart-bar" style="color:#2563eb; margin-right:4px;"></i> Statistic</div>
+                                <div class="phrase-card-example">"Despite comprising less than 5% of the world's population, the United States accounts for nearly 25% of global carbon emissions."</div>
+                            </div>
+                            <div class="hook-card hook-card-purple">
+                                <div class="phrase-card-label"><i class="fa-solid fa-circle-question" style="color:#9333ea; margin-right:4px;"></i> Thought-Provoking Question</div>
+                                <div class="phrase-card-example">"What does it mean to be literate in an age where most information is consumed through images and short video clips?"</div>
+                            </div>
+                            <div class="hook-card hook-card-pink">
+                                <div class="phrase-card-label"><i class="fa-solid fa-quote-left" style="color:#db2777; margin-right:4px;"></i> Relevant Quotation</div>
+                                <div class="phrase-card-example">"As George Orwell famously observed, 'Political language is designed to make lies sound truthful', a warning that remains strikingly relevant today."</div>
+                            </div>
+                            <div class="hook-card hook-card-green">
+                                <div class="phrase-card-label"><i class="fa-solid fa-scale-balanced" style="color:#16a34a; margin-right:4px;"></i> Concession</div>
+                                <div class="phrase-card-example">"Many people think that working from home makes employees lazy. However, recent data shows that remote workers are actually more productive."</div>
+                            </div>
+                            <div class="hook-card hook-card-orange">
+                                <div class="phrase-card-label"><i class="fa-solid fa-book-open" style="color:#f97316; margin-right:4px;"></i> Contextual Definition</div>
+                                <div class="phrase-card-example">"The term 'digital divide' refers not merely to access to technology, but to the unequal ability to use it in ways that generate social and economic capital."</div>
+                            </div>
+                            <div class="hook-card hook-card-teal">
+                                <div class="phrase-card-label"><i class="fa-solid fa-film" style="color:#0d9488; margin-right:4px;"></i> Anecdote or Scenario</div>
+                                <div class="phrase-card-example">"During my first year of university, I noticed that most students were sleeping less than five hours a night. This personal observation made me question the impact of academic stress on health."</div>
+                            </div>
+                        </div>
+
+                        <div class="tip-box" style="margin-bottom: 0;">
+                            <div class="tip-header">
+                                <i data-lucide="info" style="width: 20px; height: 20px;"></i> Tip
+                            </div>
+                            <div class="tip-content">
+                                <p><strong>Avoid overused openers:</strong> Dictionary definitions ("According to the Oxford Dictionary...") are a common but weak strategy. They are acceptable only when you reinterpret the definition or challenge it in some way.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. Background language -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">3</span>
+                            <h3>Language for Background Information</h3>
+                        </div>
+                        <p class="exercise-instructions">Use these formal structures to introduce context, trends, and accepted knowledge before you state your thesis.</p>
+
+                        <table class="connector-table">
+                            <thead>
+                                <tr>
+                                    <th>Function</th>
+                                    <th>Formal Phrase</th>
+                                    <th>Example in Context</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Accepted knowledge</td>
+                                    <td><span class="connector-chip">It is well known that</span></td>
+                                    <td>…climate change is a serious danger to coastal areas.</td>
+                                </tr>
+                                <tr>
+                                    <td>Growing trend</td>
+                                    <td><span class="connector-chip">In recent years, there has been a growing interest in</span></td>
+                                    <td>…how informal learning helps professionals.</td>
+                                </tr>
+                                <tr>
+                                    <td>Identifying a gap</td>
+                                    <td><span class="connector-chip">However, not much attention has been given to</span></td>
+                                    <td>…how these rules affect rural communities.</td>
+                                </tr>
+                                <tr>
+                                    <td>Scholarly consensus</td>
+                                    <td><span class="connector-chip">Studies consistently show that</span></td>
+                                    <td>…early childhood nutrition affects brain development.</td>
+                                </tr>
+                                <tr>
+                                    <td>Ongoing debate</td>
+                                    <td><span class="connector-chip">It is still debated whether</span></td>
+                                    <td>…limiting screen time is truly effective.</td>
+                                </tr>
+                                <tr>
+                                    <td>Contextual shift</td>
+                                    <td><span class="connector-chip">In this context,</span></td>
+                                    <td>…remote work has become a permanent feature of modern cities.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- 4. The thesis statement -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">4</span>
+                            <h3>The Thesis Statement</h3>
+                        </div>
+                        <p class="exercise-instructions">The thesis statement is the most important sentence in your essay. It must make a specific, arguable claim, not just state an obvious fact.</p>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px;">
+                            <div class="thesis-eval-box weak">
+                                <div style="font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #b91c1c; margin-bottom: 8px;"><i class="fa-solid fa-xmark" style="margin-right: 4px; color: #ef4444;"></i> Weak Thesis</div>
+                                <p style="font-family: 'Inter', sans-serif; font-size: 14px; color: #374151; line-height: 1.6; font-style: italic; margin: 0;">"Social media has changed the way we communicate."</p>
+                                <p style="font-family: 'Inter', sans-serif; font-size: 12px; color: #b91c1c; margin: 8px 0 0; line-height: 1.4;">This is an obvious fact. No one can reasonably disagree with it, so it cannot drive an argument.</p>
+                            </div>
+                            <div class="thesis-eval-box strong">
+                                <div style="font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #15803d; margin-bottom: 8px;"><i class="fa-solid fa-check" style="margin-right: 4px; color: #22c55e;"></i> Strong Thesis</div>
+                                <p style="font-family: 'Inter', sans-serif; font-size: 14px; color: #374151; line-height: 1.6; font-style: italic; margin: 0;">"Social media makes society more divided because algorithms only show users opinions they already agree with."</p>
+                                <p style="font-family: 'Inter', sans-serif; font-size: 12px; color: #15803d; margin: 8px 0 0; line-height: 1.4;">Specific, arguable, and implies a line of evidence the essay will develop.</p>
+                            </div>
+                        </div>
+
+                        <p class="exercise-instructions">Use these verbs and structures to introduce your thesis formally:</p>
+                        <div class="phrase-grid">
+                            <div class="thesis-verb-card"><div class="thesis-verb-label">Arguing</div><div class="thesis-verb-example">"This paper argues that…"</div></div>
+                            <div class="thesis-verb-card"><div class="thesis-verb-label">Examining</div><div class="thesis-verb-example">"This essay examines how…"</div></div>
+                            <div class="thesis-verb-card"><div class="thesis-verb-label">Challenging</div><div class="thesis-verb-example">"This study challenges the assumption that…"</div></div>
+                            <div class="thesis-verb-card"><div class="thesis-verb-label">Proposing</div><div class="thesis-verb-example">"This paper proposes that…"</div></div>
+                        </div>
+                    </div>
+
+                    <!-- 5. Recognizing the thesis -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">5</span>
+                            <h3>Recognizing the Thesis</h3>
+                        </div>
+                        <p class="exercise-instructions">Read the introductory paragraphs below. Click on the sentence that represents the <strong>thesis statement</strong> in each paragraph.</p>
+
+                        <div class="paragraph-grid">
+                            <div class="paragraph-box">
+                                <div class="paragraph-title">Intro 1</div>
+                                <span class="clickable-sentence">Despite making up less than 5% of the world's population, the United States produces nearly 25% of global carbon emissions.</span>
+                                <span class="clickable-sentence">In recent decades, there has been a growing interest in transitioning to renewable energy to reduce these effects.</span>
+                                <span class="clickable-sentence">However, not much attention has been given to the economic barriers faced by low-income communities during this transition.</span>
+                                <span class="clickable-sentence" data-correct="true">This paper argues that federal subsidies for green technology mostly benefit wealthy households, making economic inequality worse.</span>
+                            </div>
+
+                            <div class="paragraph-box">
+                                <div class="paragraph-title">Intro 2</div>
+                                <span class="clickable-sentence">What does it mean to be literate in an age where most information is consumed through images and short video clips?</span>
+                                <span class="clickable-sentence">Studies consistently show that traditional reading habits among teenagers have declined significantly over the past ten years.</span>
+                                <span class="clickable-sentence">In this context, teachers are struggling to adapt their methods to keep students engaged.</span>
+                                <span class="clickable-sentence" data-correct="true">This essay examines how including visual media analysis in high school programs can help digital-native students recover their critical thinking skills.</span>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 12px; margin-top: 24px;">
+                            <button class="check-answers-btn" id="checkThesisBtn"><i class="fa-solid fa-check"></i> Check answers</button>
+                            <button class="check-answers-btn retry-btn" id="retryThesisBtn" disabled><i class="fa-solid fa-rotate-right"></i> Try again</button>
+                        </div>
+                    </div>
+
+                    <!-- 6. Put it in order -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">6</span>
+                            <h3>Put It in Order</h3>
+                        </div>
+                        <p class="exercise-instructions">The sentences below form a complete essay introduction, but they have been shuffled. Drag and drop the sentences into the correct order from general to specific. Use reference words (like "this question" or "these benefits") to help you connect the ideas.</p>
+
+                        <div class="sortable-container">
+                            <div class="sortable-list" id="sortable-intro">
+                                <div class="sortable-item" draggable="true" data-id="3">
+                                    <i class="fa-solid fa-grip-vertical"></i> 
+                                    Specifically, studies consistently demonstrate that students who regularly evaluate their own progress perform much better than those who rely only on teacher feedback.
+                                </div>
+                                <div class="sortable-item" draggable="true" data-id="5">
+                                    <i class="fa-solid fa-grip-vertical"></i> 
+                                    Therefore, this paper argues that embedding structured self-assessment activities into university programs is essential for developing lifelong learners.
+                                </div>
+                                <div class="sortable-item" draggable="true" data-id="1">
+                                    <i class="fa-solid fa-grip-vertical"></i> 
+                                    How do students continue to learn effectively once they leave the structured environment of a university classroom?
+                                </div>
+                                <div class="sortable-item" draggable="true" data-id="4">
+                                    <i class="fa-solid fa-grip-vertical"></i> 
+                                    Despite these clear benefits, this practice of self-evaluation remains an underdeveloped part of most higher education systems.
+                                </div>
+                                <div class="sortable-item" draggable="true" data-id="2">
+                                    <i class="fa-solid fa-grip-vertical"></i> 
+                                    To answer this question, researchers have increasingly focused on the importance of independent learning skills.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 12px; margin-top: 20px;">
+                            <button class="check-answers-btn" id="checkOrderBtn"><i class="fa-solid fa-check"></i> Check answers</button>
+                            <button class="check-answers-btn retry-btn" id="retryOrderBtn" disabled><i class="fa-solid fa-rotate-right"></i> Try again</button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- ═══════════════════════════════════════════════
+                     TAB 3 · WRITING TASK
+                ═══════════════════════════════════════════════ -->
+                <div class="tab-content" id="writing">
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">7</span>
+                            <h3>Draft Your Introduction</h3>
+                        </div>
+
+                        <p class="exercise-instructions" style="margin-bottom: 24px;">Choose <strong>one</strong> of the essay topics below and write a complete introduction paragraph of 100 to 160 words. Your introduction must include a <strong>hook</strong>, <strong>background information</strong>, and a clear <strong>thesis statement</strong>.</p>
+                        
+                        <div class="topic-grid">
+                            <div class="topic-card" id="topic-1" onclick="selectTopic(1)">
+                                <div class="topic-card-label"><i class="fa-solid fa-mobile-screen-button" style="color: #9ca3af;"></i> Option A</div>
+                                <div class="topic-card-text">The long-term effects of social media use on teenager mental health.</div>
+                            </div>
+                            <div class="topic-card" id="topic-2" onclick="selectTopic(2)">
+                                <div class="topic-card-label"><i class="fa-solid fa-robot" style="color: #9ca3af;"></i> Option B</div>
+                                <div class="topic-card-text">How artificial intelligence is changing the way people work and learn.</div>
+                            </div>
+                            <div class="topic-card" id="topic-3" onclick="selectTopic(3)">
+                                <div class="topic-card-label"><i class="fa-solid fa-calendar-days" style="color: #9ca3af;"></i> Option C</div>
+                                <div class="topic-card-text">The impact of a four-day work week on employee happiness and company productivity.</div>
+                            </div>
+                        </div>
+
+                        <p class="exercise-instructions">Write your introduction below:</p>
+                        
+                        <div class="writing-task-area-wrapper">
+                            <button class="copy-btn" id="copyTextBtn" title="Copy to clipboard">
+                                <i class="fa-regular fa-copy"></i> Copy text
+                            </button>
+                            <textarea class="writing-task-area" id="writing-area" placeholder="Begin writing your introduction here. Start with a hook, provide background context, and end with your specific thesis statement..."></textarea>
+                        </div>
+
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
+                            <span style="font-family: 'Inter', sans-serif; font-size: 13px; color: #6b7280;">Target: 100 to 160 words</span>
+                            <span id="word-count" style="font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; color: #9ca3af;">0 words</span>
+                        </div>
+                    </div>
+
+                    <div class="exercise-section" style="margin-top: 32px;">
+                        <div class="exercise-header">
+                            <span class="exercise-number">8</span>
+                            <h3>Self-Evaluation Checklist</h3>
+                        </div>
+                        <p class="exercise-instructions">Before considering your draft complete, review it against these criteria. Click each box once you are satisfied.</p>
+
+                        <div class="self-check-list">
+                            <div class="self-check-item" onclick="toggleCheck(this)">
+                                <div class="self-check-box"><i class="fa-solid fa-check"></i></div>
+                                <div class="self-check-label">My introduction opens with an engaging hook (not a vague generalization or dictionary definition).</div>
+                            </div>
+                            <div class="self-check-item" onclick="toggleCheck(this)">
+                                <div class="self-check-box"><i class="fa-solid fa-check"></i></div>
+                                <div class="self-check-label">I have provided relevant background context to set up the topic for the reader.</div>
+                            </div>
+                            <div class="self-check-item" onclick="toggleCheck(this)">
+                                <div class="self-check-box"><i class="fa-solid fa-check"></i></div>
+                                <div class="self-check-label">My thesis statement is specific and arguable; a reasonable person could disagree with it.</div>
+                            </div>
+                            <div class="self-check-item" onclick="toggleCheck(this)">
+                                <div class="self-check-box"><i class="fa-solid fa-check"></i></div>
+                                <div class="self-check-label">My text flows logically from general to specific, following the inverted triangle model.</div>
+                            </div>
+                            <div class="self-check-item" onclick="toggleCheck(this)">
+                                <div class="self-check-box"><i class="fa-solid fa-check"></i></div>
+                                <div class="self-check-label">My word count is roughly between 100 and 160 words.</div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                    <!-- Completion Box -->
+                    <div class="completion-box" id="writing-completion-box">
+                        <div class="completion-bar"></div>
+                        <div class="completion-inner">
+                            <div class="completion-header">
+                                <div class="completion-icon">
+                                    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                                </div>
+                                <h2 class="completion-title">Activity Complete!</h2>
+                            </div>
+                            <p class="completion-subtitle">You've completed <strong>"Drafting an Essay Introduction"</strong>. Here's what you've practised:</p>
+                            <div class="skills-list">
+                                <div class="skill-item">
+                                    <div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+                                    Using the inverted triangle structure
+                                </div>
+                                <div class="skill-item">
+                                    <div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+                                    Writing an engaging hook and solid background context
+                                </div>
+                                <div class="skill-item">
+                                    <div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+                                    Formulating a clear, arguable thesis statement
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ═══════════════════════════════════════════════
+                     TAB 4 · SAMPLE INTRODUCTIONS
+                ═══════════════════════════════════════════════ -->
+                <div class="tab-content" id="sample">
+                    
+                    <div class="warning-box" style="margin-bottom: 32px;">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                        <div class="warning-box-content">
+                            <p>These models show how an introduction moves from broad to specific. Notice how the paragraph navigates from the initial Hook, through the Background, directly to the Thesis.</p>
+                        </div>
+                    </div>
+
+                    <!-- Sample 1 -->
+                    <div class="sample-card">
+                        <div class="sample-card-header">
+                            <div class="sample-card-title">Option A:&nbsp;&nbsp;Social Media &amp; Mental Health</div>
+                            <div class="sample-card-level">A2+ Sample</div>
+                        </div>
+                        <div class="sample-card-body">
+                            <p class="annotated-paragraph">
+                                <span class="hl-hook">Despite the fact that young people today are more connected than any previous generation, rates of loneliness and anxiety among teenagers have risen sharply over the past two decades.</span> <span class="hl-background">According to recent data, one in seven young people globally experiences a mental health disorder, with daily digital media consumption identified as a significant factor. In recent years, researchers have tried to understand exactly how social media platforms influence psychological wellbeing.</span> <span class="hl-thesis">This paper argues that compulsive social media use, specifically through comparing oneself to others online, is a major risk factor for depressive symptoms that schools and parents must urgently address.</span>
+                            </p>
+                            <div class="anno-legend">
+                                <div class="anno-legend-item"><div class="color-box cbox-hook"></div> <strong>Concession hook:</strong> Acknowledges an opposing idea before narrowing</div>
+                                <div class="anno-legend-item"><div class="color-box cbox-background"></div> <strong>Background:</strong> Accepted data and current research trends</div>
+                                <div class="anno-legend-item"><div class="color-box cbox-thesis"></div> <strong>Thesis:</strong> Specific, arguable claim that implies evidence</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sample 2 -->
+                    <div class="sample-card">
+                        <div class="sample-card-header">
+                            <div class="sample-card-title">Option B:&nbsp;&nbsp;Artificial Intelligence &amp; Professional Learning</div>
+                            <div class="sample-card-level">A2+ Sample</div>
+                        </div>
+                        <div class="sample-card-body">
+                            <p class="annotated-paragraph">
+                                <span class="hl-hook">When a junior doctor checks a patient's symptoms using an AI tool instead of asking a senior colleague, the boundary between human expertise and machine assistance becomes very unclear.</span> <span class="hl-background">The rapid entry of artificial intelligence into the workplace has generated considerable debate about the future of jobs and how workers will learn new skills. Research consistently demonstrates that companies using AI-assisted training programs achieve much better results than those relying on traditional methods.</span> <span class="hl-thesis">In this context, this paper proposes that the most effective way to train professionals today is to treat human-machine collaboration as a learning opportunity rather than a threat to job security.</span>
+                            </p>
+                            <div class="anno-legend">
+                                <div class="anno-legend-item"><div class="color-box cbox-hook"></div> <strong>Scenario hook:</strong> Places the reader in a specific, vivid situation</div>
+                                <div class="anno-legend-item"><div class="color-box cbox-background"></div> <strong>Background:</strong> Contextual debate and empirical evidence</div>
+                                <div class="anno-legend-item"><div class="color-box cbox-thesis"></div> <strong>Thesis:</strong> Reframes the debate in a clear, arguable way</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sample 3 -->
+                    <div class="sample-card">
+                        <div class="sample-card-header">
+                            <div class="sample-card-title">Option C:&nbsp;&nbsp;The Four-Day Work Week</div>
+                            <div class="sample-card-level">A2+ Sample</div>
+                        </div>
+                        <div class="sample-card-body">
+                            <p class="annotated-paragraph">
+                                <span class="hl-hook">What would happen if companies paid employees their full salary to work only four days a week instead of five?</span> <span class="hl-background">This question has gained serious attention recently, as workers increasingly report feeling burned out and overworked. It is well known in human resources research that employee wellbeing directly affects company performance; yet, many businesses still stick to the traditional five-day schedule.</span> <span class="hl-thesis">This essay contends that shifting to a four-day work week not only drastically improves employee mental health but also leads to higher overall productivity for modern companies.</span>
+                            </p>
+                            <div class="anno-legend">
+                                <div class="anno-legend-item"><div class="color-box cbox-hook"></div> <strong>Question hook:</strong> Engages the reader by posing a real dilemma</div>
+                                <div class="anno-legend-item"><div class="color-box cbox-background"></div> <strong>Background:</strong> Recent trends and established research</div>
+                                <div class="anno-legend-item"><div class="color-box cbox-thesis"></div> <strong>Thesis:</strong> Makes a strong, arguable claim about business practices</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="activity-nav">
+                    <button class="nav-btn nav-btn-back" id="btn-back" disabled>
+                        <i class="fa-solid fa-arrow-left"></i> Back
+                    </button>
+                    <button class="nav-btn nav-btn-next" id="btn-next">
+                        Next <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="../../../js/layout.js"></script>
+    <script src="../../../js/script.js" defer></script>
+    <script src="../../../js/checkanswers.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            lucide.createIcons();
+
+            // ── Step 5 (Recognizing the thesis) Logic ── 
+            const thesisBoxes = document.querySelectorAll('.paragraph-box');
+            const checkThesisBtn = document.getElementById('checkThesisBtn');
+            const retryThesisBtn = document.getElementById('retryThesisBtn');
+
+            // Handle clicking sentences
+            thesisBoxes.forEach(box => {
+                const sentences = box.querySelectorAll('.clickable-sentence');
+                sentences.forEach(sentence => {
+                    sentence.addEventListener('click', function() {
+                        if (checkThesisBtn && checkThesisBtn.disabled) return;
+                        
+                        if (this.classList.contains('selected')) {
+                            this.classList.remove('selected');
+                        } else {
+                            sentences.forEach(s => s.classList.remove('selected'));
+                            this.classList.add('selected');
+                        }
+                    });
+                });
+            });
+
+            // Check Answers
+            if(checkThesisBtn) {
+                checkThesisBtn.addEventListener('click', function() {
+                    let correctCount = 0;
+                    let total = thesisBoxes.length;
+
+                    thesisBoxes.forEach(box => {
+                        const selected = box.querySelector('.clickable-sentence.selected');
+                        if (selected) {
+                            if (selected.dataset.correct === "true") {
+                                selected.classList.add('correct');
+                                correctCount++;
+                            } else {
+                                selected.classList.add('incorrect');
+                            }
+                        }
+                    });
+
+                    this.disabled = true;
+                    if(retryThesisBtn) retryThesisBtn.disabled = false;
+
+                    if(typeof showFeedbackPopup === 'function') {
+                        showFeedbackPopup(correctCount, total);
+                    }
+                });
+            }
+
+            // Try Again
+            if(retryThesisBtn) {
+                retryThesisBtn.addEventListener('click', function() {
+                    document.querySelectorAll('.clickable-sentence').forEach(s => {
+                        s.classList.remove('selected', 'correct', 'incorrect');
+                    });
+                    this.disabled = true;
+                    if(checkThesisBtn) checkThesisBtn.disabled = false;
+                });
+            }
+
+            // ── Step 6 (Drag and Drop Ordering) Logic ──
+            const sortableList = document.getElementById('sortable-intro');
+            const sortableItems = document.querySelectorAll('.sortable-item');
+            const checkOrderBtn = document.getElementById('checkOrderBtn');
+            const retryOrderBtn = document.getElementById('retryOrderBtn');
+            
+            let draggedItem = null;
+            let originalSequenceHTML = "";
+            
+            if (sortableList) {
+                originalSequenceHTML = sortableList.innerHTML;
+            }
+
+            function initSortable() {
+                const currentItems = sortableList.querySelectorAll('.sortable-item');
+                currentItems.forEach(item => {
+                    item.addEventListener('dragstart', function() {
+                        draggedItem = this;
+                        setTimeout(() => this.classList.add('dragging'), 0);
+                    });
+
+                    item.addEventListener('dragend', function() {
+                        this.classList.remove('dragging');
+                        draggedItem = null;
+                    });
+                });
+            }
+            
+            initSortable();
+
+            if (sortableList) {
+                sortableList.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                    
+                    const afterElement = getDragAfterElement(sortableList, e.clientY);
+                    if (draggedItem) {
+                        if (afterElement == null) {
+                            sortableList.appendChild(draggedItem);
+                        } else {
+                            sortableList.insertBefore(draggedItem, afterElement);
+                        }
+                    }
+                });
+            }
+
+            function getDragAfterElement(container, y) {
+                const draggableElements = [...container.querySelectorAll('.sortable-item:not(.dragging)')];
+
+                return draggableElements.reduce((closest, child) => {
+                    const box = child.getBoundingClientRect();
+                    const offset = y - box.top - box.height / 2;
+                    if (offset < 0 && offset > closest.offset) {
+                        return { offset: offset, element: child };
+                    } else {
+                        return closest;
+                    }
+                }, { offset: Number.NEGATIVE_INFINITY }).element;
+            }
+
+            if (checkOrderBtn) {
+                checkOrderBtn.addEventListener('click', function() {
+                    let correctCount = 0;
+                    const items = sortableList.querySelectorAll('.sortable-item');
+                    const total = items.length;
+
+                    items.forEach((item, index) => {
+                        item.classList.remove('correct', 'incorrect');
+                        const expectedId = index + 1;
+                        if (parseInt(item.dataset.id) === expectedId) {
+                            item.classList.add('correct');
+                            correctCount++;
+                        } else {
+                            item.classList.add('incorrect');
+                        }
+                    });
+
+                    if(retryOrderBtn) retryOrderBtn.disabled = false;
+
+                    if(typeof showFeedbackPopup === 'function') {
+                        showFeedbackPopup(correctCount, total);
+                    }
+                });
+            }
+
+            if (retryOrderBtn) {
+                retryOrderBtn.addEventListener('click', function() {
+                    sortableList.innerHTML = originalSequenceHTML;
+                    initSortable();
+                    this.disabled = true;
+                });
+            }
+
+            // ── Writing Tab Logic ──
+
+            // Word Counter (counts contractions as 2 words)
+            const writingArea = document.getElementById('writing-area');
+            const wordCount   = document.getElementById('word-count');
+
+            if(writingArea && wordCount) {
+                writingArea.addEventListener('input', function () {
+                    const text = this.value.trim();
+                    let words = 0;
+                    
+                    if (text.length > 0) {
+                        const wordsArray = text.split(/\s+/).filter(w => w.length > 0);
+                        wordsArray.forEach(w => {
+                            if (/[a-zA-Z]+['’][a-zA-Z]+/.test(w)) {
+                                words += 2;
+                            } else {
+                                words += 1;
+                            }
+                        });
+                    }
+                    
+                    if(words >= 100 && words <= 160) {
+                        wordCount.innerHTML = `${words} word${words !== 1 ? 's' : ''} <i class="fa-solid fa-check" style="margin-left: 4px;"></i>`;
+                        wordCount.style.color = '#ea580c'; 
+                    } else if (words > 160) {
+                        wordCount.innerHTML = `${words} word${words !== 1 ? 's' : ''}`;
+                        wordCount.style.color = '#ef4444'; 
+                    } else {
+                        wordCount.innerHTML = `${words} word${words !== 1 ? 's' : ''}`;
+                        wordCount.style.color = '#9ca3af'; 
+                    }
+                });
+            }
+
+            // Copy to Clipboard Logic
+            const copyBtn = document.getElementById('copyTextBtn');
+            if (copyBtn && writingArea) {
+                copyBtn.addEventListener('click', function() {
+                    writingArea.select();
+                    document.execCommand('copy');
+                    window.getSelection().removeAllRanges();
+
+                    const originalHtml = copyBtn.innerHTML;
+                    copyBtn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+
+                    setTimeout(() => {
+                        copyBtn.innerHTML = originalHtml;
+                    }, 1000);
+                });
+            }
+
+            // Topic Selection Toggle
+            window.selectTopic = function (topicNumber) {
+                const allTopics = document.querySelectorAll('.topic-card');
+                allTopics.forEach(card => card.classList.remove('active'));
+                
+                const selectedTopic = document.getElementById('topic-' + topicNumber);
+                if(selectedTopic) {
+                    selectedTopic.classList.add('active');
+                }
+            };
+
+            // Self Check Toggle
+            window.toggleCheck = function(element) {
+                element.classList.toggle('checked');
+            };
+
+            // Warning Overlay Logic (Only when finishing)
+            const btnNext = document.getElementById('btn-next');
+            const overlay = document.getElementById('done-warning-overlay');
+            const cancelDone = document.getElementById('cancel-done');
+            const confirmDone = document.getElementById('confirm-done');
+
+            if (btnNext && overlay) {
+                btnNext.addEventListener('click', function(e) {
+                    const activeTabBtn = document.querySelector('.tab-btn.active');
+                    if (activeTabBtn && activeTabBtn.dataset.tab === 'writing') {
+                        const isFinishing = this.textContent.trim().toLowerCase().includes('done') || this.textContent.trim().toLowerCase().includes('finish');
+                        const hasText = writingArea && writingArea.value.trim().length > 0;
+                        
+                        if (isFinishing && hasText) {
+                            e.preventDefault();
+                            e.stopImmediatePropagation();
+                            overlay.classList.add('show');
+                        }
+                    }
+                });
+            }
+
+            if(cancelDone) {
+                cancelDone.addEventListener('click', function() {
+                    overlay.classList.remove('show');
+                });
+            }
+
+            if(confirmDone) {
+                confirmDone.addEventListener('click', function() {
+                    overlay.classList.remove('show');
+                    window.location.href = '../actividades.html';
+                });
+            }
+
+        });
+    </script>
+</body>
+</html>
