@@ -1,3 +1,8 @@
+const readingConfig = {
+    type: 'reading',
+    tabs: ['intro', 'pre-reading', 'reading', 'post-reading']
+};
+
 document.addEventListener('DOMContentLoaded', function() {
     if (typeof activityConfig === 'undefined') {
         console.warn('activityConfig is not defined. Tab navigation disabled.');
@@ -76,6 +81,16 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         if (type === 'speaking') {
+            navContainer.style.display = 'flex';
+            if (btnBack) {
+                btnBack.disabled = currentTabIndex === 0;
+                btnBack.classList.toggle('hidden', currentTabIndex === 0);
+            }
+            if (btnNext) {
+                btnNext.innerHTML = currentTabIndex === tabs.length - 1
+                    ? 'Exit'
+                    : 'Next <i class="fa-solid fa-arrow-right"></i>';
+            }
         }
 
         if (type === 'writing') {
@@ -120,6 +135,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             if (type === 'reading' && currentTabIndex === tabs.length - 1) {
+                window.location.href = '../actividades.html';
+                return;
+            }
+            if (type === 'speaking' && currentTabIndex === tabs.length - 1) {
                 window.location.href = '../actividades.html';
                 return;
             }

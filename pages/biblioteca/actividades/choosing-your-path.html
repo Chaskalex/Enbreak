@@ -1,0 +1,2239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enbreak | Choosing Your Path</title>
+    <link rel="icon" type="image/x-icon" href="../../../favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../favicon/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../favicon/apple-touch-icon.png">
+    <link rel="manifest" href="../../../favicon/site.webmanifest">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rubik:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/buttons.css">
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../../../css/activities.css">
+
+    <style>
+    .activity-hero {
+        background: url('../../../assets/activities/choosing-path.png') center 40%/cover no-repeat;
+    }
+
+    /* ── PREDICTION TITLE BANNER ──────────────────────────── */
+    .prediction-banner {
+        background: linear-gradient(135deg, #0a1e42 0%, #1e3a8a 100%);
+        border-radius: 14px;
+        padding: 36px 28px;
+        text-align: center;
+        margin-bottom: 24px;
+        box-shadow: 0 6px 18px rgba(10,30,66,0.15);
+    }
+    .prediction-banner-label {
+        font-family: 'Inter', sans-serif;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: #ff6600;
+        margin-bottom: 10px;
+    }
+    .prediction-banner-title {
+        font-family: 'Rubik', sans-serif;
+        font-size: 28px;
+        font-weight: 700;
+        color: #ffffff;
+        margin: 0;
+        line-height: 1.3;
+    }
+
+    .prediction-question {
+        margin-bottom: 22px;
+    }
+    .prediction-question:last-child { margin-bottom: 0; }
+    .prediction-q-text {
+        font-family: 'Inter', sans-serif;
+        font-size: 14.5px;
+        font-weight: 600;
+        color: #1f2937;
+        margin-bottom: 12px;
+    }
+    .prediction-options {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    .prediction-chip {
+        display: inline-flex;
+        align-items: center;
+        padding: 9px 16px;
+        border-radius: 999px;
+        border: 1.5px solid #e5e7eb;
+        background: #ffffff;
+        font-family: 'Inter', sans-serif;
+        font-size: 13.5px;
+        color: #374151;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        user-select: none;
+    }
+    .prediction-chip:hover { border-color: #ea580c; color: #ea580c; }
+    .prediction-chip.selected { background: #fff7ed; border-color: #ea580c; color: #ea580c; font-weight: 600; }
+    .prediction-chip.correct { background: #f0fdf4; border-color: #16a34a; color: #15803d; font-weight: 600; }
+    .prediction-chip.incorrect { background: #fef2f2; border-color: #dc2626; color: #991b1b; }
+    .prediction-chip.disabled { pointer-events: none; }
+    .prediction-explanation {
+        margin-top: 10px;
+        padding: 10px 14px;
+        background: #f9fafb;
+        border-left: 3px solid #ea580c;
+        border-radius: 6px;
+        font-family: 'Inter', sans-serif;
+        font-size: 13px;
+        color: #4b5563;
+        line-height: 1.5;
+        display: none;
+    }
+    .prediction-explanation.show { display: block; }
+
+    /* ── SKIM/SCAN COMPARISON CARDS ──────────────────────── */
+    .strategy-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+        margin-bottom: 28px;
+    }
+    @media (max-width: 768px) {
+        .strategy-grid { grid-template-columns: 1fr; }
+    }
+    .strategy-card {
+        background: #ffffff;
+        border: 1.5px solid #e5e7eb;
+        border-radius: 14px;
+        overflow: hidden;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .strategy-card:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.05); }
+    .strategy-card-header {
+        padding: 18px 22px 14px;
+        color: #ffffff;
+    }
+    .strategy-card.skim .strategy-card-header { background: linear-gradient(135deg, #16a34a, #22c55e); }
+    .strategy-card.scan .strategy-card-header { background: linear-gradient(135deg, #1d4ed8, #2563eb); }
+    .strategy-card-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        background: rgba(255,255,255,0.18);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+    .strategy-card-name {
+        font-family: 'Rubik', sans-serif;
+        font-size: 22px;
+        font-weight: 700;
+        margin: 0 0 4px;
+    }
+    .strategy-card-tagline {
+        font-family: 'Inter', sans-serif;
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        opacity: 0.9;
+    }
+    .strategy-card-body {
+        padding: 20px 22px 22px;
+    }
+    .strategy-card-def {
+        font-family: 'Inter', sans-serif;
+        font-size: 14px;
+        line-height: 1.6;
+        color: #374151;
+        margin-bottom: 16px;
+    }
+    .strategy-card-section-label {
+        font-family: 'Inter', sans-serif;
+        font-size: 10.5px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        color: #6b7280;
+        margin-bottom: 8px;
+        margin-top: 14px;
+    }
+    .strategy-card-section-label:first-child { margin-top: 0; }
+    .strategy-list {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 4px;
+    }
+    .strategy-list li {
+        font-family: 'Inter', sans-serif;
+        font-size: 13.5px;
+        color: #374151;
+        padding: 5px 0 5px 22px;
+        position: relative;
+        line-height: 1.5;
+    }
+    .strategy-list li::before {
+        content: '';
+        position: absolute;
+        left: 4px;
+        top: 11px;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+    }
+    .strategy-card.skim .strategy-list li::before { background: #22c55e; }
+    .strategy-card.scan .strategy-list li::before { background: #2563eb; }
+
+    /* ── SITUATION CARDS (skim/scan decision) ────────────── */
+    .situation-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+    .situation-card {
+        background: #f9fafb;
+        border: 1.5px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 16px 18px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        flex-wrap: wrap;
+    }
+    .situation-card.correct { background: #f0fdf4; border-color: #86efac; }
+    .situation-card.incorrect { background: #fef2f2; border-color: #fca5a5; }
+    .situation-text {
+        font-family: 'Inter', sans-serif;
+        font-size: 14px;
+        color: #374151;
+        line-height: 1.5;
+        flex: 1 1 60%;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .situation-num {
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: #e5e7eb;
+        color: #4b5563;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Rubik', sans-serif;
+        font-size: 12px;
+        font-weight: 700;
+        flex-shrink: 0;
+    }
+    .situation-toggle {
+        display: flex;
+        gap: 6px;
+        flex-shrink: 0;
+    }
+    .toggle-btn {
+        padding: 8px 18px;
+        border-radius: 8px;
+        border: 1.5px solid #e5e7eb;
+        background: #ffffff;
+        font-family: 'Inter', sans-serif;
+        font-size: 13px;
+        font-weight: 600;
+        color: #6b7280;
+        cursor: pointer;
+        transition: all 0.2s;
+        min-width: 76px;
+    }
+    .toggle-btn:hover { border-color: #ea580c; color: #ea580c; }
+    .toggle-btn.skim-btn.selected { background: #16a34a; border-color: #16a34a; color: #ffffff; }
+    .toggle-btn.scan-btn.selected { background: #2563eb; border-color: #2563eb; color: #ffffff; }
+    .toggle-btn.correct { background: #16a34a; border-color: #16a34a; color: #ffffff; }
+    .toggle-btn.incorrect { background: #dc2626; border-color: #dc2626; color: #ffffff; }
+    .toggle-btn.disabled { cursor: not-allowed; opacity: 0.7; }
+
+    /* ── COLLOCATION DRAG & DROP ─────────────────────────── */
+    .colloc-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        margin-bottom: 20px;
+    }
+    @media (max-width: 768px) {
+        .colloc-wrapper { grid-template-columns: 1fr; }
+    }
+    .colloc-column-label {
+        font-family: 'Inter', sans-serif;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #6b7280;
+        margin-bottom: 12px;
+    }
+    .colloc-verbs-pool {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        min-height: 100px;
+    }
+    .colloc-verb-chip {
+        background: #ffffff;
+        border: 1.5px solid #e5e7eb;
+        border-radius: 10px;
+        padding: 14px 18px;
+        font-family: 'Rubik', sans-serif;
+        font-size: 16px;
+        font-weight: 700;
+        color: #0a1e42;
+        cursor: grab;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: all 0.2s;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+    .colloc-verb-chip:hover:not(.placed) { border-color: #ea580c; transform: translateX(2px); }
+    .colloc-verb-chip.dragging { opacity: 0.4; }
+    .colloc-verb-chip.placed { cursor: default; opacity: 0.4; pointer-events: none; }
+    .colloc-verb-chip i { color: #9ca3af; font-size: 13px; }
+    .colloc-targets {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .colloc-target {
+        background: #f9fafb;
+        border: 1.5px dashed #cbd5e1;
+        border-radius: 10px;
+        padding: 14px 18px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        min-height: 56px;
+        transition: all 0.2s;
+    }
+    .colloc-target.drag-over { border-color: #ea580c; background: #fff7ed; border-style: solid; }
+    .colloc-target.has-verb { border-style: solid; background: #ffffff; }
+    .colloc-target.correct { background: #f0fdf4; border-color: #16a34a; border-style: solid; }
+    .colloc-target.incorrect { background: #fef2f2; border-color: #dc2626; border-style: solid; }
+    .colloc-drop-slot {
+        min-width: 110px;
+        min-height: 32px;
+        background: #ffffff;
+        border-radius: 8px;
+        border: 1px dashed #cbd5e1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Rubik', sans-serif;
+        font-size: 14px;
+        font-weight: 700;
+        color: #cbd5e1;
+        padding: 6px 10px;
+        flex-shrink: 0;
+        cursor: pointer;
+    }
+    .colloc-drop-slot.filled {
+        background: #fff7ed;
+        border: 1.5px solid #ea580c;
+        border-style: solid;
+        color: #ea580c;
+    }
+    .colloc-target.correct .colloc-drop-slot { background: #dcfce7; border-color: #16a34a; color: #15803d; }
+    .colloc-target.incorrect .colloc-drop-slot { background: #fee2e2; border-color: #dc2626; color: #991b1b; }
+    .colloc-plus-sign { color: #9ca3af; font-size: 14px; flex-shrink: 0; }
+    .colloc-noun {
+        font-family: 'Inter', sans-serif;
+        font-size: 15px;
+        color: #374151;
+        font-weight: 500;
+    }
+    .colloc-context {
+        margin-top: 20px;
+        padding: 18px 20px;
+        background: #fffbeb;
+        border: 1px solid #fde68a;
+        border-radius: 10px;
+        display: none;
+    }
+    .colloc-context.show { display: block; }
+    .colloc-context-title {
+        font-family: 'Inter', sans-serif;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        color: #b45309;
+        margin-bottom: 10px;
+    }
+    .colloc-context-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        font-family: 'Inter', sans-serif;
+        font-size: 13.5px;
+        color: #4b5563;
+        line-height: 1.6;
+    }
+    .colloc-context-list strong { color: #0a1e42; }
+
+    /* ── READING PASSAGE ─────────────────────────────────── */
+    .reading-passage {
+        background: #fafafa;
+        border: 1px solid #e5e7eb;
+        border-radius: 14px;
+        padding: 32px 36px;
+        margin-bottom: 28px;
+        line-height: 1.9;
+        font-size: 14.5px;
+        color: #374151;
+    }
+    .reading-passage h2 {
+        font-family: 'Rubik', sans-serif;
+        font-size: 20px;
+        font-weight: 700;
+        color: #1f2937;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    .reading-passage p { margin-bottom: 16px; }
+    .reading-passage p:last-child { margin-bottom: 0; }
+    .reading-passage strong { color: #0a1e42; }
+    .reading-passage em { color: #ea580c; font-style: italic; }
+    @media (max-width: 768px) {
+        .reading-passage { padding: 22px 20px; }
+    }
+
+    /* ── SINGLE GIST QUESTION ────────────────────────────── */
+    .gist-question {
+        background: #f9fafb;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 22px 24px;
+    }
+    .gist-question-prompt {
+        font-family: 'Inter', sans-serif;
+        font-size: 15px;
+        font-weight: 600;
+        color: #1f2937;
+        margin-bottom: 14px;
+        line-height: 1.5;
+    }
+    .gist-options { display: flex; flex-direction: column; gap: 8px; }
+    .gist-explanation {
+        margin-top: 16px;
+        padding: 14px 18px;
+        background: #ecfdf5;
+        border-left: 3px solid #16a34a;
+        border-radius: 6px;
+        font-family: 'Inter', sans-serif;
+        font-size: 13.5px;
+        color: #065f46;
+        line-height: 1.6;
+        display: none;
+    }
+    .gist-explanation.show { display: block; }
+
+    /* ── SCANNING QUESTIONS ──────────────────────────────── */
+    .scan-list {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+    .scan-item {
+        background: #f9fafb;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 18px 20px;
+    }
+    .scan-q {
+        font-family: 'Inter', sans-serif;
+        font-size: 14px;
+        color: #1f2937;
+        line-height: 1.55;
+        margin-bottom: 12px;
+        display: flex;
+        gap: 10px;
+    }
+    .scan-q-num {
+        font-family: 'Rubik', sans-serif;
+        font-size: 13px;
+        font-weight: 700;
+        color: #ea580c;
+        flex-shrink: 0;
+    }
+    .scan-input-row {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .scan-input {
+        flex: 1;
+        min-width: 200px;
+        padding: 9px 12px;
+        border: 1.5px solid #e5e7eb;
+        border-radius: 8px;
+        font-family: 'Inter', sans-serif;
+        font-size: 13.5px;
+        color: #374151;
+        background: #ffffff;
+        outline: none;
+        transition: border-color 0.2s;
+    }
+    .scan-input:focus { border-color: #ea580c; }
+    .scan-input.correct { border-color: #16a34a; background: #f0fdf4; color: #166534; }
+    .scan-input.incorrect { border-color: #dc2626; background: #fef2f2; color: #991b1b; }
+    .scan-reveal-btn {
+        background: #ffffff;
+        border: 1.5px solid #e5e7eb;
+        border-radius: 8px;
+        padding: 9px 14px;
+        font-family: 'Inter', sans-serif;
+        font-size: 13px;
+        font-weight: 600;
+        color: #6b7280;
+        cursor: pointer;
+        transition: all 0.2s;
+        white-space: nowrap;
+    }
+    .scan-reveal-btn:hover { border-color: #ea580c; color: #ea580c; }
+    .scan-answer {
+        margin-top: 10px;
+        padding: 10px 14px;
+        background: #ecfdf5;
+        border-left: 3px solid #16a34a;
+        border-radius: 6px;
+        font-family: 'Inter', sans-serif;
+        font-size: 13px;
+        color: #065f46;
+        line-height: 1.55;
+        display: none;
+    }
+    .scan-answer.show { display: block; }
+    .scan-answer strong { color: #064e3b; }
+
+    /* ── MC CAROUSEL (kept) ──────────────────────────────── */
+    .mc-container {
+        background: #f9fafb;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 18px 20px;
+    }
+    .mc-list.single-view .mc-item { display: none; }
+    .mc-list.single-view .mc-item.active {
+        display: block;
+        animation: fadeSlide 0.22s ease;
+    }
+    @keyframes fadeSlide {
+        from { opacity: 0; transform: translateY(6px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+    .mc-question {
+        font-size: 14.5px;
+        font-weight: 600;
+        color: #1f2937;
+        margin-bottom: 14px;
+        line-height: 1.5;
+    }
+    .mc-options { display: flex; flex-direction: column; gap: 8px; }
+    .mc-btn {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 14px;
+        border-radius: 8px;
+        border: 1.5px solid #e5e7eb;
+        background: #fff;
+        font-family: 'Inter', sans-serif;
+        font-size: 14px;
+        color: #374151;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-align: left;
+        width: 100%;
+    }
+    .mc-letter {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: #f3f4f6;
+        border: 1.5px solid #d1d5db;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: 700;
+        color: #6b7280;
+        flex-shrink: 0;
+        transition: all 0.2s;
+    }
+    .mc-btn:hover { border-color: #ea580c; }
+    .mc-btn:hover .mc-letter { background: #ffedd5; border-color: #ea580c; color: #ea580c; }
+    .mc-btn.selected { border-color: #ea580c; background: #fff7ed; }
+    .mc-btn.selected .mc-letter { background: #ea580c; border-color: #ea580c; color: #fff; }
+    .mc-btn.correct { border-color: #16a34a; background: #f0fdf4; }
+    .mc-btn.correct .mc-letter { background: #16a34a; border-color: #16a34a; color: #fff; }
+    .mc-btn.incorrect { border-color: #dc2626; background: #fef2f2; }
+    .mc-btn.incorrect .mc-letter { background: #dc2626; border-color: #dc2626; color: #fff; }
+    .mc-card-nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 20px;
+        margin-top: 20px;
+        border-top: 1px solid #e5e7eb;
+    }
+    .mc-card-counter { font-family: 'Inter', sans-serif; font-size: 13px; color: #6b7280; font-weight: 500; }
+    .mc-card-counter span { font-family: 'Rubik', sans-serif; font-size: 14px; font-weight: 700; color: #111827; }
+    .mc-card-arrows { display: flex; gap: 8px; }
+    .arrow-btn {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        border: 1px solid #e5e7eb;
+        background: #fff;
+        color: #374151;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.2s;
+        font-size: 14px;
+    }
+    .arrow-btn:hover:not(:disabled) { border-color: #ea580c; color: #fff; background: #ea580c; }
+    .arrow-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    /* ── SEQUENCING (kept) ───────────────────────────────── */
+    .seq-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 20px;
+    }
+    .seq-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        background: #fff;
+        border: 1.5px solid #e5e7eb;
+        border-radius: 10px;
+        padding: 13px 16px;
+        cursor: grab;
+        user-select: none;
+        font-family: 'Inter', sans-serif;
+        font-size: 14px;
+        color: #374151;
+        line-height: 1.5;
+        transition: all 0.2s;
+    }
+    .seq-item:hover { border-color: #ea580c; box-shadow: 0 2px 8px rgba(234,88,12,0.08); }
+    .seq-item.dragging { opacity: 0.4; cursor: grabbing; }
+    .seq-item.drag-over { border-color: #ea580c; background: #fff7ed; }
+    .seq-item.correct-pos { border-color: #16a34a; background: #f0fdf4; }
+    .seq-item.incorrect-pos { border-color: #dc2626; background: #fef2f2; }
+    .seq-drag-handle { color: #9ca3af; font-size: 14px; flex-shrink: 0; }
+    .seq-pos-num {
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: #f3f4f6;
+        border: 1.5px solid #e5e7eb;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Rubik', sans-serif;
+        font-size: 12px;
+        font-weight: 700;
+        color: #6b7280;
+        flex-shrink: 0;
+    }
+    .seq-item.correct-pos .seq-pos-num { background: #16a34a; border-color: #16a34a; color: #fff; }
+    .seq-item.incorrect-pos .seq-pos-num { background: #dc2626; border-color: #dc2626; color: #fff; }
+
+    /* ── STATED / IMPLIED / NOT IN TEXT ──────────────────── */
+    .si-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+    .si-item {
+        background: #f9fafb;
+        border: 1.5px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 16px 18px;
+    }
+    .si-statement {
+        font-family: 'Inter', sans-serif;
+        font-size: 14px;
+        color: #1f2937;
+        line-height: 1.55;
+        margin-bottom: 12px;
+        display: flex;
+        gap: 10px;
+    }
+    .si-num {
+        font-family: 'Rubik', sans-serif;
+        font-size: 13px;
+        font-weight: 700;
+        color: #ea580c;
+        flex-shrink: 0;
+    }
+    .si-toggle {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+    }
+    .si-btn {
+        padding: 7px 14px;
+        border-radius: 8px;
+        border: 1.5px solid #e5e7eb;
+        background: #ffffff;
+        font-family: 'Inter', sans-serif;
+        font-size: 12.5px;
+        font-weight: 600;
+        color: #6b7280;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+    .si-btn:hover { border-color: #ea580c; color: #ea580c; }
+    .si-btn.selected { background: #ea580c; border-color: #ea580c; color: #ffffff; }
+    .si-btn.correct { background: #16a34a; border-color: #16a34a; color: #ffffff; }
+    .si-btn.incorrect { background: #dc2626; border-color: #dc2626; color: #ffffff; }
+    .si-btn.disabled { cursor: not-allowed; }
+    .si-explanation {
+        margin-top: 12px;
+        padding: 10px 14px;
+        background: #ffffff;
+        border-left: 3px solid #ea580c;
+        border-radius: 6px;
+        font-family: 'Inter', sans-serif;
+        font-size: 12.5px;
+        color: #4b5563;
+        line-height: 1.55;
+        display: none;
+    }
+    .si-explanation.show { display: block; }
+    .si-explanation strong { color: #1f2937; }
+
+    /* ── REFLECTION TASK ─────────────────────────────────── */
+    .reflection-wrapper {
+        position: relative;
+        width: 100%;
+    }
+    .copy-btn {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        background: #f3f4f6;
+        border: none;
+        border-radius: 6px;
+        padding: 6px 10px;
+        color: #6b7280;
+        font-family: 'Inter', sans-serif;
+        font-size: 12.5px;
+        font-weight: 500;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        transition: all 0.2s;
+        z-index: 10;
+    }
+    .copy-btn:hover { background: #e5e7eb; color: #1f2937; }
+    .reflection-area {
+        background: #ffffff;
+        border: 2px solid #e5e7eb;
+        border-radius: 12px;
+        width: 100%;
+        min-height: 180px;
+        padding: 44px 18px 16px;
+        font-family: 'Inter', sans-serif;
+        font-size: 14.5px;
+        color: #374151;
+        resize: vertical;
+        transition: all 0.2s ease;
+        line-height: 1.7;
+        box-sizing: border-box;
+    }
+    .reflection-area:focus {
+        outline: none;
+        border-color: #ea580c;
+        box-shadow: 0 0 0 4px rgba(234, 88, 12, 0.1);
+    }
+    .reflection-area::placeholder { color: #9ca3af; }
+    .reflection-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 8px;
+    }
+    .reflection-target {
+        font-family: 'Inter', sans-serif;
+        font-size: 12.5px;
+        color: #6b7280;
+    }
+    .reflection-count {
+        font-family: 'Inter', sans-serif;
+        font-size: 12.5px;
+        font-weight: 500;
+        color: #9ca3af;
+    }
+    </style>
+
+    <script>
+        const activityConfig = {
+            type: 'reading',
+            tabs: ['intro', 'pre-reading', 'reading', 'post-reading']
+        };
+    </script>
+    <script src="../../../js/tabs.js"></script>
+</head>
+<body>
+
+    <div id="header-placeholder"></div>
+
+    <main class="activity-page">
+
+        <section class="activity-hero">
+            <div class="activity-hero-content">
+                <nav class="breadcrumb">
+                    <a href="/">Inicio</a>
+                    <span class="breadcrumb-separator">›</span>
+                    <a href="../actividades.html">Actividades</a>
+                    <span class="breadcrumb-separator">›</span>
+                    <span class="breadcrumb-current">Choosing Your Path</span>
+                </nav>
+                <h1>Choosing Your Path</h1>
+                <div class="activity-hero-badges">
+                    <span class="hero-badge"><i class="fa-solid fa-book-open"></i> Reading</span>
+                    <span class="hero-badge"><i class="fa-solid fa-layer-group"></i> Level B1</span>
+                    <span class="hero-badge"><i class="fa-regular fa-clock"></i> 30 min</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="activity-container">
+            <div class="tabs-wrapper">
+
+                <nav class="tab-nav">
+                    <div class="tab-nav-main">
+                        <button class="tab-btn active" data-tab="intro">Intro</button>
+                        <button class="tab-btn" data-tab="pre-reading">Pre-Reading</button>
+                        <button class="tab-btn" data-tab="reading">Reading</button>
+                        <button class="tab-btn" data-tab="post-reading">Post-Reading</button>
+                    </div>
+                </nav>
+
+                <!-- ================================================
+                     INTRO
+                ================================================ -->
+                <div class="tab-content active" id="intro">
+                    <div class="intro-grid">
+                        <div class="intro-main">
+                            <p class="intro-text">
+                                Every year, thousands of students face one of the most important decisions of their academic lives: what to study. This choice involves personal interests, career goals, family expectations, and a great deal of uncertainty. The implications can last for years.
+                            </p>
+                            <p class="intro-text">
+                                In this activity, you will read an academic text about how students choose a university degree and the consequences of different choices. As you read, you will practise <strong>skimming</strong> for the main idea, <strong>scanning</strong> for specific details, and understanding <strong>implicit meanings</strong>: what the author suggests without saying directly.
+                            </p>
+                            <p class="intro-text">
+                                You will also work with <strong>verb-noun collocations</strong> common in academic writing, and practise identifying the <strong>sequence of ideas</strong> in an argumentative text.
+                            </p>
+                        </div>
+                        <div class="intro-sidebar">
+                            <div class="info-card">
+                                <div class="info-card-icon"><i class="fa-solid fa-bullseye"></i></div>
+                                <div class="info-card-content">
+                                    <h4>Learning Objective</h4>
+                                    <p>Read and understand an academic text using skimming, scanning, and inference strategies.</p>
+                                </div>
+                            </div>
+                            <div class="info-card">
+                                <div class="info-card-icon"><i class="fa-solid fa-book-open"></i></div>
+                                <div class="info-card-content">
+                                    <h4>Skill Focus</h4>
+                                    <p>Level B1</p>
+                                </div>
+                            </div>
+                            <div class="info-card">
+                                <div class="info-card-icon"><i class="fa-solid fa-link"></i></div>
+                                <div class="info-card-content">
+                                    <h4>Source</h4>
+                                    <p>Enbreak Original Content</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ================================================
+                     PRE-READING
+                ================================================ -->
+                <div class="tab-content" id="pre-reading">
+
+                    <!-- ── EXERCISE 1: PREDICTING FROM THE TITLE ── -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">1</span>
+                            <h3>Predicting from the Title</h3>
+                        </div>
+                        <p class="exercise-instructions">
+                            Before reading, skilled readers make predictions. Look at the title below and answer the three questions. There are no wrong answers in prediction — but some are more likely than others.
+                        </p>
+
+                        <div class="prediction-banner">
+                            <div class="prediction-banner-label">Article Title</div>
+                            <h2 class="prediction-banner-title">Choosing Your Academic Path</h2>
+                        </div>
+
+                        <div id="prediction-block">
+                            <div class="prediction-question" data-correct="b">
+                                <p class="prediction-q-text">1. Who is this text most likely written for?</p>
+                                <div class="prediction-options">
+                                    <span class="prediction-chip" data-option="a">University professors</span>
+                                    <span class="prediction-chip" data-option="b">University students considering their degree</span>
+                                    <span class="prediction-chip" data-option="c">Parents of school-age children</span>
+                                    <span class="prediction-chip" data-option="d">Education ministry officials</span>
+                                </div>
+                                <div class="prediction-explanation">
+                                    The title speaks directly to a reader making an academic choice. "Your" suggests the reader is the one choosing — most likely a student.
+                                </div>
+                            </div>
+
+                            <div class="prediction-question" data-correct="b">
+                                <p class="prediction-q-text">2. What kind of text is this likely to be?</p>
+                                <div class="prediction-options">
+                                    <span class="prediction-chip" data-option="a">A news article</span>
+                                    <span class="prediction-chip" data-option="b">An academic argumentative essay</span>
+                                    <span class="prediction-chip" data-option="c">A personal blog post</span>
+                                    <span class="prediction-chip" data-option="d">A scientific research paper</span>
+                                </div>
+                                <div class="prediction-explanation">
+                                    The phrasing is formal and abstract ("path", not "subject"). It sounds like a discussion, not a news report or a casual blog. It is also too short and too non-empirical to be a research paper.
+                                </div>
+                            </div>
+
+                            <div class="prediction-question" data-correct="c">
+                                <p class="prediction-q-text">3. What tone do you expect?</p>
+                                <div class="prediction-options">
+                                    <span class="prediction-chip" data-option="a">Humorous</span>
+                                    <span class="prediction-chip" data-option="b">Highly technical</span>
+                                    <span class="prediction-chip" data-option="c">Reflective and persuasive</span>
+                                    <span class="prediction-chip" data-option="d">Aggressive</span>
+                                </div>
+                                <div class="prediction-explanation">
+                                    Texts about life choices tend to be reflective, and academic essays often persuade the reader to consider a particular perspective.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 12px; margin-top: 20px;">
+                            <button class="check-answers-btn" id="check-prediction">
+                                <i class="fa-solid fa-check"></i> Check predictions
+                            </button>
+                            <button class="check-answers-btn retry-btn" id="retry-prediction" disabled>
+                                <i class="fa-solid fa-rotate-right"></i> Try again
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- ── EXERCISE 2: SKIMMING & SCANNING ── -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">2</span>
+                            <h3>Skimming and Scanning</h3>
+                        </div>
+                        <p class="exercise-instructions">
+                            Two essential reading strategies for academic study. They look similar, but they serve different purposes. Compare them below and then practise choosing between them.
+                        </p>
+
+                        <div class="strategy-grid">
+                            <div class="strategy-card skim">
+                                <div class="strategy-card-header">
+                                    <div class="strategy-card-icon"><i class="fa-solid fa-bolt"></i></div>
+                                    <h4 class="strategy-card-name">Skimming</h4>
+                                    <div class="strategy-card-tagline">Reading fast for the big picture</div>
+                                </div>
+                                <div class="strategy-card-body">
+                                    <p class="strategy-card-def">
+                                        You move your eyes over the text quickly to get the general idea. You don't read every word — you build a rough understanding of what the text is about.
+                                    </p>
+                                    <div class="strategy-card-section-label">How to do it</div>
+                                    <ul class="strategy-list">
+                                        <li>Read the title and any subheadings</li>
+                                        <li>Read the first sentence of each paragraph</li>
+                                        <li>Notice images, bold text, and the conclusion</li>
+                                    </ul>
+                                    <div class="strategy-card-section-label">Use it when</div>
+                                    <ul class="strategy-list">
+                                        <li>Deciding if a text is relevant to your essay</li>
+                                        <li>Getting the gist of a long article quickly</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="strategy-card scan">
+                                <div class="strategy-card-header">
+                                    <div class="strategy-card-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+                                    <h4 class="strategy-card-name">Scanning</h4>
+                                    <div class="strategy-card-tagline">Searching for specific info</div>
+                                </div>
+                                <div class="strategy-card-body">
+                                    <p class="strategy-card-def">
+                                        You search the text for one specific piece of information — a name, a date, a number, a keyword. Everything else is ignored.
+                                    </p>
+                                    <div class="strategy-card-section-label">How to do it</div>
+                                    <ul class="strategy-list">
+                                        <li>Know exactly what you are looking for</li>
+                                        <li>Move your eyes quickly over the text</li>
+                                        <li>Stop only when you find the target</li>
+                                    </ul>
+                                    <div class="strategy-card-section-label">Use it when</div>
+                                    <ul class="strategy-list">
+                                        <li>Finding a specific date or statistic</li>
+                                        <li>Locating a name or keyword in a long text</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="exercise-instructions" style="margin-top: 26px;">
+                            <strong>Which strategy would you use?</strong> For each situation, choose Skim or Scan.
+                        </p>
+
+                        <div class="situation-list" id="situation-list">
+                            <div class="situation-card" data-correct="skim">
+                                <div class="situation-text">
+                                    <span class="situation-num">1</span>
+                                    You want to know if a 20-page article is relevant to your essay topic.
+                                </div>
+                                <div class="situation-toggle">
+                                    <button class="toggle-btn skim-btn" data-choice="skim">Skim</button>
+                                    <button class="toggle-btn scan-btn" data-choice="scan">Scan</button>
+                                </div>
+                            </div>
+                            <div class="situation-card" data-correct="scan">
+                                <div class="situation-text">
+                                    <span class="situation-num">2</span>
+                                    You need to find the publication date of a journal article.
+                                </div>
+                                <div class="situation-toggle">
+                                    <button class="toggle-btn skim-btn" data-choice="skim">Skim</button>
+                                    <button class="toggle-btn scan-btn" data-choice="scan">Scan</button>
+                                </div>
+                            </div>
+                            <div class="situation-card" data-correct="skim">
+                                <div class="situation-text">
+                                    <span class="situation-num">3</span>
+                                    You're flicking through a textbook chapter to see what topics it covers.
+                                </div>
+                                <div class="situation-toggle">
+                                    <button class="toggle-btn skim-btn" data-choice="skim">Skim</button>
+                                    <button class="toggle-btn scan-btn" data-choice="scan">Scan</button>
+                                </div>
+                            </div>
+                            <div class="situation-card" data-correct="scan">
+                                <div class="situation-text">
+                                    <span class="situation-num">4</span>
+                                    You're looking for a specific researcher's name mentioned somewhere in a long report.
+                                </div>
+                                <div class="situation-toggle">
+                                    <button class="toggle-btn skim-btn" data-choice="skim">Skim</button>
+                                    <button class="toggle-btn scan-btn" data-choice="scan">Scan</button>
+                                </div>
+                            </div>
+                            <div class="situation-card" data-correct="skim">
+                                <div class="situation-text">
+                                    <span class="situation-num">5</span>
+                                    You want to get the gist of a news article in 30 seconds.
+                                </div>
+                                <div class="situation-toggle">
+                                    <button class="toggle-btn skim-btn" data-choice="skim">Skim</button>
+                                    <button class="toggle-btn scan-btn" data-choice="scan">Scan</button>
+                                </div>
+                            </div>
+                            <div class="situation-card" data-correct="scan">
+                                <div class="situation-text">
+                                    <span class="situation-num">6</span>
+                                    You need to find a specific statistic about university enrolment in a 5-page article.
+                                </div>
+                                <div class="situation-toggle">
+                                    <button class="toggle-btn skim-btn" data-choice="skim">Skim</button>
+                                    <button class="toggle-btn scan-btn" data-choice="scan">Scan</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 12px;">
+                            <button class="check-answers-btn" id="check-situation">
+                                <i class="fa-solid fa-check"></i> Check answers
+                            </button>
+                            <button class="check-answers-btn retry-btn" id="retry-situation" disabled>
+                                <i class="fa-solid fa-rotate-right"></i> Try again
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- ── EXERCISE 3: VERB-NOUN COLLOCATIONS ── -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">3</span>
+                            <h3>Verb-Noun Collocations</h3>
+                        </div>
+                        <p class="exercise-instructions">
+                            Academic writing relies on fixed verb-noun pairs that "sound right" together to native speakers. Drag each verb on the left to the noun phrase it correctly collocates with on the right.
+                        </p>
+
+                        <div class="colloc-wrapper">
+                            <div>
+                                <div class="colloc-column-label">Verbs (drag these)</div>
+                                <div class="colloc-verbs-pool" id="verbs-pool">
+                                    <div class="colloc-verb-chip" draggable="true" data-verb="conduct">
+                                        <i class="fa-solid fa-grip-vertical"></i> conduct
+                                    </div>
+                                    <div class="colloc-verb-chip" draggable="true" data-verb="weigh up">
+                                        <i class="fa-solid fa-grip-vertical"></i> weigh up
+                                    </div>
+                                    <div class="colloc-verb-chip" draggable="true" data-verb="draw">
+                                        <i class="fa-solid fa-grip-vertical"></i> draw
+                                    </div>
+                                    <div class="colloc-verb-chip" draggable="true" data-verb="pursue">
+                                        <i class="fa-solid fa-grip-vertical"></i> pursue
+                                    </div>
+                                    <div class="colloc-verb-chip" draggable="true" data-verb="face">
+                                        <i class="fa-solid fa-grip-vertical"></i> face
+                                    </div>
+                                    <div class="colloc-verb-chip" draggable="true" data-verb="sustain">
+                                        <i class="fa-solid fa-grip-vertical"></i> sustain
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="colloc-column-label">Nouns (drop verbs here)</div>
+                                <div class="colloc-targets" id="colloc-targets">
+                                    <div class="colloc-target" data-correct="conduct">
+                                        <div class="colloc-drop-slot"><span class="slot-placeholder">drop</span></div>
+                                        <span class="colloc-plus-sign">+</span>
+                                        <span class="colloc-noun">research</span>
+                                    </div>
+                                    <div class="colloc-target" data-correct="weigh up">
+                                        <div class="colloc-drop-slot"><span class="slot-placeholder">drop</span></div>
+                                        <span class="colloc-plus-sign">+</span>
+                                        <span class="colloc-noun">the pros and cons</span>
+                                    </div>
+                                    <div class="colloc-target" data-correct="draw">
+                                        <div class="colloc-drop-slot"><span class="slot-placeholder">drop</span></div>
+                                        <span class="colloc-plus-sign">+</span>
+                                        <span class="colloc-noun">a distinction</span>
+                                    </div>
+                                    <div class="colloc-target" data-correct="pursue">
+                                        <div class="colloc-drop-slot"><span class="slot-placeholder">drop</span></div>
+                                        <span class="colloc-plus-sign">+</span>
+                                        <span class="colloc-noun">a degree</span>
+                                    </div>
+                                    <div class="colloc-target" data-correct="face">
+                                        <div class="colloc-drop-slot"><span class="slot-placeholder">drop</span></div>
+                                        <span class="colloc-plus-sign">+</span>
+                                        <span class="colloc-noun">a challenge</span>
+                                    </div>
+                                    <div class="colloc-target" data-correct="sustain">
+                                        <div class="colloc-drop-slot"><span class="slot-placeholder">drop</span></div>
+                                        <span class="colloc-plus-sign">+</span>
+                                        <span class="colloc-noun">motivation</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 12px; margin-bottom: 18px;">
+                            <button class="check-answers-btn" id="check-colloc">
+                                <i class="fa-solid fa-check"></i> Check answers
+                            </button>
+                            <button class="check-answers-btn retry-btn" id="retry-colloc" disabled>
+                                <i class="fa-solid fa-rotate-right"></i> Try again
+                            </button>
+                        </div>
+
+                        <div class="colloc-context" id="colloc-context">
+                            <div class="colloc-context-title"><i class="fa-solid fa-quote-left"></i> &nbsp;In the reading text</div>
+                            <div class="colloc-context-list">
+                                <div>• <strong>conduct research:</strong> Students who <em>conduct research</em> on different programmes feel more satisfied with their choice.</div>
+                                <div>• <strong>weigh up the pros and cons:</strong> Few students take time to <em>weigh up the pros and cons</em> of each option.</div>
+                                <div>• <strong>draw a distinction:</strong> A key distinction to <em>draw</em> is between what you want to study and what you feel expected to study.</div>
+                                <div>• <strong>pursue a degree:</strong> Many students <em>pursue a degree</em> their family considers prestigious.</div>
+                                <div>• <strong>face a challenge:</strong> Students who choose thoughtfully are better prepared to <em>face the challenges</em> of academic life.</div>
+                                <div>• <strong>sustain motivation:</strong> Engagement is difficult to <em>sustain</em> without genuine interest.</div>
+                            </div>
+                        </div>
+
+                        <div class="tip-box" style="margin-top: 18px;">
+                            <div class="tip-header">
+                                <i class="fa-solid fa-lightbulb" style="color: #ea580c;"></i> Tip
+                            </div>
+                            <div class="tip-content">
+                                <p>Collocations are word combinations that "sound right" to native speakers. Learning verbs and nouns as fixed pairs is more efficient than learning them separately — it makes your writing sound more natural and academic.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- ================================================
+                     READING
+                ================================================ -->
+                <div class="tab-content" id="reading">
+
+                    <!-- ── THE READING PASSAGE ── -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">4</span>
+                            <h3>Read the Text</h3>
+                        </div>
+                        <p class="exercise-instructions">
+                            Read the academic text below. The exercises that follow will guide you through three different reading skills: skimming for the main idea, scanning for details, and inferring implicit meaning.
+                        </p>
+
+                        <div class="reading-passage">
+                            <h2>Choosing Your Academic Path</h2>
+                            <p>
+                                Every year, thousands of students arrive at university facing one of the most important decisions of their lives: what to study. This choice is not simply about picking a subject. It involves considering future career opportunities, personal interests, and the expectations of family and society. The implications of this decision can be both immediate and long-term.
+                            </p>
+                            <p>
+                                Research suggests that students who take time to investigate their options before enrolling tend to feel more satisfied with their choices later on. Skimming through university catalogues and scanning job market reports can provide a broad picture of what different degrees lead to. However, information alone is rarely enough to make a decision that feels right.
+                            </p>
+                            <p>
+                                One common difficulty is the influence of "common knowledge" — widely held beliefs about which degrees are useful or prestigious. Many students choose to study engineering, law, or medicine not because they are passionate about these fields, but because their families or communities consider them to be successful paths. As a result, they may find themselves in courses that do not match their interests or strengths, which can lead to poor academic performance and a lack of motivation.
+                            </p>
+                            <p>
+                                A key distinction to draw is between what a student <em>wants</em> to study and what they <em>feel they are expected</em> to study. This difference matters because academic success is strongly linked to engagement, and engagement is difficult to sustain without genuine interest. Choosing a degree based on external pressure rather than internal motivation often leads to regret.
+                            </p>
+                            <p>
+                                The implications of an uninformed or externally driven choice can be significant. In practical terms, students may spend years in a programme that does not lead to the career they actually want. They may also lose confidence in their ability to succeed academically. On the other hand, a well-researched, personally motivated choice tends to produce stronger academic outcomes and a greater sense of purpose.
+                            </p>
+                            <p>
+                                In conclusion, choosing an academic path requires more than following conventional wisdom. It demands careful research, honest self-reflection, and an awareness of the difference between personal goals and social expectations. Students who approach this decision thoughtfully are better prepared to face the challenges of academic life with confidence and commitment.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- ── EXERCISE 5: SKIM FIRST (GIST) ── -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">5</span>
+                            <h3>Skim First — What's the Main Idea?</h3>
+                        </div>
+                        <p class="exercise-instructions">
+                            Skim the text quickly — try not to spend more than 60 seconds. Don't try to understand every word. Then answer the question below based on your overall impression.
+                        </p>
+
+                        <div class="gist-question" data-correct="b">
+                            <p class="gist-question-prompt">After skimming, which of these best summarises the writer's main message?</p>
+                            <div class="gist-options">
+                                <button class="mc-btn" data-option="a">
+                                    <span class="mc-letter">A</span> Most students choose the wrong degree because of bad universities.
+                                </button>
+                                <button class="mc-btn" data-option="b">
+                                    <span class="mc-letter">B</span> Choosing a degree is a complex decision that requires research, self-reflection, and resisting external pressure.
+                                </button>
+                                <button class="mc-btn" data-option="c">
+                                    <span class="mc-letter">C</span> University degrees in engineering, law, and medicine are usually the best choices.
+                                </button>
+                                <button class="mc-btn" data-option="d">
+                                    <span class="mc-letter">D</span> Students should always follow their family's advice when choosing a degree.
+                                </button>
+                            </div>
+                            <div class="gist-explanation" id="gist-explanation">
+                                <strong>Correct: B.</strong> The writer's central argument is that choosing a degree is a complex decision that requires careful research and self-reflection, and that students should be aware of — and resist — external pressure when it conflicts with their genuine interests.
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 12px; margin-top: 18px;">
+                            <button class="check-answers-btn" id="check-gist">
+                                <i class="fa-solid fa-eye"></i> Reveal answer
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- ── EXERCISE 6: SCAN FOR DETAILS ── -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">6</span>
+                            <h3>Scan for Details</h3>
+                        </div>
+                        <p class="exercise-instructions">
+                            Now scan the text for specific information. You don't need to re-read the whole text — just locate the answer. Type a short answer in each box, then check or reveal the answer.
+                        </p>
+
+                        <div class="scan-list" id="scan-list">
+                            <div class="scan-item" data-keys="catalogues|catalogs;reports">
+                                <div class="scan-q">
+                                    <span class="scan-q-num">1.</span>
+                                    According to paragraph 2, what two types of source can students skim and scan to learn about degree options?
+                                </div>
+                                <div class="scan-input-row">
+                                    <input type="text" class="scan-input" placeholder="Type your answer...">
+                                    <button class="scan-reveal-btn" data-action="check">Check</button>
+                                    <button class="scan-reveal-btn" data-action="reveal">Show answer</button>
+                                </div>
+                                <div class="scan-answer">
+                                    <strong>Answer:</strong> University catalogues and job market reports.
+                                </div>
+                            </div>
+
+                            <div class="scan-item" data-keys="engineering;law;medicine">
+                                <div class="scan-q">
+                                    <span class="scan-q-num">2.</span>
+                                    In paragraph 3, what three subjects does the writer mention as common "prestigious" choices?
+                                </div>
+                                <div class="scan-input-row">
+                                    <input type="text" class="scan-input" placeholder="Type your answer...">
+                                    <button class="scan-reveal-btn" data-action="check">Check</button>
+                                    <button class="scan-reveal-btn" data-action="reveal">Show answer</button>
+                                </div>
+                                <div class="scan-answer">
+                                    <strong>Answer:</strong> Engineering, law, and medicine.
+                                </div>
+                            </div>
+
+                            <div class="scan-item" data-keys="performance;motivation">
+                                <div class="scan-q">
+                                    <span class="scan-q-num">3.</span>
+                                    What two negative outcomes are mentioned for students who study a subject that does not match their interests?
+                                </div>
+                                <div class="scan-input-row">
+                                    <input type="text" class="scan-input" placeholder="Type your answer...">
+                                    <button class="scan-reveal-btn" data-action="check">Check</button>
+                                    <button class="scan-reveal-btn" data-action="reveal">Show answer</button>
+                                </div>
+                                <div class="scan-answer">
+                                    <strong>Answer:</strong> Poor academic performance and lack of motivation.
+                                </div>
+                            </div>
+
+                            <div class="scan-item" data-keys="engagement">
+                                <div class="scan-q">
+                                    <span class="scan-q-num">4.</span>
+                                    According to paragraph 4, what is academic success strongly linked to?
+                                </div>
+                                <div class="scan-input-row">
+                                    <input type="text" class="scan-input" placeholder="Type your answer...">
+                                    <button class="scan-reveal-btn" data-action="check">Check</button>
+                                    <button class="scan-reveal-btn" data-action="reveal">Show answer</button>
+                                </div>
+                                <div class="scan-answer">
+                                    <strong>Answer:</strong> Engagement.
+                                </div>
+                            </div>
+
+                            <div class="scan-item" data-keys="research;reflection;awareness">
+                                <div class="scan-q">
+                                    <span class="scan-q-num">5.</span>
+                                    In the conclusion, what three things does the writer say choosing an academic path requires?
+                                </div>
+                                <div class="scan-input-row">
+                                    <input type="text" class="scan-input" placeholder="Type your answer...">
+                                    <button class="scan-reveal-btn" data-action="check">Check</button>
+                                    <button class="scan-reveal-btn" data-action="reveal">Show answer</button>
+                                </div>
+                                <div class="scan-answer">
+                                    <strong>Answer:</strong> Careful research, honest self-reflection, and awareness of the difference between personal goals and social expectations.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ── EXERCISE 7: READING FOR IMPLICIT MEANING ── -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">7</span>
+                            <h3>Reading for Implicit Meaning</h3>
+                        </div>
+                        <p class="exercise-instructions">
+                            These questions go beyond what is directly stated. They test your ability to understand what the writer <em>implies</em> — the meanings that are suggested rather than spelled out. Use the navigation arrows to move through the questions.
+                        </p>
+
+                        <div class="mc-container">
+                            <div class="mc-list single-view" id="mc-list-1">
+
+                                <div class="mc-item active" data-correct="c">
+                                    <p class="mc-question">What key distinction does the author draw in paragraph 4?</p>
+                                    <div class="mc-options">
+                                        <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> Between studying in public and private universities</button>
+                                        <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> Between undergraduate and postgraduate courses</button>
+                                        <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> Between personal desire and social expectation</button>
+                                        <button class="mc-btn" data-option="d"><span class="mc-letter">D</span> Between studying locally and studying abroad</button>
+                                    </div>
+                                </div>
+
+                                <div class="mc-item" data-correct="c">
+                                    <p class="mc-question">According to the text, why is engagement important for academic success?</p>
+                                    <div class="mc-options">
+                                        <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> It makes it easier to find employment after graduation</button>
+                                        <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> It helps students build a stronger professional network</button>
+                                        <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> It is necessary to sustain motivation over time</button>
+                                        <button class="mc-btn" data-option="d"><span class="mc-letter">D</span> It is required by most university admission processes</button>
+                                    </div>
+                                </div>
+
+                                <div class="mc-item" data-correct="b">
+                                    <p class="mc-question">What does the author imply by saying the implications of an uninformed choice "can be significant"?</p>
+                                    <div class="mc-options">
+                                        <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> Students can easily change their degree at any time</button>
+                                        <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> A poor choice can seriously affect a student's career and confidence</button>
+                                        <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> Universities should limit the choices available to new students</button>
+                                        <button class="mc-btn" data-option="d"><span class="mc-letter">D</span> All students eventually succeed regardless of what they study</button>
+                                    </div>
+                                </div>
+
+                                <div class="mc-item" data-correct="c">
+                                    <p class="mc-question">The phrase "honest self-reflection" in the conclusion implies that students should...</p>
+                                    <div class="mc-options">
+                                        <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> Write a personal essay about their career goals</button>
+                                        <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> Speak openly with their family about their expectations</button>
+                                        <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> Think critically about their own motivations and interests</button>
+                                        <button class="mc-btn" data-option="d"><span class="mc-letter">D</span> Avoid letting any external opinion influence their decision</button>
+                                    </div>
+                                </div>
+
+                                <div class="mc-item" data-correct="b">
+                                    <p class="mc-question">What does the writer imply about families and communities in paragraph 3?</p>
+                                    <div class="mc-options">
+                                        <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> They are usually wrong about which careers are good</button>
+                                        <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> They can unintentionally pressure students into unsuitable choices</button>
+                                        <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> They should not be involved in students' decisions at all</button>
+                                        <button class="mc-btn" data-option="d"><span class="mc-letter">D</span> They tend to know best about prestigious careers</button>
+                                    </div>
+                                </div>
+
+                                <div class="mc-item" data-correct="c">
+                                    <p class="mc-question">In paragraph 5, the writer says: "a well-researched, personally motivated choice tends to produce stronger academic outcomes." What is implied about students who do <em>not</em> research their choice carefully?</p>
+                                    <div class="mc-options">
+                                        <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> They will fail their degree</button>
+                                        <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> They have no sense of purpose at all</button>
+                                        <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> They are likely to have weaker academic outcomes and feel less purposeful</button>
+                                        <button class="mc-btn" data-option="d"><span class="mc-letter">D</span> They are choosing the wrong subjects entirely</button>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="mc-card-nav">
+                                <p class="mc-card-counter">Question <span id="q-counter">1</span> of 6</p>
+                                <div class="mc-card-arrows">
+                                    <button class="arrow-btn" id="mc-prev" disabled><i class="fa-solid fa-chevron-left"></i></button>
+                                    <button class="arrow-btn" id="mc-next"><i class="fa-solid fa-chevron-right"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 12px; align-items: center; margin-top: 24px;">
+                            <button class="check-answers-btn" id="check-mc">
+                                <i class="fa-solid fa-check"></i> Check answers
+                            </button>
+                            <button class="check-answers-btn retry-btn" id="retry-mc" disabled>
+                                <i class="fa-solid fa-rotate-right"></i> Try again
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- ================================================
+                     POST-READING
+                ================================================ -->
+                <div class="tab-content" id="post-reading">
+
+                    <!-- ── EXERCISE 8: SEQUENCING IDEAS ── -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">8</span>
+                            <h3>Sequencing Ideas</h3>
+                        </div>
+                        <p class="exercise-instructions">
+                            These sentences summarise the six main ideas from the text, but they are in the wrong order. Drag them to match the sequence in which they appear.
+                        </p>
+
+                        <div class="seq-list" id="seq-list">
+                            <div class="seq-item" data-correct="3" draggable="true">
+                                <i class="fa-solid fa-grip-vertical seq-drag-handle"></i>
+                                <span class="seq-pos-num">1</span>
+                                <span>Exploring the influence of "common knowledge" on students' academic decisions</span>
+                            </div>
+                            <div class="seq-item" data-correct="5" draggable="true">
+                                <i class="fa-solid fa-grip-vertical seq-drag-handle"></i>
+                                <span class="seq-pos-num">2</span>
+                                <span>Examining the practical implications of an uninformed or externally driven choice</span>
+                            </div>
+                            <div class="seq-item" data-correct="1" draggable="true">
+                                <i class="fa-solid fa-grip-vertical seq-drag-handle"></i>
+                                <span class="seq-pos-num">3</span>
+                                <span>Introducing the challenge and significance of choosing an academic degree</span>
+                            </div>
+                            <div class="seq-item" data-correct="6" draggable="true">
+                                <i class="fa-solid fa-grip-vertical seq-drag-handle"></i>
+                                <span class="seq-pos-num">4</span>
+                                <span>Calling for careful research, self-reflection, and awareness of personal goals</span>
+                            </div>
+                            <div class="seq-item" data-correct="2" draggable="true">
+                                <i class="fa-solid fa-grip-vertical seq-drag-handle"></i>
+                                <span class="seq-pos-num">5</span>
+                                <span>Highlighting the role of research in helping students make more informed decisions</span>
+                            </div>
+                            <div class="seq-item" data-correct="4" draggable="true">
+                                <i class="fa-solid fa-grip-vertical seq-drag-handle"></i>
+                                <span class="seq-pos-num">6</span>
+                                <span>Drawing a distinction between what students want to study and what they feel expected to study</span>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 12px; align-items: center;">
+                            <button class="check-answers-btn" id="check-seq">
+                                <i class="fa-solid fa-check"></i> Check order
+                            </button>
+                            <button class="check-answers-btn retry-btn" id="retry-seq" disabled>
+                                <i class="fa-solid fa-rotate-right"></i> Reset
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- ── EXERCISE 9: STATED, IMPLIED, OR NOT IN THE TEXT ── -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">9</span>
+                            <h3>Stated, Implied, or Not in the Text?</h3>
+                        </div>
+                        <p class="exercise-instructions">
+                            For each statement, decide whether the text <strong>states it directly</strong>, only <strong>suggests it</strong>, or whether the statement is a <strong>false inference</strong> (something a reader might wrongly conclude). This is the kind of careful thinking academic reading demands.
+                        </p>
+
+                        <div class="si-list" id="si-list">
+                            <div class="si-item" data-correct="stated">
+                                <div class="si-statement">
+                                    <span class="si-num">1.</span>
+                                    Many students choose engineering, law, or medicine because their families consider these careers prestigious.
+                                </div>
+                                <div class="si-toggle">
+                                    <button class="si-btn" data-choice="stated">Stated</button>
+                                    <button class="si-btn" data-choice="implied">Implied</button>
+                                    <button class="si-btn" data-choice="not">Not in the text</button>
+                                </div>
+                                <div class="si-explanation">
+                                    <strong>Stated.</strong> Paragraph 3 says this directly: <em>"Many students choose to study engineering, law, or medicine... because their families or communities consider them to be successful paths."</em>
+                                </div>
+                            </div>
+
+                            <div class="si-item" data-correct="implied">
+                                <div class="si-statement">
+                                    <span class="si-num">2.</span>
+                                    Students who study what their family expects are more likely to lose motivation.
+                                </div>
+                                <div class="si-toggle">
+                                    <button class="si-btn" data-choice="stated">Stated</button>
+                                    <button class="si-btn" data-choice="implied">Implied</button>
+                                    <button class="si-btn" data-choice="not">Not in the text</button>
+                                </div>
+                                <div class="si-explanation">
+                                    <strong>Implied.</strong> The text never says this in one sentence, but it links external pressure to "lack of motivation" in paragraph 3 and to regret in paragraph 4 — so the connection is suggested.
+                                </div>
+                            </div>
+
+                            <div class="si-item" data-correct="stated">
+                                <div class="si-statement">
+                                    <span class="si-num">3.</span>
+                                    Skimming and scanning can help students learn about different degree options.
+                                </div>
+                                <div class="si-toggle">
+                                    <button class="si-btn" data-choice="stated">Stated</button>
+                                    <button class="si-btn" data-choice="implied">Implied</button>
+                                    <button class="si-btn" data-choice="not">Not in the text</button>
+                                </div>
+                                <div class="si-explanation">
+                                    <strong>Stated.</strong> Paragraph 2 explicitly says: <em>"Skimming through university catalogues and scanning job market reports can provide a broad picture of what different degrees lead to."</em>
+                                </div>
+                            </div>
+
+                            <div class="si-item" data-correct="implied">
+                                <div class="si-statement">
+                                    <span class="si-num">4.</span>
+                                    Genuine personal interest is more powerful than family pressure for sustaining academic effort.
+                                </div>
+                                <div class="si-toggle">
+                                    <button class="si-btn" data-choice="stated">Stated</button>
+                                    <button class="si-btn" data-choice="implied">Implied</button>
+                                    <button class="si-btn" data-choice="not">Not in the text</button>
+                                </div>
+                                <div class="si-explanation">
+                                    <strong>Implied.</strong> The text links engagement to "genuine interest" and contrasts internal motivation with external pressure — readers are expected to draw the conclusion.
+                                </div>
+                            </div>
+
+                            <div class="si-item" data-correct="not">
+                                <div class="si-statement">
+                                    <span class="si-num">5.</span>
+                                    Students should ignore their families when choosing a degree.
+                                </div>
+                                <div class="si-toggle">
+                                    <button class="si-btn" data-choice="stated">Stated</button>
+                                    <button class="si-btn" data-choice="implied">Implied</button>
+                                    <button class="si-btn" data-choice="not">Not in the text</button>
+                                </div>
+                                <div class="si-explanation">
+                                    <strong>Not in the text.</strong> This is a common <em>misreading</em>. The writer encourages awareness of social pressure and honest self-reflection — but never says students should ignore their families. Be careful not to push an implication too far.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 12px; align-items: center;">
+                            <button class="check-answers-btn" id="check-si">
+                                <i class="fa-solid fa-check"></i> Check answers
+                            </button>
+                            <button class="check-answers-btn retry-btn" id="retry-si" disabled>
+                                <i class="fa-solid fa-rotate-right"></i> Try again
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- ── EXERCISE 10: PERSONAL REFLECTION ── -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">10</span>
+                            <h3>Personal Reflection</h3>
+                        </div>
+                        <p class="exercise-instructions">
+                            Now apply the ideas from the text to your own experience. Think about your own choice to study at university. To what extent did "common knowledge" — what your family, friends, or society considered prestigious — influence your decision? Write a short reflection of <strong>60–100 words</strong>.
+                        </p>
+
+                        <div class="reflection-wrapper">
+                            <button class="copy-btn" id="copyReflectionBtn" title="Copy to clipboard">
+                                <i class="fa-regular fa-copy"></i> Copy text
+                            </button>
+                            <textarea class="reflection-area" id="reflection-area" placeholder="Begin writing your reflection here..."></textarea>
+                        </div>
+
+                        <div class="reflection-meta">
+                            <span class="reflection-target">Target: 60–100 words</span>
+                            <span id="reflection-count" class="reflection-count">0 words</span>
+                        </div>
+                    </div>
+
+                    <!-- ── COMPLETION BOX ── -->
+                    <div class="completion-box">
+                        <div class="completion-bar"></div>
+                        <div class="completion-inner">
+                            <div class="completion-header">
+                                <div class="completion-icon">
+                                    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                                </div>
+                                <h2 class="completion-title">Activity Complete!</h2>
+                            </div>
+                            <p class="completion-subtitle">You've completed <strong>"Choosing Your Path"</strong>. Here's what you've practised:</p>
+                            <div class="skills-list">
+                                <div class="skill-item">
+                                    <div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+                                    Predicting content from titles
+                                </div>
+                                <div class="skill-item">
+                                    <div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+                                    Skimming and scanning academic texts
+                                </div>
+                                <div class="skill-item">
+                                    <div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+                                    Verb-noun collocations in academic writing
+                                </div>
+                                <div class="skill-item">
+                                    <div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+                                    Identifying the sequence of ideas in an argument
+                                </div>
+                                <div class="skill-item">
+                                    <div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+                                    Distinguishing stated information from implied meaning
+                                </div>
+                                <div class="skill-item">
+                                    <div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+                                    Reflecting critically on academic choices
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="activity-nav">
+                    <button class="nav-btn nav-btn-back" id="btn-back" disabled>
+                        <i class="fa-solid fa-arrow-left"></i> Back
+                    </button>
+                    <button class="nav-btn nav-btn-next" id="btn-next">
+                        Next <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="../../../js/layout.js"></script>
+    <script src="../../../js/script.js" defer></script>
+    <script src="../../../js/checkanswers.js"></script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+        // ══════════════════════════════════════════════════════
+        // EXERCISE 1: PREDICTION FROM TITLE
+        // ══════════════════════════════════════════════════════
+        const predictionBlock = document.getElementById('prediction-block');
+        const checkPredBtn = document.getElementById('check-prediction');
+        const retryPredBtn = document.getElementById('retry-prediction');
+        const predQuestions = predictionBlock.querySelectorAll('.prediction-question');
+
+        predQuestions.forEach(q => {
+            q.querySelectorAll('.prediction-chip').forEach(chip => {
+                chip.addEventListener('click', function() {
+                    if (this.classList.contains('disabled')) return;
+                    q.querySelectorAll('.prediction-chip').forEach(c => c.classList.remove('selected'));
+                    this.classList.add('selected');
+                });
+            });
+        });
+
+        checkPredBtn.addEventListener('click', function() {
+            let correct = 0;
+            predQuestions.forEach(q => {
+                const correctOpt = q.dataset.correct;
+                const selected = q.querySelector('.prediction-chip.selected');
+                q.querySelectorAll('.prediction-chip').forEach(c => c.classList.add('disabled'));
+                if (selected) {
+                    if (selected.dataset.option === correctOpt) {
+                        selected.classList.add('correct');
+                        correct++;
+                    } else {
+                        selected.classList.add('incorrect');
+                        const correctChip = q.querySelector(`.prediction-chip[data-option="${correctOpt}"]`);
+                        if (correctChip) correctChip.classList.add('correct');
+                    }
+                } else {
+                    const correctChip = q.querySelector(`.prediction-chip[data-option="${correctOpt}"]`);
+                    if (correctChip) correctChip.classList.add('correct');
+                }
+                q.querySelector('.prediction-explanation').classList.add('show');
+            });
+            if (typeof showFeedbackPopup === 'function') {
+                showFeedbackPopup(correct, predQuestions.length);
+            }
+            this.disabled = true;
+            retryPredBtn.disabled = false;
+        });
+
+        retryPredBtn.addEventListener('click', function() {
+            predQuestions.forEach(q => {
+                q.querySelectorAll('.prediction-chip').forEach(c => {
+                    c.classList.remove('selected', 'correct', 'incorrect', 'disabled');
+                });
+                q.querySelector('.prediction-explanation').classList.remove('show');
+            });
+            checkPredBtn.disabled = false;
+            this.disabled = true;
+        });
+
+        // ══════════════════════════════════════════════════════
+        // EXERCISE 2: SKIM/SCAN SITUATIONS
+        // ══════════════════════════════════════════════════════
+        const situationCards = document.querySelectorAll('.situation-card');
+        const checkSitBtn = document.getElementById('check-situation');
+        const retrySitBtn = document.getElementById('retry-situation');
+
+        situationCards.forEach(card => {
+            card.querySelectorAll('.toggle-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    if (this.classList.contains('disabled')) return;
+                    card.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('selected'));
+                    this.classList.add('selected');
+                });
+            });
+        });
+
+        checkSitBtn.addEventListener('click', function() {
+            let correct = 0;
+            situationCards.forEach(card => {
+                const correctChoice = card.dataset.correct;
+                const selected = card.querySelector('.toggle-btn.selected');
+                card.querySelectorAll('.toggle-btn').forEach(b => b.classList.add('disabled'));
+                card.classList.remove('correct', 'incorrect');
+                if (selected) {
+                    selected.classList.remove('selected');
+                    if (selected.dataset.choice === correctChoice) {
+                        selected.classList.add('correct');
+                        card.classList.add('correct');
+                        correct++;
+                    } else {
+                        selected.classList.add('incorrect');
+                        card.classList.add('incorrect');
+                        const correctBtn = card.querySelector(`.toggle-btn[data-choice="${correctChoice}"]`);
+                        if (correctBtn) correctBtn.classList.add('correct');
+                    }
+                }
+            });
+            if (typeof showFeedbackPopup === 'function') {
+                showFeedbackPopup(correct, situationCards.length);
+            }
+            this.disabled = true;
+            retrySitBtn.disabled = false;
+        });
+
+        retrySitBtn.addEventListener('click', function() {
+            situationCards.forEach(card => {
+                card.classList.remove('correct', 'incorrect');
+                card.querySelectorAll('.toggle-btn').forEach(b => {
+                    b.classList.remove('selected', 'correct', 'incorrect', 'disabled');
+                });
+            });
+            checkSitBtn.disabled = false;
+            this.disabled = true;
+        });
+
+        // ══════════════════════════════════════════════════════
+        // EXERCISE 3: COLLOCATION DRAG & DROP
+        // ══════════════════════════════════════════════════════
+        const verbsPool = document.getElementById('verbs-pool');
+        const collocTargets = document.getElementById('colloc-targets');
+        const checkCollocBtn = document.getElementById('check-colloc');
+        const retryCollocBtn = document.getElementById('retry-colloc');
+        const collocContext = document.getElementById('colloc-context');
+        let dragVerb = null;
+
+        function initCollocDrag() {
+            verbsPool.querySelectorAll('.colloc-verb-chip').forEach(chip => {
+                chip.addEventListener('dragstart', function() {
+                    if (this.classList.contains('placed')) return;
+                    dragVerb = this;
+                    setTimeout(() => this.classList.add('dragging'), 0);
+                });
+                chip.addEventListener('dragend', function() {
+                    this.classList.remove('dragging');
+                });
+            });
+
+            collocTargets.querySelectorAll('.colloc-target').forEach(target => {
+                target.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                    this.classList.add('drag-over');
+                });
+                target.addEventListener('dragleave', function() {
+                    this.classList.remove('drag-over');
+                });
+                target.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    this.classList.remove('drag-over');
+                    if (!dragVerb) return;
+                    // If target already has a verb, return that one to pool
+                    const existingVerb = this.dataset.verbPlaced;
+                    if (existingVerb) {
+                        const oldChip = verbsPool.querySelector(`.colloc-verb-chip[data-verb="${existingVerb}"]`);
+                        if (oldChip) oldChip.classList.remove('placed');
+                    }
+                    // Place new verb
+                    const slot = this.querySelector('.colloc-drop-slot');
+                    slot.innerHTML = dragVerb.dataset.verb;
+                    slot.classList.add('filled');
+                    this.classList.add('has-verb');
+                    this.dataset.verbPlaced = dragVerb.dataset.verb;
+                    dragVerb.classList.add('placed');
+                    dragVerb = null;
+                });
+                // Click to remove
+                target.querySelector('.colloc-drop-slot').addEventListener('click', function(e) {
+                    if (target.classList.contains('correct') || target.classList.contains('incorrect')) return;
+                    const placedVerb = target.dataset.verbPlaced;
+                    if (!placedVerb) return;
+                    const oldChip = verbsPool.querySelector(`.colloc-verb-chip[data-verb="${placedVerb}"]`);
+                    if (oldChip) oldChip.classList.remove('placed');
+                    this.innerHTML = '<span class="slot-placeholder">drop</span>';
+                    this.classList.remove('filled');
+                    target.classList.remove('has-verb');
+                    delete target.dataset.verbPlaced;
+                });
+            });
+        }
+        initCollocDrag();
+
+        checkCollocBtn.addEventListener('click', function() {
+            let correct = 0;
+            const targets = collocTargets.querySelectorAll('.colloc-target');
+            targets.forEach(target => {
+                target.classList.remove('correct', 'incorrect');
+                if (target.dataset.verbPlaced === target.dataset.correct) {
+                    target.classList.add('correct');
+                    correct++;
+                } else if (target.dataset.verbPlaced) {
+                    target.classList.add('incorrect');
+                }
+            });
+            if (typeof showFeedbackPopup === 'function') {
+                showFeedbackPopup(correct, targets.length);
+            }
+            this.disabled = true;
+            retryCollocBtn.disabled = false;
+            collocContext.classList.add('show');
+        });
+
+        retryCollocBtn.addEventListener('click', function() {
+            const targets = collocTargets.querySelectorAll('.colloc-target');
+            targets.forEach(target => {
+                target.classList.remove('correct', 'incorrect', 'has-verb');
+                const slot = target.querySelector('.colloc-drop-slot');
+                slot.innerHTML = '<span class="slot-placeholder">drop</span>';
+                slot.classList.remove('filled');
+                delete target.dataset.verbPlaced;
+            });
+            verbsPool.querySelectorAll('.colloc-verb-chip').forEach(chip => {
+                chip.classList.remove('placed');
+            });
+            collocContext.classList.remove('show');
+            checkCollocBtn.disabled = false;
+            this.disabled = true;
+        });
+
+        // ══════════════════════════════════════════════════════
+        // EXERCISE 5: GIST QUESTION
+        // ══════════════════════════════════════════════════════
+        const gistQuestion = document.querySelector('.gist-question');
+        const gistBtns = gistQuestion.querySelectorAll('.mc-btn');
+        const checkGistBtn = document.getElementById('check-gist');
+        const gistExplanation = document.getElementById('gist-explanation');
+
+        gistBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                if (gistQuestion.classList.contains('checked')) return;
+                gistBtns.forEach(b => b.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+        });
+
+        checkGistBtn.addEventListener('click', function() {
+            gistQuestion.classList.add('checked');
+            const correctOpt = gistQuestion.dataset.correct;
+            const selected = gistQuestion.querySelector('.mc-btn.selected');
+            gistBtns.forEach(b => b.classList.remove('correct', 'incorrect'));
+            if (selected) {
+                if (selected.dataset.option === correctOpt) {
+                    selected.classList.add('correct');
+                } else {
+                    selected.classList.add('incorrect');
+                    gistQuestion.querySelector(`.mc-btn[data-option="${correctOpt}"]`).classList.add('correct');
+                }
+            } else {
+                gistQuestion.querySelector(`.mc-btn[data-option="${correctOpt}"]`).classList.add('correct');
+            }
+            gistExplanation.classList.add('show');
+            this.disabled = true;
+        });
+
+        // ══════════════════════════════════════════════════════
+        // EXERCISE 6: SCAN FOR DETAILS
+        // ══════════════════════════════════════════════════════
+        function normaliseAnswer(s) {
+            return s.toLowerCase()
+                .replace(/[.,;:!?'"]/g, '')
+                .replace(/\b(a|an|the|and|of|or|for)\b/g, ' ')
+                .replace(/\s+/g, ' ')
+                .trim();
+        }
+
+        document.querySelectorAll('.scan-item').forEach(item => {
+            const input = item.querySelector('.scan-input');
+            const answer = item.querySelector('.scan-answer');
+            const buttons = item.querySelectorAll('.scan-reveal-btn');
+
+            buttons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const action = this.dataset.action;
+                    if (action === 'check') {
+                        const userAns = normaliseAnswer(input.value);
+                        if (!userAns) return;
+                        const keys = item.dataset.keys.split(';');
+                        // Each key may have alternatives separated by |
+                        const allMatch = keys.every(keyGroup => {
+                            const alternatives = keyGroup.split('|');
+                            return alternatives.some(alt => userAns.includes(normaliseAnswer(alt)));
+                        });
+                        input.classList.remove('correct', 'incorrect');
+                        if (allMatch) {
+                            input.classList.add('correct');
+                        } else {
+                            input.classList.add('incorrect');
+                        }
+                    } else if (action === 'reveal') {
+                        answer.classList.add('show');
+                    }
+                });
+            });
+        });
+
+        // ══════════════════════════════════════════════════════
+        // EXERCISE 7: MC CAROUSEL (IMPLICIT MEANING)
+        // ══════════════════════════════════════════════════════
+        const mcList = document.getElementById('mc-list-1');
+        const mcItems = mcList ? [...mcList.querySelectorAll('.mc-item')] : [];
+        const mcPrev = document.getElementById('mc-prev');
+        const mcNext = document.getElementById('mc-next');
+        const qCounter = document.getElementById('q-counter');
+        const checkMCBtn = document.getElementById('check-mc');
+        const retryMCBtn = document.getElementById('retry-mc');
+        let currentQ = 0;
+
+        function updateMCView() {
+            mcItems.forEach((item, i) => item.classList.toggle('active', i === currentQ));
+            if (qCounter) qCounter.textContent = currentQ + 1;
+            mcPrev.disabled = currentQ === 0;
+            mcNext.disabled = currentQ === mcItems.length - 1;
+        }
+
+        mcItems.forEach(item => {
+            item.querySelectorAll('.mc-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    if (item.classList.contains('checked')) return;
+                    item.querySelectorAll('.mc-btn').forEach(b => b.classList.remove('selected'));
+                    this.classList.add('selected');
+                });
+            });
+        });
+
+        mcPrev.addEventListener('click', () => { if (currentQ > 0) { currentQ--; updateMCView(); } });
+        mcNext.addEventListener('click', () => { if (currentQ < mcItems.length - 1) { currentQ++; updateMCView(); } });
+
+        checkMCBtn.addEventListener('click', function() {
+            let correct = 0;
+            mcItems.forEach(item => {
+                item.classList.add('checked');
+                const selected = item.querySelector('.mc-btn.selected');
+                item.querySelectorAll('.mc-btn').forEach(b => b.classList.remove('correct', 'incorrect'));
+                if (selected) {
+                    if (selected.dataset.option === item.dataset.correct) {
+                        selected.classList.add('correct');
+                        correct++;
+                    } else {
+                        selected.classList.add('incorrect');
+                        item.querySelector(`.mc-btn[data-option="${item.dataset.correct}"]`)?.classList.add('correct');
+                    }
+                }
+            });
+            if (typeof showFeedbackPopup === 'function') {
+                showFeedbackPopup(correct, mcItems.length);
+            }
+            retryMCBtn.disabled = false;
+            this.disabled = true;
+        });
+
+        retryMCBtn.addEventListener('click', function() {
+            mcItems.forEach(item => {
+                item.classList.remove('checked');
+                item.querySelectorAll('.mc-btn').forEach(b => b.classList.remove('selected', 'correct', 'incorrect'));
+            });
+            checkMCBtn.disabled = false;
+            this.disabled = true;
+        });
+
+        updateMCView();
+
+        // ══════════════════════════════════════════════════════
+        // EXERCISE 8: SEQUENCING DRAG AND DROP
+        // ══════════════════════════════════════════════════════
+        const seqList = document.getElementById('seq-list');
+        const checkSeqBtn = document.getElementById('check-seq');
+        const retrySeqBtn = document.getElementById('retry-seq');
+        let dragSrc = null;
+        const originalSeqHTML = seqList.innerHTML;
+
+        function updateSeqNumbers() {
+            [...seqList.querySelectorAll('.seq-item')].forEach((item, i) => {
+                const num = item.querySelector('.seq-pos-num');
+                if (num) num.textContent = i + 1;
+                item.classList.remove('correct-pos', 'incorrect-pos');
+            });
+        }
+
+        function attachSeqHandlers() {
+            seqList.querySelectorAll('.seq-item').forEach(item => {
+                item.addEventListener('dragstart', function() {
+                    dragSrc = this;
+                    setTimeout(() => this.classList.add('dragging'), 0);
+                });
+                item.addEventListener('dragend', function() {
+                    this.classList.remove('dragging');
+                    seqList.querySelectorAll('.seq-item').forEach(i => i.classList.remove('drag-over'));
+                    updateSeqNumbers();
+                });
+                item.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                    if (this !== dragSrc) {
+                        seqList.querySelectorAll('.seq-item').forEach(i => i.classList.remove('drag-over'));
+                        this.classList.add('drag-over');
+                    }
+                });
+                item.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    if (this === dragSrc) return;
+                    const all = [...seqList.querySelectorAll('.seq-item')];
+                    const srcIdx = all.indexOf(dragSrc);
+                    const tgtIdx = all.indexOf(this);
+                    seqList.insertBefore(dragSrc, srcIdx < tgtIdx ? this.nextSibling : this);
+                });
+            });
+        }
+        attachSeqHandlers();
+
+        checkSeqBtn.addEventListener('click', function() {
+            let correct = 0;
+            const seqItems = [...seqList.querySelectorAll('.seq-item')];
+            seqItems.forEach((item, i) => {
+                item.classList.remove('correct-pos', 'incorrect-pos');
+                if (i + 1 === parseInt(item.dataset.correct)) {
+                    item.classList.add('correct-pos');
+                    correct++;
+                } else {
+                    item.classList.add('incorrect-pos');
+                }
+            });
+            if (typeof showFeedbackPopup === 'function') {
+                showFeedbackPopup(correct, seqItems.length);
+            }
+            retrySeqBtn.disabled = false;
+            this.disabled = true;
+        });
+
+        retrySeqBtn.addEventListener('click', function() {
+            seqList.innerHTML = originalSeqHTML;
+            attachSeqHandlers();
+            updateSeqNumbers();
+            checkSeqBtn.disabled = false;
+            this.disabled = true;
+        });
+
+        // ══════════════════════════════════════════════════════
+        // EXERCISE 9: STATED / IMPLIED / NOT IN TEXT
+        // ══════════════════════════════════════════════════════
+        const siItems = document.querySelectorAll('.si-item');
+        const checkSiBtn = document.getElementById('check-si');
+        const retrySiBtn = document.getElementById('retry-si');
+
+        siItems.forEach(item => {
+            item.querySelectorAll('.si-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    if (this.classList.contains('disabled')) return;
+                    item.querySelectorAll('.si-btn').forEach(b => b.classList.remove('selected'));
+                    this.classList.add('selected');
+                });
+            });
+        });
+
+        checkSiBtn.addEventListener('click', function() {
+            let correct = 0;
+            siItems.forEach(item => {
+                const correctChoice = item.dataset.correct;
+                const selected = item.querySelector('.si-btn.selected');
+                item.querySelectorAll('.si-btn').forEach(b => {
+                    b.classList.add('disabled');
+                    b.classList.remove('correct', 'incorrect', 'selected');
+                });
+                if (selected) {
+                    if (selected.dataset.choice === correctChoice) {
+                        selected.classList.add('correct');
+                        correct++;
+                    } else {
+                        selected.classList.add('incorrect');
+                        const correctBtn = item.querySelector(`.si-btn[data-choice="${correctChoice}"]`);
+                        if (correctBtn) correctBtn.classList.add('correct');
+                    }
+                } else {
+                    const correctBtn = item.querySelector(`.si-btn[data-choice="${correctChoice}"]`);
+                    if (correctBtn) correctBtn.classList.add('correct');
+                }
+                item.querySelector('.si-explanation').classList.add('show');
+            });
+            if (typeof showFeedbackPopup === 'function') {
+                showFeedbackPopup(correct, siItems.length);
+            }
+            this.disabled = true;
+            retrySiBtn.disabled = false;
+        });
+
+        retrySiBtn.addEventListener('click', function() {
+            siItems.forEach(item => {
+                item.querySelectorAll('.si-btn').forEach(b => {
+                    b.classList.remove('selected', 'correct', 'incorrect', 'disabled');
+                });
+                item.querySelector('.si-explanation').classList.remove('show');
+            });
+            checkSiBtn.disabled = false;
+            this.disabled = true;
+        });
+
+        // ══════════════════════════════════════════════════════
+        // EXERCISE 10: REFLECTION WORD COUNTER + COPY
+        // ══════════════════════════════════════════════════════
+        const reflectionArea = document.getElementById('reflection-area');
+        const reflectionCount = document.getElementById('reflection-count');
+        const copyReflectionBtn = document.getElementById('copyReflectionBtn');
+
+        if (reflectionArea && reflectionCount) {
+            reflectionArea.addEventListener('input', function() {
+                const text = this.value.trim();
+                let words = 0;
+                if (text.length > 0) {
+                    const arr = text.split(/\s+/).filter(w => w.length > 0);
+                    arr.forEach(w => {
+                        if (/[a-zA-Z]+['’][a-zA-Z]+/.test(w)) words += 2;
+                        else words += 1;
+                    });
+                }
+                if (words >= 60 && words <= 100) {
+                    reflectionCount.innerHTML = `${words} word${words !== 1 ? 's' : ''} <i class="fa-solid fa-check" style="margin-left: 4px;"></i>`;
+                    reflectionCount.style.color = '#ea580c';
+                } else if (words > 100) {
+                    reflectionCount.textContent = `${words} words`;
+                    reflectionCount.style.color = '#ef4444';
+                } else {
+                    reflectionCount.textContent = `${words} word${words !== 1 ? 's' : ''}`;
+                    reflectionCount.style.color = '#9ca3af';
+                }
+            });
+        }
+
+        if (copyReflectionBtn && reflectionArea) {
+            const originalHTML = copyReflectionBtn.innerHTML;
+            copyReflectionBtn.addEventListener('click', function() {
+                reflectionArea.select();
+                document.execCommand('copy');
+                window.getSelection().removeAllRanges();
+                this.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+                this.style.backgroundColor = '#dcfce7';
+                this.style.color = '#16a34a';
+                setTimeout(() => {
+                    this.innerHTML = originalHTML;
+                    this.style.backgroundColor = '';
+                    this.style.color = '';
+                }, 1000);
+            });
+        }
+
+    });
+    </script>
+
+</body>
+</html>

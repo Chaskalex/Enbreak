@@ -133,7 +133,6 @@ Achievement Test 1 (Final)
 	TOTAL	100%
 
 UNIDAD: corresponde a ciclos temáticos que organiza los contenidos acordes a una disposición temporal. 	CONTENIDOS: corresponden a conocimientos específicos de carácter conceptual, procedimental y actitudinal que se consideran indispensables para él desarrollo de cada resultado de aprendizaje. Los contenidos deben ser declarados y configurar la programación didáctica, actuando como núcleo de la misma y el eje alrededor del cual se organizan las relaciones interactivas entre docente - alumnos/as y entre pares. Se recomienda desagregar el contenido en unidades y subtemas.
-
 Unidad 1:   Choices and implications	Reading: Researching texts for essays. Skimming and scanning. Identifying the sequence of ideas. Understanding implicit meanings. Inferring the meaning of words. 
 Vocabulary building: adjectives
 
@@ -223,7 +222,3 @@ La integridad académica es un valor. El Modelo Educativo releva un conjunto de 
 Todos los estudiantes de la Pontificia Universidad Católica de Valparaíso tienen la responsabilidad de conocer el Reglamento de Disciplina. Se espera que los estudiantes se comprometan adecuadamente en los procesos académicos de acuerdo con los valores como la honestidad, el respeto, la veracidad, la justicia y la responsabilidad. 
 Cualquier falta a la integridad académica en una actividad de evaluación, daña profundamente la confianza que siempre debe existir en la relación de aprendizaje entre profesor y estudiante, afectando el proceso formativo.
 Igualmente, constituye una falta de integridad académica usar las ideas, la información o las expresiones de otro, sin el adecuado reconocimiento y cita de su autor. Los profesores de la Pontificia Universidad Católica de Valparaíso, atendida su responsabilidad en la formación de sus estudiantes, deben transmitir el valor de la integridad académica y, ante una falta a ésta, proceder conforme lo dispone la normativa universitaria.
-
-
-
-

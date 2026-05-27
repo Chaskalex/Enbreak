@@ -1,0 +1,256 @@
+
+PROGRAMA DE ASIGNATURA POSTGRADO
+I.- ANTECEDENTES GENERALES
+Nombre Asignatura	Academic English B1+.2
+Sigla	ING 9012
+Facultad / U. Académica:	Programa de Inglés como Lengua Extranjera
+N° Créditos PUCV: 	0	N° Créditos SCT:	0
+Tipo de Asignatura 	Actividad optativa
+Modalidad dictación	Online sincrónico
+Semestre 	1er semestre 
+Información Plan de Estudios
+Nombre Programa	N° de Decreto	Pre- requisitos
+		
+		
+Carga Académica  
+Actividad 	Horas PUCV	Cupo
+Cátedra	4 Horas	25
+Taller		
+Laboratorio		
+Ayudantía		
+Total de horas de docencia presencial Semanal/ Semestral PUCV 	4 horas pedagógicas PUCV semanales
+72 horas pedagógicas PUCV semestrales
+Total de tiempo de estudio personal autónomo Semanal/ Semestral PUCV	4 horas pedagógicas PUCV semanales
+72 horas pedagógicas PUCV semestrales
+Total de Horas de dedicación Semanal/ Semestral PUCV	8 horas pedagógicas PUCV semanales
+144 horas pedagógicas PUCV semestrales
+Académico/a responsable de la Elaboración 	Daniella Guerra Galleguillos
+Académico/a responsable/s Última Modificación	Daniella Guerra Galleguillos 05 abril 2025
+
+
+CONTEXTUALIZACIÓN DE LA ASIGNATURA: Constituye el propósito formativo que otorga sentido y finalidad a la asignatura. Debe indicar cómo la asignatura se incorpora al programa de formación (temporal, líneas, ciclo); cómo responde al perfil de titulación o graduación y las competencias a las cuales tributa.
+La asignatura “B1+ Academic English” es un curso teórico-práctico de modalidad online sincrónica, ubicado en el trayecto curricular transversal del plan de estudios de un programa de postgrado. Se inserta en la fase intermedia del desarrollo de la competencia lingüística en inglés, sirviendo como puente entre los niveles B1 y B2 del Marco Común Europeo de Referencia para las Lenguas (MCER). Este curso contribuye directamente al perfil de graduación al fortalecer las capacidades comunicativas necesarias para desenvolverse con autonomía y precisión en contextos académicos y profesionales en inglés.
+El propósito formativo de esta asignatura es consolidar y expandir las competencias lingüísticas generales de los estudiantes, orientándolas hacia un uso más fluido, estructurado y adecuado del idioma en situaciones propias del quehacer académico. De acuerdo con el MCER, el nivel B1+ implica que el usuario puede comprender los puntos principales de textos orales y escritos relacionados con temas de relevancia, producir discursos coherentes sobre asuntos familiares o de interés personal, y desenvolverse de forma eficaz en intercambios comunicativos con hablantes nativos, superando la mera supervivencia lingüística.
+La asignatura se articula en torno al desarrollo equilibrado de las cuatro habilidades del idioma: comprensión lectora, comprensión auditiva, producción escrita y producción oral. Estas competencias se trabajan mediante tareas significativas, que integran el uso de recursos gramaticales, léxicos y fonológicos adecuados al nivel, con un enfoque comunicativo que favorece la participación activa, la reflexión crítica y la autonomía del estudiante.
+Asimismo, el curso contempla una interacción continua con el docente, quien orienta el proceso de aprendizaje mediante retroalimentación directa, resolución de dudas y acompañamiento en la práctica del idioma. Las sesiones sincrónicas se realizan en plataformas virtuales interactivas y se complementan con actividades de trabajo autónomo, tales como lecturas académicas, ejercicios de escritura guiada, preparación de presentaciones orales y prácticas de autoevaluación. En conjunto, estos componentes permiten a los estudiantes avanzar con solidez hacia el nivel B2, requisito clave para una comunicación académica efectiva y para futuras instancias de formación superior en inglés.
+
+II.- ANTECEDENTES ESPECÍFICOS DE LA ASIGNATURA
+Aporte de la Asignatura a las Competencias del Perfil de Graduación 
+Competencias Disciplinares (Categorizar según programa y respetar numeración según la resolución VRA del Plan de Estudios)
+Ejemplo:  C9. Diseña una propuesta de fidelización de clientes con, herramientas digitales para contribuir diversificar y ampliar el valor y la rentabilidad del negocio.
+
+
+
+
+
+
+Programación Enseñanza – Aprendizaje
+RESULTADOS DE APRENDIZAJE: son declaraciones de lo que se espera que un/a estudiante conozca, comprenda y/o sea capaz de hacer al final de un periodo de aprendizaje. Deben dar cuenta del saber, conceptual, procedimental y actitudinal (habilidades, destrezas y actitudes); lo cual se traducirá en el desempeño de una competencia o de una porción de esta. Cada Resultado de Aprendizaje debe contener al menos: Un verbo en tercera persona singular (habilidad-capacidad) + objeto, conocimiento o contenido de estudio + contexto, condición disciplinar o profesional.  Utilizar verbos acordes al nivel formativo (pregrado o postgrado)	CRITERIOS DE EVALUACIÓN: Son las evidencias observables y medibles (atributos, condiciones, requisitos) que dan cuenta del nivel de desempeño de el o la estudiante respecto del Resultado de Aprendizaje. 
+Redacte, la cantidad suficiente (a lo menos dos) que consideren los elementos más relevantes que desea
+observar de la tarea, respetando la progresión formativa.
+
+RA1.  Analiza textos académicos breves y adaptados, identificando ideas principales, detalles relevantes y estructuras léxicas y gramaticales propias del discurso académico.	1.- Identifica con precisión ideas principales y secundarias en textos académicos breves.
+	2. Muestra actitud reflexiva y crítica frente a los temas tratados, aportando ideas relevantes en discusiones guiadas.
+
+RA2. Produce textos académicos estructurados, utilizando estrategias de organización del discurso, citación, parafraseo y referencias, de acuerdo con convenciones básicas de escritura académica en inglés.	1.- Redacta textos coherentes y cohesionados que abordan un tema académico, incluyendo introducción, desarrollo y conclusión.
+2. Aplica estructuras gramaticales pertinentes al registro académico.
+RA3. Utiliza estrategias comunicativas como la clarificación, la reformulación, la toma de turnos y la elaboración de ideas, en contextos de discusión y trabajo colaborativo.	1.- Expresa opiniones, argumentos y contraargumentos con fluidez y precisión razonables en discusiones académicas.
+2. Usa adecuadamente funciones del lenguaje oral como el acuerdo/desacuerdo, la sugerencia, la clarificación y la reformulación.
+RA4.      Integra información a partir de notas de lecturas y audiciones académicas en la preparación de textos escritos y exposiciones orales.	1.- Reconstruye el contenido de una fuente a partir de sus notas con fidelidad al sentido original.
+2. Utiliza estructuras lingüísticas propias del registro académico en la integración de la información.
+
+PROCEDIMIENTOS DE EVALUACIÓN Y CALIFICACIÓN: Proceso de recogida de información y que permiten informar sobre el nivel de logro de los resultados de aprendizaje. Deben ser coherentes con los contenidos y habilidades, con la metodología de enseñanza y con las experiencias de aprendizaje desarrolladas.  Por ejemplo: pruebas o examen escrito, oral y/o práctico, resolución de ejercicios y problemas, trabajos, Cuestionarios Reactivos, Ensayos, Portafolio, proyectos aplicados, proyectos de investigación, estudio de casos, presentaciones, entrevistas, análisis documental, listas de cotejo, las escalas de estimación o apreciación, rúbricas, etc.
+Descripción de los procedimientos de evaluación y requisitos de eximición
+Evaluación de la formación
+
+Para la evaluación escrita y oral de aprendizajes se utilizarán las siguientes estrategias:
+
+∙       2 Tests de progreso. 
+-	El primero de ellos en formato escrito donde se evalúan los conocimientos léxico-gramaticales, la comprensión auditiva y escrita y la producción escrita. 
+-	El segundo de ellos evalúa la expresión oral únicamente. (Progress Tests)
+
+∙       1 Evaluación de logros en formato oral y escrito (Esta evaluación comprende tanto los conocimientos léxico-gramaticales, recepción del lenguaje y la producción oral y escrita de las tres unidades.  
+
+La nota final del taller de idioma inglés, se compone de las siguientes evaluaciones:
+
+●	Porcentajes de ponderación:
+ 	 	50%
+Written Progress Test 1 
+(Use of English, listening, reading and Writing)	Unit 1	25%
+Speaking Progress Test 2 (Oral Production in pairs)	Unit 2	25%
+ 	 	 
+ 	 	50%
+Achievement Test 1 
+(Use of English, listening, reading, speaking and writing test)	Units 1,2,3	50%
+ 	 	 
+
+●	Todas las evaluaciones se calcularán con una exigencia del 60%. 
+
+Las evaluaciones escritas se realizarán a través de cuestionarios en el aula virtual, los cuales deberán completarse dentro del horario programado para la clase correspondiente. 
+
+A continuación, se presentan los porcentajes asignados a cada evaluación:
+
+●	2 Tests de progreso (Progress Tests)
+Progress Test 1: Evaluación formal escrita que incorporan las habilidades de recepción y producción escrita considerando mayor énfasis en la producción escrita.
+-	40% Uso de inglés más comprensión auditiva y escrita
+-	60% Producción escrita
+
+Progress Test 2: Evaluación formal oral con énfasis en la interacción entre pares. Utilizando rúbrica analítica (analytic rating scales). Estos criterios son:
+-	Grammatical Resource and Lexical Resource
+-	Discourse Management
+-	Pronunciation
+-	Interactive Communication
+Cada uno de estos se califica individualmente en una escala del 0 al 10.
+●	1 Evaluación de logro (skills-based Achievement Tests)
+La prueba “Achievement Tests” contempla todas las unidades vistas y se divide en los siguientes porcentajes: y sus porcentajes se dividen de la siguiente manera:
+
+-	20% uso del lenguaje (léxico-gramatical, comprensión escrita y oral)
+-	40% producción escrita
+-	40% producción oral
+
+
+o	Uso de rúbrica y tabla analítica para las actividades de producción oral y escrita.
+Este curso no contempla examen.
+Requisitos
+
+Las condiciones para aprobar cada uno de los niveles del programa de inglés, son las siguientes:
+
+●	La nota 4.0 será requisito mínimo para aprobar el curso y avanzar al siguiente nivel. 
+●	Cumplir con una asistencia igual o superior al 75% del total de horas del curso
+Asistencia
+
+Puntualidad y actitudes esperadas: Se espera que el alumno se conecte a clases puntualmente, disponga de todo el material de clase, ocupe la cámara y micrófono para interactuar en las actividades de clase. Así mismo, se espera que evite interrupciones durante las sesiones de clases sincrónicas.
+
+Justificaciones a inasistencias
+
+Todo alumno que se ausente a clases y/o evaluaciones deberá justificarse vía correo electrónico con la docente del curso.
+ 
+Todo estudiante que haya justificado ausencia a 1 evaluación será citado al término del período lectivo, a rendir una “Prueba Recuperativa” llamada “make-up test”, la que integra todos los contenidos del curso. Las ausencias no informadas serán evaluadas con nota 1.0. 
+
+Instrumento o Medio de evaluación	Resultados de Aprendizaje 	Porcentaje de relevancia 
+Written Progress Test 1 
+- 40% Use of English + Listening + Reading
+- 60% Writing	 RA 1, RA 2, RA 4	25% (del 50%)
+Speaking Progress Test 2  Producción oral en pares (rúbrica analítica: gramática, vocabulario, pronunciación, discurso e interacción)	 RA 3, RA 4RA4	25% (del 50%)
+Achievement Test 1 (Final)
+- 30% Use of English + Reading + Listening
+- 40% Writing
+- 40% Speaking	 RA 1, RA 2, RA 3, RA 4	50%
+	TOTAL	100%
+
+UNIDAD: corresponde a ciclos temáticos que organiza los contenidos acordes a una disposición temporal. 	CONTENIDOS: corresponden a conocimientos específicos de carácter conceptual, procedimental y actitudinal que se consideran indispensables para él desarrollo de cada resultado de aprendizaje. Los contenidos deben ser declarados y configurar la programación didáctica, actuando como núcleo de la misma y el eje alrededor del cual se organizan las relaciones interactivas entre docente - alumnos/as y entre pares. Se recomienda desagregar el contenido en unidades y subtemas.
+Unidad 1:   Difference and diversity	Thinking about what you already know
+Reading in detail
+Taking notes
+Vocabulary building 1: word families
+Vocabulary building 2: adjective-noun collocations
+Collecting information for an essay
+Taking notes for essay writing
+Lecture Skills B:
+Using preparation strategies 
+Making predictions before a lecture starts
+Working with colleagues: generating ideas and reporting
+Pronunciation: dividing speech into units
+Lecture Skills B:
+●	Making predictions during a lecture
+●	Identifying topic change
+●	Taking notes
+Language for writing 1: the grammar of reporting verbs
+Language for writing 2: comparing and contrasting 
+Reporting what you read
+Linking parts of a text: conjunctions and sentence connectors.
+Single-word verbs and multi-word verbs
+Word families
+	
+	
+Unidad 2:   The world we live in	Recognising plagiarism 
+Getting started
+Identifying the main ideas in a text
+Summarising what you have read
+Vocabulary building: single- word verbs and multi- word verbs
+Vocabulary in context: hedging adverbs
+Reaching a consensus in group work
+Pronunciation: contrasts
+Using paraphrases
+Including quotations in your writing
+Articles: zero article and the 
+Complex prepositions 
+Person, people, peoples
+
+Unidad 3:    Behaving the way we do	Organising information for an essay
+Skimming and scanning texts
+Taking notes and explaining what you have read.
+Vocabulary building: collocations
+Lecture skills C: 
+●	Thinking about purposes of lectures
+Referring backwards and forwards in presentations
+Writing conclusions in essays 
+Language for writing: hedging 
+Giving references
+Lecture skills C: 
+●	Noticing differences in the language of lectures and academic writing
+Avoiding repetition: expressions with so
+WH- noun clauses
+Using viewpoint adverbs to restrict what is said
+Verb/adjective + preposition combinations
+Lecture skills C: 
+●	Reconstructing your notes
+
+
+METODOLOGÍA DE ENSEÑANZA APRENDIZAJE Y ACTIVIDADES DE APRENDIZAJE:  Metodologías activo participativas centradas en el/la estudiante y en el logro de los resultados de aprendizaje (conocimientos, habilidades y competencias), para el desarrollo de las competencias del perfil de graduación o titulación. Métodos, estrategias, técnicas y/o actividades didácticas, que el/la docente de forma programada, secuencia y estructura, con el objetivo de alcanzar aprendizajes significativos y avanzados de excelencia (generar y dar sentido al conocimiento). 
+La asignatura B1+ Academic English se desarrolla bajo una metodología activo-participativa, centrada en el/la estudiante como protagonista de su proceso formativo. Esta se enmarca en un enfoque comunicativo funcional, que busca consolidar y ampliar las competencias lingüísticas a través del uso significativo del idioma en contextos académicos y profesionales propios del nivel B1+ según el MCER.
+El curso se organiza en torno a secuencias didácticas estructuradas que integran las cuatro habilidades del idioma (lectura, comprensión auditiva, expresión oral y escrita), con énfasis en el desarrollo gradual de la fluidez, la precisión gramatical y el uso del registro académico en inglés. Las actividades están alineadas con los resultados de aprendizaje, favoreciendo la comprensión y producción de textos académicos, la toma de notas, la interacción oral en pares y grupos, y la aplicación de estructuras lingüísticas clave para este nivel.
+La enseñanza se realiza en modalidad online sincrónica, a través de plataformas virtuales que permiten la interacción constante entre docente y estudiantes. El idioma de instrucción es exclusivamente el inglés, lo cual refuerza la inmersión lingüística y estimula la autonomía comunicativa.
+Se emplean estrategias didácticas activas que incluyen la lectura guiada y extensiva de textos académicos, el desarrollo de audiciones simuladas de clases o conferencias para ejercitar la toma de notas, y la escritura colaborativa de textos académicos breves con énfasis en la organización, coherencia y corrección lingüística. Asimismo, se integran simulaciones de discusiones y presentaciones orales para desarrollar habilidades interactivas y argumentativas, junto con actividades de reflexión metacognitiva orientadas al uso apropiado de conectores, estructuras gramaticales complejas, paráfrasis y citas textuales. Estas estrategias se articulan con el trabajo autónomo del/de la estudiante, fomentando la planificación, autoevaluación y revisión continua de su desempeño.
+A lo largo del curso se busca no solo fortalecer las habilidades lingüísticas, sino también fomentar actitudes clave como la colaboración, la autorregulación, la integridad académica y el pensamiento crítico, elementos esenciales para el desempeño académico y profesional en contextos donde el inglés es medio de instrucción o comunicación especializada.
+
+RECURSOS DE APRENDIZAJE:  Conjunto de recursos materiales, físicos, tecnológicos, indispensables que se utilizarán para desarrollar las actividades de aprendizaje.
+●	Plataforma de Aula Virtual (moodle institucional) para la gestión de contenidos, actividades y evaluaciones.
+●	Recursos audiovisuales auténticos (videos académicos, presentaciones modelo, conferencias grabadas).
+●	Software de videoconferencia Zoom para sesiones sincrónicas, que permite la interacción en tiempo real y la práctica oral guiada.
+●	Ejercicios de evaluación en línea, diseñados para reforzar aspectos léxico-gramaticales y de producción escrita.
+●	Foros de discusión académica en inglés, moderados por el/la docente para fomentar la reflexión y el intercambio de ideas.
+●	Rúbricas de evaluación analítica para orientar la producción oral y escrita.
+●	Glosarios temáticos y bancos de expresiones útiles para la comunicación académica.
+●	Bibliografía digital complementaria y acceso a bases de datos académicas.
+
+
+
+
+
+
+
+BIBLIOGRAFÍA OBLIGATORIA: Considera aquellos textos o recursos digitales a los cuales el estudiante debe acceder o consultar de manera indispensable para lograr los resultados de aprendizaje que se encuentran formulados en el programa de asignatura. 
+Esta bibliografía obligatoria debe estar disponible en el catálogo del Sistema de Bibliotecas PUCV. 
+Tener presente en caso de contenidos web, se debe verificar que el link se encuentre activo, en una página autorizada y/o acreditada." 
+
+La bibliografía debe ser entregada según Norma APA 7ªed (Apellido del Autor, Primera Inicial. (Año). Título del Libro. Editorial)	BIBLIOGRAFÍA COMPLEMENTARIA: Está constituida por textos que permiten al estudiante profundizar o complementar algunos de los temas propuestos en el programa de asignatura, para ampliar la visión del conocimiento estudiado. Su lectura es voluntaria.
+Esta bibliografía obligatoria debe estar disponible en el catálogo del Sistema de Bibliotecas PUCV. 
+Tener presente en caso de contenidos web, se debe verificar que el link se encuentre activo, en una página autorizada y/o acreditada." 
+
+La bibliografía debe ser entregada según Norma APA 7ªed (Apellido del Autor, Primera Inicial. (Año). Título del Libro. Editorial)
+●	Material de creación propia del docente del curso
+●	Aula Virtual
+●	Plataforma Zoom	●	Write & Improve https://writeandimprove.com
+
+English for Academics. Cambridge University Press. British Council.	●	Speak & Improve https://speakandimprove.com/
+●	Cambridge dictionary: https://dictionary.cambridge.org/
+●	Onelook.com: https://onelook.com/
+
+●	Cambridge Academic English EAP Upper Intermediate. Martin Hewings. Cambridge University Press
+	●	http://programadeingles.pucv.cl/
+●	https://dictionary.cambridge.org/dictionary/english
+	
+	
+
+
+INTEGRIDAD ACADÉMICA 
+
+La integridad académica es un valor. El Modelo Educativo releva un conjunto de principios y comportamientos éticos de los estudiantes en sus procesos formativos. La integridad académica se expresa en todas las actuaciones que las personas realizan en la Universidad, dentro y fuera del aula. 
+Todos los estudiantes de la Pontificia Universidad Católica de Valparaíso tienen la responsabilidad de conocer el Reglamento de Disciplina. Se espera que los estudiantes se comprometan adecuadamente en los procesos académicos de acuerdo con los valores como la honestidad, el respeto, la veracidad, la justicia y la responsabilidad. 
+Cualquier falta a la integridad académica en una actividad de evaluación, daña profundamente la confianza que siempre debe existir en la relación de aprendizaje entre profesor y estudiante, afectando el proceso formativo.
+Igualmente, constituye una falta de integridad académica usar las ideas, la información o las expresiones de otro, sin el adecuado reconocimiento y cita de su autor. Los profesores de la Pontificia Universidad Católica de Valparaíso, atendida su responsabilidad en la formación de sus estudiantes, deben transmitir el valor de la integridad académica y, ante una falta a ésta, proceder conforme lo dispone la normativa universitaria.
+
+
+
+
