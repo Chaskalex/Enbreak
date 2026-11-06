@@ -20,8 +20,76 @@
     <style>
     .activity-hero {
         background: linear-gradient(135deg, #134e4a 0%, #0d9488 100%);
-        /* background: url('../../../assets/activities/[image].jpg') center/cover no-repeat; */
     }
+
+    /* ── VOCABULARY REFERENCE CARDS ──────────────────────────── */
+    .vocab-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+    @media (max-width: 640px) { .vocab-grid { grid-template-columns: 1fr; } }
+    .vocab-pair-card { background: #fff; border: 1.5px solid #e5e7eb; border-radius: 12px; padding: 16px 18px; }
+    .vpc-avoid { font-family: 'Inter', sans-serif; font-size: 13px; color: #9ca3af; display: flex; align-items: center; gap: 6px; margin-bottom: 6px; }
+    .vpc-avoid i { color: #fca5a5; font-size: 11px; }
+    .vpc-avoid span { text-decoration: line-through; }
+    .vpc-use { font-family: 'Rubik', sans-serif; font-size: 15px; font-weight: 700; color: #0d9488; display: flex; align-items: center; gap: 6px; margin-bottom: 10px; }
+    .vpc-use i { font-size: 11px; }
+    .vpc-ex { font-family: 'Inter', sans-serif; font-size: 12.5px; color: #6b7280; font-style: italic; line-height: 1.55; border-top: 1px solid #f3f4f6; padding-top: 8px; }
+    .vpc-ex em { font-style: normal; font-weight: 700; color: #134e4a; }
+
+    /* ── REGISTER TOGGLE (si-list) ───────────────────────────── */
+    .si-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+    .si-item { background: #f9fafb; border: 1.5px solid #e5e7eb; border-radius: 12px; padding: 16px 18px; }
+    .si-statement { font-family: 'Inter', sans-serif; font-size: 14px; color: #1f2937; line-height: 1.55; margin-bottom: 12px; display: flex; gap: 10px; }
+    .si-num { font-family: 'Rubik', sans-serif; font-size: 13px; font-weight: 700; color: #0d9488; flex-shrink: 0; }
+    .si-toggle { display: flex; gap: 6px; flex-wrap: wrap; }
+    .si-btn { padding: 7px 14px; border-radius: 8px; border: 1.5px solid #e5e7eb; background: #fff; font-family: 'Inter', sans-serif; font-size: 12.5px; font-weight: 600; color: #6b7280; cursor: pointer; transition: all 0.2s; }
+    .si-btn:hover { border-color: #0d9488; color: #0d9488; }
+    .si-btn.selected { background: #0d9488; border-color: #0d9488; color: #fff; }
+    .si-btn.correct { background: #16a34a; border-color: #16a34a; color: #fff; }
+    .si-btn.incorrect { background: #dc2626; border-color: #dc2626; color: #fff; }
+    .si-btn.disabled { cursor: not-allowed; }
+    .si-explanation { margin-top: 12px; padding: 10px 14px; background: #fff; border-left: 3px solid #0d9488; border-radius: 6px; font-family: 'Inter', sans-serif; font-size: 12.5px; color: #4b5563; line-height: 1.55; display: none; }
+    .si-explanation.show { display: block; }
+
+    /* ── MC CAROUSEL ─────────────────────────────────────────── */
+    .mc-container { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 12px; padding: 18px 20px; }
+    .mc-list.single-view .mc-item { display: none; }
+    .mc-list.single-view .mc-item.active { display: block; animation: fadeSlide 0.22s ease; }
+    @keyframes fadeSlide { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    .mc-task-label { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #0d9488; margin-bottom: 8px; }
+    .mc-question { font-size: 14px; font-weight: 600; color: #1f2937; margin-bottom: 14px; line-height: 1.5; }
+    .mc-options { display: flex; flex-direction: column; gap: 8px; }
+    .mc-btn { display: flex; align-items: flex-start; gap: 10px; padding: 10px 14px; border-radius: 8px; border: 1.5px solid #e5e7eb; background: #fff; font-family: 'Inter', sans-serif; font-size: 13.5px; color: #374151; cursor: pointer; transition: all 0.2s; text-align: left; width: 100%; }
+    .mc-letter { width: 24px; height: 24px; border-radius: 50%; background: #f3f4f6; border: 1.5px solid #d1d5db; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: #6b7280; flex-shrink: 0; transition: all 0.2s; margin-top: 1px; }
+    .mc-btn:hover { border-color: #0d9488; }
+    .mc-btn:hover .mc-letter { background: #ccfbf1; border-color: #0d9488; color: #134e4a; }
+    .mc-btn.selected { border-color: #0d9488; background: #f0fdfa; }
+    .mc-btn.selected .mc-letter { background: #0d9488; border-color: #0d9488; color: #fff; }
+    .mc-btn.correct { border-color: #16a34a; background: #f0fdf4; }
+    .mc-btn.correct .mc-letter { background: #16a34a; border-color: #16a34a; color: #fff; }
+    .mc-btn.incorrect { border-color: #dc2626; background: #fef2f2; }
+    .mc-btn.incorrect .mc-letter { background: #dc2626; border-color: #dc2626; color: #fff; }
+    .mc-card-nav { display: flex; align-items: center; justify-content: space-between; padding-top: 20px; margin-top: 20px; border-top: 1px solid #e5e7eb; }
+    .mc-card-counter { font-family: 'Inter', sans-serif; font-size: 13px; color: #6b7280; font-weight: 500; }
+    .mc-card-counter span { font-family: 'Rubik', sans-serif; font-size: 14px; font-weight: 700; color: #111827; }
+    .mc-card-arrows { display: flex; gap: 8px; }
+    .arrow-btn { width: 36px; height: 36px; border-radius: 8px; border: 1px solid #e5e7eb; background: #fff; color: #374151; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; font-size: 14px; }
+    .arrow-btn:hover:not(:disabled) { border-color: #0d9488; color: #fff; background: #0d9488; }
+    .arrow-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    /* ── REPLACE EXERCISE ────────────────────────────────────── */
+    .replace-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+    .replace-item { background: #f9fafb; border: 1.5px solid #e5e7eb; border-radius: 12px; padding: 16px 18px; }
+    .replace-sentence { font-family: 'Inter', sans-serif; font-size: 14px; color: #1f2937; line-height: 1.6; margin-bottom: 12px; display: flex; gap: 10px; }
+    .replace-num { font-family: 'Rubik', sans-serif; font-size: 13px; font-weight: 700; color: #0d9488; flex-shrink: 0; }
+    .replace-informal { background: #fee2e2; color: #991b1b; padding: 1px 6px; border-radius: 4px; font-weight: 700; text-decoration: line-through; }
+    .replace-options { display: flex; gap: 8px; flex-wrap: wrap; }
+    .replace-btn { padding: 8px 16px; border-radius: 8px; border: 1.5px solid #e5e7eb; background: #fff; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; color: #374151; cursor: pointer; transition: all 0.2s; }
+    .replace-btn:hover { border-color: #0d9488; color: #0d9488; }
+    .replace-btn.selected { background: #0d9488; border-color: #0d9488; color: #fff; }
+    .replace-btn.correct { background: #16a34a; border-color: #16a34a; color: #fff; }
+    .replace-btn.incorrect { background: #dc2626; border-color: #dc2626; color: #fff; }
+    .replace-btn.disabled { cursor: not-allowed; }
+    .replace-explanation { margin-top: 10px; padding: 10px 14px; background: #fff; border-left: 3px solid #0d9488; border-radius: 6px; font-family: 'Inter', sans-serif; font-size: 12.5px; color: #4b5563; line-height: 1.55; display: none; }
+    .replace-explanation.show { display: block; }
     </style>
 
     <script>
@@ -114,7 +182,179 @@
                      PREPARATION
                 ================================================ -->
                 <div class="tab-content" id="preparation">
-                    <!-- Add exercises here -->
+
+                    <!-- ── EXERCISE 1: VOCABULARY REFERENCE ── -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">1</span>
+                            <h3>Vocabulary Reference</h3>
+                        </div>
+                        <p class="exercise-instructions">
+                            Study these eight pairs before moving on. Each card shows the informal version to avoid and its formal academic equivalent, with an example sentence to show the word in context.
+                        </p>
+
+                        <div class="vocab-grid">
+
+                            <div class="vocab-pair-card">
+                                <div class="vpc-avoid"><i class="fa-solid fa-xmark"></i><span>find out</span></div>
+                                <div class="vpc-use"><i class="fa-solid fa-check"></i>investigate / determine</div>
+                                <div class="vpc-ex">"The team aimed to <em>investigate</em> the long-term effects of the treatment."</div>
+                            </div>
+
+                            <div class="vocab-pair-card">
+                                <div class="vpc-avoid"><i class="fa-solid fa-xmark"></i><span>show</span></div>
+                                <div class="vpc-use"><i class="fa-solid fa-check"></i>demonstrate / indicate</div>
+                                <div class="vpc-ex">"The results <em>demonstrate</em> a significant improvement in the control group."</div>
+                            </div>
+
+                            <div class="vocab-pair-card">
+                                <div class="vpc-avoid"><i class="fa-solid fa-xmark"></i><span>look at</span></div>
+                                <div class="vpc-use"><i class="fa-solid fa-check"></i>examine / analyse</div>
+                                <div class="vpc-ex">"Chapter 2 <em>examines</em> the theoretical framework in detail."</div>
+                            </div>
+
+                            <div class="vocab-pair-card">
+                                <div class="vpc-avoid"><i class="fa-solid fa-xmark"></i><span>get bigger / go up</span></div>
+                                <div class="vpc-use"><i class="fa-solid fa-check"></i>increase / expand</div>
+                                <div class="vpc-ex">"Participation rates <em>increased</em> significantly over the study period."</div>
+                            </div>
+
+                            <div class="vocab-pair-card">
+                                <div class="vpc-avoid"><i class="fa-solid fa-xmark"></i><span>need</span></div>
+                                <div class="vpc-use"><i class="fa-solid fa-check"></i>require</div>
+                                <div class="vpc-ex">"This process <em>requires</em> careful documentation at each stage."</div>
+                            </div>
+
+                            <div class="vocab-pair-card">
+                                <div class="vpc-avoid"><i class="fa-solid fa-xmark"></i><span>use</span></div>
+                                <div class="vpc-use"><i class="fa-solid fa-check"></i>employ / utilise</div>
+                                <div class="vpc-ex">"The researchers <em>employed</em> a mixed-methods approach."</div>
+                            </div>
+
+                            <div class="vocab-pair-card">
+                                <div class="vpc-avoid"><i class="fa-solid fa-xmark"></i><span>help</span></div>
+                                <div class="vpc-use"><i class="fa-solid fa-check"></i>facilitate / enable</div>
+                                <div class="vpc-ex">"The training <em>enabled</em> participants to develop new technical skills."</div>
+                            </div>
+
+                            <div class="vocab-pair-card">
+                                <div class="vpc-avoid"><i class="fa-solid fa-xmark"></i><span>but</span></div>
+                                <div class="vpc-use"><i class="fa-solid fa-check"></i>however / nevertheless</div>
+                                <div class="vpc-ex">"The results were inconclusive; <em>however</em>, they suggest a useful direction."</div>
+                            </div>
+
+                        </div>
+
+                        <div class="tip-box">
+                            <div class="tip-header"><i class="fa-solid fa-lightbulb" style="color:#0d9488;"></i> Tip</div>
+                            <div class="tip-content"><p>At C1 level, register precision matters more than volume of vocabulary. Using one precise formal verb in the right place is more effective than using ten general ones. Keep these pairs in mind as you write and revise.</p></div>
+                        </div>
+                    </div>
+
+                    <!-- ── EXERCISE 2: IDENTIFY THE REGISTER ── -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">2</span>
+                            <h3>Identify the Register</h3>
+                        </div>
+                        <p class="exercise-instructions">
+                            Each sentence is taken from an academic text. The underlined word or phrase is either appropriate for academic writing or too informal. Decide which.
+                        </p>
+
+                        <div class="si-list" id="si-list">
+
+                            <div class="si-item" data-correct="informal">
+                                <div class="si-statement">
+                                    <span class="si-num">1.</span>
+                                    This section <strong><u>looks at</u></strong> the historical development of the theory.
+                                </div>
+                                <div class="si-toggle">
+                                    <button class="si-btn" data-choice="formal">Formal</button>
+                                    <button class="si-btn" data-choice="informal">Too Informal</button>
+                                </div>
+                                <div class="si-explanation">
+                                    <strong>Too informal.</strong> "Looks at" is conversational. In academic writing, use "examines" or "analyses" instead.
+                                </div>
+                            </div>
+
+                            <div class="si-item" data-correct="formal">
+                                <div class="si-statement">
+                                    <span class="si-num">2.</span>
+                                    The findings <strong><u>indicate</u></strong> that the hypothesis was partially supported.
+                                </div>
+                                <div class="si-toggle">
+                                    <button class="si-btn" data-choice="formal">Formal</button>
+                                    <button class="si-btn" data-choice="informal">Too Informal</button>
+                                </div>
+                                <div class="si-explanation">
+                                    <strong>Formal.</strong> "Indicate" is a precise, neutral verb widely used for reporting research findings. It is fully appropriate at C1 academic level.
+                                </div>
+                            </div>
+
+                            <div class="si-item" data-correct="informal">
+                                <div class="si-statement">
+                                    <span class="si-num">3.</span>
+                                    There are <strong><u>a lot of</u></strong> factors that contribute to student disengagement.
+                                </div>
+                                <div class="si-toggle">
+                                    <button class="si-btn" data-choice="formal">Formal</button>
+                                    <button class="si-btn" data-choice="informal">Too Informal</button>
+                                </div>
+                                <div class="si-explanation">
+                                    <strong>Too informal.</strong> "A lot of" is conversational. Use "numerous," "a range of," or "a significant number of" in academic writing.
+                                </div>
+                            </div>
+
+                            <div class="si-item" data-correct="formal">
+                                <div class="si-statement">
+                                    <span class="si-num">4.</span>
+                                    The data <strong><u>demonstrate</u></strong> a statistically significant difference between the two groups.
+                                </div>
+                                <div class="si-toggle">
+                                    <button class="si-btn" data-choice="formal">Formal</button>
+                                    <button class="si-btn" data-choice="informal">Too Informal</button>
+                                </div>
+                                <div class="si-explanation">
+                                    <strong>Formal.</strong> "Demonstrate" is the standard academic verb for presenting empirical evidence. It is more precise than "show" and signals a C1 register.
+                                </div>
+                            </div>
+
+                            <div class="si-item" data-correct="informal">
+                                <div class="si-statement">
+                                    <span class="si-num">5.</span>
+                                    The programme <strong><u>helped</u></strong> participants improve their confidence in public speaking.
+                                </div>
+                                <div class="si-toggle">
+                                    <button class="si-btn" data-choice="formal">Formal</button>
+                                    <button class="si-btn" data-choice="informal">Too Informal</button>
+                                </div>
+                                <div class="si-explanation">
+                                    <strong>Too informal.</strong> "Helped" is acceptable in everyday writing but too vague at C1 level. Use "enabled," "assisted," or "facilitated" for academic precision.
+                                </div>
+                            </div>
+
+                            <div class="si-item" data-correct="formal">
+                                <div class="si-statement">
+                                    <span class="si-num">6.</span>
+                                    The study <strong><u>employed</u></strong> a longitudinal design spanning three academic years.
+                                </div>
+                                <div class="si-toggle">
+                                    <button class="si-btn" data-choice="formal">Formal</button>
+                                    <button class="si-btn" data-choice="informal">Too Informal</button>
+                                </div>
+                                <div class="si-explanation">
+                                    <strong>Formal.</strong> "Employed" is the appropriate academic verb for describing methodology. It is more precise and formal than "used."
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div style="display: flex; gap: 12px;">
+                            <button class="check-answers-btn" id="check-si"><i class="fa-solid fa-check"></i> Check answers</button>
+                            <button class="check-answers-btn retry-btn" id="retry-si" disabled><i class="fa-solid fa-rotate-right"></i> Try again</button>
+                        </div>
+                    </div>
+
                 </div>
 
                 <!-- ================================================
@@ -122,7 +362,179 @@
                 ================================================ -->
                 <div class="tab-content" id="practice">
 
-                    <!-- Add exercises here -->
+                    <!-- ── EXERCISE 3: IN CONTEXT ── -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">3</span>
+                            <h3>In Context</h3>
+                        </div>
+                        <p class="exercise-instructions">
+                            Each sentence has a gap. Choose the most appropriate formal word or phrase to complete it. Use the arrows to move between questions.
+                        </p>
+
+                        <div class="mc-container">
+                            <div class="mc-list single-view" id="mc-list">
+
+                                <div class="mc-item active" data-correct="b">
+                                    <div class="mc-task-label">Research verb</div>
+                                    <p class="mc-question">The team carefully _____ the effects of sleep deprivation on reaction time.</p>
+                                    <div class="mc-options">
+                                        <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> had a look at</button>
+                                        <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> examined</button>
+                                        <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> checked on</button>
+                                    </div>
+                                </div>
+
+                                <div class="mc-item" data-correct="c">
+                                    <div class="mc-task-label">Reporting results</div>
+                                    <p class="mc-question">The analysis _____ that prolonged exposure to noise impairs concentration significantly.</p>
+                                    <div class="mc-options">
+                                        <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> told us</button>
+                                        <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> showed to be</button>
+                                        <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> demonstrated</button>
+                                    </div>
+                                </div>
+
+                                <div class="mc-item" data-correct="c">
+                                    <div class="mc-task-label">Connective</div>
+                                    <p class="mc-question">The sample was relatively small; _____, the results should be interpreted with caution.</p>
+                                    <div class="mc-options">
+                                        <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> so</button>
+                                        <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> that is why</button>
+                                        <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> consequently</button>
+                                    </div>
+                                </div>
+
+                                <div class="mc-item" data-correct="c">
+                                    <div class="mc-task-label">Methodology verb</div>
+                                    <p class="mc-question">The investigation _____ in-depth interviews with thirty-two participants.</p>
+                                    <div class="mc-options">
+                                        <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> got through</button>
+                                        <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> went through</button>
+                                        <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> employed</button>
+                                    </div>
+                                </div>
+
+                                <div class="mc-item" data-correct="c">
+                                    <div class="mc-task-label">Impact verb</div>
+                                    <p class="mc-question">The new curriculum _____ significant improvements in student literacy rates.</p>
+                                    <div class="mc-options">
+                                        <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> helped make</button>
+                                        <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> did a lot for</button>
+                                        <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> produced</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="mc-card-nav">
+                                <p class="mc-card-counter">Question <span id="q-counter">1</span> of 5</p>
+                                <div class="mc-card-arrows">
+                                    <button class="arrow-btn" id="mc-prev" disabled><i class="fa-solid fa-chevron-left"></i></button>
+                                    <button class="arrow-btn" id="mc-next"><i class="fa-solid fa-chevron-right"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 12px; margin-top: 24px;">
+                            <button class="check-answers-btn" id="check-mc"><i class="fa-solid fa-check"></i> Check answers</button>
+                            <button class="check-answers-btn retry-btn" id="retry-mc" disabled><i class="fa-solid fa-rotate-right"></i> Try again</button>
+                        </div>
+                    </div>
+
+                    <!-- ── EXERCISE 4: SELECT THE REPLACEMENT ── -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">4</span>
+                            <h3>Select the Best Replacement</h3>
+                        </div>
+                        <p class="exercise-instructions">
+                            Each sentence contains an informal word or phrase (shown in red). Choose the best formal replacement from the three options.
+                        </p>
+
+                        <div class="replace-list" id="replace-list">
+
+                            <div class="replace-item" data-correct="investigated">
+                                <div class="replace-sentence">
+                                    <span class="replace-num">1.</span>
+                                    <span>The researchers <span class="replace-informal">tried to find out</span> whether early intervention reduces school dropout rates.</span>
+                                </div>
+                                <div class="replace-options">
+                                    <button class="replace-btn" data-choice="looked into">looked into</button>
+                                    <button class="replace-btn" data-choice="investigated">investigated</button>
+                                    <button class="replace-btn" data-choice="checked">checked</button>
+                                </div>
+                                <div class="replace-explanation">
+                                    <strong>Investigated</strong> is the precise academic verb for systematic inquiry. "Looked into" is still informal, and "checked" lacks the academic specificity required at C1 level.
+                                </div>
+                            </div>
+
+                            <div class="replace-item" data-correct="increased">
+                                <div class="replace-sentence">
+                                    <span class="replace-num">2.</span>
+                                    <span>The proportion of students choosing STEM subjects <span class="replace-informal">got bigger</span> substantially over the five-year period.</span>
+                                </div>
+                                <div class="replace-options">
+                                    <button class="replace-btn" data-choice="went up">went up</button>
+                                    <button class="replace-btn" data-choice="got larger">got larger</button>
+                                    <button class="replace-btn" data-choice="increased">increased</button>
+                                </div>
+                                <div class="replace-explanation">
+                                    <strong>Increased</strong> is the standard formal verb for describing growth. "Went up" and "got larger" are too conversational for academic writing.
+                                </div>
+                            </div>
+
+                            <div class="replace-item" data-correct="considers">
+                                <div class="replace-sentence">
+                                    <span class="replace-num">3.</span>
+                                    <span>The discussion <span class="replace-informal">thinks about</span> the broader social implications of the study's findings.</span>
+                                </div>
+                                <div class="replace-options">
+                                    <button class="replace-btn" data-choice="looks at">looks at</button>
+                                    <button class="replace-btn" data-choice="considers">considers</button>
+                                    <button class="replace-btn" data-choice="talks about">talks about</button>
+                                </div>
+                                <div class="replace-explanation">
+                                    <strong>Considers</strong> is the appropriate academic verb for analytical reflection. "Looks at" is informal, and "talks about" is far too conversational.
+                                </div>
+                            </div>
+
+                            <div class="replace-item" data-correct="employed">
+                                <div class="replace-sentence">
+                                    <span class="replace-num">4.</span>
+                                    <span>The methodological framework <span class="replace-informal">used</span> a three-stage model to assess participant progress.</span>
+                                </div>
+                                <div class="replace-options">
+                                    <button class="replace-btn" data-choice="made use of">made use of</button>
+                                    <button class="replace-btn" data-choice="had">had</button>
+                                    <button class="replace-btn" data-choice="employed">employed</button>
+                                </div>
+                                <div class="replace-explanation">
+                                    <strong>Employed</strong> is the formal academic term for using a tool or method. "Made use of" is wordy and slightly informal; "had" is far too vague.
+                                </div>
+                            </div>
+
+                            <div class="replace-item" data-correct="is required to">
+                                <div class="replace-sentence">
+                                    <span class="replace-num">5.</span>
+                                    <span>The review <span class="replace-informal">needs to</span> acknowledge the limitations of the existing literature.</span>
+                                </div>
+                                <div class="replace-options">
+                                    <button class="replace-btn" data-choice="has to">has to</button>
+                                    <button class="replace-btn" data-choice="wants to">wants to</button>
+                                    <button class="replace-btn" data-choice="is required to">is required to</button>
+                                </div>
+                                <div class="replace-explanation">
+                                    <strong>Is required to</strong> signals an academic expectation with the appropriate formal register. "Has to" and "wants to" are too conversational for formal academic writing.
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div style="display: flex; gap: 12px;">
+                            <button class="check-answers-btn" id="check-replace"><i class="fa-solid fa-check"></i> Check answers</button>
+                            <button class="check-answers-btn retry-btn" id="retry-replace" disabled><i class="fa-solid fa-rotate-right"></i> Try again</button>
+                        </div>
+                    </div>
 
                     <!-- ── COMPLETION BOX ── -->
                     <div class="completion-box">
@@ -134,10 +546,10 @@
                             </div>
                             <p class="completion-subtitle">You've completed <strong>"Formal or Informal?"</strong>. Here's what you've practised:</p>
                             <div class="skills-list">
-                                <div class="skill-item"><div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>[Skill 1]</div>
-                                <div class="skill-item"><div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>[Skill 2]</div>
-                                <div class="skill-item"><div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>[Skill 3]</div>
-                                <div class="skill-item"><div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>[Skill 4]</div>
+                                <div class="skill-item"><div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Recognising informal language in academic contexts</div>
+                                <div class="skill-item"><div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Matching informal vocabulary to formal academic equivalents</div>
+                                <div class="skill-item"><div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Selecting precise formal verbs for research writing at C1 level</div>
+                                <div class="skill-item"><div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Replacing informal expressions with appropriate academic alternatives</div>
                             </div>
                         </div>
                     </div>
@@ -162,6 +574,148 @@
     <script src="../../../js/layout.js"></script>
     <script src="../../../js/script.js" defer></script>
     <script src="../../../js/checkanswers.js"></script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+        // ══ EXERCISE 2: REGISTER TOGGLE ═════════════════════════
+        const siItems = document.querySelectorAll('.si-item');
+        const checkSiBtn = document.getElementById('check-si');
+        const retrySiBtn = document.getElementById('retry-si');
+
+        siItems.forEach(item => {
+            item.querySelectorAll('.si-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    if (this.classList.contains('disabled')) return;
+                    item.querySelectorAll('.si-btn').forEach(b => b.classList.remove('selected'));
+                    this.classList.add('selected');
+                });
+            });
+        });
+
+        checkSiBtn.addEventListener('click', function() {
+            let correct = 0;
+            siItems.forEach(item => {
+                const correctChoice = item.dataset.correct;
+                const selected = item.querySelector('.si-btn.selected');
+                item.querySelectorAll('.si-btn').forEach(b => b.classList.add('disabled'));
+                if (selected) {
+                    selected.classList.remove('selected');
+                    if (selected.dataset.choice === correctChoice) { selected.classList.add('correct'); correct++; }
+                    else { selected.classList.add('incorrect'); item.querySelector(`.si-btn[data-choice="${correctChoice}"]`)?.classList.add('correct'); }
+                } else { item.querySelector(`.si-btn[data-choice="${correctChoice}"]`)?.classList.add('correct'); }
+                item.querySelector('.si-explanation').classList.add('show');
+            });
+            if (typeof showFeedbackPopup === 'function') showFeedbackPopup(correct, siItems.length);
+            this.disabled = true; retrySiBtn.disabled = false;
+        });
+
+        retrySiBtn.addEventListener('click', function() {
+            siItems.forEach(item => {
+                item.querySelectorAll('.si-btn').forEach(b => b.classList.remove('selected', 'correct', 'incorrect', 'disabled'));
+                item.querySelector('.si-explanation').classList.remove('show');
+            });
+            checkSiBtn.disabled = false; this.disabled = true;
+        });
+
+        // ══ EXERCISE 3: MC CAROUSEL ═════════════════════════════
+        const mcList = document.getElementById('mc-list');
+        const mcItems = [...mcList.querySelectorAll('.mc-item')];
+        const qCounter = document.getElementById('q-counter');
+        const mcPrev = document.getElementById('mc-prev');
+        const mcNext = document.getElementById('mc-next');
+        const checkMcBtn = document.getElementById('check-mc');
+        const retryMcBtn = document.getElementById('retry-mc');
+        let currentQ = 0;
+
+        mcItems.forEach(item => {
+            item.querySelectorAll('.mc-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    if (item.dataset.answered) return;
+                    item.querySelectorAll('.mc-btn').forEach(b => b.classList.remove('selected'));
+                    this.classList.add('selected');
+                });
+            });
+        });
+
+        function goToQ(idx) {
+            mcItems[currentQ].classList.remove('active');
+            currentQ = idx;
+            mcItems[currentQ].classList.add('active');
+            qCounter.textContent = currentQ + 1;
+            mcPrev.disabled = currentQ === 0;
+            mcNext.disabled = currentQ === mcItems.length - 1;
+        }
+
+        mcPrev.addEventListener('click', () => { if (currentQ > 0) goToQ(currentQ - 1); });
+        mcNext.addEventListener('click', () => { if (currentQ < mcItems.length - 1) goToQ(currentQ + 1); });
+
+        checkMcBtn.addEventListener('click', function() {
+            let correct = 0;
+            mcItems.forEach(item => {
+                const correctOpt = item.dataset.correct;
+                const selected = item.querySelector('.mc-btn.selected');
+                item.dataset.answered = 'true';
+                item.querySelectorAll('.mc-btn').forEach(b => b.style.pointerEvents = 'none');
+                if (selected) {
+                    if (selected.dataset.option === correctOpt) { selected.classList.add('correct'); correct++; }
+                    else { selected.classList.add('incorrect'); item.querySelector(`.mc-btn[data-option="${correctOpt}"]`)?.classList.add('correct'); }
+                } else { item.querySelector(`.mc-btn[data-option="${correctOpt}"]`)?.classList.add('correct'); }
+            });
+            if (typeof showFeedbackPopup === 'function') showFeedbackPopup(correct, mcItems.length);
+            this.disabled = true; retryMcBtn.disabled = false;
+        });
+
+        retryMcBtn.addEventListener('click', function() {
+            mcItems.forEach(item => {
+                delete item.dataset.answered;
+                item.querySelectorAll('.mc-btn').forEach(b => { b.classList.remove('selected', 'correct', 'incorrect'); b.style.pointerEvents = ''; });
+            });
+            goToQ(0); checkMcBtn.disabled = false; this.disabled = true;
+        });
+
+        // ══ EXERCISE 4: SELECT REPLACEMENT ══════════════════════
+        const replaceItems = document.querySelectorAll('.replace-item');
+        const checkReplaceBtn = document.getElementById('check-replace');
+        const retryReplaceBtn = document.getElementById('retry-replace');
+
+        replaceItems.forEach(item => {
+            item.querySelectorAll('.replace-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    if (this.classList.contains('disabled')) return;
+                    item.querySelectorAll('.replace-btn').forEach(b => b.classList.remove('selected'));
+                    this.classList.add('selected');
+                });
+            });
+        });
+
+        checkReplaceBtn.addEventListener('click', function() {
+            let correct = 0;
+            replaceItems.forEach(item => {
+                const correctChoice = item.dataset.correct;
+                const selected = item.querySelector('.replace-btn.selected');
+                item.querySelectorAll('.replace-btn').forEach(b => b.classList.add('disabled'));
+                if (selected) {
+                    selected.classList.remove('selected');
+                    if (selected.dataset.choice === correctChoice) { selected.classList.add('correct'); correct++; }
+                    else { selected.classList.add('incorrect'); item.querySelector(`.replace-btn[data-choice="${correctChoice}"]`)?.classList.add('correct'); }
+                } else { item.querySelector(`.replace-btn[data-choice="${correctChoice}"]`)?.classList.add('correct'); }
+                item.querySelector('.replace-explanation').classList.add('show');
+            });
+            if (typeof showFeedbackPopup === 'function') showFeedbackPopup(correct, replaceItems.length);
+            this.disabled = true; retryReplaceBtn.disabled = false;
+        });
+
+        retryReplaceBtn.addEventListener('click', function() {
+            replaceItems.forEach(item => {
+                item.querySelectorAll('.replace-btn').forEach(b => b.classList.remove('selected', 'correct', 'incorrect', 'disabled'));
+                item.querySelector('.replace-explanation').classList.remove('show');
+            });
+            checkReplaceBtn.disabled = false; this.disabled = true;
+        });
+
+    });
+    </script>
 
 </body>
 </html>

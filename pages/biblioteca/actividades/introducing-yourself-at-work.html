@@ -19,9 +19,90 @@
 
     <style>
     .activity-hero {
-        background: linear-gradient(135deg, #7c2d12 0%, #ea580c 100%);
-        /* background: url('../../../assets/activities/[image].jpg') center/cover no-repeat; */
+        background-color: #0a1e42;
     }
+
+    .phrase-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 24px; }
+    @media (max-width: 640px) { .phrase-grid { grid-template-columns: 1fr; } }
+    .phrase-card { background: #ffffff; border: 1.5px solid #e5e7eb; border-radius: 14px; overflow: hidden; }
+    .phrase-card-header { background: linear-gradient(135deg, #7c2d12 0%, #ea580c 100%); padding: 13px 18px; display: flex; align-items: center; gap: 10px; }
+    .phrase-card-icon { width: 32px; height: 32px; background: rgba(255,255,255,0.15); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; color: #ffffff; flex-shrink: 0; }
+    .phrase-card-title { font-family: 'Rubik', sans-serif; font-size: 15px; font-weight: 700; color: #ffffff; margin: 0; }
+    .phrase-card-body { padding: 14px 18px; }
+    .phrase-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 7px; }
+    .phrase-list li { font-family: 'Inter', sans-serif; font-size: 13.5px; color: #374151; line-height: 1.5; padding: 8px 12px; background: #f9fafb; border-radius: 8px; border-left: 3px solid #ea580c; }
+    .phrase-list li em { color: #ea580c; font-style: normal; font-weight: 600; }
+
+    .mc-container { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 12px; padding: 18px 20px; }
+    .mc-list.single-view .mc-item { display: none; }
+    .mc-list.single-view .mc-item.active { display: block; animation: fadeSlide 0.22s ease; }
+    @keyframes fadeSlide { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    .mc-question { font-size: 14.5px; font-weight: 600; color: #1f2937; margin-bottom: 14px; line-height: 1.5; }
+    .mc-options { display: flex; flex-direction: column; gap: 8px; }
+    .mc-btn { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 8px; border: 1.5px solid #e5e7eb; background: #fff; font-family: 'Inter', sans-serif; font-size: 13.5px; color: #374151; cursor: pointer; transition: all 0.2s; text-align: left; width: 100%; }
+    .mc-letter { width: 24px; height: 24px; border-radius: 50%; background: #f3f4f6; border: 1.5px solid #d1d5db; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: #6b7280; flex-shrink: 0; transition: all 0.2s; }
+    .mc-btn:hover { border-color: #ea580c; }
+    .mc-btn:hover .mc-letter { background: #ffedd5; border-color: #ea580c; color: #ea580c; }
+    .mc-btn.selected { border-color: #ea580c; background: #fff7ed; }
+    .mc-btn.selected .mc-letter { background: #ea580c; border-color: #ea580c; color: #fff; }
+    .mc-btn.correct { border-color: #16a34a; background: #f0fdf4; }
+    .mc-btn.correct .mc-letter { background: #16a34a; border-color: #16a34a; color: #fff; }
+    .mc-btn.incorrect { border-color: #dc2626; background: #fef2f2; }
+    .mc-btn.incorrect .mc-letter { background: #dc2626; border-color: #dc2626; color: #fff; }
+    .mc-card-nav { display: flex; align-items: center; justify-content: space-between; padding-top: 20px; margin-top: 20px; border-top: 1px solid #e5e7eb; }
+    .mc-card-counter { font-family: 'Inter', sans-serif; font-size: 13px; color: #6b7280; font-weight: 500; }
+    .mc-card-counter span { font-family: 'Rubik', sans-serif; font-size: 14px; font-weight: 700; color: #111827; }
+    .mc-card-arrows { display: flex; gap: 8px; }
+    .arrow-btn { width: 36px; height: 36px; border-radius: 8px; border: 1px solid #e5e7eb; background: #fff; color: #374151; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; font-size: 14px; }
+    .arrow-btn:hover:not(:disabled) { border-color: #ea580c; color: #fff; background: #ea580c; }
+    .arrow-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .seq-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+    .seq-item { display: flex; align-items: flex-start; gap: 12px; background: #fff; border: 1.5px solid #e5e7eb; border-radius: 10px; padding: 13px 16px; cursor: grab; user-select: none; font-family: 'Inter', sans-serif; font-size: 14px; color: #374151; line-height: 1.55; transition: all 0.2s; }
+    .seq-item:hover { border-color: #ea580c; box-shadow: 0 2px 8px rgba(234,88,12,0.08); }
+    .seq-item.dragging { opacity: 0.4; cursor: grabbing; }
+    .seq-item.drag-over { border-color: #ea580c; background: #fff7ed; }
+    .seq-item.correct-pos { border-color: #16a34a; background: #f0fdf4; }
+    .seq-item.incorrect-pos { border-color: #dc2626; background: #fef2f2; }
+    .seq-drag-handle { color: #9ca3af; font-size: 14px; flex-shrink: 0; margin-top: 2px; }
+    .seq-pos-num { width: 26px; height: 26px; border-radius: 50%; background: #f3f4f6; border: 1.5px solid #e5e7eb; display: flex; align-items: center; justify-content: center; font-family: 'Rubik', sans-serif; font-size: 12px; font-weight: 700; color: #6b7280; flex-shrink: 0; }
+    .seq-item.correct-pos .seq-pos-num { background: #16a34a; border-color: #16a34a; color: #fff; }
+    .seq-item.incorrect-pos .seq-pos-num { background: #dc2626; border-color: #dc2626; color: #fff; }
+
+    .speaking-scenario { background: linear-gradient(135deg, #7c2d12 0%, #ea580c 100%); border-radius: 14px; padding: 28px 30px; margin-bottom: 24px; }
+    .scenario-label { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(255,255,255,0.7); margin-bottom: 10px; }
+    .scenario-title { font-family: 'Rubik', sans-serif; font-size: 22px; font-weight: 700; color: #ffffff; margin-bottom: 16px; }
+    .scenario-details { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
+    .scenario-detail-row { display: flex; align-items: flex-start; gap: 10px; font-family: 'Inter', sans-serif; font-size: 14px; color: rgba(255,255,255,0.9); line-height: 1.5; }
+    .scenario-detail-row i { margin-top: 2px; flex-shrink: 0; opacity: 0.75; }
+    .scenario-prompt { background: rgba(255,255,255,0.15); border-radius: 10px; padding: 16px 18px; font-family: 'Inter', sans-serif; font-size: 15px; font-style: italic; color: #ffffff; line-height: 1.65; border-left: 3px solid rgba(255,255,255,0.45); }
+
+    .speak-notes-card { background: #ffffff; border: 1.5px solid #e5e7eb; border-radius: 14px; padding: 24px 26px; margin-bottom: 24px; }
+    .speak-notes-title { font-family: 'Rubik', sans-serif; font-size: 15px; font-weight: 700; color: #1f2937; margin-bottom: 18px; display: flex; align-items: center; gap: 8px; }
+    .speak-notes-title i { color: #ea580c; }
+    .speak-notes-grid { display: flex; flex-direction: column; gap: 11px; }
+    .speak-note-row { display: flex; align-items: center; gap: 12px; }
+    .speak-note-label { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; color: #6b7280; min-width: 180px; flex-shrink: 0; }
+    .speak-note-input { flex: 1; padding: 9px 12px; border: 1.5px solid #e5e7eb; border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 13.5px; color: #374151; background: #f9fafb; outline: none; transition: border-color 0.2s; }
+    .speak-note-input:focus { border-color: #ea580c; background: #ffffff; }
+    .speak-note-input::placeholder { color: #9ca3af; }
+    @media (max-width: 580px) { .speak-note-row { flex-direction: column; align-items: flex-start; gap: 5px; } .speak-note-input { width: 100%; box-sizing: border-box; } }
+
+    .speak-tips { background: #fff7ed; border: 1px solid #fed7aa; border-radius: 12px; padding: 18px 20px; margin-bottom: 24px; }
+    .speak-tips-title { font-family: 'Inter', sans-serif; font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #c2410c; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+    .speak-tips-list { display: flex; flex-direction: column; gap: 6px; list-style: none; padding: 0; margin: 0; }
+    .speak-tips-list li { font-family: 'Inter', sans-serif; font-size: 13.5px; color: #78350f; line-height: 1.55; padding-left: 16px; position: relative; }
+    .speak-tips-list li::before { content: '•'; position: absolute; left: 0; color: #ea580c; font-weight: 700; }
+
+    .model-toggle-btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 20px; border-radius: 10px; border: 1.5px solid #e5e7eb; background: #ffffff; font-family: 'Inter', sans-serif; font-size: 13.5px; font-weight: 600; color: #374151; cursor: pointer; transition: all 0.2s; margin-bottom: 16px; }
+    .model-toggle-btn:hover { border-color: #ea580c; color: #ea580c; }
+    .model-intro-box { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 14px; padding: 28px 32px 24px; margin-bottom: 20px; display: none; }
+    .model-intro-box.show { display: block; }
+    .model-intro-label { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: #ea580c; margin-bottom: 14px; }
+    .model-intro-text { font-family: 'Inter', sans-serif; font-size: 15px; color: #374151; line-height: 1.9; font-style: italic; margin-bottom: 20px; }
+    .model-intro-notes { display: flex; flex-direction: column; gap: 8px; }
+    .model-note { padding: 10px 14px; background: #ffffff; border-left: 3px solid #ea580c; border-radius: 6px; font-family: 'Inter', sans-serif; font-size: 13px; color: #4b5563; line-height: 1.55; }
+    .model-note strong { color: #1f2937; }
     </style>
 
     <script>
@@ -114,7 +195,232 @@
                      PREPARATION
                 ================================================ -->
                 <div class="tab-content" id="preparation">
-                    <!-- Add exercises here -->
+
+                    <!-- ── EXERCISE 1: KEY PHRASES ── -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">1</span>
+                            <h3>Key Phrases</h3>
+                        </div>
+                        <p class="exercise-instructions">
+                            Study these useful phrases before you speak. Each group covers one part of a workplace introduction. You do not need to memorise them — use them as a reference when you prepare your speaking task.
+                        </p>
+
+                        <div class="phrase-grid">
+                            <div class="phrase-card">
+                                <div class="phrase-card-header">
+                                    <div class="phrase-card-icon"><i class="fa-solid fa-hand-wave"></i></div>
+                                    <h4 class="phrase-card-title">Greeting</h4>
+                                </div>
+                                <div class="phrase-card-body">
+                                    <ul class="phrase-list">
+                                        <li>"<em>Hello</em>, my name is [name]."</li>
+                                        <li>"<em>Hi!</em> I'm [name]."</li>
+                                        <li>"<em>Nice to meet you.</em>"</li>
+                                        <li>"<em>It's great to meet you.</em>"</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="phrase-card">
+                                <div class="phrase-card-header">
+                                    <div class="phrase-card-icon"><i class="fa-solid fa-id-badge"></i></div>
+                                    <h4 class="phrase-card-title">Your Job Title</h4>
+                                </div>
+                                <div class="phrase-card-body">
+                                    <ul class="phrase-list">
+                                        <li>"I <em>work as</em> a [job title]."</li>
+                                        <li>"I'm a [job title]."</li>
+                                        <li>"My <em>job</em> is [title]."</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="phrase-card">
+                                <div class="phrase-card-header">
+                                    <div class="phrase-card-icon"><i class="fa-solid fa-building"></i></div>
+                                    <h4 class="phrase-card-title">Department or Company</h4>
+                                </div>
+                                <div class="phrase-card-body">
+                                    <ul class="phrase-list">
+                                        <li>"I work <em>in</em> the [department] department."</li>
+                                        <li>"I work <em>at</em> [company name]."</li>
+                                        <li>"I'm part of the [team name] team."</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="phrase-card">
+                                <div class="phrase-card-header">
+                                    <div class="phrase-card-icon"><i class="fa-solid fa-location-dot"></i></div>
+                                    <h4 class="phrase-card-title">Your Location</h4>
+                                </div>
+                                <div class="phrase-card-body">
+                                    <ul class="phrase-list">
+                                        <li>"I'm <em>based</em> in [city / office]."</li>
+                                        <li>"I work from the [branch] office."</li>
+                                        <li>"I'm on the [floor] floor."</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="phrase-card">
+                                <div class="phrase-card-header">
+                                    <div class="phrase-card-icon"><i class="fa-solid fa-list-check"></i></div>
+                                    <h4 class="phrase-card-title">Your Main Tasks</h4>
+                                </div>
+                                <div class="phrase-card-body">
+                                    <ul class="phrase-list">
+                                        <li>"My <em>main responsibility</em> is [task]."</li>
+                                        <li>"In my job, I [verb phrase]."</li>
+                                        <li>"I mainly <em>work on</em> [task]."</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="phrase-card">
+                                <div class="phrase-card-header">
+                                    <div class="phrase-card-icon"><i class="fa-solid fa-calendar-days"></i></div>
+                                    <h4 class="phrase-card-title">How Long You've Been There</h4>
+                                </div>
+                                <div class="phrase-card-body">
+                                    <ul class="phrase-list">
+                                        <li>"I've been here <em>for</em> [time period]."</li>
+                                        <li>"I started [time] <em>ago</em>."</li>
+                                        <li>"I'm new — I only started last [week/month]."</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ── EXERCISE 2: MC CAROUSEL ── -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">2</span>
+                            <h3>Choose the Right Phrase</h3>
+                        </div>
+                        <p class="exercise-instructions">
+                            For each situation, choose the most natural and correct sentence. Use the arrows to move between questions, then check all your answers at once.
+                        </p>
+
+                        <div class="mc-container">
+                            <div class="mc-list single-view" id="mc-list-1">
+
+                                <div class="mc-item active" data-correct="b">
+                                    <p class="mc-question">You meet a colleague for the first time. What do you say to start?</p>
+                                    <div class="mc-options">
+                                        <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> "I work in marketing."</button>
+                                        <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> "Hello, my name is Elena."</button>
+                                        <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> "Nice to meet you too."</button>
+                                        <button class="mc-btn" data-option="d"><span class="mc-letter">D</span> "I've been here for two years."</button>
+                                    </div>
+                                </div>
+
+                                <div class="mc-item" data-correct="c">
+                                    <p class="mc-question">Your new colleague asks what you do. Which sentence is correct?</p>
+                                    <div class="mc-options">
+                                        <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> "I am work as a designer."</button>
+                                        <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> "I working in design."</button>
+                                        <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> "I work as a graphic designer."</button>
+                                        <button class="mc-btn" data-option="d"><span class="mc-letter">D</span> "My work is in design."</button>
+                                    </div>
+                                </div>
+
+                                <div class="mc-item" data-correct="a">
+                                    <p class="mc-question">You want to say where you work. Which sentence is correct?</p>
+                                    <div class="mc-options">
+                                        <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> "I work in the sales department."</button>
+                                        <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> "I working in sales department."</button>
+                                        <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> "I am work in sales."</button>
+                                        <button class="mc-btn" data-option="d"><span class="mc-letter">D</span> "My work is in department of sales."</button>
+                                    </div>
+                                </div>
+
+                                <div class="mc-item" data-correct="b">
+                                    <p class="mc-question">You want to describe your main task. What do you say?</p>
+                                    <div class="mc-options">
+                                        <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> "I responsible for customer service."</button>
+                                        <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> "My main responsibility is helping customers."</button>
+                                        <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> "I am customer service responsible."</button>
+                                        <button class="mc-btn" data-option="d"><span class="mc-letter">D</span> "I doing customer service."</button>
+                                    </div>
+                                </div>
+
+                                <div class="mc-item" data-correct="c">
+                                    <p class="mc-question">You want to say how long you have been at the company. Which is correct?</p>
+                                    <div class="mc-options">
+                                        <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> "I am here since two months."</button>
+                                        <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> "I been here for two months."</button>
+                                        <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> "I've been here for two months."</button>
+                                        <button class="mc-btn" data-option="d"><span class="mc-letter">D</span> "I work here since two months."</button>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="mc-card-nav">
+                                <p class="mc-card-counter">Question <span id="q-counter">1</span> of 5</p>
+                                <div class="mc-card-arrows">
+                                    <button class="arrow-btn" id="mc-prev" disabled><i class="fa-solid fa-chevron-left"></i></button>
+                                    <button class="arrow-btn" id="mc-next"><i class="fa-solid fa-chevron-right"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 12px; align-items: center; margin-top: 20px;">
+                            <button class="check-answers-btn" id="check-mc">
+                                <i class="fa-solid fa-check"></i> Check answers
+                            </button>
+                            <button class="check-answers-btn retry-btn" id="retry-mc" disabled>
+                                <i class="fa-solid fa-rotate-right"></i> Try again
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- ── EXERCISE 3: SEQUENCING ── -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">3</span>
+                            <h3>Put the Introduction in Order</h3>
+                        </div>
+                        <p class="exercise-instructions">
+                            These five sentences form a complete workplace introduction, but they are in the wrong order. Drag them into the correct sequence.
+                        </p>
+
+                        <div class="seq-list" id="seq-list">
+                            <div class="seq-item" data-correct="5" draggable="true">
+                                <i class="fa-solid fa-grip-vertical seq-drag-handle"></i>
+                                <span class="seq-pos-num">1</span>
+                                <span>"It's great to meet everyone. I'm really looking forward to working with you all!"</span>
+                            </div>
+                            <div class="seq-item" data-correct="1" draggable="true">
+                                <i class="fa-solid fa-grip-vertical seq-drag-handle"></i>
+                                <span class="seq-pos-num">2</span>
+                                <span>"Hi there! I'm Laura, and I've just joined the marketing team."</span>
+                            </div>
+                            <div class="seq-item" data-correct="3" draggable="true">
+                                <i class="fa-solid fa-grip-vertical seq-drag-handle"></i>
+                                <span class="seq-pos-num">3</span>
+                                <span>"I'm based here in the main office, on the second floor."</span>
+                            </div>
+                            <div class="seq-item" data-correct="2" draggable="true">
+                                <i class="fa-solid fa-grip-vertical seq-drag-handle"></i>
+                                <span class="seq-pos-num">4</span>
+                                <span>"I work as a content coordinator, which means I mainly manage our social media accounts."</span>
+                            </div>
+                            <div class="seq-item" data-correct="4" draggable="true">
+                                <i class="fa-solid fa-grip-vertical seq-drag-handle"></i>
+                                <span class="seq-pos-num">5</span>
+                                <span>"Before joining here, I worked for a small communications agency for two years."</span>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 12px; align-items: center;">
+                            <button class="check-answers-btn" id="check-seq">
+                                <i class="fa-solid fa-check"></i> Check order
+                            </button>
+                            <button class="check-answers-btn retry-btn" id="retry-seq" disabled>
+                                <i class="fa-solid fa-rotate-right"></i> Reset
+                            </button>
+                        </div>
+                    </div>
+
                 </div>
 
                 <!-- ================================================
@@ -122,7 +428,101 @@
                 ================================================ -->
                 <div class="tab-content" id="speaking">
 
-                    <!-- Add exercises here -->
+                    <!-- ── EXERCISE 4: SPEAKING TASK ── -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">4</span>
+                            <h3>Your Turn</h3>
+                        </div>
+                        <p class="exercise-instructions">
+                            Read the scenario below. Then use the planning card to prepare your introduction before you speak.
+                        </p>
+
+                        <div class="speaking-scenario">
+                            <div class="scenario-label">Role Play Scenario</div>
+                            <div class="scenario-title">First Day at Brightworks Solutions</div>
+                            <div class="scenario-details">
+                                <div class="scenario-detail-row">
+                                    <i class="fa-solid fa-building"></i>
+                                    <span><strong>Company:</strong> Brightworks Solutions</span>
+                                </div>
+                                <div class="scenario-detail-row">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                    <span><strong>Situation:</strong> It is your first day. You are in the break room getting a coffee.</span>
+                                </div>
+                                <div class="scenario-detail-row">
+                                    <i class="fa-solid fa-user"></i>
+                                    <span><strong>Your partner:</strong> A colleague named Mark smiles at you.</span>
+                                </div>
+                            </div>
+                            <div class="scenario-prompt">
+                                "Hi! Are you new here? I don't think we've met."
+                            </div>
+                        </div>
+
+                        <div class="speak-notes-card">
+                            <div class="speak-notes-title">
+                                <i class="fa-solid fa-pen-to-square"></i> Plan Your Introduction
+                            </div>
+                            <div class="speak-notes-grid">
+                                <div class="speak-note-row">
+                                    <span class="speak-note-label">Your name:</span>
+                                    <input type="text" class="speak-note-input" placeholder="e.g. &quot;Hi, I'm...&quot;">
+                                </div>
+                                <div class="speak-note-row">
+                                    <span class="speak-note-label">Your job title:</span>
+                                    <input type="text" class="speak-note-input" placeholder="e.g. I work as a...">
+                                </div>
+                                <div class="speak-note-row">
+                                    <span class="speak-note-label">Your department:</span>
+                                    <input type="text" class="speak-note-input" placeholder="e.g. I work in the... department">
+                                </div>
+                                <div class="speak-note-row">
+                                    <span class="speak-note-label">Your location/floor:</span>
+                                    <input type="text" class="speak-note-input" placeholder="e.g. I'm based on the... floor">
+                                </div>
+                                <div class="speak-note-row">
+                                    <span class="speak-note-label">Your main task:</span>
+                                    <input type="text" class="speak-note-input" placeholder="e.g. My main responsibility is...">
+                                </div>
+                                <div class="speak-note-row">
+                                    <span class="speak-note-label">How long you've been there:</span>
+                                    <input type="text" class="speak-note-input" placeholder="e.g. I've been here for...">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="speak-tips">
+                            <div class="speak-tips-title">
+                                <i class="fa-solid fa-lightbulb"></i> Speaking Tips
+                            </div>
+                            <ul class="speak-tips-list">
+                                <li>Speak slowly and clearly. At A2 level, simple is better than fast.</li>
+                                <li>You do not need to say everything at once. Start with your name and job, then add details.</li>
+                                <li>Use short sentences: "I work as..." is clearer than "My position involves..."</li>
+                                <li>Smile and make eye contact. A warm tone matters as much as the words.</li>
+                            </ul>
+                        </div>
+
+                        <button class="model-toggle-btn" id="model-toggle-btn">
+                            <i class="fa-solid fa-eye" id="model-toggle-icon"></i> Show model introduction
+                        </button>
+
+                        <div class="model-intro-box" id="model-intro-box">
+                            <div class="model-intro-label">Model Introduction</div>
+                            <div class="model-intro-text">
+                                "Hi! My name is Alex and I'm new here — I only started on Monday. I work as a junior assistant in the HR department. My main job is helping with paperwork and organising meetings. I'm on the third floor, in the north wing. It's really nice to meet you!"
+                            </div>
+                            <div class="model-intro-notes">
+                                <div class="model-note"><strong>Greeting + name:</strong> "Hi! My name is Alex..." — simple and friendly.</div>
+                                <div class="model-note"><strong>How new:</strong> "I only started on Monday." — gives context naturally.</div>
+                                <div class="model-note"><strong>Job and department:</strong> "I work as a junior assistant in the HR department." — uses the key pattern.</div>
+                                <div class="model-note"><strong>Main task:</strong> "My main job is helping with paperwork..." — simple verb + -ing form.</div>
+                                <div class="model-note"><strong>Location:</strong> "I'm on the third floor, in the north wing." — brief and clear.</div>
+                                <div class="model-note"><strong>Closing:</strong> "It's really nice to meet you!" — warm and natural end.</div>
+                            </div>
+                        </div>
+                    </div>
 
                     <!-- ── COMPLETION BOX ── -->
                     <div class="completion-box">
@@ -134,10 +534,10 @@
                             </div>
                             <p class="completion-subtitle">You've completed <strong>"Introducing Yourself at Work"</strong>. Here's what you've practised:</p>
                             <div class="skills-list">
-                                <div class="skill-item"><div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>[Skill 1]</div>
-                                <div class="skill-item"><div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>[Skill 2]</div>
-                                <div class="skill-item"><div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>[Skill 3]</div>
-                                <div class="skill-item"><div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>[Skill 4]</div>
+                                <div class="skill-item"><div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Using key phrases for greetings and professional introductions</div>
+                                <div class="skill-item"><div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Describing your job title and department in English</div>
+                                <div class="skill-item"><div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Talking about your daily tasks and main responsibilities</div>
+                                <div class="skill-item"><div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Structuring a short, clear self-introduction from start to finish</div>
                             </div>
                         </div>
                     </div>
@@ -162,6 +562,165 @@
     <script src="../../../js/layout.js"></script>
     <script src="../../../js/script.js" defer></script>
     <script src="../../../js/checkanswers.js"></script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+        // ══════════════════════════════════════════════════════
+        // EXERCISE 2: MC CAROUSEL
+        // ══════════════════════════════════════════════════════
+        const mcList = document.getElementById('mc-list-1');
+        const mcItems = mcList ? [...mcList.querySelectorAll('.mc-item')] : [];
+        const mcPrev = document.getElementById('mc-prev');
+        const mcNext = document.getElementById('mc-next');
+        const qCounter = document.getElementById('q-counter');
+        const checkMCBtn = document.getElementById('check-mc');
+        const retryMCBtn = document.getElementById('retry-mc');
+        let currentQ = 0;
+
+        function updateMCView() {
+            mcItems.forEach((item, i) => item.classList.toggle('active', i === currentQ));
+            if (qCounter) qCounter.textContent = currentQ + 1;
+            mcPrev.disabled = currentQ === 0;
+            mcNext.disabled = currentQ === mcItems.length - 1;
+        }
+
+        mcItems.forEach(item => {
+            item.querySelectorAll('.mc-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    if (item.classList.contains('checked')) return;
+                    item.querySelectorAll('.mc-btn').forEach(b => b.classList.remove('selected'));
+                    this.classList.add('selected');
+                });
+            });
+        });
+
+        mcPrev.addEventListener('click', () => { if (currentQ > 0) { currentQ--; updateMCView(); } });
+        mcNext.addEventListener('click', () => { if (currentQ < mcItems.length - 1) { currentQ++; updateMCView(); } });
+
+        checkMCBtn.addEventListener('click', function() {
+            let correct = 0;
+            mcItems.forEach(item => {
+                item.classList.add('checked');
+                const selected = item.querySelector('.mc-btn.selected');
+                item.querySelectorAll('.mc-btn').forEach(b => b.classList.remove('correct', 'incorrect'));
+                if (selected) {
+                    if (selected.dataset.option === item.dataset.correct) {
+                        selected.classList.add('correct');
+                        correct++;
+                    } else {
+                        selected.classList.add('incorrect');
+                        item.querySelector(`.mc-btn[data-option="${item.dataset.correct}"]`)?.classList.add('correct');
+                    }
+                }
+            });
+            if (typeof showFeedbackPopup === 'function') {
+                showFeedbackPopup(correct, mcItems.length);
+            }
+            retryMCBtn.disabled = false;
+            this.disabled = true;
+        });
+
+        retryMCBtn.addEventListener('click', function() {
+            mcItems.forEach(item => {
+                item.classList.remove('checked');
+                item.querySelectorAll('.mc-btn').forEach(b => b.classList.remove('selected', 'correct', 'incorrect'));
+            });
+            checkMCBtn.disabled = false;
+            this.disabled = true;
+        });
+
+        updateMCView();
+
+        // ══════════════════════════════════════════════════════
+        // EXERCISE 3: SEQUENCING DRAG AND DROP
+        // ══════════════════════════════════════════════════════
+        const seqList = document.getElementById('seq-list');
+        const checkSeqBtn = document.getElementById('check-seq');
+        const retrySeqBtn = document.getElementById('retry-seq');
+        let dragSrc = null;
+        const originalSeqHTML = seqList.innerHTML;
+
+        function updateSeqNumbers() {
+            [...seqList.querySelectorAll('.seq-item')].forEach((item, i) => {
+                const num = item.querySelector('.seq-pos-num');
+                if (num) num.textContent = i + 1;
+                item.classList.remove('correct-pos', 'incorrect-pos');
+            });
+        }
+
+        function attachSeqHandlers() {
+            seqList.querySelectorAll('.seq-item').forEach(item => {
+                item.addEventListener('dragstart', function() {
+                    dragSrc = this;
+                    setTimeout(() => this.classList.add('dragging'), 0);
+                });
+                item.addEventListener('dragend', function() {
+                    this.classList.remove('dragging');
+                    seqList.querySelectorAll('.seq-item').forEach(i => i.classList.remove('drag-over'));
+                    updateSeqNumbers();
+                });
+                item.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                    if (this !== dragSrc) {
+                        seqList.querySelectorAll('.seq-item').forEach(i => i.classList.remove('drag-over'));
+                        this.classList.add('drag-over');
+                    }
+                });
+                item.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    if (this === dragSrc) return;
+                    const all = [...seqList.querySelectorAll('.seq-item')];
+                    const srcIdx = all.indexOf(dragSrc);
+                    const tgtIdx = all.indexOf(this);
+                    seqList.insertBefore(dragSrc, srcIdx < tgtIdx ? this.nextSibling : this);
+                });
+            });
+        }
+        attachSeqHandlers();
+
+        checkSeqBtn.addEventListener('click', function() {
+            let correct = 0;
+            const seqItems = [...seqList.querySelectorAll('.seq-item')];
+            seqItems.forEach((item, i) => {
+                item.classList.remove('correct-pos', 'incorrect-pos');
+                if (i + 1 === parseInt(item.dataset.correct)) {
+                    item.classList.add('correct-pos');
+                    correct++;
+                } else {
+                    item.classList.add('incorrect-pos');
+                }
+            });
+            if (typeof showFeedbackPopup === 'function') {
+                showFeedbackPopup(correct, seqItems.length);
+            }
+            retrySeqBtn.disabled = false;
+            this.disabled = true;
+        });
+
+        retrySeqBtn.addEventListener('click', function() {
+            seqList.innerHTML = originalSeqHTML;
+            attachSeqHandlers();
+            updateSeqNumbers();
+            checkSeqBtn.disabled = false;
+            this.disabled = true;
+        });
+
+        // ══════════════════════════════════════════════════════
+        // MODEL INTRODUCTION TOGGLE
+        // ══════════════════════════════════════════════════════
+        const modelToggleBtn = document.getElementById('model-toggle-btn');
+        const modelIntroBox = document.getElementById('model-intro-box');
+        const modelToggleIcon = document.getElementById('model-toggle-icon');
+
+        modelToggleBtn.addEventListener('click', function() {
+            const isOpen = modelIntroBox.classList.toggle('show');
+            modelToggleIcon.className = isOpen ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye';
+            this.childNodes[2].textContent = isOpen ? ' Hide model introduction' : ' Show model introduction';
+        });
+
+    });
+    </script>
 
 </body>
 </html>

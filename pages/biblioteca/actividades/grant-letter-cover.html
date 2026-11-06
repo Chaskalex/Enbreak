@@ -20,8 +20,109 @@
     <style>
     .activity-hero {
         background: linear-gradient(135deg, #065f46 0%, #059669 100%);
-        /* background: url('../../../assets/activities/[image].jpg') center/cover no-repeat; */
     }
+
+    /* ── MATCHING EXERCISE ───────────────────────────────────── */
+    .match-wrapper { display: grid; grid-template-columns: 170px 1fr; gap: 28px; margin-bottom: 20px; }
+    @media (max-width: 768px) { .match-wrapper { grid-template-columns: 1fr; } }
+    .match-col-label { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #6b7280; margin-bottom: 12px; }
+    .match-pool { display: flex; flex-direction: column; gap: 10px; }
+    .match-chip { background: #fff; border: 1.5px solid #e5e7eb; border-radius: 10px; padding: 11px 14px; font-family: 'Rubik', sans-serif; font-size: 13px; font-weight: 700; color: #065f46; cursor: grab; display: flex; align-items: center; gap: 8px; transition: all 0.2s; }
+    .match-chip:hover:not(.placed) { border-color: #059669; transform: translateX(2px); }
+    .match-chip.dragging { opacity: 0.4; }
+    .match-chip.placed { opacity: 0.35; pointer-events: none; cursor: default; }
+    .match-chip i { color: #9ca3af; font-size: 12px; flex-shrink: 0; }
+    .match-targets { display: flex; flex-direction: column; gap: 10px; }
+    .match-target { background: #f9fafb; border: 1.5px dashed #cbd5e1; border-radius: 10px; padding: 14px 16px; display: flex; align-items: center; gap: 12px; transition: all 0.2s; }
+    .match-target.drag-over { border-color: #059669; background: #ecfdf5; border-style: solid; }
+    .match-target.has-chip { border-style: solid; background: #fff; }
+    .match-target.correct { background: #f0fdf4; border-color: #16a34a; border-style: solid; }
+    .match-target.incorrect { background: #fef2f2; border-color: #dc2626; border-style: solid; }
+    .match-slot { min-width: 134px; background: #fff; border-radius: 8px; border: 1px dashed #cbd5e1; display: flex; align-items: center; justify-content: center; font-family: 'Rubik', sans-serif; font-size: 12px; font-weight: 700; color: #cbd5e1; padding: 8px; flex-shrink: 0; cursor: pointer; text-align: center; line-height: 1.3; }
+    .match-slot.filled { background: #ecfdf5; border: 1.5px solid #059669; color: #065f46; }
+    .match-target.correct .match-slot { background: #dcfce7; border-color: #16a34a; color: #15803d; }
+    .match-target.incorrect .match-slot { background: #fee2e2; border-color: #dc2626; color: #991b1b; }
+    .match-desc { font-family: 'Inter', sans-serif; font-size: 13.5px; color: #374151; line-height: 1.55; }
+
+    /* ── MC CAROUSEL ─────────────────────────────────────────── */
+    .mc-container { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 12px; padding: 18px 20px; }
+    .mc-list.single-view .mc-item { display: none; }
+    .mc-list.single-view .mc-item.active { display: block; animation: fadeSlide 0.22s ease; }
+    @keyframes fadeSlide { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    .mc-task-label { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #059669; margin-bottom: 8px; }
+    .mc-question { font-size: 14px; font-weight: 600; color: #1f2937; margin-bottom: 14px; line-height: 1.5; }
+    .mc-options { display: flex; flex-direction: column; gap: 8px; }
+    .mc-btn { display: flex; align-items: flex-start; gap: 10px; padding: 10px 14px; border-radius: 8px; border: 1.5px solid #e5e7eb; background: #fff; font-family: 'Inter', sans-serif; font-size: 13.5px; color: #374151; cursor: pointer; transition: all 0.2s; text-align: left; width: 100%; }
+    .mc-letter { width: 24px; height: 24px; border-radius: 50%; background: #f3f4f6; border: 1.5px solid #d1d5db; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: #6b7280; flex-shrink: 0; transition: all 0.2s; margin-top: 1px; }
+    .mc-btn:hover { border-color: #059669; }
+    .mc-btn:hover .mc-letter { background: #d1fae5; border-color: #059669; color: #065f46; }
+    .mc-btn.selected { border-color: #059669; background: #ecfdf5; }
+    .mc-btn.selected .mc-letter { background: #059669; border-color: #059669; color: #fff; }
+    .mc-btn.correct { border-color: #16a34a; background: #f0fdf4; }
+    .mc-btn.correct .mc-letter { background: #16a34a; border-color: #16a34a; color: #fff; }
+    .mc-btn.incorrect { border-color: #dc2626; background: #fef2f2; }
+    .mc-btn.incorrect .mc-letter { background: #dc2626; border-color: #dc2626; color: #fff; }
+    .mc-card-nav { display: flex; align-items: center; justify-content: space-between; padding-top: 20px; margin-top: 20px; border-top: 1px solid #e5e7eb; }
+    .mc-card-counter { font-family: 'Inter', sans-serif; font-size: 13px; color: #6b7280; font-weight: 500; }
+    .mc-card-counter span { font-family: 'Rubik', sans-serif; font-size: 14px; font-weight: 700; color: #111827; }
+    .mc-card-arrows { display: flex; gap: 8px; }
+    .arrow-btn { width: 36px; height: 36px; border-radius: 8px; border: 1px solid #e5e7eb; background: #fff; color: #374151; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; font-size: 14px; }
+    .arrow-btn:hover:not(:disabled) { border-color: #059669; color: #fff; background: #059669; }
+    .arrow-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    /* ── REGISTER TOGGLE ─────────────────────────────────────── */
+    .si-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+    .si-item { background: #f9fafb; border: 1.5px solid #e5e7eb; border-radius: 12px; padding: 16px 18px; }
+    .si-statement { font-family: 'Inter', sans-serif; font-size: 14px; color: #1f2937; line-height: 1.55; margin-bottom: 12px; display: flex; gap: 10px; }
+    .si-num { font-family: 'Rubik', sans-serif; font-size: 13px; font-weight: 700; color: #059669; flex-shrink: 0; }
+    .si-toggle { display: flex; gap: 6px; flex-wrap: wrap; }
+    .si-btn { padding: 7px 14px; border-radius: 8px; border: 1.5px solid #e5e7eb; background: #fff; font-family: 'Inter', sans-serif; font-size: 12.5px; font-weight: 600; color: #6b7280; cursor: pointer; transition: all 0.2s; }
+    .si-btn:hover { border-color: #059669; color: #059669; }
+    .si-btn.selected { background: #059669; border-color: #059669; color: #fff; }
+    .si-btn.correct { background: #16a34a; border-color: #16a34a; color: #fff; }
+    .si-btn.incorrect { background: #dc2626; border-color: #dc2626; color: #fff; }
+    .si-btn.disabled { cursor: not-allowed; }
+    .si-explanation { margin-top: 12px; padding: 10px 14px; background: #fff; border-left: 3px solid #059669; border-radius: 6px; font-family: 'Inter', sans-serif; font-size: 12.5px; color: #4b5563; line-height: 1.55; display: none; }
+    .si-explanation.show { display: block; }
+
+    /* ── SCENARIO CARD ───────────────────────────────────────── */
+    .scenario-card { background: linear-gradient(135deg, #065f46 0%, #059669 100%); border-radius: 14px; padding: 28px 32px; margin-bottom: 28px; }
+    .scenario-label { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(255,255,255,0.7); margin-bottom: 10px; }
+    .scenario-title { font-family: 'Rubik', sans-serif; font-size: 20px; font-weight: 700; color: #fff; margin: 0 0 14px; }
+    .scenario-body { font-family: 'Inter', sans-serif; font-size: 14px; line-height: 1.75; color: rgba(255,255,255,0.9); }
+    .scenario-body strong { color: #fff; }
+
+    /* ── STRUCTURE GUIDE ─────────────────────────────────────── */
+    .structure-guide { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 28px; }
+    @media (max-width: 900px) { .structure-guide { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 480px) { .structure-guide { grid-template-columns: 1fr; } }
+    .sg-card { background: #fff; border: 1.5px solid #e5e7eb; border-radius: 12px; padding: 14px 16px; }
+    .sg-num { font-family: 'Rubik', sans-serif; font-size: 26px; font-weight: 700; color: #e5e7eb; line-height: 1; margin-bottom: 6px; }
+    .sg-title { font-family: 'Rubik', sans-serif; font-size: 11.5px; font-weight: 700; color: #065f46; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .sg-hint { font-family: 'Inter', sans-serif; font-size: 12px; color: #6b7280; line-height: 1.5; }
+
+    /* ── WRITING AREA ────────────────────────────────────────── */
+    .writing-wrapper { position: relative; width: 100%; margin-bottom: 8px; }
+    .copy-btn { position: absolute; top: 12px; right: 12px; background: #f3f4f6; border: none; border-radius: 6px; padding: 6px 10px; color: #6b7280; font-family: 'Inter', sans-serif; font-size: 12.5px; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: all 0.2s; z-index: 10; }
+    .copy-btn:hover { background: #e5e7eb; color: #1f2937; }
+    .writing-area { background: #fff; border: 2px solid #e5e7eb; border-radius: 12px; width: 100%; min-height: 280px; padding: 44px 18px 16px; font-family: 'Inter', sans-serif; font-size: 14.5px; color: #374151; resize: vertical; transition: border-color 0.2s; line-height: 1.8; box-sizing: border-box; }
+    .writing-area:focus { outline: none; border-color: #059669; box-shadow: 0 0 0 4px rgba(5,150,105,0.1); }
+    .writing-area::placeholder { color: #9ca3af; }
+    .writing-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; }
+    .writing-target { font-family: 'Inter', sans-serif; font-size: 12.5px; color: #6b7280; }
+    .writing-count { font-family: 'Inter', sans-serif; font-size: 12.5px; font-weight: 500; color: #9ca3af; }
+
+    /* ── SAMPLE LETTER ───────────────────────────────────────── */
+    .sample-letter { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 14px; padding: 32px 40px 28px; margin-bottom: 28px; font-family: 'Inter', sans-serif; font-size: 14px; color: #374151; line-height: 1.8; }
+    @media (max-width: 768px) { .sample-letter { padding: 22px 20px; } }
+    .letter-block { margin-bottom: 20px; }
+    .letter-subject { font-weight: 700; color: #1f2937; margin-bottom: 20px; }
+    .letter-body p { margin-bottom: 14px; }
+    .letter-body p:last-child { margin-bottom: 0; }
+    .letter-sign { margin-top: 20px; }
+    .letter-sign-name { margin-top: 28px; font-weight: 600; color: #1f2937; }
+    .sample-note { background: #fefce8; border: 1px solid #fde68a; border-radius: 8px; padding: 10px 14px; margin-top: 10px; font-family: 'Inter', sans-serif; font-size: 12.5px; color: #78350f; line-height: 1.5; }
+    .sample-note i { color: #d97706; margin-right: 5px; }
     </style>
 
     <script>
@@ -76,7 +177,7 @@
                     <div class="intro-grid">
                         <div class="intro-main">
                             <p class="intro-text">
-                                Imagine you have a research idea, a community initiative, or an academic project that could genuinely make a difference — but it needs funding. In many institutions and organisations, the first thing that decides whether your proposal gets read at all is a cover letter. One page. A few paragraphs. And yet those few paragraphs can open or close a door entirely.
+                                Imagine you have a research idea, a community initiative, or an academic project that could genuinely make a difference, but it needs funding. In many institutions and organisations, the first thing that decides whether your proposal gets read at all is a cover letter. One page. A few paragraphs. And yet those few paragraphs can open or close a door entirely.
                             </p>
                             <p class="intro-text">
                                 In this activity, you will write a cover letter for an academic grant proposal. You will study the structure and conventions of formal academic correspondence, work with language for making a persuasive case, and practise the tone and register expected at B2 level in professional and academic contexts.
@@ -115,7 +216,220 @@
                      PREPARATION
                 ================================================ -->
                 <div class="tab-content" id="preparation">
-                    <!-- Add exercises here -->
+
+                    <!-- ── EXERCISE 1: LETTER STRUCTURE ── -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">1</span>
+                            <h3>Letter Structure</h3>
+                        </div>
+                        <p class="exercise-instructions">
+                            A grant cover letter has five distinct sections, each with a specific purpose. Drag the section name on the left to match the description of its function on the right.
+                        </p>
+
+                        <div class="match-wrapper">
+                            <div>
+                                <div class="match-col-label">Sections (drag)</div>
+                                <div class="match-pool" id="match-pool">
+                                    <div class="match-chip" draggable="true" data-chip="opening"><i class="fa-solid fa-grip-vertical"></i> Opening</div>
+                                    <div class="match-chip" draggable="true" data-chip="research-summary"><i class="fa-solid fa-grip-vertical"></i> Research Summary</div>
+                                    <div class="match-chip" draggable="true" data-chip="significance"><i class="fa-solid fa-grip-vertical"></i> Significance</div>
+                                    <div class="match-chip" draggable="true" data-chip="credentials"><i class="fa-solid fa-grip-vertical"></i> Credentials</div>
+                                    <div class="match-chip" draggable="true" data-chip="closing"><i class="fa-solid fa-grip-vertical"></i> Closing</div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="match-col-label">Functions (drop here)</div>
+                                <div class="match-targets" id="match-targets">
+                                    <div class="match-target" data-correct="opening">
+                                        <div class="match-slot"><span class="slot-ph">drop</span></div>
+                                        <span class="match-desc">State your name, affiliation, and the specific grant you are applying for.</span>
+                                    </div>
+                                    <div class="match-target" data-correct="research-summary">
+                                        <div class="match-slot"><span class="slot-ph">drop</span></div>
+                                        <span class="match-desc">Describe the project: its aims, methods, and expected outcomes.</span>
+                                    </div>
+                                    <div class="match-target" data-correct="significance">
+                                        <div class="match-slot"><span class="slot-ph">drop</span></div>
+                                        <span class="match-desc">Explain why this research matters and the benefit it could bring to the field.</span>
+                                    </div>
+                                    <div class="match-target" data-correct="credentials">
+                                        <div class="match-slot"><span class="slot-ph">drop</span></div>
+                                        <span class="match-desc">Briefly establish your academic background and suitability for this project.</span>
+                                    </div>
+                                    <div class="match-target" data-correct="closing">
+                                        <div class="match-slot"><span class="slot-ph">drop</span></div>
+                                        <span class="match-desc">Confirm the documents enclosed and express your request to the committee.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 12px;">
+                            <button class="check-answers-btn" id="check-match"><i class="fa-solid fa-check"></i> Check answers</button>
+                            <button class="check-answers-btn retry-btn" id="retry-match" disabled><i class="fa-solid fa-rotate-right"></i> Try again</button>
+                        </div>
+                    </div>
+
+                    <!-- ── EXERCISE 2: CHOOSING THE RIGHT PHRASE ── -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">2</span>
+                            <h3>Choosing the Right Phrase</h3>
+                        </div>
+                        <p class="exercise-instructions">
+                            For each function, choose the most appropriate phrase for a formal B2 grant cover letter. Use the arrows to navigate between questions.
+                        </p>
+
+                        <div class="mc-container">
+                            <div class="mc-list single-view" id="mc-list">
+
+                                <div class="mc-item active" data-correct="b">
+                                    <div class="mc-task-label">Opening the letter</div>
+                                    <p class="mc-question">Which is the most appropriate opening sentence?</p>
+                                    <div class="mc-options">
+                                        <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> I am happy to apply for your FARE grant this year and I think I have a good project.</button>
+                                        <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> I am writing to apply for the FARE Early-Career Research Grant offered to postgraduate researchers at UK universities.</button>
+                                        <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> Pursuant to the aforementioned grant opportunity, I hereby respectfully submit my candidacy for consideration.</button>
+                                    </div>
+                                </div>
+
+                                <div class="mc-item" data-correct="b">
+                                    <div class="mc-task-label">Research summary</div>
+                                    <p class="mc-question">Which best describes the research project in formal academic language?</p>
+                                    <div class="mc-options">
+                                        <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> I want to study how social media affects students' mental health because it is a very big problem nowadays.</button>
+                                        <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> The proposed research investigates the relationship between social media engagement patterns and mental health outcomes among undergraduate students.</button>
+                                        <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> My study is going to look at social media and try to find out how it makes students feel in university.</button>
+                                    </div>
+                                </div>
+
+                                <div class="mc-item" data-correct="c">
+                                    <div class="mc-task-label">Stating significance</div>
+                                    <p class="mc-question">Which most effectively communicates the research's importance?</p>
+                                    <div class="mc-options">
+                                        <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> A lot of students use social media every day and some of them feel really bad because of it.</button>
+                                        <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> This research is needed because social media is a very important issue for young people at the moment.</button>
+                                        <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> The findings aim to inform evidence-based institutional guidelines for supporting student wellbeing in the digital age.</button>
+                                    </div>
+                                </div>
+
+                                <div class="mc-item" data-correct="b">
+                                    <div class="mc-task-label">Referring to enclosures</div>
+                                    <p class="mc-question">Which is the most appropriate way to refer to documents enclosed with the letter?</p>
+                                    <div class="mc-options">
+                                        <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> I am also sending you my CV and the proposal so you can have a look at them.</button>
+                                        <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> Please find enclosed my research proposal and curriculum vitae for your consideration.</button>
+                                        <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> I have attached my stuff with this letter so hope you can check it out when you get a chance.</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="mc-card-nav">
+                                <p class="mc-card-counter">Question <span id="q-counter">1</span> of 4</p>
+                                <div class="mc-card-arrows">
+                                    <button class="arrow-btn" id="mc-prev" disabled><i class="fa-solid fa-chevron-left"></i></button>
+                                    <button class="arrow-btn" id="mc-next"><i class="fa-solid fa-chevron-right"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 12px; margin-top: 24px;">
+                            <button class="check-answers-btn" id="check-mc"><i class="fa-solid fa-check"></i> Check answers</button>
+                            <button class="check-answers-btn retry-btn" id="retry-mc" disabled><i class="fa-solid fa-rotate-right"></i> Try again</button>
+                        </div>
+                    </div>
+
+                    <!-- ── EXERCISE 3: REGISTER CHECK ── -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">3</span>
+                            <h3>Register Check</h3>
+                        </div>
+                        <p class="exercise-instructions">
+                            Decide whether the underlined language in each sentence is <strong>Formal</strong> and appropriate for a grant cover letter, or <strong>Too Informal</strong> for this context.
+                        </p>
+
+                        <div class="si-list" id="si-list">
+
+                            <div class="si-item" data-correct="informal">
+                                <div class="si-statement">
+                                    <span class="si-num">1.</span>
+                                    I am <strong><u>really passionate</u></strong> about this research area and have always wanted to study it.
+                                </div>
+                                <div class="si-toggle">
+                                    <button class="si-btn" data-choice="formal">Formal</button>
+                                    <button class="si-btn" data-choice="informal">Too Informal</button>
+                                </div>
+                                <div class="si-explanation">
+                                    <strong>Too informal.</strong> "Really passionate" is conversational. A more appropriate alternative: "I have a strong and sustained commitment to this research area."
+                                </div>
+                            </div>
+
+                            <div class="si-item" data-correct="formal">
+                                <div class="si-statement">
+                                    <span class="si-num">2.</span>
+                                    The proposed research <strong><u>aims to</u></strong> identify the types of social media engagement most strongly associated with adverse mental health outcomes.
+                                </div>
+                                <div class="si-toggle">
+                                    <button class="si-btn" data-choice="formal">Formal</button>
+                                    <button class="si-btn" data-choice="informal">Too Informal</button>
+                                </div>
+                                <div class="si-explanation">
+                                    <strong>Formal.</strong> "Aims to" is a neutral, precise phrase widely used in academic writing. It states the purpose clearly without sounding conversational.
+                                </div>
+                            </div>
+
+                            <div class="si-item" data-correct="informal">
+                                <div class="si-statement">
+                                    <span class="si-num">3.</span>
+                                    I think this project <strong><u>could be really useful</u></strong> for universities trying to help their students.
+                                </div>
+                                <div class="si-toggle">
+                                    <button class="si-btn" data-choice="formal">Formal</button>
+                                    <button class="si-btn" data-choice="informal">Too Informal</button>
+                                </div>
+                                <div class="si-explanation">
+                                    <strong>Too informal.</strong> "Really useful" is vague and conversational. A stronger alternative: "This research has the potential to make a significant contribution to student wellbeing policy."
+                                </div>
+                            </div>
+
+                            <div class="si-item" data-correct="formal">
+                                <div class="si-statement">
+                                    <span class="si-num">4.</span>
+                                    I <strong><u>hold a first-class undergraduate degree</u></strong> in Psychology and have completed advanced coursework in research design.
+                                </div>
+                                <div class="si-toggle">
+                                    <button class="si-btn" data-choice="formal">Formal</button>
+                                    <button class="si-btn" data-choice="informal">Too Informal</button>
+                                </div>
+                                <div class="si-explanation">
+                                    <strong>Formal.</strong> "Hold a degree" and "have completed" are standard formal constructions for stating credentials. The sentence is precise and well-suited to academic correspondence.
+                                </div>
+                            </div>
+
+                            <div class="si-item" data-correct="informal">
+                                <div class="si-statement">
+                                    <span class="si-num">5.</span>
+                                    Please <strong><u>have a look at</u></strong> my attached proposal and let me know if you need anything else.
+                                </div>
+                                <div class="si-toggle">
+                                    <button class="si-btn" data-choice="formal">Formal</button>
+                                    <button class="si-btn" data-choice="informal">Too Informal</button>
+                                </div>
+                                <div class="si-explanation">
+                                    <strong>Too informal.</strong> "Have a look at" and "let me know if you need anything else" are too casual. Better: "Please find enclosed my research proposal for your consideration."
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div style="display: flex; gap: 12px;">
+                            <button class="check-answers-btn" id="check-si"><i class="fa-solid fa-check"></i> Check answers</button>
+                            <button class="check-answers-btn retry-btn" id="retry-si" disabled><i class="fa-solid fa-rotate-right"></i> Try again</button>
+                        </div>
+                    </div>
+
                 </div>
 
                 <!-- ================================================
@@ -123,7 +437,60 @@
                 ================================================ -->
                 <div class="tab-content" id="writing">
 
-                    <!-- Add exercises here -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">4</span>
+                            <h3>Writing Task</h3>
+                        </div>
+
+                        <div class="scenario-card">
+                            <div class="scenario-label">Your scenario</div>
+                            <div class="scenario-title">The FARE Early-Career Research Grant</div>
+                            <div class="scenario-body">
+                                You are a second-year postgraduate student at Hartwell University. You have developed a research proposal investigating the mental health impacts of social media use among undergraduate students. The <strong>Foundation for Academic Research Excellence (FARE)</strong> is offering grants of up to <strong>£5,000</strong> for postgraduate researchers at UK universities. Write the cover letter to accompany your grant application. Address it to: <strong>The Selection Committee, Foundation for Academic Research Excellence</strong>.
+                            </div>
+                        </div>
+
+                        <p class="exercise-instructions">Use the paragraph guide below to structure your letter, then write it in the text area.</p>
+
+                        <div class="structure-guide">
+                            <div class="sg-card">
+                                <div class="sg-num">1</div>
+                                <div class="sg-title">Opening</div>
+                                <div class="sg-hint">Name the grant, your degree, and your institution.</div>
+                            </div>
+                            <div class="sg-card">
+                                <div class="sg-num">2</div>
+                                <div class="sg-title">Research Summary</div>
+                                <div class="sg-hint">Describe the topic, method, and what you aim to find.</div>
+                            </div>
+                            <div class="sg-card">
+                                <div class="sg-num">3</div>
+                                <div class="sg-title">Significance</div>
+                                <div class="sg-hint">Explain who benefits from the findings and how.</div>
+                            </div>
+                            <div class="sg-card">
+                                <div class="sg-num">4</div>
+                                <div class="sg-title">Credentials</div>
+                                <div class="sg-hint">One sentence on your relevant academic background.</div>
+                            </div>
+                            <div class="sg-card">
+                                <div class="sg-num">5</div>
+                                <div class="sg-title">Closing</div>
+                                <div class="sg-hint">Refer to enclosed documents and express your request.</div>
+                            </div>
+                        </div>
+
+                        <div class="writing-wrapper">
+                            <button class="copy-btn" id="copy-writing-btn"><i class="fa-regular fa-copy"></i> Copy text</button>
+                            <textarea class="writing-area" id="writing-area" placeholder="Dear Members of the Selection Committee,"></textarea>
+                        </div>
+                        <div class="writing-meta">
+                            <span class="writing-target">Target: 150–200 words</span>
+                            <span class="writing-count" id="writing-count">0 words</span>
+                        </div>
+
+                    </div>
 
                     <!-- ── COMPLETION BOX ── -->
                     <div class="completion-box">
@@ -135,10 +502,11 @@
                             </div>
                             <p class="completion-subtitle">You've completed <strong>"Writing a Grant Cover Letter"</strong>. Here's what you've practised:</p>
                             <div class="skills-list">
-                                <div class="skill-item"><div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>[Skill 1]</div>
-                                <div class="skill-item"><div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>[Skill 2]</div>
-                                <div class="skill-item"><div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>[Skill 3]</div>
-                                <div class="skill-item"><div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>[Skill 4]</div>
+                                <div class="skill-item"><div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Understanding the structure of a formal cover letter</div>
+                                <div class="skill-item"><div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Matching letter sections to their communicative functions</div>
+                                <div class="skill-item"><div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Selecting formal language appropriate to B2 academic register</div>
+                                <div class="skill-item"><div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Identifying and correcting informal language in formal contexts</div>
+                                <div class="skill-item"><div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Writing a structured, persuasive grant cover letter</div>
                             </div>
                         </div>
                     </div>
@@ -149,7 +517,57 @@
                      VIEW SAMPLE
                 ================================================ -->
                 <div class="tab-content" id="sample">
-                    <!-- Add sample text here -->
+
+                    <div class="warning-box">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                        <div class="warning-box-content">
+                            <h4>Before you continue:</h4>
+                            <p>Try to complete the writing task first. Only use this sample if you need guidance on structure or language.</p>
+                        </div>
+                    </div>
+
+                    <div class="sample-letter">
+
+                        <div class="letter-block">
+                            Elena Voss<br>
+                            MRes Psychology, Year 2<br>
+                            Hartwell University<br>
+                            12 Campus Road, London EC1A 2BT
+                        </div>
+                        <div class="letter-block">14 March 2025</div>
+                        <div class="letter-block">
+                            The Selection Committee<br>
+                            Foundation for Academic Research Excellence<br>
+                            FARE Secretariat, London WC1E 7HX
+                        </div>
+                        <div class="letter-subject">Re: Application for the FARE Early-Career Research Grant 2025</div>
+
+                        <div class="letter-body">
+                            <p>Dear Members of the Selection Committee,</p>
+
+                            <p>I am writing to apply for the FARE Early-Career Research Grant. I am currently enrolled as a second-year MRes student in Psychology at Hartwell University, where my research focuses on digital wellbeing and mental health in higher education.</p>
+                            <div class="sample-note"><i class="fa-solid fa-pen"></i> <strong>Opening:</strong> Names the grant, states the degree and institution. Formal salutation used throughout.</div>
+
+                            <p>My proposed research investigates the relationship between social media engagement patterns and levels of anxiety and depression among undergraduate students. The study will employ a mixed-methods approach, combining survey data with qualitative interviews, to identify which types of engagement are most strongly associated with adverse mental health outcomes.</p>
+                            <div class="sample-note"><i class="fa-solid fa-pen"></i> <strong>Research Summary:</strong> Uses "proposed research investigates" and "aims to" constructions. Specific method (mixed-methods) adds credibility.</div>
+
+                            <p>This research addresses a significant gap in institutional policy. Despite the growing prevalence of social media-related distress among students, universities currently lack evidence-based guidelines for responding to it. The findings will be made available to student services and policy teams at participating institutions.</p>
+                            <div class="sample-note"><i class="fa-solid fa-pen"></i> <strong>Significance:</strong> Identifies a gap ("lack evidence-based guidelines"), names the beneficiaries, and states what the findings will produce.</div>
+
+                            <p>I hold a first-class undergraduate degree in Psychology and have completed coursework in research methodology and data analysis. I am confident that my academic preparation positions me well to carry out this study.</p>
+                            <div class="sample-note"><i class="fa-solid fa-pen"></i> <strong>Credentials:</strong> Uses "hold a degree" and "have completed" — standard formal constructions. Ends with a confident but measured statement of suitability.</div>
+
+                            <p>Please find enclosed my full research proposal and curriculum vitae for your consideration. I would welcome the opportunity to discuss my application further and trust that you will give it your full consideration.</p>
+                            <div class="sample-note"><i class="fa-solid fa-pen"></i> <strong>Closing:</strong> "Please find enclosed" is the standard formal phrase for enclosures. "I trust that" is more formal than "I hope that."</div>
+                        </div>
+
+                        <div class="letter-sign">
+                            Yours sincerely,
+                            <div class="letter-sign-name">Elena Voss</div>
+                        </div>
+
+                    </div>
+
                 </div>
 
                 <div class="activity-nav">
@@ -170,6 +588,211 @@
     <script src="../../../js/layout.js"></script>
     <script src="../../../js/script.js" defer></script>
     <script src="../../../js/checkanswers.js"></script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+        // ══ EXERCISE 1: MATCHING DRAG & DROP ════════════════════
+        const matchPool = document.getElementById('match-pool');
+        const matchTargetsEl = document.getElementById('match-targets');
+        const checkMatchBtn = document.getElementById('check-match');
+        const retryMatchBtn = document.getElementById('retry-match');
+        let dragChip = null;
+
+        matchPool.querySelectorAll('.match-chip').forEach(chip => {
+            chip.addEventListener('dragstart', function() {
+                if (this.classList.contains('placed')) return;
+                dragChip = this;
+                setTimeout(() => this.classList.add('dragging'), 0);
+            });
+            chip.addEventListener('dragend', function() { this.classList.remove('dragging'); });
+        });
+
+        matchTargetsEl.querySelectorAll('.match-target').forEach(target => {
+            target.addEventListener('dragover', e => { e.preventDefault(); target.classList.add('drag-over'); });
+            target.addEventListener('dragleave', () => target.classList.remove('drag-over'));
+            target.addEventListener('drop', function(e) {
+                e.preventDefault();
+                this.classList.remove('drag-over');
+                if (!dragChip) return;
+                const prev = this.dataset.chipPlaced;
+                if (prev) matchPool.querySelector(`.match-chip[data-chip="${prev}"]`)?.classList.remove('placed');
+                const slot = this.querySelector('.match-slot');
+                slot.textContent = dragChip.querySelector('i') ? dragChip.childNodes[dragChip.childNodes.length - 1].textContent.trim() : dragChip.textContent.trim();
+                slot.classList.add('filled');
+                this.classList.add('has-chip');
+                this.dataset.chipPlaced = dragChip.dataset.chip;
+                dragChip.classList.add('placed');
+                dragChip = null;
+            });
+            target.querySelector('.match-slot').addEventListener('click', function() {
+                if (target.classList.contains('correct') || target.classList.contains('incorrect')) return;
+                const placed = target.dataset.chipPlaced;
+                if (!placed) return;
+                matchPool.querySelector(`.match-chip[data-chip="${placed}"]`)?.classList.remove('placed');
+                this.textContent = 'drop';
+                this.classList.remove('filled');
+                target.classList.remove('has-chip');
+                delete target.dataset.chipPlaced;
+            });
+        });
+
+        checkMatchBtn.addEventListener('click', function() {
+            let correct = 0;
+            const targets = matchTargetsEl.querySelectorAll('.match-target');
+            targets.forEach(t => {
+                if (t.dataset.chipPlaced === t.dataset.correct) { t.classList.add('correct'); correct++; }
+                else if (t.dataset.chipPlaced) t.classList.add('incorrect');
+            });
+            if (typeof showFeedbackPopup === 'function') showFeedbackPopup(correct, targets.length);
+            this.disabled = true; retryMatchBtn.disabled = false;
+        });
+
+        retryMatchBtn.addEventListener('click', function() {
+            matchTargetsEl.querySelectorAll('.match-target').forEach(t => {
+                t.classList.remove('correct', 'incorrect', 'has-chip');
+                const slot = t.querySelector('.match-slot');
+                slot.textContent = 'drop';
+                slot.classList.remove('filled');
+                delete t.dataset.chipPlaced;
+            });
+            matchPool.querySelectorAll('.match-chip').forEach(c => c.classList.remove('placed'));
+            checkMatchBtn.disabled = false; this.disabled = true;
+        });
+
+        // ══ EXERCISE 2: MC CAROUSEL ═════════════════════════════
+        const mcList = document.getElementById('mc-list');
+        const mcItems = [...mcList.querySelectorAll('.mc-item')];
+        const qCounter = document.getElementById('q-counter');
+        const mcPrev = document.getElementById('mc-prev');
+        const mcNext = document.getElementById('mc-next');
+        const checkMcBtn = document.getElementById('check-mc');
+        const retryMcBtn = document.getElementById('retry-mc');
+        let currentQ = 0;
+
+        mcItems.forEach(item => {
+            item.querySelectorAll('.mc-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    if (item.dataset.answered) return;
+                    item.querySelectorAll('.mc-btn').forEach(b => b.classList.remove('selected'));
+                    this.classList.add('selected');
+                });
+            });
+        });
+
+        function goToQ(idx) {
+            mcItems[currentQ].classList.remove('active');
+            currentQ = idx;
+            mcItems[currentQ].classList.add('active');
+            qCounter.textContent = currentQ + 1;
+            mcPrev.disabled = currentQ === 0;
+            mcNext.disabled = currentQ === mcItems.length - 1;
+        }
+
+        mcPrev.addEventListener('click', () => { if (currentQ > 0) goToQ(currentQ - 1); });
+        mcNext.addEventListener('click', () => { if (currentQ < mcItems.length - 1) goToQ(currentQ + 1); });
+
+        checkMcBtn.addEventListener('click', function() {
+            let correct = 0;
+            mcItems.forEach(item => {
+                const correctOpt = item.dataset.correct;
+                const selected = item.querySelector('.mc-btn.selected');
+                item.dataset.answered = 'true';
+                item.querySelectorAll('.mc-btn').forEach(b => b.style.pointerEvents = 'none');
+                if (selected) {
+                    if (selected.dataset.option === correctOpt) { selected.classList.add('correct'); correct++; }
+                    else { selected.classList.add('incorrect'); item.querySelector(`.mc-btn[data-option="${correctOpt}"]`)?.classList.add('correct'); }
+                } else { item.querySelector(`.mc-btn[data-option="${correctOpt}"]`)?.classList.add('correct'); }
+            });
+            if (typeof showFeedbackPopup === 'function') showFeedbackPopup(correct, mcItems.length);
+            this.disabled = true; retryMcBtn.disabled = false;
+        });
+
+        retryMcBtn.addEventListener('click', function() {
+            mcItems.forEach(item => {
+                delete item.dataset.answered;
+                item.querySelectorAll('.mc-btn').forEach(b => { b.classList.remove('selected', 'correct', 'incorrect'); b.style.pointerEvents = ''; });
+            });
+            goToQ(0); checkMcBtn.disabled = false; this.disabled = true;
+        });
+
+        // ══ EXERCISE 3: REGISTER TOGGLE ═════════════════════════
+        const siItems = document.querySelectorAll('.si-item');
+        const checkSiBtn = document.getElementById('check-si');
+        const retrySiBtn = document.getElementById('retry-si');
+
+        siItems.forEach(item => {
+            item.querySelectorAll('.si-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    if (this.classList.contains('disabled')) return;
+                    item.querySelectorAll('.si-btn').forEach(b => b.classList.remove('selected'));
+                    this.classList.add('selected');
+                });
+            });
+        });
+
+        checkSiBtn.addEventListener('click', function() {
+            let correct = 0;
+            siItems.forEach(item => {
+                const correctChoice = item.dataset.correct;
+                const selected = item.querySelector('.si-btn.selected');
+                item.querySelectorAll('.si-btn').forEach(b => b.classList.add('disabled'));
+                if (selected) {
+                    selected.classList.remove('selected');
+                    if (selected.dataset.choice === correctChoice) { selected.classList.add('correct'); correct++; }
+                    else { selected.classList.add('incorrect'); item.querySelector(`.si-btn[data-choice="${correctChoice}"]`)?.classList.add('correct'); }
+                } else { item.querySelector(`.si-btn[data-choice="${correctChoice}"]`)?.classList.add('correct'); }
+                item.querySelector('.si-explanation').classList.add('show');
+            });
+            if (typeof showFeedbackPopup === 'function') showFeedbackPopup(correct, siItems.length);
+            this.disabled = true; retrySiBtn.disabled = false;
+        });
+
+        retrySiBtn.addEventListener('click', function() {
+            siItems.forEach(item => {
+                item.querySelectorAll('.si-btn').forEach(b => b.classList.remove('selected', 'correct', 'incorrect', 'disabled'));
+                item.querySelector('.si-explanation').classList.remove('show');
+            });
+            checkSiBtn.disabled = false; this.disabled = true;
+        });
+
+        // ══ WRITING AREA: WORD COUNTER + COPY ═══════════════════
+        const writingArea = document.getElementById('writing-area');
+        const writingCount = document.getElementById('writing-count');
+        const copyWritingBtn = document.getElementById('copy-writing-btn');
+
+        if (writingArea && writingCount) {
+            writingArea.addEventListener('input', function() {
+                const text = this.value.trim();
+                const words = text.length === 0 ? 0 : text.split(/\s+/).filter(w => w.length > 0).length;
+                if (words >= 150 && words <= 200) {
+                    writingCount.innerHTML = `${words} word${words !== 1 ? 's' : ''} <i class="fa-solid fa-check" style="margin-left:4px;"></i>`;
+                    writingCount.style.color = '#059669';
+                } else if (words > 200) {
+                    writingCount.textContent = `${words} words`;
+                    writingCount.style.color = '#ef4444';
+                } else {
+                    writingCount.textContent = `${words} word${words !== 1 ? 's' : ''}`;
+                    writingCount.style.color = '#9ca3af';
+                }
+            });
+        }
+
+        if (copyWritingBtn && writingArea) {
+            const origHTML = copyWritingBtn.innerHTML;
+            copyWritingBtn.addEventListener('click', function() {
+                writingArea.select();
+                document.execCommand('copy');
+                window.getSelection()?.removeAllRanges();
+                this.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+                this.style.backgroundColor = '#dcfce7';
+                this.style.color = '#16a34a';
+                setTimeout(() => { this.innerHTML = origHTML; this.style.backgroundColor = ''; this.style.color = ''; }, 1000);
+            });
+        }
+
+    });
+    </script>
 
 </body>
 </html>

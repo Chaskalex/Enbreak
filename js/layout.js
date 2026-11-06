@@ -19,6 +19,42 @@ document.addEventListener('DOMContentLoaded', function() {
     const depth = (window.location.pathname.match(/\//g) || []).length - 1;
     const basePath = depth === 0 ? '' : '../'.repeat(depth);
 
+    const toActivityImageSlug = title => title
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-|-$/g, '');
+
+    const setActivityImage = (element, title, imageDirectory) => {
+        const slug = toActivityImageSlug(title);
+        if (!slug) return;
+
+        const image = new Image();
+        image.onload = () => {
+            element.style.backgroundImage = `url("${image.src}")`;
+            element.style.backgroundSize = 'cover';
+            element.style.backgroundPosition = 'center';
+            element.style.backgroundRepeat = 'no-repeat';
+        };
+        image.onerror = () => {};
+        image.src = `${basePath}assets/activities/${imageDirectory}${slug}.png`;
+    };
+
+    document.querySelectorAll('.activity-card').forEach(card => {
+        const title = card.querySelector('.activity-card-title');
+        const image = card.querySelector('.activity-card-image');
+        if (title && image) {
+            setActivityImage(image, title.textContent, 'miniatures/');
+        }
+    });
+
+    const activityHero = document.querySelector('.activity-hero');
+    if (activityHero) {
+        const activityTitle = document.title.split('|').pop().trim();
+        setActivityImage(activityHero, activityTitle, '');
+    }
+
     Promise.all([
         loadComponent('header-placeholder', basePath + 'header.html'),
         loadComponent('footer-placeholder', basePath + 'footer.html')

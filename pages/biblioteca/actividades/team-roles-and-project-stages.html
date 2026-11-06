@@ -19,9 +19,89 @@
 
     <style>
     .activity-hero {
-        background: linear-gradient(135deg, #134e4a 0%, #0d9488 100%);
-        /* background: url('../../../assets/activities/[image].jpg') center/cover no-repeat; */
+        background-image: url('../../../assets/activities/team-roles-and-project-stages.png');
     }
+
+    /* ── VOCABULARY SECTION HEADERS ─────────────────────────── */
+    .vocab-section { margin-bottom: 28px; }
+    .vocab-section-header { background: linear-gradient(135deg, #134e4a 0%, #0d9488 100%); border-radius: 12px 12px 0 0; padding: 14px 20px; display: flex; align-items: center; gap: 10px; }
+    .vocab-section-icon { width: 32px; height: 32px; background: rgba(255,255,255,0.15); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; color: #ffffff; flex-shrink: 0; }
+    .vocab-section-title { font-family: 'Rubik', sans-serif; font-size: 15px; font-weight: 700; color: #ffffff; margin: 0; }
+    .vocab-section-subtitle { font-family: 'Inter', sans-serif; font-size: 11.5px; color: rgba(255,255,255,0.7); margin-left: auto; }
+    .vocab-term-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1.5px solid #e5e7eb; border-top: none; border-radius: 0 0 12px 12px; overflow: hidden; }
+    @media (max-width: 640px) { .vocab-term-grid { grid-template-columns: 1fr; } }
+    .vocab-term-card { background: #ffffff; padding: 16px 18px; border-bottom: 1px solid #f3f4f6; border-right: 1px solid #f3f4f6; }
+    .vocab-term-card:nth-child(2n) { border-right: none; }
+    .vocab-term-card:nth-last-child(-n+2) { border-bottom: none; }
+    @media (max-width: 640px) { .vocab-term-card { border-right: none; } .vocab-term-card:last-child { border-bottom: none; } .vocab-term-card:nth-last-child(2) { border-bottom: 1px solid #f3f4f6; } }
+    .vtc-term { font-family: 'Rubik', sans-serif; font-size: 15px; font-weight: 700; color: #134e4a; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+    .vtc-term span.vtc-pos { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 600; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.5px; }
+    .vtc-def { font-family: 'Inter', sans-serif; font-size: 13px; color: #374151; line-height: 1.55; margin-bottom: 8px; }
+    .vtc-ex { font-family: 'Inter', sans-serif; font-size: 12px; color: #6b7280; font-style: italic; line-height: 1.5; padding-top: 8px; border-top: 1px solid #f3f4f6; }
+    .vtc-ex em { font-style: normal; font-weight: 700; color: #0d9488; }
+
+    /* ── MATCH EXERCISE (chips + definition targets) ─────────── */
+    .match-pool-label { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #6b7280; margin-bottom: 10px; }
+    .match-pool { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; min-height: 52px; padding: 12px 14px; background: #f9fafb; border: 1.5px dashed #cbd5e1; border-radius: 12px; }
+    .match-chip { display: inline-flex; align-items: center; gap: 7px; padding: 8px 14px; border-radius: 10px; border: 1.5px solid #e5e7eb; background: #ffffff; font-family: 'Rubik', sans-serif; font-size: 14px; font-weight: 700; color: #134e4a; cursor: grab; transition: all 0.2s; user-select: none; }
+    .match-chip i { color: #9ca3af; font-size: 12px; }
+    .match-chip:hover:not(.placed) { border-color: #0d9488; box-shadow: 0 2px 8px rgba(13,148,136,0.12); }
+    .match-chip.dragging { opacity: 0.35; cursor: grabbing; }
+    .match-chip.placed { opacity: 0.35; pointer-events: none; cursor: default; }
+    .match-targets { display: flex; flex-direction: column; gap: 10px; }
+    .match-target { background: #f9fafb; border: 1.5px dashed #cbd5e1; border-radius: 10px; padding: 14px 16px; display: flex; align-items: flex-start; gap: 14px; min-height: 56px; transition: all 0.2s; }
+    .match-target.drag-over { border-color: #0d9488; background: #f0fdfa; border-style: solid; }
+    .match-target.has-chip { border-style: solid; border-color: #d1d5db; background: #ffffff; }
+    .match-target.correct { background: #f0fdf4; border-color: #16a34a; border-style: solid; }
+    .match-target.incorrect { background: #fef2f2; border-color: #dc2626; border-style: solid; }
+    .match-drop-slot { min-width: 116px; min-height: 34px; background: #ffffff; border-radius: 8px; border: 1px dashed #cbd5e1; display: flex; align-items: center; justify-content: center; font-family: 'Rubik', sans-serif; font-size: 13px; font-weight: 700; color: #cbd5e1; padding: 6px 10px; flex-shrink: 0; cursor: pointer; text-align: center; transition: all 0.2s; }
+    .match-drop-slot.filled { background: #f0fdfa; border: 1.5px solid #0d9488; color: #134e4a; }
+    .match-target.correct .match-drop-slot { background: #dcfce7; border-color: #16a34a; color: #15803d; border-style: solid; }
+    .match-target.incorrect .match-drop-slot { background: #fee2e2; border-color: #dc2626; color: #991b1b; border-style: solid; }
+    .match-def-text { font-family: 'Inter', sans-serif; font-size: 13.5px; color: #374151; line-height: 1.6; flex: 1; padding-top: 6px; }
+
+    /* ── SI-LIST (teal, 5 options) ────────────────────────────── */
+    .si-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+    .si-item { background: #f9fafb; border: 1.5px solid #e5e7eb; border-radius: 12px; padding: 16px 18px; }
+    .si-statement { font-family: 'Inter', sans-serif; font-size: 14px; color: #1f2937; line-height: 1.55; margin-bottom: 12px; display: flex; gap: 10px; font-style: italic; }
+    .si-num { font-family: 'Rubik', sans-serif; font-size: 13px; font-weight: 700; color: #0d9488; flex-shrink: 0; font-style: normal; }
+    .si-toggle { display: flex; gap: 6px; flex-wrap: wrap; }
+    .si-btn { padding: 7px 13px; border-radius: 8px; border: 1.5px solid #e5e7eb; background: #fff; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; color: #6b7280; cursor: pointer; transition: all 0.2s; }
+    .si-btn:hover { border-color: #0d9488; color: #0d9488; }
+    .si-btn.selected { background: #0d9488; border-color: #0d9488; color: #fff; }
+    .si-btn.correct { background: #16a34a; border-color: #16a34a; color: #fff; }
+    .si-btn.incorrect { background: #dc2626; border-color: #dc2626; color: #fff; }
+    .si-btn.disabled { cursor: not-allowed; }
+    .si-explanation { margin-top: 12px; padding: 10px 14px; background: #fff; border-left: 3px solid #0d9488; border-radius: 6px; font-family: 'Inter', sans-serif; font-size: 12.5px; color: #4b5563; line-height: 1.55; display: none; }
+    .si-explanation.show { display: block; }
+    .si-explanation strong { color: #1f2937; }
+
+    /* ── MC CAROUSEL (teal) ──────────────────────────────────── */
+    .mc-container { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 12px; padding: 18px 20px; }
+    .mc-list.single-view .mc-item { display: none; }
+    .mc-list.single-view .mc-item.active { display: block; animation: fadeSlide 0.22s ease; }
+    @keyframes fadeSlide { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    .mc-context { font-family: 'Inter', sans-serif; font-size: 13.5px; color: #4b5563; font-style: italic; line-height: 1.6; margin-bottom: 14px; padding: 12px 14px; background: #ffffff; border-left: 3px solid #0d9488; border-radius: 6px; }
+    .mc-context strong { font-style: normal; color: #134e4a; font-weight: 700; }
+    .mc-question { font-size: 14px; font-weight: 600; color: #1f2937; margin-bottom: 12px; line-height: 1.5; }
+    .mc-options { display: flex; flex-direction: column; gap: 8px; }
+    .mc-btn { display: flex; align-items: flex-start; gap: 10px; padding: 10px 14px; border-radius: 8px; border: 1.5px solid #e5e7eb; background: #fff; font-family: 'Inter', sans-serif; font-size: 13.5px; color: #374151; cursor: pointer; transition: all 0.2s; text-align: left; width: 100%; }
+    .mc-letter { width: 24px; height: 24px; border-radius: 50%; background: #f3f4f6; border: 1.5px solid #d1d5db; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: #6b7280; flex-shrink: 0; transition: all 0.2s; margin-top: 1px; }
+    .mc-btn:hover { border-color: #0d9488; }
+    .mc-btn:hover .mc-letter { background: #ccfbf1; border-color: #0d9488; color: #134e4a; }
+    .mc-btn.selected { border-color: #0d9488; background: #f0fdfa; }
+    .mc-btn.selected .mc-letter { background: #0d9488; border-color: #0d9488; color: #fff; }
+    .mc-btn.correct { border-color: #16a34a; background: #f0fdf4; }
+    .mc-btn.correct .mc-letter { background: #16a34a; border-color: #16a34a; color: #fff; }
+    .mc-btn.incorrect { border-color: #dc2626; background: #fef2f2; }
+    .mc-btn.incorrect .mc-letter { background: #dc2626; border-color: #dc2626; color: #fff; }
+    .mc-card-nav { display: flex; align-items: center; justify-content: space-between; padding-top: 20px; margin-top: 20px; border-top: 1px solid #e5e7eb; }
+    .mc-card-counter { font-family: 'Inter', sans-serif; font-size: 13px; color: #6b7280; font-weight: 500; }
+    .mc-card-counter span { font-family: 'Rubik', sans-serif; font-size: 14px; font-weight: 700; color: #111827; }
+    .mc-card-arrows { display: flex; gap: 8px; }
+    .arrow-btn { width: 36px; height: 36px; border-radius: 8px; border: 1px solid #e5e7eb; background: #fff; color: #374151; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; font-size: 14px; }
+    .arrow-btn:hover:not(:disabled) { border-color: #0d9488; color: #fff; background: #0d9488; }
+    .arrow-btn:disabled { opacity: 0.4; cursor: not-allowed; }
     </style>
 
     <script>
@@ -114,7 +194,150 @@
                      PREPARATION
                 ================================================ -->
                 <div class="tab-content" id="preparation">
-                    <!-- Add exercises here -->
+
+                    <!-- ── EXERCISE 1: VOCABULARY REFERENCE ── -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">1</span>
+                            <h3>Key Vocabulary</h3>
+                        </div>
+                        <p class="exercise-instructions">
+                            Study the two groups of words below. These are the key terms you will use throughout this activity. Read each definition and example sentence before moving on.
+                        </p>
+
+                        <div class="vocab-section">
+                            <div class="vocab-section-header">
+                                <div class="vocab-section-icon"><i class="fa-solid fa-diagram-project"></i></div>
+                                <h4 class="vocab-section-title">Project Stages</h4>
+                                <span class="vocab-section-subtitle">6 terms</span>
+                            </div>
+                            <div class="vocab-term-grid">
+                                <div class="vocab-term-card">
+                                    <div class="vtc-term">brief <span class="vtc-pos">n.</span></div>
+                                    <div class="vtc-def">A document given at the start of a project that outlines the goals, requirements, and expectations.</div>
+                                    <div class="vtc-ex">The client sent us a <em>brief</em> before we started any design work.</div>
+                                </div>
+                                <div class="vocab-term-card">
+                                    <div class="vtc-term">scope <span class="vtc-pos">n.</span></div>
+                                    <div class="vtc-def">The defined range of tasks and goals that a project includes, and what it does not include.</div>
+                                    <div class="vtc-ex">We need to agree on the <em>scope</em> before the team can start work.</div>
+                                </div>
+                                <div class="vocab-term-card">
+                                    <div class="vtc-term">milestone <span class="vtc-pos">n.</span></div>
+                                    <div class="vtc-def">An important point in a project that marks the completion of a key stage or achievement.</div>
+                                    <div class="vtc-ex">Finishing the prototype was a major <em>milestone</em> for the whole team.</div>
+                                </div>
+                                <div class="vocab-term-card">
+                                    <div class="vtc-term">deadline <span class="vtc-pos">n.</span></div>
+                                    <div class="vtc-def">The date or time by which a specific piece of work must be completed.</div>
+                                    <div class="vtc-ex">We have a hard <em>deadline</em> of 30 June for the first progress report.</div>
+                                </div>
+                                <div class="vocab-term-card">
+                                    <div class="vtc-term">deliverable <span class="vtc-pos">n.</span></div>
+                                    <div class="vtc-def">A product, document, or result that must be produced and handed over as part of a project.</div>
+                                    <div class="vtc-ex">The first <em>deliverable</em> is a 10-page feasibility report for the client.</div>
+                                </div>
+                                <div class="vocab-term-card">
+                                    <div class="vtc-term">handover <span class="vtc-pos">n.</span></div>
+                                    <div class="vtc-def">The process of passing a completed task, project, or responsibility to another person or team.</div>
+                                    <div class="vtc-ex">The <em>handover</em> to the client's IT team went smoothly after testing.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="vocab-section">
+                            <div class="vocab-section-header">
+                                <div class="vocab-section-icon"><i class="fa-solid fa-people-group"></i></div>
+                                <h4 class="vocab-section-title">Team Roles</h4>
+                                <span class="vocab-section-subtitle">5 terms</span>
+                            </div>
+                            <div class="vocab-term-grid">
+                                <div class="vocab-term-card">
+                                    <div class="vtc-term">project manager <span class="vtc-pos">n.</span></div>
+                                    <div class="vtc-def">The person responsible for planning, leading, and monitoring the overall project.</div>
+                                    <div class="vtc-ex">The <em>project manager</em> set the timeline and assigned tasks to each team.</div>
+                                </div>
+                                <div class="vocab-term-card">
+                                    <div class="vtc-term">team lead <span class="vtc-pos">n.</span></div>
+                                    <div class="vtc-def">A person who manages a specific sub-group and its daily work within a larger project.</div>
+                                    <div class="vtc-ex">The design <em>team lead</em> reported progress at the weekly status meeting.</div>
+                                </div>
+                                <div class="vocab-term-card">
+                                    <div class="vtc-term">stakeholder <span class="vtc-pos">n.</span></div>
+                                    <div class="vtc-def">A person or group with a direct interest in the project's outcome or results.</div>
+                                    <div class="vtc-ex">All <em>stakeholders</em> were invited to the final presentation to approve the plan.</div>
+                                </div>
+                                <div class="vocab-term-card">
+                                    <div class="vtc-term">contractor <span class="vtc-pos">n.</span></div>
+                                    <div class="vtc-def">A person hired from outside the organisation to carry out a specific piece of work.</div>
+                                    <div class="vtc-ex">We hired a <em>contractor</em> to develop the mobile application for the launch.</div>
+                                </div>
+                                <div class="vocab-term-card">
+                                    <div class="vtc-term">end user <span class="vtc-pos">n.</span></div>
+                                    <div class="vtc-def">The person who will ultimately use the product or system once it is complete and live.</div>
+                                    <div class="vtc-ex"><em>End users</em> were consulted throughout the testing and feedback phase.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ── EXERCISE 2: MATCH THE DEFINITION ── -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">2</span>
+                            <h3>Match the Definition</h3>
+                        </div>
+                        <p class="exercise-instructions">
+                            Drag each term from the pool and drop it onto the correct definition below. Click a filled slot to return the term to the pool.
+                        </p>
+
+                        <div class="match-pool-label">Terms — drag these to the definitions below</div>
+                        <div class="match-pool" id="match-pool">
+                            <span class="match-chip" draggable="true" data-term="brief"><i class="fa-solid fa-grip-vertical"></i> brief</span>
+                            <span class="match-chip" draggable="true" data-term="scope"><i class="fa-solid fa-grip-vertical"></i> scope</span>
+                            <span class="match-chip" draggable="true" data-term="milestone"><i class="fa-solid fa-grip-vertical"></i> milestone</span>
+                            <span class="match-chip" draggable="true" data-term="deadline"><i class="fa-solid fa-grip-vertical"></i> deadline</span>
+                            <span class="match-chip" draggable="true" data-term="deliverable"><i class="fa-solid fa-grip-vertical"></i> deliverable</span>
+                            <span class="match-chip" draggable="true" data-term="handover"><i class="fa-solid fa-grip-vertical"></i> handover</span>
+                        </div>
+
+                        <div class="match-targets" id="match-targets">
+                            <div class="match-target" data-correct="brief">
+                                <div class="match-drop-slot"><span class="slot-placeholder">drop here</span></div>
+                                <div class="match-def-text">A document given at the start of a project that outlines what the client needs and expects.</div>
+                            </div>
+                            <div class="match-target" data-correct="scope">
+                                <div class="match-drop-slot"><span class="slot-placeholder">drop here</span></div>
+                                <div class="match-def-text">The defined boundaries of what a project includes and, importantly, what it does not include.</div>
+                            </div>
+                            <div class="match-target" data-correct="milestone">
+                                <div class="match-drop-slot"><span class="slot-placeholder">drop here</span></div>
+                                <div class="match-def-text">An important point that marks the successful completion of a significant stage in a project.</div>
+                            </div>
+                            <div class="match-target" data-correct="deadline">
+                                <div class="match-drop-slot"><span class="slot-placeholder">drop here</span></div>
+                                <div class="match-def-text">The date or time by which a piece of work must be finished and submitted.</div>
+                            </div>
+                            <div class="match-target" data-correct="deliverable">
+                                <div class="match-drop-slot"><span class="slot-placeholder">drop here</span></div>
+                                <div class="match-def-text">A product, document, or result that must be produced and handed over as part of a project.</div>
+                            </div>
+                            <div class="match-target" data-correct="handover">
+                                <div class="match-drop-slot"><span class="slot-placeholder">drop here</span></div>
+                                <div class="match-def-text">The process of passing a completed project or task to another person or team.</div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 12px; margin-top: 18px;">
+                            <button class="check-answers-btn" id="check-match">
+                                <i class="fa-solid fa-check"></i> Check answers
+                            </button>
+                            <button class="check-answers-btn retry-btn" id="retry-match" disabled>
+                                <i class="fa-solid fa-rotate-right"></i> Try again
+                            </button>
+                        </div>
+                    </div>
+
                 </div>
 
                 <!-- ================================================
@@ -122,7 +345,201 @@
                 ================================================ -->
                 <div class="tab-content" id="practice">
 
-                    <!-- Add exercises here -->
+                    <!-- ── EXERCISE 3: WHO SAID IT? ── -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">3</span>
+                            <h3>Who Said It?</h3>
+                        </div>
+                        <p class="exercise-instructions">
+                            Read what each person says about their role. Choose the correct team role from the options.
+                        </p>
+
+                        <div class="si-list" id="si-list">
+                            <div class="si-item" data-correct="contractor">
+                                <div class="si-statement">
+                                    <span class="si-num">1.</span>
+                                    "I was brought in specifically to rebuild the company's website. Once I deliver it, the internal team takes over."
+                                </div>
+                                <div class="si-toggle">
+                                    <button class="si-btn" data-choice="project-manager">Project Manager</button>
+                                    <button class="si-btn" data-choice="team-lead">Team Lead</button>
+                                    <button class="si-btn" data-choice="stakeholder">Stakeholder</button>
+                                    <button class="si-btn" data-choice="contractor">Contractor</button>
+                                    <button class="si-btn" data-choice="end-user">End User</button>
+                                </div>
+                                <div class="si-explanation">
+                                    <strong>Contractor.</strong> This person was hired from outside specifically for one task and will not stay after the work is done. This is the defining feature of a contractor.
+                                </div>
+                            </div>
+
+                            <div class="si-item" data-correct="project-manager">
+                                <div class="si-statement">
+                                    <span class="si-num">2.</span>
+                                    "I keep the full project on track: the timeline, the budget, and communication between all teams."
+                                </div>
+                                <div class="si-toggle">
+                                    <button class="si-btn" data-choice="project-manager">Project Manager</button>
+                                    <button class="si-btn" data-choice="team-lead">Team Lead</button>
+                                    <button class="si-btn" data-choice="stakeholder">Stakeholder</button>
+                                    <button class="si-btn" data-choice="contractor">Contractor</button>
+                                    <button class="si-btn" data-choice="end-user">End User</button>
+                                </div>
+                                <div class="si-explanation">
+                                    <strong>Project Manager.</strong> Managing the full timeline, budget, and cross-team communication describes the project manager's overall responsibility for the whole project.
+                                </div>
+                            </div>
+
+                            <div class="si-item" data-correct="team-lead">
+                                <div class="si-statement">
+                                    <span class="si-num">3.</span>
+                                    "I manage the design sub-group's daily tasks and send progress reports to the project manager each Friday."
+                                </div>
+                                <div class="si-toggle">
+                                    <button class="si-btn" data-choice="project-manager">Project Manager</button>
+                                    <button class="si-btn" data-choice="team-lead">Team Lead</button>
+                                    <button class="si-btn" data-choice="stakeholder">Stakeholder</button>
+                                    <button class="si-btn" data-choice="contractor">Contractor</button>
+                                    <button class="si-btn" data-choice="end-user">End User</button>
+                                </div>
+                                <div class="si-explanation">
+                                    <strong>Team Lead.</strong> This person manages a specific sub-group (design) and reports to the project manager. They have responsibility for one part of the project, not the whole thing.
+                                </div>
+                            </div>
+
+                            <div class="si-item" data-correct="stakeholder">
+                                <div class="si-statement">
+                                    <span class="si-num">4.</span>
+                                    "My division funded this initiative. I expect regular updates and the right to approve any major decisions."
+                                </div>
+                                <div class="si-toggle">
+                                    <button class="si-btn" data-choice="project-manager">Project Manager</button>
+                                    <button class="si-btn" data-choice="team-lead">Team Lead</button>
+                                    <button class="si-btn" data-choice="stakeholder">Stakeholder</button>
+                                    <button class="si-btn" data-choice="contractor">Contractor</button>
+                                    <button class="si-btn" data-choice="end-user">End User</button>
+                                </div>
+                                <div class="si-explanation">
+                                    <strong>Stakeholder.</strong> This person has a financial and decision-making interest in the outcome. They funded the project and want influence over major choices — the classic stakeholder position.
+                                </div>
+                            </div>
+
+                            <div class="si-item" data-correct="end-user">
+                                <div class="si-statement">
+                                    <span class="si-num">5.</span>
+                                    "Once this new platform goes live, my team will be working with it every day. Our feedback during testing really matters."
+                                </div>
+                                <div class="si-toggle">
+                                    <button class="si-btn" data-choice="project-manager">Project Manager</button>
+                                    <button class="si-btn" data-choice="team-lead">Team Lead</button>
+                                    <button class="si-btn" data-choice="stakeholder">Stakeholder</button>
+                                    <button class="si-btn" data-choice="contractor">Contractor</button>
+                                    <button class="si-btn" data-choice="end-user">End User</button>
+                                </div>
+                                <div class="si-explanation">
+                                    <strong>End User.</strong> This person will use the product daily after launch. Their feedback is valuable not because they fund or manage the project, but because they are the final recipient of the result.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 12px; align-items: center;">
+                            <button class="check-answers-btn" id="check-si">
+                                <i class="fa-solid fa-check"></i> Check answers
+                            </button>
+                            <button class="check-answers-btn retry-btn" id="retry-si" disabled>
+                                <i class="fa-solid fa-rotate-right"></i> Try again
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- ── EXERCISE 4: FILL THE GAP ── -->
+                    <div class="exercise-section">
+                        <div class="exercise-header">
+                            <span class="exercise-number">4</span>
+                            <h3>Fill the Gap</h3>
+                        </div>
+                        <p class="exercise-instructions">
+                            Choose the correct project stages term to complete each sentence. Use the arrows to move between questions.
+                        </p>
+
+                        <div class="mc-container">
+                            <div class="mc-list single-view" id="mc-list-1">
+
+                                <div class="mc-item active" data-correct="b">
+                                    <div class="mc-context">"The client sent us a detailed _____ before the project began, explaining exactly what they needed from us."</div>
+                                    <p class="mc-question">Which word completes the sentence?</p>
+                                    <div class="mc-options">
+                                        <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> milestone</button>
+                                        <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> brief</button>
+                                        <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> scope</button>
+                                        <button class="mc-btn" data-option="d"><span class="mc-letter">D</span> handover</button>
+                                    </div>
+                                </div>
+
+                                <div class="mc-item" data-correct="d">
+                                    <div class="mc-context">"Completing the beta version on time was a major _____ for the whole development team."</div>
+                                    <p class="mc-question">Which word completes the sentence?</p>
+                                    <div class="mc-options">
+                                        <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> deadline</button>
+                                        <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> brief</button>
+                                        <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> deliverable</button>
+                                        <button class="mc-btn" data-option="d"><span class="mc-letter">D</span> milestone</button>
+                                    </div>
+                                </div>
+
+                                <div class="mc-item" data-correct="c">
+                                    <div class="mc-context">"The first _____ is due next Friday: a 10-page report on the feasibility of the new system."</div>
+                                    <p class="mc-question">Which word completes the sentence?</p>
+                                    <div class="mc-options">
+                                        <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> brief</button>
+                                        <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> scope</button>
+                                        <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> deliverable</button>
+                                        <button class="mc-btn" data-option="d"><span class="mc-letter">D</span> milestone</button>
+                                    </div>
+                                </div>
+
+                                <div class="mc-item" data-correct="a">
+                                    <div class="mc-context">"Before we add any new features, we need to check whether this falls within the _____ of the current project."</div>
+                                    <p class="mc-question">Which word completes the sentence?</p>
+                                    <div class="mc-options">
+                                        <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> scope</button>
+                                        <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> deadline</button>
+                                        <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> milestone</button>
+                                        <button class="mc-btn" data-option="d"><span class="mc-letter">D</span> brief</button>
+                                    </div>
+                                </div>
+
+                                <div class="mc-item" data-correct="b">
+                                    <div class="mc-context">"The development team prepared detailed documentation to make the _____ to the client's IT staff as smooth as possible."</div>
+                                    <p class="mc-question">Which word completes the sentence?</p>
+                                    <div class="mc-options">
+                                        <button class="mc-btn" data-option="a"><span class="mc-letter">A</span> scope</button>
+                                        <button class="mc-btn" data-option="b"><span class="mc-letter">B</span> handover</button>
+                                        <button class="mc-btn" data-option="c"><span class="mc-letter">C</span> brief</button>
+                                        <button class="mc-btn" data-option="d"><span class="mc-letter">D</span> deadline</button>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="mc-card-nav">
+                                <p class="mc-card-counter">Question <span id="q-counter">1</span> of 5</p>
+                                <div class="mc-card-arrows">
+                                    <button class="arrow-btn" id="mc-prev" disabled><i class="fa-solid fa-chevron-left"></i></button>
+                                    <button class="arrow-btn" id="mc-next"><i class="fa-solid fa-chevron-right"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 12px; align-items: center; margin-top: 20px;">
+                            <button class="check-answers-btn" id="check-mc">
+                                <i class="fa-solid fa-check"></i> Check answers
+                            </button>
+                            <button class="check-answers-btn retry-btn" id="retry-mc" disabled>
+                                <i class="fa-solid fa-rotate-right"></i> Try again
+                            </button>
+                        </div>
+                    </div>
 
                     <!-- ── COMPLETION BOX ── -->
                     <div class="completion-box">
@@ -134,10 +551,10 @@
                             </div>
                             <p class="completion-subtitle">You've completed <strong>"Team Roles and Project Stages"</strong>. Here's what you've practised:</p>
                             <div class="skills-list">
-                                <div class="skill-item"><div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>[Skill 1]</div>
-                                <div class="skill-item"><div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>[Skill 2]</div>
-                                <div class="skill-item"><div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>[Skill 3]</div>
-                                <div class="skill-item"><div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>[Skill 4]</div>
+                                <div class="skill-item"><div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Key vocabulary for the stages of a professional project</div>
+                                <div class="skill-item"><div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Terms for five common team roles and their responsibilities</div>
+                                <div class="skill-item"><div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Matching vocabulary terms to their definitions in context</div>
+                                <div class="skill-item"><div class="skill-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Using project vocabulary accurately in professional sentences</div>
                             </div>
                         </div>
                     </div>
@@ -162,6 +579,229 @@
     <script src="../../../js/layout.js"></script>
     <script src="../../../js/script.js" defer></script>
     <script src="../../../js/checkanswers.js"></script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+        // ══════════════════════════════════════════════════════
+        // EXERCISE 2: MATCH THE DEFINITION (drag-drop)
+        // ══════════════════════════════════════════════════════
+        const matchPool = document.getElementById('match-pool');
+        const matchTargets = document.getElementById('match-targets');
+        const checkMatchBtn = document.getElementById('check-match');
+        const retryMatchBtn = document.getElementById('retry-match');
+        let dragChip = null;
+
+        function initMatchDrag() {
+            matchPool.querySelectorAll('.match-chip').forEach(chip => {
+                chip.addEventListener('dragstart', function() {
+                    if (this.classList.contains('placed')) return;
+                    dragChip = this;
+                    setTimeout(() => this.classList.add('dragging'), 0);
+                });
+                chip.addEventListener('dragend', function() {
+                    this.classList.remove('dragging');
+                });
+            });
+
+            matchTargets.querySelectorAll('.match-target').forEach(target => {
+                target.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                    this.classList.add('drag-over');
+                });
+                target.addEventListener('dragleave', function() {
+                    this.classList.remove('drag-over');
+                });
+                target.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    this.classList.remove('drag-over');
+                    if (!dragChip) return;
+                    const existingTerm = this.dataset.termPlaced;
+                    if (existingTerm) {
+                        const oldChip = matchPool.querySelector(`.match-chip[data-term="${existingTerm}"]`);
+                        if (oldChip) oldChip.classList.remove('placed');
+                    }
+                    const slot = this.querySelector('.match-drop-slot');
+                    slot.textContent = dragChip.dataset.term;
+                    slot.classList.add('filled');
+                    this.classList.add('has-chip');
+                    this.dataset.termPlaced = dragChip.dataset.term;
+                    dragChip.classList.add('placed');
+                    dragChip = null;
+                });
+                target.querySelector('.match-drop-slot').addEventListener('click', function() {
+                    if (target.classList.contains('correct') || target.classList.contains('incorrect')) return;
+                    const placedTerm = target.dataset.termPlaced;
+                    if (!placedTerm) return;
+                    const oldChip = matchPool.querySelector(`.match-chip[data-term="${placedTerm}"]`);
+                    if (oldChip) oldChip.classList.remove('placed');
+                    this.innerHTML = '<span class="slot-placeholder">drop here</span>';
+                    this.classList.remove('filled');
+                    target.classList.remove('has-chip');
+                    delete target.dataset.termPlaced;
+                });
+            });
+        }
+        initMatchDrag();
+
+        checkMatchBtn.addEventListener('click', function() {
+            let correct = 0;
+            matchTargets.querySelectorAll('.match-target').forEach(target => {
+                target.classList.remove('correct', 'incorrect');
+                if (target.dataset.termPlaced === target.dataset.correct) {
+                    target.classList.add('correct');
+                    correct++;
+                } else if (target.dataset.termPlaced) {
+                    target.classList.add('incorrect');
+                }
+            });
+            if (typeof showFeedbackPopup === 'function') {
+                showFeedbackPopup(correct, matchTargets.querySelectorAll('.match-target').length);
+            }
+            this.disabled = true;
+            retryMatchBtn.disabled = false;
+        });
+
+        retryMatchBtn.addEventListener('click', function() {
+            matchTargets.querySelectorAll('.match-target').forEach(target => {
+                target.classList.remove('correct', 'incorrect', 'has-chip');
+                const slot = target.querySelector('.match-drop-slot');
+                slot.innerHTML = '<span class="slot-placeholder">drop here</span>';
+                slot.classList.remove('filled');
+                delete target.dataset.termPlaced;
+            });
+            matchPool.querySelectorAll('.match-chip').forEach(chip => chip.classList.remove('placed'));
+            checkMatchBtn.disabled = false;
+            this.disabled = true;
+        });
+
+        // ══════════════════════════════════════════════════════
+        // EXERCISE 3: WHO SAID IT? (si-list)
+        // ══════════════════════════════════════════════════════
+        const siItems = document.querySelectorAll('.si-item');
+        const checkSiBtn = document.getElementById('check-si');
+        const retrySiBtn = document.getElementById('retry-si');
+
+        siItems.forEach(item => {
+            item.querySelectorAll('.si-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    if (this.classList.contains('disabled')) return;
+                    item.querySelectorAll('.si-btn').forEach(b => b.classList.remove('selected'));
+                    this.classList.add('selected');
+                });
+            });
+        });
+
+        checkSiBtn.addEventListener('click', function() {
+            let correct = 0;
+            siItems.forEach(item => {
+                const correctChoice = item.dataset.correct;
+                const selected = item.querySelector('.si-btn.selected');
+                item.querySelectorAll('.si-btn').forEach(b => {
+                    b.classList.add('disabled');
+                    b.classList.remove('correct', 'incorrect', 'selected');
+                });
+                if (selected) {
+                    if (selected.dataset.choice === correctChoice) {
+                        selected.classList.add('correct');
+                        correct++;
+                    } else {
+                        selected.classList.add('incorrect');
+                        const correctBtn = item.querySelector(`.si-btn[data-choice="${correctChoice}"]`);
+                        if (correctBtn) correctBtn.classList.add('correct');
+                    }
+                } else {
+                    const correctBtn = item.querySelector(`.si-btn[data-choice="${correctChoice}"]`);
+                    if (correctBtn) correctBtn.classList.add('correct');
+                }
+                item.querySelector('.si-explanation').classList.add('show');
+            });
+            if (typeof showFeedbackPopup === 'function') {
+                showFeedbackPopup(correct, siItems.length);
+            }
+            this.disabled = true;
+            retrySiBtn.disabled = false;
+        });
+
+        retrySiBtn.addEventListener('click', function() {
+            siItems.forEach(item => {
+                item.querySelectorAll('.si-btn').forEach(b => {
+                    b.classList.remove('selected', 'correct', 'incorrect', 'disabled');
+                });
+                item.querySelector('.si-explanation').classList.remove('show');
+            });
+            checkSiBtn.disabled = false;
+            this.disabled = true;
+        });
+
+        // ══════════════════════════════════════════════════════
+        // EXERCISE 4: MC CAROUSEL (fill the gap)
+        // ══════════════════════════════════════════════════════
+        const mcList = document.getElementById('mc-list-1');
+        const mcItems = mcList ? [...mcList.querySelectorAll('.mc-item')] : [];
+        const mcPrev = document.getElementById('mc-prev');
+        const mcNext = document.getElementById('mc-next');
+        const qCounter = document.getElementById('q-counter');
+        const checkMCBtn = document.getElementById('check-mc');
+        const retryMCBtn = document.getElementById('retry-mc');
+        let currentQ = 0;
+
+        function updateMCView() {
+            mcItems.forEach((item, i) => item.classList.toggle('active', i === currentQ));
+            if (qCounter) qCounter.textContent = currentQ + 1;
+            mcPrev.disabled = currentQ === 0;
+            mcNext.disabled = currentQ === mcItems.length - 1;
+        }
+
+        mcItems.forEach(item => {
+            item.querySelectorAll('.mc-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    if (item.classList.contains('checked')) return;
+                    item.querySelectorAll('.mc-btn').forEach(b => b.classList.remove('selected'));
+                    this.classList.add('selected');
+                });
+            });
+        });
+
+        mcPrev.addEventListener('click', () => { if (currentQ > 0) { currentQ--; updateMCView(); } });
+        mcNext.addEventListener('click', () => { if (currentQ < mcItems.length - 1) { currentQ++; updateMCView(); } });
+
+        checkMCBtn.addEventListener('click', function() {
+            let correct = 0;
+            mcItems.forEach(item => {
+                item.classList.add('checked');
+                const selected = item.querySelector('.mc-btn.selected');
+                item.querySelectorAll('.mc-btn').forEach(b => b.classList.remove('correct', 'incorrect'));
+                if (selected) {
+                    if (selected.dataset.option === item.dataset.correct) {
+                        selected.classList.add('correct');
+                        correct++;
+                    } else {
+                        selected.classList.add('incorrect');
+                        item.querySelector(`.mc-btn[data-option="${item.dataset.correct}"]`)?.classList.add('correct');
+                    }
+                }
+            });
+            if (typeof showFeedbackPopup === 'function') {
+                showFeedbackPopup(correct, mcItems.length);
+            }
+            retryMCBtn.disabled = false;
+            this.disabled = true;
+        });
+
+        retryMCBtn.addEventListener('click', function() {
+            mcItems.forEach(item => {
+                item.classList.remove('checked');
+                item.querySelectorAll('.mc-btn').forEach(b => b.classList.remove('selected', 'correct', 'incorrect'));
+            });
+            checkMCBtn.disabled = false;
+            this.disabled = true;
+        });
+
+        updateMCView();
+
+    });
+    </script>
 
 </body>
 </html>
