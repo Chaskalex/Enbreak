@@ -1803,10 +1803,10 @@ let notificationTimeout = null;
 
 const plans = [
     { id: 1, classes: 1, price: 14990, savings: 0, popular: false, bestPrice: false },
-    { id: 2, classes: 2, price: 27980, savings: 7, popular: false, bestPrice: false },
-    { id: 3, classes: 4, price: 51960, savings: 13, popular: true, bestPrice: false },
-    { id: 4, classes: 6, price: 71940, savings: 20, popular: false, bestPrice: false },
-    { id: 5, classes: 8, price: 87920, savings: 27, popular: false, bestPrice: true }
+    { id: 2, classes: 2, price: 28580, savings: 5, popular: false, bestPrice: false },
+    { id: 3, classes: 4, price: 53960, savings: 10, popular: true, bestPrice: false },
+    { id: 4, classes: 6, price: 76440, savings: 15, popular: false, bestPrice: false },
+    { id: 5, classes: 8, price: 95920, savings: 20, popular: false, bestPrice: true }
 ];
 
 const timeSlots = {
@@ -3367,9 +3367,9 @@ const renderStep3 = () => {
             class="w-5 h-5 text-blue-500 rounded focus:ring-2 focus:ring-blue-300 cursor-pointer flex-shrink-0"
             style="margin: 0;"
         />
-        <span class="text-sm font-medium text-gray-700 flex-1" style="margin: 0; line-height: 1.3;">
+        <label for="reminder-checkbox" class="text-sm font-medium text-gray-700 flex-1 cursor-pointer" style="margin: 0; line-height: 1.3;">
             ¿Deseas recibir un recordatorio antes de tu clase?
-        </span>
+        </label>
     </div>
 </div>
             </div>
@@ -3551,7 +3551,7 @@ const renderStep4 = () => {
                 <button onclick="handleConfirmPayment()"
                     class="nav-button next"
                 >
-                    <span>Pagar ${formatCurrency(finalPrice)}</span> <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" style="margin-bottom: 1px;"><path d="M6 2l6 6-6 6V2z"/></svg>
+                    <span>Pagar ${formatCurrency(finalPrice)}</span>
                 </button>
             </div>
         </div>
