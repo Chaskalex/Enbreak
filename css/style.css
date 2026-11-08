@@ -2548,19 +2548,8 @@ body.loaded {
 }
 
 @media (max-width: 968px) {
-    .top-header .container {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .top-left {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .top-item {
-        border-right: none;
-        padding: 0;
+    .top-header {
+        display: none;
     }
 
     .header-container {
@@ -2569,10 +2558,10 @@ body.loaded {
 
     .nav-menu {
         position: fixed;
-        top: 140px;
+        top: 61px;
         left: -100%;
         width: 100%;
-        height: calc(100vh - 140px);
+        height: calc(100vh - 61px);
         background: white;
         flex-direction: column;
         padding: 30px;
@@ -2859,6 +2848,10 @@ body.loaded {
 }
 
 @media (max-width: 768px) {
+    .page-header .page-header-content {
+        padding-left: 40px;
+    }
+
     .services-grid {
         grid-template-columns: 1fr;
     }
