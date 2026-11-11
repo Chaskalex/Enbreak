@@ -36,6 +36,18 @@
     <!-- Your page content goes here -->
 <style>
 
+.transfer-details-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+}
+
+@media (max-width: 640px) {
+    .transfer-details-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 .page-header {
     position: relative;
     width: 100%;
@@ -1795,11 +1807,14 @@ let selectedDate = null;
 let selectedTime = null;
 let modifyingIndex = null;
 let studentName = '', studentEmail = '', studentRut = '', studentPhone = '+56 ', wantsReminder = false;
-let paymentMethod = 'webpay';
+let pendingBookingData = null;
 let fieldErrors = {};
 let calendarMonth = new Date();
 let activeCalendar = null;
 let notificationTimeout = null;
+let paymentCountdownInterval = null;
+let paymentCountdownDeadline = null;
+let paymentCountdownReference = null;
 
 const plans = [
     { id: 1, classes: 1, price: 14990, savings: 0, popular: false, bestPrice: false },
@@ -1827,6 +1842,48 @@ const formatCurrency = (amount) => {
         currency: 'CLP', 
         minimumFractionDigits: 0, 
     }).format(amount);
+};
+
+const escapeHTML = (value) => String(value).replace(/[&<>"']/g, character => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+})[character]);
+
+const createBookingReference = () => {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    const code = Array.from({ length: 5 }, () => characters[Math.floor(Math.random() * characters.length)]).join('');
+    return `${code.slice(0, 2)}-${code.slice(2)}`;
+};
+
+const copyTransferValue = async (button, elementId) => {
+    const value = document.getElementById(elementId)?.textContent.trim();
+    if (!value) {
+        button.textContent = 'No disponible';
+        return;
+    }
+
+    let copied = false;
+    try {
+        await navigator.clipboard.writeText(value);
+        copied = true;
+    } catch (error) {
+        const input = document.createElement('textarea');
+        input.value = value;
+        input.style.position = 'fixed';
+        input.style.opacity = '0';
+        document.body.appendChild(input);
+        input.select();
+        copied = typeof document.execCommand === 'function' && document.execCommand('copy');
+        input.remove();
+    }
+
+    button.textContent = copied ? '¡Copiado!' : 'No se pudo copiar';
+    setTimeout(() => {
+        button.textContent = 'Copiar';
+    }, 1500);
 };
 
 const calculateOriginalPrice = (plan) => {
@@ -1958,9 +2015,116 @@ const selectPlan = (planId) => {
     }
 };
 
-const selectPaymentMethod = (method) => {
-    paymentMethod = method;
-    renderStep(currentStep);
+const renderStep5 = () => {
+    if (!pendingBookingData) {
+        currentStep = 4;
+        return renderStep4();
+    }
+
+    const amount = formatCurrency(pendingBookingData.plan.finalPrice);
+    const proofMessage = `Hola, envío el comprobante de transferencia de mi reserva ${pendingBookingData.reference}. Nombre: ${pendingBookingData.student.name}. Monto: ${amount}.`;
+    const emailSubject = `Comprobante de transferencia - Código ${pendingBookingData.reference}`;
+    const whatsappUrl = `https://wa.me/56979924910?text=${encodeURIComponent(proofMessage)}`;
+    const emailUrl = `mailto:info@enbreak.net?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(proofMessage)}`;
+    const originalPrice = pendingBookingData.plan.originalPrice;
+    const hasDiscount = originalPrice > pendingBookingData.plan.finalPrice;
+    const planName = pendingBookingData.plan.classes === 1 ? 'Plan de 1 Clase' : `${pendingBookingData.plan.classes} clases`;
+    if (paymentCountdownReference !== pendingBookingData.reference) {
+        paymentCountdownReference = pendingBookingData.reference;
+        paymentCountdownDeadline = Date.now() + 8 * 60 * 1000;
+    }
+
+    return `
+        <section class="step-content" style="color: #1f2937;">
+            <h2 class="section-header">¡Gracias por tu reserva!</h2>
+            <div style="display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin: -1.5rem auto 1.5rem;">
+                <span style="display: inline-flex; align-items: center; gap: 0.375rem; padding: 0.3rem 0.75rem; border-radius: 9999px; background: #fef3c7; color: #92400e; font-size: 0.8125rem; font-weight: 700;">${icon('clock', 14, '')} Pendiente de pago</span>
+                <span id="payment-countdown" role="timer" aria-live="off" style="padding: 0.3rem 0.75rem; border-radius: 9999px; background: #fef3c7; color: #92400e; font-size: 0.8125rem; font-weight: 700; font-variant-numeric: tabular-nums;">08:00</span>
+            </div>
+
+            <div class="p-6 rounded-xl" style="background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); border: 2px solid #e2e8f0; width: 90%; margin: 0 auto;">
+
+            <div style="border-radius: 0.5rem; border: 1px solid #d1d5db; overflow: hidden;">
+                <div style="background: #f3f4f6; padding: 0.75rem 1rem; border-bottom: 2px solid #3b82f6;">
+                    <h4 style="margin: 0; font-size: 0.875rem; font-weight: 600; color: #374151; display: flex; align-items: center; gap: 0.5rem;">
+                        ${icon('clipboard-list', 16, 'text-blue-600')}
+                        <span>Información de tu Reserva</span>
+                    </h4>
+                </div>
+                <div style="padding: 1.25rem; background: #fff;">
+                    <dl style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.75rem; margin: 0;">
+                        <div><dt style="font-size: 0.8125rem; color: #6b7280;">Código de reserva</dt><dd style="margin: 0; font-weight: 600;">${escapeHTML(pendingBookingData.reference)}</dd></div>
+                        <div><dt style="font-size: 0.8125rem; color: #6b7280;">Nombre</dt><dd style="margin: 0; font-weight: 600;">${escapeHTML(pendingBookingData.student.name)}</dd></div>
+                        <div><dt style="font-size: 0.8125rem; color: #6b7280;">Plan</dt><dd style="margin: 0; font-weight: 600;">${planName}</dd></div>
+                        <div>
+                            <dt style="font-size: 0.8125rem; color: #6b7280;">Total</dt>
+                            <dd style="display: flex; align-items: baseline; gap: 0.5rem; margin: 0; font-weight: 700;">
+                                <span>${escapeHTML(amount)}</span>
+                                ${hasDiscount ? `<span style="color: #6b7280; font-size: 0.875rem; font-weight: 400; text-decoration: line-through;">${escapeHTML(formatCurrency(originalPrice))}</span>` : ''}
+                            </dd>
+                        </div>
+                    </dl>
+                </div>
+            </div>
+
+            <div style="margin-top: 1.25rem; border-radius: 0.5rem; border: 1px solid #d1d5db; overflow: hidden;">
+                <div style="background: #f3f4f6; padding: 0.75rem 1rem; border-bottom: 2px solid #3b82f6;">
+                    <h4 style="margin: 0; font-size: 0.875rem; font-weight: 600; color: #374151; display: flex; align-items: center; gap: 0.5rem;">
+                        ${icon('landmark', 16, 'text-blue-600')}
+                        <span>Datos Bancarios</span>
+                    </h4>
+                </div>
+                <div style="padding: 1.25rem; background: #fff;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0 0 1rem; margin-bottom: 1rem; border-bottom: 1px solid #e5e7eb;">
+                        <div>
+                            <div style="font-size: 0.8125rem; color: #6b7280;">Monto a transferir</div>
+                            <div style="font-size: 1.75rem; line-height: 1.2; font-weight: 700; color: #1d4ed8;">${escapeHTML(amount)}</div>
+                        </div>
+                    </div>
+                    <dl class="transfer-details-grid" style="margin: 0;">
+                        <div><dt style="font-size: 0.8125rem; color: #6b7280;">Nombre</dt><dd style="margin: 0; font-weight: 600;">Alexis Inostroza Díaz</dd></div>
+                        <div><dt style="font-size: 0.8125rem; color: #6b7280;">RUT</dt><dd style="margin: 0; font-weight: 600;">18.615.436-3</dd></div>
+                        <div><dt style="font-size: 0.8125rem; color: #6b7280;">Tipo de cuenta</dt><dd style="margin: 0; font-weight: 600;">Corriente</dd></div>
+                        <div><dt style="font-size: 0.8125rem; color: #6b7280;">Banco</dt><dd style="margin: 0; font-weight: 600;">Falabella</dd></div>
+                        <div><dt style="font-size: 0.8125rem; color: #6b7280;">Correo</dt><dd style="margin: 0; font-weight: 600;"><a href="mailto:info@enbreak.net" style="color: #1d4ed8;">info@enbreak.net</a></dd></div>
+                        <div>
+                            <dt style="font-size: 0.8125rem; color: #6b7280;">Número de cuenta</dt>
+                            <dd style="display: flex; align-items: center; justify-content: flex-start; gap: 0.5rem; margin: 0; font-weight: 600;"><span id="transfer-account">1-983-239404-6</span><button type="button" aria-label="Copiar número de cuenta" onclick="copyTransferValue(this, 'transfer-account')" style="padding: 0.35rem 0.6rem; border: 1px solid #d1d5db; border-radius: 0.4rem; background: #fff; color: #374151; font-size: 0.75rem; cursor: pointer;">Copiar</button></dd>
+                        </div>
+                    </dl>
+                </div>
+            </div>
+
+            <div style="margin-top: 1.25rem; border-radius: 0.5rem; border: 1px solid #d1d5db; overflow: hidden;">
+                <div style="background: #f3f4f6; padding: 0.75rem 1rem; border-bottom: 2px solid #3b82f6;">
+                    <h4 style="margin: 0; font-size: 0.875rem; font-weight: 600; color: #374151; display: flex; align-items: center; gap: 0.5rem;">
+                        ${icon('send', 16, 'text-blue-600')}
+                        <span>Enviar comprobante</span>
+                    </h4>
+                </div>
+                <div style="padding: 1.25rem; background: #fff;">
+                    <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
+                        <a href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.75rem 1rem; border-radius: 0.5rem; background: #16a34a; color: #fff; font-weight: 600; text-decoration: none;"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
+                        <a href="${emailUrl}" style="display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.75rem 1rem; border-radius: 0.5rem; background: #2563eb; color: #fff; font-weight: 600; text-decoration: none;">${icon('mail', 18, '')} Correo</a>
+                    </div>
+                    <p style="margin: 0.75rem 0 0; color: #4b5563; font-size: 0.875rem;">Adjunta el comprobante de transferencia en tu mensaje y envíalo al WhatsApp <a href="https://wa.me/56979924910" target="_blank" rel="noopener noreferrer" style="color: #1d4ed8; font-weight: 600;">+56 9 7992 4910</a> o al correo <a href="mailto:info@enbreak.net" style="color: #1d4ed8; font-weight: 600;">info@enbreak.net</a>.</p>
+                </div>
+            </div>
+
+            </div>
+
+            <div style="background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%); border: 2px solid #facc15; border-radius: 0.75rem; padding: 1.25rem; margin-top: 2rem; width: 90%; margin-left: auto; margin-right: auto; box-shadow: 0 2px 4px rgba(250, 204, 21, 0.1);">
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <div style="flex-shrink: 0;">
+                        ${icon('shield-check', 20, 'text-yellow-700')}
+                    </div>
+                    <p style="margin: 0; font-size: 0.875rem; line-height: 1.5; color: #713f12;">
+                        Tus horarios quedarán reservados en cuanto el pago sea recibido y verificado.
+                    </p>
+                </div>
+            </div>
+        </section>
+    `;
 };
 
 const handleConfirmPayment = () => {
@@ -1973,6 +2137,7 @@ const handleConfirmPayment = () => {
     const finalPrice = calculateFinalPrice();
 
     const bookingData = {
+        reference: createBookingReference(),
         plan: {
             id: selectedPlan.id,
             classes: selectedPlan.classes,
@@ -1981,21 +2146,17 @@ const handleConfirmPayment = () => {
         },
         student: {
             name: studentName,
+            rut: studentRut,
             email: studentEmail,
-            age: studentAge,
-            id: studentId,
             phone: studentPhone,
         },
-        schedule: bookings,
-        discount: appliedDiscount,
+        schedule: bookings.map(booking => ({ date: booking.date, time: booking.time })),
         timestamp: new Date().toISOString()
     };
 
-    console.log('Booking Data:', bookingData);
-
-    setTimeout(() => {
-        alert('Demo: Redirigiendo a Pasarela de Pago con un total de ' + formatCurrency(finalPrice) + '...');
-    }, 1500);
+    pendingBookingData = bookingData;
+    currentStep = 5;
+    renderStep(currentStep, true);
 };
 
 // --- Replace the popup-based toggle with inline toggle behavior ---
@@ -3500,35 +3661,35 @@ const renderStep4 = () => {
                 <div style="margin-bottom: 0;">
                     <div style="background: #f3f4f6; padding: 0.75rem 1rem; border-radius: 0.5rem 0.5rem 0 0; border: 1px solid #d1d5db; border-bottom: 2px solid #3b82f6;">
                         <h4 style="margin: 0; font-size: 0.875rem; font-weight: 600; color: #374151; display: flex; align-items: center; gap: 0.5rem;">
-                            ${icon('credit-card', 16, 'text-blue-600')}
-                            <span>Método de Pago</span>
+                            ${icon('landmark', 16, 'text-blue-600')}
+                            <span>Método de pago</span>
                         </h4>
                     </div>
                     <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; padding: 1.25rem; background: white; border: 1px solid #d1d5db; border-top: none; border-radius: 0 0 0.5rem 0.5rem;">
                         <button
-                            onclick="selectPaymentMethod('webpay')"
-                            class="payment-method-btn ${paymentMethod === 'webpay' ? 'selected' : ''}"
-                            style="position: relative; padding: 1.5rem 1rem; border: 2px solid ${paymentMethod === 'webpay' ? '#3b82f6' : '#d1d5db'}; border-radius: 0.5rem; background: ${paymentMethod === 'webpay' ? '#eff6ff' : 'white'}; cursor: pointer; transition: all 0.2s ease; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 110px; box-shadow: ${paymentMethod === 'webpay' ? '0 2px 8px rgba(59, 130, 246, 0.2)' : '0 1px 3px rgba(0,0,0,0.05)'};"
-                            onmouseover="if('${paymentMethod}' !== 'webpay') this.style.borderColor='#9ca3af'; if('${paymentMethod}' !== 'webpay') this.style.boxShadow='0 2px 6px rgba(0,0,0,0.1)';"
-                            onmouseout="if('${paymentMethod}' !== 'webpay') this.style.borderColor='#d1d5db'; if('${paymentMethod}' !== 'webpay') this.style.boxShadow='0 1px 3px rgba(0,0,0,0.05)';"
+                            type="button"
+                            disabled
+                            aria-label="Webpay, pronto"
+                            class="payment-method-btn"
+                            style="order: 2; position: relative; padding: 1.5rem 1rem; border: 2px solid #d1d5db; border-radius: 0.5rem; background: #f9fafb; cursor: not-allowed; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 110px; opacity: 0.7;"
                         >
-                            ${paymentMethod === 'webpay' ? `<div style="position: absolute; top: 0.5rem; right: 0.5rem; background: #3b82f6; color: white; border-radius: 9999px; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>` : ''}
+                            <span style="position: absolute; top: 0.5rem; right: 0.5rem; padding: 0.2rem 0.55rem; border-radius: 9999px; background: #e5e7eb; color: #4b5563; font-size: 0.6875rem; font-weight: 700;">Pronto</span>
                             <img src="/assets/logo/webpay.png" alt="Webpay" style="max-height: 50px; max-width: 100%; object-fit: contain; margin-bottom: 0.625rem;" />
-                            <span style="font-size: 0.8125rem; font-weight: 600; color: ${paymentMethod === 'webpay' ? '#1e40af' : '#6b7280'};">Pago en Línea</span>
+                            <span style="font-size: 0.8125rem; font-weight: 600; color: #6b7280;">Pago en Línea</span>
                             <span style="font-size: 0.75rem; color: #9ca3af; margin-top: 0.25rem;">Débito o Crédito</span>
                         </button>
-                        <button
-                            onclick="selectPaymentMethod('transferencia')"
-                            class="payment-method-btn ${paymentMethod === 'transferencia' ? 'selected' : ''}"
-                            style="position: relative; padding: 1.5rem 1rem; border: 2px solid ${paymentMethod === 'transferencia' ? '#3b82f6' : '#d1d5db'}; border-radius: 0.5rem; background: ${paymentMethod === 'transferencia' ? '#eff6ff' : 'white'}; cursor: pointer; transition: all 0.2s ease; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 110px; box-shadow: ${paymentMethod === 'transferencia' ? '0 2px 8px rgba(59, 130, 246, 0.2)' : '0 1px 3px rgba(0,0,0,0.05)'};"
-                            onmouseover="if('${paymentMethod}' !== 'transferencia') this.style.borderColor='#9ca3af'; if('${paymentMethod}' !== 'transferencia') this.style.boxShadow='0 2px 6px rgba(0,0,0,0.1)';"
-                            onmouseout="if('${paymentMethod}' !== 'transferencia') this.style.borderColor='#d1d5db'; if('${paymentMethod}' !== 'transferencia') this.style.boxShadow='0 1px 3px rgba(0,0,0,0.05)';"
+                        <div
+                            class="payment-method-btn selected"
+                            aria-current="true"
+                            style="order: 1; position: relative; padding: 1.5rem 1rem; border: 2px solid #3b82f6; border-radius: 0.5rem; background: #eff6ff; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 110px; box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);"
                         >
-                            ${paymentMethod === 'transferencia' ? `<div style="position: absolute; top: 0.5rem; right: 0.5rem; background: #3b82f6; color: white; border-radius: 9999px; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>` : ''}
+                            <div style="position: absolute; top: 0.5rem; right: 0.5rem; background: #3b82f6; color: white; border-radius: 9999px; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center;">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            </div>
                             <img src="/assets/logo/transferencia.png" alt="Transferencia Bancaria" style="max-height: 50px; max-width: 100%; object-fit: contain; margin-bottom: 0.625rem;" />
-                            <span style="font-size: 0.8125rem; font-weight: 600; color: ${paymentMethod === 'transferencia' ? '#1e40af' : '#6b7280'};">Transferencia</span>
+                            <span style="font-size: 0.8125rem; font-weight: 600; color: #1e40af;">Transferencia</span>
                             <span style="font-size: 0.75rem; color: #9ca3af; margin-top: 0.25rem;">Bancaria</span>
-                        </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -3560,6 +3721,7 @@ const renderStep4 = () => {
 
 const renderStep = (step, shouldAnimate = false) => {
     let content = '';
+    const header = renderHeader();
     document.removeEventListener('click', handleCalendarClickOutside);
     if (step === 1) {
         content = renderStep1();
@@ -3569,22 +3731,44 @@ const renderStep = (step, shouldAnimate = false) => {
         content = renderStep3();
     } else if (step === 4) {
         content = renderStep4();
+    } else if (step === 5) {
+        content = renderStep5();
     }
     const container = document.querySelector('#booking-system-container .max-w-6xl');
     if (container) {
-        container.innerHTML = `${renderHeader()}<div id="booking-system-content">${content}</div>`;
+        container.innerHTML = `${header}<div id="booking-system-content">${content}</div>`;
     } else {
 
     document.getElementById('booking-system-container').innerHTML = `
         <div class="min-h-screen py-12 px-4"> 
             <div class="max-w-6xl mx-auto rounded-2xl shadow-xl" style="background-color: #fff;">
-                ${renderHeader()}
+                ${header}
                 <div id="booking-system-content">${content}</div>
             </div>
         </div>
     `;
 }
-    if (shouldAnimate) {
+if (paymentCountdownInterval) {
+    clearInterval(paymentCountdownInterval);
+    paymentCountdownInterval = null;
+}
+if (step === 5) {
+    paymentCountdownInterval = setInterval(() => {
+        const countdown = document.getElementById('payment-countdown');
+        const remainingSeconds = Math.max(0, Math.ceil((paymentCountdownDeadline - Date.now()) / 1000));
+        if (countdown) {
+            const minutes = Math.floor(remainingSeconds / 60);
+            const seconds = remainingSeconds % 60;
+            countdown.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        }
+        if (remainingSeconds === 0) {
+            clearInterval(paymentCountdownInterval);
+            paymentCountdownInterval = null;
+            window.location.reload();
+        }
+    }, 250);
+}
+if (shouldAnimate) {
         scrollToTop();
     }
     lucide.createIcons();
